@@ -1,0 +1,51 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg3" x1="800" y1="0" x2="800" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFCF8"/>
+      <stop offset="0.52" stop-color="#F4ECDD"/>
+      <stop offset="1" stop-color="#EBE1CF"/>
+    </linearGradient>
+    <radialGradient id="topGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1222 148) rotate(145.42) scale(540 280)">
+      <stop stop-color="#EFA53A" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#EFA53A" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid3" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0V84" stroke="#4A3B28" stroke-opacity="0.045"/>
+    </pattern>
+    <filter id="softShadow" x="612" y="250" width="842" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#bg3)"/>
+  <rect width="1600" height="1200" fill="url(#grid3)"/>
+  <rect width="1600" height="1200" fill="url(#topGlow)"/>
+
+  <path d="M1180 0H1382L1014 1200H810L1180 0Z" fill="#FFF7E8" fill-opacity="0.8"/>
+  <path d="M1274 0H1312L944 1200H906L1274 0Z" fill="#E29E33" fill-opacity="0.14"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="702" y="350" width="662" height="382" rx="56" fill="#E8C98B" fill-opacity="0.34"/>
+  </g>
+  <rect x="680" y="326" width="662" height="382" rx="56" fill="#FFFDF8" fill-opacity="0.82" stroke="#D6C09A" stroke-opacity="0.48"/>
+  <rect x="724" y="370" width="574" height="294" rx="38" fill="#FFFFFF" fill-opacity="0.66" stroke="#D6C09A" stroke-opacity="0.28"/>
+
+  <path d="M770 430H1020" stroke="#E0CCA8" stroke-width="2"/>
+  <path d="M770 484H1204" stroke="#E0CCA8" stroke-opacity="0.7" stroke-width="2"/>
+  <path d="M770 538H1122" stroke="#E0CCA8" stroke-opacity="0.4" stroke-width="2"/>
+  <path d="M770 592H1070" stroke="#E0CCA8" stroke-opacity="0.22" stroke-width="2"/>
+
+  <g opacity="0.82">
+    <circle cx="1180" cy="516" r="60" fill="#ECF1E3"/>
+    <path d="M1180 474C1212 501 1231 541 1231 579C1231 616 1209 644 1173 647C1137 649 1108 627 1098 592C1088 554 1101 508 1135 479C1150 466 1166 463 1180 474Z" fill="#FFFDF7" stroke="#94A581" stroke-width="2.5"/>
+    <path d="M1161 491C1187 512 1203 544 1203 575C1203 606 1185 628 1156 630C1128 632 1104 614 1097 585C1089 555 1099 519 1126 496C1137 487 1150 484 1161 491Z" stroke="#7C916A" stroke-width="3"/>
+    <path d="M1135 504C1158 536 1172 576 1172 615" stroke="#7C916A" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <g opacity="0.34">
+    <rect x="154" y="760" width="158" height="158" rx="34" transform="rotate(-14 154 760)" stroke="#CBB188" stroke-width="3"/>
+    <rect x="194" y="800" width="158" height="158" rx="34" transform="rotate(-14 194 800)" stroke="#E4A23A" stroke-opacity="0.18" stroke-width="3"/>
+  </g>
+
+  <path d="M0 953C268 864 467 849 734 892C1000 934 1235 1006 1600 934V1200H0V953Z" fill="#F7F0E2"/>
+</svg>

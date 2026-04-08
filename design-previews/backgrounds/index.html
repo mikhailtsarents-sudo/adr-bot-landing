@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADR Bot Background Previews</title>
+    <style>
+      :root {
+        --bg: #f4efe6;
+        --panel: rgba(255, 255, 255, 0.78);
+        --border: rgba(53, 42, 25, 0.12);
+        --text: #1f2937;
+        --muted: #6b7280;
+        --accent: #d99327;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top, rgba(232, 160, 48, 0.12), transparent 24%),
+          linear-gradient(180deg, #fffcf6 0%, var(--bg) 100%);
+      }
+
+      .wrap {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 24px 64px;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(32px, 4vw, 54px);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .intro {
+        max-width: 760px;
+        margin: 0 0 36px;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      .grid {
+        display: grid;
+        gap: 28px;
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        background: var(--panel);
+        backdrop-filter: blur(12px);
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(31, 41, 55, 0.08);
+      }
+
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px 24px 18px;
+      }
+
+      .meta h2 {
+        margin: 0 0 4px;
+        font-size: 22px;
+      }
+
+      .meta p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .tag {
+        flex: 0 0 auto;
+        border-radius: 999px;
+        background: rgba(217, 147, 39, 0.12);
+        color: #9a6213;
+        padding: 10px 14px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-top: 1px solid var(--border);
+      }
+
+      .footer {
+        margin-top: 32px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      code {
+        background: rgba(31, 41, 55, 0.06);
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Фоны для ADR Bot</h1>
+      <p class="intro">
+        Это отдельная preview-страница. Ничего из этого пока не встроено в сам
+        лендинг. Просто посмотри варианты и скажи, какой фон тебе ближе:
+        <code>A</code>, <code>B</code> или <code>C</code>.
+      </p>
+
+      <div class="grid">
+        <section class="card">
+          <div class="meta">
+            <div>
+              <h2>Вариант A</h2>
+              <p>Спокойный, чистый, дорогой. Самый аккуратный editorial/premium вариант.</p>
+            </div>
+            <div class="tag">A</div>
+          </div>
+          <img src="./background-option-a.svg.png" alt="Background option A" />
+        </section>
+
+        <section class="card">
+          <div class="meta">
+            <div>
+              <h2>Вариант B</h2>
+              <p>Более характерный, с намёком на транспорт, маршруты и техническую геометрию.</p>
+            </div>
+            <div class="tag">B</div>
+          </div>
+          <img src="./background-option-b.svg.png" alt="Background option B" />
+        </section>
+
+        <section class="card">
+          <div class="meta">
+            <div>
+              <h2>Вариант C</h2>
+              <p>Самый product/premium. Больше глубины, света и ощущения интерфейсной атмосферы.</p>
+            </div>
+            <div class="tag">C</div>
+          </div>
+          <img src="./background-option-c.svg.png" alt="Background option C" />
+        </section>
+      </div>
+
+      <p class="footer">
+        Открыть можно напрямую в браузере: <code>/Users/mihailcarenc/Documents/New project/adr-bot-landing/design-previews/backgrounds/index.html</code>
+      </p>
+
+      <h1 style="margin-top:56px">Более Люксовые Концепты</h1>
+      <p class="intro">
+        Эти варианты уже не просто “подложка”, а более характерный визуальный мир:
+        экология, безопасность, премиальная атмосфера и мягкая связь с ADR.
+      </p>
+
+      <div class="grid">
+        <section class="card">
+          <div class="meta">
+            <div>
+              <h2>Lux Eco A</h2>
+              <p>Люксовый eco-tech: мягкий пейзаж, лист как защитный символ, спокойный premium-свет.</p>
+            </div>
+            <div class="tag">LA</div>
+          </div>
+          <img src="./lux-eco-option-a.svg" alt="Luxury eco background option A" />
+        </section>
+
+        <section class="card">
+          <div class="meta">
+            <div>
+              <h2>Lux Eco B</h2>
+              <p>Больше логистики и “Umweltschutz”: маршрут, дорожная графика, защитный знак в экологичном ключе.</p>
+            </div>
+            <div class="tag">LB</div>
+          </div>
+          <img src="./lux-eco-option-b.svg" alt="Luxury eco background option B" />
+        </section>
+
+        <section class="card">
+          <div class="meta">
+            <div>
+              <h2>Lux Eco C</h2>
+              <p>Самый люксовый и product-like: стеклянная панель, свет, экологичный акцент и атмосфера премиального сервиса.</p>
+            </div>
+            <div class="tag">LC</div>
+          </div>
+          <img src="./lux-eco-option-c.svg" alt="Luxury eco background option C" />
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

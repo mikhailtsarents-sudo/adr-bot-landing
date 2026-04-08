@@ -1,0 +1,36 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="baseB" x1="0" y1="0" x2="1600" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFCF5"/>
+      <stop offset="0.52" stop-color="#F6F0E4"/>
+      <stop offset="1" stop-color="#F1EBDF"/>
+    </linearGradient>
+    <radialGradient id="glowB1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1258 164) rotate(148.736) scale(420 240)">
+      <stop stop-color="#F3B24A" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#F3B24A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(202 932) rotate(-2.59) scale(520 190)">
+      <stop stop-color="#CFC1AB" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#CFC1AB" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="roadGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M80 0H0V80" stroke="#433827" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#baseB)"/>
+  <rect width="1600" height="1200" fill="url(#roadGrid)"/>
+  <rect width="1600" height="1200" fill="url(#glowB1)"/>
+  <rect width="1600" height="1200" fill="url(#glowB2)"/>
+
+  <path d="M156 1036L512 676" stroke="#CAB796" stroke-opacity="0.28" stroke-width="2"/>
+  <path d="M226 1106L582 746" stroke="#CAB796" stroke-opacity="0.12" stroke-width="2"/>
+  <path d="M1470 141L1260 351" stroke="#CAB796" stroke-opacity="0.2" stroke-width="2"/>
+  <path d="M1544 214L1334 424" stroke="#CAB796" stroke-opacity="0.08" stroke-width="2"/>
+
+  <path d="M1248 0L1426 0L1122 1200L948 1200L1248 0Z" fill="#FFF6E4" fill-opacity="0.74"/>
+  <path d="M1344 0L1384 0L1078 1200L1038 1200L1344 0Z" fill="#E5A02F" fill-opacity="0.15"/>
+
+  <rect x="88" y="242" width="152" height="152" rx="34" transform="rotate(-12 88 242)" stroke="#C8B18B" stroke-opacity="0.18" stroke-width="3"/>
+  <rect x="124" y="278" width="152" height="152" rx="34" transform="rotate(-12 124 278)" stroke="#C8B18B" stroke-opacity="0.08" stroke-width="3"/>
+</svg>
