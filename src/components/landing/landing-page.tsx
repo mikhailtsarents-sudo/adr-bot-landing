@@ -21,8 +21,7 @@ import { PhoneCarousel } from "./phone-carousel";
 import { Reveal } from "./reveal";
 import { SceneBg } from "./scene-bg";
 import { SectionHeading } from "./section-heading";
-
-const telegramHref = "https://t.me/Adr_wort_trainer_bot";
+import { TrackedTelegramLink } from "./tracked-telegram-link";
 
 // Icons for problem, how-it-works, and audience cards (order matches translations)
 const problemIcons = [Languages, ClipboardCheck, Route, ShieldCheck];
@@ -33,13 +32,13 @@ const audienceIcons = [Truck, Layers3, CheckCircle2, Languages];
 
 function PrimaryLink({ label }: { label: string }) {
   return (
-    <Link
-      href={telegramHref}
+    <TrackedTelegramLink
+      source="hero_primary"
       className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(232,160,48,0.35)] transition hover:bg-[var(--color-accent-strong)] hover:shadow-[0_6px_24px_rgba(232,160,48,0.45)]"
     >
       {label}
       <ArrowRight className="h-4 w-4 shrink-0" />
-    </Link>
+    </TrackedTelegramLink>
   );
 }
 
@@ -85,12 +84,12 @@ export function LandingPage() {
           </div>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
-            <Link
-              href={telegramHref}
+            <TrackedTelegramLink
+              source="nav_open_telegram"
               className="hidden text-sm font-medium text-slate-500 transition hover:text-slate-800 sm:inline-flex"
             >
               {t.nav.openInTelegram}
-            </Link>
+            </TrackedTelegramLink>
           </div>
         </Reveal>
 
@@ -319,13 +318,13 @@ export function LandingPage() {
                 {t.cta.description}
               </p>
               <div className="mt-8">
-                <Link
-                  href={telegramHref}
+                <TrackedTelegramLink
+                  source="final_cta"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-800"
                 >
                   {t.cta.button}
                   <ArrowRight className="h-4 w-4 shrink-0" />
-                </Link>
+                </TrackedTelegramLink>
               </div>
               <p className="mt-4 text-sm text-slate-500">{t.cta.note}</p>
             </div>
@@ -338,12 +337,12 @@ export function LandingPage() {
         <Reveal className="flex flex-col gap-6 rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-sm text-sm text-slate-600 md:flex-row md:items-center md:justify-between">
           <p className="max-w-2xl leading-7">{t.footer.description}</p>
           <div className="flex flex-col gap-2 md:items-end">
-            <Link
-              href={telegramHref}
+            <TrackedTelegramLink
+              source="footer_link"
               className="font-medium text-slate-900 transition hover:text-amber-600"
             >
               {t.footer.link}
-            </Link>
+            </TrackedTelegramLink>
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500 md:justify-end">
               <Link href="/impressum" className="hover:text-slate-900">
                 Impressum

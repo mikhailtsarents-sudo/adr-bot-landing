@@ -4,9 +4,9 @@ import { StickyHeader } from "@/components/landing/sticky-header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ADR Prüfungsvorbereitung auf Deutsch per Telegram",
+  title: "ADR Prüfung Deutsch | ADR Bot zur Prüfungsvorbereitung per Telegram",
   description:
-    "Kostenlose Pilotphase für ADR Prüfungsvorbereitung auf Deutsch. ADR Bot hilft bei Begriffen, Prüfungsdeutsch und verständlicher Orientierung direkt in Telegram.",
+    "Kostenlose ADR Prüfungsvorbereitung auf Deutsch per Telegram. ADR Bot hilft bei Begriffen, Prüfungsdeutsch, ADR-Fragen und dem Einstieg zum ADR-Schein.",
   alternates: {
     canonical: "/",
   },
@@ -22,6 +22,10 @@ export default function Home() {
         url: siteUrl,
         inLanguage: "de-DE",
         description: siteConfig.description,
+        potentialAction: {
+          "@type": "ReadAction",
+          target: [siteUrl],
+        },
       },
       {
         "@type": "Organization",
@@ -35,12 +39,49 @@ export default function Home() {
         applicationCategory: "EducationalApplication",
         operatingSystem: "Telegram",
         description:
-          "Telegram-based learning support for ADR exam preparation in German.",
+          "Telegram-basierte Lernhilfe fuer die ADR-Pruefung auf Deutsch.",
         offers: {
           "@type": "Offer",
           price: "0",
           priceCurrency: "EUR",
         },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Wie kann ich mich auf die ADR-Pruefung auf Deutsch vorbereiten?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "ADR Bot unterstuetzt die Vorbereitung mit erklaerten Fachbegriffen, verstaendlicherem Pruefungsdeutsch und einer strukturierten Uebung direkt in Telegram.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Ist ADR Bot kostenlos?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Ja. ADR Bot befindet sich aktuell in einer kostenlosen oeffentlichen Testphase.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Brauche ich fuer ADR Bot eine neue App?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Nein. Das Angebot funktioniert direkt in Telegram, ohne zusaetzliche Lernplattform.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Hilft ADR Bot beim Verstaendnis von ADR-Fachbegriffen und offiziellen Formulierungen?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Ja. Der Fokus liegt auf Begriffen, typischen Fragestellungen und technischem Deutsch rund um die ADR-Pruefung.",
+            },
+          },
+        ],
       },
     ],
   };

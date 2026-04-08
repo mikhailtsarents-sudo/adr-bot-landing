@@ -3,11 +3,9 @@
 import { useLang } from "@/lib/i18n/use-lang";
 import { motion } from "framer-motion";
 import { ArrowRight, Bot } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "./language-switcher";
-
-const telegramHref = "https://t.me/Adr_wort_trainer_bot";
+import { TrackedTelegramLink } from "./tracked-telegram-link";
 
 export function StickyHeader() {
   const { t } = useLang();
@@ -40,14 +38,14 @@ export function StickyHeader() {
         </div>
         <div className="flex items-center gap-2">
           <LanguageSwitcher compact />
-          <Link
-            href={telegramHref}
+          <TrackedTelegramLink
+            source="sticky_header"
             tabIndex={visible ? 0 : -1}
             className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)] px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-[var(--color-accent-strong)]"
           >
             {t.hero.ctaPrimary}
             <ArrowRight className="h-3 w-3 shrink-0" />
-          </Link>
+          </TrackedTelegramLink>
         </div>
       </div>
     </motion.div>
