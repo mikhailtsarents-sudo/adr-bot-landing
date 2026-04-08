@@ -31,7 +31,7 @@ export default function Home() {
         "@type": "Organization",
         name: siteConfig.name,
         url: siteUrl,
-        sameAs: ["https://t.me/Adr_wort_trainer_bot"],
+        sameAs: ["https://t.me/adr_pruefung_trainer_bot"],
       },
       {
         "@type": "SoftwareApplication",
