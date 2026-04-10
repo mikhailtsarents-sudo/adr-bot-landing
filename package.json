@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate:canva-manifest": "node scripts/generate-canva-manifest.mjs",
+    "generate:heygen-manifest": "node scripts/generate-heygen-manifest.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

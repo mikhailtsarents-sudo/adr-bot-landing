@@ -1,0 +1,44 @@
+{
+  "project": "adr-short-video",
+  "format": "9:16",
+  "slides_count": 6,
+  "updated_at": "2026-04-10T13:44:52.805Z",
+  "slides": [
+    {
+      "id": 1,
+      "name": "slide1",
+      "role": "hook",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide1.png"
+    },
+    {
+      "id": 2,
+      "name": "slide2",
+      "role": "question",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide2.png"
+    },
+    {
+      "id": 3,
+      "name": "slide3",
+      "role": "answers",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide3.png"
+    },
+    {
+      "id": 4,
+      "name": "slide4",
+      "role": "timer",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide4.png"
+    },
+    {
+      "id": 5,
+      "name": "slide5",
+      "role": "answer",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide5.png"
+    },
+    {
+      "id": 6,
+      "name": "slide6",
+      "role": "cta",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide6.png"
+    }
+  ]
+}
