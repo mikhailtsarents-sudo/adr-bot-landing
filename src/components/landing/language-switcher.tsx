@@ -37,12 +37,12 @@ export function LanguageSwitcher({ compact = false }: Props) {
   }, [open]);
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative z-[120]">
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Select language"
         aria-expanded={open}
-        className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
+        className="flex items-center gap-1.5 rounded-full border border-white/65 bg-white/72 px-3 py-1.5 text-sm text-slate-700 shadow-[0_8px_24px_rgba(15,10,6,0.12)] backdrop-blur-md transition hover:border-white/80 hover:bg-white/82"
       >
         <Globe className="h-3.5 w-3.5 text-slate-500" />
         {compact ? (
@@ -58,7 +58,7 @@ export function LanguageSwitcher({ compact = false }: Props) {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-2 w-44 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+        <div className="absolute right-0 top-full z-[140] mt-2 w-44 overflow-hidden rounded-2xl border border-white/70 bg-white/92 shadow-[0_18px_40px_rgba(15,10,6,0.18)] backdrop-blur-xl">
           {SUPPORTED_LANGS.map((code) => (
             <button
               key={code}
@@ -67,7 +67,7 @@ export function LanguageSwitcher({ compact = false }: Props) {
                 setOpen(false);
               }}
               className={[
-                "flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition hover:bg-slate-50",
+                "flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm transition hover:bg-white/80",
                 code === lang ? "bg-amber-50 font-semibold text-amber-700" : "text-slate-700",
               ].join(" ")}
             >

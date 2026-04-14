@@ -117,11 +117,11 @@ export function LandingPage() {
       : "ADR Bot befindet sich aktuell als kostenloses Pilotprojekt in einer öffentlichen Testphase. Das Angebot dient der unterstützenden Selbstvorbereitung rund um die ADR-Prüfung auf Deutsch. Inhalte und Funktionen können sich ändern.";
 
   return (
-    <main className="relative overflow-hidden bg-transparent text-[var(--color-text)]">
+    <main className="relative overflow-x-hidden bg-transparent text-[var(--color-text)]">
       <ParallaxRoadBg />
 
       <section className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 pb-16 pt-6 sm:min-h-screen sm:px-8 lg:px-10">
-        <Reveal className="mb-12 flex items-center justify-between rounded-full border border-white/70 bg-white/80 px-5 py-3 shadow-[0_10px_28px_rgba(15,10,6,0.14)] backdrop-blur-md">
+        <Reveal className="relative z-[90] mb-12 flex items-center justify-between rounded-full border border-white/55 bg-white/52 px-5 py-3 shadow-[0_10px_28px_rgba(15,10,6,0.12)] backdrop-blur-xl">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#e8a030,#f6b548)] text-white shadow-[0_4px_14px_rgba(232,160,48,0.3)]">
               <Bot className="h-5 w-5" />
@@ -145,7 +145,7 @@ export function LandingPage() {
         </Reveal>
 
         <div className="grid flex-1 items-center gap-10 lg:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-          <Reveal className="max-w-2xl rounded-[2rem] border border-white/58 bg-[rgba(255,252,246,0.78)] p-6 shadow-[0_22px_60px_rgba(15,10,6,0.16)] backdrop-blur-[10px] sm:p-8">
+          <Reveal className="max-w-2xl rounded-[2rem] border border-white/46 bg-[rgba(255,252,246,0.58)] p-6 shadow-[0_22px_60px_rgba(15,10,6,0.13)] backdrop-blur-[12px] sm:p-8">
             <span className="inline-flex items-center rounded-full border border-amber-300 bg-amber-50 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.32em] text-amber-700">
               {t.hero.eyebrow}
             </span>
@@ -187,7 +187,7 @@ export function LandingPage() {
               <Reveal
                 key={index}
                 delay={index * 0.07}
-                className="rounded-[1.75rem] border border-slate-200/70 bg-white/88 p-6 shadow-sm backdrop-blur-sm"
+                className="rounded-[1.75rem] border border-white/45 bg-white/56 p-6 shadow-[0_10px_28px_rgba(15,10,6,0.10)] backdrop-blur-md"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
                   <Icon className="h-5 w-5" />
@@ -222,7 +222,7 @@ export function LandingPage() {
               <Reveal
                 key={index}
                 delay={index * 0.08}
-                className="relative rounded-[2rem] border border-slate-200/70 bg-white/90 p-7 shadow-sm backdrop-blur-sm"
+                className="relative rounded-[2rem] border border-white/45 bg-white/58 p-7 shadow-[0_10px_28px_rgba(15,10,6,0.10)] backdrop-blur-md"
               >
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
                   <Icon className="h-6 w-6" />
@@ -253,7 +253,7 @@ export function LandingPage() {
                 <Reveal
                   key={item}
                   delay={0.07 + index * 0.06}
-                  className="flex items-center gap-3 rounded-2xl border border-slate-200/70 bg-white/88 px-4 py-3.5 shadow-sm backdrop-blur-sm"
+                  className="flex items-center gap-3 rounded-2xl border border-white/42 bg-white/54 px-4 py-3.5 shadow-[0_8px_22px_rgba(15,10,6,0.08)] backdrop-blur-md"
                 >
                   <CheckCircle2 className="h-5 w-5 shrink-0 text-amber-500" />
                   <span className="text-sm text-slate-700">{item}</span>
@@ -268,10 +268,10 @@ export function LandingPage() {
                 <div
                   key={index}
                   className={[
-                    "rounded-[1.7rem] border p-6 shadow-sm backdrop-blur-sm",
+                    "rounded-[1.7rem] border p-6 shadow-[0_8px_22px_rgba(15,10,6,0.08)] backdrop-blur-md",
                     index === 1
-                      ? "border-amber-200 bg-amber-50/92"
-                      : "border-slate-200/70 bg-white/88",
+                      ? "border-amber-200/60 bg-amber-50/62"
+                      : "border-white/42 bg-white/54",
                   ].join(" ")}
                 >
                   <h3 className="font-display text-xl font-semibold text-slate-900">
@@ -301,7 +301,7 @@ export function LandingPage() {
                 <Reveal
                   key={index}
                   delay={index * 0.06}
-                  className="rounded-[1.8rem] border border-slate-200/70 bg-white/88 p-6 shadow-sm backdrop-blur-sm"
+                  className="rounded-[1.8rem] border border-white/42 bg-white/54 p-6 shadow-[0_8px_22px_rgba(15,10,6,0.08)] backdrop-blur-md"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
                     <Icon className="h-5 w-5" />
@@ -319,7 +319,7 @@ export function LandingPage() {
 
       <section className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
-          <div className="rounded-[2.25rem] border border-amber-200 bg-[linear-gradient(135deg,rgba(255,253,248,0.95),rgba(255,248,236,0.94),rgba(255,255,255,0.9))] px-6 py-8 shadow-sm backdrop-blur-sm sm:p-10 lg:p-12">
+          <div className="rounded-[2.25rem] border border-amber-200/55 bg-[linear-gradient(135deg,rgba(255,253,248,0.72),rgba(255,248,236,0.64),rgba(255,255,255,0.58))] px-6 py-8 shadow-[0_10px_28px_rgba(15,10,6,0.10)] backdrop-blur-md sm:p-10 lg:p-12">
             <SectionHeading
               eyebrow={t.trust.eyebrow}
               title={t.trust.title}
@@ -330,7 +330,7 @@ export function LandingPage() {
                 <Reveal
                   key={item}
                   delay={index * 0.06}
-                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-sm"
+                  className="rounded-full border border-white/52 bg-white/62 px-4 py-2 text-sm text-slate-700 shadow-[0_8px_20px_rgba(15,10,6,0.08)] backdrop-blur-md"
                 >
                   {item}
                 </Reveal>
@@ -342,7 +342,7 @@ export function LandingPage() {
 
       <section className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
-          <div className="overflow-hidden rounded-[2.5rem] border border-amber-200 bg-[linear-gradient(135deg,rgba(255,248,236,0.96),rgba(255,243,214,0.94),rgba(254,249,240,0.9))] px-6 py-10 shadow-[0_8px_40px_rgba(232,160,48,0.15)] backdrop-blur-sm sm:p-10 lg:p-14">
+          <div className="overflow-hidden rounded-[2.5rem] border border-amber-200/55 bg-[linear-gradient(135deg,rgba(255,248,236,0.72),rgba(255,243,214,0.64),rgba(254,249,240,0.58))] px-6 py-10 shadow-[0_8px_40px_rgba(232,160,48,0.12)] backdrop-blur-md sm:p-10 lg:p-14">
             <div className="relative">
               <div className="absolute -right-10 -top-14 h-48 w-48 rounded-full bg-amber-200/40 blur-3xl" />
               <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-amber-700/70">
@@ -364,7 +364,7 @@ export function LandingPage() {
       </section>
 
       <footer className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-10 pt-4 sm:px-8 lg:px-10">
-        <Reveal className="flex flex-col gap-6 rounded-[2rem] border border-slate-200/70 bg-white/88 px-6 py-6 text-sm text-slate-600 shadow-sm backdrop-blur-sm md:flex-row md:items-center md:justify-between">
+        <Reveal className="flex flex-col gap-6 rounded-[2rem] border border-white/45 bg-white/56 px-6 py-6 text-sm text-slate-600 shadow-[0_10px_28px_rgba(15,10,6,0.10)] backdrop-blur-md md:flex-row md:items-center md:justify-between">
           <p className="max-w-2xl leading-7">{t.footer.description}</p>
           <div className="flex flex-col gap-2 md:items-end">
             <TrackedTelegramLink
