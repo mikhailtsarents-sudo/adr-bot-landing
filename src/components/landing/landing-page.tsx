@@ -230,11 +230,13 @@ export function LandingPage() {
       </section>
 
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
+        <div className="rounded-[2.6rem] border border-white/10 bg-[rgba(16,14,10,0.68)] px-6 py-8 shadow-[0_24px_70px_rgba(4,4,3,0.28)] backdrop-blur-xl sm:px-8 sm:py-10 lg:px-10 lg:py-12">
         <Reveal>
           <SectionHeading
             eyebrow={t.problems.eyebrow}
             title={t.problems.title}
             description={t.problems.description}
+            theme="dark"
           />
         </Reveal>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -244,20 +246,21 @@ export function LandingPage() {
               <Reveal
                 key={card.title}
                 delay={index * 0.07}
-                className="brand-card rounded-[1.8rem] p-6"
+                className="rounded-[1.8rem] border border-white/10 bg-[rgba(255,248,234,0.08)] p-6 shadow-[0_18px_40px_rgba(8,7,5,0.18)] backdrop-blur-lg"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(242,183,5,0.14)] text-[var(--color-dark)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(242,183,5,0.16)] text-amber-200">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-6 font-display text-xl font-semibold text-[var(--color-text-strong)]">
+                <h3 className="mt-6 font-display text-xl font-semibold text-white">
                   {card.title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
+                <p className="mt-3 text-sm leading-7 text-white/70">
                   {card.text}
                 </p>
               </Reveal>
             );
           })}
+        </div>
         </div>
       </section>
 
@@ -271,6 +274,7 @@ export function LandingPage() {
             eyebrow={t.howItWorks.eyebrow}
             title={t.howItWorks.title}
             description={t.howItWorks.description}
+            theme="dark"
           />
         </Reveal>
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -280,13 +284,13 @@ export function LandingPage() {
               <Reveal
                 key={step.title}
                 delay={index * 0.08}
-                className="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-dark)] p-7 text-white shadow-[0_24px_48px_rgba(15,23,42,0.16)]"
+                className="rounded-[2rem] border border-white/10 bg-[rgba(16,14,10,0.76)] p-7 text-white shadow-[0_26px_54px_rgba(7,6,4,0.24)] backdrop-blur-xl"
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-[var(--color-dark)]">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(242,183,5,0.18)] text-amber-200 ring-1 ring-amber-200/15">
                     <Icon className="h-6 w-6" />
                   </div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-white/42">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-amber-100/55">
                     Step {index + 1}
                   </p>
                 </div>
@@ -305,28 +309,29 @@ export function LandingPage() {
         className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10"
       >
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <Reveal>
+          <Reveal className="rounded-[2.3rem] border border-white/10 bg-[rgba(17,14,10,0.68)] p-6 shadow-[0_22px_54px_rgba(7,6,5,0.2)] backdrop-blur-xl sm:p-8">
             <SectionHeading
               eyebrow={t.benefits.eyebrow}
               title={t.benefits.title}
               description={t.benefits.description}
+              theme="dark"
             />
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {t.benefits.checklist.map((item, index) => (
                 <Reveal
                   key={item}
                   delay={0.07 + index * 0.06}
-                  className="brand-card flex items-center gap-3 rounded-[1.4rem] px-4 py-4"
+                  className="flex items-center gap-3 rounded-[1.4rem] border border-white/10 bg-[rgba(255,248,234,0.08)] px-4 py-4 text-white/78 backdrop-blur-lg"
                 >
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[var(--color-green)]" />
-                  <span className="text-sm text-[var(--color-text)]">{item}</span>
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-300" />
+                  <span className="text-sm">{item}</span>
                 </Reveal>
               ))}
             </div>
           </Reveal>
 
           <Reveal delay={0.12} className="grid gap-4 sm:grid-cols-2">
-            <div className="relative overflow-hidden rounded-[2rem] bg-[var(--color-dark)] p-6 text-white shadow-[0_24px_52px_rgba(15,23,42,0.18)] sm:col-span-2">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[rgba(17,14,10,0.78)] p-6 text-white shadow-[0_24px_52px_rgba(8,7,5,0.22)] backdrop-blur-xl sm:col-span-2">
               <div className="absolute right-0 top-0 h-full w-[42%] opacity-20">
                 <Image
                   src="/redesign/truck-secondary.svg"
@@ -344,35 +349,36 @@ export function LandingPage() {
                     : "Die Website holt Aufmerksamkeit. Telegram macht daraus Wiederholung."}
               </p>
             </div>
-            {t.benefits.cards.map((card, index) => (
-              <div
-                key={card.title}
-                className={[
-                  "rounded-[1.7rem] border p-6 shadow-[0_16px_44px_rgba(15,23,42,0.08)]",
-                  index === 1 || index === 4
-                    ? "border-[rgba(242,183,5,0.26)] bg-[rgba(255,247,214,0.92)]"
-                    : "border-[var(--color-border)] bg-white",
-                ].join(" ")}
-              >
-                <h3 className="font-display text-xl font-semibold text-[var(--color-text-strong)]">
-                  {card.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
-                  {card.text}
-                </p>
-              </div>
-            ))}
+              {t.benefits.cards.map((card, index) => (
+                <div
+                  key={card.title}
+                  className={[
+                    "rounded-[1.7rem] border p-6 shadow-[0_18px_42px_rgba(8,7,5,0.18)] backdrop-blur-xl",
+                    index === 1 || index === 4
+                      ? "border-amber-300/28 bg-[rgba(255,233,189,0.14)]"
+                      : "border-white/10 bg-[rgba(255,248,234,0.07)]",
+                  ].join(" ")}
+                >
+                  <h3 className="font-display text-xl font-semibold text-white">
+                    {card.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-white/70">
+                    {card.text}
+                  </p>
+                </div>
+              ))}
           </Reveal>
         </div>
       </section>
 
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <Reveal>
+          <Reveal className="rounded-[2.3rem] border border-white/10 bg-[rgba(17,14,10,0.68)] p-6 shadow-[0_22px_54px_rgba(7,6,5,0.2)] backdrop-blur-xl sm:p-8">
             <SectionHeading
               eyebrow={t.audience.eyebrow}
               title={t.audience.title}
               description={t.audience.description}
+              theme="dark"
             />
           </Reveal>
           <div className="grid gap-5 sm:grid-cols-2">
@@ -382,15 +388,15 @@ export function LandingPage() {
                 <Reveal
                   key={card.title}
                   delay={index * 0.06}
-                  className="brand-card rounded-[1.8rem] p-6"
+                  className="rounded-[1.8rem] border border-white/10 bg-[rgba(255,248,234,0.08)] p-6 shadow-[0_18px_40px_rgba(8,7,5,0.18)] backdrop-blur-lg"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(46,125,50,0.12)] text-[var(--color-green)]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(73,145,91,0.16)] text-emerald-300">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold text-[var(--color-text-strong)]">
+                  <h3 className="mt-5 font-display text-xl font-semibold text-white">
                     {card.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
+                  <p className="mt-3 text-sm leading-7 text-white/70">
                     {card.text}
                   </p>
                 </Reveal>
@@ -402,18 +408,19 @@ export function LandingPage() {
 
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
-          <div className="overflow-hidden rounded-[2.4rem] border border-[rgba(242,183,5,0.24)] bg-[linear-gradient(135deg,#fffdfa,#fff7dd,#ffffff)] px-6 py-8 shadow-[0_24px_56px_rgba(242,183,5,0.12)] sm:p-10 lg:p-12">
+          <div className="overflow-hidden rounded-[2.4rem] border border-amber-300/18 bg-[rgba(255,231,190,0.12)] px-6 py-8 shadow-[0_24px_56px_rgba(17,12,7,0.18)] backdrop-blur-xl sm:p-10 lg:p-12">
             <SectionHeading
               eyebrow={t.trust.eyebrow}
               title={t.trust.title}
               description={t.trust.description}
+              theme="dark"
             />
             <div className="mt-8 flex flex-wrap gap-3">
               {t.trust.bullets.map((item, index) => (
                 <Reveal
                   key={item}
                   delay={index * 0.06}
-                  className="rounded-full border border-[var(--color-border)] bg-white px-4 py-2 text-sm text-[var(--color-text)] shadow-sm"
+                  className="rounded-full border border-white/10 bg-[rgba(255,248,234,0.08)] px-4 py-2 text-sm text-white/80 shadow-sm backdrop-blur-lg"
                 >
                   {item}
                 </Reveal>
@@ -453,30 +460,30 @@ export function LandingPage() {
       </section>
 
       <footer className="relative mx-auto w-full max-w-7xl px-6 pb-10 pt-4 sm:px-8 lg:px-10">
-        <Reveal className="brand-card flex flex-col gap-6 rounded-[2rem] px-6 py-6 text-sm text-[var(--color-text-soft)] md:flex-row md:items-center md:justify-between">
+        <Reveal className="flex flex-col gap-6 rounded-[2rem] border border-white/10 bg-[rgba(16,14,10,0.7)] px-6 py-6 text-sm text-white/66 shadow-[0_20px_48px_rgba(7,6,5,0.2)] backdrop-blur-xl md:flex-row md:items-center md:justify-between">
           <p className="max-w-2xl leading-7">{t.footer.description}</p>
           <div className="flex flex-col gap-2 md:items-end">
             <TrackedTelegramLink
               source="footer_link"
-              className="font-medium text-[var(--color-text-strong)] transition hover:text-[var(--color-green)]"
+              className="font-medium text-white transition hover:text-amber-200"
             >
               {t.footer.link}
             </TrackedTelegramLink>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--color-text-muted)] md:justify-end">
-              <Link href="/impressum" className="hover:text-[var(--color-text-strong)]">
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/48 md:justify-end">
+              <Link href="/impressum" className="hover:text-white">
                 Impressum
               </Link>
-              <Link href="/datenschutz" className="hover:text-[var(--color-text-strong)]">
+              <Link href="/datenschutz" className="hover:text-white">
                 Datenschutz
               </Link>
-              <Link href="/legal" className="hover:text-[var(--color-text-strong)]">
+              <Link href="/legal" className="hover:text-white">
                 Legal
               </Link>
             </div>
-            <p className="max-w-md text-xs leading-5 text-[var(--color-text-muted)] md:text-right">
+            <p className="max-w-md text-xs leading-5 text-white/48 md:text-right">
               {pilotNotice}
             </p>
-            <p className="max-w-xs text-xs leading-5 text-[var(--color-text-muted)] md:text-right">
+            <p className="max-w-xs text-xs leading-5 text-white/48 md:text-right">
               {t.footer.disclaimer}
             </p>
           </div>
