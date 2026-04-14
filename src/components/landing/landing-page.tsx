@@ -1,40 +1,67 @@
 "use client";
 
 import { useLang } from "@/lib/i18n/use-lang";
-import {
-  ArrowRight,
-  BadgeCheck,
-  Bot,
-  CheckCircle2,
-  ChevronRight,
-  ClipboardCheck,
-  Languages,
-  Layers3,
-  MessageCircleMore,
-  Route,
-  Send,
-  ShieldCheck,
-  Sparkles,
-  Truck,
-  Waypoints,
-} from "lucide-react";
+import { ArrowRight, BadgeCheck, Bot, CheckCircle2, ChevronRight, Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { LanguageSwitcher } from "./language-switcher";
-import { PhoneCarousel } from "./phone-carousel";
 import { Reveal } from "./reveal";
-import { SectionHeading } from "./section-heading";
 import { TrackedTelegramLink } from "./tracked-telegram-link";
 
-const problemIcons = [Languages, ClipboardCheck, Route, ShieldCheck];
-const stepIcons = [MessageCircleMore, Waypoints, ShieldCheck];
-const audienceIcons = [Truck, Layers3, CheckCircle2, Languages];
+const heroLinks = [
+  { id: "benefits", label: { de: "Vorteile", en: "Benefits", ru: "Преимущества" } },
+  { id: "how-it-works", label: { de: "So geht's", en: "How it works", ru: "Как это работает" } },
+  { id: "faq", label: { de: "FAQ", en: "FAQ", ru: "FAQ" } },
+];
 
-function PrimaryLink({ label }: { label: string }) {
+function navLabel(
+  labels: { de: string; en: string; ru: string },
+  lang: string,
+) {
+  if (lang === "ru") return labels.ru;
+  if (lang === "en") return labels.en;
+  return labels.de;
+}
+
+function HandoffPhone({
+  className = "",
+  priority = false,
+}: {
+  className?: string;
+  priority?: boolean;
+}) {
+  return (
+    <div
+      className={[
+        "relative overflow-hidden rounded-[2.15rem] border-[5px] border-[#151515] bg-[#111111] shadow-[0_30px_80px_rgba(0,0,0,0.28)]",
+        className,
+      ].join(" ")}
+    >
+      <div className="flex justify-center bg-[#111111] pb-1 pt-2.5">
+        <div className="h-4 w-20 rounded-full bg-black" />
+      </div>
+      <div className="relative bg-white" style={{ paddingBottom: "180%" }}>
+        <Image
+          src="/redesign/telegram-preview.png"
+          alt="ADR Bot Telegram preview"
+          fill
+          priority={priority}
+          className="object-cover object-top"
+          sizes="(max-width: 768px) 240px, 320px"
+        />
+      </div>
+      <div className="flex justify-center bg-[#111111] py-2.5">
+        <div className="h-1 w-20 rounded-full bg-white/20" />
+      </div>
+    </div>
+  );
+}
+
+function PrimaryLink({ label, source }: { label: string; source: string }) {
   return (
     <TrackedTelegramLink
-      source="hero_primary"
-      className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3.5 text-sm font-semibold text-[var(--color-dark)] shadow-[0_16px_30px_rgba(242,183,5,0.28)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]"
+      source={source}
+      className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-semibold text-[var(--color-dark)] shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]"
     >
       {label}
       <ArrowRight className="h-4 w-4 shrink-0" />
@@ -46,7 +73,7 @@ function SecondaryLink({ label }: { label: string }) {
   return (
     <Link
       href="#how-it-works"
-      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/18 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/32 hover:bg-white/14"
+      className="inline-flex items-center justify-center gap-2 rounded-full border border-black/12 bg-white/82 px-7 py-3.5 text-sm font-semibold text-[#1c1b18] shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition hover:bg-white"
     >
       {label}
       <ChevronRight className="h-4 w-4 shrink-0" />
@@ -56,437 +83,285 @@ function SecondaryLink({ label }: { label: string }) {
 
 export function LandingPage() {
   const { lang, t } = useLang();
+
   const pilotNotice =
     lang === "en"
       ? "ADR Bot is currently a free pilot project in a public test phase for self-study support around ADR exam preparation in German. Content and features may change."
-      : "ADR Bot befindet sich aktuell als kostenloses Pilotprojekt in einer öffentlichen Testphase. Das Angebot dient der unterstützenden Selbstvorbereitung rund um die ADR-Prüfung auf Deutsch. Inhalte und Funktionen können sich ändern.";
+      : lang === "ru"
+        ? "ADR Bot сейчас работает как бесплатный пилотный проект в открытой тестовой фазе для самостоятельной подготовки к ADR на немецком. Контент и функции могут меняться."
+        : "ADR Bot befindet sich aktuell als kostenloses Pilotprojekt in einer öffentlichen Testphase für die selbstständige Vorbereitung auf die ADR-Prüfung auf Deutsch. Inhalte und Funktionen können sich ändern.";
 
-  const proofItems = [
-    { label: lang === "ru" ? "Формат" : lang === "en" ? "Format" : "Format", value: "Telegram-first" },
-    { label: lang === "ru" ? "Фокус" : lang === "en" ? "Focus" : "Fokus", value: "ADR Deutsch" },
-    { label: lang === "ru" ? "Режим" : lang === "en" ? "Mode" : "Modus", value: lang === "en" ? "Short drills" : lang === "ru" ? "Короткие тренировки" : "Kurze Drills" },
+  const quickBenefits = t.howItWorks.steps;
+  const designCards = [
+    t.benefits.cards[0],
+    t.benefits.cards[1],
+    t.benefits.cards[4],
   ];
 
   return (
-    <main className="relative overflow-hidden bg-transparent text-[var(--color-text)]">
-      <div className="pointer-events-none absolute inset-0 -z-20">
-        <Image
-          src="/redesign/hero-desktop.png"
-          alt=""
-          fill
-          priority
-          className="hidden object-cover object-top md:block"
-          sizes="100vw"
-        />
-        <Image
-          src="/redesign/hero-mobile.png"
-          alt=""
-          fill
-          priority
-          className="object-cover object-top md:hidden"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,11,7,0.04),rgba(18,14,9,0.1)_24%,rgba(20,16,10,0.18)_48%,rgba(23,18,12,0.28)_72%,rgba(24,19,12,0.42)_100%)]" />
-        <div className="absolute inset-y-0 left-0 w-[58%] bg-[linear-gradient(90deg,rgba(12,9,6,0.2),rgba(12,9,6,0.08)_38%,rgba(12,9,6,0)_100%)] md:w-[46%]" />
-      </div>
+    <main className="bg-[#f4efe2] text-[var(--color-text)]">
+      <section className="relative overflow-hidden bg-[#f4efe2]">
+        <div className="absolute inset-0">
+          <Image
+            src="/redesign/hero-scene-desktop.png"
+            alt=""
+            fill
+            priority
+            className="hidden object-cover object-center md:block"
+            sizes="100vw"
+          />
+          <Image
+            src="/redesign/hero-scene-mobile.png"
+            alt=""
+            fill
+            priority
+            className="object-cover object-top md:hidden"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(244,239,226,0.96)_0%,rgba(244,239,226,0.92)_24%,rgba(244,239,226,0.62)_42%,rgba(244,239,226,0.16)_62%,rgba(244,239,226,0)_100%)] md:bg-[linear-gradient(90deg,rgba(244,239,226,0.96)_0%,rgba(244,239,226,0.92)_26%,rgba(244,239,226,0.76)_40%,rgba(244,239,226,0.18)_56%,rgba(244,239,226,0.02)_74%,rgba(244,239,226,0)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,rgba(244,239,226,0)_0%,rgba(244,239,226,0.82)_74%,#f4efe2_100%)]" />
+        </div>
 
-      <section className="relative isolate min-h-screen text-white">
-        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-18 pt-6 sm:px-8 lg:px-10">
-          <Reveal className="brand-card mb-8 flex items-center justify-between rounded-[1.75rem] border-white/16 bg-[rgba(255,255,255,0.12)] px-4 py-3 text-white shadow-[0_14px_42px_rgba(17,12,7,0.14)] backdrop-blur-sm sm:mb-10 sm:rounded-full sm:px-5">
+        <div className="relative mx-auto flex min-h-[980px] w-full max-w-[1200px] flex-col px-6 pb-24 pt-6 sm:px-8 lg:min-h-[940px] lg:px-10">
+          <Reveal className="flex items-center justify-between gap-4 rounded-full border border-white/75 bg-[rgba(255,255,255,0.88)] px-5 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)] backdrop-blur-sm">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-dark)] shadow-[0_10px_24px_rgba(242,183,5,0.3)]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-dark)]">
                 <Bot className="h-5 w-5" />
               </div>
               <div>
-                <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white">
+                <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-[#fbfaf6] mix-blend-difference">
                   ADR Bot
                 </p>
-                <p className="text-xs text-white/74">{t.nav.tagline}</p>
+                <p className="text-xs text-[#8f8a7d]">{t.nav.tagline}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 sm:gap-3">
+
+            <div className="hidden items-center gap-8 lg:flex">
+              {heroLinks.map((link) => (
+                <Link
+                  key={link.id}
+                  href={`#${link.id}`}
+                  className="text-sm font-medium text-[#211d17] transition hover:text-[#7a5a00]"
+                >
+                  {navLabel(link.label, lang)}
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-3">
               <LanguageSwitcher />
               <TrackedTelegramLink
                 source="nav_open_telegram"
-                className="hidden rounded-full border border-white/14 bg-[rgba(255,191,0,0.88)] px-4 py-2 text-sm font-semibold text-[#231b0b] transition hover:bg-[rgba(255,201,50,0.96)] sm:inline-flex"
+                className="hidden rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[#1c1b18] shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition hover:bg-[var(--color-accent-strong)] sm:inline-flex"
               >
                 {t.nav.openInTelegram}
               </TrackedTelegramLink>
             </div>
           </Reveal>
 
-          <div className="grid items-center gap-10 pb-10 lg:min-h-[calc(100vh-10rem)] lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
-            <Reveal className="relative z-10 max-w-2xl rounded-[2rem] border border-white/14 bg-[rgba(16,13,9,0.1)] p-6 shadow-[0_24px_56px_rgba(12,9,6,0.12)] backdrop-blur-[1.5px] sm:p-8">
-              <span className="brand-chip">
-                <Sparkles className="h-3.5 w-3.5" />
-                {t.hero.eyebrow}
-              </span>
+          <div className="relative flex flex-1 flex-col pt-10 sm:pt-14 lg:pt-16">
+            <Reveal className="max-w-[560px]">
+              <div className="w-[170px] sm:w-[210px]">
+                <Image
+                  src="/redesign/adr-signs.svg"
+                  alt="ADR signs"
+                  width={420}
+                  height={368}
+                  className="h-auto w-full"
+                  sizes="(max-width: 640px) 170px, 210px"
+                />
+              </div>
 
-              <h1 className="mt-8 font-display text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
+              <h1 className="mt-6 max-w-[620px] font-display text-5xl font-semibold leading-[0.93] tracking-[-0.05em] text-[#fffaf1] drop-shadow-[0_4px_14px_rgba(0,0,0,0.22)] sm:text-6xl lg:text-[4.9rem]">
                 {t.hero.title}
               </h1>
 
-              <p className="mt-6 max-w-xl text-lg leading-8 text-white/82 sm:text-xl">
-                {t.hero.description}
+              <p className="mt-5 max-w-[520px] text-lg leading-8 text-[#f4eedf] drop-shadow-[0_4px_12px_rgba(0,0,0,0.2)] sm:text-[1.35rem]">
+                {lang === "ru"
+                  ? "Учитесь в дороге, уверенно и экологично."
+                  : lang === "en"
+                    ? "Learn on the go, safely and with less friction."
+                    : "Lerne unterwegs, sicher und umweltfreundlich."}
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <PrimaryLink label={t.hero.ctaPrimary} />
+                <PrimaryLink label={t.hero.ctaPrimary} source="hero_primary" />
                 <SecondaryLink label={t.hero.ctaSecondary} />
               </div>
 
-              <p className="mt-4 max-w-lg text-sm leading-7 text-white/66">{t.hero.note}</p>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {proofItems.map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-[1.4rem] border border-white/12 bg-[rgba(255,255,255,0.08)] px-4 py-4 backdrop-blur-sm"
-                  >
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-white/55">
-                      {item.label}
-                    </p>
-                    <p className="mt-2 text-sm font-semibold text-white">{item.value}</p>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-4 max-w-[430px] text-sm leading-7 text-[#f3ead4]">
+                {t.hero.note}
+              </p>
             </Reveal>
 
-            <Reveal delay={0.12} className="relative lg:justify-self-end">
-              <div className="relative overflow-hidden rounded-[2.2rem] border border-white/14 bg-[rgba(17,13,9,0.08)] p-4 shadow-[0_24px_56px_rgba(12,8,5,0.16)] backdrop-blur-[2px]">
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),transparent_38%,rgba(0,0,0,0.08))]" />
-                <div className="absolute right-4 top-4 z-10 rounded-full bg-[rgba(0,0,0,0.55)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/78">
-                  {lang === "ru" ? "Пилотный доступ" : lang === "en" ? "Pilot Access" : "Pilotzugang"}
-                </div>
-                <div className="relative flex min-h-[340px] items-end justify-center rounded-[1.8rem] p-4 sm:min-h-[460px] lg:min-h-[560px]">
-                  <div className="w-full max-w-[284px] sm:max-w-[300px] lg:max-w-[310px]">
-                    <div className="rounded-[2rem] border border-white/12 bg-[rgba(255,255,255,0.08)] p-3 backdrop-blur-lg">
-                      <PhoneCarousel />
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <Reveal
+              delay={0.12}
+              className="relative mt-10 w-[220px] sm:w-[260px] lg:absolute lg:-bottom-10 lg:left-4 lg:mt-0 lg:w-[310px]"
+            >
+              <HandoffPhone priority />
             </Reveal>
           </div>
-
-          <Reveal delay={0.18} className="mt-2 grid gap-4 lg:mt-4 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.09)] p-6 backdrop-blur-sm">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-white/55">
-                {lang === "ru" ? "Как это ощущается" : lang === "en" ? "How it feels" : "Wie es sich anfuehlt"}
-              </p>
-              <div className="mt-4 grid gap-4 sm:grid-cols-3">
-                <div>
-                  <p className="font-display text-3xl text-white">01</p>
-                  <p className="mt-2 text-sm text-white/72">
-                    {lang === "ru" ? "Вы открываете Telegram и сразу попадаете в практику." : lang === "en" ? "You open Telegram and land directly in practice." : "Du oeffnest Telegram und landest direkt in der Uebung."}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-display text-3xl text-white">02</p>
-                  <p className="mt-2 text-sm text-white/72">
-                    {lang === "ru" ? "Язык становится понятнее за счёт коротких повторений." : lang === "en" ? "The language becomes clearer through short repetitions." : "Die Sprache wird durch kurze Wiederholungen greifbarer."}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-display text-3xl text-white">03</p>
-                  <p className="mt-2 text-sm text-white/72">
-                    {lang === "ru" ? "Сайт и бот работают как одна воронка." : lang === "en" ? "Site and bot work as one conversion path." : "Website und Bot arbeiten als ein gemeinsamer Pfad."}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] border border-[rgba(242,183,5,0.36)] bg-[rgba(255,245,211,0.94)] p-6 text-[var(--color-dark)] shadow-[0_18px_48px_rgba(32,19,4,0.22)]">
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-dark)] text-[var(--color-accent)]">
-                  <Send className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="font-display text-2xl font-semibold">
-                    {lang === "ru" ? "Сразу к действию" : lang === "en" ? "Go straight to action" : "Direkt in die Aktion"}
-                  </p>
-                  <p className="text-sm text-[var(--color-text-soft)]">
-                    {lang === "ru"
-                      ? "Без регистрации и лишних экранов."
-                      : lang === "en"
-                        ? "No signup and no dead-end screens."
-                        : "Ohne Registrierung und ohne tote Zwischenschritte."}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-6 space-y-3">
-                {t.benefits.checklist.slice(0, 3).map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-3 rounded-[1.2rem] bg-white/84 px-4 py-3 text-sm text-[var(--color-text)]"
-                  >
-                    <BadgeCheck className="h-4 w-4 shrink-0 text-[var(--color-green)]" />
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-        <div className="rounded-[2.6rem] border border-white/10 bg-[rgba(16,14,10,0.68)] px-6 py-8 shadow-[0_24px_70px_rgba(4,4,3,0.28)] backdrop-blur-xl sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-        <Reveal>
-          <SectionHeading
-            eyebrow={t.problems.eyebrow}
-            title={t.problems.title}
-            description={t.problems.description}
-            theme="dark"
-          />
-        </Reveal>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {t.problems.cards.map((card, index) => {
-            const Icon = problemIcons[index];
-            return (
-              <Reveal
-                key={card.title}
-                delay={index * 0.07}
-                className="rounded-[1.8rem] border border-white/10 bg-[rgba(255,248,234,0.08)] p-6 shadow-[0_18px_40px_rgba(8,7,5,0.18)] backdrop-blur-lg"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(242,183,5,0.16)] text-amber-200">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-6 font-display text-xl font-semibold text-white">
-                  {card.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-white/70">
-                  {card.text}
-                </p>
-              </Reveal>
-            );
-          })}
-        </div>
         </div>
       </section>
 
       <section
         id="how-it-works"
-        className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10"
+        className="relative mx-auto w-full max-w-[1200px] px-6 py-16 sm:px-8 lg:px-10 lg:py-20"
       >
-        <Reveal>
-          <SectionHeading
-            align="center"
-            eyebrow={t.howItWorks.eyebrow}
-            title={t.howItWorks.title}
-            description={t.howItWorks.description}
-            theme="dark"
-          />
-        </Reveal>
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {t.howItWorks.steps.map((step, index) => {
-            const Icon = stepIcons[index];
-            return (
-              <Reveal
-                key={step.title}
-                delay={index * 0.08}
-                className="rounded-[2rem] border border-white/10 bg-[rgba(16,14,10,0.76)] p-7 text-white shadow-[0_26px_54px_rgba(7,6,4,0.24)] backdrop-blur-xl"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(242,183,5,0.18)] text-amber-200 ring-1 ring-amber-200/15">
-                    <Icon className="h-6 w-6" />
+        <Reveal className="grid items-center gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="rounded-[2rem] bg-white/88 p-5 shadow-[0_20px_54px_rgba(0,0,0,0.08)] backdrop-blur-sm">
+            <HandoffPhone className="mx-auto w-full max-w-[300px]" />
+          </div>
+
+          <div>
+            <p className="font-display text-4xl font-semibold tracking-[-0.03em] text-[#191611] sm:text-5xl">
+              {lang === "ru"
+                ? "Как работает обучение"
+                : lang === "en"
+                  ? "How learning works"
+                  : "So funktioniert das Lernen"}
+            </p>
+
+            <div className="mt-8 space-y-5">
+              {quickBenefits.map((item, index) => (
+                <div key={item.title} className="flex gap-4">
+                  <div className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[rgba(242,183,5,0.16)] text-[#7f5d00]">
+                    {index === 0 ? (
+                      <BadgeCheck className="h-5 w-5" />
+                    ) : index === 1 ? (
+                      <CheckCircle2 className="h-5 w-5" />
+                    ) : (
+                      <Send className="h-5 w-5" />
+                    )}
                   </div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-amber-100/55">
-                    Step {index + 1}
-                  </p>
+                  <div>
+                    <h2 className="font-display text-2xl font-semibold text-[#1d1912] sm:text-[2rem]">
+                      {item.title}
+                    </h2>
+                    <p className="mt-2 max-w-[520px] text-base leading-7 text-[var(--color-text-soft)]">
+                      {item.text}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-8 font-display text-3xl font-semibold text-white">
-                  {step.title}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-white/66">{step.text}</p>
-              </Reveal>
-            );
-          })}
-        </div>
+              ))}
+            </div>
+
+            <div className="mt-8">
+              <PrimaryLink label={t.hero.ctaPrimary} source="how_it_works_primary" />
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section
         id="benefits"
-        className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10"
+        className="relative mx-auto w-full max-w-[1200px] px-6 py-4 sm:px-8 lg:px-10 lg:py-10"
       >
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <Reveal className="rounded-[2.3rem] border border-white/10 bg-[rgba(17,14,10,0.68)] p-6 shadow-[0_22px_54px_rgba(7,6,5,0.2)] backdrop-blur-xl sm:p-8">
-            <SectionHeading
-              eyebrow={t.benefits.eyebrow}
-              title={t.benefits.title}
-              description={t.benefits.description}
-              theme="dark"
-            />
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {t.benefits.checklist.map((item, index) => (
-                <Reveal
-                  key={item}
-                  delay={0.07 + index * 0.06}
-                  className="flex items-center gap-3 rounded-[1.4rem] border border-white/10 bg-[rgba(255,248,234,0.08)] px-4 py-4 text-white/78 backdrop-blur-lg"
-                >
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-300" />
-                  <span className="text-sm">{item}</span>
-                </Reveal>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.12} className="grid gap-4 sm:grid-cols-2">
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[rgba(17,14,10,0.78)] p-6 text-white shadow-[0_24px_52px_rgba(8,7,5,0.22)] backdrop-blur-xl sm:col-span-2">
-              <div className="absolute right-0 top-0 h-full w-[42%] opacity-20">
-                <Image
-                  src="/redesign/truck-secondary.svg"
-                  alt=""
-                  fill
-                  className="object-contain object-right"
-                  sizes="420px"
-                />
-              </div>
-              <p className="relative z-10 max-w-md font-display text-3xl font-semibold">
+        <Reveal className="overflow-hidden rounded-[2.4rem] border border-[#e3dccd] bg-white/92 shadow-[0_24px_60px_rgba(0,0,0,0.08)]">
+          <div className="grid gap-0 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="p-8 sm:p-10">
+              <p className="font-display text-4xl font-semibold tracking-[-0.03em] text-[#17130f] sm:text-5xl">
                 {lang === "ru"
-                  ? "Сайт цепляет внимание. Telegram превращает интерес в привычку."
+                  ? "Почему дизайн сразу ощущается как ADR"
                   : lang === "en"
-                    ? "The site earns attention. Telegram turns it into repetition."
-                    : "Die Website holt Aufmerksamkeit. Telegram macht daraus Wiederholung."}
+                    ? "Why the design feels ADR instantly"
+                    : "Warum das Design sofort nach ADR aussieht"}
               </p>
-            </div>
-              {t.benefits.cards.map((card, index) => (
-                <div
-                  key={card.title}
-                  className={[
-                    "rounded-[1.7rem] border p-6 shadow-[0_18px_42px_rgba(8,7,5,0.18)] backdrop-blur-xl",
-                    index === 1 || index === 4
-                      ? "border-amber-300/28 bg-[rgba(255,233,189,0.14)]"
-                      : "border-white/10 bg-[rgba(255,248,234,0.07)]",
-                  ].join(" ")}
-                >
-                  <h3 className="font-display text-xl font-semibold text-white">
-                    {card.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-white/70">
-                    {card.text}
-                  </p>
-                </div>
-              ))}
-          </Reveal>
-        </div>
-      </section>
+              <p className="mt-4 max-w-[560px] text-base leading-8 text-[var(--color-text-soft)]">
+                {lang === "ru"
+                  ? "Фон, знаки, жёлтые CTA и интерфейс Telegram работают как одна визуальная система. За счёт этого страница выглядит ближе к экзаменационному контексту, а не к абстрактному лендингу."
+                  : lang === "en"
+                    ? "The road scene, ADR signs, yellow actions, and Telegram UI all work as one visual system. That makes the page feel closer to the exam context instead of a generic landing page."
+                    : "Szene, ADR-Schilder, gelbe CTA-Flaechen und das Telegram-Interface arbeiten als ein einziges visuelles System. Dadurch wirkt die Seite naeher am Pruefungskontext statt wie eine generische Landingpage."}
+              </p>
 
-      <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <Reveal className="rounded-[2.3rem] border border-white/10 bg-[rgba(17,14,10,0.68)] p-6 shadow-[0_22px_54px_rgba(7,6,5,0.2)] backdrop-blur-xl sm:p-8">
-            <SectionHeading
-              eyebrow={t.audience.eyebrow}
-              title={t.audience.title}
-              description={t.audience.description}
-              theme="dark"
-            />
-          </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {t.audience.cards.map((card, index) => {
-              const Icon = audienceIcons[index];
-              return (
-                <Reveal
-                  key={card.title}
-                  delay={index * 0.06}
-                  className="rounded-[1.8rem] border border-white/10 bg-[rgba(255,248,234,0.08)] p-6 shadow-[0_18px_40px_rgba(8,7,5,0.18)] backdrop-blur-lg"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(73,145,91,0.16)] text-emerald-300">
-                    <Icon className="h-5 w-5" />
+              <div className="mt-8 grid gap-4 md:grid-cols-3">
+                {designCards.map((card) => (
+                  <div
+                    key={card.title}
+                    className="rounded-[1.35rem] border border-[#ece5d6] bg-[#fffdf8] p-5 shadow-[0_12px_32px_rgba(0,0,0,0.04)]"
+                  >
+                    <h3 className="text-base font-semibold text-[#17130f]">{card.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">
+                      {card.text}
+                    </p>
                   </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold text-white">
-                    {card.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-white/70">
-                    {card.text}
-                  </p>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                ))}
+              </div>
+            </div>
 
-      <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-        <Reveal>
-          <div className="overflow-hidden rounded-[2.4rem] border border-amber-300/18 bg-[rgba(255,231,190,0.12)] px-6 py-8 shadow-[0_24px_56px_rgba(17,12,7,0.18)] backdrop-blur-xl sm:p-10 lg:p-12">
-            <SectionHeading
-              eyebrow={t.trust.eyebrow}
-              title={t.trust.title}
-              description={t.trust.description}
-              theme="dark"
-            />
-            <div className="mt-8 flex flex-wrap gap-3">
-              {t.trust.bullets.map((item, index) => (
-                <Reveal
-                  key={item}
-                  delay={index * 0.06}
-                  className="rounded-full border border-white/10 bg-[rgba(255,248,234,0.08)] px-4 py-2 text-sm text-white/80 shadow-sm backdrop-blur-lg"
-                >
-                  {item}
-                </Reveal>
-              ))}
+            <div className="relative min-h-[320px] overflow-hidden bg-[#f2ede1] lg:min-h-full">
+              <Image
+                src="/redesign/truck-secondary.png"
+                alt=""
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 480px"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02)_38%,rgba(17,17,17,0.22)_100%)]" />
             </div>
           </div>
         </Reveal>
       </section>
 
-      <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-        <Reveal>
-          <div className="overflow-hidden rounded-[2.7rem] bg-[linear-gradient(135deg,#1a1a1a_0%,#223126_100%)] px-6 py-10 text-white shadow-[0_28px_80px_rgba(15,23,42,0.22)] sm:p-10 lg:p-14">
-            <div className="relative">
-              <div className="absolute -right-14 -top-14 h-52 w-52 rounded-full bg-[rgba(242,183,5,0.22)] blur-3xl" />
-              <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-[rgba(255,255,255,0.5)]">
-                {t.cta.eyebrow}
+      <section
+        id="faq"
+        className="relative mx-auto w-full max-w-[1200px] px-6 py-14 sm:px-8 lg:px-10 lg:py-18"
+      >
+        <Reveal className="rounded-[2.4rem] bg-[rgba(255,255,255,0.72)] px-6 py-8 shadow-[0_18px_48px_rgba(0,0,0,0.06)] backdrop-blur-sm sm:px-8 sm:py-10">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div>
+              <p className="font-display text-[11px] uppercase tracking-[0.28em] text-[#7c715d]">
+                {t.trust.eyebrow}
               </p>
-              <h2 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">
+              <h2 className="mt-4 font-display text-4xl font-semibold tracking-[-0.03em] text-[#17130f] sm:text-5xl">
                 {t.cta.title}
               </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
+              <p className="mt-4 max-w-[720px] text-base leading-8 text-[var(--color-text-soft)]">
                 {t.cta.description}
               </p>
-              <div className="mt-8">
-                <TrackedTelegramLink
-                  source="final_cta"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-semibold text-[var(--color-dark)] shadow-[0_16px_30px_rgba(242,183,5,0.28)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]"
-                >
-                  {t.cta.button}
-                  <ArrowRight className="h-4 w-4 shrink-0" />
-                </TrackedTelegramLink>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {t.trust.bullets.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-[#e6decf] bg-[#fffaf0] px-4 py-2 text-sm text-[#544a39]"
+                  >
+                    {item}
+                  </span>
+                ))}
               </div>
-              <p className="mt-4 text-sm text-white/56">{t.cta.note}</p>
+            </div>
+
+            <div className="flex flex-col gap-3 lg:items-end">
+              <PrimaryLink label={t.cta.button} source="final_cta" />
+              <p className="max-w-sm text-sm leading-7 text-[var(--color-text-soft)] lg:text-right">
+                {t.cta.note}
+              </p>
             </div>
           </div>
         </Reveal>
       </section>
 
-      <footer className="relative mx-auto w-full max-w-7xl px-6 pb-10 pt-4 sm:px-8 lg:px-10">
-        <Reveal className="flex flex-col gap-6 rounded-[2rem] border border-white/10 bg-[rgba(16,14,10,0.7)] px-6 py-6 text-sm text-white/66 shadow-[0_20px_48px_rgba(7,6,5,0.2)] backdrop-blur-xl md:flex-row md:items-center md:justify-between">
-          <p className="max-w-2xl leading-7">{t.footer.description}</p>
-          <div className="flex flex-col gap-2 md:items-end">
-            <TrackedTelegramLink
-              source="footer_link"
-              className="font-medium text-white transition hover:text-amber-200"
-            >
-              {t.footer.link}
-            </TrackedTelegramLink>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/48 md:justify-end">
-              <Link href="/impressum" className="hover:text-white">
-                Impressum
-              </Link>
-              <Link href="/datenschutz" className="hover:text-white">
-                Datenschutz
-              </Link>
-              <Link href="/legal" className="hover:text-white">
-                Legal
-              </Link>
+      <footer className="mx-auto w-full max-w-[1200px] px-6 pb-10 pt-4 sm:px-8 lg:px-10">
+        <Reveal className="flex flex-col gap-5 border-t border-black/10 py-6 text-sm text-[var(--color-text-soft)] md:flex-row md:items-start md:justify-between">
+          <div className="max-w-2xl">
+            <p className="font-display text-2xl font-semibold text-[#17130f]">ADR Bot</p>
+            <p className="mt-2 leading-7">{t.footer.description}</p>
+          </div>
+
+          <div className="flex flex-col gap-3 md:items-end">
+            <div className="flex flex-wrap gap-4 text-[#544a39]">
+              {heroLinks.map((link) => (
+                <Link key={link.id} href={`#${link.id}`} className="hover:text-[#111111]">
+                  {navLabel(link.label, lang)}
+                </Link>
+              ))}
+              <TrackedTelegramLink source="footer_link" className="hover:text-[#111111]">
+                {t.footer.link}
+              </TrackedTelegramLink>
             </div>
-            <p className="max-w-md text-xs leading-5 text-white/48 md:text-right">
-              {pilotNotice}
-            </p>
-            <p className="max-w-xs text-xs leading-5 text-white/48 md:text-right">
-              {t.footer.disclaimer}
-            </p>
+            <p className="max-w-md text-xs leading-6 md:text-right">{pilotNotice}</p>
+            <p className="max-w-md text-xs leading-6 md:text-right">{t.footer.disclaimer}</p>
           </div>
         </Reveal>
       </footer>
