@@ -1,27 +1,11 @@
 "use client";
 
 import { useLang } from "@/lib/i18n/use-lang";
-import { ArrowRight, BadgeCheck, Bot, CheckCircle2, ChevronRight, Send } from "lucide-react";
+import { ArrowRight, BadgeCheck, CheckCircle2, Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { LanguageSwitcher } from "./language-switcher";
 import { Reveal } from "./reveal";
 import { TrackedTelegramLink } from "./tracked-telegram-link";
-
-const heroLinks = [
-  { id: "benefits", label: { de: "Vorteile", en: "Benefits", ru: "Преимущества" } },
-  { id: "how-it-works", label: { de: "So geht's", en: "How it works", ru: "Как это работает" } },
-  { id: "faq", label: { de: "FAQ", en: "FAQ", ru: "FAQ" } },
-];
-
-function navLabel(
-  labels: { de: string; en: string; ru: string },
-  lang: string,
-) {
-  if (lang === "ru") return labels.ru;
-  if (lang === "en") return labels.en;
-  return labels.de;
-}
 
 function HandoffPhone({
   className = "",
@@ -69,16 +53,18 @@ function PrimaryLink({ label, source }: { label: string; source: string }) {
   );
 }
 
-function SecondaryLink({ label }: { label: string }) {
-  return (
-    <Link
-      href="#how-it-works"
-      className="inline-flex items-center justify-center gap-2 rounded-full border border-black/12 bg-white/82 px-7 py-3.5 text-sm font-semibold text-[#1c1b18] shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition hover:bg-white"
-    >
-      {label}
-      <ChevronRight className="h-4 w-4 shrink-0" />
-    </Link>
-  );
+function footerNavLabel(id: "benefits" | "how-it-works" | "faq", lang: string) {
+  if (id === "benefits") {
+    if (lang === "ru") return "Преимущества";
+    if (lang === "en") return "Benefits";
+    return "Vorteile";
+  }
+  if (id === "how-it-works") {
+    if (lang === "ru") return "Как это работает";
+    if (lang === "en") return "How it works";
+    return "So geht's";
+  }
+  return "FAQ";
 }
 
 export function LandingPage() {
@@ -101,105 +87,62 @@ export function LandingPage() {
   return (
     <main className="bg-[#f4efe2] text-[var(--color-text)]">
       <section className="relative overflow-hidden bg-[#f4efe2]">
-        <div className="absolute inset-0">
-          <Image
-            src="/redesign/hero-scene-desktop.png"
-            alt=""
-            fill
-            priority
-            className="hidden object-cover object-center md:block"
-            sizes="100vw"
-          />
-          <Image
-            src="/redesign/hero-scene-mobile.png"
-            alt=""
-            fill
-            priority
-            className="object-cover object-top md:hidden"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(244,239,226,0.96)_0%,rgba(244,239,226,0.92)_24%,rgba(244,239,226,0.62)_42%,rgba(244,239,226,0.16)_62%,rgba(244,239,226,0)_100%)] md:bg-[linear-gradient(90deg,rgba(244,239,226,0.96)_0%,rgba(244,239,226,0.92)_26%,rgba(244,239,226,0.76)_40%,rgba(244,239,226,0.18)_56%,rgba(244,239,226,0.02)_74%,rgba(244,239,226,0)_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,rgba(244,239,226,0)_0%,rgba(244,239,226,0.82)_74%,#f4efe2_100%)]" />
-        </div>
-
-        <div className="relative mx-auto flex min-h-[980px] w-full max-w-[1200px] flex-col px-6 pb-24 pt-6 sm:px-8 lg:min-h-[940px] lg:px-10">
-          <Reveal className="flex items-center justify-between gap-4 rounded-full border border-white/75 bg-[rgba(255,255,255,0.88)] px-5 py-3 shadow-[0_12px_28px_rgba(0,0,0,0.08)] backdrop-blur-sm">
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-dark)]">
-                <Bot className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-[#fbfaf6] mix-blend-difference">
-                  ADR Bot
-                </p>
-                <p className="text-xs text-[#8f8a7d]">{t.nav.tagline}</p>
-              </div>
+        <div className="relative mx-auto w-full max-w-[1200px] px-4 pb-10 pt-4 sm:px-6 lg:px-8 lg:pb-14 lg:pt-6">
+          <div className="relative overflow-hidden rounded-[2rem] shadow-[0_24px_80px_rgba(0,0,0,0.12)]">
+            <div className="sr-only">
+              <h1>{t.hero.title}</h1>
+              <p>{t.hero.description}</p>
             </div>
 
-            <div className="hidden items-center gap-8 lg:flex">
-              {heroLinks.map((link) => (
-                <Link
-                  key={link.id}
-                  href={`#${link.id}`}
-                  className="text-sm font-medium text-[#211d17] transition hover:text-[#7a5a00]"
-                >
-                  {navLabel(link.label, lang)}
-                </Link>
-              ))}
-            </div>
+            <Image
+              src="/redesign/hero-export-desktop.png"
+              alt="ADR Bot hero preview"
+              width={1024}
+              height={640}
+              priority
+              className="hidden h-auto w-full md:block"
+              sizes="(max-width: 1280px) 100vw, 1200px"
+            />
+            <Image
+              src="/redesign/hero-export-mobile.png"
+              alt="ADR Bot hero preview mobile"
+              width={1024}
+              height={1536}
+              priority
+              className="h-auto w-full md:hidden"
+              sizes="100vw"
+            />
 
-            <div className="flex items-center gap-3">
-              <LanguageSwitcher />
-              <TrackedTelegramLink
-                source="nav_open_telegram"
-                className="hidden rounded-full bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[#1c1b18] shadow-[0_8px_20px_rgba(0,0,0,0.12)] transition hover:bg-[var(--color-accent-strong)] sm:inline-flex"
-              >
-                {t.nav.openInTelegram}
-              </TrackedTelegramLink>
-            </div>
-          </Reveal>
-
-          <div className="relative flex flex-1 flex-col pt-10 sm:pt-14 lg:pt-16">
-            <Reveal className="max-w-[560px]">
-              <div className="w-[170px] sm:w-[210px]">
-                <Image
-                  src="/redesign/adr-signs.svg"
-                  alt="ADR signs"
-                  width={420}
-                  height={368}
-                  className="h-auto w-full"
-                  sizes="(max-width: 640px) 170px, 210px"
-                />
-              </div>
-
-              <h1 className="mt-6 max-w-[620px] font-display text-5xl font-semibold leading-[0.93] tracking-[-0.05em] text-[#fffaf1] drop-shadow-[0_4px_14px_rgba(0,0,0,0.22)] sm:text-6xl lg:text-[4.9rem]">
-                {t.hero.title}
-              </h1>
-
-              <p className="mt-5 max-w-[520px] text-lg leading-8 text-[#f4eedf] drop-shadow-[0_4px_12px_rgba(0,0,0,0.2)] sm:text-[1.35rem]">
-                {lang === "ru"
-                  ? "Учитесь в дороге, уверенно и экологично."
-                  : lang === "en"
-                    ? "Learn on the go, safely and with less friction."
-                    : "Lerne unterwegs, sicher und umweltfreundlich."}
-              </p>
-
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <PrimaryLink label={t.hero.ctaPrimary} source="hero_primary" />
-                <SecondaryLink label={t.hero.ctaSecondary} />
-              </div>
-
-              <p className="mt-4 max-w-[430px] text-sm leading-7 text-[#f3ead4]">
-                {t.hero.note}
-              </p>
-            </Reveal>
-
-            <Reveal
-              delay={0.12}
-              className="relative mt-10 w-[220px] sm:w-[260px] lg:absolute lg:-bottom-10 lg:left-4 lg:mt-0 lg:w-[310px]"
+            <TrackedTelegramLink
+              source="hero_primary"
+              aria-label={t.hero.ctaPrimary}
+              className="absolute right-[4.8%] top-[4.8%] hidden h-[10.6%] w-[22.2%] rounded-full md:block"
             >
-              <HandoffPhone priority />
-            </Reveal>
+              <span className="sr-only">{t.hero.ctaPrimary}</span>
+            </TrackedTelegramLink>
+            <TrackedTelegramLink
+              source="hero_primary_mobile"
+              aria-label={t.hero.ctaPrimary}
+              className="absolute right-[6.5%] top-[3.8%] h-[7.4%] w-[39%] rounded-full md:hidden"
+            >
+              <span className="sr-only">{t.hero.ctaPrimary}</span>
+            </TrackedTelegramLink>
+
+            <Link
+              href="#benefits"
+              aria-label="Benefits"
+              className="absolute left-[34%] top-[5.8%] hidden h-[5%] w-[9%] rounded-full md:block"
+            />
+            <Link
+              href="#how-it-works"
+              aria-label="How it works"
+              className="absolute left-[44.5%] top-[5.8%] hidden h-[5%] w-[11%] rounded-full md:block"
+            />
+            <Link
+              href="#faq"
+              aria-label="FAQ"
+              className="absolute left-[57.2%] top-[5.8%] hidden h-[5%] w-[6%] rounded-full md:block"
+            />
           </div>
         </div>
       </section>
@@ -351,11 +294,15 @@ export function LandingPage() {
 
           <div className="flex flex-col gap-3 md:items-end">
             <div className="flex flex-wrap gap-4 text-[#544a39]">
-              {heroLinks.map((link) => (
-                <Link key={link.id} href={`#${link.id}`} className="hover:text-[#111111]">
-                  {navLabel(link.label, lang)}
-                </Link>
-              ))}
+              <Link href="#benefits" className="hover:text-[#111111]">
+                {footerNavLabel("benefits", lang)}
+              </Link>
+              <Link href="#how-it-works" className="hover:text-[#111111]">
+                {footerNavLabel("how-it-works", lang)}
+              </Link>
+              <Link href="#faq" className="hover:text-[#111111]">
+                FAQ
+              </Link>
               <TrackedTelegramLink source="footer_link" className="hover:text-[#111111]">
                 {t.footer.link}
               </TrackedTelegramLink>
