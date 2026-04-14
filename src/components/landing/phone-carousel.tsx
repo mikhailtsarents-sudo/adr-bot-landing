@@ -1,7 +1,7 @@
 "use client";
 
 import { useLang } from "@/lib/i18n/use-lang";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -27,16 +27,18 @@ const screens = [
 export function PhoneCarousel() {
   const { t } = useLang();
   const caption = t.carousel.caption;
+  const shouldReduceMotion = useReducedMotion();
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
 
   useEffect(() => {
+    if (shouldReduceMotion) return;
     const id = setInterval(() => {
       setDirection(1);
       setActive((prev) => (prev + 1) % screens.length);
     }, 3800);
     return () => clearInterval(id);
-  }, []);
+  }, [shouldReduceMotion]);
 
   function goTo(index: number) {
     setDirection(index > active ? 1 : -1);
@@ -58,22 +60,22 @@ export function PhoneCarousel() {
   };
 
   return (
-    <div className="relative mx-auto flex flex-col items-center gap-5 w-full max-w-[320px] sm:max-w-[300px] lg:max-w-[280px]">
-      {/* Ambient glow */}
-      <div className="absolute inset-x-4 top-6 h-48 rounded-full bg-amber-300/20 blur-3xl" />
+    <div className="relative mx-auto flex w-full max-w-[280px] select-none flex-col items-center gap-4 sm:max-w-[292px] lg:max-w-[300px]">
+      <div className="absolute inset-x-5 top-5 h-44 rounded-full bg-amber-300/20 blur-3xl" />
 
-      {/* Phone shell — width adapts via parent max-w */}
       <motion.div
-        animate={{ y: [-6, 6, -6] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        animate={shouldReduceMotion ? { y: 0 } : { y: [-4, 5, -4] }}
+        transition={
+          shouldReduceMotion
+            ? { duration: 0 }
+            : { duration: 8, repeat: Infinity, ease: "easeInOut" }
+        }
         className="relative z-10 w-full overflow-hidden rounded-[2.5rem] border-[5px] border-slate-800 bg-slate-800 shadow-[0_32px_80px_rgba(0,0,0,0.25),0_0_0_1px_rgba(0,0,0,0.06)]"
       >
-        {/* Notch */}
         <div className="flex justify-center bg-slate-800 pb-1 pt-2.5">
           <div className="h-4 w-20 rounded-full bg-black" />
         </div>
 
-        {/* Screen — aspect ratio 9:19.5 like iPhone */}
         <div className="relative w-full overflow-hidden bg-white" style={{ paddingBottom: "216%" }}>
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
@@ -83,7 +85,11 @@ export function PhoneCarousel() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.45, ease: [0.32, 0.72, 0, 1] }
+              }
               className="absolute inset-0"
             >
               <Image
@@ -98,21 +104,20 @@ export function PhoneCarousel() {
           </AnimatePresence>
         </div>
 
-        {/* Home indicator */}
         <div className="flex justify-center bg-slate-800 py-2.5">
           <div className="h-1 w-20 rounded-full bg-white/20" />
         </div>
       </motion.div>
 
-      {/* Dot navigation */}
       <div className="flex items-center gap-2">
         {screens.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
             aria-label={`Show screenshot ${i + 1}`}
+            aria-pressed={i === active}
             className={[
-              "rounded-full transition-all duration-300",
+              "rounded-full transition-all duration-300 focus-visible:outline-none",
               i === active
                 ? "h-2 w-6 bg-amber-500"
                 : "h-2 w-2 bg-slate-300 hover:bg-slate-400",
@@ -121,7 +126,6 @@ export function PhoneCarousel() {
         ))}
       </div>
 
-      {/* Caption */}
       <p className="text-center text-xs text-slate-400">{caption}</p>
     </div>
   );

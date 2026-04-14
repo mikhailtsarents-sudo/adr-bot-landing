@@ -3,6 +3,7 @@
 import { useLang } from "@/lib/i18n/use-lang";
 import {
   ArrowRight,
+  BadgeCheck,
   Bot,
   CheckCircle2,
   ChevronRight,
@@ -11,30 +12,29 @@ import {
   Layers3,
   MessageCircleMore,
   Route,
+  Send,
   ShieldCheck,
+  Sparkles,
   Truck,
   Waypoints,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { LanguageSwitcher } from "./language-switcher";
 import { PhoneCarousel } from "./phone-carousel";
 import { Reveal } from "./reveal";
-import { SceneBg } from "./scene-bg";
 import { SectionHeading } from "./section-heading";
 import { TrackedTelegramLink } from "./tracked-telegram-link";
 
-// Icons for problem, how-it-works, and audience cards (order matches translations)
 const problemIcons = [Languages, ClipboardCheck, Route, ShieldCheck];
 const stepIcons = [MessageCircleMore, Waypoints, ShieldCheck];
 const audienceIcons = [Truck, Layers3, CheckCircle2, Languages];
-
-// ─── UI Helpers ───────────────────────────────────────────────────────────────
 
 function PrimaryLink({ label }: { label: string }) {
   return (
     <TrackedTelegramLink
       source="hero_primary"
-      className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(232,160,48,0.35)] transition hover:bg-[var(--color-accent-strong)] hover:shadow-[0_6px_24px_rgba(232,160,48,0.45)]"
+      className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3.5 text-sm font-semibold text-[var(--color-dark)] shadow-[0_16px_30px_rgba(242,183,5,0.28)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]"
     >
       {label}
       <ArrowRight className="h-4 w-4 shrink-0" />
@@ -46,15 +46,13 @@ function SecondaryLink({ label }: { label: string }) {
   return (
     <Link
       href="#how-it-works"
-      className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
+      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/18 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/32 hover:bg-white/14"
     >
       {label}
       <ChevronRight className="h-4 w-4 shrink-0" />
     </Link>
   );
 }
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export function LandingPage() {
   const { lang, t } = useLang();
@@ -63,66 +61,196 @@ export function LandingPage() {
       ? "ADR Bot is currently a free pilot project in a public test phase for self-study support around ADR exam preparation in German. Content and features may change."
       : "ADR Bot befindet sich aktuell als kostenloses Pilotprojekt in einer öffentlichen Testphase. Das Angebot dient der unterstützenden Selbstvorbereitung rund um die ADR-Prüfung auf Deutsch. Inhalte und Funktionen können sich ändern.";
 
+  const proofItems = [
+    { label: lang === "ru" ? "Формат" : lang === "en" ? "Format" : "Format", value: "Telegram-first" },
+    { label: lang === "ru" ? "Фокус" : lang === "en" ? "Focus" : "Fokus", value: "ADR Deutsch" },
+    { label: lang === "ru" ? "Режим" : lang === "en" ? "Mode" : "Modus", value: lang === "en" ? "Short drills" : lang === "ru" ? "Короткие тренировки" : "Kurze Drills" },
+  ];
+
   return (
     <main className="relative overflow-hidden bg-[var(--color-bg)] text-[var(--color-text)]">
-      <SceneBg />
+      <section className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#191919_0%,#202020_38%,#143120_100%)] text-white">
+        <div className="hero-grid-overlay absolute inset-0 opacity-60" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(242,183,5,0.24),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.1),transparent_28%)]" />
+        <div className="absolute -left-16 top-24 h-56 w-56 rounded-full bg-[rgba(242,183,5,0.16)] blur-3xl" />
+        <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-[rgba(46,125,50,0.18)] blur-3xl" />
 
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-16 pt-6 sm:min-h-screen sm:px-8 lg:px-10">
-        {/* Navbar */}
-        <Reveal className="mb-12 flex items-center justify-between rounded-full border border-slate-200 bg-white/80 px-5 py-3 shadow-sm backdrop-blur-md">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#e8a030,#f6b548)] text-white shadow-[0_4px_14px_rgba(232,160,48,0.3)]">
-              <Bot className="h-5 w-5" />
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-18 pt-6 sm:px-8 lg:px-10">
+          <Reveal className="brand-card mb-8 flex items-center justify-between rounded-[1.75rem] bg-white/10 px-4 py-3 text-white shadow-none sm:mb-10 sm:rounded-full sm:px-5">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-dark)] shadow-[0_10px_24px_rgba(242,183,5,0.3)]">
+                <Bot className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white">
+                  ADR Bot
+                </p>
+                <p className="text-xs text-white/70">{t.nav.tagline}</p>
+              </div>
             </div>
-            <div>
-              <p className="font-display text-sm font-semibold tracking-[0.16em] text-slate-900 uppercase">
-                ADR Bot
-              </p>
-              <p className="text-xs text-slate-500">{t.nav.tagline}</p>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <LanguageSwitcher />
+              <TrackedTelegramLink
+                source="nav_open_telegram"
+                className="hidden rounded-full border border-white/16 bg-white/8 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/14 sm:inline-flex"
+              >
+                {t.nav.openInTelegram}
+              </TrackedTelegramLink>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher />
-            <TrackedTelegramLink
-              source="nav_open_telegram"
-              className="hidden text-sm font-medium text-slate-500 transition hover:text-slate-800 sm:inline-flex"
-            >
-              {t.nav.openInTelegram}
-            </TrackedTelegramLink>
-          </div>
-        </Reveal>
-
-        {/* Hero content */}
-        <div className="grid flex-1 items-center gap-10 lg:gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-          <Reveal className="max-w-2xl">
-            <span className="inline-flex items-center rounded-full border border-amber-300 bg-amber-50 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.32em] text-amber-700">
-              {t.hero.eyebrow}
-            </span>
-
-            <h1 className="mt-8 font-display text-5xl font-semibold tracking-[-0.03em] text-slate-900 sm:text-6xl lg:text-7xl">
-              {t.hero.title}
-            </h1>
-
-            <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600 sm:text-xl">
-              {t.hero.description}
-            </p>
-
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <PrimaryLink label={t.hero.ctaPrimary} />
-              <SecondaryLink label={t.hero.ctaSecondary} />
-            </div>
-
-            <p className="mt-4 text-sm text-slate-500">{t.hero.note}</p>
           </Reveal>
 
-          <Reveal delay={0.12} className="relative lg:justify-self-end">
-            <PhoneCarousel />
+          <div className="grid items-center gap-8 pb-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12">
+            <Reveal className="relative z-10 max-w-2xl">
+              <span className="brand-chip">
+                <Sparkles className="h-3.5 w-3.5" />
+                {t.hero.eyebrow}
+              </span>
+
+              <h1 className="mt-8 font-display text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
+                {t.hero.title}
+              </h1>
+
+              <p className="mt-6 max-w-xl text-lg leading-8 text-white/74 sm:text-xl">
+                {t.hero.description}
+              </p>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <PrimaryLink label={t.hero.ctaPrimary} />
+                <SecondaryLink label={t.hero.ctaSecondary} />
+              </div>
+
+              <p className="mt-4 max-w-lg text-sm leading-7 text-white/58">{t.hero.note}</p>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {proofItems.map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-[1.4rem] border border-white/12 bg-white/8 px-4 py-4 backdrop-blur-sm"
+                  >
+                    <p className="text-[11px] uppercase tracking-[0.24em] text-white/48">
+                      {item.label}
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-white">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.12} className="relative lg:justify-self-end">
+              <div className="relative overflow-hidden rounded-[2.1rem] border border-white/12 bg-white/10 p-2.5 shadow-[var(--color-hero-shadow)] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-3">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),transparent_34%,rgba(0,0,0,0.3))]" />
+                <div className="absolute right-4 top-4 z-10 rounded-full bg-[rgba(23,23,23,0.75)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/78">
+                  {lang === "ru" ? "Пилотный доступ" : lang === "en" ? "Pilot Access" : "Pilotzugang"}
+                </div>
+                <div className="relative h-[340px] overflow-hidden rounded-[1.7rem] sm:h-[480px] sm:rounded-[2rem] lg:h-[560px]">
+                  <Image
+                    src="/redesign/hero-desktop.png"
+                    alt="ADR Bot redesign hero preview"
+                    fill
+                    className="hidden object-cover md:block"
+                    sizes="(max-width: 1024px) 100vw, 560px"
+                    priority
+                  />
+                  <Image
+                    src="/redesign/hero-mobile.png"
+                    alt="ADR Bot redesign mobile preview"
+                    fill
+                    className="object-cover md:hidden"
+                    sizes="100vw"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.46))]" />
+                  <div className="absolute left-4 top-4 hidden rounded-[1.4rem] border border-white/14 bg-[rgba(15,23,42,0.58)] px-4 py-3 text-sm text-white/82 backdrop-blur-md sm:block">
+                    <p className="font-semibold text-white">
+                      {lang === "ru" ? "Подготовка к ADR без новой платформы" : lang === "en" ? "ADR prep without a new platform" : "ADR-Vorbereitung ohne neue Plattform"}
+                    </p>
+                    <p className="mt-1 max-w-[16rem] text-xs leading-5 text-white/66">
+                      {lang === "ru"
+                        ? "Сайт приводит, Telegram доводит до действия."
+                        : lang === "en"
+                          ? "The site attracts, Telegram handles the real drill."
+                          : "Die Website fuehrt hinein, Telegram uebernimmt den echten Drill."}
+                    </p>
+                  </div>
+                  <Image
+                    src="/redesign/adr-signs.svg"
+                    alt=""
+                    width={94}
+                    height={94}
+                    className="absolute bottom-4 left-4 w-[76px] opacity-92 sm:bottom-6 sm:left-6 sm:w-[94px]"
+                  />
+                </div>
+
+                <div className="relative z-10 mx-auto mt-4 w-full max-w-[284px] pointer-events-none sm:max-w-[300px] lg:absolute lg:-bottom-8 lg:right-6 lg:mt-0 lg:w-[280px]">
+                  <div className="rounded-[2rem] border border-white/16 bg-[rgba(255,255,255,0.08)] p-3 backdrop-blur-lg">
+                    <PhoneCarousel />
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.18} className="mt-2 grid gap-4 lg:mt-4 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="rounded-[2rem] border border-white/12 bg-white/8 p-6 backdrop-blur-sm">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-white/50">
+                {lang === "ru" ? "Как это ощущается" : lang === "en" ? "How it feels" : "Wie es sich anfuehlt"}
+              </p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                <div>
+                  <p className="font-display text-3xl text-white">01</p>
+                  <p className="mt-2 text-sm text-white/66">
+                    {lang === "ru" ? "Вы открываете Telegram и сразу попадаете в практику." : lang === "en" ? "You open Telegram and land directly in practice." : "Du oeffnest Telegram und landest direkt in der Uebung."}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-display text-3xl text-white">02</p>
+                  <p className="mt-2 text-sm text-white/66">
+                    {lang === "ru" ? "Язык становится понятнее за счёт коротких повторений." : lang === "en" ? "The language becomes clearer through short repetitions." : "Die Sprache wird durch kurze Wiederholungen greifbarer."}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-display text-3xl text-white">03</p>
+                  <p className="mt-2 text-sm text-white/66">
+                    {lang === "ru" ? "Сайт и бот работают как одна воронка." : lang === "en" ? "Site and bot work as one conversion path." : "Website und Bot arbeiten als ein gemeinsamer Pfad."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-[rgba(242,183,5,0.28)] bg-[rgba(255,247,214,0.98)] p-6 text-[var(--color-dark)] shadow-[0_18px_48px_rgba(242,183,5,0.18)]">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-dark)] text-[var(--color-accent)]">
+                  <Send className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-display text-2xl font-semibold">
+                    {lang === "ru" ? "Сразу к действию" : lang === "en" ? "Go straight to action" : "Direkt in die Aktion"}
+                  </p>
+                  <p className="text-sm text-[var(--color-text-soft)]">
+                    {lang === "ru"
+                      ? "Без регистрации и лишних экранов."
+                      : lang === "en"
+                        ? "No signup and no dead-end screens."
+                        : "Ohne Registrierung und ohne tote Zwischenschritte."}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-6 space-y-3">
+                {t.benefits.checklist.slice(0, 3).map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 rounded-[1.2rem] bg-white/80 px-4 py-3 text-sm text-[var(--color-text)]"
+                  >
+                    <BadgeCheck className="h-4 w-4 shrink-0 text-[var(--color-green)]" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Problem ───────────────────────────────────────────────────────── */}
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
           <SectionHeading
@@ -136,17 +264,17 @@ export function LandingPage() {
             const Icon = problemIcons[index];
             return (
               <Reveal
-                key={index}
+                key={card.title}
                 delay={index * 0.07}
-                className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm"
+                className="brand-card rounded-[1.8rem] p-6"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(242,183,5,0.14)] text-[var(--color-dark)]">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-6 font-display text-xl font-semibold text-slate-900">
+                <h3 className="mt-6 font-display text-xl font-semibold text-[var(--color-text-strong)]">
                   {card.title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
+                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
                   {card.text}
                 </p>
               </Reveal>
@@ -155,7 +283,6 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* ── How it works ──────────────────────────────────────────────────── */}
       <section
         id="how-it-works"
         className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10"
@@ -168,35 +295,33 @@ export function LandingPage() {
             description={t.howItWorks.description}
           />
         </Reveal>
-        <div className="relative mt-14 grid gap-6 lg:grid-cols-3">
-          <div className="absolute left-[16.66%] right-[16.66%] top-10 hidden h-px bg-[linear-gradient(90deg,transparent,rgba(232,160,48,0.5),transparent)] lg:block" />
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {t.howItWorks.steps.map((step, index) => {
             const Icon = stepIcons[index];
             return (
               <Reveal
-                key={index}
+                key={step.title}
                 delay={index * 0.08}
-                className="relative rounded-[2rem] border border-slate-200 bg-white p-7 shadow-sm"
+                className="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-dark)] p-7 text-white shadow-[0_24px_48px_rgba(15,23,42,0.16)]"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
-                  <Icon className="h-6 w-6" />
+                <div className="flex items-center justify-between">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-[var(--color-dark)]">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-white/42">
+                    Step {index + 1}
+                  </p>
                 </div>
-                <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.26em] text-slate-400">
-                  Step {index + 1}
-                </p>
-                <h3 className="mt-2 font-display text-2xl font-semibold text-slate-900">
+                <h3 className="mt-8 font-display text-3xl font-semibold text-white">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600">
-                  {step.text}
-                </p>
+                <p className="mt-4 text-sm leading-7 text-white/66">{step.text}</p>
               </Reveal>
             );
           })}
         </div>
       </section>
 
-      {/* ── Solution / Benefits ───────────────────────────────────────────── */}
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <Reveal>
@@ -208,43 +333,58 @@ export function LandingPage() {
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {t.benefits.checklist.map((item, index) => (
                 <Reveal
-                  key={index}
+                  key={item}
                   delay={0.07 + index * 0.06}
-                  className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm"
+                  className="brand-card flex items-center gap-3 rounded-[1.4rem] px-4 py-4"
                 >
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-amber-500" />
-                  <span className="text-sm text-slate-700">{item}</span>
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[var(--color-green)]" />
+                  <span className="text-sm text-[var(--color-text)]">{item}</span>
                 </Reveal>
               ))}
             </div>
           </Reveal>
 
-          <Reveal delay={0.12}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {t.benefits.cards.map((card, index) => (
-                <div
-                  key={index}
-                  className={[
-                    "rounded-[1.7rem] border p-6",
-                    index === 1
-                      ? "border-amber-200 bg-amber-50 shadow-sm"
-                      : "border-slate-200 bg-white shadow-sm",
-                  ].join(" ")}
-                >
-                  <h3 className="font-display text-xl font-semibold text-slate-900">
-                    {card.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {card.text}
-                  </p>
-                </div>
-              ))}
+          <Reveal delay={0.12} className="grid gap-4 sm:grid-cols-2">
+            <div className="relative overflow-hidden rounded-[2rem] bg-[var(--color-dark)] p-6 text-white shadow-[0_24px_52px_rgba(15,23,42,0.18)] sm:col-span-2">
+              <div className="absolute right-0 top-0 h-full w-[42%] opacity-20">
+                <Image
+                  src="/redesign/truck-secondary.svg"
+                  alt=""
+                  fill
+                  className="object-contain object-right"
+                  sizes="420px"
+                />
+              </div>
+              <p className="relative z-10 max-w-md font-display text-3xl font-semibold">
+                {lang === "ru"
+                  ? "Сайт цепляет внимание. Telegram превращает интерес в привычку."
+                  : lang === "en"
+                    ? "The site earns attention. Telegram turns it into repetition."
+                    : "Die Website holt Aufmerksamkeit. Telegram macht daraus Wiederholung."}
+              </p>
             </div>
+            {t.benefits.cards.map((card, index) => (
+              <div
+                key={card.title}
+                className={[
+                  "rounded-[1.7rem] border p-6 shadow-[0_16px_44px_rgba(15,23,42,0.08)]",
+                  index === 1 || index === 4
+                    ? "border-[rgba(242,183,5,0.26)] bg-[rgba(255,247,214,0.92)]"
+                    : "border-[var(--color-border)] bg-white",
+                ].join(" ")}
+              >
+                <h3 className="font-display text-xl font-semibold text-[var(--color-text-strong)]">
+                  {card.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
+                  {card.text}
+                </p>
+              </div>
+            ))}
           </Reveal>
         </div>
       </section>
 
-      {/* ── Who it is for ─────────────────────────────────────────────────── */}
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <Reveal>
@@ -259,17 +399,17 @@ export function LandingPage() {
               const Icon = audienceIcons[index];
               return (
                 <Reveal
-                  key={index}
+                  key={card.title}
                   delay={index * 0.06}
-                  className="rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-sm"
+                  className="brand-card rounded-[1.8rem] p-6"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[rgba(46,125,50,0.12)] text-[var(--color-green)]">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-5 font-display text-xl font-semibold text-slate-900">
+                  <h3 className="mt-5 font-display text-xl font-semibold text-[var(--color-text-strong)]">
                     {card.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
                     {card.text}
                   </p>
                 </Reveal>
@@ -281,7 +421,7 @@ export function LandingPage() {
 
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
-          <div className="rounded-[2.25rem] border border-amber-200 bg-[linear-gradient(135deg,#fffdf8,#fff8ec,#ffffff)] px-6 py-8 shadow-sm sm:p-10 lg:p-12">
+          <div className="overflow-hidden rounded-[2.4rem] border border-[rgba(242,183,5,0.24)] bg-[linear-gradient(135deg,#fffdfa,#fff7dd,#ffffff)] px-6 py-8 shadow-[0_24px_56px_rgba(242,183,5,0.12)] sm:p-10 lg:p-12">
             <SectionHeading
               eyebrow={t.trust.eyebrow}
               title={t.trust.title}
@@ -292,7 +432,7 @@ export function LandingPage() {
                 <Reveal
                   key={item}
                   delay={index * 0.06}
-                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-sm"
+                  className="rounded-full border border-[var(--color-border)] bg-white px-4 py-2 text-sm text-[var(--color-text)] shadow-sm"
                 >
                   {item}
                 </Reveal>
@@ -302,62 +442,60 @@ export function LandingPage() {
         </Reveal>
       </section>
 
-      {/* ── Final CTA ─────────────────────────────────────────────────────── */}
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
-          <div className="overflow-hidden rounded-[2.5rem] border border-amber-200 bg-[linear-gradient(135deg,#fff8ec,#fff3d6,#fef9f0)] px-6 py-10 shadow-[0_8px_40px_rgba(232,160,48,0.15)] sm:p-10 lg:p-14">
+          <div className="overflow-hidden rounded-[2.7rem] bg-[linear-gradient(135deg,#1a1a1a_0%,#223126_100%)] px-6 py-10 text-white shadow-[0_28px_80px_rgba(15,23,42,0.22)] sm:p-10 lg:p-14">
             <div className="relative">
-              <div className="absolute -right-10 -top-14 h-48 w-48 rounded-full bg-amber-200/40 blur-3xl" />
-              <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-amber-700/70">
+              <div className="absolute -right-14 -top-14 h-52 w-52 rounded-full bg-[rgba(242,183,5,0.22)] blur-3xl" />
+              <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-[rgba(255,255,255,0.5)]">
                 {t.cta.eyebrow}
               </p>
-              <h2 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-[-0.03em] text-slate-900 sm:text-5xl">
+              <h2 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">
                 {t.cta.title}
               </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-700 sm:text-lg">
+              <p className="mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
                 {t.cta.description}
               </p>
               <div className="mt-8">
                 <TrackedTelegramLink
                   source="final_cta"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-800"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-semibold text-[var(--color-dark)] shadow-[0_16px_30px_rgba(242,183,5,0.28)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]"
                 >
                   {t.cta.button}
                   <ArrowRight className="h-4 w-4 shrink-0" />
                 </TrackedTelegramLink>
               </div>
-              <p className="mt-4 text-sm text-slate-500">{t.cta.note}</p>
+              <p className="mt-4 text-sm text-white/56">{t.cta.note}</p>
             </div>
           </div>
         </Reveal>
       </section>
 
-      {/* ── Footer ────────────────────────────────────────────────────────── */}
       <footer className="relative mx-auto w-full max-w-7xl px-6 pb-10 pt-4 sm:px-8 lg:px-10">
-        <Reveal className="flex flex-col gap-6 rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-sm text-sm text-slate-600 md:flex-row md:items-center md:justify-between">
+        <Reveal className="brand-card flex flex-col gap-6 rounded-[2rem] px-6 py-6 text-sm text-[var(--color-text-soft)] md:flex-row md:items-center md:justify-between">
           <p className="max-w-2xl leading-7">{t.footer.description}</p>
           <div className="flex flex-col gap-2 md:items-end">
             <TrackedTelegramLink
               source="footer_link"
-              className="font-medium text-slate-900 transition hover:text-amber-600"
+              className="font-medium text-[var(--color-text-strong)] transition hover:text-[var(--color-green)]"
             >
               {t.footer.link}
             </TrackedTelegramLink>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500 md:justify-end">
-              <Link href="/impressum" className="hover:text-slate-900">
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--color-text-muted)] md:justify-end">
+              <Link href="/impressum" className="hover:text-[var(--color-text-strong)]">
                 Impressum
               </Link>
-              <Link href="/datenschutz" className="hover:text-slate-900">
+              <Link href="/datenschutz" className="hover:text-[var(--color-text-strong)]">
                 Datenschutz
               </Link>
-              <Link href="/legal" className="hover:text-slate-900">
+              <Link href="/legal" className="hover:text-[var(--color-text-strong)]">
                 Legal
               </Link>
             </div>
-            <p className="max-w-md text-xs leading-5 text-slate-400 md:text-right">
+            <p className="max-w-md text-xs leading-5 text-[var(--color-text-muted)] md:text-right">
               {pilotNotice}
             </p>
-            <p className="max-w-xs text-xs leading-5 text-slate-400 md:text-right">
+            <p className="max-w-xs text-xs leading-5 text-[var(--color-text-muted)] md:text-right">
               {t.footer.disclaimer}
             </p>
           </div>

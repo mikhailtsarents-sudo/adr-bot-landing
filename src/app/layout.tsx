@@ -1,7 +1,7 @@
 import { Providers } from "@/components/providers";
 import { allowIndexing, siteConfig, siteUrl } from "@/lib/site";
 import { Barlow_Condensed, Plus_Jakarta_Sans } from "next/font/google";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -19,6 +19,7 @@ const barlowCondensed = Barlow_Condensed({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  manifest: "/manifest.webmanifest",
   title: {
     default: "ADR Bot | ADR Prüfung auf Deutsch per Telegram",
     template: "%s | ADR Bot",
@@ -28,6 +29,24 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   alternates: {
     canonical: "/",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-icon", sizes: "256x256", type: "image/png" }],
+    shortcut: ["/favicon.ico"],
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: siteConfig.name,
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
   category: "education",
   robots: allowIndexing
@@ -72,6 +91,11 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ["/opengraph-image"],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f6b548",
+  colorScheme: "light",
 };
 
 export default function RootLayout({

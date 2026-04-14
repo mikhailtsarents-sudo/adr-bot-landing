@@ -1,18 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8f6f2;
-  --foreground: #1a2332;
-  --color-bg: #f8f6f2;
+  --background: #f7f6f1;
+  --foreground: #171717;
+  --color-bg: #f7f6f1;
   --color-surface: #ffffff;
-  --color-panel: rgba(0, 0, 0, 0.03);
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-text: #374151;
-  --color-text-strong: #0f1923;
-  --color-text-soft: #4b5563;
-  --color-text-muted: #6b7280;
-  --color-accent: #e8a030;
-  --color-accent-strong: #f6b548;
+  --color-panel: rgba(15, 23, 42, 0.04);
+  --color-border: rgba(23, 23, 23, 0.09);
+  --color-text: #262626;
+  --color-text-strong: #101010;
+  --color-text-soft: #525252;
+  --color-text-muted: #737373;
+  --color-accent: #f2b705;
+  --color-accent-strong: #d99c02;
+  --color-green: #2e7d32;
+  --color-dark: #1a1a1a;
+  --color-cream: #fcfbf7;
+  --color-hero-shadow: 0 28px 80px rgba(15, 23, 42, 0.22);
+  --color-card-shadow: 0 16px 44px rgba(15, 23, 42, 0.08);
 }
 
 @theme inline {
@@ -32,17 +37,35 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-plus-jakarta), "Avenir Next", "Segoe UI", sans-serif;
   background-image:
-    radial-gradient(ellipse 90% 50% at 50% 0%, rgba(246, 181, 72, 0.14), transparent 52%),
-    linear-gradient(180deg, #fffdf9 0%, #f8f6f2 60%);
+    radial-gradient(circle at top left, rgba(242, 183, 5, 0.16), transparent 24%),
+    radial-gradient(circle at top right, rgba(46, 125, 50, 0.12), transparent 20%),
+    linear-gradient(180deg, #fffef9 0%, #f7f6f1 52%, #f1f0ea 100%);
 }
 
 a {
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(242, 183, 5, 0.9);
+  outline-offset: 3px;
 }
 
 .font-display {
@@ -57,6 +80,49 @@ a {
   background-position: center center;
   background-size: 96px 96px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 80%);
+}
+
+.brand-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  box-shadow: var(--color-card-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.brand-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(242, 183, 5, 0.24);
+  background: rgba(255, 247, 214, 0.95);
+  padding: 0.65rem 1rem;
+  font-family: var(--font-plus-jakarta), "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #845b00;
+}
+
+.hero-grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), transparent 88%);
+}
+
+.brand-card-soft {
+  border: 1px solid rgba(23, 23, 23, 0.09);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--color-card-shadow);
+}
+
+.brand-dark-panel {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(23, 23, 23, 0.96), rgba(34, 49, 38, 0.96));
+  box-shadow: 0 24px 56px rgba(15, 23, 42, 0.2);
 }
 
 ::selection {

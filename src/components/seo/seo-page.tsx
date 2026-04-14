@@ -17,6 +17,7 @@ import {
   PanelTop,
   Sparkles,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 function SampleCard({
@@ -29,7 +30,7 @@ function SampleCard({
   text: string;
 }) {
   return (
-    <div className="rounded-[1.6rem] border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="brand-card rounded-[1.6rem] p-5">
       <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-amber-700">
         <span className="inline-flex h-2 w-2 rounded-full bg-amber-400" />
         {label}
@@ -46,7 +47,7 @@ function InternalLinkCard({ link }: { link: SeoRelatedLink }) {
   return (
     <Link
       href={link.href}
-      className="group rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-amber-300"
+      className="brand-card group rounded-[1.5rem] p-5 transition hover:-translate-y-0.5 hover:border-amber-300"
     >
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -74,7 +75,7 @@ function TelegramButton({
     <TrackedTelegramLink
       source={source}
       className={[
-        "inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-800",
+        "inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-[var(--color-dark)] shadow-[0_16px_30px_rgba(242,183,5,0.24)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]",
         className ?? "",
       ].join(" ")}
     >
@@ -94,7 +95,7 @@ function SectionDividerLabel({ text }: { text: string }) {
 
 function FaqCard({ item }: { item: SeoFaqCard }) {
   return (
-    <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="brand-card rounded-[1.5rem] p-5">
       <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400">
         <MessagesSquare className="h-4 w-4 text-amber-500" />
         FAQ
@@ -117,7 +118,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
       <SceneBg />
 
       <section className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-16 pt-6 sm:px-8 lg:px-10">
-        <Reveal className="mb-10 flex items-center justify-between rounded-full border border-slate-200 bg-white/80 px-5 py-3 shadow-sm backdrop-blur-md">
+        <Reveal className="mb-8 flex items-center justify-between rounded-[1.75rem] border border-[var(--color-border)] bg-white/90 px-4 py-3 shadow-[0_16px_44px_rgba(15,23,42,0.08)] backdrop-blur-md sm:mb-10 sm:rounded-full sm:px-5">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#e8a030,#f6b548)] text-white shadow-[0_4px_14px_rgba(232,160,48,0.3)]">
               <BookOpenText className="h-5 w-5" />
@@ -129,10 +130,10 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
               <p className="text-xs text-slate-500">SEO page / first wave</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="hidden text-sm font-medium text-slate-500 transition hover:text-slate-800 sm:inline-flex"
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Link
+                href="/"
+                className="hidden text-sm font-medium text-slate-500 transition hover:text-slate-800 sm:inline-flex"
             >
               Zur Startseite
             </Link>
@@ -170,30 +171,46 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
 
           <Reveal
             delay={0.08}
-            className="rounded-[2rem] border border-amber-200 bg-[linear-gradient(135deg,#fffdf8,#fff8ec,#ffffff)] p-6 shadow-[0_10px_36px_rgba(232,160,48,0.12)] sm:p-8"
+            className="overflow-hidden rounded-[2.2rem] border border-[rgba(242,183,5,0.26)] bg-[linear-gradient(135deg,#fffdf8,#fff8ec,#ffffff)] p-6 shadow-[0_20px_54px_rgba(242,183,5,0.14)] sm:p-8"
           >
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
-                <Sparkles className="h-5 w-5" />
+            <div className="grid gap-6 md:grid-cols-[0.92fr_1.08fr] md:items-center">
+              <div className="relative overflow-hidden rounded-[1.7rem] bg-[var(--color-dark)] p-5 text-white">
+                <div className="absolute inset-0 opacity-15">
+                  <Image
+                    src="/redesign/truck-secondary.svg"
+                    alt=""
+                    fill
+                    className="object-contain object-right"
+                    sizes="400px"
+                  />
+                </div>
+                <div className="relative z-10 flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-[var(--color-dark)]">
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-display text-2xl font-semibold text-white">
+                      Was du hier bekommst
+                    </p>
+                    <p className="text-sm text-white/58">
+                      Kleines Sample, klare Orientierung, Telegram als naechster Schritt.
+                    </p>
+                  </div>
+                </div>
+                <div className="relative z-10 mt-6 rounded-[1.2rem] border border-white/12 bg-white/8 px-4 py-4 text-sm text-white/72">
+                  Diese Seite ist die visuelle Einstiegsflaeche. Der Bot uebernimmt die echte Tiefe.
+                </div>
               </div>
-              <div>
-                <p className="font-display text-2xl font-semibold text-slate-900">
-                  Was du hier bekommst
-                </p>
-                <p className="text-sm text-slate-500">
-                  Kleines Sample, klare Orientierung, Telegram als naechster Schritt.
-                </p>
-              </div>
-            </div>
-            <div className="mt-6 space-y-3">
-              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
-                Nur ein kleiner Ausschnitt statt voller Kursinhalt
-              </div>
-              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
-                Nueszlich fuer SEO und fruehe Orientierung
-              </div>
-              <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
-                Mehr Fragen, mehr Begriffe und Drill im Telegram-Bot
+              <div className="space-y-3">
+                <div className="brand-card-soft rounded-2xl px-4 py-3 text-sm text-slate-700">
+                  Nur ein kleiner Ausschnitt statt voller Kursinhalt
+                </div>
+                <div className="brand-card-soft rounded-2xl px-4 py-3 text-sm text-slate-700">
+                  Nueszlich fuer SEO und fruehe Orientierung
+                </div>
+                <div className="brand-card-soft rounded-2xl px-4 py-3 text-sm text-slate-700">
+                  Mehr Fragen, mehr Begriffe und Drill im Telegram-Bot
+                </div>
               </div>
             </div>
           </Reveal>
@@ -213,7 +230,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
             <Reveal
               key={paragraph}
               delay={index * 0.06}
-              className="rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-sm"
+              className="brand-card rounded-[1.8rem] p-6"
             >
               <p className="text-base leading-8 text-slate-600">{paragraph}</p>
             </Reveal>
@@ -265,7 +282,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
         ) : null}
 
         {page.sampleCalloutTitle && page.sampleCalloutText ? (
-          <Reveal className="mt-10 rounded-[2rem] border border-amber-200 bg-[linear-gradient(135deg,#fff8ec,#fffdf8,#ffffff)] p-6 shadow-sm sm:p-8">
+          <Reveal className="mt-10 rounded-[2rem] border border-amber-200 bg-[linear-gradient(135deg,#fff8ec,#fffdf8,#ffffff)] p-6 shadow-[0_18px_44px_rgba(242,183,5,0.12)] sm:p-8">
             <div className="flex items-start gap-4">
               <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
                 <PanelTop className="h-5 w-5" />
@@ -293,41 +310,38 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
             />
             <div className="mt-6 space-y-4">
               {page.whyTelegramParagraphs.map((paragraph) => (
-                <div
-                  key={paragraph}
-                  className="rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm"
-                >
+                <div key={paragraph} className="brand-card rounded-2xl px-5 py-4">
                   <p className="text-sm leading-7 text-slate-600">{paragraph}</p>
                 </div>
               ))}
             </div>
           </Reveal>
 
-          <Reveal delay={0.08} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+          <Reveal delay={0.08} className="brand-dark-panel rounded-[2rem] p-6 text-white sm:p-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-100 text-amber-600">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-[var(--color-dark)]">
                 <MessagesSquare className="h-5 w-5" />
               </div>
               <div>
-                <p className="font-display text-2xl font-semibold text-slate-900">
+                <p className="font-display text-2xl font-semibold text-white">
                   Telegram als Vollversion
                 </p>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-white/58">
                   Die Seite bleibt klein. Der Bot liefert die Tiefe.
                 </p>
               </div>
             </div>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+              <div className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm text-white/78">
                 Mehr Fragen
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+              <div className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm text-white/78">
                 Mehr Wiederholung
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+              <div className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm text-white/78">
                 Mehr Begriffe
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+              <div className="rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-sm text-white/78">
                 Klarer naechster Schritt
               </div>
             </div>
@@ -373,16 +387,16 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
 
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
-          <div className="overflow-hidden rounded-[2.5rem] border border-amber-200 bg-[linear-gradient(135deg,#fff8ec,#fff3d6,#fef9f0)] px-6 py-10 shadow-[0_8px_40px_rgba(232,160,48,0.15)] sm:p-10 lg:p-14">
+          <div className="overflow-hidden rounded-[2.7rem] bg-[linear-gradient(135deg,#1a1a1a_0%,#223126_100%)] px-6 py-10 text-white shadow-[0_28px_80px_rgba(15,23,42,0.22)] sm:p-10 lg:p-14">
             <div className="relative">
-              <div className="absolute -right-10 -top-14 h-48 w-48 rounded-full bg-amber-200/40 blur-3xl" />
-              <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-amber-700/70">
+              <div className="absolute -right-10 -top-14 h-48 w-48 rounded-full bg-[rgba(242,183,5,0.18)] blur-3xl" />
+              <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-white/48">
                 Final CTA
               </p>
-              <h2 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-[-0.03em] text-slate-900 sm:text-5xl">
+              <h2 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">
                 {page.ctaTitle}
               </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-700 sm:text-lg">
+              <p className="mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
                 {page.ctaLead}
               </p>
               <div className="mt-8">
@@ -391,7 +405,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
                   label={page.ctaButton}
                 />
               </div>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-500">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/56">
                 {page.disclaimer}
               </p>
             </div>
