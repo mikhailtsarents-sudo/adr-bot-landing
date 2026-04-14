@@ -3,18 +3,25 @@
 import { useLang } from "@/lib/i18n/use-lang";
 import {
   ArrowRight,
+  BadgeCheck,
+  Bot,
   CheckCircle2,
+  ChevronRight,
   ClipboardCheck,
   Languages,
   Layers3,
   MessageCircleMore,
   Route,
+  Send,
   ShieldCheck,
+  Sparkles,
   Truck,
   Waypoints,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { LanguageSwitcher } from "./language-switcher";
+import { PhoneCarousel } from "./phone-carousel";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 import { TrackedTelegramLink } from "./tracked-telegram-link";
@@ -23,99 +30,27 @@ const problemIcons = [Languages, ClipboardCheck, Route, ShieldCheck];
 const stepIcons = [MessageCircleMore, Waypoints, ShieldCheck];
 const audienceIcons = [Truck, Layers3, CheckCircle2, Languages];
 
-function DesignerHero() {
-  const { lang, t } = useLang();
-
-  const links = {
-    benefits:
-      lang === "ru" ? "Преимущества" : lang === "en" ? "Benefits" : "Vorteile",
-    how:
-      lang === "ru" ? "Как это работает" : lang === "en" ? "How it works" : "So geht's",
-    faq: lang === "ru" ? "FAQ" : "FAQ",
-  };
-
+function PrimaryLink({ label }: { label: string }) {
   return (
-    <section className="relative overflow-hidden bg-[#d9c49a] px-3 py-4 sm:px-6 sm:py-6 lg:px-8">
-      <div className="mx-auto max-w-[1100px]">
-        <div className="relative mx-auto max-w-[1024px] overflow-hidden rounded-[2rem] border border-black/10 bg-[#b08c53] shadow-[0_26px_80px_rgba(47,31,9,0.28)]">
-          <Image
-            src="/redesign/hero-desktop.png"
-            alt="ADR Bot homepage design preview with truck road background and Telegram preparation flow"
-            width={1024}
-            height={1536}
-            className="hidden h-auto w-full md:block"
-            priority
-          />
-          <Image
-            src="/redesign/hero-mobile.png"
-            alt="ADR Bot mobile homepage design preview with truck road background and Telegram preparation flow"
-            width={1024}
-            height={1536}
-            className="h-auto w-full md:hidden"
-            priority
-          />
+    <TrackedTelegramLink
+      source="hero_primary"
+      className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3.5 text-sm font-semibold text-[var(--color-dark)] shadow-[0_16px_30px_rgba(242,183,5,0.28)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]"
+    >
+      {label}
+      <ArrowRight className="h-4 w-4 shrink-0" />
+    </TrackedTelegramLink>
+  );
+}
 
-          <div className="absolute inset-0">
-            <Link
-              href="#benefits"
-              aria-label={links.benefits}
-              className="absolute left-[41.5%] top-[3.2%] hidden h-[3.5%] w-[11.5%] rounded-full md:block"
-            />
-            <Link
-              href="#how-it-works"
-              aria-label={links.how}
-              className="absolute left-[52.7%] top-[3.2%] hidden h-[3.5%] w-[10.5%] rounded-full md:block"
-            />
-            <Link
-              href="/adr-faq-fuer-fahrer"
-              aria-label={links.faq}
-              className="absolute left-[63.4%] top-[3.2%] hidden h-[3.5%] w-[6.5%] rounded-full md:block"
-            />
-
-            <TrackedTelegramLink
-              source="designer_hero_top"
-              aria-label={t.hero.ctaPrimary}
-              className="absolute right-[4.4%] top-[2.4%] hidden h-[5.5%] w-[25.5%] rounded-full md:block"
-            >
-              <span className="sr-only">{t.hero.ctaPrimary}</span>
-            </TrackedTelegramLink>
-            <TrackedTelegramLink
-              source="designer_hero_middle"
-              aria-label={t.hero.ctaPrimary}
-              className="absolute left-[45.3%] top-[48.6%] hidden h-[5.4%] w-[26.8%] rounded-full md:block"
-            >
-              <span className="sr-only">{t.hero.ctaPrimary}</span>
-            </TrackedTelegramLink>
-
-            <TrackedTelegramLink
-              source="designer_hero_top_mobile"
-              aria-label={t.hero.ctaPrimary}
-              className="absolute right-[5.6%] top-[2.3%] h-[5.4%] w-[32.8%] rounded-full md:hidden"
-            >
-              <span className="sr-only">{t.hero.ctaPrimary}</span>
-            </TrackedTelegramLink>
-            <TrackedTelegramLink
-              source="designer_hero_middle_mobile"
-              aria-label={t.hero.ctaPrimary}
-              className="absolute left-[36.8%] top-[48.6%] h-[5.2%] w-[40.8%] rounded-full md:hidden"
-            >
-              <span className="sr-only">{t.hero.ctaPrimary}</span>
-            </TrackedTelegramLink>
-          </div>
-        </div>
-
-        <div className="sr-only">
-          <h1>{t.hero.title}</h1>
-          <p>{t.hero.description}</p>
-          <p>{t.hero.note}</p>
-          <ul>
-            <li>{t.benefits.checklist[0]}</li>
-            <li>{t.benefits.checklist[1]}</li>
-            <li>{t.benefits.checklist[2]}</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+function SecondaryLink({ label }: { label: string }) {
+  return (
+    <Link
+      href="#how-it-works"
+      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/18 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/32 hover:bg-white/14"
+    >
+      {label}
+      <ChevronRight className="h-4 w-4 shrink-0" />
+    </Link>
   );
 }
 
@@ -126,9 +61,173 @@ export function LandingPage() {
       ? "ADR Bot is currently a free pilot project in a public test phase for self-study support around ADR exam preparation in German. Content and features may change."
       : "ADR Bot befindet sich aktuell als kostenloses Pilotprojekt in einer öffentlichen Testphase. Das Angebot dient der unterstützenden Selbstvorbereitung rund um die ADR-Prüfung auf Deutsch. Inhalte und Funktionen können sich ändern.";
 
+  const proofItems = [
+    { label: lang === "ru" ? "Формат" : lang === "en" ? "Format" : "Format", value: "Telegram-first" },
+    { label: lang === "ru" ? "Фокус" : lang === "en" ? "Focus" : "Fokus", value: "ADR Deutsch" },
+    { label: lang === "ru" ? "Режим" : lang === "en" ? "Mode" : "Modus", value: lang === "en" ? "Short drills" : lang === "ru" ? "Короткие тренировки" : "Kurze Drills" },
+  ];
+
   return (
-    <main className="relative overflow-hidden bg-[var(--color-bg)] text-[var(--color-text)]">
-      <DesignerHero />
+    <main className="relative overflow-hidden bg-[#15120d] text-[var(--color-text)]">
+      <div className="pointer-events-none fixed inset-0 -z-20">
+        <Image
+          src="/redesign/hero-desktop.png"
+          alt=""
+          fill
+          priority
+          className="hidden object-cover object-center md:block"
+          sizes="100vw"
+        />
+        <Image
+          src="/redesign/hero-mobile.png"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center md:hidden"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,10,6,0.24),rgba(18,15,10,0.62)_34%,rgba(20,17,12,0.86)_72%,rgba(17,14,10,0.96)_100%)]" />
+      </div>
+
+      <section className="relative isolate min-h-screen text-white">
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-18 pt-6 sm:px-8 lg:px-10">
+          <Reveal className="brand-card mb-8 flex items-center justify-between rounded-[1.75rem] border-white/10 bg-[rgba(255,255,255,0.14)] px-4 py-3 text-white shadow-[0_14px_42px_rgba(17,12,7,0.22)] sm:mb-10 sm:rounded-full sm:px-5">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-dark)] shadow-[0_10px_24px_rgba(242,183,5,0.3)]">
+                <Bot className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white">
+                  ADR Bot
+                </p>
+                <p className="text-xs text-white/74">{t.nav.tagline}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <LanguageSwitcher />
+              <TrackedTelegramLink
+                source="nav_open_telegram"
+                className="hidden rounded-full border border-white/14 bg-[rgba(255,191,0,0.88)] px-4 py-2 text-sm font-semibold text-[#231b0b] transition hover:bg-[rgba(255,201,50,0.96)] sm:inline-flex"
+              >
+                {t.nav.openInTelegram}
+              </TrackedTelegramLink>
+            </div>
+          </Reveal>
+
+          <div className="grid items-center gap-10 pb-10 lg:min-h-[calc(100vh-10rem)] lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
+            <Reveal className="relative z-10 max-w-2xl rounded-[2rem] border border-white/10 bg-[rgba(16,13,9,0.42)] p-6 shadow-[0_26px_72px_rgba(12,9,6,0.26)] backdrop-blur-[6px] sm:p-8">
+              <span className="brand-chip">
+                <Sparkles className="h-3.5 w-3.5" />
+                {t.hero.eyebrow}
+              </span>
+
+              <h1 className="mt-8 font-display text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
+                {t.hero.title}
+              </h1>
+
+              <p className="mt-6 max-w-xl text-lg leading-8 text-white/82 sm:text-xl">
+                {t.hero.description}
+              </p>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <PrimaryLink label={t.hero.ctaPrimary} />
+                <SecondaryLink label={t.hero.ctaSecondary} />
+              </div>
+
+              <p className="mt-4 max-w-lg text-sm leading-7 text-white/66">{t.hero.note}</p>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {proofItems.map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-[1.4rem] border border-white/10 bg-[rgba(255,255,255,0.08)] px-4 py-4 backdrop-blur-sm"
+                  >
+                    <p className="text-[11px] uppercase tracking-[0.24em] text-white/55">
+                      {item.label}
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-white">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.12} className="relative lg:justify-self-end">
+              <div className="relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-[rgba(17,13,9,0.4)] p-4 shadow-[0_28px_70px_rgba(12,8,5,0.3)] backdrop-blur-[8px]">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_34%,rgba(0,0,0,0.28))]" />
+                <div className="absolute right-4 top-4 z-10 rounded-full bg-[rgba(0,0,0,0.55)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/78">
+                  {lang === "ru" ? "Пилотный доступ" : lang === "en" ? "Pilot Access" : "Pilotzugang"}
+                </div>
+                <div className="relative flex min-h-[340px] items-end justify-center rounded-[1.8rem] p-4 sm:min-h-[460px] lg:min-h-[560px]">
+                  <div className="w-full max-w-[284px] sm:max-w-[300px] lg:max-w-[310px]">
+                    <div className="rounded-[2rem] border border-white/12 bg-[rgba(255,255,255,0.08)] p-3 backdrop-blur-lg">
+                      <PhoneCarousel />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.18} className="mt-2 grid gap-4 lg:mt-4 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="rounded-[2rem] border border-white/10 bg-[rgba(255,255,255,0.09)] p-6 backdrop-blur-sm">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-white/55">
+                {lang === "ru" ? "Как это ощущается" : lang === "en" ? "How it feels" : "Wie es sich anfuehlt"}
+              </p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                <div>
+                  <p className="font-display text-3xl text-white">01</p>
+                  <p className="mt-2 text-sm text-white/72">
+                    {lang === "ru" ? "Вы открываете Telegram и сразу попадаете в практику." : lang === "en" ? "You open Telegram and land directly in practice." : "Du oeffnest Telegram und landest direkt in der Uebung."}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-display text-3xl text-white">02</p>
+                  <p className="mt-2 text-sm text-white/72">
+                    {lang === "ru" ? "Язык становится понятнее за счёт коротких повторений." : lang === "en" ? "The language becomes clearer through short repetitions." : "Die Sprache wird durch kurze Wiederholungen greifbarer."}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-display text-3xl text-white">03</p>
+                  <p className="mt-2 text-sm text-white/72">
+                    {lang === "ru" ? "Сайт и бот работают как одна воронка." : lang === "en" ? "Site and bot work as one conversion path." : "Website und Bot arbeiten als ein gemeinsamer Pfad."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-[rgba(242,183,5,0.36)] bg-[rgba(255,245,211,0.94)] p-6 text-[var(--color-dark)] shadow-[0_18px_48px_rgba(32,19,4,0.22)]">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-dark)] text-[var(--color-accent)]">
+                  <Send className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-display text-2xl font-semibold">
+                    {lang === "ru" ? "Сразу к действию" : lang === "en" ? "Go straight to action" : "Direkt in die Aktion"}
+                  </p>
+                  <p className="text-sm text-[var(--color-text-soft)]">
+                    {lang === "ru"
+                      ? "Без регистрации и лишних экранов."
+                      : lang === "en"
+                        ? "No signup and no dead-end screens."
+                        : "Ohne Registrierung und ohne tote Zwischenschritte."}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-6 space-y-3">
+                {t.benefits.checklist.slice(0, 3).map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-3 rounded-[1.2rem] bg-white/84 px-4 py-3 text-sm text-[var(--color-text)]"
+                  >
+                    <BadgeCheck className="h-4 w-4 shrink-0 text-[var(--color-green)]" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
