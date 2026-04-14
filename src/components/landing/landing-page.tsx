@@ -68,7 +68,7 @@ export function LandingPage() {
   ];
 
   return (
-    <main className="relative overflow-hidden bg-[#15120d] text-[var(--color-text)]">
+    <main className="relative overflow-hidden bg-transparent text-[var(--color-text)]">
       <div className="pointer-events-none fixed inset-0 -z-20">
         <Image
           src="/redesign/hero-desktop.png"
@@ -86,12 +86,12 @@ export function LandingPage() {
           className="object-cover object-center md:hidden"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,10,6,0.24),rgba(18,15,10,0.62)_34%,rgba(20,17,12,0.86)_72%,rgba(17,14,10,0.96)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,14,9,0.12),rgba(20,16,10,0.22)_26%,rgba(22,18,12,0.34)_56%,rgba(24,19,12,0.52)_100%)]" />
       </div>
 
       <section className="relative isolate min-h-screen text-white">
         <div className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-18 pt-6 sm:px-8 lg:px-10">
-          <Reveal className="brand-card mb-8 flex items-center justify-between rounded-[1.75rem] border-white/10 bg-[rgba(255,255,255,0.14)] px-4 py-3 text-white shadow-[0_14px_42px_rgba(17,12,7,0.22)] sm:mb-10 sm:rounded-full sm:px-5">
+          <Reveal className="brand-card mb-8 flex items-center justify-between rounded-[1.75rem] border-white/12 bg-[rgba(255,255,255,0.1)] px-4 py-3 text-white shadow-[0_14px_42px_rgba(17,12,7,0.18)] backdrop-blur-md sm:mb-10 sm:rounded-full sm:px-5">
             <div className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent)] text-[var(--color-dark)] shadow-[0_10px_24px_rgba(242,183,5,0.3)]">
                 <Bot className="h-5 w-5" />
@@ -115,7 +115,7 @@ export function LandingPage() {
           </Reveal>
 
           <div className="grid items-center gap-10 pb-10 lg:min-h-[calc(100vh-10rem)] lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
-            <Reveal className="relative z-10 max-w-2xl rounded-[2rem] border border-white/10 bg-[rgba(16,13,9,0.42)] p-6 shadow-[0_26px_72px_rgba(12,9,6,0.26)] backdrop-blur-[6px] sm:p-8">
+            <Reveal className="relative z-10 max-w-2xl rounded-[2rem] border border-white/10 bg-[rgba(16,13,9,0.22)] p-6 shadow-[0_26px_72px_rgba(12,9,6,0.18)] backdrop-blur-[3px] sm:p-8">
               <span className="brand-chip">
                 <Sparkles className="h-3.5 w-3.5" />
                 {t.hero.eyebrow}
@@ -140,7 +140,7 @@ export function LandingPage() {
                 {proofItems.map((item) => (
                   <div
                     key={item.label}
-                    className="rounded-[1.4rem] border border-white/10 bg-[rgba(255,255,255,0.08)] px-4 py-4 backdrop-blur-sm"
+                    className="rounded-[1.4rem] border border-white/10 bg-[rgba(255,255,255,0.06)] px-4 py-4 backdrop-blur-sm"
                   >
                     <p className="text-[11px] uppercase tracking-[0.24em] text-white/55">
                       {item.label}
@@ -152,8 +152,8 @@ export function LandingPage() {
             </Reveal>
 
             <Reveal delay={0.12} className="relative lg:justify-self-end">
-              <div className="relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-[rgba(17,13,9,0.4)] p-4 shadow-[0_28px_70px_rgba(12,8,5,0.3)] backdrop-blur-[8px]">
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_34%,rgba(0,0,0,0.28))]" />
+              <div className="relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-[rgba(17,13,9,0.18)] p-4 shadow-[0_28px_70px_rgba(12,8,5,0.22)] backdrop-blur-[4px]">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),transparent_34%,rgba(0,0,0,0.16))]" />
                 <div className="absolute right-4 top-4 z-10 rounded-full bg-[rgba(0,0,0,0.55)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/78">
                   {lang === "ru" ? "Пилотный доступ" : lang === "en" ? "Pilot Access" : "Pilotzugang"}
                 </div>
