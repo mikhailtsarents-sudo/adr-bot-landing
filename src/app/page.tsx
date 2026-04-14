@@ -1,6 +1,5 @@
 import { siteConfig, siteUrl } from "@/lib/site";
 import { LandingPage } from "@/components/landing/landing-page";
-import { StickyHeader } from "@/components/landing/sticky-header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -92,7 +91,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <StickyHeader />
       <LandingPage />
     </>
   );
