@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { mkdir, copyFile, readdir, readFile, stat, writeFile } from "node:fs/promises";
+import crypto from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -21,6 +22,10 @@ const DEFAULT_PUBLIC_DIR = path.join(
 
 const SLIDE_ROLES = ["hook", "question", "answers", "timer", "answer", "cta"];
 const PNG_SIGNATURE = "89504e470d0a1a0a";
+
+function sha256(buffer) {
+  return crypto.createHash("sha256").update(buffer).digest("hex");
+}
 
 function parseArgs(argv) {
   const args = {
@@ -90,10 +95,10 @@ async function assertPng(filePath) {
   }
 }
 
-async function verifyRemoteUrl(url) {
+async function verifyRemoteUrl(url, expectedBuffer) {
   const response = await fetch(url, {
     method: "GET",
-    headers: { Range: "bytes=0-32" },
+    headers: { Range: "bytes=0-1048575" },
   });
 
   if (!response.ok) {
@@ -104,6 +109,17 @@ async function verifyRemoteUrl(url) {
   if (!contentType.toLowerCase().includes("image/png")) {
     throw new Error(`Remote verification failed for ${url}: content-type ${contentType}`);
   }
+
+  const remoteBuffer = Buffer.from(await response.arrayBuffer());
+  if (expectedBuffer && !remoteBuffer.equals(expectedBuffer)) {
+    throw new Error(`Remote verification failed for ${url}: bytes do not match local copy`);
+  }
+
+  return {
+    status: response.status,
+    contentType,
+    sha256: sha256(remoteBuffer),
+  };
 }
 
 async function main() {
@@ -113,6 +129,7 @@ async function main() {
   await mkdir(args.outputDir, { recursive: true });
 
   const slides = [];
+  const normalizedFiles = [];
 
   for (let i = 0; i < inputFiles.length; i += 1) {
     const sourceName = inputFiles[i];
@@ -128,34 +145,85 @@ async function main() {
     await assertPng(sourcePath);
     await copyFile(sourcePath, targetPath);
 
+    const targetBuffer = await readFile(targetPath);
+    normalizedFiles.push(targetBuffer);
+
     slides.push({
       id: i + 1,
       name: `slide${i + 1}`,
       role: SLIDE_ROLES[i],
       url: publicUrl,
+      sha256: sha256(targetBuffer),
     });
   }
+
+  const batchFingerprint = sha256(
+    Buffer.from(
+      JSON.stringify(
+        {
+          project: args.project,
+          slides: slides.map((slide) => ({
+            id: slide.id,
+            name: slide.name,
+            role: slide.role,
+            url: slide.url,
+            sha256: slide.sha256,
+          })),
+        },
+        null,
+        0,
+      ),
+    ),
+  );
+
+  const verification = {
+    mode: "stable-storage",
+    local_export_verified: true,
+    public_copy_verified: true,
+    remote_http_200_verified: false,
+    remote_content_type_verified: false,
+    remote_hash_match_verified: false,
+    live_urls_match_new_batch: false,
+    ready_for_shotstack: false,
+    sync_state: "not_ready",
+  };
 
   const manifest = {
     project: args.project,
     format: "9:16",
     slides_count: slides.length,
     updated_at: new Date().toISOString(),
+    batch_fingerprint: batchFingerprint,
     slides,
+    verification,
   };
 
-  const manifestJson = `${JSON.stringify(manifest, null, 2)}\n`;
   const localManifestPath = path.join(repoRoot, "canva_manifest.json");
   const publicManifestPath = path.join(args.outputDir, "canva_manifest.json");
 
+  if (args.verifyRemote) {
+    for (let i = 0; i < slides.length; i += 1) {
+      const slide = slides[i];
+      const localCopy = normalizedFiles[i];
+      await verifyRemoteUrl(slide.url, localCopy);
+    }
+
+    verification.remote_http_200_verified = true;
+    verification.remote_content_type_verified = true;
+    verification.remote_hash_match_verified = true;
+    verification.live_urls_match_new_batch = true;
+    verification.ready_for_shotstack = true;
+    verification.sync_state = "ready";
+  }
+
+  const finalManifest = {
+    ...manifest,
+    verification,
+  };
+  const manifestJson = `${JSON.stringify(finalManifest, null, 2)}\n`;
+
   await writeFile(localManifestPath, manifestJson, "utf8");
   await writeFile(publicManifestPath, manifestJson, "utf8");
-
-  if (args.verifyRemote) {
-    for (const slide of slides) {
-      await verifyRemoteUrl(slide.url);
-    }
-  }
 
   for (const slide of slides) {
     console.log(`${slide.name}=${slide.url}`);
@@ -163,6 +231,7 @@ async function main() {
 
   console.log(`manifest=${localManifestPath}`);
   console.log(`public_manifest=${publicManifestPath}`);
+  console.log(`batch_fingerprint=${batchFingerprint}`);
 }
 
 main().catch((error) => {

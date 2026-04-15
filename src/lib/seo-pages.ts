@@ -52,7 +52,11 @@ export type SeoPageConfig = {
   keywords: string[];
 };
 
+type StructuredDataRecord = Record<string, unknown>;
+
 const sharedKeywords = siteConfig.keywords;
+const SEO_PAGE_KICKER = "ADR-Lernvorschau";
+const SEO_PRIMARY_CTA = "In Telegram starten";
 
 export const adrPruefungAufDeutsch: SeoPageConfig = {
   slug: "adr-pruefung-auf-deutsch",
@@ -61,7 +65,7 @@ export const adrPruefungAufDeutsch: SeoPageConfig = {
   metaTitle: "ADR-Pruefung auf Deutsch | Begriffe, Fragen und Tipps",
   metaDescription:
     "Lerne ADR auf Deutsch mit kurzen Beispielen, wichtigen Begriffen und einem kleinen Fragen-Sample. Fuer mehr Uebung geht es in den Telegram-Bot.",
-  heroKicker: "SEO-Hub / Wave 1",
+  heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR-Pruefung auf Deutsch",
   heroLead:
     "Kurzer Einstieg in ADR auf Deutsch mit kleinen Beispielen, klaren Begriffen und einem begrenzten Sample. Die volle Uebung geht im Telegram-Bot weiter.",
@@ -72,7 +76,7 @@ export const adrPruefungAufDeutsch: SeoPageConfig = {
     "Diese Seite hilft Menschen, die ADR auf Deutsch suchen und zuerst eine kleine Orientierung brauchen. Sie ist als Einstieg gebaut, nicht als vollstaendige Wissensdatenbank.",
     "Du bekommst kleine, lesbare Beispiele, damit du schnell verstehst, wie die Begriffe und die Sprache rund um ADR klingen. Fuer die komplette Uebung fuehrt der naechste Schritt in den Telegram-Bot.",
   ],
-  sampleTitle: "Public Sample",
+  sampleTitle: "Kurzes Sample",
   sampleLead:
     "Nur ein kleiner, hilfreicher Ausschnitt. Nicht der komplette Trainingsinhalt.",
   sampleQuestions: [
@@ -155,7 +159,7 @@ export const adrPruefungAufDeutsch: SeoPageConfig = {
   ctaTitle: "Mehr ADR-Uebung im Telegram-Bot",
   ctaLead:
     "Wenn dir die Vorschau geholfen hat, findest du im Bot mehr Fragen, mehr Begriffe und einen vollstaendigeren Trainingsfluss.",
-  ctaButton: "Zu Telegram wechseln",
+  ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite zeigt nur ein Sample. Sie ersetzt keine offizielle Schulung und gibt keine Garantie auf Pruefungserfolg.",
   telegramSource: "seo_adr_pruefung_auf_deutsch",
@@ -174,7 +178,7 @@ export const basiskursPreview: SeoPageConfig = {
   metaTitle: "Basiskurs Preview | ADR Fragen und Woerter",
   metaDescription:
     "Sieh dir ein kleines Preview vom Basiskurs an: wenige Fragen, wichtige Woerter und kurze Erklaerungen. Die volle Uebung geht im Telegram-Bot weiter.",
-  heroKicker: "SEO-Hub / Wave 1",
+  heroKicker: SEO_PAGE_KICKER,
   heroTitle: "Basiskurs Preview",
   heroLead:
     "Sieh dir ein kleines Preview vom Basiskurs an: wenige Fragen, wichtige Woerter und kurze Erklaerungen. Die volle Uebung geht im Telegram-Bot weiter.",
@@ -278,7 +282,7 @@ export const basiskursPreview: SeoPageConfig = {
   ctaTitle: "Mehr Uebung im Telegram-Bot",
   ctaLead:
     "Wenn du mehr Fragen und Wiederholungen willst, fuehrt dich der Bot durch den naechsten Schritt.",
-  ctaButton: "Zum Bot weitergehen",
+  ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Das Preview zeigt nur einen begrenzten Ausschnitt. Es ersetzt keinen vollstaendigen Kurs und verspricht keinen Pruefungserfolg.",
   telegramSource: "seo_basiskurs_preview",
@@ -297,7 +301,7 @@ export const aufbaukursTankPreview: SeoPageConfig = {
   metaTitle: "Aufbaukurs Tank Preview | ADR Tank Fragen und Begriffe",
   metaDescription:
     "Kurzes Preview zum Aufbaukurs Tank mit wenigen Beispiel-Fragen, wichtigen Begriffen und klarer Weiterleitung in den Telegram-Bot.",
-  heroKicker: "SEO-Hub / Wave 1",
+  heroKicker: SEO_PAGE_KICKER,
   heroTitle: "Aufbaukurs Tank Preview",
   heroLead:
     "Kurzes Preview zum Aufbaukurs Tank mit wenigen Beispiel-Fragen, wichtigen Begriffen und klarer Weiterleitung in den Telegram-Bot.",
@@ -391,7 +395,7 @@ export const aufbaukursTankPreview: SeoPageConfig = {
   ctaTitle: "Tank weiter im Telegram-Bot ueben",
   ctaLead:
     "Wenn du den Kontext schon kennst, bekommst du im Bot mehr Wiederholung und mehr relevante Fragen.",
-  ctaButton: "Zum Bot wechseln",
+  ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite zeigt nur ein begrenztes Tank-Sample und ersetzt keinen vollstaendigen Kurs.",
   telegramSource: "seo_aufbaukurs_tank_preview",
@@ -410,7 +414,7 @@ export const adrBegriffeVocabulary: SeoPageConfig = {
   metaTitle: "ADR Begriffe erklaert | ADR Vocabulary fuer Fahrer",
   metaDescription:
     "Lerne die wichtigsten ADR Begriffe mit kurzen Beispielen und Nutzungs-Hinweisen. Fuer mehr Woerter und Drill geht es in den Telegram-Bot.",
-  heroKicker: "SEO-Hub / Wave 1",
+  heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Begriffe / Vocabulary",
   heroLead:
     "Lerne die wichtigsten ADR Begriffe mit kurzen Beispielen und Nutzungs-Hinweisen. Fuer mehr Woerter und Drill geht es in den Telegram-Bot.",
@@ -421,7 +425,7 @@ export const adrBegriffeVocabulary: SeoPageConfig = {
     "Viele Nutzer suchen zuerst nicht nach Kursnamen, sondern nach einzelnen Begriffen. Diese Seite fängt genau diese Suchintention ab.",
     "Sie zeigt einen kleinen, lesbaren Auszug mit Begriffen, die in der ADR-Vorbereitung haeufig vorkommen. Danach geht es fuer mehr Drill in den Bot.",
   ],
-  sampleTitle: "Vocabulary Sample",
+  sampleTitle: "Wortschatz-Sample",
   sampleLead:
     "5 bis 8 Begriffe reichen, um den Nutzen zu zeigen und den groesseren Wortschatz im Bot zu lassen.",
   sampleTerms: [
@@ -499,7 +503,7 @@ export const adrBegriffeVocabulary: SeoPageConfig = {
   ctaTitle: "Mehr Begriffe im Telegram-Bot",
   ctaLead:
     "Wenn dir ein kleiner Ausschnitt reicht, bekommst du im Bot den groesseren Drill fuer die Praxis.",
-  ctaButton: "Vocabulary im Bot weiterfuehren",
+  ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite zeigt nur einen kleinen Auszug. Sie ersetzt keinen kompletten Wortschatz und gibt keine Pruefungsgarantie.",
   telegramSource: "seo_adr_begriffe",
@@ -518,7 +522,7 @@ export const adrFaqFuerFahrer: SeoPageConfig = {
   metaTitle: "ADR FAQ fuer Fahrer | Kurze Antworten zur ADR-Pruefung",
   metaDescription:
     "Kurze Antworten auf haeufige ADR-Fragen fuer Fahrer. Mit Beispielen, Kurs-Hinweisen und einem klaren Weg in den Telegram-Bot.",
-  heroKicker: "SEO-Hub / Wave 1",
+  heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR FAQ fuer Fahrer",
   heroLead:
     "Kurze Antworten auf haeufige ADR-Fragen fuer Fahrer. Mit Beispielen, Kurs-Hinweisen und einem klaren Weg in den Telegram-Bot.",
@@ -529,7 +533,7 @@ export const adrFaqFuerFahrer: SeoPageConfig = {
     "Diese Seite ist fuer Nutzer gedacht, die schnelle Antworten suchen, bevor sie sich in die vollstaendige Vorbereitung stuerzen.",
     "Sie hilft bei Kurswahl, Einstieg und Erwartungshaltung und fuehrt danach sauber in den Bot weiter.",
   ],
-  sampleTitle: "FAQ Preview",
+  sampleTitle: "FAQ-Sample",
   sampleLead:
     "Kurze Antworten, klare Einordnung und ein kleiner Vergleich, damit der naechste Schritt obvious wird.",
   sampleCalloutTitle: "Kurzer Vergleich",
@@ -583,7 +587,7 @@ export const adrFaqFuerFahrer: SeoPageConfig = {
   ctaTitle: "Mehr Antworten im Telegram-Bot",
   ctaLead:
     "Wenn dir die FAQ beim Einordnen geholfen hat, geht die echte Uebung im Bot weiter.",
-  ctaButton: "Zu Telegram wechseln",
+  ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese FAQ dient nur der Orientierung. Sie ersetzt keine offizielle ADR-Ausbildung oder Pruefung.",
   telegramSource: "seo_adr_faq_fuer_fahrer",
@@ -602,6 +606,75 @@ export const seoPageList = [
   adrBegriffeVocabulary,
   aufbaukursTankPreview,
 ] as const;
+
+export function buildSeoPageStructuredData(
+  page: SeoPageConfig,
+): StructuredDataRecord[] {
+  const pageUrl = `${siteUrl}${page.path}`;
+  const webpageId = `${pageUrl}#webpage`;
+  const breadcrumbId = `${pageUrl}#breadcrumb`;
+
+  const data: StructuredDataRecord[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": webpageId,
+      url: pageUrl,
+      name: page.metaTitle,
+      headline: page.heroTitle,
+      description: page.metaDescription,
+      inLanguage: siteConfig.defaultLocale,
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+      },
+      about: {
+        "@type": "Thing",
+        name: page.pageTitle,
+      },
+      breadcrumb: {
+        "@id": breadcrumbId,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": breadcrumbId,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "ADR Bot",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: page.pageTitle,
+          item: pageUrl,
+        },
+      ],
+    },
+  ];
+
+  if (page.faqs?.length) {
+    data.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      mainEntity: page.faqs.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    });
+  }
+
+  return data;
+}
 
 export function buildSeoPageMetadata(page: SeoPageConfig): Metadata {
   return {

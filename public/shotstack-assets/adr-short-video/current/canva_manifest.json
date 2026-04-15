@@ -2,43 +2,65 @@
   "project": "adr-short-video",
   "format": "9:16",
   "slides_count": 6,
-  "updated_at": "2026-04-10T13:44:52.805Z",
+  "mode": "stable-storage",
+  "source_type": "stable_storage",
+  "batch_id": "bd5c2eab9c5140d7",
+  "batch_fingerprint": "bd5c2eab9c5140d7f5634e47bf41f77ae07d7df2b51582fc35158898f4f5f28b",
+  "updated_at": "2026-04-15T18:09:30.026Z",
   "slides": [
     {
       "id": 1,
       "name": "slide1",
       "role": "hook",
-      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide1.png"
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide1.png",
+      "sha256": "038a61a33bd9c2d4ee5f9438869de32658c21ea4f3c62b20ec55fd154b0d1edc",
+      "width": 335,
+      "height": 596
     },
     {
       "id": 2,
       "name": "slide2",
       "role": "question",
-      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide2.png"
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide2.png",
+      "sha256": "0a056f0d705b58172133f5067f46445438d43067595ffaba9a2dd1f05cbf8ddb",
+      "width": 335,
+      "height": 596
     },
     {
       "id": 3,
       "name": "slide3",
       "role": "answers",
-      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide3.png"
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide3.png",
+      "sha256": "c86a9cb632148fada7fc605b51fb0efb8a52be61a777f7db4744cd7d1583a497",
+      "width": 335,
+      "height": 596
     },
     {
       "id": 4,
       "name": "slide4",
       "role": "timer",
-      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide4.png"
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide4.png",
+      "sha256": "88855731d019469806d83c4c786339bbae6dfbd3b6d953624c03fcc42e3b1761",
+      "width": 335,
+      "height": 596
     },
     {
       "id": 5,
       "name": "slide5",
       "role": "answer",
-      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide5.png"
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide5.png",
+      "sha256": "6faa2f6d98bb8946e6777bd97a885c7110f056d8d595b018108de5a107b2e29f",
+      "width": 335,
+      "height": 596
     },
     {
       "id": 6,
       "name": "slide6",
       "role": "cta",
-      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide6.png"
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide6.png",
+      "sha256": "f9b9ab843db699e88fd4bdc14fc0a3a2c10c08355eb316207f8254e0f9ae405c",
+      "width": 335,
+      "height": 596
     }
   ]
 }

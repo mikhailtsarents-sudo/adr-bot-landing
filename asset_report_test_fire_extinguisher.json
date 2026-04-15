@@ -1,0 +1,81 @@
+{
+  "asset_report_id": "asset-report-fire-extinguisher-test-v1",
+  "trace_id": "g6-fire-extinguisher-temp-direct-v2",
+  "scenario_id": "question-fire-extinguisher-minimum-quantity-v1",
+  "manifest_id": "canva-manifest-adr-short-video-current",
+  "status": "ready",
+  "assets": [
+    {
+      "name": "slide1",
+      "role": "hook",
+      "type": "image/png",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide1.png",
+      "source": "canva",
+      "validation": {
+        "http_200_expected": true,
+        "content_type": "image/png"
+      }
+    },
+    {
+      "name": "slide2",
+      "role": "question",
+      "type": "image/png",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide2.png",
+      "source": "canva",
+      "validation": {
+        "http_200_expected": true,
+        "content_type": "image/png"
+      }
+    },
+    {
+      "name": "slide3",
+      "role": "answers",
+      "type": "image/png",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide3.png",
+      "source": "canva",
+      "validation": {
+        "http_200_expected": true,
+        "content_type": "image/png"
+      }
+    },
+    {
+      "name": "slide4",
+      "role": "timer",
+      "type": "image/png",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide4.png",
+      "source": "canva",
+      "validation": {
+        "http_200_expected": true,
+        "content_type": "image/png"
+      }
+    },
+    {
+      "name": "slide5",
+      "role": "answer",
+      "type": "image/png",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide5.png",
+      "source": "canva",
+      "validation": {
+        "http_200_expected": true,
+        "content_type": "image/png"
+      }
+    },
+    {
+      "name": "slide6",
+      "role": "cta",
+      "type": "image/png",
+      "url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide6.png",
+      "source": "canva",
+      "validation": {
+        "http_200_expected": true,
+        "content_type": "image/png"
+      }
+    }
+  ],
+  "duplicates_detected": false,
+  "missing_assets": [],
+  "notes": [
+    "Built from real Canva-generated scene outputs.",
+    "Prepared for first visual-only Shotstack test without subtitles or audio."
+  ]
+}

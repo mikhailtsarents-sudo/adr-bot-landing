@@ -8,6 +8,10 @@ export const metadata: Metadata = {
     "Kostenlose ADR Prüfungsvorbereitung auf Deutsch per Telegram. ADR Bot hilft bei Begriffen, Prüfungsdeutsch, ADR-Fragen und dem Einstieg zum ADR-Schein.",
   alternates: {
     canonical: "/",
+    languages: {
+      de: "/",
+      ru: "/ru",
+    },
   },
 };
 

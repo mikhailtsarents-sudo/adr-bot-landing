@@ -7,8 +7,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "build:render-package": "node scripts/build-render-package.mjs",
+    "finalize:render-package": "node scripts/finalize-render-package.mjs",
+    "run:canva-scene-batch": "node scripts/run-canva-scene-batch.mjs",
+    "run:news-shadow-branch": "node scripts/run-news-shadow-branch.mjs",
+    "run:news-specific-canva-shotstack": "node scripts/run-news-specific-canva-shotstack.mjs",
+    "run:approved-news-live-branch": "node scripts/run-approved-news-live-branch.mjs",
+    "run:word-render-package": "node scripts/run-word-render-package.mjs",
+    "run:question-render-package": "node scripts/run-question-render-package.mjs",
+    "run:daily-content-chooser": "node scripts/run-daily-content-chooser.mjs",
+    "run:daily-content-dispatch": "node scripts/run-daily-content-dispatch.mjs",
+    "run:daily-content-cycle": "node scripts/run-daily-content-cycle.mjs",
+    "run:daily-content-wrapper": "node scripts/run-daily-live-wrapper.mjs",
     "generate:canva-manifest": "node scripts/generate-canva-manifest.mjs",
-    "generate:heygen-manifest": "node scripts/generate-heygen-manifest.mjs"
+    "generate:heygen-manifest": "node scripts/generate-heygen-manifest.mjs",
+    "check:gsc-indexing": "node scripts/check-search-console-indexing.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

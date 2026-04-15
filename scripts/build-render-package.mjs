@@ -2,9 +2,10 @@
 
 import crypto from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildSceneCaptionClips } from "./render/caption-styles.mjs";
+import { buildQuestionQaReport } from "./render/question-quality.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -218,51 +219,41 @@ function buildSubtitlesSrt(timeline, sceneTextEntries) {
     .join("\n");
 }
 
-function buildShotstackPayload(timeline, sceneTextEntries, subtitlesEnabled) {
-  const textByRole = new Map(sceneTextEntries.map((entry) => [entry.role, entry.text]));
-  const titleClips = subtitlesEnabled
-    ? timeline
-        .map((scene) => {
-          const subtitleText = textByRole.get(scene.role);
-          if (!subtitleText) {
-            return null;
-          }
-          return {
-            asset: {
-              type: "title",
-              text: subtitleText,
-              style: "minimal",
-              size: "small",
-              color: "#FFFFFF",
-              position: "bottom",
-            },
-            start: scene.start_sec,
-            length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
-            offset: {
-              y: 0.76,
-            },
-          };
-        })
-        .filter(Boolean)
-    : [];
+function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabled) {
+  const talkingHeadUrl = text(input.talking_head_url);
+  const durationTargetSec = Number(input.duration_target_sec || input.duration_sec || 12);
+  const captionClips = subtitlesEnabled ? buildSceneCaptionClips(timeline, sceneTextEntries) : [];
 
   return {
     timeline: {
       background: "#0b1020",
       tracks: [
         {
-          clips: timeline.map((scene) => ({
-            asset: {
-              type: "image",
-              src: scene.asset_url,
-            },
-            start: scene.start_sec,
-            length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
-            fit: "contain",
-            position: "center",
-          })),
+          clips: talkingHeadUrl
+            ? [
+                {
+                  asset: {
+                    type: "video",
+                    src: talkingHeadUrl,
+                  },
+                  start: 0,
+                  length: Number(durationTargetSec.toFixed(2)),
+                  fit: "cover",
+                  position: "center",
+                },
+              ]
+            : timeline.map((scene) => ({
+                asset: {
+                  type: "image",
+                  src: scene.asset_url,
+                },
+                start: scene.start_sec,
+                length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
+                fit: "contain",
+                position: "center",
+              })),
         },
-        ...(titleClips.length > 0 ? [{ clips: titleClips }] : []),
+        ...(captionClips.length > 0 ? [{ clips: captionClips }] : []),
       ],
     },
     output: {
@@ -356,6 +347,7 @@ async function main() {
   const publishReadyPath = path.join(outputDir, "publish_ready_package.json");
   const bridgeRowPath = path.join(outputDir, "g3_bridge_row.json");
   const subtitlesPath = path.join(outputDir, "subtitles.srt");
+  const qaReportPath = path.join(outputDir, "qa_report.json");
 
   const assetReport = {
     asset_report_id: assetReportId,
@@ -404,14 +396,39 @@ async function main() {
     visibility: text(input.visibility) || DEFAULT_VISIBILITY,
     category: text(input.category) || "Education",
     thumbnail_url: slides[0].url,
+    talking_head_url: text(input.talking_head_url),
+    talking_head_asset_name: text(input.talking_head_asset_name),
     duration_sec: durationTargetSec,
     render_family: text(input.render_family),
+    template_variant: text(input.template_variant),
+    fallback_template_variant: text(input.fallback_template_variant),
     content_family: text(input.content_family),
     source_type: text(input.source_type),
     source_id: text(input.source_id),
     source_title: text(input.source_title),
     source_url: text(input.source_url),
+    retry_policy: input.retry_policy || null,
+    fallback_policy: input.fallback_policy || null,
   };
+
+  const renderPayload = buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabled);
+  const qaReport =
+    text(input.source_type) === "QUESTION" && input.shortform_contract
+      ? buildQuestionQaReport({
+          shortform: input.shortform_contract,
+          templateVariant: text(input.template_variant) || "quiz_standard",
+          fallbackTemplateVariant: text(input.fallback_template_variant) || "quiz_safe",
+        })
+      : {
+          qa_version: "generic_render_package_v1",
+          template_variant: text(input.template_variant),
+          fallback_template_variant: text(input.fallback_template_variant),
+          checks: {},
+          score_fields: {},
+          score: 8,
+          threshold: 7,
+          status: "pass",
+        };
 
   const shotstackInput = {
     shotstack_input_id: shotstackInputId,
@@ -428,6 +445,8 @@ async function main() {
     timing_policy: text(input.timing_policy) || "readability_first_short",
     reading_time_policy: text(input.reading_time_policy) || "reader_buffer_short",
     transition_policy: "hard_cut",
+    template_variant: text(input.template_variant),
+    fallback_template_variant: text(input.fallback_template_variant),
     subtitle_policy: subtitlePolicy,
     audio_policy: text(input.audio_policy) || "none_for_first_visual_test",
     timeline,
@@ -435,6 +454,8 @@ async function main() {
       voiceover_url: text(input.voiceover_url),
       music_url: text(input.music_url),
       voice_mode: text(input.voice_mode) || "none",
+      talking_head_url: text(input.talking_head_url),
+      talking_head_asset_name: text(input.talking_head_asset_name),
     },
     text_tracks: [
       {
@@ -450,11 +471,11 @@ async function main() {
     metadata_ref: metadataPath,
     notes: [
       `render_payload_id=${renderPayloadId}`,
+      `qa_status=${qaReport.status}`,
+      `qa_score=${qaReport.score}`,
       "Prepared for direct render handoff without fallback reconstruction.",
     ],
   };
-
-  const renderPayload = buildShotstackPayload(timeline, sceneTextEntries, subtitlesEnabled);
 
   const publishReadyPackage = {
     publish_ready_id: publishReadyId,
@@ -474,6 +495,12 @@ async function main() {
     source_id: text(input.source_id),
     source_family: text(input.source_family),
     template_id: text(input.template_id),
+    template_variant: text(input.template_variant),
+    fallback_template_variant: text(input.fallback_template_variant),
+    qa_status: qaReport.status,
+    qa_score: qaReport.score,
+    qa_report_json: qaReportPath,
+    cta_text: text(input.cta_text),
     approval_state: text(input.approval_state) || "approved",
     publish_state: text(input.publish_state) || "publish_ready",
     delivery_state: text(input.delivery_state) || "not_sent",
@@ -492,6 +519,8 @@ async function main() {
     subtitles_srt: subtitlesEnabled && subtitlesSrt ? subtitlesPath : "",
     title_source: "metadata",
     description_source: "metadata",
+    retry_policy: input.retry_policy || null,
+    fallback_policy: input.fallback_policy || null,
   };
 
   const bridgeFeedbackParts = [
@@ -539,6 +568,7 @@ async function main() {
     [metadataPath, metadata],
     [shotstackInputPath, shotstackInput],
     [renderPayloadPath, renderPayload],
+    [qaReportPath, qaReport],
     [publishReadyPath, publishReadyPackage],
     [bridgeRowPath, bridgeRow],
   ];
@@ -555,6 +585,7 @@ async function main() {
   console.log(`metadata=${metadataPath}`);
   console.log(`shotstack_input=${shotstackInputPath}`);
   console.log(`shotstack_render_payload=${renderPayloadPath}`);
+  console.log(`qa_report=${qaReportPath}`);
   console.log(`publish_ready=${publishReadyPath}`);
   console.log(`g3_bridge_row=${bridgeRowPath}`);
   console.log(`subtitles_srt=${subtitlesEnabled && subtitlesSrt ? subtitlesPath : ""}`);

@@ -2,13 +2,13 @@
 
 import { TrackedTelegramLink } from "@/components/landing/tracked-telegram-link";
 import { Reveal } from "@/components/landing/reveal";
-import { SceneBg } from "@/components/landing/scene-bg";
 import { SectionHeading } from "@/components/landing/section-heading";
 import type {
   SeoPageConfig,
   SeoFaqCard,
   SeoRelatedLink,
 } from "@/lib/seo-pages";
+import { buildSeoPageStructuredData } from "@/lib/seo-pages";
 import {
   ArrowRight,
   ChevronRight,
@@ -112,10 +112,23 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
   const hasSampleQuestions = Boolean(page.sampleQuestions?.length);
   const hasSampleTerms = Boolean(page.sampleTerms?.length);
   const hasFaqs = Boolean(page.faqs?.length);
+  const structuredData = buildSeoPageStructuredData(page);
 
   return (
     <main className="relative overflow-hidden bg-[var(--color-bg)] text-[var(--color-text)]">
-      <SceneBg />
+      {structuredData.map((item, index) => (
+        <script
+          key={`${page.slug}-jsonld-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
+        />
+      ))}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-5%,_rgba(246,181,72,0.16),_transparent_58%)]" />
+        <div className="absolute -right-44 top-[8%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,_rgba(180,200,230,0.18),_transparent_60%)] blur-3xl" />
+        <div className="absolute -left-24 top-[18%] h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,_rgba(242,183,5,0.08),_transparent_65%)] blur-3xl" />
+        <div className="grid-overlay absolute inset-0 opacity-[0.5]" />
+      </div>
 
       <section className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-16 pt-6 sm:px-8 lg:px-10">
         <Reveal className="mb-8 flex items-center justify-between rounded-[1.75rem] border border-[var(--color-border)] bg-white/90 px-4 py-3 shadow-[0_16px_44px_rgba(15,23,42,0.08)] backdrop-blur-md sm:mb-10 sm:rounded-full sm:px-5">
@@ -127,7 +140,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
               <p className="font-display text-sm font-semibold tracking-[0.16em] text-slate-900 uppercase">
                 ADR Bot
               </p>
-              <p className="text-xs text-slate-500">SEO page / first wave</p>
+              <p className="text-xs text-slate-500">Lernvorschau fuer den Telegram-Bot</p>
             </div>
           </div>
             <div className="flex items-center gap-2 sm:gap-3">
@@ -136,10 +149,10 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
                 className="hidden text-sm font-medium text-slate-500 transition hover:text-slate-800 sm:inline-flex"
             >
               Zur Startseite
-            </Link>
+              </Link>
             <TelegramButton
               source={`${page.telegramSource}_top`}
-              label="In Telegram weiter"
+              label="In Telegram starten"
               className="bg-transparent px-0 py-0 text-slate-600 shadow-none hover:bg-transparent hover:text-slate-900"
             />
           </div>
@@ -220,7 +233,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
           <SectionHeading
-            eyebrow="Intent"
+            eyebrow="Worum es geht"
             title={page.intentTitle}
             description=""
           />
@@ -241,7 +254,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
           <SectionHeading
-            eyebrow="Sample Content"
+            eyebrow="Beispiele"
             title={page.sampleTitle}
             description={page.sampleLead}
           />
@@ -304,7 +317,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
         <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
           <Reveal>
             <SectionHeading
-              eyebrow="Why Telegram Next"
+              eyebrow="Warum Telegram"
               title={page.whyTelegramTitle}
               description=""
             />
@@ -371,7 +384,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
       <section className="relative mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
         <Reveal>
           <SectionHeading
-            eyebrow="Internal Links"
+            eyebrow="Weiterfuehrende Seiten"
             title="Weiter fuehrende Seiten"
             description="Jede neue SEO-Seite verlinkt zur Startseite, zu passenden Preview-Seiten und zum naechsten logischen Schritt."
           />
@@ -390,9 +403,6 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
           <div className="overflow-hidden rounded-[2.7rem] bg-[linear-gradient(135deg,#1a1a1a_0%,#223126_100%)] px-6 py-10 text-white shadow-[0_28px_80px_rgba(15,23,42,0.22)] sm:p-10 lg:p-14">
             <div className="relative">
               <div className="absolute -right-10 -top-14 h-48 w-48 rounded-full bg-[rgba(242,183,5,0.18)] blur-3xl" />
-              <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-white/48">
-                Final CTA
-              </p>
               <h2 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-[-0.03em] text-white sm:text-5xl">
                 {page.ctaTitle}
               </h2>

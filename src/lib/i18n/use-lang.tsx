@@ -61,13 +61,21 @@ function subscribeToLangChange(onStoreChange: () => void) {
 }
 
 // ── Provider ──────────────────────────────────────────────────────────────────
-export function LangProvider({ children }: { children: ReactNode }) {
+export function LangProvider({
+  children,
+  initialLang,
+}: {
+  children: ReactNode;
+  initialLang?: LangCode;
+}) {
   const detectedLang = useSyncExternalStore(
     subscribeToLangChange,
     detectLang,
     () => DEFAULT_LANG,
   );
-  const [manualLang, setManualLang] = useState<LangCode | null>(null);
+  const [manualLang, setManualLang] = useState<LangCode | null>(
+    initialLang ?? null,
+  );
   const lang = manualLang ?? detectedLang;
 
   // Apply RTL + lang attribute whenever language changes

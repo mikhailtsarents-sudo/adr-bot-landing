@@ -1,0 +1,24 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "q-test-001",
+  "source_version": "question-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": ["basic-knowledge", "driver-documents"],
+  "difficulty": "easy",
+  "payload": {
+    "question_text": "Welche Unterlage muss der Fahrer bei der Beförderung von Gefahrgut grundsätzlich mitführen?",
+    "answer_options": [
+      "Nur den Führerschein",
+      "Beförderungspapier und schriftliche Weisungen",
+      "Nur den Fahrzeugschein",
+      "Keine Unterlagen"
+    ],
+    "correct_answer": "Beförderungspapier und schriftliche Weisungen",
+    "simple_explanation": "Diese Unterlagen gehören zur Grundausstattung beim Gefahrguttransport.",
+    "category": "driver_documents",
+    "keywords": ["Beförderungspapier", "schriftliche Weisungen"],
+    "trap_level": "low"
+  }
+}

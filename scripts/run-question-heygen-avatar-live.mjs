@@ -4,6 +4,10 @@ import { cp, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
+import {
+  buildQuestionVariantAttempts,
+  getQuestionTemplateProfile,
+} from "./render/question-quality.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -153,15 +157,311 @@ function parseAssDialogues(assContent) {
     .filter((item) => item.text);
 }
 
-function buildAvatarPayload(dialogues, rawVideoUrl) {
+function normalizeCaptionText(raw) {
+  return text(raw)
+    .replace(/\s+/g, " ")
+    .replace(/\s*([?!.;,])\s*/g, "$1 ")
+    .trim();
+}
+
+function stripLeadingAnswerMarker(value) {
+  return normalizeCaptionText(value).replace(/^(?:[A-D][):.\-]\s*|Antwort\s+[A-D][):.\-]?\s*)/i, "").trim();
+}
+
+function splitCaptionLines(value, maxLineLength = 24) {
+  const words = normalizeCaptionText(value).split(" ").filter(Boolean);
+  const lines = [];
+  let current = "";
+
+  for (const word of words) {
+    const candidate = current ? `${current} ${word}` : word;
+    if (candidate.length <= maxLineLength || !current) {
+      current = candidate;
+      continue;
+    }
+    lines.push(current);
+    current = word;
+  }
+
+  if (current) lines.push(current);
+  return lines.slice(0, 3).join("\n");
+}
+
+function classifyDialoguePhase(item, index, dialogues) {
+  const body = normalizeCaptionText(item.text).toLowerCase();
+  const isLast = index === dialogues.length - 1;
+
+  if (/(telegram|gratis|kostenlos|5 fragen|kostenlos starten|testen)/i.test(body) || isLast) {
+    return "cta";
+  }
+  if (/(richtige antwort|korrekte antwort|richtig ist|die richtige antwort|antwort:)/i.test(body)) {
+    return "reveal";
+  }
+  if (/^(a|b|c|d)[).:\- ]/i.test(body) || /^(antwort|option) /i.test(body)) {
+    return "answer";
+  }
+  if (body.includes("?") || index === 0) {
+    return "question";
+  }
+  return "answer";
+}
+
+function extractAnswerLetter(value) {
+  const match = normalizeCaptionText(value).match(/^([A-D])[):.\- ]/i);
+  return match ? match[1].toUpperCase() : "";
+}
+
+function formatCaptionCardText(item, phase) {
+  const body = normalizeCaptionText(item.text);
+
+  if (phase === "question") {
+    return `FRAGE\n${body}`;
+  }
+
+  if (phase === "answer") {
+    const answerLetter = extractAnswerLetter(body);
+    const content = stripLeadingAnswerMarker(body);
+    return answerLetter ? `ANTWORTEN\n${answerLetter}: ${content}` : `ANTWORTEN\n${content}`;
+  }
+
+  if (phase === "reveal") {
+    const revealBody = body.replace(/^Richtig ist\s*/i, "").trim();
+    return `ANTWORTEN\n${revealBody || body}`;
+  }
+
+  if (phase === "cta") {
+    return `JETZT GRATIS TESTEN\n${body}`;
+  }
+
+  return body;
+}
+
+function getPhaseStyle(phase, templateVariant = "quiz_standard") {
+  const profile = getQuestionTemplateProfile(templateVariant);
+  const styles = {
+    question: {
+      labelStyle: "marker",
+      labelSize: "medium",
+      labelColor: "#111827",
+      labelBackground: "#FDE68A",
+      labelY: -0.06,
+      bodyStyle: "blockbuster",
+      bodySize: "large",
+      bodyColor: "#F8FAFC",
+      bodyBackground: "",
+      shadowColor: "#020617",
+      bodyY: 0.09,
+      shadowY: 0.08,
+      maxLineLength: 21,
+    },
+    answer: {
+      labelStyle: "marker",
+      labelSize: "medium",
+      labelColor: "#111827",
+      labelBackground: "#F8FAFC",
+      labelY: -0.02,
+      bodyStyle: "blockbuster",
+      bodySize: "large",
+      bodyColor: "#F8FAFC",
+      bodyBackground: "",
+      shadowColor: "#0F172A",
+      bodyY: 0.16,
+      shadowY: 0.15,
+      maxLineLength: 20,
+    },
+    reveal: {
+      labelStyle: "marker",
+      labelSize: "medium",
+      labelColor: "#111827",
+      labelBackground: "#DCFCE7",
+      labelY: -0.02,
+      bodyStyle: "blockbuster",
+      bodySize: "large",
+      bodyColor: "#DCFCE7",
+      bodyBackground: "",
+      shadowColor: "#022C22",
+      bodyY: 0.16,
+      shadowY: 0.15,
+      maxLineLength: 20,
+    },
+    cta: {
+      labelStyle: "marker",
+      labelSize: "small",
+      labelColor: "#111827",
+      labelBackground: "#FDE68A",
+      labelY: 0.02,
+      bodyStyle: "blockbuster",
+      bodySize: "large",
+      bodyColor: "#FDE68A",
+      bodyBackground: "",
+      shadowColor: "#111827",
+      bodyY: 0.2,
+      shadowY: 0.19,
+      maxLineLength: 21,
+    },
+  };
+  const chosen = { ...(styles[phase] || styles.answer) };
+  const phaseOffsets = profile.phaseOffsets?.[phase];
+  if (phaseOffsets) {
+    chosen.bodyY = phaseOffsets.bodyY;
+    chosen.shadowY = phaseOffsets.shadowY;
+    chosen.labelY = phaseOffsets.labelY;
+  }
+  chosen.maxLineLength = profile.bodyMaxLineLength;
+
+  if (templateVariant === "quiz_split" || templateVariant === "quiz_safe") {
+    chosen.bodySize = phase === "question" ? "medium" : "small";
+    chosen.labelSize = "small";
+  }
+
+  return chosen;
+}
+
+function getPhaseLabel(phase) {
+  if (phase === "question") return "FRAGE";
+  if (phase === "answer" || phase === "reveal") return "ANTWORTEN";
+  if (phase === "cta") return "GRATIS IM BOT";
+  return "";
+}
+
+function formatCaptionBodyText(item, phase) {
+  const body = normalizeCaptionText(item.text);
+
+  if (phase === "question") {
+    return body;
+  }
+
+  if (phase === "answer") {
+    const answerLetter = extractAnswerLetter(body);
+    const content = stripLeadingAnswerMarker(body);
+    return answerLetter ? `${answerLetter}: ${content}` : content;
+  }
+
+  if (phase === "reveal") {
+    return body.replace(/^Richtig ist\s*/i, "").trim() || body;
+  }
+
+  if (phase === "cta") {
+    return body;
+  }
+
+  return body;
+}
+
+function formatAnswerLine(raw, maxLineLength = 26) {
+  const normalized = normalizeCaptionText(raw);
+  const answerLetter = extractAnswerLetter(normalized);
+  const content = stripLeadingAnswerMarker(normalized);
+  const line = answerLetter ? `${answerLetter}: ${content}` : content;
+  return splitCaptionLines(line, maxLineLength);
+}
+
+function buildCaptionTracks(dialogues, templateVariant = "quiz_standard") {
+  const shadowClips = [];
+  const labelClips = [];
+  const bodyClips = [];
+  const accumulatedAnswers = [];
+
+  dialogues.forEach((item, index) => {
+    const phase = classifyDialoguePhase(item, index, dialogues);
+    const phaseStyle = getPhaseStyle(phase, templateVariant);
+    const labelText = getPhaseLabel(phase);
+    const clipLength = item.length;
+    let bodyText = splitCaptionLines(formatCaptionBodyText(item, phase), phaseStyle.maxLineLength);
+
+    if (phase === "answer") {
+      const answerLine = formatAnswerLine(item.text, phaseStyle.maxLineLength);
+      if (answerLine && !accumulatedAnswers.includes(answerLine)) {
+        accumulatedAnswers.push(answerLine);
+      }
+      bodyText = accumulatedAnswers.join("\n");
+    } else if (phase === "reveal") {
+      const revealLine = formatAnswerLine(item.text.replace(/^Richtig ist\s*/i, ""), phaseStyle.maxLineLength);
+      if (revealLine && !accumulatedAnswers.includes(revealLine)) {
+        accumulatedAnswers.push(revealLine);
+      }
+      bodyText = accumulatedAnswers.join("\n");
+    }
+
+    shadowClips.push({
+      asset: {
+        type: "title",
+        text: bodyText,
+        style: "minimal",
+        size: phaseStyle.bodySize,
+        color: phaseStyle.shadowColor,
+        position: "center",
+      },
+      start: item.start,
+      length: clipLength,
+      offset: {
+        y: phaseStyle.shadowY,
+      },
+    });
+
+    const bodyAsset = {
+      type: "title",
+      text: bodyText,
+      style: phaseStyle.bodyStyle,
+      size: phaseStyle.bodySize,
+      color: phaseStyle.bodyColor,
+      position: "center",
+    };
+    if (phaseStyle.bodyBackground) {
+      bodyAsset.background = phaseStyle.bodyBackground;
+    }
+
+    bodyClips.push({
+      asset: bodyAsset,
+      start: item.start,
+      length: clipLength,
+      offset: {
+        y: phaseStyle.bodyY,
+      },
+    });
+
+    if (labelText) {
+      labelClips.push({
+        asset: {
+          type: "title",
+          text: labelText,
+          style: phaseStyle.labelStyle,
+          size: phaseStyle.labelSize,
+          color: phaseStyle.labelColor,
+          position: "center",
+          background: phaseStyle.labelBackground,
+        },
+        start: item.start,
+        length: clipLength,
+        offset: {
+          y: phaseStyle.labelY,
+        },
+      });
+    }
+  });
+
+  return { shadowClips, bodyClips, labelClips };
+}
+
+function buildAvatarPayload(dialogues, rawVideoUrl, templateVariant = "quiz_standard") {
   const totalDuration = Number(
     Math.max(...dialogues.map((item) => item.end), 10).toFixed(2),
   );
+  const { shadowClips, bodyClips, labelClips } = buildCaptionTracks(dialogues, templateVariant);
 
   return {
     timeline: {
       background: "#0b1020",
       tracks: [
+        {
+          clips: shadowClips,
+        },
+        {
+          clips: bodyClips,
+        },
+        {
+          clips: labelClips,
+        },
         {
           clips: [
             {
@@ -176,23 +476,6 @@ function buildAvatarPayload(dialogues, rawVideoUrl) {
             },
           ],
         },
-        {
-          clips: dialogues.map((item) => ({
-            asset: {
-              type: "title",
-              text: item.text,
-              style: "minimal",
-              size: "small",
-              color: "#FFFFFF",
-              position: "bottom",
-            },
-            start: item.start,
-            length: item.length,
-            offset: {
-              y: 0.68,
-            },
-          })),
-        },
       ],
     },
     output: {
@@ -203,6 +486,74 @@ function buildAvatarPayload(dialogues, rawVideoUrl) {
         height: 1920,
       },
     },
+  };
+}
+
+function buildAvatarQaReport(dialogues, templateVariant, publishReady) {
+  const profile = getQuestionTemplateProfile(templateVariant);
+  const accumulatedAnswers = [];
+  let maxVisibleLines = 0;
+
+  dialogues.forEach((item, index) => {
+    const phase = classifyDialoguePhase(item, index, dialogues);
+    const phaseStyle = getPhaseStyle(phase, templateVariant);
+    if (phase === "answer" || phase === "reveal") {
+      const answerLine = formatAnswerLine(
+        phase === "reveal" ? item.text.replace(/^Richtig ist\s*/i, "") : item.text,
+        phaseStyle.maxLineLength,
+      );
+      if (answerLine && !accumulatedAnswers.includes(answerLine)) {
+        accumulatedAnswers.push(answerLine);
+      }
+      const visibleLines = accumulatedAnswers.join("\n").split("\n").filter(Boolean).length;
+      maxVisibleLines = Math.max(maxVisibleLines, visibleLines);
+    }
+  });
+
+  const questionLength = normalizeCaptionText(publishReady?.shortform_contract?.question_short).length;
+  const longestAnswerLength = Math.max(
+    0,
+    ...((publishReady?.shortform_contract?.answers_short || []).map((item) => normalizeCaptionText(item).length)),
+  );
+  const checks = {
+    question_fits_variant: questionLength <= profile.questionMaxLength,
+    answers_fit_variant: longestAnswerLength <= profile.answerMaxLength,
+    accumulated_answers_fit: maxVisibleLines <= profile.answerMaxVisibleLines,
+    cta_present: Boolean(text(publishReady?.cta_text)),
+  };
+
+  const readability = Math.max(
+    0,
+    10 -
+      Math.max(0, questionLength - profile.questionMaxLength) / 8 -
+      Math.max(0, longestAnswerLength - profile.answerMaxLength) / 6 -
+      Math.max(0, maxVisibleLines - profile.answerMaxVisibleLines) * 1.2,
+  );
+  const score = Number(((readability * 0.5) + 2 + (checks.cta_present ? 1 : 0)).toFixed(2));
+  const status =
+    checks.question_fits_variant &&
+    checks.answers_fit_variant &&
+    checks.accumulated_answers_fit &&
+    checks.cta_present &&
+    score >= 7
+      ? "pass"
+      : templateVariant !== "quiz_safe"
+        ? "fallback_required"
+        : "pass";
+
+  return {
+    qa_version: "avatar_caption_v1",
+    template_variant: templateVariant,
+    checks,
+    metrics: {
+      question_length: questionLength,
+      longest_answer_length: longestAnswerLength,
+      max_visible_answer_lines: maxVisibleLines,
+      answer_line_budget: profile.answerMaxVisibleLines,
+    },
+    score,
+    threshold: 7,
+    status,
   };
 }
 
@@ -354,6 +705,8 @@ async function main() {
   const payloadPath = path.join(packageDir, "shotstack_render_payload.json");
   const receiptPath = path.join(packageDir, "shotstack_render_receipt.json");
   const assPath = path.join(packageDir, "heygen_caption.ass");
+  const attemptReportPath = path.join(packageDir, "avatar_variant_attempts.json");
+  const avatarQaPath = path.join(packageDir, "avatar_qa_report.json");
 
   const [g3Row, publishReady] = await Promise.all([
     loadJson(g3Path),
@@ -372,8 +725,28 @@ async function main() {
     throw new Error("No dialogues parsed from ASS");
   }
 
-  const payload = buildAvatarPayload(dialogues, args.rawVideoUrl);
+  const templateAttempts = buildQuestionVariantAttempts(
+    text(publishReady.template_variant) || "quiz_standard",
+    text(publishReady.fallback_template_variant) || "quiz_safe",
+  );
+  const attemptReports = [];
+  let chosenVariant = templateAttempts[templateAttempts.length - 1] || "quiz_safe";
+  let qaReport = null;
+
+  for (const variant of templateAttempts) {
+    const report = buildAvatarQaReport(dialogues, variant, publishReady);
+    attemptReports.push(report);
+    if (report.status === "pass" || variant === templateAttempts[templateAttempts.length - 1]) {
+      chosenVariant = variant;
+      qaReport = report;
+      break;
+    }
+  }
+
+  const payload = buildAvatarPayload(dialogues, args.rawVideoUrl, chosenVariant);
   await writeJson(payloadPath, payload);
+  await writeJson(attemptReportPath, attemptReports);
+  await writeJson(avatarQaPath, qaReport);
 
   const render = await submitShotstackRender(payload, args);
   await writeJson(receiptPath, {
@@ -409,6 +782,8 @@ async function main() {
   publishReady.publish_state = "publish_ready";
   publishReady.delivery_state = "not_sent";
   publishReady.render_status = "assets_packaged";
+  publishReady.template_variant = chosenVariant;
+  publishReady.avatar_qa_report_json = avatarQaPath;
 
   await writeJson(g3Path, g3Row);
   await writeJson(publishReadyPath, publishReady);
@@ -453,6 +828,7 @@ async function main() {
 
   console.log(JSON.stringify({
     package_dir: packageDir,
+    template_variant: chosenVariant,
     render_id: render.renderId,
     render_url: render.renderUrl,
     final_status: finalStorageRow.published_status,

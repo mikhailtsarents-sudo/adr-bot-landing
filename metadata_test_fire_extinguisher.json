@@ -1,0 +1,28 @@
+{
+  "metadata_id": "metadata-fire-extinguisher-test-v1",
+  "trace_id": "g6-fire-extinguisher-temp-direct-v2",
+  "scenario_id": "question-fire-extinguisher-minimum-quantity-v1",
+  "manifest_id": "canva-manifest-adr-short-video-current",
+  "asset_report_id": "asset-report-fire-extinguisher-test-v1",
+  "publish_target": "youtube_shorts",
+  "language": "de",
+  "title": "ADR Frage: Wie viel Löschmittel muss dein Feuerlöscher haben?",
+  "description": "Kurze ADR-Prüfungsfrage für Fahrerinnen und Fahrer: Welche Löschmittelmenge muss bei Beförderungseinheiten unterhalb der Kennzeichnungspflicht mit mehr als 7,5 t zulässigem Gesamtgewicht mindestens vorhanden sein? Mehr üben im Telegram-Bot.",
+  "caption": "Schaffst du diese ADR-Frage?",
+  "hashtags": [
+    "#ADR",
+    "#ADRPruefung",
+    "#LKW",
+    "#LKWFahrer",
+    "#Gefahrgut"
+  ],
+  "cta_text": "Mehr ADR-Fragen im Telegram-Bot üben",
+  "cta_url": "https://t.me/adr_pruefung_trainer_bot",
+  "channel_name": "ADR Prüfung Trainer",
+  "visibility": "public",
+  "category": "Education",
+  "thumbnail_url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide1.png",
+  "duration_sec": 12.3,
+  "render_family": "Question Card",
+  "content_family": "QUESTION"
+}

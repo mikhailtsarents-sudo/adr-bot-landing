@@ -1,0 +1,32 @@
+{
+  "trace_id": "draft-1775858422834-trace",
+  "news_id": "draft-1775858422834",
+  "news_version": "1",
+  "scenario_id": "draft-1775858422834-scenario-01",
+  "approval_state": "approved",
+  "gpt_scenario_ready": true,
+  "render_family": "News Card",
+  "template_family": "News Card",
+  "template_id": "T5",
+  "asset_format_target": "news_card_short_v1",
+  "scene_count": 6,
+  "scene_roles": [
+    "hook",
+    "question",
+    "answers",
+    "timer",
+    "answer",
+    "cta"
+  ],
+  "scene_root": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/canva-exports/adr-short-video",
+  "output_dir": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/public/shotstack-assets/adr-short-video/current",
+  "remote_verification_requested": false,
+  "verification_mode": "local_smoke",
+  "batch_path": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/canva_scene_batch.json",
+  "manifest_path": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/canva_manifest.json",
+  "scene_batch_fingerprint": "a7f87dbeb22e50bf75d854cc64e6356230fdfa4c98252472f1247e248fd77a47",
+  "manifest_batch_fingerprint": "7c08206f38958b6c9f98693ae9a57507f84499f8749f89b280877ee47927d1f7",
+  "ready_for_shotstack": false,
+  "validation_status": "pass",
+  "created_at": "2026-04-15T06:06:02.172Z"
+}

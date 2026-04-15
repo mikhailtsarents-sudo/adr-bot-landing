@@ -1,0 +1,79 @@
+{
+  "timeline": {
+    "background": "#0b1020",
+    "tracks": [
+      {
+        "clips": [
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide1.png"
+            },
+            "start": 0.0,
+            "length": 2.0,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide2.png"
+            },
+            "start": 2.0,
+            "length": 3.6,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide3.png"
+            },
+            "start": 5.6,
+            "length": 3.2,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide4.png"
+            },
+            "start": 8.8,
+            "length": 1.5,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide5.png"
+            },
+            "start": 10.3,
+            "length": 2.8,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide6.png"
+            },
+            "start": 13.1,
+            "length": 2.0,
+            "fit": "contain",
+            "position": "center"
+          }
+        ]
+      }
+    ]
+  },
+  "output": {
+    "format": "mp4",
+    "fps": 25,
+    "size": {
+      "width": 1080,
+      "height": 1920
+    }
+  }
+}

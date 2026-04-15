@@ -1,0 +1,44 @@
+{
+  "candidates": [
+    {
+      "trace_id": "word-sicherungskeil-run",
+      "source_type": "WORD",
+      "source_id": "word-sicherungskeil",
+      "source_version": "wave-1",
+      "audience": "ADR",
+      "difficulty": "easy",
+      "topic_tags": ["vocabulary", "wheel-safety"],
+      "priority_hint": "normal",
+      "source_path": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/examples/word-sicherungskeil-source.json",
+      "payload": {
+        "de_term": "Sicherungskeil",
+        "simple_explanation": "Ein Keil sichert das Fahrzeug gegen Wegrollen.",
+        "translations": {
+          "ru": "противооткатный упор"
+        }
+      }
+    },
+    {
+      "trace_id": "q-test-001-run",
+      "source_type": "QUESTION",
+      "source_id": "q-test-001",
+      "source_version": "question-wave-1",
+      "audience": "ADR",
+      "difficulty": "easy",
+      "topic_tags": ["basic-knowledge", "driver-documents"],
+      "priority_hint": "high",
+      "source_path": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/examples/question-driver-documents-source.json",
+      "payload": {
+        "question_text": "Welche Unterlage muss der Fahrer bei der Beförderung von Gefahrgut grundsätzlich mitführen?",
+        "answer_options": [
+          "Nur den Führerschein",
+          "Beförderungspapier und schriftliche Weisungen",
+          "Nur den Fahrzeugschein",
+          "Keine Unterlagen"
+        ],
+        "correct_answer": "Beförderungspapier und schriftliche Weisungen",
+        "simple_explanation": "Diese Unterlagen gehören zur Grundausstattung beim Gefahrguttransport."
+      }
+    }
+  ]
+}

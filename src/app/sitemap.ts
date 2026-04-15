@@ -2,7 +2,14 @@ import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/site";
 import { seoPageList } from "@/lib/seo-pages";
 
-const routes = ["", "/impressum", "/datenschutz", "/legal", ...seoPageList.map((page) => page.path)];
+const routes = [
+  "",
+  "/ru",
+  "/impressum",
+  "/datenschutz",
+  "/legal",
+  ...seoPageList.map((page) => page.path),
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({

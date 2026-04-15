@@ -1,0 +1,79 @@
+{
+  "timeline": {
+    "background": "#0b1020",
+    "tracks": [
+      {
+        "clips": [
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://document-export.canva.com/hgrrY/DAHGg6hgrrY/1/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T073321Z&X-Amz-Expires=76241&X-Amz-Signature=34cbe137a7f8595c21390c1486019947fa420094d88cf27ff63cde92183d0228&X-Amz-SignedHeaders=host&response-expires=Sat%2C%2011%20Apr%202026%2004%3A44%3A02%20GMT"
+            },
+            "start": 0.0,
+            "length": 2.0,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://document-export.canva.com/VkcsE/DAHGg6VkcsE/1/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T211824Z&X-Amz-Expires=28595&X-Amz-Signature=f8864157fb63c7f9d25d4da1d0b2f06399823b881a5821c26a99875e18c81e89&X-Amz-SignedHeaders=host&response-expires=Sat%2C%2011%20Apr%202026%2005%3A14%3A59%20GMT"
+            },
+            "start": 2.0,
+            "length": 3.6,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://document-export.canva.com/AHX_M/DAHGg3AHX_M/1/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T202524Z&X-Amz-Expires=31998&X-Amz-Signature=c88c71f37231ca1ec90bc9fb79ed10644a7bc8db49172e075a597216f266ce1b&X-Amz-SignedHeaders=host&response-expires=Sat%2C%2011%20Apr%202026%2005%3A18%3A42%20GMT"
+            },
+            "start": 5.6,
+            "length": 3.2,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://document-export.canva.com/SbvpI/DAHGg2SbvpI/1/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T084702Z&X-Amz-Expires=72095&X-Amz-Signature=224612f5c94bbec511bd9cbb56d1d6b154fde987f6cde681e162da199ab405a2&X-Amz-SignedHeaders=host&response-expires=Sat%2C%2011%20Apr%202026%2004%3A48%3A37%20GMT"
+            },
+            "start": 8.8,
+            "length": 1.5,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://document-export.canva.com/6AZh0/DAHGg56AZh0/1/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T211740Z&X-Amz-Expires=29577&X-Amz-Signature=a2e49ed15c247270fd3d41c1f99f2831b6f1aab5fa3db0d955f5b9712d8c3bc6&X-Amz-SignedHeaders=host&response-expires=Sat%2C%2011%20Apr%202026%2005%3A30%3A37%20GMT"
+            },
+            "start": 10.3,
+            "length": 2.8,
+            "fit": "contain",
+            "position": "center"
+          },
+          {
+            "asset": {
+              "type": "image",
+              "src": "https://document-export.canva.com/nk86E/DAHGgxnk86E/1/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWEOTUD6Q%2F20260410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260410T091051Z&X-Amz-Expires=70978&X-Amz-Signature=e1e19465e80a62b5de02da7f67c3b70f644f3e38d84b857480b8d503e0930b3e&X-Amz-SignedHeaders=host&response-expires=Sat%2C%2011%20Apr%202026%2004%3A53%3A49%20GMT"
+            },
+            "start": 13.1,
+            "length": 2.0,
+            "fit": "contain",
+            "position": "center"
+          }
+        ]
+      }
+    ]
+  },
+  "output": {
+    "format": "mp4",
+    "fps": 25,
+    "size": {
+      "width": 1080,
+      "height": 1920
+    }
+  }
+}

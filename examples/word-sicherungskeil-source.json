@@ -1,0 +1,20 @@
+{
+  "source_type": "WORD",
+  "source_id": "word-test-001",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": ["equipment", "safety"],
+  "difficulty": "easy",
+  "payload": {
+    "de_term": "Sicherungskeil",
+    "translations": {
+      "ru": "противооткатный упор",
+      "en": "wheel chock"
+    },
+    "simple_explanation": "Er verhindert, dass das Fahrzeug wegrollt.",
+    "category": "equipment",
+    "synonym": "Unterlegkeil"
+  }
+}

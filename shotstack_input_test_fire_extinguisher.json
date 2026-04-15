@@ -1,0 +1,108 @@
+{
+  "shotstack_input_id": "shotstack-fire-extinguisher-test-v2",
+  "trace_id": "g6-fire-extinguisher-temp-direct-v2",
+  "scenario_id": "question-fire-extinguisher-minimum-quantity-v1",
+  "manifest_id": "canva-manifest-adr-short-video-current",
+  "content_family": "QUESTION",
+  "format": "9:16",
+  "duration_target_sec": 15.1,
+  "render_family": "question_short_vertical",
+  "scene_order": [
+    "hook",
+    "question",
+    "answers",
+    "timer",
+    "answer",
+    "cta"
+  ],
+  "scene_role_map": {
+    "1": "hook",
+    "2": "question",
+    "3": "answers",
+    "4": "timer",
+    "5": "answer",
+    "6": "cta"
+  },
+  "timing_policy": "readability_first_quiz_short",
+  "reading_time_policy": "question_answers_answer_get_reader_buffer",
+  "transition_policy": "hard_cut",
+  "subtitle_policy": "none_for_first_visual_test",
+  "audio_policy": "none_for_first_visual_test",
+  "timeline": [
+    {
+      "scene_id": 1,
+      "role": "hook",
+      "asset_url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide1.png",
+      "start_sec": 0.0,
+      "end_sec": 2.0,
+      "transition": "cut",
+      "subtitle_ref": ""
+    },
+    {
+      "scene_id": 2,
+      "role": "question",
+      "asset_url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide2.png",
+      "start_sec": 2.0,
+      "end_sec": 5.6,
+      "transition": "cut",
+      "subtitle_ref": ""
+    },
+    {
+      "scene_id": 3,
+      "role": "answers",
+      "asset_url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide3.png",
+      "start_sec": 5.6,
+      "end_sec": 8.8,
+      "transition": "cut",
+      "subtitle_ref": ""
+    },
+    {
+      "scene_id": 4,
+      "role": "timer",
+      "asset_url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide4.png",
+      "start_sec": 8.8,
+      "end_sec": 10.3,
+      "transition": "cut",
+      "subtitle_ref": ""
+    },
+    {
+      "scene_id": 5,
+      "role": "answer",
+      "asset_url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide5.png",
+      "start_sec": 10.3,
+      "end_sec": 13.1,
+      "transition": "cut",
+      "subtitle_ref": ""
+    },
+    {
+      "scene_id": 6,
+      "role": "cta",
+      "asset_url": "https://www.adr-bot.de/shotstack-assets/adr-short-video/current/slide6.png",
+      "start_sec": 13.1,
+      "end_sec": 15.1,
+      "transition": "cut",
+      "subtitle_ref": ""
+    }
+  ],
+  "audio": {
+    "voiceover_url": "",
+    "music_url": "",
+    "voice_mode": "none"
+  },
+  "text_tracks": [
+    {
+      "track_id": "de-empty-first-visual-test",
+      "lang": "de",
+      "srt_ref": ""
+    }
+  ],
+  "publish_target": "youtube_shorts",
+  "adapter_hint": "youtube_short_adapter",
+  "source_prompt_ref": "/Users/mihailcarenc/Documents/New project/adr-control-center/g6-canva-fire-extinguisher-test-prompt.md",
+  "asset_report_ref": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/asset_report_test_fire_extinguisher.json",
+  "metadata_ref": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/metadata_test_fire_extinguisher.json",
+  "notes": [
+    "Render package built from real Canva-generated scene outputs.",
+    "This is a visual-only first Shotstack test package with no subtitles and no audio."
+  ]
+}
