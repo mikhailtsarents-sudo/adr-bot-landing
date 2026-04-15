@@ -1,0 +1,24 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "q-test-002",
+  "source_version": "question-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": ["equipment", "fire-extinguisher"],
+  "difficulty": "easy",
+  "payload": {
+    "question_text": "Welche Ausrüstung gehört bei vielen ADR-Beförderungen zur vorgeschriebenen Notfallausstattung?",
+    "answer_options": [
+      "Feuerlöscher",
+      "Nur ein Warndreieck",
+      "Nur Handschuhe",
+      "Keine zusätzliche Ausrüstung"
+    ],
+    "correct_answer": "Feuerlöscher",
+    "simple_explanation": "Feuerlöscher gehören bei vielen ADR-Transporten zur vorgeschriebenen Notfallausrüstung.",
+    "category": "emergency_equipment",
+    "keywords": ["Feuerlöscher", "Notfallausstattung"],
+    "trap_level": "low"
+  }
+}

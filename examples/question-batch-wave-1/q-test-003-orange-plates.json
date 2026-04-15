@@ -1,0 +1,24 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "q-test-003",
+  "source_version": "question-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": ["marking", "vehicle-signage"],
+  "difficulty": "easy",
+  "payload": {
+    "question_text": "Wozu dienen orangefarbene Tafeln an einem Gefahrgut-Fahrzeug?",
+    "answer_options": [
+      "Sie zeigen an, dass das Fahrzeug Gefahrgut befördert",
+      "Sie kennzeichnen nur die Fahrzeugfarbe",
+      "Sie dienen als Werbefläche",
+      "Sie ersetzen alle anderen Kennzeichnungen"
+    ],
+    "correct_answer": "Sie zeigen an, dass das Fahrzeug Gefahrgut befördert",
+    "simple_explanation": "Die orangefarbenen Tafeln sind eine zentrale ADR-Kennzeichnung für Fahrzeuge mit Gefahrgut.",
+    "category": "vehicle_marking",
+    "keywords": ["orangefarbene Tafeln", "Kennzeichnung"],
+    "trap_level": "low"
+  }
+}

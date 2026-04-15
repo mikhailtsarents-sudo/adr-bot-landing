@@ -81,6 +81,18 @@ function slugify(value) {
     .slice(0, 80);
 }
 
+function shortenQuestionForHook(value, limit = 72) {
+  const source = text(value);
+  if (!source || source.length <= limit) {
+    return source;
+  }
+
+  const slice = source.slice(0, limit + 1);
+  const lastBoundary = Math.max(slice.lastIndexOf(" "), slice.lastIndexOf("?"));
+  const shortened = (lastBoundary > 20 ? slice.slice(0, lastBoundary) : source.slice(0, limit)).trimEnd();
+  return shortened.endsWith("?") ? shortened : `${shortened}?`;
+}
+
 function runNodeScript(scriptPath, scriptArgs) {
   const result = spawnSync(process.execPath, [scriptPath, ...scriptArgs], {
     cwd: repoRoot,
@@ -124,8 +136,7 @@ function buildScenario(questionInput, classification) {
   const explanation = text(questionInput.payload?.simple_explanation);
   const sourceId = text(questionInput.source_id);
   const traceId = `${sourceId}-run-01`;
-  const shortenedHook =
-    questionText.length > 72 ? `${questionText.slice(0, 69).trimEnd()}?` : questionText;
+  const shortenedHook = shortenQuestionForHook(questionText);
 
   return {
     trace_id: traceId,

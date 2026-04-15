@@ -1,0 +1,24 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "q-test-004",
+  "source_version": "question-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": ["route", "tunnel"],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche zusätzliche Angabe kann für die Routenplanung bei Gefahrgutbeförderung wichtig sein?",
+    "answer_options": [
+      "Die Tunnelbeschränkungskategorie",
+      "Die Lieblingsroute des Fahrers",
+      "Die Farbe des Fahrzeugs",
+      "Die Uhrzeit der Pause"
+    ],
+    "correct_answer": "Die Tunnelbeschränkungskategorie",
+    "simple_explanation": "Die Tunnelbeschränkungskategorie hilft zu prüfen, ob ein Fahrzeug bestimmte Tunnel benutzen darf.",
+    "category": "route_restriction",
+    "keywords": ["Tunnelbeschränkung", "Routenplanung"],
+    "trap_level": "medium"
+  }
+}

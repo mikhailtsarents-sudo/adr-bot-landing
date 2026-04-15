@@ -1,0 +1,24 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "q-test-005",
+  "source_version": "question-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": ["driver-action", "parking-safety"],
+  "difficulty": "easy",
+  "payload": {
+    "question_text": "Was ist eine sinnvolle Sicherheitsmaßnahme, wenn ein Gefahrgut-Fahrzeug abgestellt wird?",
+    "answer_options": [
+      "Das Fahrzeug gegen Wegrollen sichern",
+      "Nur das Radio ausschalten",
+      "Die Türen offen lassen",
+      "Die Kennzeichnung entfernen"
+    ],
+    "correct_answer": "Das Fahrzeug gegen Wegrollen sichern",
+    "simple_explanation": "Beim Abstellen muss das Fahrzeug gesichert werden, damit es sich nicht unbeabsichtigt bewegt.",
+    "category": "parking_safety",
+    "keywords": ["Wegrollen", "Abstellen", "Sicherung"],
+    "trap_level": "low"
+  }
+}
