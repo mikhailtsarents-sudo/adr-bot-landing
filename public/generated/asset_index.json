@@ -22,5 +22,53 @@
     "asset_sha256": "4609d0f596a0dd50157ed04ec989d1ee38283ad80d1fc6e1319db20f4c70a581",
     "render_timestamp": "2026-04-15T19:07:19.168Z",
     "fallback_used": false
+  },
+  {
+    "video_id": "q-test-001-q-test-001-render-01-1776280956407",
+    "question_id": "q-test-001",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-001-q-test-001-render-01-1776280956407/bg.png",
+    "asset_sha256": "11d01d5644ad5f2351fcf1051a29d18de32f6e67c2c142224f3b72c79bbba9e6",
+    "render_timestamp": "2026-04-15T19:22:36.600Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-002-q-test-002-render-01-1776280956655",
+    "question_id": "q-test-002",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-002-q-test-002-render-01-1776280956655/bg.png",
+    "asset_sha256": "1ae3a409ec89ee02a2b50fb572f92925ded22c8c48b829832061b5f6f817566c",
+    "render_timestamp": "2026-04-15T19:22:36.799Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-003-q-test-003-render-01-1776280956853",
+    "question_id": "q-test-003",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-003-q-test-003-render-01-1776280956853/bg.png",
+    "asset_sha256": "b2a2e3f8837d44639c98d01b83c5f4416516fe240ea79fe713556993e438ec09",
+    "render_timestamp": "2026-04-15T19:22:36.998Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-004-q-test-004-render-01-1776280957052",
+    "question_id": "q-test-004",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-004-q-test-004-render-01-1776280957052/bg.png",
+    "asset_sha256": "2d406fae6a076a718b4b14854809b9505f9705f9b9532f94d50deaa04362089b",
+    "render_timestamp": "2026-04-15T19:22:37.194Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-005-q-test-005-render-01-1776280957253",
+    "question_id": "q-test-005",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-005-q-test-005-render-01-1776280957253/bg.png",
+    "asset_sha256": "48f7fdd2b00595ebb0203276a00c09e1aca0e543870466974baa21d6e1ca7212",
+    "render_timestamp": "2026-04-15T19:22:37.390Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-001-q-test-001-render-01-1776285635406",
+    "question_id": "q-test-001",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-001-q-test-001-render-01-1776285635406/bg.png",
+    "asset_sha256": "c7efd1cade254551b2b796af66298adebebe73cf6277571eaf6756cfdddb8208",
+    "render_timestamp": "2026-04-15T20:40:35.612Z",
+    "fallback_used": false
   }
 ]

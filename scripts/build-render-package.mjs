@@ -184,6 +184,14 @@ function normalizeSceneTextEntries(input) {
     .filter((entry) => entry.role && entry.text);
 }
 
+function isQuestionVisualFlow(input) {
+  return (
+    String(input.source_type || "").toUpperCase() === "QUESTION" ||
+    String(input.source_family || "").toUpperCase() === "QUESTION" ||
+    String(input.content_family || "").toLowerCase().includes("question")
+  );
+}
+
 function formatSrtTimestamp(totalSeconds) {
   const totalMs = Math.max(0, Math.round(Number(totalSeconds || 0) * 1000));
   const hours = Math.floor(totalMs / 3600000);
@@ -291,9 +299,53 @@ async function main() {
     "analytics_tag",
   ]);
 
-  const slides = normalizeSlides(manifest);
+  const isQuestionFlow = isQuestionVisualFlow(input);
+  let slides = normalizeSlides(manifest);
+  const generatedAssetUrl =
+    text(input.generated_visual?.asset_url) ||
+    text(input.generated_visual_asset_url) ||
+    text(input.asset_url) ||
+    "";
+
+  if (isQuestionFlow && !generatedAssetUrl) {
+    throw new Error("QUESTION visual pipeline broken: missing generated visual asset URL.");
+  }
+
+  if (isQuestionFlow && generatedAssetUrl) {
+    slides = slides.map((slide) => ({
+      ...slide,
+      url: generatedAssetUrl,
+    }));
+  }
+
+  const hasLegacyStaticAsset = slides.some((slide) => {
+    const url = String(slide.url || "");
+    return (
+      url.includes("/shotstack-assets/") ||
+      url.includes("/current/") ||
+      url.includes("slide1.png")
+    );
+  });
+
+  if (isQuestionFlow && hasLegacyStaticAsset) {
+    throw new Error(
+      "QUESTION visual pipeline broken: static legacy Shotstack asset detected in render payload.",
+    );
+  }
+
+  console.log("QUESTION_FLOW=", isQuestionFlow);
+  console.log("GENERATED_ASSET_URL=", generatedAssetUrl);
+  console.log(
+    "FINAL_SLIDE_URLS=",
+    slides.map((slide) => slide.url),
+  );
   const durationTargetSec = Number(input.duration_target_sec || input.duration_sec || 12);
   const sceneTextEntries = normalizeSceneTextEntries(input);
+  if (isQuestionFlow && sceneTextEntries.length === 0) {
+    console.warn(
+      "QUESTION visual pipeline warning: subtitles/scene_texts empty before render payload assembly.",
+    );
+  }
   const subtitlePolicy = text(input.subtitle_policy) || DEFAULT_SUBTITLE_POLICY;
   const subtitlesEnabled = subtitlePolicy !== "none_for_first_visual_test";
   const subtitleRef = subtitlesEnabled ? "subtitles.srt" : "";

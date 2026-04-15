@@ -332,6 +332,11 @@ async function main() {
     questionId: text(questionInput.source_id),
     shortform: scenario.shortform_contract,
   });
+  renderTask.generated_visual = {
+    asset_url: visualBundle.asset_url,
+  };
+  renderTask.generated_visual_asset_url = visualBundle.asset_url;
+  renderTask.asset_url = visualBundle.asset_url;
   await writeFile(packagePath, `${JSON.stringify(renderTask, null, 2)}\n`, "utf8");
 
   try {
