@@ -30,11 +30,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  verification: {
-    other: {
-      "msvalidate.01": "2028F869A48CF5B416545FE84E778B72",
-    },
-  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -111,6 +106,12 @@ export default function RootLayout({
       lang="de"
       className={`h-full antialiased ${plusJakarta.variable} ${barlowCondensed.variable}`}
     >
+      <head>
+        <meta
+          name="msvalidate.01"
+          content="2028F869A48CF5B416545FE84E778B72"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
       </body>
