@@ -70,5 +70,45 @@
     "asset_sha256": "c7efd1cade254551b2b796af66298adebebe73cf6277571eaf6756cfdddb8208",
     "render_timestamp": "2026-04-15T20:40:35.612Z",
     "fallback_used": false
+  },
+  {
+    "video_id": "q-test-001-q-test-001-render-01-1776289892054",
+    "question_id": "q-test-001",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-001-q-test-001-render-01-1776289892054/bg.png",
+    "asset_sha256": "fd1534454929eba2d6120acd9c4a5013049ea32632582a416850e07130aa584f",
+    "render_timestamp": "2026-04-15T21:51:32.307Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-002-q-test-002-render-01-1776289892365",
+    "question_id": "q-test-002",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-002-q-test-002-render-01-1776289892365/bg.png",
+    "asset_sha256": "1a03ab84801fe5781d7e2076b52e3ac2802166e5d11e28ec8fee41d4e4889d1c",
+    "render_timestamp": "2026-04-15T21:51:32.513Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-003-q-test-003-render-01-1776289892569",
+    "question_id": "q-test-003",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-003-q-test-003-render-01-1776289892569/bg.png",
+    "asset_sha256": "ffa0154810d910e7cecb2f0a429609f5d56fb328e15967876f4ea5cc2d333feb",
+    "render_timestamp": "2026-04-15T21:51:32.713Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-004-q-test-004-render-01-1776289892772",
+    "question_id": "q-test-004",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-004-q-test-004-render-01-1776289892772/bg.png",
+    "asset_sha256": "b4f5866ceffed68bcabd8c0fd50269751f208db329c1b2daf2f2ff9c6dda5f71",
+    "render_timestamp": "2026-04-15T21:51:32.913Z",
+    "fallback_used": false
+  },
+  {
+    "video_id": "q-test-005-q-test-005-render-01-1776289892969",
+    "question_id": "q-test-005",
+    "asset_path": "https://www.adr-bot.de/generated/q-test-005-q-test-005-render-01-1776289892969/bg.png",
+    "asset_sha256": "42298439bafdfeed4c6efd3bf8a327f0193bb610945fc9168e959a5be86710a1",
+    "render_timestamp": "2026-04-15T21:51:33.108Z",
+    "fallback_used": false
   }
 ]

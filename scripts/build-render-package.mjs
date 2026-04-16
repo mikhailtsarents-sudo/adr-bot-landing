@@ -230,38 +230,41 @@ function buildSubtitlesSrt(timeline, sceneTextEntries) {
 function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabled) {
   const talkingHeadUrl = text(input.talking_head_url);
   const durationTargetSec = Number(input.duration_target_sec || input.duration_sec || 12);
-  const captionClips = subtitlesEnabled ? buildSceneCaptionClips(timeline, sceneTextEntries) : [];
+  const captionClips = subtitlesEnabled
+    ? buildSceneCaptionClips(timeline, sceneTextEntries, text(input.template_variant) || "quiz_safe")
+    : [];
+  const backgroundTrack = {
+    clips: talkingHeadUrl
+      ? [
+          {
+            asset: {
+              type: "video",
+              src: talkingHeadUrl,
+            },
+            start: 0,
+            length: Number(durationTargetSec.toFixed(2)),
+            fit: "cover",
+            position: "center",
+          },
+        ]
+      : timeline.map((scene) => ({
+          asset: {
+            type: "image",
+            src: scene.asset_url,
+          },
+          start: scene.start_sec,
+          length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
+          fit: "contain",
+          position: "center",
+        })),
+  };
 
   return {
     timeline: {
       background: "#0b1020",
       tracks: [
-        {
-          clips: talkingHeadUrl
-            ? [
-                {
-                  asset: {
-                    type: "video",
-                    src: talkingHeadUrl,
-                  },
-                  start: 0,
-                  length: Number(durationTargetSec.toFixed(2)),
-                  fit: "cover",
-                  position: "center",
-                },
-              ]
-            : timeline.map((scene) => ({
-                asset: {
-                  type: "image",
-                  src: scene.asset_url,
-                },
-                start: scene.start_sec,
-                length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
-                fit: "contain",
-                position: "center",
-              })),
-        },
         ...(captionClips.length > 0 ? [{ clips: captionClips }] : []),
+        backgroundTrack,
       ],
     },
     output: {

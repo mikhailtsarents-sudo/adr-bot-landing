@@ -227,7 +227,7 @@ function buildScenario(questionInput, classification) {
   };
 }
 
-function buildRenderTask(questionInput, scenario, talkingHead) {
+function buildRenderTask(questionInput, scenario) {
   const shortenedTitle = text(scenario.hook_text);
   const correctAnswer = text(questionInput.payload?.correct_answer);
   const explanation = text(questionInput.payload?.simple_explanation);
@@ -280,10 +280,10 @@ function buildRenderTask(questionInput, scenario, talkingHead) {
     visibility: "public",
     duration_target_sec: 10,
     subtitle_policy: "burned_or_external_srt",
-    audio_policy: talkingHead.talkingHeadUrl ? "embedded_avatar_audio" : "none_for_first_visual_test",
-    voice_mode: talkingHead.talkingHeadUrl ? "heygen_avatar" : "none",
-    talking_head_url: talkingHead.talkingHeadUrl,
-    talking_head_asset_name: talkingHead.talkingHeadAssetName,
+    audio_policy: "none_for_first_visual_test",
+    voice_mode: "none",
+    talking_head_url: "",
+    talking_head_asset_name: "",
     source_title: `QUESTION source: ${shortenedTitle}`,
     source_url: "https://www.adr-bot.de/adr-pruefung-auf-deutsch",
     source_name: "Content Engine QUESTION render package runner",
@@ -311,8 +311,7 @@ async function main() {
 
   const classification = buildClassification(questionInput);
   const scenario = buildScenario(questionInput, classification);
-  const talkingHead = resolveTalkingHeadAsset(heygenManifest, args.baseUrl);
-  const renderTask = buildRenderTask(questionInput, scenario, talkingHead);
+  const renderTask = buildRenderTask(questionInput, scenario);
   const qaReport = buildQuestionQaReport({
     shortform: scenario.shortform_contract,
     templateVariant: renderTask.template_variant,

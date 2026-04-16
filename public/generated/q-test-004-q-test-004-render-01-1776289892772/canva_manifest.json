@@ -1,0 +1,68 @@
+{
+  "project": "adr-short-video",
+  "format": "9:16",
+  "slides_count": 6,
+  "mode": "generated-visual-mvp",
+  "source_type": "generated_visual",
+  "asset_family": "question_single_background_v1",
+  "render_family": "Question Card Short",
+  "batch_id": "q-test-004-q-test-004-render-01-1776289892772",
+  "batch_fingerprint": "99102ed0c49469ec007a8f6131703facc5b6d8bc0a90e6f551e26edcc382e8c8",
+  "updated_at": "2026-04-15T21:51:32.913Z",
+  "slides": [
+    {
+      "id": 1,
+      "name": "slide1",
+      "role": "hook",
+      "url": "https://www.adr-bot.de/generated/q-test-004-q-test-004-render-01-1776289892772/bg.png",
+      "sha256": "b4f5866ceffed68bcabd8c0fd50269751f208db329c1b2daf2f2ff9c6dda5f71",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": 2,
+      "name": "slide2",
+      "role": "question",
+      "url": "https://www.adr-bot.de/generated/q-test-004-q-test-004-render-01-1776289892772/bg.png",
+      "sha256": "b4f5866ceffed68bcabd8c0fd50269751f208db329c1b2daf2f2ff9c6dda5f71",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": 3,
+      "name": "slide3",
+      "role": "answers",
+      "url": "https://www.adr-bot.de/generated/q-test-004-q-test-004-render-01-1776289892772/bg.png",
+      "sha256": "b4f5866ceffed68bcabd8c0fd50269751f208db329c1b2daf2f2ff9c6dda5f71",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": 4,
+      "name": "slide4",
+      "role": "timer",
+      "url": "https://www.adr-bot.de/generated/q-test-004-q-test-004-render-01-1776289892772/bg.png",
+      "sha256": "b4f5866ceffed68bcabd8c0fd50269751f208db329c1b2daf2f2ff9c6dda5f71",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": 5,
+      "name": "slide5",
+      "role": "answer",
+      "url": "https://www.adr-bot.de/generated/q-test-004-q-test-004-render-01-1776289892772/bg.png",
+      "sha256": "b4f5866ceffed68bcabd8c0fd50269751f208db329c1b2daf2f2ff9c6dda5f71",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "id": 6,
+      "name": "slide6",
+      "role": "cta",
+      "url": "https://www.adr-bot.de/generated/q-test-004-q-test-004-render-01-1776289892772/bg.png",
+      "sha256": "b4f5866ceffed68bcabd8c0fd50269751f208db329c1b2daf2f2ff9c6dda5f71",
+      "width": 1080,
+      "height": 1920
+    }
+  ]
+}
