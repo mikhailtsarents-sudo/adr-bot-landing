@@ -9,7 +9,7 @@ export type Translation = {
   nav: { tagline: string; openInTelegram: string };
   hero: {
     eyebrow: string; title: string; description: string;
-    ctaPrimary: string; ctaSecondary: string; note: string;
+    ctaPrimary: string; ctaSecondary: string; note: string; offer?: string;
   };
   problems: {
     eyebrow: string; title: string; description: string;
@@ -50,8 +50,9 @@ export const translations: Record<LangCode, Translation> = {
       eyebrow: "ADR-Prüfungsvorbereitung per Telegram",
       title: "Bereite dich auf die ADR-Prüfung auf Deutsch vor – mit mehr Klarheit",
       description: "ADR Bot hilft Fahrern und Logistikfachleuten dabei, Fachbegriffe zu verstehen, echte Prüfungsformulierungen zu üben und sich Schritt für Schritt direkt in Telegram vorzubereiten.",
-      ctaPrimary: "In Telegram starten",
+      ctaPrimary: "Jetzt in Telegram starten",
       ctaSecondary: "So funktioniert es",
+      offer: "Kostenlos starten: Vokabeltrainer & 10 Fragen gratis. Vollzugriff ab 15 €/Monat.",
       note: "Keine Registrierung. Keine neue Plattform. Direkt in Telegram starten.",
     },
     problems: {
@@ -135,8 +136,9 @@ export const translations: Record<LangCode, Translation> = {
       eyebrow: "Telegram-based ADR preparation",
       title: "Prepare for the ADR exam in German with less confusion",
       description: "ADR Bot helps drivers and logistics professionals break down terminology, practice real exam wording, and prepare step by step — directly inside Telegram.",
-      ctaPrimary: "Start in Telegram",
+      ctaPrimary: "Start in Telegram now",
       ctaSecondary: "How it works",
+      offer: "Start free: vocabulary trainer and 10 questions included. Full access from €15/month.",
       note: "No sign-up. No new platform. Start directly in Telegram.",
     },
     problems: {
