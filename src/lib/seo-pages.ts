@@ -1194,6 +1194,589 @@ export const adrPruefungsfragenAppDeutsch: SeoPageConfig = {
   ],
 };
 
+export const adrFragenAufDeutsch: SeoPageConfig = {
+  slug: "adr-fragen-auf-deutsch",
+  path: "/adr-fragen-auf-deutsch",
+  pageTitle: "ADR Fragen auf Deutsch",
+  metaTitle: "ADR Fragen auf Deutsch | Fragen verstehen und ueben",
+  metaDescription:
+    "Uebungsnahe ADR Fragen auf Deutsch mit kurzem Sample, typischen Formulierungen und klarem Weiterweg in den Telegram-Bot.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Fragen auf Deutsch",
+  heroLead:
+    "Diese Seite sammelt typische ADR Fragen auf Deutsch in kleiner Vorschauform, damit du Formulierungen schneller verstehst und gezielt weiterlernst.",
+  heroSupport:
+    "Sie ist als oeffentlicher Einstieg gedacht. Fuer mehr Fragen und Wiederholung geht es in den Telegram-Bot.",
+  intentTitle: "Warum diese Suche wichtig ist",
+  intentParagraphs: [
+    "Viele Suchende kennen das Fachthema schon grob, scheitern aber an der Formulierung der Fragen. Genau diese Suchintention faengt die Seite ab.",
+    "Google soll hier sehen, dass ADR Bot nicht nur allgemeine ADR-Inhalte bietet, sondern konkrete Hilfe fuer deutschsprachige Fragen und deren Verstaendnis.",
+  ],
+  sampleTitle: "Kleines Fragen-Sample",
+  sampleLead:
+    "Ein paar typische Frageformen reichen, um Relevanz zu zeigen und die tieferen Uebungen im Bot zu lassen.",
+  sampleQuestions: [
+    {
+      question: "Welche Unterlage muss der Fahrer grundsaetzlich mitfuehren?",
+      answer:
+        "Oft geht es in solchen Fragen um Beforderungspapiere und andere vorgeschriebene Begleitunterlagen.",
+    },
+    {
+      question: "Warum wirken ADR Fragen auf Deutsch so schwer?",
+      answer:
+        "Nicht nur wegen des Stoffs, sondern weil die Sprache knapp, technisch und pruefungsnah formuliert ist.",
+    },
+    {
+      question: "Was bringt regelmaessiges Fragen-Training?",
+      answer:
+        "Du erkennst typische Satzmuster schneller und antwortest sicherer unter Pruefungsdruck.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Antwortmoeglichkeit", note: "Die Auswahloption in typischen Uebungsfragen." },
+    { term: "Beforderungspapier", note: "Ein haeufig abgefragter Begriff in ADR-Fragen." },
+    { term: "Kennzeichnung", note: "Klassischer Themenblock in Theoriefragen." },
+    { term: "Pflichtangabe", note: "Hinweis auf Informationen, die nicht fehlen duerfen." },
+  ],
+  sampleCalloutTitle: "Wichtig fuer Suchende",
+  sampleCalloutText:
+    "Die Seite beantwortet nicht alles. Sie zeigt nur genug, damit der Bot als naechster Schritt logisch wird.",
+  whyTelegramTitle: "Warum der Bot danach sinnvoll ist",
+  whyTelegramParagraphs: [
+    "Der Bot liefert mehr Fragen, mehr Wiederholung und mehr Tempo beim Lernen als eine statische Seite.",
+    "So bleibt diese Seite stark fuer Google und Orientierung, waehrend die eigentliche Pruefungspraxis im Bot passiert.",
+  ],
+  faqs: [
+    {
+      question: "Sind das echte ADR Fragen?",
+      answer:
+        "Es sind lernorientierte Beispiel-Fragen und Formulierungen, nicht die offizielle Pruefung selbst.",
+    },
+    {
+      question: "Wo kann ich mehr ueben?",
+      answer:
+        "Im Telegram-Bot geht es mit mehr Fragen und einem vollstaendigeren Trainingsfluss weiter.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/", label: "Startseite", note: "Zum Haupt-Einstieg zurueck" },
+    {
+      href: "/adr-fragen-und-antworten",
+      label: "ADR Fragen und Antworten",
+      note: "Breiterer Fragen-Einstieg mit kurzen Erklaerungen",
+    },
+    {
+      href: "/adr-pruefungsfragen-app-deutsch",
+      label: "ADR Pruefungsfragen App Deutsch",
+      note: "App-intent fuer konkrete Lernhilfe",
+    },
+  ],
+  ctaTitle: "Mehr ADR Fragen direkt im Bot",
+  ctaLead:
+    "Wenn du nach ADR Fragen auf Deutsch suchst, bekommst du im Bot mehr Wiederholung und einen klareren Lernpfad.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer:
+    "Diese Seite ist eine Lernvorschau. Sie ersetzt keine offizielle Schulung und keine behördliche Vorbereitung.",
+  telegramSource: "seo_adr_fragen_auf_deutsch",
+  keywords: [
+    "ADR Fragen auf Deutsch",
+    "ADR Fragen Deutsch",
+    "ADR Fragebogen Deutsch",
+    "ADR Fragen lernen",
+  ],
+};
+
+export const adrFachbegriffeDeutsch: SeoPageConfig = {
+  slug: "adr-fachbegriffe-deutsch",
+  path: "/adr-fachbegriffe-deutsch",
+  pageTitle: "ADR Fachbegriffe Deutsch",
+  metaTitle: "ADR Fachbegriffe Deutsch | Woerter fuer die Pruefung",
+  metaDescription:
+    "Wichtige ADR Fachbegriffe auf Deutsch mit kurzen Erklaerungen fuer Fahrer, Lernende und Nicht-Muttersprachler.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Fachbegriffe Deutsch",
+  heroLead:
+    "Wer ADR lernen will, braucht nicht nur Antworten, sondern auch die richtigen Fachbegriffe. Diese Vorschauseite erklaert die wichtigsten Woerter auf Deutsch.",
+  heroSupport:
+    "Sie ist bewusst kompakt, damit Google den Intent versteht und der Bot die eigentliche Vertiefung uebernimmt.",
+  intentTitle: "Warum Fachbegriffe ein eigener SEO-Cluster sind",
+  intentParagraphs: [
+    "Viele Nutzer suchen nicht nach einem Kursnamen, sondern nach einzelnen Woertern, die sie in Fragen oder Schulungsunterlagen nicht verstehen.",
+    "Mit einer separaten Seite fuer Fachbegriffe bauen wir thematische Tiefe auf und holen Nutzer frueh in ihrer Recherche ab.",
+  ],
+  sampleTitle: "Fachbegriffe im Sample",
+  sampleLead:
+    "Ein kleiner Auszug zeigt das Muster und laesst den groesseren Wortschatz bewusst im Bot.",
+  sampleTerms: [
+    { term: "Gefahrzettel", note: "Sichtbare Kennzeichnung fuer eine Gefahrgut-Klasse." },
+    { term: "Verpackungsgruppe", note: "Hilft bei der Einordnung des Gefahrenpotenzials." },
+    { term: "Befuellung", note: "Wichtiger Begriff in Tank- und Handlingsituationen." },
+    { term: "Freistellung", note: "Fall mit reduziertem Regelumfang innerhalb der Vorschriften." },
+    { term: "Tunnelschild", note: "Relevanter Hinweis fuer die Streckenwahl." },
+  ],
+  sampleCalloutTitle: "Lernen ueber Sprache",
+  sampleCalloutText:
+    "Gerade fuer Berufskraftfahrer mit Deutsch als Zweitsprache ist Wortschatz oft der eigentliche Hebel.",
+  whyTelegramTitle: "Warum Telegram dann mehr bringt",
+  whyTelegramParagraphs: [
+    "Im Bot koennen Fachbegriffe wiederholt, in Fragen eingebettet und dadurch schneller verankert werden.",
+    "Das ist fuer SEO und Conversion gleichzeitig stark: Google bekommt Relevanz, Nutzer bekommen einen klaren Weiterweg.",
+  ],
+  faqs: [
+    {
+      question: "Ist das ein komplettes ADR Lexikon?",
+      answer:
+        "Nein. Es ist eine fokussierte Vorschau mit den wichtigsten Begriffen und klarer Weiterleitung in den Bot.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
+    {
+      href: "/adr-begriffe",
+      label: "ADR Begriffe",
+      note: "Breitere Vorschauseite fuer ADR-Wortschatz",
+    },
+    {
+      href: "/technisches-deutsch-adr",
+      label: "Technisches Deutsch ADR",
+      note: "Sprache und Verstaendnis im Pruefungskontext",
+    },
+  ],
+  ctaTitle: "Mehr Fachbegriffe im Telegram-Bot",
+  ctaLead:
+    "Wenn dir die wichtigsten Woerter schon helfen, bekommst du im Bot mehr Begriffe und mehr Wiederholung.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer:
+    "Diese Seite dient der Orientierung und ersetzt kein vollstaendiges Fachwoertertraining.",
+  telegramSource: "seo_adr_fachbegriffe_deutsch",
+  keywords: [
+    "ADR Fachbegriffe Deutsch",
+    "ADR Fachwoerter",
+    "Gefahrgut Fachbegriffe Deutsch",
+    "ADR Terminologie Deutsch",
+  ],
+};
+
+export const adrDeutschFuerLkwFahrer: SeoPageConfig = {
+  slug: "adr-deutsch-fuer-lkw-fahrer",
+  path: "/adr-deutsch-fuer-lkw-fahrer",
+  pageTitle: "ADR Deutsch fuer LKW-Fahrer",
+  metaTitle: "ADR Deutsch fuer LKW-Fahrer | Sprache fuer Theorie und Praxis",
+  metaDescription:
+    "ADR Deutsch fuer LKW-Fahrer: typische Begriffe, Frageformen und sprachliche Hilfe fuer die Vorbereitung auf die ADR-Pruefung.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Deutsch fuer LKW-Fahrer",
+  heroLead:
+    "Diese Seite richtet sich an LKW-Fahrer, die ADR nicht nur fachlich, sondern auch sprachlich besser verstehen wollen.",
+  heroSupport:
+    "Sie kombiniert Sprachhilfe, Vorschaufragen und den klaren Uebergang in den Telegram-Bot.",
+  intentTitle: "Weshalb diese Seite relevant ist",
+  intentParagraphs: [
+    "Viele Fahrer suchen keine allgemeine Sprachseite, sondern genau die Mischung aus Berufsdeutsch, Fachbegriffen und pruefungsnahen ADR-Formulierungen.",
+    "Diese Long-Tail-Seite holt genau diese Suche ab und positioniert ADR Bot als praktische Lernhilfe fuer Fahrer.",
+  ],
+  sampleTitle: "Typische Fahrer-Perspektive",
+  sampleLead:
+    "Hier geht es nicht um akademische Theorie, sondern um Sprache, die in Schulung, Unterlagen und Fragen vorkommt.",
+  sampleQuestions: [
+    {
+      question: "Welche Woerter sind fuer Fahrer am wichtigsten?",
+      answer:
+        "Haefig wiederkehren Begriffe wie Kennzeichnung, Papiere, Ladung, Freistellung und Gefahrzettel.",
+    },
+    {
+      question: "Warum hilft Sprachtraining beim Bestehen?",
+      answer:
+        "Weil viele Fehler nicht aus fehlendem Wissen, sondern aus Missverstaendnissen in der Frage entstehen.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Ladungssicherung", note: "Praktischer Kernbegriff fuer den Fahreralltag." },
+    { term: "Pflichtdokument", note: "Unterlage, die im Transport mitzufuehren ist." },
+    { term: "Fahrzeugkennzeichnung", note: "Sichtbare ADR-relevante Markierung." },
+    { term: "Unterweisung", note: "Wichtiger Lern- und Schulungsbegriff." },
+  ],
+  whyTelegramTitle: "Warum der Bot hier besonders stark ist",
+  whyTelegramParagraphs: [
+    "Der Bot passt gut zu Fahrern, weil kurze Lernschritte und Wiederholung besser in den Alltag passen als lange Theorieblöcke.",
+    "So bleibt die Seite der Google-Einstieg, waehrend der Bot die eigentliche Trainingsroutine liefert.",
+  ],
+  relatedLinks: [
+    { href: "/", label: "Startseite", note: "Zurueck zum Haupt-Einstieg" },
+    {
+      href: "/adr-vorbereitung-fuer-lkw-fahrer",
+      label: "ADR Vorbereitung fuer LKW-Fahrer",
+      note: "Der direkt benachbarte Vorbereitungs-Intent",
+    },
+    {
+      href: "/technisches-deutsch-adr",
+      label: "Technisches Deutsch ADR",
+      note: "Sprachfokus fuer technische Formulierungen",
+    },
+  ],
+  ctaTitle: "ADR Deutsch direkt im Bot ueben",
+  ctaLead:
+    "Wenn du als Fahrer schnell und praxisnah lernen willst, geht es im Bot mit dem eigentlichen Training weiter.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer:
+    "Die Seite bietet nur einen oeffentlichen Einstieg und ersetzt keine vollstaendige Ausbildung.",
+  telegramSource: "seo_adr_deutsch_fuer_lkw_fahrer",
+  keywords: [
+    "ADR Deutsch fuer LKW Fahrer",
+    "ADR Deutsch Fahrer",
+    "Gefahrgut Deutsch fuer Fahrer",
+    "ADR Sprache fuer LKW Fahrer",
+  ],
+};
+
+export const adrPruefungDeutschLernen: SeoPageConfig = {
+  slug: "adr-pruefung-deutsch-lernen",
+  path: "/adr-pruefung-deutsch-lernen",
+  pageTitle: "ADR Pruefung Deutsch lernen",
+  metaTitle: "ADR Pruefung Deutsch lernen | Fragen, Begriffe, Vorbereitung",
+  metaDescription:
+    "ADR Pruefung auf Deutsch lernen mit kleinem Fragen-Sample, wichtigen Begriffen und klarem Einstieg in den Telegram-Bot.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Pruefung Deutsch lernen",
+  heroLead:
+    "Diese Seite ist fuer Menschen gedacht, die ADR auf Deutsch lernen wollen und einen klaren, einfachen Einstieg suchen.",
+  heroSupport:
+    "Sie verbindet Suchintention, Sprachhilfe und einen direkten Uebergang in den Telegram-Bot.",
+  intentTitle: "Was Google hier verstehen soll",
+  intentParagraphs: [
+    "Nicht jeder sucht nach Kursnamen. Viele Nutzer suchen ganz direkt nach der Aufgabe: ADR Pruefung auf Deutsch lernen.",
+    "Genau deshalb ist diese Seite stark: sie spiegelt den Suchsatz fast eins zu eins und gibt Google eine sehr klare Relevanz.",
+  ],
+  sampleTitle: "Lernen in kleinen Schritten",
+  sampleLead:
+    "Eine kurze Vorschau reicht fuer Verstaendnis und erzeugt den naechsten Schritt in Richtung Bot.",
+  sampleQuestions: [
+    {
+      question: "Was ist der beste Einstieg ins Lernen?",
+      answer:
+        "Mit den wichtigsten Begriffen, einfachen Fragen und regelmaessiger Wiederholung.",
+    },
+    {
+      question: "Warum auf Deutsch ueben?",
+      answer:
+        "Weil die Pruefung selbst ueber Sprache und Fachverstaendnis laeuft.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Uebungsfrage", note: "Kleine wiederholbare Frage fuer den Lernfluss." },
+    { term: "Fachsprache", note: "Die formelle Sprache der ADR-Unterlagen und Fragen." },
+    { term: "Pruefungsvorbereitung", note: "Das gezielte Lernen vor Theorie und Test." },
+    { term: "Wiederholung", note: "Entscheidend fuer das Behalten der Formulierungen." },
+  ],
+  whyTelegramTitle: "Warum danach Telegram",
+  whyTelegramParagraphs: [
+    "Im Bot geht Lernen in kleinen Einheiten weiter, was fuer Sprach- und Frage-Training besonders gut funktioniert.",
+    "Die oeffentliche Seite zeigt nur die Richtung. Der Bot uebernimmt die eigentliche Lernroutine.",
+  ],
+  relatedLinks: [
+    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
+    {
+      href: "/adr-pruefung-auf-deutsch",
+      label: "ADR Pruefung auf Deutsch",
+      note: "Allgemeinerer Einstieg zum gleichen Themenfeld",
+    },
+    {
+      href: "/adr-fragen-auf-deutsch",
+      label: "ADR Fragen auf Deutsch",
+      note: "Fragenfokus mit typischen Formulierungen",
+    },
+  ],
+  ctaTitle: "Jetzt mit ADR auf Deutsch starten",
+  ctaLead:
+    "Wenn du nicht nur lesen, sondern wirklich lernen willst, fuehrt der naechste Schritt direkt in den Bot.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer:
+    "Diese Seite ist ein SEO- und Lern-Einstieg, nicht die komplette Ausbildung.",
+  telegramSource: "seo_adr_pruefung_deutsch_lernen",
+  keywords: [
+    "ADR Pruefung Deutsch lernen",
+    "ADR auf Deutsch lernen",
+    "ADR Deutsch lernen",
+    "ADR Pruefung lernen",
+  ],
+};
+
+export const gefahrgutPruefungAufDeutsch: SeoPageConfig = {
+  slug: "gefahrgut-pruefung-auf-deutsch",
+  path: "/gefahrgut-pruefung-auf-deutsch",
+  pageTitle: "Gefahrgut Pruefung auf Deutsch",
+  metaTitle: "Gefahrgut Pruefung auf Deutsch | Einstieg fuer ADR-Lernende",
+  metaDescription:
+    "Gefahrgut Pruefung auf Deutsch verstehen: typische Begriffe, Lernhinweise und der schnelle Weiterweg in den ADR Telegram-Bot.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "Gefahrgut Pruefung auf Deutsch",
+  heroLead:
+    "Wer eher nach Gefahrgut als nach ADR sucht, landet oft spaeter trotzdem bei derselben Vorbereitung. Diese Seite schliesst genau diese Luecke.",
+  heroSupport:
+    "So holen wir Suchende ab, die das Themenfeld kennen, aber den offiziellen ADR-Begriff noch nicht aktiv nutzen.",
+  intentTitle: "Warum Gefahrgut als Suchwort wichtig ist",
+  intentParagraphs: [
+    "Im Alltag suchen viele Nutzer zuerst nach Gefahrgut-Pruefung oder Gefahrgut auf Deutsch, obwohl inhaltlich ADR gemeint ist.",
+    "Diese Seite erweitert deshalb unsere Reichweite in die gleiche Nische, aber ueber alltagsnaehere Suchbegriffe.",
+  ],
+  sampleTitle: "Gefahrgut-Sample",
+  sampleLead:
+    "Kleine Beispielinhalte machen den Uebergang von allgemeinem Gefahrgut-Intent zu konkreter ADR-Vorbereitung leicht.",
+  sampleTerms: [
+    { term: "Gefahrgut", note: "Alltagsnahes Einstiegswort fuer den ADR-Kontext." },
+    { term: "Transportregel", note: "Regel, die beim Befordern zu beachten ist." },
+    { term: "Kennzeichen", note: "Sichtbarer Hinweis auf die Art der Gefahr." },
+    { term: "Sicherheitsabstand", note: "Praxisnaher Begriff fuer sicheres Verhalten." },
+  ],
+  whyTelegramTitle: "Warum der Bot danach Sinn ergibt",
+  whyTelegramParagraphs: [
+    "Im Bot wird aus allgemeinem Gefahrgut-Interesse ein konkreter ADR-Lernpfad mit Fragen und Wiederholung.",
+    "Die Seite selbst bleibt klein und sauber, damit sie schnell indexiert werden kann.",
+  ],
+  relatedLinks: [
+    { href: "/", label: "Startseite", note: "Zurueck zum Haupteinstieg" },
+    {
+      href: "/gefahrgut-deutsch-lernen",
+      label: "Gefahrgut Deutsch lernen",
+      note: "Verwandter Sprach- und Lernfokus",
+    },
+    {
+      href: "/adr-pruefung-auf-deutsch",
+      label: "ADR Pruefung auf Deutsch",
+      note: "Der direktere ADR-Einstieg",
+    },
+  ],
+  ctaTitle: "Gefahrgut-Verstaendnis in ADR-Training umwandeln",
+  ctaLead:
+    "Wenn du ueber Gefahrgut gesucht hast, kannst du im Bot jetzt mit echter ADR-Vorbereitung weitermachen.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer:
+    "Die Seite ist ein Einstieg in den Themenbereich und ersetzt kein vollstaendiges Training.",
+  telegramSource: "seo_gefahrgut_pruefung_auf_deutsch",
+  keywords: [
+    "Gefahrgut Pruefung auf Deutsch",
+    "Gefahrgut Deutsch Pruefung",
+    "Gefahrgut lernen Deutsch",
+    "ADR Gefahrgut Pruefung",
+  ],
+};
+
+export const adrAppFuerAuslaender: SeoPageConfig = {
+  slug: "adr-app-fuer-auslaender",
+  path: "/adr-app-fuer-auslaender",
+  pageTitle: "ADR App fuer Auslaender",
+  metaTitle: "ADR App fuer Auslaender | Deutsch lernen und Fragen verstehen",
+  metaDescription:
+    "ADR App fuer Auslaender: einfache Lernhilfe auf Deutsch mit Fragen, Begriffen und Telegram-Bot als naechstem Schritt.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR App fuer Auslaender",
+  heroLead:
+    "Diese Seite richtet sich an Menschen, die die ADR-Pruefung in Deutschland schaffen wollen, aber mit der deutschen Fachsprache kaempfen.",
+  heroSupport:
+    "Sie verbindet Suchintention, Sprachhilfe und einen klaren Einstieg in den Telegram-Bot.",
+  intentTitle: "Worum es bei dieser Suche wirklich geht",
+  intentParagraphs: [
+    "Hinter dieser Suchanfrage steckt meistens nicht Technik, sondern Sprachbarriere: Fragen verstehen, Fachwoerter merken, sicher antworten.",
+    "Genau deshalb ist diese Seite wichtig. Sie macht ADR Bot fuer Nicht-Muttersprachler direkt auffindbar und verstaendlich.",
+  ],
+  sampleTitle: "Sprachhilfe im kleinen Format",
+  sampleLead:
+    "Ein kleines Sample reicht, damit Suchende sehen: Das ist nicht nur ADR, sondern ADR auf verstaendlichem Deutsch.",
+  sampleQuestions: [
+    {
+      question: "Ist das fuer Menschen mit einfachem Deutsch geeignet?",
+      answer:
+        "Ja. Der Fokus liegt auf Verstaendnis, Wiederholung und klaren Formulierungen statt komplizierter Theorie.",
+    },
+    {
+      question: "Warum ist eine App oder ein Bot hilfreich?",
+      answer:
+        "Weil kurze Einheiten und Wiederholung beim Lernen in einer Zweitsprache besonders gut funktionieren.",
+    },
+  ],
+  sampleTerms: [
+    { term: "einfach erklaert", note: "Der Kern der Suchintention hinter dieser Seite." },
+    { term: "Fachsprache", note: "Das eigentliche Hindernis fuer viele Lernende." },
+    { term: "Wiederholung", note: "Hilft beim Verankern schwieriger Begriffe." },
+    { term: "Pruefungsfrage", note: "Ziel der Vorbereitung in der Alltagssprache." },
+  ],
+  whyTelegramTitle: "Warum der Bot der richtige Weiterweg ist",
+  whyTelegramParagraphs: [
+    "Der Bot eignet sich gut fuer Lernende mit Sprachbarriere, weil er kurze, wiederholbare Einheiten statt langer Textbloecke bietet.",
+    "So bauen wir einen klaren Uebergang von der Google-Suche in die eigentliche Lernroutine.",
+  ],
+  relatedLinks: [
+    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
+    {
+      href: "/adr-pruefung-fuer-nicht-muttersprachler",
+      label: "ADR Pruefung fuer Nicht-Muttersprachler",
+      note: "Direkt verwandter Suchintent",
+    },
+    {
+      href: "/adr-pruefungsfragen-app-deutsch",
+      label: "ADR Pruefungsfragen App Deutsch",
+      note: "App-Fokus fuer Fragen auf Deutsch",
+    },
+  ],
+  ctaTitle: "Einfacher mit ADR auf Deutsch starten",
+  ctaLead:
+    "Wenn du nach einer ADR App fuer Auslaender suchst, ist der Telegram-Bot der naechste logische Schritt.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer:
+    "Die Seite ist eine Lernhilfe und keine offizielle App oder behördliche Schulung.",
+  telegramSource: "seo_adr_app_fuer_auslaender",
+  keywords: [
+    "ADR App fuer Auslaender",
+    "ADR App fuer Nicht Muttersprachler",
+    "ADR Deutsch App Auslaender",
+    "ADR Lernen fuer Auslaender",
+  ],
+};
+
+export const adrTelegramBotDeutsch: SeoPageConfig = {
+  slug: "adr-telegram-bot-deutsch",
+  path: "/adr-telegram-bot-deutsch",
+  pageTitle: "ADR Telegram Bot Deutsch",
+  metaTitle: "ADR Telegram Bot Deutsch | Fragen und Begriffe im Chat lernen",
+  metaDescription:
+    "ADR Telegram Bot auf Deutsch: Fragen, Begriffe und Wiederholung im Chat fuer Fahrer und Lernende.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Telegram Bot Deutsch",
+  heroLead:
+    "Wer direkt nach einem ADR Telegram Bot auf Deutsch sucht, will meistens eine einfache, schnelle Lernhilfe ohne grosse Plattform-Huerden.",
+  heroSupport:
+    "Diese Seite verbindet genau diesen Intent mit einer klaren, indexierbaren Einstiegsflaeche.",
+  intentTitle: "Warum dieser Suchbegriff wertvoll ist",
+  intentParagraphs: [
+    "Das ist ein sehr konkreter Suchintent mit hoher Naehe zur Conversion, weil die Loesung bereits im Suchsatz mitgedacht wird.",
+    "Genau deshalb sollte Google fuer diesen Begriff nicht nur die Startseite, sondern eine eigene, passend benannte Zielseite sehen.",
+  ],
+  sampleTitle: "So passt der Bot zum Suchintent",
+  sampleLead:
+    "Die Seite erklaert kurz den Nutzen des Bots und laesst das eigentliche Training bewusst im Telegram-Flow.",
+  sampleQuestions: [
+    {
+      question: "Warum Telegram statt klassischer App?",
+      answer:
+        "Telegram ist niedrigschwellig, schnell erreichbar und gut fuer kurze Lernschritte geeignet.",
+    },
+    {
+      question: "Was lernt man im Bot?",
+      answer:
+        "Vor allem Fragen, Begriffe und Wiederholungen rund um ADR auf Deutsch.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Chat-Lernen", note: "Kurze Lernimpulse im Messenger statt langer Plattformwege." },
+    { term: "Drill", note: "Wiederholung zur Festigung von Fragen und Begriffen." },
+    { term: "Lernhilfe", note: "Der Suchintent hinter der Telegram-Lösung." },
+    { term: "Einstieg", note: "Die Seite macht den ersten Schritt klar und leicht." },
+  ],
+  whyTelegramTitle: "Warum Telegram hier der Haupt-CTA bleibt",
+  whyTelegramParagraphs: [
+    "Suchende nach einem Telegram Bot sollten ohne Umweg direkt in denselben Kanal wechseln koennen.",
+    "Genau deshalb ist diese Seite nicht nur fuer SEO, sondern auch fuer Conversion sehr stark.",
+  ],
+  relatedLinks: [
+    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
+    {
+      href: "/adr-pruefungsfragen-app-deutsch",
+      label: "ADR Pruefungsfragen App Deutsch",
+      note: "App-intent mit aehnlicher Suchlogik",
+    },
+    {
+      href: "/adr-fragen-auf-deutsch",
+      label: "ADR Fragen auf Deutsch",
+      note: "Fragenfokus fuer deutschsprachige Lernende",
+    },
+  ],
+  ctaTitle: "Direkt in den ADR Telegram Bot wechseln",
+  ctaLead:
+    "Wenn du genau danach gesucht hast, fuehrt der naechste Schritt ohne Umweg direkt in Telegram.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer:
+    "Diese Seite dient als oeffentlicher SEO-Einstieg fuer den Bot und ersetzt keine offizielle Schulung.",
+  telegramSource: "seo_adr_telegram_bot_deutsch",
+  keywords: [
+    "ADR Telegram Bot Deutsch",
+    "ADR Bot Telegram",
+    "Telegram Bot ADR Deutsch",
+    "ADR lernen Telegram",
+  ],
+};
+
+export const adrPruefungsfragenLernen: SeoPageConfig = {
+  slug: "adr-pruefungsfragen-lernen",
+  path: "/adr-pruefungsfragen-lernen",
+  pageTitle: "ADR Pruefungsfragen lernen",
+  metaTitle: "ADR Pruefungsfragen lernen | Uebung und Wiederholung",
+  metaDescription:
+    "ADR Pruefungsfragen lernen mit kleinem oeffentlichen Sample und klarem Einstieg in den Telegram-Bot fuer mehr Uebung.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Pruefungsfragen lernen",
+  heroLead:
+    "Diese Seite spricht Nutzer an, die nicht nur lesen, sondern gezielt Pruefungsfragen lernen und wiederholen wollen.",
+  heroSupport:
+    "Genau dieser Intent liegt nah an echter Nutzung, deshalb lohnt sich eine eigene Zielseite.",
+  intentTitle: "Warum diese Seite auf Conversion zielt",
+  intentParagraphs: [
+    "Hier steckt ein sehr handlungsnaher Suchintent drin: nicht nur Informationen, sondern aktives Fragenlernen.",
+    "Diese Seite soll genau das versprechen, was der Bot spaeter einloest: Wiederholung, Uebung und ein klarer Lernfluss.",
+  ],
+  sampleTitle: "Lern-Sample",
+  sampleLead:
+    "Ein kleiner Ausschnitt zeigt den Nutzen und spart den eigentlichen Uebungsumfang fuer den Bot auf.",
+  sampleQuestions: [
+    {
+      question: "Wie lernt man Pruefungsfragen effizienter?",
+      answer:
+        "Durch kurze Durchlaeufe, Wiederholung und Fokus auf typische Satzmuster.",
+    },
+    {
+      question: "Warum reichen einfache Listen oft nicht aus?",
+      answer:
+        "Weil erst das aktive Wiederholen und Abfragen das Gelernte stabil macht.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Wiederholung", note: "Der Kern wirksamer Vorbereitung." },
+    { term: "Satzmuster", note: "Wichtige Struktur vieler ADR-Fragen." },
+    { term: "Abfrage", note: "Aktiver Schritt statt reinem Lesen." },
+    { term: "Lernrhythmus", note: "Kurze Einheiten schlagen oft lange Sessions." },
+  ],
+  whyTelegramTitle: "Warum der Bot hier besonders gut passt",
+  whyTelegramParagraphs: [
+    "Der Bot kann Fragen in kleinen Portionen liefern und genau damit die Suchabsicht 'lernen' deutlich besser bedienen als eine statische Seite.",
+    "So bleibt die Landingpage klar fuer Google und der Bot stark fuer echte Nutzung.",
+  ],
+  relatedLinks: [
+    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
+    {
+      href: "/adr-pruefungsfragen-app-deutsch",
+      label: "ADR Pruefungsfragen App Deutsch",
+      note: "App-orientierter Einstieg fuer denselben Kernintent",
+    },
+    {
+      href: "/adr-fragen-und-antworten",
+      label: "ADR Fragen und Antworten",
+      note: "Breiter Fragencluster mit FAQ-Nutzen",
+    },
+  ],
+  ctaTitle: "Mit Pruefungsfragen direkt im Bot lernen",
+  ctaLead:
+    "Wenn du genau fuer Fragen und Wiederholung gesucht hast, geht es im Bot ohne Umweg weiter.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer:
+    "Diese Seite ist eine Vorschau fuer Lernende und keine offizielle Pruefungsplattform.",
+  telegramSource: "seo_adr_pruefungsfragen_lernen",
+  keywords: [
+    "ADR Pruefungsfragen lernen",
+    "ADR Fragen lernen",
+    "ADR Pruefung Fragen ueben",
+    "ADR Lernfragen",
+  ],
+};
+
 export const seoPageList = [
   adrPruefungAufDeutsch,
   basiskursPreview,
@@ -1206,6 +1789,14 @@ export const seoPageList = [
   adrPruefungFuerNichtMuttersprachler,
   adrFragenUndAntworten,
   adrPruefungsfragenAppDeutsch,
+  adrFragenAufDeutsch,
+  adrFachbegriffeDeutsch,
+  adrDeutschFuerLkwFahrer,
+  adrPruefungDeutschLernen,
+  gefahrgutPruefungAufDeutsch,
+  adrAppFuerAuslaender,
+  adrTelegramBotDeutsch,
+  adrPruefungsfragenLernen,
 ] as const;
 
 export function buildSeoPageStructuredData(
