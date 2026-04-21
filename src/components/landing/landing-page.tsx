@@ -1,5 +1,6 @@
 "use client";
 
+import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { useLang } from "@/lib/i18n/use-lang";
 import {
   ArrowRight,
@@ -24,8 +25,6 @@ import { PhoneCarousel } from "./phone-carousel";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 import { TrackedTelegramLink } from "./tracked-telegram-link";
-
-const telegramHref = "https://t.me/Adr_wort_trainer_bot";
 
 const problemIcons = [Languages, ClipboardCheck, Route, ShieldCheck];
 const stepIcons = [MessageCircleMore, Waypoints, ShieldCheck];
@@ -85,10 +84,19 @@ function ParallaxRoadBg() {
   );
 }
 
-function PrimaryLink({ label, source }: { label: string; source: string }) {
+function PrimaryLink({
+  label,
+  source,
+  locale,
+}: {
+  label: string;
+  source: string;
+  locale?: string;
+}) {
   return (
     <TrackedTelegramLink
       source={source}
+      locale={locale}
       className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(232,160,48,0.35)] transition hover:bg-[var(--color-accent-strong)] hover:shadow-[0_6px_24px_rgba(232,160,48,0.45)]"
     >
       {label}
@@ -118,6 +126,11 @@ export function LandingPage() {
 
   return (
     <main className="relative overflow-x-hidden bg-transparent text-[var(--color-text)]">
+      <PageViewTracker
+        source={lang === "en" ? "landing_home_en" : "landing_home_de"}
+        pageSlug={lang === "en" ? "home-en" : "home"}
+        locale={lang}
+      />
       <ParallaxRoadBg />
 
       <section className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 pb-16 pt-6 sm:min-h-screen sm:px-8 lg:px-10">
@@ -137,6 +150,7 @@ export function LandingPage() {
             <LanguageSwitcher />
             <TrackedTelegramLink
               source="nav_open_telegram"
+              locale={lang}
               className="hidden text-sm font-medium text-slate-500 transition hover:text-slate-800 sm:inline-flex"
             >
               {t.nav.openInTelegram}
@@ -158,8 +172,20 @@ export function LandingPage() {
               {t.hero.description}
             </p>
 
+            {t.hero.offer ? (
+              <div className="mt-6 max-w-xl rounded-[1.4rem] border border-amber-200 bg-amber-50/90 px-5 py-4 shadow-[0_8px_24px_rgba(232,160,48,0.12)]">
+                <p className="text-sm font-semibold leading-6 text-slate-900 sm:text-[15px]">
+                  {t.hero.offer}
+                </p>
+              </div>
+            ) : null}
+
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <PrimaryLink label={t.hero.ctaPrimary} source="hero_primary" />
+              <PrimaryLink
+                label={t.hero.ctaPrimary}
+                source="hero_primary"
+                locale={lang}
+              />
               <SecondaryLink label={t.hero.ctaSecondary} />
             </div>
 
@@ -355,7 +381,11 @@ export function LandingPage() {
                 {t.cta.description}
               </p>
               <div className="mt-8">
-                <PrimaryLink label={t.cta.button} source="final_cta" />
+                <PrimaryLink
+                  label={t.cta.button}
+                  source="final_cta"
+                  locale={lang}
+                />
               </div>
               <p className="mt-4 text-sm text-slate-500">{t.cta.note}</p>
             </div>
@@ -369,6 +399,7 @@ export function LandingPage() {
           <div className="flex flex-col gap-2 md:items-end">
             <TrackedTelegramLink
               source="footer_telegram"
+              locale={lang}
               className="font-medium text-slate-900 transition hover:text-amber-600"
             >
               {t.footer.link}

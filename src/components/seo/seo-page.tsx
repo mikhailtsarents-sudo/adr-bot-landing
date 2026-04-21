@@ -1,5 +1,6 @@
 "use client";
 
+import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { TrackedTelegramLink } from "@/components/landing/tracked-telegram-link";
 import { Reveal } from "@/components/landing/reveal";
 import { SectionHeading } from "@/components/landing/section-heading";
@@ -74,6 +75,7 @@ function TelegramButton({
   return (
     <TrackedTelegramLink
       source={source}
+      locale="de"
       className={[
         "inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-sm font-semibold text-[var(--color-dark)] shadow-[0_16px_30px_rgba(242,183,5,0.24)] transition hover:-translate-y-0.5 hover:bg-[var(--color-accent-strong)]",
         className ?? "",
@@ -116,6 +118,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
 
   return (
     <main className="relative overflow-hidden bg-[var(--color-bg)] text-[var(--color-text)]">
+      <PageViewTracker source={page.telegramSource} pageSlug={page.slug} locale="de" />
       {structuredData.map((item, index) => (
         <script
           key={`${page.slug}-jsonld-${index}`}
