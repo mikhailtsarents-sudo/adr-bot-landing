@@ -3,6 +3,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { resolveSearchConsoleAccessToken } from "./runtime/gsc-auth.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,6 +34,7 @@ Options:
 
 Environment variables:
   GSC_ACCESS_TOKEN
+  GSC_SERVICE_ACCOUNT_KEY_PATH
   GSC_SITE_URL
   GSC_PROPERTY_URL
 `);
@@ -43,6 +45,7 @@ function parseArgs(argv) {
     siteUrl: process.env.GSC_SITE_URL || DEFAULT_SITE_URL,
     propertyUrl: process.env.GSC_PROPERTY_URL || DEFAULT_PROPERTY_URL,
     accessToken: process.env.GSC_ACCESS_TOKEN || null,
+    serviceAccountKeyPath: process.env.GSC_SERVICE_ACCOUNT_KEY_PATH || null,
     urls: [],
     jsonOut: DEFAULT_JSON_PATH,
     txtOut: DEFAULT_TXT_PATH,
@@ -54,6 +57,7 @@ function parseArgs(argv) {
     else if (token === "--property-url") args.propertyUrl = argv[++i];
     else if (token === "--url") args.urls.push(argv[++i]);
     else if (token === "--access-token") args.accessToken = argv[++i];
+    else if (token === "--service-account-key") args.serviceAccountKeyPath = argv[++i];
     else if (token === "--json-out") args.jsonOut = path.resolve(argv[++i]);
     else if (token === "--txt-out") args.txtOut = path.resolve(argv[++i]);
     else if (token === "--help" || token === "-h") {
@@ -147,11 +151,10 @@ function buildSummaryLines(report) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  if (!args.accessToken) {
-    throw new Error(
-      "Missing Google Search Console access token. Set GSC_ACCESS_TOKEN or pass --access-token.",
-    );
-  }
+  const auth = await resolveSearchConsoleAccessToken({
+    accessToken: args.accessToken,
+    serviceAccountKeyPath: args.serviceAccountKeyPath,
+  });
 
   await mkdir(path.dirname(args.jsonOut), { recursive: true });
   await mkdir(path.dirname(args.txtOut), { recursive: true });
@@ -165,7 +168,7 @@ async function main() {
   for (const inspectionUrl of args.urls) {
     const result = await inspectUrl({
       siteUrl: args.siteUrl,
-      accessToken: args.accessToken,
+      accessToken: auth.accessToken,
       inspectionUrl,
     });
     urls.push(result);

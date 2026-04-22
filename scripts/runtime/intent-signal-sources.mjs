@@ -1,0 +1,148 @@
+import { readFile } from "node:fs/promises";
+import { resolveSearchConsoleAccessToken } from "./gsc-auth.mjs";
+
+function text(value) {
+  return value == null ? "" : String(value).trim();
+}
+
+function num(value, fallback = 0) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function toIsoDate(value) {
+  const safe = text(value);
+  if (!safe) return "";
+  return safe.slice(0, 10);
+}
+
+export async function loadJsonIfExists(filePath) {
+  if (!text(filePath)) return [];
+  try {
+    const raw = await readFile(filePath, "utf8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : Array.isArray(parsed?.rows) ? parsed.rows : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function fetchAnalyticsRowsFromTable({
+  baseUrl,
+  apiKey,
+  tableId,
+  limit = 250,
+}) {
+  if (!text(baseUrl) || !text(apiKey) || !text(tableId)) {
+    throw new Error("Missing N8N_BASE_URL, N8N_API_KEY, or N8N_ANALYTICS_TABLE_ID for live analytics fetch.");
+  }
+
+  const url = new URL(`${baseUrl.replace(/\/+$/g, "")}/api/v1/data-tables/${tableId}/rows`);
+  url.searchParams.set("limit", String(Math.max(1, Math.min(limit, 250))));
+
+  const response = await fetch(url.toString(), {
+    method: "GET",
+    headers: {
+      "X-N8N-API-KEY": apiKey,
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`Live analytics table fetch failed with ${response.status}: ${body.slice(0, 400)}`);
+  }
+
+  const json = await response.json();
+  return Array.isArray(json?.data) ? json.data : [];
+}
+
+export function normalizeSiteAnalyticsRows(rows) {
+  return rows.map((row) => ({
+    event: text(row.event),
+    source: text(row.source),
+    page_path: text(row.page_path),
+    page_slug: text(row.page_slug),
+    page_type: text(row.page_type),
+    locale: text(row.locale),
+    target: text(row.target),
+    occurred_at: text(row.occurred_at),
+    received_at: text(row.received_at || row.createdAt),
+  }));
+}
+
+export async function fetchSearchConsoleRows({
+  accessToken,
+  serviceAccountKeyPath = "",
+  siteUrl,
+  startDate,
+  endDate,
+  rowLimit = 250,
+}) {
+  if (!text(siteUrl)) {
+    throw new Error("Missing GSC_SITE_URL for live Search Console fetch.");
+  }
+  if (!text(startDate) || !text(endDate)) {
+    throw new Error("Search Console fetch requires startDate and endDate.");
+  }
+
+  const auth = await resolveSearchConsoleAccessToken({
+    accessToken,
+    serviceAccountKeyPath,
+  });
+
+  const response = await fetch(
+    `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${auth.accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        startDate: toIsoDate(startDate),
+        endDate: toIsoDate(endDate),
+        dimensions: ["query", "page"],
+        rowLimit: Math.max(1, Math.min(rowLimit, 25000)),
+      }),
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`Search Console query failed with ${response.status}: ${body.slice(0, 500)}`);
+  }
+
+  const json = await response.json();
+  const rows = Array.isArray(json?.rows) ? json.rows : [];
+
+  return rows.map((row) => ({
+    query: text(row.keys?.[0]),
+    page: text(row.keys?.[1]),
+    clicks: num(row.clicks, 0),
+    impressions: num(row.impressions, 0),
+    ctr: num(row.ctr, 0),
+    position: num(row.position, 0),
+  }));
+}
+
+export async function buildLiveIntentSnapshot({
+  analytics,
+  searchConsole,
+  telegramFeedbackPath = "",
+  contentFeedbackPath = "",
+}) {
+  const [telegramFeedback, contentFeedback] = await Promise.all([
+    loadJsonIfExists(telegramFeedbackPath),
+    loadJsonIfExists(contentFeedbackPath),
+  ]);
+
+  return {
+    created_at: new Date().toISOString(),
+    search_console: searchConsole,
+    site_analytics: analytics,
+    telegram_feedback: telegramFeedback,
+    content_feedback: contentFeedback,
+  };
+}
