@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LegalPage } from "@/components/legal/legal-page";
 
 export const metadata: Metadata = {
-  title: "Rechtliches | ADR Bot",
+  title: { absolute: "Rechtliches | ADR Bot" },
   description: "Zentrale Seite mit Impressum und Datenschutzerklärung für ADR Bot.",
 };
 

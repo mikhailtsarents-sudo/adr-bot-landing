@@ -1,0 +1,127 @@
+{
+  "search_console": [
+    {
+      "query": "adr prüfungsfragen app deutsch",
+      "page": "https://www.adr-bot.de/adr-pruefungsfragen-app-deutsch",
+      "clicks": 18,
+      "impressions": 420,
+      "ctr": 0.0429,
+      "position": 10.3
+    },
+    {
+      "query": "adr begriffe deutsch",
+      "page": "https://www.adr-bot.de/adr-begriffe",
+      "clicks": 9,
+      "impressions": 210,
+      "ctr": 0.0428,
+      "position": 11.8
+    },
+    {
+      "query": "adr bot",
+      "page": "https://www.adr-bot.de/",
+      "clicks": 14,
+      "impressions": 120,
+      "ctr": 0.116,
+      "position": 4.1
+    },
+    {
+      "query": "adr deutsch lernen",
+      "page": "https://www.adr-bot.de/adr-deutsch-ueben",
+      "clicks": 6,
+      "impressions": 180,
+      "ctr": 0.033,
+      "position": 14.6
+    }
+  ],
+  "site_analytics": [
+    {
+      "event": "site_page_view",
+      "page_path": "/adr-pruefungsfragen-app-deutsch",
+      "source": "seo_adr_pruefungsfragen_app_deutsch_hero"
+    },
+    {
+      "event": "site_page_view",
+      "page_path": "/adr-pruefungsfragen-app-deutsch",
+      "source": "seo_adr_pruefungsfragen_app_deutsch_hero"
+    },
+    {
+      "event": "telegram_cta_click",
+      "page_path": "/adr-pruefungsfragen-app-deutsch",
+      "source": "seo_adr_pruefungsfragen_app_deutsch_hero"
+    },
+    {
+      "event": "telegram_redirect",
+      "page_path": "/adr-pruefungsfragen-app-deutsch",
+      "source": "seo_adr_pruefungsfragen_app_deutsch_hero"
+    },
+    {
+      "event": "site_page_view",
+      "page_path": "/adr-begriffe",
+      "source": "seo_adr_begriffe_glossary"
+    },
+    {
+      "event": "site_page_view",
+      "page_path": "/adr-begriffe",
+      "source": "seo_adr_begriffe_glossary"
+    },
+    {
+      "event": "site_page_view",
+      "page_path": "/adr-begriffe",
+      "source": "seo_adr_begriffe_glossary"
+    },
+    {
+      "event": "site_page_view",
+      "page_path": "/adr-deutsch-ueben",
+      "source": "seo_adr_deutsch_ueben_hero"
+    },
+    {
+      "event": "site_page_view",
+      "page_path": "/adr-deutsch-ueben",
+      "source": "seo_adr_deutsch_ueben_hero"
+    },
+    {
+      "event": "site_page_view",
+      "page_path": "/adr-deutsch-ueben",
+      "source": "seo_adr_deutsch_ueben_hero"
+    },
+    {
+      "event": "telegram_redirect",
+      "page_path": "/",
+      "source": "brand_adr_bot_main_cta"
+    }
+  ],
+  "telegram_feedback": [
+    {
+      "intent_key": "adr-pruefungsfragen-app-deutsch",
+      "sentiment": "positive",
+      "start_count": 7,
+      "completion_count": 2,
+      "note": "Users want direct quiz mode in German."
+    },
+    {
+      "intent_key": "adr-deutsch-lernen",
+      "sentiment": "positive",
+      "start_count": 4,
+      "completion_count": 1,
+      "note": "Beginner users ask for simpler German explanations."
+    }
+  ],
+  "content_feedback": [
+    {
+      "intent_key": "adr-pruefungsfragen-app-deutsch",
+      "title": "ADR quiz short test",
+      "format": "youtube_short",
+      "views": 220,
+      "conversions": 9,
+      "retention_score": 41
+    },
+    {
+      "intent_key": "adr-begriffe-deutsch",
+      "title": "ADR Begriffe quick explainer",
+      "format": "youtube_short",
+      "views": 130,
+      "conversions": 3,
+      "retention_score": 54
+    }
+  ]
+}

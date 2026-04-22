@@ -33,7 +33,18 @@ yarn-error.log*
 # local content-machine artifacts
 /daily-chooser-runs/
 /daily-cycle-runs/
+/daily-live-runs/
 /render-packages/
+/word-autopilot-runs/
+/seo-autopilot-runs/
+/youtube-test-runs/
+/intent-live-cycle-runs/
+/intent-signal-runs/
+/question-autopilot-runs/
+/autonomous-production-test-runs/
+/intent-to-content-runs/
+/preview-smoke-runs/
+/public/generated/q-test-*/
 
 # env files (can opt-in for committing if needed)
 .env*

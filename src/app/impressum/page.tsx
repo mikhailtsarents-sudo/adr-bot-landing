@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/legal/legal-page";
 import { hasValue, legalContact } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Impressum | ADR Bot",
+  title: { absolute: "Impressum | ADR Bot" },
   description: "Anbieterkennzeichnung und Kontaktangaben für ADR Bot.",
 };
 

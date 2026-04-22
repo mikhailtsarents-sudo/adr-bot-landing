@@ -3,11 +3,13 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 const DEFAULT_OUTPUT_ROOT = path.join(repoRoot, "daily-chooser-runs");
+enableStrictNonInteractiveMode("run-daily-content-chooser");
 
 const WEIGHTS = {
   source_quality_score: 0.3,
@@ -395,6 +397,11 @@ async function main() {
   const evaluated = candidates.map((candidate) => evaluateCandidate(candidate, now));
   const ranked = [...evaluated].sort(compareCandidates);
   const decision = buildDecision(ranked, nowDate);
+  logAutonomousDecision("selected source item", {
+    source_type: decision.selected_source_type,
+    source_id: decision.selected_source_id,
+    decision_state: decision.decision_state,
+  });
   const slug = slugify(`daily-${nowDate}-${decision.selected_source_type || "blocked"}`) || `daily-${nowDate}`;
   const outputDir = path.join(args.outputRoot, slug);
 

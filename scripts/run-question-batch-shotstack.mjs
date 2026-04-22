@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 
 const DEFAULT_PACKAGES_ROOT = "/tmp/adr-question-batch5-v2";
-const DEFAULT_API_BASE = "https://api.shotstack.io/stage";
+const DEFAULT_API_BASE = process.env.SHOTSTACK_API_BASE || "https://api.shotstack.io/edit/v1";
 const DEFAULT_POLL_INTERVAL_MS = 8000;
 const DEFAULT_TIMEOUT_MS = 8 * 60 * 1000;
 

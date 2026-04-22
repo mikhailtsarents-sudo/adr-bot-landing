@@ -27,6 +27,12 @@ const DEFAULT_ROLE_WEIGHTS = {
   cta: 0.14,
 };
 
+// Reading speed: ~2.5 words/sec for video viewers + 1s buffer per slide
+function readingDurationSec(slideText) {
+  const words = String(slideText || "").trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(2.0, Number((words / 2.5 + 1.0).toFixed(2)));
+}
+
 function printHelp() {
   console.log(`Usage: node scripts/build-render-package.mjs --input <package.json> [options]
 
@@ -87,6 +93,23 @@ function text(value) {
   return value == null ? "" : String(value).trim();
 }
 
+function describeAssetUrl(value) {
+  const url = text(value);
+  if (!url) {
+    return "";
+  }
+  if (url.startsWith("data:")) {
+    const commaIndex = url.indexOf(",");
+    const header = commaIndex >= 0 ? url.slice(0, commaIndex + 1) : url;
+    return `${header}...[inline-bytes:${Math.max(0, url.length - header.length)}]`;
+  }
+  return url;
+}
+
+function isInlineDataUrl(value) {
+  return text(value).startsWith("data:");
+}
+
 function ensureFields(input, requiredKeys) {
   for (const key of requiredKeys) {
     if (!text(input[key])) {
@@ -122,6 +145,33 @@ function normalizeHashtags(hashtags) {
   return [];
 }
 
+function filterProductionHashtags(tags) {
+  return tags.filter((tag) => !/#autonomous-/i.test(tag));
+}
+
+function normalizeHookSnapshot(value) {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+  const frameStyle = text(value.frame_style);
+  const overlayType = text(value.overlay_type);
+  const cameraPov = text(value.camera_pov);
+  const mutationOrigin = text(value.mutation_origin);
+  const focalObject = text(value.focal_object);
+  const inspectorBehavior = text(value.inspector_behavior);
+  if (!frameStyle && !overlayType && !cameraPov && !mutationOrigin && !focalObject && !inspectorBehavior) {
+    return null;
+  }
+  return {
+    frame_style: frameStyle,
+    overlay_type: overlayType,
+    camera_pov: cameraPov,
+    mutation_origin: mutationOrigin,
+    focal_object: focalObject,
+    inspector_behavior: inspectorBehavior,
+  };
+}
+
 function normalizeSlides(manifest) {
   const slides = Array.isArray(manifest.slides) ? manifest.slides : [];
   if (slides.length !== 6) {
@@ -142,19 +192,32 @@ function normalizeSlides(manifest) {
 }
 
 function buildRoleDurations(slides, durationTargetSec) {
-  const duration = Number(durationTargetSec || 12);
-  const totalWeight = slides.reduce(
-    (sum, slide) => sum + (DEFAULT_ROLE_WEIGHTS[slide.role] || 1 / slides.length),
-    0,
-  );
+  // Use text-based reading duration when slides have text; fall back to weight-based otherwise
+  const hasText = slides.some((s) => s.text && String(s.text).trim().length > 0);
+  if (!hasText) {
+    const duration = Number(durationTargetSec || 12);
+    const totalWeight = slides.reduce(
+      (sum, slide) => sum + (DEFAULT_ROLE_WEIGHTS[slide.role] || 1 / slides.length),
+      0,
+    );
+    let elapsed = 0;
+    return slides.map((slide, index) => {
+      const weight = DEFAULT_ROLE_WEIGHTS[slide.role] || 1 / slides.length;
+      const rawLength = Number(((duration * weight) / totalWeight).toFixed(2));
+      const start = Number(elapsed.toFixed(2));
+      const isLast = index === slides.length - 1;
+      const end = isLast ? Number(duration.toFixed(2)) : Number((start + rawLength).toFixed(2));
+      elapsed = end;
+      return { scene_id: slide.id, role: slide.role, asset_url: slide.url, start_sec: start, end_sec: end, transition: "cut", subtitle_ref: "" };
+    });
+  }
 
+  // Text-based: duration = reading time + 1s buffer per slide
   let elapsed = 0;
-  return slides.map((slide, index) => {
-    const weight = DEFAULT_ROLE_WEIGHTS[slide.role] || 1 / slides.length;
-    const rawLength = Number(((duration * weight) / totalWeight).toFixed(2));
+  return slides.map((slide) => {
+    const dur = readingDurationSec(slide.text);
     const start = Number(elapsed.toFixed(2));
-    const isLast = index === slides.length - 1;
-    const end = isLast ? Number(duration.toFixed(2)) : Number((start + rawLength).toFixed(2));
+    const end = Number((start + dur).toFixed(2));
     elapsed = end;
     return {
       scene_id: slide.id,
@@ -227,14 +290,42 @@ function buildSubtitlesSrt(timeline, sceneTextEntries) {
     .join("\n");
 }
 
+function getQuestionBackgroundPosition(_role) {
+  return "center";
+}
+
 function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabled) {
+  const isQuestionFlow = isQuestionVisualFlow(input);
   const talkingHeadUrl = text(input.talking_head_url);
+  const voiceoverUrl = text(input.voiceover_url);
+  const musicUrl = text(input.music_url);
   const durationTargetSec = Number(input.duration_target_sec || input.duration_sec || 12);
+  const useTalkingHeadAsMainTrack = Boolean(talkingHeadUrl) && !isQuestionFlow;
   const captionClips = subtitlesEnabled
     ? buildSceneCaptionClips(timeline, sceneTextEntries, text(input.template_variant) || "quiz_safe")
     : [];
+  const styledCaptionClips = captionClips;
+  if (isQuestionFlow && talkingHeadUrl) {
+    console.warn("QUESTION flow received talking_head_url but it was intentionally ignored");
+  }
+  console.log("QUESTION_FLOW=", isQuestionFlow);
+  console.log("TALKING_HEAD_URL=", talkingHeadUrl);
+  console.log("USING_TALKING_HEAD_AS_MAIN_TRACK=", useTalkingHeadAsMainTrack);
+  console.log(
+    "FINAL_IMAGE_SRCS=",
+    timeline.map((scene) => describeAssetUrl(scene.asset_url)),
+  );
+
+  const inlineQuestionBackgroundUrl =
+    isQuestionFlow &&
+    timeline.length > 0 &&
+    timeline.every((scene) => text(scene.asset_url) === text(timeline[0]?.asset_url)) &&
+    isInlineDataUrl(timeline[0]?.asset_url)
+      ? text(timeline[0]?.asset_url)
+      : "";
+
   const backgroundTrack = {
-    clips: talkingHeadUrl
+    clips: useTalkingHeadAsMainTrack
       ? [
           {
             asset: {
@@ -247,24 +338,74 @@ function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabl
             position: "center",
           },
         ]
-      : timeline.map((scene) => ({
-          asset: {
-            type: "image",
-            src: scene.asset_url,
-          },
-          start: scene.start_sec,
-          length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
-          fit: "contain",
-          position: "center",
-        })),
+      : inlineQuestionBackgroundUrl
+        ? [
+            {
+              asset: {
+                type: "image",
+                src: inlineQuestionBackgroundUrl,
+              },
+              start: 0,
+              length: Number(durationTargetSec.toFixed(2)),
+              fit: "cover",
+              position: "center",
+            },
+          ]
+        : timeline.map((scene) => ({
+            asset: {
+              type: "image",
+              src: scene.asset_url,
+            },
+            start: scene.start_sec,
+            length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
+            fit: isQuestionFlow ? "cover" : "contain",
+            position: isQuestionFlow ? getQuestionBackgroundPosition(scene.role) : "center",
+          })),
   };
+
+  const hasQuestionTalkingHeadMainTrack = backgroundTrack.clips.some((clip) => {
+    const asset = clip.asset || {};
+    return asset.type === "video" && String(asset.src || "") === talkingHeadUrl;
+  });
+  const hasQuestionImageClipSrc = backgroundTrack.clips.some((clip) => {
+    const asset = clip.asset || {};
+    return asset.type === "image" && text(asset.src);
+  });
+
+  if (isQuestionFlow && hasQuestionTalkingHeadMainTrack) {
+    throw new Error(
+      "QUESTION visual pipeline broken: talking_head_url was used as main video track.",
+    );
+  }
+
+  if (isQuestionFlow && !hasQuestionImageClipSrc) {
+    throw new Error("QUESTION visual pipeline broken: no QUESTION image clip src found.");
+  }
+
+  const soundtrackSrc = voiceoverUrl || musicUrl;
+  const audioTrack =
+    soundtrackSrc
+        ? {
+            clips: [
+              {
+                asset: {
+                  type: "audio",
+                  src: soundtrackSrc,
+                },
+                start: 0,
+                length: Number(durationTargetSec.toFixed(2)),
+              },
+            ],
+          }
+      : null;
 
   return {
     timeline: {
       background: "#0b1020",
       tracks: [
-        ...(captionClips.length > 0 ? [{ clips: captionClips }] : []),
+        ...(styledCaptionClips.length > 0 ? [{ clips: styledCaptionClips }] : []),
         backgroundTrack,
+        ...(audioTrack ? [audioTrack] : []),
       ],
     },
     output: {
@@ -315,9 +456,13 @@ async function main() {
   }
 
   if (isQuestionFlow && generatedAssetUrl) {
+    const sceneAssetUrls = Array.isArray(input.generated_visual?.scene_asset_urls) && input.generated_visual.scene_asset_urls.length > 0
+      ? input.generated_visual.scene_asset_urls
+      : [generatedAssetUrl];
+    const ROLE_SCENE_INDEX = { hook: 0, question: 1, answers: 2, timer: 1, answer: 2, cta: 2 };
     slides = slides.map((slide) => ({
       ...slide,
-      url: generatedAssetUrl,
+      url: sceneAssetUrls[ROLE_SCENE_INDEX[slide.role] ?? sceneAssetUrls.length - 1] || generatedAssetUrl,
     }));
   }
 
@@ -337,10 +482,10 @@ async function main() {
   }
 
   console.log("QUESTION_FLOW=", isQuestionFlow);
-  console.log("GENERATED_ASSET_URL=", generatedAssetUrl);
+  console.log("GENERATED_ASSET_URL=", describeAssetUrl(generatedAssetUrl));
   console.log(
     "FINAL_SLIDE_URLS=",
-    slides.map((slide) => slide.url),
+    slides.map((slide) => describeAssetUrl(slide.url)),
   );
   const durationTargetSec = Number(input.duration_target_sec || input.duration_sec || 12);
   const sceneTextEntries = normalizeSceneTextEntries(input);
@@ -352,12 +497,16 @@ async function main() {
   const subtitlePolicy = text(input.subtitle_policy) || DEFAULT_SUBTITLE_POLICY;
   const subtitlesEnabled = subtitlePolicy !== "none_for_first_visual_test";
   const subtitleRef = subtitlesEnabled ? "subtitles.srt" : "";
-  const timeline = buildRoleDurations(slides, durationTargetSec).map((scene) => ({
+  const slidesWithText = slides.map((slide) => ({
+    ...slide,
+    text: (sceneTextEntries.find((e) => e.id === slide.id) || {}).text || "",
+  }));
+  const timeline = buildRoleDurations(slidesWithText, durationTargetSec).map((scene) => ({
     ...scene,
     subtitle_ref: subtitleRef,
   }));
   const subtitlesSrt = subtitlesEnabled ? buildSubtitlesSrt(timeline, sceneTextEntries) : "";
-  const hashtags = normalizeHashtags(input.hashtags);
+  const hashtags = filterProductionHashtags(normalizeHashtags(input.hashtags));
   const slug =
     slugify(args.slug) ||
     slugify(
@@ -437,11 +586,15 @@ async function main() {
     trace_id: input.trace_id,
     scenario_id: input.scenario_id,
     render_task_id: input.render_task_id,
+    batch_item_id: text(input.batch_item_id),
     manifest_id: manifestId,
     asset_report_id: assetReportId,
     publish_target: text(input.publish_target) || DEFAULT_TARGET,
     language: text(input.language) || DEFAULT_LANGUAGE,
     title: text(input.title),
+    title_variant_a: text(input.title_variant_a),
+    title_variant_b: text(input.title_variant_b),
+    title_variant_c: text(input.title_variant_c),
     description: text(input.description),
     caption: text(input.caption_text),
     hashtags,
@@ -462,6 +615,9 @@ async function main() {
     source_id: text(input.source_id),
     source_title: text(input.source_title),
     source_url: text(input.source_url),
+    variation_type: text(input.variation?.variation_type || input.variation_type),
+    variation_value: text(input.variation?.variation_value || input.variation_value),
+    hook_snapshot: normalizeHookSnapshot(input.hook_snapshot || input.generated_visual?.hook_snapshot),
     retry_policy: input.retry_policy || null,
     fallback_policy: input.fallback_policy || null,
   };
@@ -490,6 +646,7 @@ async function main() {
     trace_id: input.trace_id,
     scenario_id: input.scenario_id,
     render_task_id: input.render_task_id,
+    batch_item_id: text(input.batch_item_id),
     manifest_id: manifestId,
     content_family: text(input.content_family),
     format: text(manifest.format) || "9:16",
@@ -538,14 +695,21 @@ async function main() {
     trace_id: text(input.trace_id),
     scenario_id: text(input.scenario_id),
     render_task_id: text(input.render_task_id),
+    batch_item_id: text(input.batch_item_id),
     publish_target: text(input.publish_target) || DEFAULT_TARGET,
     publish_adapter: text(input.publish_adapter) || DEFAULT_ADAPTER,
     title: text(input.title),
+    title_variant_a: text(input.title_variant_a),
+    title_variant_b: text(input.title_variant_b),
+    title_variant_c: text(input.title_variant_c),
     description: text(input.description),
     hashtags,
     caption_text: text(input.caption_text),
     visibility: text(input.visibility) || DEFAULT_VISIBILITY,
     analytics_tag: text(input.analytics_tag),
+    variation_type: text(input.variation?.variation_type || input.variation_type),
+    variation_value: text(input.variation?.variation_value || input.variation_value),
+    hook_snapshot: normalizeHookSnapshot(input.hook_snapshot || input.generated_visual?.hook_snapshot),
     source_type: text(input.source_type),
     source_id: text(input.source_id),
     source_family: text(input.source_family),
@@ -583,10 +747,31 @@ async function main() {
     `trace_id=${input.trace_id}`,
     `scenario_id=${input.scenario_id}`,
     `render_task_id=${input.render_task_id}`,
+    ...(text(input.batch_item_id) ? [`batch_item_id=${text(input.batch_item_id)}`] : []),
     `asset_package_type=rendered`,
     `asset_fingerprint=${assetFingerprint}`,
     `render_status=${publishReadyPackage.render_status}`,
   ];
+
+  if (text(input.variation?.variation_type || input.variation_type)) {
+    bridgeFeedbackParts.push(`variation_type=${text(input.variation?.variation_type || input.variation_type)}`);
+  }
+  if (text(input.variation?.variation_value || input.variation_value)) {
+    bridgeFeedbackParts.push(`variation_value=${text(input.variation?.variation_value || input.variation_value)}`);
+  }
+  const hookSnapshot = normalizeHookSnapshot(input.hook_snapshot || input.generated_visual?.hook_snapshot);
+  if (hookSnapshot?.overlay_type) {
+    bridgeFeedbackParts.push(`hook_overlay_type=${hookSnapshot.overlay_type}`);
+  }
+  if (hookSnapshot?.frame_style) {
+    bridgeFeedbackParts.push(`hook_frame_style=${hookSnapshot.frame_style}`);
+  }
+  if (hookSnapshot?.camera_pov) {
+    bridgeFeedbackParts.push(`hook_camera_pov=${hookSnapshot.camera_pov}`);
+  }
+  if (hookSnapshot?.mutation_origin) {
+    bridgeFeedbackParts.push(`hook_mutation_origin=${hookSnapshot.mutation_origin}`);
+  }
 
   if (publishReadyPackage.final_mp4_url) {
     bridgeFeedbackParts.push(`final_mp4_url=${publishReadyPackage.final_mp4_url}`);
@@ -605,6 +790,7 @@ async function main() {
     post_text: text(input.caption_text),
     cta: text(input.cta_text),
     hashtags: hashtags.join(" "),
+    hashtags_array: hashtags,
     image_prompt: "",
     image_url: "",
     approval_status: text(input.approval_state) || "approved",
@@ -615,7 +801,11 @@ async function main() {
     asset_package_type: "rendered",
     asset_fingerprint: assetFingerprint,
     render_task_id: text(input.render_task_id),
+    batch_item_id: text(input.batch_item_id),
     trace_id: text(input.trace_id),
+    variation_type: text(input.variation?.variation_type || input.variation_type),
+    variation_value: text(input.variation?.variation_value || input.variation_value),
+    hook_snapshot: hookSnapshot,
   };
 
   const files = [

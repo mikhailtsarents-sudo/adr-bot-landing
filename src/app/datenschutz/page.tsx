@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/legal/legal-page";
 import { legalContact } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Datenschutz | ADR Bot",
+  title: { absolute: "Datenschutz | ADR Bot" },
   description: "Datenschutzhinweise für den Webauftritt von ADR Bot.",
 };
 

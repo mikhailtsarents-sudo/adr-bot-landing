@@ -3,10 +3,13 @@
 import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
+
+enableStrictNonInteractiveMode("finalize-render-package");
 
 function printHelp() {
   console.log(`Usage: node scripts/finalize-render-package.mjs --package-dir <dir> --final-mp4-url <url> [options]
@@ -100,6 +103,11 @@ function publicUrlForPath(publicOutputDir, publicBaseUrl, publicFilePath) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  logAutonomousDecision("selected finalize render package settings", {
+    package_dir: args.packageDir,
+    has_final_mp4_file: Boolean(args.finalMp4File),
+    has_final_mp4_url: Boolean(args.finalMp4Url),
+  });
   const publishReadyPath = path.join(args.packageDir, "publish_ready_package.json");
   const bridgeRowPath = path.join(args.packageDir, "g3_bridge_row.json");
 

@@ -4,11 +4,13 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 const DEFAULT_OUTPUT_ROOT = path.join(repoRoot, "daily-dispatch-runs");
+enableStrictNonInteractiveMode("run-daily-content-dispatch");
 
 function printHelp() {
   console.log(`Usage: npm run run:daily-content-dispatch -- --decision <decision.json> [options]
@@ -18,6 +20,7 @@ Options:
   --output-root <dir>   Output root (default: ${DEFAULT_OUTPUT_ROOT})
   --verify-remote       Pass remote verification to downstream runners where supported
   --keep-temp           Preserve downstream temporary files where supported
+  --full-pipeline       After render package, automatically run Shotstack → finalize → YouTube publish
   --help                Show this help
 
 The selected candidate must include enough execution metadata:
@@ -36,6 +39,7 @@ function parseArgs(argv) {
     outputRoot: DEFAULT_OUTPUT_ROOT,
     verifyRemote: false,
     keepTemp: false,
+    fullPipeline: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -44,6 +48,7 @@ function parseArgs(argv) {
     else if (token === "--output-root") args.outputRoot = path.resolve(argv[++i]);
     else if (token === "--verify-remote") args.verifyRemote = true;
     else if (token === "--keep-temp") args.keepTemp = true;
+    else if (token === "--full-pipeline") args.fullPipeline = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
       process.exit(0);
@@ -117,6 +122,10 @@ async function main() {
   const slug = slugify(`${decision.selected_source_type}-${decision.selected_source_id}-${Date.now()}`) || "daily-dispatch";
   const outputDir = path.join(args.outputRoot, slug);
   await mkdir(outputDir, { recursive: true });
+  logAutonomousDecision("selected dispatch candidate", {
+    source_type: decision.selected_source_type,
+    source_id: decision.selected_source_id,
+  });
 
   let dispatchMode = "";
   let runner = "";
@@ -207,6 +216,15 @@ async function main() {
 
   const reportPath = path.join(outputDir, "dispatch_report.json");
   await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+
+  if (args.fullPipeline && (dispatchMode === "question_render_package" || dispatchMode === "word_render_package")) {
+    logAutonomousDecision("chaining post-render pipeline", { output_dir: outputDir, dispatch_mode: dispatchMode });
+    const pipelineOutput = runNodeScript(path.join(repoRoot, "scripts", "run-post-render-pipeline.mjs"), [
+      "--packages-root",
+      outputDir,
+    ]);
+    console.log(pipelineOutput);
+  }
 
   console.log(`output_dir=${outputDir}`);
   console.log(`dispatch_report=${reportPath}`);

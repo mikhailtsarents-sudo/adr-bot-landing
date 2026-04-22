@@ -608,18 +608,15 @@ export const technischesDeutschAdr: SeoPageConfig = {
     "Lerne technisches Deutsch fuer ADR mit kurzen Begriffen, Beispielen und einem klaren Einstieg in die Telegram-Uebung.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "Technisches Deutsch fuer ADR",
-  heroLead:
-    "Viele scheitern nicht am Stoff, sondern an der Sprache. Diese Seite zeigt technisches Deutsch fuer ADR in kleinen, lesbaren Beispielen.",
-  heroSupport:
-    "Die Vorschau bleibt bewusst kompakt. Mehr Begriffe, mehr Wiederholung und mehr Drill liegen im Telegram-Bot.",
-  intentTitle: "Warum technisches Deutsch hier so wichtig ist",
+  heroLead: "Diese Seite fokussiert jetzt klarer den Intent technisches deutsch adr und bietet einen kompakten Einstieg fuer Menschen, die ADR auf Deutsch besser verstehen und anwenden wollen.",
+  heroSupport: "Sie bleibt bewusst kompakt: Orientierung auf der Seite, mehr Tiefe und Wiederholung danach im Telegram-Bot.",
+  intentTitle: "Warum dieser Lern-Intent gerade wichtig ist",
   intentParagraphs: [
-    "Wer ADR auf Deutsch lernt, kaempft oft weniger mit Regeln als mit Formulierungen. Genau deshalb ist technisches Deutsch ein eigener SEO-Einstieg mit klarer Suchintention.",
-    "Die Seite nimmt typische Sprachhuerden aus Fragen, Begriffen und kurzen Satzmustern auf. Danach fuehrt sie sauber in den Bot, wo der eigentliche Drill beginnt.",
+    "Live-Signale zeigen, dass Nutzer bei diesem Thema einen klaren, anfangerfreundlichen Einstieg suchen statt ueberladener Theorie.",
+    "Darum bleibt die Seite fokussiert und conversion-nah: etwas Nutzen direkt sichtbar, mehr Uebung anschliessend im Bot.",
   ],
-  sampleTitle: "Sprach-Sample",
-  sampleLead:
-    "Ein kleiner Wortschatz-Ausschnitt zeigt schnell, woran es im Pruefungsdeutsch oft haengt.",
+  sampleTitle: "Gezielte Lernvorschau",
+  sampleLead: "2 bis 3 kleine Beispiele oder Mini-Lektionen reichen, um Suchintention und Vertrauen sauber abzudecken.",
   sampleTerms: [
     {
       term: "Beforderung",
@@ -643,12 +640,11 @@ export const technischesDeutschAdr: SeoPageConfig = {
     },
   ],
   sampleCalloutTitle: "Typische Sprachhuerde",
-  sampleCalloutText:
-    "Viele Antwortfehler entstehen, weil ein einzelnes Fachwort falsch verstanden wird. Die volle Wiederholung und mehr Beispiele liegen im Bot.",
-  whyTelegramTitle: "Warum Telegram danach sinnvoll ist",
+  sampleCalloutText: "Die Vorschau bleibt absichtlich klein. Die eigentliche Wiederholung und Lernroutine liegt im Bot.",
+  whyTelegramTitle: "Warum Telegram nach der Vorschau der richtige Schritt ist",
   whyTelegramParagraphs: [
-    "Im Bot lassen sich Begriffe und Frageformulierungen mehrfach wiederholen, statt sie nur einmal auf einer Seite zu lesen.",
-    "So bleibt die Seite ein guter Google-Einstieg, waehrend der Bot das aktive Lernen uebernimmt.",
+    "Der Bot passt besser zu kurzen Wiederholungseinheiten als eine statische SEO-Seite.",
+    "So bleibt die Seite hilfreich fuer Suchende, waehrend der naechste Lernschritt klar und praktisch bleibt.",
   ],
   faqs: [
     {
@@ -680,9 +676,8 @@ export const technischesDeutschAdr: SeoPageConfig = {
       note: "Breiter Einstieg in Fragen und Begriffe",
     },
   ],
-  ctaTitle: "Technisches Deutsch weiter in Telegram ueben",
-  ctaLead:
-    "Wenn dir die Vorschau geholfen hat, bekommst du im Bot mehr Begriffe, mehr Satzmuster und mehr Wiederholung.",
+  ctaTitle: "Im Telegram-Bot weiterlernen",
+  ctaLead: "Wenn du nach dem Einstieg direkt weitermachen willst, ist der Bot der sinnvollste naechste Schritt.",
   ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite ist nur eine Lernvorschau. Sie ersetzt keine offizielle Schulung und gibt keine Garantie auf Pruefungserfolg.",
@@ -1295,18 +1290,15 @@ export const adrFachbegriffeDeutsch: SeoPageConfig = {
     "Wichtige ADR Fachbegriffe auf Deutsch mit kurzen Erklaerungen fuer Fahrer, Lernende und Nicht-Muttersprachler.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Fachbegriffe Deutsch",
-  heroLead:
-    "Wer ADR lernen will, braucht nicht nur Antworten, sondern auch die richtigen Fachbegriffe. Diese Vorschauseite erklaert die wichtigsten Woerter auf Deutsch.",
-  heroSupport:
-    "Sie ist bewusst kompakt, damit Google den Intent versteht und der Bot die eigentliche Vertiefung uebernimmt.",
-  intentTitle: "Warum Fachbegriffe ein eigener SEO-Cluster sind",
+  heroLead: "Diese Seite fokussiert jetzt klarer den Intent adr fachbegriffe deutsch und zeigt einen kleinen, nuetzlichen Wortschatz-Ausschnitt fuer ADR auf Deutsch.",
+  heroSupport: "Sie soll Suchende schnell orientieren, Vertrauen aufbauen und danach sauber in den Telegram-Bot weiterfuehren.",
+  intentTitle: "Warum dieser Wortschatz-Intent gerade wichtig ist",
   intentParagraphs: [
-    "Viele Nutzer suchen nicht nach einem Kursnamen, sondern nach einzelnen Woertern, die sie in Fragen oder Schulungsunterlagen nicht verstehen.",
-    "Mit einer separaten Seite fuer Fachbegriffe bauen wir thematische Tiefe auf und holen Nutzer frueh in ihrer Recherche ab.",
+    "Live-Signale zeigen, dass Nutzer fuer diesen Begriffsbereich einfache, praktische Orientierung suchen statt langer Theorie.",
+    "Darum bleibt die Seite kompakt und hilfreich: genug Inhalt fuer Vertrauen und Suchintention, mehr Drill spaeter im Bot.",
   ],
-  sampleTitle: "Fachbegriffe im Sample",
-  sampleLead:
-    "Ein kleiner Auszug zeigt das Muster und laesst den groesseren Wortschatz bewusst im Bot.",
+  sampleTitle: "Gezielte Wortschatz-Vorschau",
+  sampleLead: "6 bis 10 Begriffe genuegen, um Nutzen und Suchintention sauber zu bedienen.",
   sampleTerms: [
     { term: "Gefahrzettel", note: "Sichtbare Kennzeichnung fuer eine Gefahrgut-Klasse." },
     { term: "Verpackungsgruppe", note: "Hilft bei der Einordnung des Gefahrenpotenzials." },
@@ -1315,12 +1307,11 @@ export const adrFachbegriffeDeutsch: SeoPageConfig = {
     { term: "Tunnelschild", note: "Relevanter Hinweis fuer die Streckenwahl." },
   ],
   sampleCalloutTitle: "Lernen ueber Sprache",
-  sampleCalloutText:
-    "Gerade fuer Berufskraftfahrer mit Deutsch als Zweitsprache ist Wortschatz oft der eigentliche Hebel.",
-  whyTelegramTitle: "Warum Telegram dann mehr bringt",
+  sampleCalloutText: "Die oeffentliche Seite bleibt bewusst kompakt. Fuer mehr Begriffe, Wiederholung und Drill geht es danach in Telegram weiter.",
+  whyTelegramTitle: "Warum Telegram nach der Vorschau der richtige Schritt ist",
   whyTelegramParagraphs: [
-    "Im Bot koennen Fachbegriffe wiederholt, in Fragen eingebettet und dadurch schneller verankert werden.",
-    "Das ist fuer SEO und Conversion gleichzeitig stark: Google bekommt Relevanz, Nutzer bekommen einen klaren Weiterweg.",
+    "Im Bot laesst sich Wortschatz besser wiederholen als auf einer statischen SEO-Seite.",
+    "So bleibt die Seite hilfreich fuer Google und Nutzer, waehrend die eigentliche Lerntiefe im Bot liegt.",
   ],
   faqs: [
     {
@@ -1342,9 +1333,8 @@ export const adrFachbegriffeDeutsch: SeoPageConfig = {
       note: "Sprache und Verstaendnis im Pruefungskontext",
     },
   ],
-  ctaTitle: "Mehr Fachbegriffe im Telegram-Bot",
-  ctaLead:
-    "Wenn dir die wichtigsten Woerter schon helfen, bekommst du im Bot mehr Begriffe und mehr Wiederholung.",
+  ctaTitle: "ADR-Wortschatz im Telegram-Bot weiterlernen",
+  ctaLead: "Wenn der kleine Ausschnitt hilfreich war, geht der naechste sinnvolle Schritt in den Bot mit mehr Begriffen und mehr Wiederholung.",
   ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite dient der Orientierung und ersetzt kein vollstaendiges Fachwoertertraining.",
@@ -1714,18 +1704,15 @@ export const adrPruefungsfragenLernen: SeoPageConfig = {
     "ADR Pruefungsfragen lernen mit kleinem oeffentlichen Sample und klarem Einstieg in den Telegram-Bot fuer mehr Uebung.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Pruefungsfragen lernen",
-  heroLead:
-    "Diese Seite spricht Nutzer an, die nicht nur lesen, sondern gezielt Pruefungsfragen lernen und wiederholen wollen.",
-  heroSupport:
-    "Genau dieser Intent liegt nah an echter Nutzung, deshalb lohnt sich eine eigene Zielseite.",
-  intentTitle: "Warum diese Seite auf Conversion zielt",
+  heroLead: "Diese Seite fokussiert jetzt klarer den Intent adr pruefungsfragen lernen und zeigt eine kleine, glaubwuerdige Fragen-Vorschau fuer ADR auf Deutsch.",
+  heroSupport: "Sie soll Suchende schnell orientieren und danach direkt in den Bot fuer echtes Ueben weiterleiten.",
+  intentTitle: "Warum dieser Fragen-Intent gerade wichtig ist",
   intentParagraphs: [
-    "Hier steckt ein sehr handlungsnaher Suchintent drin: nicht nur Informationen, sondern aktives Fragenlernen.",
-    "Diese Seite soll genau das versprechen, was der Bot spaeter einloest: Wiederholung, Uebung und ein klarer Lernfluss.",
+    "Live-Signale zeigen, dass Nutzer bei diesem Intent moeglichst schnell in konkrete Fragen und Antwortmuster einsteigen wollen.",
+    "Darum zeigt die Seite nur ein kleines Sample, waehrend der Bot den eigentlichen Drill und die Wiederholung uebernimmt.",
   ],
-  sampleTitle: "Lern-Sample",
-  sampleLead:
-    "Ein kleiner Ausschnitt zeigt den Nutzen und spart den eigentlichen Uebungsumfang fuer den Bot auf.",
+  sampleTitle: "Gezielte Fragen-Vorschau",
+  sampleLead: "3 bis 5 Beispiel-Fragen reichen, um den Nutzen sichtbar zu machen und den Rest im Bot zu lassen.",
   sampleQuestions: [
     {
       question: "Wie lernt man Pruefungsfragen effizienter?",
@@ -1744,10 +1731,10 @@ export const adrPruefungsfragenLernen: SeoPageConfig = {
     { term: "Abfrage", note: "Aktiver Schritt statt reinem Lesen." },
     { term: "Lernrhythmus", note: "Kurze Einheiten schlagen oft lange Sessions." },
   ],
-  whyTelegramTitle: "Warum der Bot hier besonders gut passt",
+  whyTelegramTitle: "Warum Telegram nach der Vorschau der richtige Schritt ist",
   whyTelegramParagraphs: [
-    "Der Bot kann Fragen in kleinen Portionen liefern und genau damit die Suchabsicht 'lernen' deutlich besser bedienen als eine statische Seite.",
-    "So bleibt die Landingpage klar fuer Google und der Bot stark fuer echte Nutzung.",
+    "Fragen und Antwortmuster lassen sich im Bot besser wiederholen als auf einer statischen Seite.",
+    "Die Seite bleibt klar und suchorientiert, der Bot uebernimmt die eigentliche Trainingslogik.",
   ],
   relatedLinks: [
     { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
@@ -1762,9 +1749,8 @@ export const adrPruefungsfragenLernen: SeoPageConfig = {
       note: "Breiter Fragencluster mit FAQ-Nutzen",
     },
   ],
-  ctaTitle: "Mit Pruefungsfragen direkt im Bot lernen",
-  ctaLead:
-    "Wenn du genau fuer Fragen und Wiederholung gesucht hast, geht es im Bot ohne Umweg weiter.",
+  ctaTitle: "ADR-Fragen im Telegram-Bot weiterueben",
+  ctaLead: "Wenn du nach dem Sample direkt weiterlernen willst, bringt dich der Bot schneller in echte Wiederholung.",
   ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite ist eine Vorschau fuer Lernende und keine offizielle Pruefungsplattform.",
@@ -2240,6 +2226,390 @@ export const adrDeutschUeben: SeoPageConfig = {
   ],
 };
 
+export const adrPruefungBestehen: SeoPageConfig = {
+  slug: "adr-pruefung-bestehen",
+  path: "/adr-pruefung-bestehen",
+  pageTitle: "ADR Pruefung bestehen",
+  metaTitle: "ADR Pruefung bestehen | Tipps und Vorbereitung | ADR Bot",
+  metaDescription:
+    "ADR Pruefung bestehen: Worauf es wirklich ankommt, welche Fehler vermieden werden und wie der Telegram-Bot beim systematischen Lernen hilft.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Pruefung bestehen",
+  heroLead:
+    "Viele scheitern nicht am Stoff, sondern an der Sprache oder an unsystematischem Lernen. Diese Seite zeigt, worauf es wirklich ankommt.",
+  heroSupport:
+    "Du bekommst einen Ueberblick ueber typische Stolperfallen und einen direkten Einstieg in die Uebung im Bot.",
+  intentTitle: "Warum die Pruefung schwieriger wirkt als sie ist",
+  intentParagraphs: [
+    "Die ADR-Pruefung faellt vielen schwerer, weil die Fragen formal und technisch formuliert sind. Wer die Fachsprache nicht kennt, versteht manchmal nicht einmal, was gefragt wird.",
+    "Systematisches Ueben mit kurzen Fragebloecken hilft mehr als stundenlanges Lesen. Der Telegram-Bot ist dafuer gebaut.",
+  ],
+  sampleTitle: "Was du fuer die Pruefung wissen solltest",
+  sampleLead:
+    "Nicht alle Themen sind gleich wichtig. Hier ein kleines Sample der Kernbereiche.",
+  sampleQuestions: [
+    {
+      question: "Was wird in der ADR-Pruefung tatsaechlich getestet?",
+      answer:
+        "Kenntnisse zu Gefahrgutklassen, Kennzeichnung, Beforderungspapieren, Tunnelkategorien und Verhaltenspflichten des Fahrers.",
+    },
+    {
+      question: "Wie viele Fragen gibt es typischerweise?",
+      answer:
+        "Je nach Pruefungstyp zwischen 30 und 60 Multiple-Choice-Fragen mit Zeitlimit.",
+    },
+    {
+      question: "Was ist der haeufigste Grund fuers Nicht-Bestehen?",
+      answer:
+        "Unbekannte Fachbegriffe und unklare Frageformulierungen, nicht das fehlende Fachwissen selbst.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Bestehensgrenze", note: "Mindestpunktzahl, die erreicht werden muss." },
+    { term: "Multiple-Choice", note: "Aufgabenformat mit vorgegebenen Antwortmoeglichkeiten." },
+    { term: "Wiederholungspruefung", note: "Neue Pruefung nach Nichtbestehen." },
+  ],
+  sampleCalloutTitle: "Wichtig",
+  sampleCalloutText:
+    "Diese Seite ist kein offizielles Pruefungssimulator. Sie gibt Orientierung und leitet in den Bot fuer echte Uebung weiter.",
+  whyTelegramTitle: "Warum der Bot besser vorbereitet als Merkblaetter",
+  whyTelegramParagraphs: [
+    "Im Bot trainierst du mit echten Frageformulierungen und bekommst sofortige Erklaerungen. Das baut Vertrauen fuer die Pruefungssituation auf.",
+    "Kurze Einheiten taeglich sind effektiver als ein einmaliger Lernmarathon kurz vor der Pruefung.",
+  ],
+  faqs: [
+    {
+      question: "Wie oft darf ich die ADR-Pruefung wiederholen?",
+      answer:
+        "Das haengt von der jeweiligen Pruefungsstelle und dem Bundesland ab. Es gibt keine bundesweit einheitliche Grenze.",
+    },
+    {
+      question: "Muss ich alle ADR-Klassen auf einmal lernen?",
+      answer:
+        "Nein. Du kannst mit Basisstoff starten und einzelne Klassen dazulernen, wenn sie fuer deine Arbeit relevant werden.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-pruefung-auf-deutsch", label: "ADR-Pruefung auf Deutsch", note: "Allgemeiner Einstieg" },
+    { href: "/adr-pruefung-hilfe", label: "ADR Pruefung Hilfe", note: "Hilfe bei konkreten Fragen" },
+    { href: "/adr-pruefungsfragen-lernen", label: "ADR Pruefungsfragen lernen", note: "Fragen systematisch lernen" },
+  ],
+  ctaTitle: "Direkt mit der Pruefungsvorbereitung starten",
+  ctaLead: "Der Bot trainiert dich mit echten Frageformulierungen und sofortigen Erklaerungen.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Diese Seite ist kein offizielles Pruefungsangebot.",
+  telegramSource: "seo_adr_pruefung_bestehen",
+  keywords: [
+    "ADR Pruefung bestehen",
+    "ADR Pruefung tipps",
+    "ADR Pruefung vorbereitung",
+    "ADR bestehen",
+  ],
+};
+
+export const adrGefahrgutSymboleDeutsch: SeoPageConfig = {
+  slug: "adr-gefahrgut-symbole-deutsch",
+  path: "/adr-gefahrgut-symbole-deutsch",
+  pageTitle: "Gefahrgut Symbole Deutsch",
+  metaTitle: "Gefahrgut Symbole Deutsch | ADR Gefahrzettel erklaert | ADR Bot",
+  metaDescription:
+    "Gefahrgut-Symbole und Gefahrzettel auf Deutsch erklaert: Piktogramme, Klassen und was sie fuer ADR-Fahrer bedeuten.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "Gefahrgut Symbole auf Deutsch",
+  heroLead:
+    "Gefahrzettel und Symbole sind ein zentrales Thema der ADR-Pruefung. Diese Seite erklaert die wichtigsten Piktogramme und ihre Bedeutung auf Deutsch.",
+  heroSupport:
+    "Du bekommst eine kompakte Uebersicht der haeufigsten Symbole. Fuer tiefere Wiederholung geht es im Bot weiter.",
+  intentTitle: "Warum Symbole so pruefungsrelevant sind",
+  intentParagraphs: [
+    "In der ADR-Pruefung kommen Fragen zu Gefahrzettel, Orangetafeln und Kennzeichnung regelmaessig vor. Wer die Symbole nicht kennt, verliert leicht Punkte.",
+    "Gleichzeitig sind viele Symbole logisch aufgebaut. Wer die Grundprinzipien versteht, kann sich den Rest erschliessen.",
+  ],
+  sampleTitle: "Beispiele typischer Gefahrzettel",
+  sampleLead:
+    "Nur ein kleiner Ausschnitt mit den Symbolen, die in Pruefungen am haeufigsten vorkommen.",
+  sampleQuestions: [
+    {
+      question: "Was bedeutet die Nummer auf einem Gefahrzettel?",
+      answer:
+        "Sie gibt die ADR-Gefahrgutklasse an, zum Beispiel Klasse 3 fuer entzuendbare Fluessigkeiten.",
+    },
+    {
+      question: "Was zeigt die Orangetafel am Fahrzeug?",
+      answer:
+        "Die Gefahrnummer oben und die UN-Nummer unten. Beides identifiziert den Stoff und seine Gefahren.",
+    },
+    {
+      question: "Warum gibt es Gefahrzettel in verschiedenen Formen?",
+      answer:
+        "Die Rautenform signalisiert immer Gefahrgut. Form und Farbe geben schnell Auskunft ueber Art und Klasse.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Gefahrzettel", note: "Rautenfoermiges Piktogramm auf Verpackungen und Fahrzeugen." },
+    { term: "Orangetafel", note: "Kennzeichnung am Fahrzeug mit Gefahrnummer und UN-Nummer." },
+    { term: "Gefahrnummer", note: "Zweistellige Zahl, die auf Art und Intensitaet der Gefahr hinweist." },
+    { term: "UN-Nummer", note: "Vierstellige Nummer zur eindeutigen Identifikation des Stoffes." },
+  ],
+  whyTelegramTitle: "Symbole besser im Bot einpraegsam lernen",
+  whyTelegramParagraphs: [
+    "Im Bot lernst du Symbole und Kennzeichnung mit Fragen und sofortigen Erklaerungen statt nur mit einer Tabelle.",
+    "So bleiben die Zusammenhaenge besser in Erinnerung fuer die echte Pruefung.",
+  ],
+  faqs: [
+    {
+      question: "Muss ich alle ADR-Symbole auswendig koennen?",
+      answer:
+        "Du musst die gaengigen Gefahrzettel und die Logik der Kennzeichnung verstehen. Auswendiglernen jeder Variante ist nicht notwendig.",
+    },
+    {
+      question: "Sind die Symbole international gleich?",
+      answer:
+        "Weitgehend ja. Das ADR ist ein internationales Abkommen und die Piktogramme folgen internationalen Normen.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-klassen-deutsch", label: "ADR Klassen Deutsch", note: "Gefahrgutklassen im Ueberblick" },
+    { href: "/adr-begriffe", label: "ADR Begriffe", note: "Wichtige Fachwoerter erklaert" },
+    { href: "/technisches-deutsch-adr", label: "Technisches Deutsch ADR", note: "Fachsprache der Pruefung" },
+  ],
+  ctaTitle: "Gefahrzettel und Symbole im Bot trainieren",
+  ctaLead: "Mit Fragen zu Kennzeichnung und Klassen im Telegram-Bot gezielt fuer die Pruefung ueben.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Diese Seite ist eine Lernvorschau und keine offizielle Klassifikationsreferenz.",
+  telegramSource: "seo_adr_gefahrgut_symbole_deutsch",
+  keywords: [
+    "Gefahrgut Symbole Deutsch",
+    "ADR Gefahrzettel",
+    "ADR Kennzeichnung erklaert",
+    "Gefahrzettel Bedeutung",
+  ],
+};
+
+export const adrKlassenDeutsch: SeoPageConfig = {
+  slug: "adr-klassen-deutsch",
+  path: "/adr-klassen-deutsch",
+  pageTitle: "ADR Klassen Deutsch",
+  metaTitle: "ADR Klassen Deutsch | Gefahrgutklassen 1-9 erklaert | ADR Bot",
+  metaDescription:
+    "ADR Gefahrgutklassen 1 bis 9 auf Deutsch erklaert: Was jede Klasse bedeutet, typische Beispiele und was fuer Fahrer pruefungsrelevant ist.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Klassen auf Deutsch",
+  heroLead:
+    "Die neun ADR-Gefahrgutklassen sind das Grundgeruest der Pruefung. Diese Seite erklaert sie kompakt auf Deutsch.",
+  heroSupport:
+    "Du bekommst einen kurzen Ueberblick. Die volle Wiederholung mit Fragen laeuft im Telegram-Bot.",
+  intentTitle: "Warum die Klassen so wichtig sind",
+  intentParagraphs: [
+    "Ohne Grundkenntnisse der Gefahrgutklassen kann man viele Pruefungsfragen nicht korrekt einordnen. Die Klassen bestimmen Kennzeichnung, Verpackung und Verhaltenspflichten.",
+    "Die meisten Fahrer benoetigen nur ein paar der neun Klassen regelmaessig. Trotzdem fragt die Pruefung quer ueber alle Klassen.",
+  ],
+  sampleTitle: "Kurzer Ueberblick der Klassen",
+  sampleLead: "Nur die wichtigsten Klassen mit einem praxisnahen Beispiel jeweils.",
+  sampleQuestions: [
+    {
+      question: "Was umfasst Klasse 3?",
+      answer:
+        "Entzuendbare Fluessigkeiten wie Benzin, Dieselkraftstoff und Loesungsmittel.",
+    },
+    {
+      question: "Was sind typische Klasse-8-Gueter?",
+      answer:
+        "Aeztende Stoffe wie Saeure, Laugen und bestimmte Reinigungsmittel.",
+    },
+    {
+      question: "Warum gibt es eine Klasse 9?",
+      answer:
+        "Klasse 9 erfasst sonstige gefaehrliche Stoffe und Gegenstaende, die keiner anderen Klasse eindeutig zuzuordnen sind.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Klasse 1", note: "Explosivstoffe und Gegenstaende mit Explosivstoff." },
+    { term: "Klasse 3", note: "Entzuendbare Fluessigkeiten." },
+    { term: "Klasse 6.1", note: "Giftige Stoffe." },
+    { term: "Klasse 8", note: "Aeztende Stoffe." },
+    { term: "Klasse 9", note: "Sonstige gefaehrliche Stoffe." },
+  ],
+  whyTelegramTitle: "Klassen mit echten Fragen festigen",
+  whyTelegramParagraphs: [
+    "Im Bot werden Klassen in pruefungsaehnlichen Fragen trainiert, nicht nur in Tabellen gelesen.",
+    "Das festigt das Wissen nachhaltiger als ein einmaliger Ueberblick.",
+  ],
+  faqs: [
+    {
+      question: "Muss ich alle neun Klassen koennen?",
+      answer:
+        "Grundkenntnisse aller Klassen sind pruefungsrelevant. Tiefes Detailwissen brauchst du meist nur fuer die Klassen, mit denen du arbeitest.",
+    },
+    {
+      question: "Gibt es Unterklassen?",
+      answer:
+        "Ja, einige Klassen wie 2, 4 und 6 haben Unterklassen mit speziellen Regeln.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-gefahrgut-symbole-deutsch", label: "Gefahrgut Symbole", note: "Symbole und Gefahrzettel erklaert" },
+    { href: "/adr-begriffe", label: "ADR Begriffe", note: "Fachwoerter fuer die Pruefung" },
+    { href: "/gefahrgut-deutsch-lernen", label: "Gefahrgut Deutsch lernen", note: "Gefahrgut auf Deutsch verstehen" },
+  ],
+  ctaTitle: "Alle Klassen im Bot trainieren",
+  ctaLead: "Pruefungsfragen zu allen neun Gefahrgutklassen direkt im Telegram-Bot ueben.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Diese Seite ist eine Lernvorschau. Sie ersetzt keine offizielle ADR-Schulung.",
+  telegramSource: "seo_adr_klassen_deutsch",
+  keywords: [
+    "ADR Klassen Deutsch",
+    "Gefahrgutklassen erklaert",
+    "ADR Klassen 1 bis 9",
+    "ADR Gefahrgutklassen",
+  ],
+};
+
+export const adrWiederholungDeutsch: SeoPageConfig = {
+  slug: "adr-wiederholung-deutsch",
+  path: "/adr-wiederholung-deutsch",
+  pageTitle: "ADR Wiederholung Deutsch",
+  metaTitle: "ADR Wiederholung Deutsch | Stoff wiederholen und festigen | ADR Bot",
+  metaDescription:
+    "ADR Stoff auf Deutsch wiederholen: Kompakte Wiederholungseinheiten fuer Begriffe, Fragen und Regeln vor der Pruefung oder Verlaengerung.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Wiederholung auf Deutsch",
+  heroLead:
+    "Wer den ADR-Schein verlaengern oder eine Refresher-Pruefung ablegen muss, braucht gezielte Wiederholung. Diese Seite gibt eine kompakte Einstiegsorientierung.",
+  heroSupport:
+    "Du bekommst einen kleinen Ausschnitt typischer Wiederholungsinhalte. Die systematische Wiederholung laeuft im Bot.",
+  intentTitle: "Wer Wiederholung sucht und warum",
+  intentParagraphs: [
+    "ADR-Scheine muessen regelmaessig verlaengert werden. Viele Fahrer lernen fuer die Erstpruefung intensiv und muessen danach gezielt auffrischen.",
+    "Die Sprache und Formulierungen aendern sich nur wenig. Wer die Struktur kennt, braucht weniger Wiederholungszeit.",
+  ],
+  sampleTitle: "Typische Wiederholungsthemen",
+  sampleLead:
+    "Diese Bereiche kommen in Verlaengerungspruefungen besonders haeufig vor.",
+  sampleQuestions: [
+    {
+      question: "Was muss bei der Verlaengerung des ADR-Scheins gelernt werden?",
+      answer:
+        "Aktualisierte Vorschriften, Kennzeichnung, Verhaltenspflichten und pruefungsrelevante Aenderungen seit der letzten Pruefung.",
+    },
+    {
+      question: "Wie lange gilt ein ADR-Schein?",
+      answer:
+        "Fuenf Jahre. Danach ist eine Verlaengerungspruefung erforderlich.",
+    },
+    {
+      question: "Was ist der Unterschied zwischen Basis- und Aufbaukurs?",
+      answer:
+        "Der Basiskurs deckt allgemeine Gefahrgutregeln ab. Aufbaukurse sind spezialisiert auf Tankfahrzeuge oder bestimmte Klassen.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Verlaengerungspruefung", note: "Pruefung zur Erneuerung des ADR-Scheins nach Ablauf." },
+    { term: "Refresher", note: "Kurzform fuer Auffrischungskurs oder Wiederholungseinheit." },
+    { term: "Basiskurs", note: "Grundausbildung fuer alle ADR-Fahrer." },
+    { term: "Aufbaukurs", note: "Spezialisierung fuer Tanks oder bestimmte Gefahrgutklassen." },
+  ],
+  whyTelegramTitle: "Wiederholung im Bot ist effizienter",
+  whyTelegramParagraphs: [
+    "Kurze taeglich Einheiten im Bot sind effektiver fuer die Wiederholung als stundenlanges Lesen unmittelbar vor der Pruefung.",
+    "Der Bot stellt Fragen in pruefungsaehnlicher Sprache, sodass du dich sofort an das Format gewoehnen kannst.",
+  ],
+  relatedLinks: [
+    { href: "/adr-pruefung-bestehen", label: "ADR Pruefung bestehen", note: "Tipps fuer die Pruefung" },
+    { href: "/adr-pruefungsfragen-lernen", label: "ADR Pruefungsfragen lernen", note: "Fragen systematisch lernen" },
+    { href: "/adr-deutsch-ueben", label: "ADR Deutsch ueben", note: "Sprache und Fragen aktiv ueben" },
+  ],
+  ctaTitle: "Jetzt gezielt mit der Wiederholung starten",
+  ctaLead: "Im Telegram-Bot kannst du sofort mit kurzen Wiederholungseinheiten beginnen.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Diese Seite ist eine Lernvorschau und kein offizieller Wiederholungskurs.",
+  telegramSource: "seo_adr_wiederholung_deutsch",
+  keywords: [
+    "ADR Wiederholung Deutsch",
+    "ADR Schein verlaengern",
+    "ADR Refresher",
+    "ADR Stoff wiederholen",
+  ],
+};
+
+export const adrLernhilfeDeutsch: SeoPageConfig = {
+  slug: "adr-lernhilfe-deutsch",
+  path: "/adr-lernhilfe-deutsch",
+  pageTitle: "ADR Lernhilfe Deutsch",
+  metaTitle: "ADR Lernhilfe Deutsch | Einstieg, Begriffe und Uebung | ADR Bot",
+  metaDescription:
+    "ADR Lernhilfe auf Deutsch: Einstieg fuer Fahrer und Lernende mit Fachbegriffen, kurzen Fragebeispielen und dem Telegram-Bot fuer echte Wiederholung.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Lernhilfe auf Deutsch",
+  heroLead:
+    "Diese Seite ist als erste Anlaufstelle gedacht, wenn du Hilfe beim Lernen fuer ADR auf Deutsch brauchst.",
+  heroSupport:
+    "Du bekommst Orientierung, wichtige Begriffe und einen direkten Einstieg in den Telegram-Bot.",
+  intentTitle: "Wer nach ADR Lernhilfe sucht",
+  intentParagraphs: [
+    "Viele Fahrer suchen nach ADR Lernhilfe, weil ihnen der Einstieg schwerfaellt. Die Kombination aus technischen Inhalten und Fachsprache wirkt am Anfang ueberwaetigend.",
+    "Diese Seite hilft dabei, den Stoff zu strukturieren und einen echten Lernfluss zu starten.",
+  ],
+  sampleTitle: "Erste Lernhilfe-Elemente",
+  sampleLead:
+    "Ein kleiner Ausschnitt der Themen, bei denen Lernhilfe am meisten hilft.",
+  sampleQuestions: [
+    {
+      question: "Wie fange ich am besten mit ADR an?",
+      answer:
+        "Mit den Grundbegriffen: Gefahrgutklassen, Kennzeichnung und Beforderungspflichten. Das gibt Struktur fuer alles Weitere.",
+    },
+    {
+      question: "Welche Fehler machen Einsteiger beim Lernen haeufig?",
+      answer:
+        "Zu frueh versuchen, alles auswendig zu lernen, statt zuerst die Logik hinter den Regeln zu verstehen.",
+    },
+    {
+      question: "Wie lang sollten Lerneinheiten sein?",
+      answer:
+        "Kurze Einheiten von 10 bis 20 Minuten mit klarem Fokus sind wirksamer als stundenlanges Lesen ohne Wiederholung.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Gefahrgutunterweisung", note: "Pflichtschulung fuer Fahrer vor dem ersten Transport." },
+    { term: "Lernziel", note: "Klares Thema oder Kompetenzbereich, den du als naechstes festigen willst." },
+    { term: "Wiederholungsintervall", note: "Regelmaessiger Abstand zwischen Lerneinheiten fuer bessere Einpraegung." },
+  ],
+  whyTelegramTitle: "Warum der Bot eine echte Lernhilfe ist",
+  whyTelegramParagraphs: [
+    "Der Bot stellt Fragen in pruefungsnaher Sprache und erklaert sofort, wenn etwas unklar ist. Das ist effektiver als passives Lesen.",
+    "Du kannst jederzeit kurze Einheiten machen, ohne ein Lehrbuch aufschlagen zu muessen.",
+  ],
+  faqs: [
+    {
+      question: "Brauche ich fuer ADR einen Kurs oder reicht Selbstlernen?",
+      answer:
+        "Fuer die Pruefung ist ein zugelassener Kurs erforderlich. Der Bot hilft beim Vor- und Nachbereiten, ersetzt aber keinen offiziellen Kurs.",
+    },
+    {
+      question: "Kann ich ADR auf Deutsch lernen, obwohl ich kein Muttersprachler bin?",
+      answer:
+        "Ja. Viele Fahrer lernen ADR auf Deutsch als Zweitsprache. Der Bot ist genau dafuer gebaut.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-pruefung-auf-deutsch", label: "ADR-Pruefung auf Deutsch", note: "Allgemeiner Einstieg" },
+    { href: "/adr-deutsch-ueben", label: "ADR Deutsch ueben", note: "Aktives Ueben von Sprache und Fragen" },
+    { href: "/adr-pruefung-fuer-nicht-muttersprachler", label: "ADR fuer Nicht-Muttersprachler", note: "Speziell fuer Lernende mit anderer Muttersprache" },
+  ],
+  ctaTitle: "Jetzt mit echtem Lernen beginnen",
+  ctaLead: "Der Telegram-Bot begleitet dich von den ersten Begriffen bis zur Pruefungsvorbereitung.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Diese Seite ist eine Lernvorschau und kein Ersatz fuer einen offiziellen ADR-Kurs.",
+  telegramSource: "seo_adr_lernhilfe_deutsch",
+  keywords: [
+    "ADR Lernhilfe Deutsch",
+    "ADR lernen Hilfe",
+    "ADR Einstieg Deutsch",
+    "ADR Lernhilfe Fahrer",
+  ],
+};
+
 export const seoPageList = [
   adrPruefungAufDeutsch,
   basiskursPreview,
@@ -2266,6 +2636,11 @@ export const seoPageList = [
   adrScheinDeutsch,
   adrPruefungHilfe,
   adrDeutschUeben,
+  adrPruefungBestehen,
+  adrGefahrgutSymboleDeutsch,
+  adrKlassenDeutsch,
+  adrWiederholungDeutsch,
+  adrLernhilfeDeutsch,
 ] as const;
 
 export function buildSeoPageStructuredData(
@@ -2339,7 +2714,7 @@ export function buildSeoPageStructuredData(
 
 export function buildSeoPageMetadata(page: SeoPageConfig): Metadata {
   return {
-    title: page.metaTitle,
+    title: { absolute: page.metaTitle },
     description: page.metaDescription,
     alternates: {
       canonical: page.path,
