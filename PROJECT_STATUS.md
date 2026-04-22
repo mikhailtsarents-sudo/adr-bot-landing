@@ -161,16 +161,12 @@ Practical status now:
 
 ### YouTube Upload & Google Drive — VPS credentials configured (2026-04-22)
 
-Both OAuth credentials were manually authorized through the n8n UI at `http://localhost:5678` (via SSH tunnel `ssh -L 5678:localhost:5678 root@46.225.170.55`):
+Both OAuth credentials were manually authorized through the self-hosted n8n UI on the VPS via an SSH tunnel.
 
-- **YouTube OAuth2 API** — credential name "YouTube account", connected to `mikhail.tsarents@gmail.com`
-- **Google Drive OAuth2 API** — credential name "Google Drive account", connected to `mikhail.tsarents@gmail.com`
+- **YouTube OAuth2 API** — connected and working on VPS
+- **Google Drive OAuth2 API** — connected and working on VPS
 
-The OAuth client used: `347309803067-g17jcikgn22ckafg2pnt2huec5hs75tf.apps.googleusercontent.com` (Web app, project `adr-trainer`). Redirect URI `http://localhost:5678/rest/oauth2-credential/callback` was added to Google Cloud Console for this purpose.
-
-**n8n VPS login:** `mikhail.tsarents@gmail.com` / `ADRn8n2026!` (access via SSH tunnel only)
-
-**n8n VPS API key for Codex:** `n8n_api_371adce97cf095c05ab16ab60d6a0d6c529c3bae9195fe53`
+Sensitive login data, API keys, and OAuth client details are intentionally kept out of Git and must remain only in the secure server/runtime setup.
 
 YouTube upload already works via the **n8n "ADR YouTube Execution Bridge"** workflow on VPS.
 
