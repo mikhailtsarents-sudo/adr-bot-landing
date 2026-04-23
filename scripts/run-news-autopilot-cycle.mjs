@@ -16,6 +16,7 @@ import {
 } from "./runtime/news-content-creator-engine.mjs";
 import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
 import { bootstrapLocalRuntimeEnv } from "./runtime/local-runtime-env.mjs";
+import { normalizeRenderedNewsVideo } from "./runtime/news-rendered-video-normalizer.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -69,6 +70,7 @@ Options:
   --history <file>       Publish history JSON (default: ${DEFAULT_HISTORY_PATH})
   --output-root <dir>    Output root (default: ${DEFAULT_OUTPUT_ROOT})
   --recent-limit <n>     Avoid the most recent N published news items when possible (default: 3)
+  --no-seed-upstream     Do not auto-discover and seed a fresh news row when queue is empty
   --skip-publish         Stop after approved-news package/finalize, skip YouTube publish
   --help                 Show this help
 `);
@@ -82,6 +84,7 @@ function parseArgs(argv) {
     historyPath: DEFAULT_HISTORY_PATH,
     outputRoot: DEFAULT_OUTPUT_ROOT,
     recentLimit: 3,
+    seedUpstreamWhenEmpty: true,
     skipPublish: false,
   };
 
@@ -93,6 +96,7 @@ function parseArgs(argv) {
     else if (token === "--history") args.historyPath = path.resolve(argv[++i]);
     else if (token === "--output-root") args.outputRoot = path.resolve(argv[++i]);
     else if (token === "--recent-limit") args.recentLimit = Math.max(0, Number(argv[++i]) || 3);
+    else if (token === "--no-seed-upstream") args.seedUpstreamWhenEmpty = false;
     else if (token === "--skip-publish") args.skipPublish = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
@@ -139,6 +143,29 @@ async function writeJson(filePath, payload) {
   await writeFile(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 }
 
+async function patchPackageRenderSource(packageDir, normalizedVideoUrl) {
+  const publishReadyPath = path.join(packageDir, "publish_ready_package.json");
+  const bridgeRowPath = path.join(packageDir, "g3_bridge_row.json");
+  const metadataPath = path.join(packageDir, "metadata.json");
+  const [publishReady, bridgeRow, metadata] = await Promise.all([
+    loadJson(publishReadyPath, {}),
+    loadJson(bridgeRowPath, {}),
+    loadJson(metadataPath, {}),
+  ]);
+
+  publishReady.final_mp4_url = normalizedVideoUrl;
+  publishReady.render_source_url = normalizedVideoUrl;
+  bridgeRow.final_mp4_url = normalizedVideoUrl;
+  bridgeRow.render_source_url = normalizedVideoUrl;
+  metadata.render_source_url = normalizedVideoUrl;
+
+  await Promise.all([
+    writeJson(publishReadyPath, publishReady),
+    writeJson(bridgeRowPath, bridgeRow),
+    writeJson(metadataPath, metadata),
+  ]);
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const startedAt = new Date().toISOString();
@@ -155,11 +182,33 @@ async function main() {
   );
 
   const preparedQueuePath = parseOutputPath(creatorOutput, "latest_prepared_news_queue") || args.preparedQueuePath;
-  const preparedQueue = await loadJson(preparedQueuePath, { entries: [] });
+  let preparedQueue = await loadJson(preparedQueuePath, { entries: [] });
   const historyEntries = await loadNewsAutopilotHistory(args.historyPath);
   const issuedPayload = await loadJson(args.issuedHistoryPath, { history: [] });
   const issuedHistory = Array.isArray(issuedPayload?.history) ? issuedPayload.history : [];
-  const consumed = consumePreparedNews(preparedQueue);
+  let consumed = consumePreparedNews(preparedQueue);
+
+  if (!consumed.selected && args.seedUpstreamWhenEmpty) {
+    logAutonomousDecision("news queue empty, attempting upstream seed");
+    runNodeScript(
+      path.join(repoRoot, "scripts", "run-news-upstream-cycle.mjs"),
+      ["--output-root", path.join(args.outputRoot, "upstream-seed-runs")],
+    );
+
+    const creatorOutputAfterSeed = runNodeScript(
+      path.join(repoRoot, "scripts", "run-news-content-creator.mjs"),
+      [
+        "--output-root", args.creatorOutputRoot,
+        "--publish-history", args.historyPath,
+        "--issued-history", args.issuedHistoryPath,
+        "--recent-limit", String(args.recentLimit),
+      ],
+    );
+    const reseededQueuePath = parseOutputPath(creatorOutputAfterSeed, "latest_prepared_news_queue") || preparedQueuePath;
+    preparedQueue = await loadJson(reseededQueuePath, { entries: [] });
+    consumed = consumePreparedNews(preparedQueue);
+  }
+
   const selectedEntry = consumed.selected;
   const selectionMeta = selectedEntry?.selection_meta || {};
   const selected = selectedEntry
@@ -202,7 +251,7 @@ async function main() {
   await writeJson(approvedRowPath, selected.payload);
 
   const branchOutput = runNodeScript(
-    path.join(repoRoot, "scripts", "run-approved-news-live-branch.mjs"),
+    path.join(repoRoot, "scripts", "run-news-render-package.mjs"),
     [
       "--input", approvedRowPath,
       "--output-root", outputDir,
@@ -212,25 +261,33 @@ async function main() {
   const publishReadyPath = parseOutputPath(branchOutput, "publish_ready");
   const reportPath = parseOutputPath(branchOutput, "report");
   const renderPackageDir = parseOutputPath(branchOutput, "render_package");
+  let postRenderReportPath = "";
+  let normalizationReportPath = "";
 
   let youtubeUrl = "";
   if (!args.skipPublish && text(renderPackageDir)) {
-    const publishOutput = runNodeScript(
+    const packagesRoot = path.dirname(renderPackageDir);
+    const postRenderOutput = runNodeScript(
+      path.join(repoRoot, "scripts", "run-post-render-pipeline.mjs"),
+      ["--packages-root", packagesRoot, "--skip-youtube"],
+    );
+    postRenderReportPath = path.join(packagesRoot, "shotstack_batch_render_summary.json");
+    const publishReady = await loadJson(path.join(renderPackageDir, "publish_ready_package.json"), {});
+    const normalization = await normalizeRenderedNewsVideo({
+      remoteUrl: text(publishReady.final_mp4_url || publishReady.render_source_url),
+      traceId,
+      diagnosticsDir: renderPackageDir,
+      outputRoot: path.join(outputDir, "normalized-news-video"),
+    });
+    normalizationReportPath = normalization.reportPath;
+    await patchPackageRenderSource(renderPackageDir, normalization.normalizedVideoUrl);
+
+    const youtubeOutput = runNodeScript(
       path.join(repoRoot, "scripts", "run-package-youtube-publish.mjs"),
       ["--package-dir", renderPackageDir],
     );
-    const publishUrlMatch = String(publishOutput).match(/youtube_urls=([^\n]+)/);
-    youtubeUrl = publishUrlMatch ? text(publishUrlMatch[1].split(",")[0]) : "";
-
-    const summaryPath = path.join(renderPackageDir, "youtube_publish_result.json");
-    const finalRow = await loadJson(summaryPath, null);
-    if (!youtubeUrl && finalRow) {
-      youtubeUrl = text(finalRow.youtube_url);
-      if (!youtubeUrl && text(finalRow.feedback).includes("youtube_link=")) {
-        const match = text(finalRow.feedback).match(/youtube_link=([^\s]+)/);
-        if (match) youtubeUrl = text(match[1]);
-      }
-    }
+    const publishUrlMatch = String(youtubeOutput).match(/YOUTUBE_URL=([^\n]+)/);
+    youtubeUrl = publishUrlMatch ? text(publishUrlMatch[1]) : "";
   }
 
   if (!args.skipPublish) {
@@ -262,6 +319,8 @@ async function main() {
     ranked_source_ids: selectionMeta.ranked_source_ids || [],
     approved_row_path: approvedRowPath,
     news_branch_report_path: reportPath,
+    post_render_report_path: postRenderReportPath,
+    normalization_report_path: normalizationReportPath,
     render_package_dir: renderPackageDir,
     publish_ready_path: publishReadyPath,
     youtube_url: youtubeUrl,

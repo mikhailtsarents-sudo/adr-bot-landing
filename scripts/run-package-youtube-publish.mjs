@@ -20,7 +20,7 @@ const DEFAULT_DRAFT_STORAGE_URL =
   || "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows";
 const DEFAULT_YOUTUBE_BRIDGE_WEBHOOK_URL =
   text(process.env.YOUTUBE_BRIDGE_WEBHOOK_URL)
-  || "http://46.225.170.55:5678/webhook/6h5ymwOvFs4E9Rvi/webhook%2520trigger/adr-youtube-execution-bridge-run";
+  || "http://46.225.170.55:5678/webhook/adr-youtube-execution-bridge-run";
 
 const DEFAULT_PACKAGE_DIR = path.join(
   repoRoot,
@@ -93,6 +93,17 @@ async function loadJson(filePath) {
   return JSON.parse(await readFile(filePath, "utf8"));
 }
 
+async function loadJsonWithFallback(primaryPath, fallbackPath = "") {
+  try {
+    return await loadJson(primaryPath);
+  } catch (error) {
+    if (text(fallbackPath)) {
+      return loadJson(fallbackPath);
+    }
+    throw error;
+  }
+}
+
 async function writeJson(filePath, value) {
   await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
@@ -125,6 +136,15 @@ function rowShowsUploadedState(row) {
     || Boolean(text(row?.youtube_url))
     || Boolean(feedbackValue(row?.feedback, "youtube_video_id"))
     || Boolean(feedbackValue(row?.feedback, "youtube_link"));
+}
+
+function rowShowsPriorPublishLifecycle(row) {
+  const status = text(row?.published_status);
+  return Boolean(status)
+    || Boolean(text(row?.final_mp4_url))
+    || Boolean(text(row?.youtube_video_id))
+    || Boolean(text(row?.youtube_url))
+    || Boolean(text(row?.feedback));
 }
 
 async function triggerBridge({ draftId, traceId, requestedBy, packagePayload }, args) {
@@ -214,17 +234,18 @@ async function main() {
   const packageDir = args.packageDir;
   const bridgeRowPath = path.join(packageDir, "g3_bridge_row.json");
   const renderTaskPath = path.join(packageDir, "render_task.json");
+  const renderTaskFallbackPath = path.join(path.dirname(packageDir), "render_task.json");
   const publishReadyPath = path.join(packageDir, "publish_ready_package.json");
   const [bridgeRow, renderTask, publishReady] = await Promise.all([
     loadJson(bridgeRowPath),
-    loadJson(renderTaskPath),
+    loadJsonWithFallback(renderTaskPath, renderTaskFallbackPath),
     loadJson(publishReadyPath),
   ]);
 
   let effectiveDraftIdSuffix = text(args.draftIdSuffix);
   if (!effectiveDraftIdSuffix) {
     const existingRows = await loadExistingDraftRows(text(bridgeRow.draft_id), args);
-    if (existingRows.some((row) => rowShowsUploadedState(row))) {
+    if (existingRows.some((row) => rowShowsUploadedState(row) || rowShowsPriorPublishLifecycle(row))) {
       effectiveDraftIdSuffix = buildAutoDraftSuffix();
     }
   }

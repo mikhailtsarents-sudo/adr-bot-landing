@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, stat, writeFile, mkdir, rename } from "node:fs/promises";
 import crypto from "node:crypto";
 import { spawnSync } from "node:child_process";
 import os from "node:os";
@@ -11,6 +11,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 const ROLE_ORDER = ["hook", "question", "answers", "timer", "answer", "cta"];
+const WIDTH = 1080;
+const HEIGHT = 1920;
 const DEFAULT_PROJECT = "adr-short-video";
 const DEFAULT_OUTPUT_DIR = path.join(
   repoRoot,
@@ -80,6 +82,124 @@ function sha256(buffer) {
   return crypto.createHash("sha256").update(buffer).digest("hex");
 }
 
+function text(value) {
+  return value == null ? "" : String(value).trim();
+}
+
+function escapeXml(value) {
+  return text(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function wrapText(value, maxChars) {
+  const words = text(value).split(/\s+/).filter(Boolean);
+  const lines = [];
+  let current = "";
+  for (const word of words) {
+    const candidate = current ? `${current} ${word}` : word;
+    if (candidate.length > maxChars && current) {
+      lines.push(current);
+      current = word;
+    } else {
+      current = candidate;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.slice(0, 8);
+}
+
+function rolePalette(role) {
+  const map = {
+    hook: { bgA: "#0b1f3a", bgB: "#143e72", accent: "#4cc9f0", badge: "ADR NEWS", badgeBg: "#0f6db2" },
+    question: { bgA: "#11253f", bgB: "#244b78", accent: "#ffd166", badge: "WAS IST JETZT WICHTIG", badgeBg: "#8d6a00" },
+    answers: { bgA: "#10212c", bgB: "#1b4457", accent: "#80ed99", badge: "KURZ ERKLÄRT", badgeBg: "#0f6b3d" },
+    timer: { bgA: "#1d1930", bgB: "#41306b", accent: "#ff9f1c", badge: "MERKEN", badgeBg: "#9a4d00" },
+    answer: { bgA: "#1c2333", bgB: "#28527a", accent: "#c7f464", badge: "PRAKTISCHE FOLGE", badgeBg: "#43611b" },
+    cta: { bgA: "#072d53", bgB: "#0a5ba8", accent: "#7dd3fc", badge: "TELEGRAM BOT", badgeBg: "#0c7bc4" },
+  };
+  return map[role] || map.answers;
+}
+
+function buildNewsSlideSvg({ role, copyText }) {
+  const palette = rolePalette(role);
+  const titleLines = wrapText(copyText, role === "answers" ? 22 : 18);
+  const fontSize = role === "answers" ? 68 : 80;
+  const lineGap = role === "answers" ? 88 : 104;
+  const textY = role === "cta" ? 1180 : 900;
+  const textBlock = titleLines
+    .map((line, index) => `<text x="108" y="${textY + index * lineGap}" font-family="Arial, Helvetica, sans-serif" font-size="${fontSize}" font-weight="800" fill="#ffffff">${escapeXml(line)}</text>`)
+    .join("\n  ");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${palette.bgA}" />
+      <stop offset="100%" stop-color="${palette.bgB}" />
+    </linearGradient>
+    <radialGradient id="glow" cx="20%" cy="10%" r="80%">
+      <stop offset="0%" stop-color="${palette.accent}" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="${palette.accent}" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#bg)" />
+  <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#glow)" />
+  <circle cx="930" cy="280" r="220" fill="${palette.accent}" opacity="0.18" />
+  <circle cx="140" cy="1710" r="180" fill="${palette.accent}" opacity="0.12" />
+  <rect x="72" y="86" width="936" height="1748" rx="42" fill="#07131f" opacity="0.18" stroke="rgba(255,255,255,0.08)" />
+  <rect x="108" y="132" width="420" height="66" rx="18" fill="${palette.badgeBg}" />
+  <text x="136" y="178" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="800" fill="#ffffff">${escapeXml(palette.badge)}</text>
+  <rect x="108" y="250" width="864" height="8" rx="4" fill="${palette.accent}" opacity="0.9" />
+  ${textBlock}
+  <text x="108" y="1738" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#dbeafe" opacity="0.92">ADR Bot · News Short</text>
+</svg>`;
+}
+
+async function renderSvgToPng(svgPath, pngPath) {
+  const outputDir = path.dirname(pngPath);
+  const qlmanageResult = spawnSync("/usr/bin/qlmanage", ["-t", "-s", String(WIDTH), "-o", outputDir, svgPath], {
+    encoding: "utf8",
+    stdio: "pipe",
+  });
+
+  if (qlmanageResult.status === 0) {
+    const generatedPngPath = path.join(outputDir, `${path.basename(svgPath)}.png`);
+    await rename(generatedPngPath, pngPath);
+    return;
+  }
+
+  const rsvgResult = spawnSync("rsvg-convert", [
+    "-w",
+    String(WIDTH),
+    "-h",
+    String(HEIGHT),
+    "-o",
+    pngPath,
+    svgPath,
+  ], {
+    encoding: "utf8",
+    stdio: "pipe",
+  });
+
+  if (rsvgResult.status === 0) {
+    return;
+  }
+
+  throw new Error(
+    [
+      "Failed to render NEWS SVG to PNG.",
+      qlmanageResult.stdout?.trim() ? `qlmanage stdout:\n${qlmanageResult.stdout.trim()}` : null,
+      qlmanageResult.stderr?.trim() ? `qlmanage stderr:\n${qlmanageResult.stderr.trim()}` : null,
+      rsvgResult.stdout?.trim() ? `rsvg-convert stdout:\n${rsvgResult.stdout.trim()}` : null,
+      rsvgResult.stderr?.trim() ? `rsvg-convert stderr:\n${rsvgResult.stderr.trim()}` : null,
+    ].filter(Boolean).join("\n"),
+  );
+}
+
 function roleIndex(role) {
   const index = ROLE_ORDER.indexOf(role);
   return index === -1 ? ROLE_ORDER.length : index;
@@ -133,32 +253,27 @@ async function loadJson(filePath) {
   return JSON.parse(await readFile(filePath, "utf8"));
 }
 
-async function validateSceneFiles(sceneRoot, scenes) {
+async function synthesizeSceneFiles(sceneRoot, scenes) {
   const resolvedScenes = [];
+  await mkdir(sceneRoot, { recursive: true });
 
   for (let i = 0; i < scenes.length; i += 1) {
     const scene = scenes[i];
-    const rawPath = scene.input_path || scene.source_path || scene.input_file || scene.source_file;
-
-    if (!rawPath) {
-      throw new Error(`Scene ${i + 1} is missing input_path/source_path.`);
-    }
-
+    const rawPath = scene.input_path || scene.source_path || scene.input_file || scene.source_file || `slide${i + 1}.png`;
     const resolvedPath = path.isAbsolute(rawPath) ? rawPath : path.resolve(sceneRoot, rawPath);
+    const svgPath = resolvedPath.replace(/\.png$/i, ".svg");
+    const svg = buildNewsSlideSvg({
+      role: scene.role || ROLE_ORDER[i],
+      copyText: scene.copy_text || scene.copy || scene.text || scene.role || `Slide ${i + 1}`,
+    });
+    await writeFile(svgPath, svg, "utf8");
+    await renderSvgToPng(svgPath, resolvedPath);
     const fileInfo = await stat(resolvedPath);
     if (!fileInfo.isFile()) {
-      throw new Error(`Scene ${i + 1} is not a file: ${resolvedPath}`);
+      throw new Error(`Synthesized NEWS scene ${i + 1} is not a file: ${resolvedPath}`);
     }
-
     const buffer = await readFile(resolvedPath);
     assertPngSignature(buffer, resolvedPath);
-
-    const relativePath = path.relative(sceneRoot, resolvedPath);
-    if (!relativePath || relativePath.startsWith("..") || path.dirname(relativePath) !== ".") {
-      throw new Error(
-        `Scene ${i + 1} must live directly inside the scene root: ${resolvedPath} (root: ${sceneRoot})`,
-      );
-    }
 
     resolvedScenes.push({
       scene,
@@ -273,13 +388,26 @@ async function main() {
   requireBooleanFalse(input.allow_template_fallback, "allow_template_fallback");
   requireBooleanFalse(input.allow_generic_fallback, "allow_generic_fallback");
 
-  const resolvedSceneRoot = path.resolve(args.sceneRoot || input.scene_root || DEFAULT_SCENE_ROOT);
-  const sceneFiles = await validateSceneFiles(resolvedSceneRoot, input.scenes || []);
-
-  const plan = buildPlan(input, resolvedSceneRoot, args.project);
+  const requestedSceneRoot = path.resolve(args.sceneRoot || input.scene_root || DEFAULT_SCENE_ROOT);
+  const plan = buildPlan(input, requestedSceneRoot, args.project);
   const planDir = await mkdtemp(path.join(os.tmpdir(), "adr-news-plan-"));
+  const synthesizedSceneRoot = path.join(planDir, "generated-news-scenes");
+  const planWithGeneratedScenes = {
+    ...plan,
+    source_root: synthesizedSceneRoot,
+    asset_source_ref: synthesizedSceneRoot,
+    scenes: plan.scenes.map((scene, index) => ({
+      ...scene,
+      input_path: path.join(synthesizedSceneRoot, `slide${index + 1}.png`),
+      copy_text:
+        input.scenes?.[index]?.copy_text ||
+        input.scenes?.find((candidate) => candidate.role === scene.role)?.copy_text ||
+        scene.role,
+    })),
+  };
+  const sceneFiles = await synthesizeSceneFiles(synthesizedSceneRoot, planWithGeneratedScenes.scenes);
   const planPath = path.join(planDir, "news-plan.json");
-  await writeFile(planPath, `${JSON.stringify(plan, null, 2)}\n`, "utf8");
+  await writeFile(planPath, `${JSON.stringify(planWithGeneratedScenes, null, 2)}\n`, "utf8");
 
   try {
     runNodeScript(path.join(repoRoot, "scripts", "run-canva-scene-batch.mjs"), [
@@ -296,7 +424,7 @@ async function main() {
 
     runNodeScript(path.join(repoRoot, "scripts", "generate-canva-manifest.mjs"), [
       "--input",
-      resolvedSceneRoot,
+      synthesizedSceneRoot,
       "--output",
       args.outputDir,
       "--project",
@@ -351,7 +479,7 @@ async function main() {
       asset_format_target: input.asset_format_target,
       scene_count: sceneFiles.length,
       scene_roles: batchScenes.map((scene) => scene.role),
-      scene_root: resolvedSceneRoot,
+      scene_root: synthesizedSceneRoot,
       output_dir: args.outputDir,
       remote_verification_requested: Boolean(args.verifyRemote),
       verification_mode: args.verifyRemote ? "remote" : "local_smoke",
@@ -367,7 +495,7 @@ async function main() {
     await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`, "utf8");
 
     console.log(`news_id=${input.news_id}`);
-    console.log(`scene_root=${resolvedSceneRoot}`);
+    console.log(`scene_root=${synthesizedSceneRoot}`);
     console.log(`batch=${batchPath}`);
     console.log(`manifest=${manifestPath}`);
     console.log(`summary=${summaryPath}`);

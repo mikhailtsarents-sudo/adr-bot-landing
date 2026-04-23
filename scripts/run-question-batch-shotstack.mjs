@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -94,19 +94,47 @@ async function shotstackRequest(url, apiKey, init = {}) {
 
 async function listPackageDirs(rootDir) {
   const entries = await readdir(rootDir, { withFileTypes: true });
-  return entries
+  const candidates = entries
     .filter((entry) => entry.isDirectory())
     .map((entry) => path.join(rootDir, entry.name))
     .sort();
+
+  const packageDirs = [];
+  for (const candidate of candidates) {
+    try {
+      await access(path.join(candidate, "shotstack_render_payload.json"));
+      packageDirs.push(candidate);
+    } catch {
+      // Skip helper folders like `shadow` that are not actual render packages.
+    }
+  }
+
+  return packageDirs;
 }
 
 async function submitRender(packageDir, args) {
   const payloadPath = path.join(packageDir, "shotstack_render_payload.json");
   const scenarioPath = path.join(packageDir, "scenario.json");
   const renderTaskPath = path.join(packageDir, "render_task.json");
+  const renderTaskFallbackPath = path.join(path.dirname(packageDir), "render_task.json");
+  const scenarioFallbackPath = path.join(path.dirname(packageDir), "scenario.json");
   const payload = await loadJson(payloadPath);
-  const scenario = await loadJson(scenarioPath);
-  const renderTask = await loadJson(renderTaskPath);
+  let renderTask;
+  try {
+    renderTask = await loadJson(renderTaskPath);
+  } catch {
+    renderTask = await loadJson(renderTaskFallbackPath);
+  }
+  let scenario;
+  try {
+    scenario = await loadJson(scenarioPath);
+  } catch {
+    try {
+      scenario = await loadJson(scenarioFallbackPath);
+    } catch {
+      scenario = { scenario_id: renderTask?.scenario_id || "" };
+    }
+  }
   const submitPayload = args.textOnly ? buildTextOnlyPayload(payload) : payload;
 
   const submitUrl = `${args.apiBase}/render`;

@@ -255,6 +255,30 @@ function isQuestionVisualFlow(input) {
   );
 }
 
+function isWordVisualFlow(input) {
+  return (
+    String(input.source_type || "").toUpperCase() === "WORD" ||
+    String(input.source_family || "").toUpperCase() === "WORD" ||
+    String(input.content_family || "").toLowerCase().includes("word")
+  );
+}
+
+function adjustWordTimeline(timeline) {
+  const ctaIndex = timeline.findIndex((scene) => scene.role === "cta");
+  if (ctaIndex < 0) {
+    return timeline;
+  }
+
+  const adjusted = timeline.map((scene) => ({ ...scene }));
+  const ctaScene = adjusted[ctaIndex];
+  const originalLength = Number((ctaScene.end_sec - ctaScene.start_sec).toFixed(2));
+  const desiredLength = Math.max(3.2, originalLength);
+  const shiftedStart = Math.max(0, Number((ctaScene.start_sec - 0.4).toFixed(2)));
+  ctaScene.start_sec = shiftedStart;
+  ctaScene.end_sec = Number((shiftedStart + desiredLength).toFixed(2));
+  return adjusted;
+}
+
 function formatSrtTimestamp(totalSeconds) {
   const totalMs = Math.max(0, Math.round(Number(totalSeconds || 0) * 1000));
   const hours = Math.floor(totalMs / 3600000);
@@ -501,7 +525,10 @@ async function main() {
     ...slide,
     text: (sceneTextEntries.find((e) => e.id === slide.id) || {}).text || "",
   }));
-  const timeline = buildRoleDurations(slidesWithText, durationTargetSec).map((scene) => ({
+  const isWordFlow = isWordVisualFlow(input);
+  const roleTimeline = buildRoleDurations(slidesWithText, durationTargetSec);
+  const adjustedTimeline = isWordFlow ? adjustWordTimeline(roleTimeline) : roleTimeline;
+  const timeline = adjustedTimeline.map((scene) => ({
     ...scene,
     subtitle_ref: subtitleRef,
   }));

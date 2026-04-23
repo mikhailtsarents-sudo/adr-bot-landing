@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { access, copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { access, copyFile, cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -233,6 +233,27 @@ expect eof
         .join("\n"),
     );
   }
+}
+
+async function canUseLocalGeneratedAssetRoot(remoteRoot) {
+  try {
+    await mkdir(remoteRoot, { recursive: true });
+    await access(remoteRoot);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function stageGeneratedAssetDirectoryLocally({
+  localDir,
+  remoteRoot,
+}) {
+  await mkdir(remoteRoot, { recursive: true });
+  const targetDir = path.join(remoteRoot, path.basename(localDir));
+  await rm(targetDir, { recursive: true, force: true });
+  await cp(localDir, targetDir, { recursive: true });
+  return targetDir;
 }
 
 function probeAudioDurationSec(localPath) {
@@ -786,6 +807,7 @@ async function synthesizeQuestionVoiceoverToFile(outputPath, scriptText) {
 async function resolveQuestionVoiceoverAsset(args, visualBundle, questionInput, scenario, heygenManifest) {
   const voiceoverTargetPath = path.join(visualBundle.generated_dir, "voiceover.mp3");
   const publicBase = String(args.generatedAssetPublicBaseUrl).replace(/\/$/, "");
+  const canUseLocalGeneratedAssetDelivery = await canUseLocalGeneratedAssetRoot(args.generatedAssetRemoteRoot);
 
   if (text(args.questionVoiceoverLocalPath)) {
     await copyFile(args.questionVoiceoverLocalPath, voiceoverTargetPath);
@@ -804,7 +826,7 @@ async function resolveQuestionVoiceoverAsset(args, visualBundle, questionInput, 
     if (generated) {
       let voiceoverUrl = `${publicBase}/generated/${visualBundle.video_id}/voiceover.mp3`;
       const sshPassword = process.env.GENERATED_ASSET_SSH_PASSWORD || "";
-      if (!text(sshPassword)) {
+      if (!canUseLocalGeneratedAssetDelivery && !text(sshPassword)) {
         const temporaryUpload = await uploadFileToTemporaryHost(voiceoverTargetPath, {
           diagnosticsDir: args.uploadDiagnosticsDir,
           frameId: "question_voiceover",
@@ -917,6 +939,16 @@ async function resolveRemoteSafeAssetUrl(repoRoot, questionId, visualBundle) {
 }
 
 async function resolveQuestionVisualAssetUrl(args, questionId, visualBundle) {
+  if (await canUseLocalGeneratedAssetRoot(args.generatedAssetRemoteRoot)) {
+    await stageGeneratedAssetDirectoryLocally({
+      localDir: visualBundle.generated_dir,
+      remoteRoot: args.generatedAssetRemoteRoot,
+    });
+    return args.verifyRemote
+      ? resolveRemoteSafeAssetUrl(repoRoot, questionId, visualBundle)
+      : visualBundle.asset_url;
+  }
+
   const sshPassword = process.env.GENERATED_ASSET_SSH_PASSWORD || "";
   if (!text(sshPassword)) {
     const temporaryUpload = await uploadFileToTemporaryHost(visualBundle.asset_path, {

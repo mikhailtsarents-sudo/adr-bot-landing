@@ -174,6 +174,9 @@ function guessMimeType(filePath) {
   if (ext === ".png") return "image/png";
   if (ext === ".webp") return "image/webp";
   if (ext === ".gif") return "image/gif";
+  if (ext === ".mp4" || ext === ".m4v") return "video/mp4";
+  if (ext === ".mov") return "video/quicktime";
+  if (ext === ".mp3") return "audio/mpeg";
   return "application/octet-stream";
 }
 
@@ -257,6 +260,7 @@ function selectUploadHost(runState, orderedHosts) {
 function shouldMarkHostUnhealthy(attemptRecord, hostState) {
   const status = text(attemptRecord?.verification_status);
   const uploadedUrl = text(attemptRecord?.stdout);
+  const uploadTransportSuccess = Boolean(attemptRecord?.upload_transport_success);
   const repeatedSameUrlZeroBytes =
     Boolean(uploadedUrl) &&
     uploadedUrl === text(hostState?.last_uploaded_url) &&
@@ -264,13 +268,16 @@ function shouldMarkHostUnhealthy(attemptRecord, hostState) {
     Number(attemptRecord?.verification_content_length) === 0;
 
   const unhealthy =
+    !uploadTransportSuccess ||
     status === "remote_asset_not_ready" ||
     status === "invalid_remote_asset" ||
     repeatedSameUrlZeroBytes;
 
   return {
     unhealthy,
-    failureReason: repeatedSameUrlZeroBytes ? "repeated_same_url_zero_bytes" : status,
+    failureReason: repeatedSameUrlZeroBytes
+      ? "repeated_same_url_zero_bytes"
+      : (!uploadTransportSuccess ? "upload_transport_failed" : status),
     repeatedSameUrlZeroBytes,
   };
 }

@@ -30,7 +30,7 @@ function rowShowsUploadedState(row) {
     || Boolean(text(row?.youtube_url));
 }
 
-function looksLikeSmoke(row) {
+function looksLikeNoise(row) {
   const haystack = [
     text(row?.draft_id),
     text(row?.headline),
@@ -40,7 +40,15 @@ function looksLikeSmoke(row) {
     .join(" ")
     .toLowerCase();
 
-  return haystack.includes("smoke");
+  return [
+    "smoke",
+    "test",
+    "router",
+    "validation",
+    "bridge",
+    "codex",
+    "example.com",
+  ].some((needle) => haystack.includes(needle));
 }
 
 function isValidApprovedNewsRow(row) {
@@ -50,7 +58,7 @@ function isValidApprovedNewsRow(row) {
   if (topicType !== "news") return false;
   if (!["approved_for_shortform_distribution", "youtube_upload_failed_retryable"].includes(status)) return false;
   if (rowShowsUploadedState(row)) return false;
-  if (looksLikeSmoke(row)) return false;
+  if (looksLikeNoise(row)) return false;
 
   return Boolean(
     text(row?.draft_id)
@@ -102,8 +110,18 @@ export async function loadNewsCatalog(options = {}) {
 
     const payload = await response.json();
     const rows = Array.isArray(payload?.data) ? payload.data : [];
+    const uploadedKeys = new Set();
+
     for (const row of rows) {
+      const key = text(row?.story_id) || text(row?.draft_id) || `news-row-${text(row?.id)}`;
+      if (!key) continue;
+      if (rowShowsUploadedState(row)) uploadedKeys.add(key);
+    }
+
+    for (const row of rows) {
+      const key = text(row?.story_id) || text(row?.draft_id) || `news-row-${text(row?.id)}`;
       if (!isValidApprovedNewsRow(row)) continue;
+      if (uploadedKeys.has(key)) continue;
       items.push(normalizeNewsItem(row));
     }
   }
