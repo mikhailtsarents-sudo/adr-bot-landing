@@ -25,40 +25,56 @@ function buildLineClip({ html, color, fontSize, start, length, offsetY }) {
   };
 }
 
-// Telegram CTA — standard template, same in every video
+// Telegram CTA — glassmorphism overlay, reusable across all video types
 function buildCtaClips({ start, length }) {
-  const fs = 50;
-  const s = lineStep(fs);
-  const h = fs * 3;
-  const animCss =
-    `${FONT_IMPORT}` +
-    `@keyframes jump{` +
-    `0%,100%{transform:scale(1) translateY(0);box-shadow:0 8px 28px rgba(34,158,217,0.55),0 2px 8px rgba(0,0,0,0.5);}` +
-    `50%{transform:scale(1.04) translateY(-5px);box-shadow:0 16px 44px rgba(34,158,217,0.85),0 4px 12px rgba(0,0,0,0.6);}}` +
-    `body{margin:0;padding:0;background:transparent;text-align:center;}` +
-    `p{display:inline-block;background:#229ED9;color:#FFFFFF;` +
-    `font-family:'Montserrat',Arial,sans-serif;font-size:${fs}px;font-weight:800;` +
-    `line-height:${h - 20}px;margin:0;padding:10px 32px;` +
-    `word-break:break-word;animation:jump 0.8s ease-in-out infinite;}`;
+  const cardWidth = 920;
+  const cardHeight = 330;
 
-  const makeCtaClip = (text, offsetY, radius) => ({
-    asset: {
-      type: "html",
-      html: `<p style="border-radius:${radius}">${text}</p>`,
-      css: animCss,
-      width: 960,
-      height: h,
-    },
+  const css = [
+    FONT_IMPORT,
+    `*{box-sizing:border-box;margin:0;padding:0;}`,
+    `body{background:transparent;width:${cardWidth}px;height:${cardHeight}px;`,
+    `display:flex;align-items:center;justify-content:center;}`,
+    `.card{background:rgba(10,18,32,0.58);`,
+    `border:1.5px solid rgba(255,255,255,0.18);`,
+    `border-radius:28px;`,
+    `padding:26px 34px;`,
+    `box-shadow:0 8px 40px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.12);`,
+    `display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;}`,
+    `.headline{font-family:'Montserrat',Arial,sans-serif;font-size:56px;font-weight:900;`,
+    `color:#F5EDD8;`,
+    `-webkit-text-stroke:1.5px rgba(0,0,0,0.75);`,
+    `text-shadow:0 3px 12px rgba(0,0,0,0.95),0 1px 4px rgba(0,0,0,0.85);`,
+    `letter-spacing:-1px;text-align:center;}`,
+    `.sub{font-family:'Montserrat',Arial,sans-serif;font-size:32px;font-weight:700;`,
+    `color:#229ED9;text-shadow:0 2px 8px rgba(0,0,0,0.8);text-align:center;}`,
+    `@keyframes jump{`,
+    `0%,100%{transform:scale(1) translateY(0);`,
+    `box-shadow:0 8px 28px rgba(34,158,217,0.55),0 2px 8px rgba(0,0,0,0.5);}`,
+    `50%{transform:scale(1.04) translateY(-5px);`,
+    `box-shadow:0 16px 44px rgba(34,158,217,0.85),0 4px 12px rgba(0,0,0,0.6);}}`,
+    `.btn{display:inline-flex;align-items:center;gap:10px;`,
+    `background:#229ED9;color:#fff;`,
+    `font-family:'Montserrat',Arial,sans-serif;font-size:36px;font-weight:800;`,
+    `padding:14px 38px;border-radius:60px;border:none;`,
+    `animation:jump 0.8s ease-in-out infinite;white-space:nowrap;}`,
+  ].join("");
+
+  const html = [
+    `<div class="card">`,
+    `<div class="headline">Kostenlos starten</div>`,
+    `<div class="sub">im Telegram-Bot</div>`,
+    `<div class="btn">\u2708 Kostenlos ausprobieren \u2192</div>`,
+    `</div>`,
+  ].join("");
+
+  return [{
+    asset: { type: "html", html, css, width: cardWidth, height: cardHeight },
     position: "center",
     start: Number((start || 0).toFixed(2)),
     length: Number(Math.max(length || 0.1, 0.1).toFixed(2)),
-    offset: { x: 0, y: Number(offsetY.toFixed(6)) },
-  });
-
-  return [
-    makeCtaClip("Im Telegram-Bot", 0 - s / 2, "20px 20px 8px 8px"),
-    makeCtaClip("kostenlos starten \u2197", 0 + s / 2, "8px 8px 20px 20px"),
-  ];
+    offset: { x: 0, y: -0.27 },
+  }];
 }
 
 // Split text into lines of max maxLineLength chars
