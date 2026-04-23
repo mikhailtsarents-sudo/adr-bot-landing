@@ -406,6 +406,10 @@ function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabl
     throw new Error("QUESTION visual pipeline broken: no QUESTION image clip src found.");
   }
 
+  const timelineEndSec = timeline.length > 0
+    ? Math.max(...timeline.map((s) => Number(s.end_sec || 0)))
+    : durationTargetSec;
+  const audioLength = Number(Math.max(durationTargetSec, timelineEndSec).toFixed(2));
   const soundtrackSrc = voiceoverUrl || musicUrl;
   const audioTrack =
     soundtrackSrc
@@ -417,7 +421,7 @@ function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabl
                   src: soundtrackSrc,
                 },
                 start: 0,
-                length: Number(durationTargetSec.toFixed(2)),
+                length: audioLength,
               },
             ],
           }
