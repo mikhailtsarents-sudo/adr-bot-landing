@@ -27,8 +27,8 @@ function buildLineClip({ html, color, fontSize, start, length, offsetY }) {
 
 // Telegram CTA — glassmorphism overlay, reusable across all video types
 function buildCtaClips({ start, length }) {
-  const cardWidth = 920;
-  const cardHeight = 330;
+  const cardWidth = 960;
+  const cardHeight = 370;
 
   const css = [
     FONT_IMPORT,
@@ -37,16 +37,16 @@ function buildCtaClips({ start, length }) {
     `display:flex;align-items:center;justify-content:center;}`,
     `.card{background:rgba(10,18,32,0.58);`,
     `border:1.5px solid rgba(255,255,255,0.18);`,
-    `border-radius:28px;`,
-    `padding:26px 34px;`,
+    `border-radius:44px;`,
+    `padding:30px 42px;`,
     `box-shadow:0 8px 40px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.12);`,
-    `display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;}`,
-    `.headline{font-family:'Montserrat',Arial,sans-serif;font-size:56px;font-weight:900;`,
+    `display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;}`,
+    `.headline{font-family:'Montserrat',Arial,sans-serif;font-size:64px;font-weight:900;`,
     `color:#F5EDD8;`,
     `-webkit-text-stroke:1.5px rgba(0,0,0,0.75);`,
     `text-shadow:0 3px 12px rgba(0,0,0,0.95),0 1px 4px rgba(0,0,0,0.85);`,
     `letter-spacing:-1px;text-align:center;}`,
-    `.sub{font-family:'Montserrat',Arial,sans-serif;font-size:32px;font-weight:700;`,
+    `.sub{font-family:'Montserrat',Arial,sans-serif;font-size:38px;font-weight:700;`,
     `color:#229ED9;text-shadow:0 2px 8px rgba(0,0,0,0.8);text-align:center;}`,
     `@keyframes jump{`,
     `0%,100%{transform:scale(1) translateY(0);`,
@@ -55,8 +55,8 @@ function buildCtaClips({ start, length }) {
     `box-shadow:0 16px 44px rgba(34,158,217,0.85),0 4px 12px rgba(0,0,0,0.6);}}`,
     `.btn{display:inline-flex;align-items:center;gap:10px;`,
     `background:#229ED9;color:#fff;`,
-    `font-family:'Montserrat',Arial,sans-serif;font-size:36px;font-weight:800;`,
-    `padding:14px 38px;border-radius:60px;border:none;`,
+    `font-family:'Montserrat',Arial,sans-serif;font-size:42px;font-weight:800;`,
+    `padding:16px 46px;border-radius:60px;border:none;`,
     `animation:jump 0.8s ease-in-out infinite;white-space:nowrap;}`,
   ].join("");
 

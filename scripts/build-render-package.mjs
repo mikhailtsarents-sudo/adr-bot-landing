@@ -525,9 +525,14 @@ async function main() {
   const subtitlePolicy = text(input.subtitle_policy) || DEFAULT_SUBTITLE_POLICY;
   const subtitlesEnabled = subtitlePolicy !== "none_for_first_visual_test";
   const subtitleRef = subtitlesEnabled ? "subtitles.srt" : "";
+  // Text lookup: prefer role-based match (e.g. "answer", "cta") so semantic roles
+  // align correctly even when scene_plan has fewer entries than manifest slides.
+  // Falls back to id-based match for positional slides (content, pause, etc.).
+  const sceneTextByRole = new Map(sceneTextEntries.map((e) => [e.role, e.text]));
+  const sceneTextById = new Map(sceneTextEntries.map((e) => [e.id, e.text]));
   const slidesWithText = slides.map((slide) => ({
     ...slide,
-    text: (sceneTextEntries.find((e) => e.id === slide.id) || {}).text || "",
+    text: sceneTextByRole.get(slide.role) || sceneTextById.get(slide.id) || "",
   }));
   const isWordFlow = isWordVisualFlow(input);
   const roleTimeline = buildRoleDurations(slidesWithText, durationTargetSec);
@@ -536,7 +541,15 @@ async function main() {
     ...scene,
     subtitle_ref: subtitleRef,
   }));
-  const subtitlesSrt = subtitlesEnabled ? buildSubtitlesSrt(timeline, sceneTextEntries) : "";
+  // Build caption entries aligned with the final timeline roles (not scene_plan roles).
+  // This ensures WORD/NEWS flows where scene_plan uses non-standard role names (content, pause)
+  // still produce captions — the text is resolved by slide id match in slidesWithText.
+  const captionEntries = timeline.map((scene, i) => ({
+    id: scene.scene_id,
+    role: scene.role,
+    text: slidesWithText[i]?.text || "",
+  }));
+  const subtitlesSrt = subtitlesEnabled ? buildSubtitlesSrt(timeline, captionEntries) : "";
   const hashtags = filterProductionHashtags(normalizeHashtags(input.hashtags));
   const slug =
     slugify(args.slug) ||
@@ -653,7 +666,7 @@ async function main() {
     fallback_policy: input.fallback_policy || null,
   };
 
-  const renderPayload = buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabled);
+  const renderPayload = buildShotstackPayload(input, timeline, captionEntries, subtitlesEnabled);
   const qaReport =
     text(input.source_type) === "QUESTION" && input.shortform_contract
       ? buildQuestionQaReport({

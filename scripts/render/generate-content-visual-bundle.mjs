@@ -8,6 +8,10 @@ function text(value) {
 
 function buildWordBrief({ term, translation, explanation, category }) {
   const cat = text(category) || "word_vocabulary";
+  const objectDesc = text(explanation || translation);
+  // Give the image generator a concrete physical description of the term so it
+  // renders the actual equipment/object, not generic ADR placards or signs.
+  const physicalHint = `the specific physical item or action described by "${term}" (${objectDesc}); NOT ADR danger placards, NOT orange hazmat signs`;
   return {
     content_type: "WORD",
     category: cat,
@@ -16,31 +20,31 @@ function buildWordBrief({ term, translation, explanation, category }) {
         id: 1,
         role: "hook",
         copy: `Was bedeutet ${term}?`,
-        scene_intent: `driver or worker encounters a real ADR situation where not knowing ${term} causes a problem`,
-        visual_hint: `close documentary frame, person pausing or looking confused near relevant equipment or truck`,
-        subject: `driver or worker in ADR transport context, moment of uncertainty`,
-        context: `truck loading area, warehouse, or roadside; European setting`,
-        tension: `not knowing what ${term} means in this moment matters`,
+        scene_intent: `driver or worker about to use the physical item "${term}" (${objectDesc}) — the item itself is visible in the frame`,
+        visual_hint: `close frame showing ${physicalHint} near a truck wheel or loading area`,
+        subject: `driver or worker in ADR transport context reaching for or looking at the item`,
+        context: `truck parking area or roadside; European setting; item clearly identifiable`,
+        tension: `the person needs the item right now — urgency`,
       },
       {
         id: 2,
         role: "question",
         copy: `${term} / ${translation}`,
-        scene_intent: `real-world demonstration of the ${term} concept in active ADR use`,
-        visual_hint: `hands interacting with the relevant object or process related to ${term}`,
-        subject: `worker actively using or handling the item/concept of ${term}`,
-        context: `authentic industrial transport or hazmat setting, Mercedes Actros or MAN truck visible`,
-        tension: `task in progress, active engagement`,
+        scene_intent: `hands actively placing or using ${physicalHint} in an ADR transport situation`,
+        visual_hint: `tight close-up of hands on the actual ${term} object; ${objectDesc}; object clearly fills centre of frame`,
+        subject: `worker handling the actual item — the object itself is the hero of the shot`,
+        context: `truck wheel, truck undercarriage, or loading dock; authentic industrial ADR setting`,
+        tension: `task in progress, physical object prominent`,
       },
       {
         id: 3,
         role: "answers",
         copy: `${term} = ${translation}`,
-        scene_intent: `successful correct application of ${term} knowledge visible in practice`,
-        visual_hint: `clear result showing the completed action, correct use of equipment or process`,
-        subject: `driver or worker completing the relevant task correctly`,
-        context: `same ADR setting with a resolved, clear outcome`,
-        tension: `clarity and competence visible`,
+        scene_intent: `${term} correctly placed and visible — result shot showing the item in use`,
+        visual_hint: `the ${term} item (${objectDesc}) clearly in position; vehicle or equipment visible in background`,
+        subject: `driver standing back, item correctly deployed, small satisfaction`,
+        context: `same ADR truck setting, resolved outcome, item in final position`,
+        tension: `competence and completion visible`,
       },
     ],
   };
