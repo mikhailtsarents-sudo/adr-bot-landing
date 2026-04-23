@@ -22,6 +22,27 @@ export type AnalyticsEventPayload = {
   occurred_at?: string;
 };
 
+function sanitizeTelegramStartChunk(value: string, fallback: string, maxLength = 24) {
+  const normalized = value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return (normalized || fallback).slice(0, maxLength);
+}
+
+export function buildTelegramStartToken({
+  source,
+  pathname,
+}: {
+  source: string;
+  pathname: string;
+}) {
+  const sourceChunk = sanitizeTelegramStartChunk(source, "site");
+  const pathChunk = sanitizeTelegramStartChunk(pathname === "/" ? "home" : pathname, "home");
+  return `site--${sourceChunk}--${pathChunk}`;
+}
+
 export function inferPageType(pathname: string): AnalyticsPageType {
   if (pathname === "/" || pathname === "/ru") {
     return "landing";
@@ -58,6 +79,7 @@ export function buildTelegramRedirectHref({
   const params = new URLSearchParams({
     source,
     from: pathname,
+    start: buildTelegramStartToken({ source, pathname }),
   });
 
   if (locale) {

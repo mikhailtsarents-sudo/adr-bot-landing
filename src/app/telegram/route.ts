@@ -9,6 +9,8 @@ export async function GET(request: Request) {
   const source = searchParams.get("source") || "unknown";
   const from = searchParams.get("from") || undefined;
   const locale = searchParams.get("locale") || undefined;
+  const start = searchParams.get("start") || undefined;
+  const targetHref = start ? `${telegramHref}?start=${encodeURIComponent(start)}` : telegramHref;
 
   try {
     await forwardAnalyticsEvent({
@@ -16,7 +18,7 @@ export async function GET(request: Request) {
       source,
       page_path: from,
       locale,
-      target: telegramHref,
+      target: targetHref,
       user_agent: request.headers.get("user-agent") || undefined,
       referrer: request.headers.get("referer") || undefined,
     });
@@ -24,5 +26,5 @@ export async function GET(request: Request) {
     console.error("[telegram-redirect]", error);
   }
 
-  return NextResponse.redirect(telegramHref, 307);
+  return NextResponse.redirect(targetHref, 307);
 }
