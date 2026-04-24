@@ -6,6 +6,16 @@ This landing now emits three event types:
 - `telegram_cta_click`
 - `telegram_redirect`
 
+## Current Real Status
+
+As of April 21, 2026:
+
+- production analytics export is live on `adr-bot.de`;
+- n8n Data Table is the intended source of truth;
+- Google Sheets reporting works;
+- plain `IMPORTDATA(...)` in Google Sheets proved unreliable in practice;
+- the reliable working bridge is a small Apps Script function that fetches the CSV export directly.
+
 ## What works immediately
 
 Without any extra setup, you can already see:
@@ -93,6 +103,44 @@ This does not require:
 - Google OAuth setup in the landing;
 - extra paid analytics tooling.
 
+## Important Production Note About Google Sheets
+
+In practice, direct `IMPORTDATA(...)` may fail or cache earlier bad responses even when the export endpoint itself is healthy.
+
+The working fallback is a custom Apps Script function:
+
+```javascript
+function ADR_IMPORT_CSV() {
+  const url = "https://www.adr-bot.de/api/analytics/export.csv?limit=250";
+  const response = UrlFetchApp.fetch(url, {
+    muteHttpExceptions: true,
+    headers: {
+      "Accept": "text/csv"
+    }
+  });
+
+  const code = response.getResponseCode();
+  const text = response.getContentText();
+
+  if (code !== 200) {
+    throw new Error("HTTP " + code + ": " + text);
+  }
+
+  return Utilities.parseCsv(text);
+}
+```
+
+Then in the sheet:
+
+```gs
+=ADR_IMPORT_CSV()
+```
+
+Important detail:
+
+- the current export limit must stay `<= 250`
+- larger values return a `400` error from the export route
+
 ## Suggested sheet columns
 
 - `occurred_at`
@@ -121,3 +169,24 @@ If direct n8n Data Table access is not available, the app still supports a gener
 - `ANALYTICS_WEBHOOK_URL`
 
 This fallback remains useful for temporary Google Apps Script or other webhook collectors, but it is no longer the preferred production path.
+
+## Recommended Interpretation Layer
+
+For day-to-day reporting, the most important fields are:
+
+- `received_at`
+- `occurred_at`
+- `event`
+- `source`
+- `page_path`
+- `page_slug`
+- `page_type`
+- `locale`
+- `target`
+- `referrer`
+
+Mostly technical/debug fields:
+
+- `user_agent`
+- `auth_ok`
+- `raw_json`

@@ -36,15 +36,20 @@ yarn-error.log*
 /daily-live-runs/
 /render-packages/
 /word-autopilot-runs/
+/news-autopilot-runs/
+/news-upstream-runs/
 /seo-autopilot-runs/
 /youtube-test-runs/
+/shorts-decider-runs/
 /intent-live-cycle-runs/
 /intent-signal-runs/
 /question-autopilot-runs/
 /autonomous-production-test-runs/
 /intent-to-content-runs/
 /preview-smoke-runs/
+/runtime-archive/
 /public/generated/q-test-*/
+/public/shotstack-assets/adr-short-video/current/*-trace/
 
 # env files (can opt-in for committing if needed)
 .env*

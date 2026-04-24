@@ -1,36 +1,331 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ADR Bot Landing
 
-## Getting Started
+Public landing site for `adr-bot.de`.
 
-First, run the development server:
+This project does three jobs at once:
+
+- convert Google traffic into Telegram bot starts;
+- publish and index narrow SEO landing pages for ADR + German-learning intents;
+- collect site analytics that can be exported into Google Sheets.
+
+## Current Status
+
+- Production site: [https://www.adr-bot.de](https://www.adr-bot.de)
+- Framework: Next.js App Router
+- Main conversion target: Telegram bot CTA / redirect
+- Analytics export: live
+- Search Console integration: configured
+- TikTok app setup: partially configured, not review-ready yet
+
+Detailed execution status lives in:
+
+- [PROJECT_STATUS.md](/Users/mihailcarenc/Documents/New project/adr-bot-landing/PROJECT_STATUS.md)
+- [ANALYTICS_SETUP.md](/Users/mihailcarenc/Documents/New project/adr-bot-landing/ANALYTICS_SETUP.md)
+- [TIKTOK_SETUP_LOG.md](/Users/mihailcarenc/Documents/New project/adr-bot-landing/TIKTOK_SETUP_LOG.md)
+
+## Local Development
+
+Run the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## SEO Structure
 
-## Learn More
+The site now uses a clustered landing-page strategy on the same domain.
 
-To learn more about Next.js, take a look at the following resources:
+Live/managed paths include:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `/adr-pruefung-auf-deutsch`
+- `/adr-begriffe`
+- `/adr-faq-fuer-fahrer`
+- `/technisches-deutsch-adr`
+- `/gefahrgut-deutsch-lernen`
+- `/adr-vorbereitung-fuer-lkw-fahrer`
+- `/adr-pruefung-fuer-nicht-muttersprachler`
+- `/adr-fragen-und-antworten`
+- `/adr-pruefungsfragen-app-deutsch`
+- `/adr-fragen-auf-deutsch`
+- `/adr-fachbegriffe-deutsch`
+- `/adr-deutsch-fuer-lkw-fahrer`
+- `/adr-pruefung-deutsch-lernen`
+- `/gefahrgut-pruefung-auf-deutsch`
+- `/adr-app-fuer-auslaender`
+- `/adr-telegram-bot-deutsch`
+- `/adr-pruefungsfragen-lernen`
+- `/adr-test-deutsch`
+- `/adr-fragebogen-deutsch`
+- `/adr-kurs-deutsch`
+- `/adr-schein-deutsch`
+- `/adr-pruefung-hilfe`
+- `/adr-deutsch-ueben`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+These pages are intended to stay public and indexable. They do not need to dominate the main navigation to be valuable for Google.
 
-## Deploy on Vercel
+## Analytics
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The landing emits:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `site_page_view`
+- `telegram_cta_click`
+- `telegram_redirect`
+
+Production exports:
+
+- `/api/analytics/export.csv`
+- `/api/analytics/export.json`
+
+Preferred sink:
+
+- n8n Data Table via `N8N_BASE_URL`, `N8N_API_KEY`, `N8N_ANALYTICS_TABLE_ID`
+
+## Content Video Pipeline
+
+The project can generate and publish YouTube Shorts automatically — from a question/word source through to a live YouTube video.
+
+### Full pipeline (all steps in one command)
+
+```bash
+node scripts/run-daily-content-dispatch.mjs \
+  --decision <decision.json> \
+  --full-pipeline
+```
+
+### Step-by-step breakdown
+
+| Step | Script | What it does |
+| ---- | ------ | ------------ |
+| 1 | `run-content-plan-queue.mjs` | Builds a ranked backlog of QUESTION / WORD / NEWS items |
+| 2 | `run-content-plan-picker.mjs` | Picks the next item ready for production |
+| 3 | `run-daily-content-chooser.mjs` | Selects the final candidate and writes `decision.json` |
+| 4 | `run-daily-content-dispatch.mjs` | Routes by type → calls render-package script |
+| 5 | `run-question-batch-shotstack.mjs` | Sends render payload to Shotstack, polls until MP4 is ready |
+| 6 | `finalize-render-package.mjs` | Writes `final_mp4_url` into the package JSON |
+| 7 | `run-package-youtube-publish.mjs` | Posts to n8n, triggers YouTube upload, polls for result |
+
+Steps 5–7 are chained automatically by `run-post-render-pipeline.mjs`. The `--full-pipeline` flag on dispatch calls it automatically after step 4.
+
+### Run post-render steps separately (if dispatch already ran)
+
+```bash
+node scripts/run-post-render-pipeline.mjs \
+  --packages-root <dispatch-output-dir>
+```
+
+Use `--skip-youtube` to stop after finalize — useful when testing Shotstack renders without actually uploading.
+
+### Required env vars
+
+```text
+SHOTSTACK_API_KEY=...     # Shotstack render API key
+N8N_API_KEY=...           # n8n API key (cloud or VPS)
+N8N_BASE_URL=...          # n8n instance base URL
+```
+
+### Image generation (Flux AI)
+
+Frame images are generated by `scripts/render/question-photoreal-generator.mjs`.
+
+Default model: `fal-ai/flux-realism` (photorealism LoRA on top of Flux Dev).
+
+Override via env var:
+
+```text
+FAL_AI_API_KEY=...                    # required — fal.ai API key
+FAL_AI_PROFILE=realism                # optional — realism | dev | pro
+FAL_AI_MODEL_URL=https://fal.run/...  # optional — explicit endpoint override (wins over profile)
+```
+
+Available model endpoints on fal.ai:
+
+- `https://fal.run/fal-ai/flux-realism` — **default**, best for photorealistic scenes
+- `https://fal.run/fal-ai/flux/dev` — base Flux Dev, faster but less realistic
+- `https://fal.run/fal-ai/flux-pro/v1.1` — highest quality, slowest, costs more
+
+Recommended usage:
+
+- keep `realism` as the quality baseline for the current public visual path
+- use `FAL_AI_PROFILE=dev` only when intentionally switching into lower-cost mode
+- use `FAL_AI_MODEL_URL` only for explicit one-off overrides or provider experiments
+
+If `FAL_AI_API_KEY` is missing, falls back to `openai_primary` (gpt-image-1).
+
+Provider priority is controlled by `QUESTION_PHOTOREAL_PROVIDER_PRIORITY` (comma-separated list of provider IDs: `fal_ai_primary`, `openai_primary`).
+
+### n8n infrastructure
+
+YouTube upload is handled by the **"ADR YouTube Execution Bridge"** n8n workflow. It is deployed on the self-hosted VPS instance (`46.225.170.55`) and authorized with the `mikhail.tsarents@gmail.com` Google account.
+
+Access the VPS n8n instance via SSH tunnel:
+
+```bash
+ssh -L 5678:localhost:5678 root@46.225.170.55
+# then open http://localhost:5678
+```
+
+Credentials and operational notes are in [PROJECT_STATUS.md](PROJECT_STATUS.md).
+
+## Intent-to-Content Machine
+
+The project now has a first local MVP for the upstream SEO compass layer.
+
+Purpose:
+
+- combine `Search Console`, site analytics, Telegram feedback, and content performance;
+- surface which intents show real demand;
+- suggest whether the next move should be an SEO page refresh, a new short video angle, or a stronger Telegram conversion path.
+
+Run the sample snapshot:
+
+```bash
+npm run run:intent-to-content-machine
+```
+
+Build a live signal snapshot from the existing analytics sink and Search Console:
+
+```bash
+npm run run:intent-signal-snapshot
+```
+
+Or run the full live cycle in one command:
+
+```bash
+npm run run:intent-to-content-live-cycle
+```
+
+Run the SEO worker directly from the latest intent queue:
+
+```bash
+npm run run:seo-expansion-worker
+```
+
+Run the content decision worker directly from the latest intent queue:
+
+```bash
+npm run run:content-decision-worker
+```
+
+Build the unified content-plan queue from search intents, questions, words, and news:
+
+```bash
+npm run run:content-plan-queue
+```
+
+Pick the next planning item plus the next production-ready batch from that queue:
+
+```bash
+npm run run:content-plan-picker
+```
+
+Apply only controlled page creation from the latest SEO execution queue:
+
+```bash
+npm run run:seo-page-create
+```
+
+The active daily live wrapper can now run this intent layer alongside the normal daily content dispatch:
+
+```bash
+npm run run:daily-content-wrapper -- --input /absolute/path/to/daily-content-candidates.json
+```
+
+By default the wrapper uses `--intent-mode auto`:
+
+- it tries to build a live intent report from `.env.local` / runtime env;
+- it does not block the normal daily content run if Search Console is missing or the intent run fails;
+- it writes the intent backlog path into the same wrapper report when successful.
+
+Run with your own exported signals:
+
+```bash
+npm run run:intent-to-content-machine -- --input /absolute/path/to/signals.json
+```
+
+Then analyze that snapshot:
+
+```bash
+npm run run:intent-to-content-machine -- --input /absolute/path/to/intent_signal_snapshot.json
+```
+
+Outputs:
+
+- `intent_opportunities.json`
+- `intent_opportunities.md`
+- `intent_backlog.json`
+- `seo_brief_queue.json`
+- `content_brief_queue.json`
+
+Live cycle also writes handoff queues for the next operational layer into:
+
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/intent-machine/latest/seo_brief_queue.latest.json`
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/intent-machine/latest/content_brief_queue.latest.json`
+
+The downstream SEO worker now also writes:
+
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/seo-expansion-worker/latest/seo_execution_queue.latest.json`
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/seo-expansion-worker-refresh/latest/seo_refresh_report.latest.json`
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/seo-expansion-worker-create/latest/seo_create_report.latest.json`
+
+The downstream content worker now writes:
+
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/content-decision-worker/latest/content_execution_queue.latest.json`
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/content-decision-worker/latest/content_worker_summary.latest.json`
+
+The unified content-plan layer now writes:
+
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/content-plan/latest/content_source_pool.latest.json`
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/content-plan/latest/content_plan_queue.latest.json`
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/content-plan/latest/content_plan_queue.latest.md`
+
+The content-plan picker now writes:
+
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/content-plan-picker/latest/planning_selection.latest.json`
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/content-plan-picker/latest/production_selection.latest.json`
+- `/Users/mihailcarenc/Documents/New project/adr-control-center/runtime/queues/content-plan-picker/latest/production_candidate_batch.latest.json`
+
+Current automation behavior:
+
+- existing SEO pages can be auto-refreshed from the top worker tasks;
+- new SEO pages can be auto-created through the controlled create path;
+- content intents can be turned into Telegram-first execution tasks, hooks, and message skeletons without routing into Shorts/TikTok generation;
+- a unified content-plan queue now mixes `SEARCH_INTENT`, `QUESTION`, `WORD`, and `NEWS` into one rotating backlog for the next content-source picker;
+- when one family is temporarily empty, the queue falls back to the strongest remaining family instead of leaving an empty slot;
+- the current daily cycle can now consume `content_plan_queue.latest.json` instead of a manual batch;
+- `--skip-dispatch` lets the system stop after selection/decision, which is useful while render/publish layers are intentionally paused;
+- if no valid `create_new_page` tasks exist after filtering noise, create mode exits cleanly with `applied_count = 0`.
+
+The final use of this layer is simple: it tells the project which demand pockets are worth turning into the next SEO page, page refresh, short-form video, or Telegram angle instead of guessing manually.
+
+## Search Console
+
+Search Console access is set up through a Google Cloud service account so the project can be analyzed programmatically.
+
+The service account key must never be committed to Git.
+
+## TikTok
+
+TikTok developer app setup has started and the basic foundation exists:
+
+- app created
+- domain verified
+- `Login Kit` added
+- `Content Posting API` added
+
+Still missing:
+
+- real posting flow implementation
+- end-to-end demo video
+- app review submission
+
+## Deployment
+
+The site is deployed continuously from `main`.
+
+When in doubt, verify production directly by opening live URLs on `adr-bot.de` instead of relying only on deployment UI state.

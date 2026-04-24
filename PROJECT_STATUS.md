@@ -63,6 +63,11 @@ Current public SEO paths:
 - `/adr-schein-deutsch`
 - `/adr-pruefung-hilfe`
 - `/adr-deutsch-ueben`
+- `/adr-pruefung-bestehen`
+- `/adr-gefahrgut-symbole-deutsch`
+- `/adr-klassen-deutsch`
+- `/adr-wiederholung-deutsch`
+- `/adr-lernhilfe-deutsch`
 
 Relevant production commits:
 
@@ -82,11 +87,22 @@ Relevant production commits:
 
 ## In Progress
 
-### SEO Growth
+### SEO Growth — SEO Autopilot done (2026-04-22)
 
-- Continue using Search Console data to decide next long-tail clusters
-- Expand beyond current three clusters carefully, without creating thin or duplicate pages
-- Monitor which landing pages actually start earning impressions and clicks
+`run-seo-autopilot-cycle.mjs` is now complete. It chains:
+1. `run-seo-page-refresh.mjs` — updates copy in `seo-pages.ts` for up to 3 existing pages
+2. `run-seo-page-create.mjs` — creates up to 1 new page (config + `page.tsx`)
+3. `git add src/lib/seo-pages.ts src/app/` → `git commit` → `git push origin main` → Vercel auto-deploys
+
+Dry-run confirmed working. Live test with `--skip-git` applied 3 pages successfully.
+
+To run on VPS (after `git pull`):
+```
+node scripts/run-seo-autopilot-cycle.mjs
+```
+
+- Monitor which landing pages earn impressions and clicks via [[📡 Google Search Console]]
+- VPS needs git push credentials configured for the full automated loop
 
 ### Image Generation — Flux AI upgrade (done 2026-04-22)
 
@@ -196,8 +212,19 @@ node scripts/run-daily-content-dispatch.mjs --decision <decision.json> --full-pi
 node scripts/run-post-render-pipeline.mjs --packages-root <dispatch-output-dir>
 ```
 
+## Claude Code SSH Access (done 2026-04-23)
+
+SSH key for Claude Code autonomous VPS access is configured:
+
+- **Key file (local):** `~/.ssh/adr_vps_key`
+- **Authorized key on VPS:** `/root/.ssh/authorized_keys`
+- **Connection:** `ssh -i ~/.ssh/adr_vps_key root@46.225.170.55`
+
+Claude Code can now run commands on the VPS directly without going through the Hetzner KVM console.
+
 ## Operational Notes
 
 - Do not commit live credentials or service-account JSON files
 - Verify production directly on `adr-bot.de` when checking deploy outcomes
 - Prefer narrow, high-intent German long-tail pages over broad generic ADR terms
+- Claude Code SSH key: `~/.ssh/adr_vps_key` — do not delete
