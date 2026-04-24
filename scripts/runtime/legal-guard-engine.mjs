@@ -8,7 +8,35 @@
  *   low    — publish without changes
  *   medium — publishable, note the issues
  *   high   — block: must fix before publish
+ *
+ * Results are written to n8n Cloud:
+ *   - Yura Legal Review Queue  (medium + high) — for human review
+ *   - Yura Legal Review Results (all)           — audit trail
  */
+
+import { spawnSync } from "node:child_process";
+
+const N8N_BASE_URL = process.env.N8N_BASE_URL ?? "https://tsarents.app.n8n.cloud";
+const N8N_API_KEY = process.env.N8N_API_KEY ?? "";
+const YURA_QUEUE_TABLE_ID = "7MEY9Rqyt6Ls734m";
+const YURA_RESULTS_TABLE_ID = "cZuso8N5vniKgdth";
+
+function postToN8nTable(tableId, row) {
+  if (!N8N_API_KEY) return;
+  const body = JSON.stringify({ data: [row] });
+  spawnSync(
+    "curl",
+    [
+      "-s", "-X", "POST",
+      `${N8N_BASE_URL}/api/v1/data-tables/${tableId}/rows`,
+      "-H", "Content-Type: application/json",
+      "-H", `X-N8N-API-KEY: ${N8N_API_KEY}`,
+      "-d", body,
+      "--max-time", "8",
+    ],
+    { encoding: "utf8" },
+  );
+}
 
 const RISKY_HIGH = [
   /\bguaranteed\s+success\b/i,
@@ -95,18 +123,54 @@ export function runLegalGuard(content, context = {}) {
 
   const approved = risk_level !== "high";
 
-  return {
-    task_id: `legal-guard-${context.slug || "unknown"}`,
-    status: approved ? (risk_level === "low" ? "approved" : "approved_with_notes") : "blocked",
+  const reviewedAt = new Date().toISOString();
+  const taskId = `legal-guard-${context.slug || "unknown"}-${Date.now()}`;
+  const requiredChanges = issues.filter((i) => i.startsWith("HIGH:"));
+  const optionalNotes = issues.filter((i) => i.startsWith("MEDIUM:"));
+  const shortSummary = approved
+    ? risk_level === "low"
+      ? "No legal issues detected."
+      : `Publishable with notes (${mediumHits.length} medium issue(s)).`
+    : `Blocked: ${highHits.length} high-risk phrase(s) found. Fix before publish.`;
+  const status = approved ? (risk_level === "low" ? "approved" : "approved_with_notes") : "blocked";
+
+  // Always write result to audit trail
+  postToN8nTable(YURA_RESULTS_TABLE_ID, {
+    task_id: taskId,
+    status,
     risk_level,
-    short_summary: approved
-      ? risk_level === "low"
-        ? "No legal issues detected."
-        : `Publishable with notes (${mediumHits.length} medium issue(s)).`
-      : `Blocked: ${highHits.length} high-risk phrase(s) found. Fix before publish.`,
-    required_changes: issues.filter((i) => i.startsWith("HIGH:")),
-    optional_notes: issues.filter((i) => i.startsWith("MEDIUM:")),
-    reviewed_at: new Date().toISOString(),
+    short_summary: shortSummary,
+    required_changes_json: JSON.stringify(requiredChanges),
+    optional_notes_json: JSON.stringify(optionalNotes),
+    reviewed_at: reviewedAt,
+    reviewed_by: "legal_guard_engine",
+  });
+
+  // Write to review queue only when human attention needed (medium or high)
+  if (risk_level !== "low") {
+    postToN8nTable(YURA_QUEUE_TABLE_ID, {
+      task_id: taskId,
+      task_type: "legal_review",
+      title: `Legal review: /${context.slug || "unknown"}`,
+      summary: shortSummary,
+      source: context.source || "seo_autopilot",
+      status: risk_level === "high" ? "blocked" : "needs_review",
+      priority: risk_level === "high" ? "high" : "medium",
+      requested_by: "legal_guard_engine",
+      artifacts_json: JSON.stringify([{ type: "slug", value: context.slug || "" }]),
+      questions_json: JSON.stringify([...requiredChanges, ...optionalNotes]),
+      created_at: reviewedAt,
+    });
+  }
+
+  return {
+    task_id: taskId,
+    status,
+    risk_level,
+    short_summary: shortSummary,
+    required_changes: requiredChanges,
+    optional_notes: optionalNotes,
+    reviewed_at: reviewedAt,
     reviewed_by: "legal_guard_engine",
     source: context.source || "unknown",
     slug: context.slug || "",
