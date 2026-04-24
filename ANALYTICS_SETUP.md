@@ -72,10 +72,33 @@ The landing now also exposes analytics exports that can be consumed from Google 
 
 - `/api/analytics/export.json`
 - `/api/analytics/export.csv`
+- `/api/analytics/dashboard.json`
 
 Example:
 
 - `https://www.adr-bot.de/api/analytics/export.csv?limit=500`
+- `https://www.adr-bot.de/api/analytics/dashboard.json?limit=2000`
+
+The dashboard endpoint is the new preferred machine-readable summary layer. It returns:
+
+- `today`
+- `7 days`
+- `30 days`
+- funnel summary for the last 30 days
+- top sources
+- top pages
+- top page types
+- latest events
+- latest Telegram redirects
+
+Important detail:
+
+- `today` is calculated in the dashboard timezone, not as a floating "last 24 hours" bucket
+- default timezone:
+  - `Europe/Berlin`
+- override if needed:
+  - `ANALYTICS_DASHBOARD_TIMEZONE`
+  - or `?timezone=...` on the endpoint
 
 In Google Sheets, the simplest bridge is:
 

@@ -16,9 +16,18 @@ This file is the current execution snapshot for the ADR Bot landing project.
 - Export endpoints are live:
   - `/api/analytics/export.csv`
   - `/api/analytics/export.json`
+- Dashboard summary endpoint is now implemented:
+  - `/api/analytics/dashboard.json`
 - n8n Data Table sink is configured as the preferred production sink
 - Google Sheets bridge works
 - In practice, Google Sheets is more reliable via Apps Script than plain `IMPORTDATA`
+- The dashboard layer now exposes:
+  - `today`
+  - `7 days`
+  - `30 days`
+  - 30d funnel summary
+  - top sources / pages / page types
+  - latest events and latest Telegram redirects
 
 ### Google Search Console
 
