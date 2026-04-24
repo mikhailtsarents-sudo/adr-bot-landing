@@ -88,16 +88,89 @@ function buildInternalLinkSuggestions(brief, existingSlugs) {
   return [...new Set(suggestions)];
 }
 
+function buildDefaultAutoRules() {
+  return {
+    refresh: {
+      min_opportunity_score: 30,
+      allowed_intent_kinds: ["question", "vocabulary", "learning", "product"],
+    },
+    create: {
+      min_opportunity_score: 55,
+      allowed_intent_kinds: ["question", "vocabulary", "learning", "product"],
+      allowed_brief_types: ["seo_landing_page", "seo_vocab_page", "seo_product_page"],
+      forbidden_slug_fragments: ["test", "manual", "tmp", "draft"],
+    },
+  };
+}
+
+function normalizeRules(rules = {}) {
+  const defaults = buildDefaultAutoRules();
+  return {
+    refresh: {
+      ...defaults.refresh,
+      ...(rules.refresh || {}),
+    },
+    create: {
+      ...defaults.create,
+      ...(rules.create || {}),
+    },
+  };
+}
+
+function buildAutoEligibility(taskType, brief, pageExists, normalizedSlug, autoRules) {
+  const rules = normalizeRules(autoRules);
+  const intentKind = text(brief.intent_kind).toLowerCase();
+  const briefType = text(brief.brief_type);
+  const opportunityScore = Number(brief.opportunity_score) || 0;
+  const reasons = [];
+
+  if (!normalizedSlug) {
+    reasons.push("missing_recommended_slug");
+  }
+
+  if (taskType === "refresh_existing_page") {
+    if (!pageExists) reasons.push("page_not_found");
+    if (!rules.refresh.allowed_intent_kinds.includes(intentKind)) {
+      reasons.push("intent_kind_not_allowed_for_refresh");
+    }
+    if (opportunityScore < Number(rules.refresh.min_opportunity_score || 0)) {
+      reasons.push("opportunity_score_below_refresh_threshold");
+    }
+  } else {
+    if (pageExists) reasons.push("page_already_exists");
+    if (!rules.create.allowed_intent_kinds.includes(intentKind)) {
+      reasons.push("intent_kind_not_allowed_for_create");
+    }
+    if (!rules.create.allowed_brief_types.includes(briefType)) {
+      reasons.push("brief_type_not_allowed_for_create");
+    }
+    if (opportunityScore < Number(rules.create.min_opportunity_score || 0)) {
+      reasons.push("opportunity_score_below_create_threshold");
+    }
+    const slugValue = text(normalizedSlug).toLowerCase();
+    if ((rules.create.forbidden_slug_fragments || []).some((fragment) => slugValue.includes(String(fragment).toLowerCase()))) {
+      reasons.push("forbidden_slug_fragment");
+    }
+  }
+
+  return {
+    eligible: reasons.length === 0,
+    reasons,
+  };
+}
+
 export function buildSeoExecutionQueue(briefQueue, options = {}) {
   const briefs = Array.isArray(briefQueue) ? briefQueue : [];
   const existingSlugs = new Set((options.existingSlugs || []).map((slug) => normalizeSlug(slug)).filter(Boolean));
   const createdAt = options.createdAt || new Date().toISOString();
+  const autoRules = normalizeRules(options.autoRules);
 
   return briefs.map((brief) => {
     const recommendedSlug = text(brief.recommended_slug || "");
     const normalizedSlug = normalizeSlug(recommendedSlug);
     const taskType = inferTaskType(brief, existingSlugs);
     const pageExists = existingSlugs.has(normalizedSlug);
+    const eligibility = buildAutoEligibility(taskType, brief, pageExists, normalizedSlug, autoRules);
 
     return {
       task_id: `seo-worker-${taskType}-${slugify(brief.intent_key || brief.brief_id || recommendedSlug)}`,
@@ -124,6 +197,9 @@ export function buildSeoExecutionQueue(briefQueue, options = {}) {
       internal_link_suggestions: buildInternalLinkSuggestions(brief, existingSlugs),
       next_actions: Array.isArray(brief.next_actions) ? brief.next_actions : [],
       evidence: brief.evidence || {},
+      auto_rules: autoRules,
+      auto_apply_eligible: eligibility.eligible,
+      auto_apply_reasons: eligibility.reasons,
       telegram_cta_source: `seo_worker_${slugify(normalizedSlug || brief.intent_key)}`,
       requires_design_approval: true,
       requires_yura_review: true,
@@ -140,6 +216,7 @@ export function buildSeoMarkdownBrief(task) {
   lines.push(`- Task type: ${task.task_type}`);
   lines.push(`- Recommended slug: ${task.recommended_slug}`);
   lines.push(`- Existing page: ${task.page_exists ? "yes" : "no"}`);
+  lines.push(`- Auto-apply eligible: ${task.auto_apply_eligible ? "yes" : "no"}`);
   lines.push(`- Intent kind: ${task.intent_kind}`);
   lines.push(`- Priority rank: ${task.priority_rank}`);
   lines.push(`- Opportunity score: ${task.opportunity_score}`);
@@ -179,6 +256,9 @@ export function buildSeoMarkdownBrief(task) {
   lines.push("- Requires design approval before publication.");
   lines.push("- Requires Yura review for public wording.");
   lines.push("- Requires Analytics Monitor check after release.");
+  if (Array.isArray(task.auto_apply_reasons) && task.auto_apply_reasons.length > 0) {
+    lines.push(`- Auto-apply blocked by: ${task.auto_apply_reasons.join(", ")}`);
+  }
   lines.push("");
   return `${lines.join("\n")}\n`;
 }

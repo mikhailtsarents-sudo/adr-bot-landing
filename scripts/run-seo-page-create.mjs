@@ -26,6 +26,7 @@ Options:
   --app-dir <dir>       Explicit src/app directory (default: ${APP_DIR})
   --slug <value>        Explicit output slug
   --top <n>             Limit how many create tasks to apply (default: 1)
+  --only-auto-eligible  Create only tasks marked as auto-apply eligible
   --dry-run             Build report without writing files
   --help                Show this help
 `);
@@ -39,6 +40,7 @@ function parseArgs(argv) {
     appDir: APP_DIR,
     slug: "",
     top: 1,
+    onlyAutoEligible: false,
     dryRun: false,
   };
 
@@ -50,6 +52,7 @@ function parseArgs(argv) {
     else if (token === "--app-dir") args.appDir = path.resolve(argv[++i]);
     else if (token === "--slug") args.slug = argv[++i];
     else if (token === "--top") args.top = Number(argv[++i]);
+    else if (token === "--only-auto-eligible") args.onlyAutoEligible = true;
     else if (token === "--dry-run") args.dryRun = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
@@ -262,7 +265,12 @@ export default function Page() {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const queue = await loadJson(args.inputPath);
-  const tasks = queue.filter(isCreateCandidate).slice(0, Number.isFinite(args.top) && args.top > 0 ? args.top : 1);
+  const filteredQueue = args.onlyAutoEligible
+    ? queue.filter((task) => task.auto_apply_eligible === true)
+    : queue;
+  const tasks = filteredQueue
+    .filter(isCreateCandidate)
+    .slice(0, Number.isFinite(args.top) && args.top > 0 ? args.top : 1);
 
   if (tasks.length === 0) {
     const createdAt = new Date().toISOString();
@@ -278,6 +286,7 @@ async function main() {
       app_dir: args.appDir,
       applied_count: 0,
       top_limit: Number.isFinite(args.top) && args.top > 0 ? args.top : 1,
+      only_auto_eligible: args.onlyAutoEligible,
       dry_run: args.dryRun,
       created: [],
       skipped_reason: "No valid create_new_page tasks available.",
@@ -330,6 +339,7 @@ async function main() {
     app_dir: args.appDir,
     applied_count: created.length,
     top_limit: Number.isFinite(args.top) && args.top > 0 ? args.top : 1,
+    only_auto_eligible: args.onlyAutoEligible,
     dry_run: args.dryRun,
     created,
   };

@@ -31,6 +31,7 @@
     "run:intent-signal-snapshot": "node scripts/run-intent-signal-snapshot.mjs",
     "run:intent-to-content-machine": "node scripts/run-intent-to-content-machine.mjs",
     "run:intent-to-content-live-cycle": "node scripts/run-intent-to-content-live-cycle.mjs",
+    "run:intent-seo-autopilot-cycle": "node scripts/run-intent-seo-autopilot-cycle.mjs",
     "run:intent-handoff-queue": "node scripts/run-intent-handoff-queue.mjs",
     "run:content-decision-worker": "node scripts/run-content-decision-worker.mjs",
     "run:content-plan-queue": "node scripts/run-content-plan-queue.mjs",

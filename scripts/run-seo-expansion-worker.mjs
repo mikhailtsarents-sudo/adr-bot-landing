@@ -13,6 +13,7 @@ const repoRoot = path.resolve(__dirname, "..");
 const controlCenterRoot = path.resolve(repoRoot, "..", "adr-control-center");
 const DEFAULT_INPUT_PATH = path.join(controlCenterRoot, "runtime", "queues", "intent-machine", "latest", "seo_brief_queue.latest.json");
 const DEFAULT_OUTPUT_ROOT = path.join(controlCenterRoot, "runtime", "queues", "seo-expansion-worker");
+const DEFAULT_AUTO_RULES_PATH = path.join(controlCenterRoot, "runtime", "config", "intent-seo-auto-rules.json");
 const APP_DIR = path.join(repoRoot, "src", "app");
 
 enableStrictNonInteractiveMode("run-seo-expansion-worker");
@@ -29,6 +30,8 @@ Options:
   --refresh-top <n>     Limit how many existing pages to refresh (default: 3)
   --apply-create        Apply creation for new SEO pages after queue generation
   --create-top <n>      Limit how many new pages to create (default: 1)
+  --auto-rules <file>   JSON config with auto-apply thresholds (default: ${DEFAULT_AUTO_RULES_PATH})
+  --dry-run-actions     Build reports but do not write refresh/create changes
   --help                Show this help
 `);
 }
@@ -43,6 +46,8 @@ function parseArgs(argv) {
     refreshTop: 3,
     applyCreate: false,
     createTop: 1,
+    autoRulesPath: DEFAULT_AUTO_RULES_PATH,
+    dryRunActions: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -55,6 +60,8 @@ function parseArgs(argv) {
     else if (token === "--refresh-top") args.refreshTop = Number(argv[++i]);
     else if (token === "--apply-create") args.applyCreate = true;
     else if (token === "--create-top") args.createTop = Number(argv[++i]);
+    else if (token === "--auto-rules") args.autoRulesPath = path.resolve(argv[++i]);
+    else if (token === "--dry-run-actions") args.dryRunActions = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
       process.exit(0);
@@ -112,6 +119,14 @@ async function loadJson(filePath) {
   return JSON.parse(await readFile(filePath, "utf8"));
 }
 
+async function loadOptionalJson(filePath, fallback) {
+  try {
+    return JSON.parse(await readFile(filePath, "utf8"));
+  } catch {
+    return fallback;
+  }
+}
+
 async function writeJson(filePath, payload) {
   await writeFile(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 }
@@ -128,6 +143,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const queue = await loadJson(args.inputPath);
   const existingSlugs = await detectExistingSlugs();
+  const autoRules = await loadOptionalJson(args.autoRulesPath, {});
   const selectedQueue = Number.isFinite(args.top) && args.top > 0 ? queue.slice(0, args.top) : queue;
   const createdAt = new Date().toISOString();
   const slug = slugify(args.slug || `seo-expansion-worker-${Date.now()}`) || `seo-expansion-worker-${Date.now()}`;
@@ -142,6 +158,7 @@ async function main() {
   const executionQueue = buildSeoExecutionQueue(selectedQueue, {
     existingSlugs,
     createdAt,
+    autoRules,
   });
 
   for (const task of executionQueue) {
@@ -152,9 +169,11 @@ async function main() {
   const summary = {
     created_at: createdAt,
     input_path: args.inputPath,
+    auto_rules_path: args.autoRulesPath,
     task_count: executionQueue.length,
     existing_page_count: executionQueue.filter((task) => task.page_exists).length,
     new_page_count: executionQueue.filter((task) => !task.page_exists).length,
+    auto_apply_eligible_count: executionQueue.filter((task) => task.auto_apply_eligible).length,
     top_task_id: executionQueue[0]?.task_id || "",
   };
 
@@ -170,25 +189,35 @@ async function main() {
 
   let refreshOutput = "";
   if (args.applyRefresh) {
-    refreshOutput = runNodeScript(path.join(repoRoot, "scripts", "run-seo-page-refresh.mjs"), [
+    const refreshArgs = [
       "--input",
       latestQueuePath,
       "--slug",
       slug,
       "--top",
       String(Number.isFinite(args.refreshTop) && args.refreshTop > 0 ? args.refreshTop : 3),
-    ]);
+      "--only-auto-eligible",
+    ];
+    if (args.dryRunActions) {
+      refreshArgs.push("--dry-run");
+    }
+    refreshOutput = runNodeScript(path.join(repoRoot, "scripts", "run-seo-page-refresh.mjs"), refreshArgs);
   }
   let createOutput = "";
   if (args.applyCreate) {
-    createOutput = runNodeScript(path.join(repoRoot, "scripts", "run-seo-page-create.mjs"), [
+    const createArgs = [
       "--input",
       latestQueuePath,
       "--slug",
       slug,
       "--top",
       String(Number.isFinite(args.createTop) && args.createTop > 0 ? args.createTop : 1),
-    ]);
+      "--only-auto-eligible",
+    ];
+    if (args.dryRunActions) {
+      createArgs.push("--dry-run");
+    }
+    createOutput = runNodeScript(path.join(repoRoot, "scripts", "run-seo-page-create.mjs"), createArgs);
   }
 
   logAutonomousDecision("seo expansion worker queue generated", {
@@ -205,6 +234,8 @@ async function main() {
   console.log(`briefs_dir=${briefsDir}`);
   console.log(`seo_refresh_report=${parseOutputPath(refreshOutput, "latest_seo_refresh_report")}`);
   console.log(`seo_create_report=${parseOutputPath(createOutput, "latest_seo_create_report")}`);
+  console.log(`auto_rules_path=${args.autoRulesPath}`);
+  console.log(`dry_run_actions=${args.dryRunActions}`);
 }
 
 main().catch((error) => {

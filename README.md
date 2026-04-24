@@ -200,6 +200,26 @@ Or run the full live cycle in one command:
 npm run run:intent-to-content-live-cycle
 ```
 
+Run the stronger production orchestration entrypoint:
+
+```bash
+npm run run:intent-seo-autopilot-cycle
+```
+
+Planning-only mode without mutating SEO pages:
+
+```bash
+node scripts/run-intent-seo-autopilot-cycle.mjs \
+  --skip-seo-refresh \
+  --skip-seo-create
+```
+
+Safe smoke / dry-run:
+
+```bash
+node scripts/run-intent-seo-autopilot-cycle.mjs --dry-run
+```
+
 Run the SEO worker directly from the latest intent queue:
 
 ```bash

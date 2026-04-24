@@ -24,6 +24,8 @@ Options:
   --seo-pages <file>    Explicit seo-pages.ts path (default: ${SEO_PAGES_PATH})
   --slug <value>        Explicit output slug
   --top <n>             Limit how many refresh tasks to apply (default: 3)
+  --only-auto-eligible  Refresh only tasks marked as auto-apply eligible
+  --dry-run             Build report without writing seo-pages.ts
   --help                Show this help
 `);
 }
@@ -35,6 +37,8 @@ function parseArgs(argv) {
     seoPagesPath: SEO_PAGES_PATH,
     slug: "",
     top: 3,
+    onlyAutoEligible: false,
+    dryRun: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -44,6 +48,8 @@ function parseArgs(argv) {
     else if (token === "--seo-pages") args.seoPagesPath = path.resolve(argv[++i]);
     else if (token === "--slug") args.slug = argv[++i];
     else if (token === "--top") args.top = Number(argv[++i]);
+    else if (token === "--only-auto-eligible") args.onlyAutoEligible = true;
+    else if (token === "--dry-run") args.dryRun = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
       process.exit(0);
@@ -209,7 +215,10 @@ function findSeoBlock(source, slug) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const queue = await loadJson(args.inputPath);
-  const refreshTasks = queue
+  const filteredQueue = args.onlyAutoEligible
+    ? queue.filter((task) => task.auto_apply_eligible === true)
+    : queue;
+  const refreshTasks = filteredQueue
     .filter((task) => task.task_type === "refresh_existing_page" && task.page_exists)
     .slice(0, Number.isFinite(args.top) && args.top > 0 ? args.top : 3);
 
@@ -235,7 +244,9 @@ async function main() {
     });
   }
 
-  await writeFile(args.seoPagesPath, seoPagesSource, "utf8");
+  if (!args.dryRun) {
+    await writeFile(args.seoPagesPath, seoPagesSource, "utf8");
+  }
 
   const createdAt = new Date().toISOString();
   const slug = slugify(args.slug || `seo-refresh-${Date.now()}`) || `seo-refresh-${Date.now()}`;
@@ -248,6 +259,8 @@ async function main() {
     created_at: createdAt,
     input_path: args.inputPath,
     seo_pages_path: args.seoPagesPath,
+    only_auto_eligible: args.onlyAutoEligible,
+    dry_run: args.dryRun,
     applied_count: updated.length,
     top_limit: Number.isFinite(args.top) && args.top > 0 ? args.top : 3,
     updated,

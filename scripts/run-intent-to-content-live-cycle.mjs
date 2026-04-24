@@ -20,6 +20,12 @@ function printHelp() {
 Options:
   --output-root <dir>         Output root for live cycle runs (default: ${DEFAULT_OUTPUT_ROOT})
   --slug <value>              Explicit run slug
+  --seo-rules <file>          JSON config for SEO auto-apply rules
+  --seo-refresh-top <n>       How many refresh tasks may be applied (default: 3)
+  --seo-create-top <n>        How many create tasks may be applied (default: 1)
+  --skip-seo-refresh          Do not apply SEO refresh actions
+  --skip-seo-create           Do not apply SEO create actions
+  --dry-run-seo-actions       Build SEO action reports without mutating site files
   --analytics-limit <n>       Forwarded to snapshot builder
   --gsc-row-limit <n>         Forwarded to snapshot builder
   --gsc-site-url <value>      Forwarded to snapshot builder
@@ -35,6 +41,12 @@ function parseArgs(argv) {
   const args = {
     outputRoot: DEFAULT_OUTPUT_ROOT,
     slug: "",
+    seoRulesPath: "",
+    seoRefreshTop: 3,
+    seoCreateTop: 1,
+    skipSeoRefresh: false,
+    skipSeoCreate: false,
+    dryRunSeoActions: false,
     passthrough: [],
   };
 
@@ -42,6 +54,12 @@ function parseArgs(argv) {
     const token = argv[i];
     if (token === "--output-root") args.outputRoot = path.resolve(argv[++i]);
     else if (token === "--slug") args.slug = argv[++i];
+    else if (token === "--seo-rules") args.seoRulesPath = path.resolve(argv[++i]);
+    else if (token === "--seo-refresh-top") args.seoRefreshTop = Number(argv[++i]);
+    else if (token === "--seo-create-top") args.seoCreateTop = Number(argv[++i]);
+    else if (token === "--skip-seo-refresh") args.skipSeoRefresh = true;
+    else if (token === "--skip-seo-create") args.skipSeoCreate = true;
+    else if (token === "--dry-run-seo-actions") args.dryRunSeoActions = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
       process.exit(0);
@@ -144,12 +162,10 @@ async function main() {
       parseOutputPath(handoffOutput, "latest_seo_brief_queue"),
       "--slug",
       slug,
-      "--apply-refresh",
-      "--refresh-top",
-      "3",
-      "--apply-create",
-      "--create-top",
-      "1",
+      ...(args.seoRulesPath ? ["--auto-rules", args.seoRulesPath] : []),
+      ...(args.skipSeoRefresh ? [] : ["--apply-refresh", "--refresh-top", String(Number.isFinite(args.seoRefreshTop) && args.seoRefreshTop > 0 ? args.seoRefreshTop : 3)]),
+      ...(args.skipSeoCreate ? [] : ["--apply-create", "--create-top", String(Number.isFinite(args.seoCreateTop) && args.seoCreateTop > 0 ? args.seoCreateTop : 1)]),
+      ...(args.dryRunSeoActions ? ["--dry-run-actions"] : []),
     ])
     : "";
   const contentWorkerOutput = parseOutputPath(handoffOutput, "latest_content_brief_queue")
@@ -193,6 +209,10 @@ async function main() {
         seo_worker_briefs_dir: parseOutputPath(seoWorkerOutput, "briefs_dir"),
         seo_refresh_report: parseOutputPath(seoWorkerOutput, "seo_refresh_report"),
         seo_create_report: parseOutputPath(seoWorkerOutput, "seo_create_report"),
+        seo_rules_path: args.seoRulesPath,
+        dry_run_seo_actions: args.dryRunSeoActions,
+        skip_seo_refresh: args.skipSeoRefresh,
+        skip_seo_create: args.skipSeoCreate,
         content_execution_queue: parseOutputPath(contentWorkerOutput, "latest_content_execution_queue"),
         content_worker_summary: parseOutputPath(contentWorkerOutput, "latest_content_worker_summary"),
         content_worker_briefs_dir: parseOutputPath(contentWorkerOutput, "briefs_dir"),
@@ -229,6 +249,10 @@ async function main() {
   console.log(`seo_worker_briefs_dir=${parseOutputPath(seoWorkerOutput, "briefs_dir")}`);
   console.log(`seo_refresh_report=${parseOutputPath(seoWorkerOutput, "seo_refresh_report")}`);
   console.log(`seo_create_report=${parseOutputPath(seoWorkerOutput, "seo_create_report")}`);
+  console.log(`seo_rules_path=${args.seoRulesPath}`);
+  console.log(`dry_run_seo_actions=${args.dryRunSeoActions}`);
+  console.log(`skip_seo_refresh=${args.skipSeoRefresh}`);
+  console.log(`skip_seo_create=${args.skipSeoCreate}`);
   console.log(`content_execution_queue=${parseOutputPath(contentWorkerOutput, "latest_content_execution_queue")}`);
   console.log(`content_worker_summary=${parseOutputPath(contentWorkerOutput, "latest_content_worker_summary")}`);
   console.log(`content_worker_briefs_dir=${parseOutputPath(contentWorkerOutput, "briefs_dir")}`);
