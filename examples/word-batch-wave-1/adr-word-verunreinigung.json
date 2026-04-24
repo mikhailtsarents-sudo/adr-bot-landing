@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-verunreinigung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Verunreinigung",
+    "translations": {
+      "ru": "Загрязнение / Заражение",
+      "tr": "Kirlilik",
+      "ar": "تلوث / شوائب",
+      "uk": "Забруднення",
+      "pl": "Zanieczyszczenie",
+      "ro": "Poluare / Contaminare",
+      "en": "Contamination / Pollution",
+      "bg": "Замърсяване",
+      "hr": "Zagađenje"
+    },
+    "simple_explanation": "Kontamination",
+    "category": "vocabulary",
+    "synonym": "Kontamination"
+  }
+}

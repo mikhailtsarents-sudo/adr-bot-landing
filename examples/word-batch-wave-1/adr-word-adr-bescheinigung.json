@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-adr-bescheinigung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "ADR-Bescheinigung",
+    "translations": {
+      "ru": "Свидетельство ADR (сертификат водителя)",
+      "tr": "ADR belgesi (sürücü sertifikası)",
+      "ar": "شهادة ADR (للسائق)",
+      "uk": "Свідоцтво ADR (сертифікат водія)",
+      "pl": "Zaświadczenie ADR (certyfikat kierowcy)",
+      "ro": "Certificat ADR (al conducătorului)",
+      "en": "ADR training certificate",
+      "bg": "Свидетелство ADR (сертификат на шофьора)",
+      "hr": "ADR svjedodžba (certifikat vozača)"
+    },
+    "simple_explanation": "Schulungsbescheinigung, ADR-Schein",
+    "category": "vocabulary",
+    "synonym": "Schulungsbescheinigung, ADR-Schein"
+  }
+}

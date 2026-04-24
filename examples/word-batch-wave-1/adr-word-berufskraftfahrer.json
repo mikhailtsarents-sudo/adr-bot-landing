@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-berufskraftfahrer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Berufskraftfahrer",
+    "translations": {
+      "ru": "Профессиональный водитель",
+      "tr": "Profesyonel sürücü",
+      "ar": "سائق محترف",
+      "uk": "Професійний водій",
+      "pl": "Zawodowy kierowca",
+      "ro": "Conducător auto profesionist",
+      "en": "Professional driver",
+      "bg": "Професионален шофьор",
+      "hr": "Profesionalni vozač"
+    },
+    "simple_explanation": "Fahrer",
+    "category": "vocabulary",
+    "synonym": "Fahrer"
+  }
+}

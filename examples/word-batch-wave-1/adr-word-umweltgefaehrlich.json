@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-umweltgefaehrlich",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "umweltgefährlich",
+    "translations": {
+      "ru": "Опасный для окружающей среды",
+      "tr": "Çevreye zararlı",
+      "ar": "ضار بالبيئة",
+      "uk": "Небезпечний для довкілля",
+      "pl": "Niebezpieczny dla środowiska",
+      "ro": "Periculos pentru mediu",
+      "en": "Environmentally hazardous",
+      "bg": "Опасен за околната среда",
+      "hr": "Opasan za okoliš"
+    },
+    "simple_explanation": "Auch: wassergefährdend",
+    "category": "vocabulary",
+    "synonym": "wassergefährdend"
+  }
+}

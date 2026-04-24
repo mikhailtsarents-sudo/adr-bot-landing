@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-entlader",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Entlader",
+    "translations": {
+      "ru": "Тот кто разгружает",
+      "tr": "Boşaltan kişi",
+      "ar": "من يفرغ الشحنة",
+      "uk": "Той хто розвантажує",
+      "pl": "Rozładowca",
+      "ro": "Descărcător",
+      "en": "Unloader",
+      "bg": "Разтоварвач",
+      "hr": "Istovarivaač"
+    },
+    "simple_explanation": "Verlader",
+    "category": "vocabulary",
+    "synonym": "Verlader"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-orangefarbene-tafel",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "orangefarbene Tafel",
+    "translations": {
+      "ru": "Оранжевая табличка (с Kemler и UN номерами)",
+      "tr": "Turuncu levha",
+      "ar": "اللوحة البرتقالية",
+      "uk": "Оранжева табличка (з номерами Кемлера і ООН)",
+      "pl": "Pomarańczowa tablica (z numerami Kemlera i ONZ)",
+      "ro": "Tablă portocalie (cu numerele Kemler și ONU)",
+      "en": "Orange panel (with Kemler and UN numbers)",
+      "bg": "Оранжева табела (с номера на Кемлер и ООН)",
+      "hr": "Narančasta ploča (s Kemlerovim i UN brojevima)"
+    },
+    "simple_explanation": "Gefahrentafel, Warntafel",
+    "category": "vocabulary",
+    "synonym": "Gefahrentafel, Warntafel"
+  }
+}

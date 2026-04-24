@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefaess",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefäß",
+    "translations": {
+      "ru": "Сосуд / Ёмкость",
+      "tr": "Kap / Kova",
+      "ar": "إناء / وعاء",
+      "uk": "Посудина / Ємність",
+      "pl": "Naczynie / Pojemnik",
+      "ro": "Vas / Recipient",
+      "en": "Vessel / Container",
+      "bg": "Съд / Резервоар",
+      "hr": "Posuda"
+    },
+    "simple_explanation": "Behälter, Behältnis",
+    "category": "vocabulary",
+    "synonym": "Behälter, Behältnis"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrengut",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrengut",
+    "translations": {
+      "ru": "Опасный груз (устаревший вариант)",
+      "tr": "Tehlikeli madde (eski kullanim)",
+      "ar": "بضاعة خطرة (مصطلح قديم)",
+      "uk": "Небезпечний вантаж (застарілий варіант)",
+      "pl": "Towar niebezpieczny (przestarzały)",
+      "ro": "Mărfuri periculoase (termen vechi)",
+      "en": "Dangerous goods (outdated term)",
+      "bg": "Опасен товар (остаряло)",
+      "hr": "Opasna roba (zastarjeli izraz)"
+    },
+    "simple_explanation": "Gefahrgut",
+    "category": "vocabulary",
+    "synonym": "Gefahrgut"
+  }
+}

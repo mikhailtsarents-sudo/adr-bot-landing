@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-unfall",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Unfall",
+    "translations": {
+      "ru": "Авария / Несчастный случай",
+      "tr": "Kaza",
+      "ar": "حادث",
+      "uk": "Аварія / Нещасний випадок",
+      "pl": "Wypadek",
+      "ro": "Accident",
+      "en": "Accident",
+      "bg": "Авария / Злополука",
+      "hr": "Nesreća / Prometna nezgoda"
+    },
+    "simple_explanation": "Zwischenfall, Schadensereignis",
+    "category": "vocabulary",
+    "synonym": "Zwischenfall, Schadensereignis"
+  }
+}

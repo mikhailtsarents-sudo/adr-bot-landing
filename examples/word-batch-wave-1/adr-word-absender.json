@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-absender",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Absender",
+    "translations": {
+      "ru": "Отправитель",
+      "tr": "Gönderici",
+      "ar": "المرسِل",
+      "uk": "Відправник",
+      "pl": "Nadawca",
+      "ro": "Expeditor",
+      "en": "Consignor / Sender",
+      "bg": "Изпращач",
+      "hr": "Pošiljatelj"
+    },
+    "simple_explanation": "Versender",
+    "category": "vocabulary",
+    "synonym": "Versender"
+  }
+}

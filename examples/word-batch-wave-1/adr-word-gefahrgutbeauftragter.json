@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrgutbeauftragter",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrgutbeauftragter",
+    "translations": {
+      "ru": "Уполномоченный по опасным грузам",
+      "tr": "Tehlikeli madde sorumlusu",
+      "ar": "مسؤول البضائع الخطرة",
+      "uk": "Уповноважений з небезпечних вантажів",
+      "pl": "Doradca ds. bezpieczeństwa (ADR)",
+      "ro": "Consilier pentru siguranța transportului",
+      "en": "Dangerous goods safety adviser",
+      "bg": "Съветник по безопасност при превоз на ОТ",
+      "hr": "Savjetnik za sigurnost prijevoza opasne robe"
+    },
+    "simple_explanation": "Sicherheitsberater",
+    "category": "vocabulary",
+    "synonym": "Sicherheitsberater"
+  }
+}

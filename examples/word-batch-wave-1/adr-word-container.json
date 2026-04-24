@@ -1,0 +1,28 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-container",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Container",
+    "translations": {
+      "ru": "Контейнер",
+      "tr": "Konteyner",
+      "ar": "حاوية",
+      "uk": "Контейнер",
+      "pl": "Kontener",
+      "bg": "Контейнер",
+      "hr": "Kontejner"
+    },
+    "simple_explanation": "Großcontainer, Kleincontainer",
+    "category": "vocabulary",
+    "synonym": "Großcontainer, Kleincontainer"
+  }
+}

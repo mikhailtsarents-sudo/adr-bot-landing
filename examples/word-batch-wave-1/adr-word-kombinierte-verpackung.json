@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kombinierte-verpackung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "kombinierte Verpackung",
+    "translations": {
+      "ru": "Комбинированная упаковка",
+      "tr": "Kombine ambalaj",
+      "ar": "تغليف مدمج",
+      "uk": "Комбінована упаковка",
+      "pl": "Opakowanie kombinowane",
+      "ro": "Ambalaj combinat",
+      "en": "Combined packaging",
+      "bg": "Комбинирана опаковка",
+      "hr": "Kombinirana ambalaža"
+    },
+    "simple_explanation": "Auch: zusammengesetzte Verpackung",
+    "category": "vocabulary",
+    "synonym": "zusammengesetzte Verpackung"
+  }
+}

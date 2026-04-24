@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-brennbar",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "brennbar",
+    "translations": {
+      "ru": "Горючий",
+      "tr": "Yanıcı",
+      "ar": "قابل للاحتراق",
+      "uk": "Горючий",
+      "pl": "Palny",
+      "ro": "Combustibil",
+      "en": "Combustible",
+      "bg": "Горим",
+      "hr": "Gori / Goriva tvar"
+    },
+    "simple_explanation": "Auch: entzündlich, entzündbar",
+    "category": "vocabulary",
+    "synonym": "entzündlich, entzündbar"
+  }
+}

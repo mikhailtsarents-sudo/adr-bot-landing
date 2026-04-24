@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-ortsbeweglicher-tank",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "ortsbeweglicher Tank",
+    "translations": {
+      "ru": "Передвижная цистерна (UN-T код)",
+      "tr": "Taşınabilir tank",
+      "ar": "خزان متنقل",
+      "uk": "Пересувна цистерна",
+      "pl": "Przenośny zbiornik",
+      "ro": "Rezervor portabil",
+      "en": "Portable tank",
+      "bg": "Преносим резервоар",
+      "hr": "Prijenosni spremnik"
+    },
+    "simple_explanation": "UN-Tank",
+    "category": "vocabulary",
+    "synonym": "UN-Tank"
+  }
+}

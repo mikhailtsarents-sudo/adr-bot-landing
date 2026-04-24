@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-tankcontainer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Tankcontainer",
+    "translations": {
+      "ru": "Танк-контейнер (в стандартном каркасе)",
+      "tr": "Tank konteyner",
+      "ar": "حاوية خزان",
+      "uk": "Танк-контейнер",
+      "pl": "Kontener-cysterna",
+      "ro": "Container-cisternă",
+      "en": "Tank container",
+      "bg": "Танк-контейнер",
+      "hr": "Kontejner-cisterna"
+    },
+    "simple_explanation": "Aufsetztank",
+    "category": "vocabulary",
+    "synonym": "Aufsetztank"
+  }
+}

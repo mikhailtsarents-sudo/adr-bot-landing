@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-bestimmungen",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Bestimmungen",
+    "translations": {
+      "ru": "Положения / Нормы",
+      "tr": "Hükümler",
+      "ar": "أحكام / معايير",
+      "uk": "Положення / Норми",
+      "pl": "Postanowienia / Normy",
+      "ro": "Prevederi / Norme",
+      "en": "Provisions / Regulations",
+      "bg": "Разпоредби / Норми",
+      "hr": "Odredbe / Norme"
+    },
+    "simple_explanation": "Vorschriften, Regelungen",
+    "category": "vocabulary",
+    "synonym": "Vorschriften, Regelungen"
+  }
+}

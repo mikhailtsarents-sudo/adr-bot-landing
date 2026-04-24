@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-genehmigung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Genehmigung",
+    "translations": {
+      "ru": "Разрешение / Допуск",
+      "tr": "İzin / Onay",
+      "ar": "إذن / موافقة",
+      "uk": "Дозвіл",
+      "pl": "Zezwolenie",
+      "ro": "Aprobare",
+      "en": "Approval / Permit",
+      "bg": "Разрешение",
+      "hr": "Dozvola / Odobrenje"
+    },
+    "simple_explanation": "Zulassung",
+    "category": "vocabulary",
+    "synonym": "Zulassung"
+  }
+}

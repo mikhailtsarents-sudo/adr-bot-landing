@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrenpiktogramm",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrenpiktogramm",
+    "translations": {
+      "ru": "Пиктограмма опасности (на этикетках)",
+      "tr": "Tehlike piktogramı",
+      "ar": "رمز الخطر",
+      "uk": "Піктограма небезпеки",
+      "pl": "Piktogram zagrożenia",
+      "ro": "Pictogramă de pericol",
+      "en": "Hazard pictogram",
+      "bg": "Пиктограма за опасност",
+      "hr": "Piktogram opasnosti"
+    },
+    "simple_explanation": "Gefahrzettel",
+    "category": "vocabulary",
+    "synonym": "Gefahrzettel"
+  }
+}

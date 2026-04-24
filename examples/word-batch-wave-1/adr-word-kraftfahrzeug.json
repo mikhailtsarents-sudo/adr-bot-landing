@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kraftfahrzeug",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Kraftfahrzeug",
+    "translations": {
+      "ru": "Моторное транспортное средство",
+      "tr": "Motorlu taşıt",
+      "ar": "مركبة آلية",
+      "uk": "Моторний транспортний засіб",
+      "pl": "Pojazd silnikowy",
+      "ro": "Autovehicul",
+      "en": "Motor vehicle",
+      "bg": "Моторно превозно средство",
+      "hr": "Motorno vozilo"
+    },
+    "simple_explanation": "Fahrzeug, KFZ",
+    "category": "vocabulary",
+    "synonym": "Fahrzeug, KFZ"
+  }
+}

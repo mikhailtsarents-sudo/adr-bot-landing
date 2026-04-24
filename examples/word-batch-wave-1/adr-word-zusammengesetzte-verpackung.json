@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-zusammengesetzte-verpackung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "zusammengesetzte Verpackung",
+    "translations": {
+      "ru": "Составная упаковка (внутр. + внешняя)",
+      "tr": "Bileşik ambalaj",
+      "ar": "تغليف مركب",
+      "uk": "Складена упаковка",
+      "pl": "Opakowanie złożone",
+      "ro": "Ambalaj combinat",
+      "en": "Composite packaging",
+      "bg": "Комбинирана опаковка",
+      "hr": "Složena ambalaža"
+    },
+    "simple_explanation": "zusammengesetzte Verpackung",
+    "category": "vocabulary",
+    "synonym": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-leichtentzuendlich",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "leichtentzündlich",
+    "translations": {
+      "ru": "Легко воспламеняющийся",
+      "tr": "Çok kolay tutuşabilir",
+      "ar": "شديد القابلية للاشتعال",
+      "uk": "Дуже легкозаймистий",
+      "pl": "Bardzo łatwo zapalny",
+      "ro": "Foarte ușor inflamabil",
+      "en": "Highly flammable",
+      "bg": "Много лесно запалим",
+      "hr": "Vrlo lako zapaljiv"
+    },
+    "simple_explanation": "Auch: entzündbar, entzündlich",
+    "category": "vocabulary",
+    "synonym": "entzündbar, entzündlich"
+  }
+}

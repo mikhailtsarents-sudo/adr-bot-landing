@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-sicherheitsmassnahme",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Sicherheitsmaßnahme",
+    "translations": {
+      "ru": "Мера безопасности",
+      "tr": "Güvenlik tedbiri",
+      "ar": "تدبير أمني",
+      "uk": "Захід безпеки",
+      "pl": "Środek bezpieczeństwa",
+      "ro": "Măsură de siguranță",
+      "en": "Safety measure",
+      "bg": "Мярка за безопасност",
+      "hr": "Sigurnosna mjera"
+    },
+    "simple_explanation": "Maßnahme",
+    "category": "vocabulary",
+    "synonym": "Maßnahme"
+  }
+}

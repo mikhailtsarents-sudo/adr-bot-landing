@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-adr",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "ADR",
+    "translations": {
+      "ru": "Европейское соглашение о перевозке опасных грузов (Accord relatif au transport...)",
+      "tr": "Avrupa Tehlikeli Madde Taşıma Anlaşması",
+      "ar": "اتفاقية نقل البضائع الخطرة بالطريق",
+      "uk": "Європейська угода про перевезення небезпечних вантажів",
+      "pl": "Europejska umowa dot. przewozu towarów niebezpiecznych",
+      "ro": "Acordul european privind transportul rutier al mărfurilor periculoase",
+      "en": "European Agreement on International Carriage of Dangerous Goods by Road",
+      "bg": "Европейско споразумение за превоз на опасни товари",
+      "hr": "Europski sporazum o međunarodnom prijevozu opasne robe cestom"
+    },
+    "simple_explanation": "Auch: internationale Vorschrift",
+    "category": "vocabulary",
+    "synonym": "internationale Vorschrift"
+  }
+}

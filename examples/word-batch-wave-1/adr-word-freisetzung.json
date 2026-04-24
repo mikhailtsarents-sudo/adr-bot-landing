@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-freisetzung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Freisetzung",
+    "translations": {
+      "ru": "Выброс / Высвобождение вещества",
+      "tr": "Salınım / Kaçak",
+      "ar": "انبعاث / إطلاق مادة",
+      "uk": "Викид / Вивільнення речовини",
+      "pl": "Uwolnienie substancji",
+      "ro": "Eliberare de substanță",
+      "en": "Release of substance",
+      "bg": "Отделяне на вещество",
+      "hr": "Oslobađanje tvari"
+    },
+    "simple_explanation": "Austritt, Leckage",
+    "category": "vocabulary",
+    "synonym": "Austritt, Leckage"
+  }
+}

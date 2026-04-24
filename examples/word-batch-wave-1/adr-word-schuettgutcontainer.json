@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-schuettgutcontainer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Schüttgutcontainer",
+    "translations": {
+      "ru": "Контейнер для насыпных грузов",
+      "tr": "Dökme yük konteyneri",
+      "ar": "حاوية البضائع السائبة",
+      "uk": "Контейнер для сипучих вантажів",
+      "pl": "Kontener do ładunków sypkich",
+      "ro": "Container pentru vrac",
+      "en": "Bulk container",
+      "bg": "Контейнер за насипни товари",
+      "hr": "Kontejner za rasuti teret"
+    },
+    "simple_explanation": "BK (Bulk Container)",
+    "category": "vocabulary",
+    "synonym": "BK (Bulk Container)"
+  }
+}

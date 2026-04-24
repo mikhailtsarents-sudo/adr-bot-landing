@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-begrenzte-menge",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "begrenzte Menge",
+    "translations": {
+      "ru": "Ограниченное количество (упрощённые правила)",
+      "tr": "Sınırlı miktar (LQ)",
+      "ar": "الكمية المحدودة (LQ)",
+      "uk": "Обмежена кількість (LQ)",
+      "pl": "Ilość ograniczona (LQ)",
+      "ro": "Cantitate limitată (LQ)",
+      "en": "Limited quantity (LQ)",
+      "bg": "Ограничено количество (LQ)",
+      "hr": "Ograničena količina (LQ)"
+    },
+    "simple_explanation": "Auch: limited quantity, LQ",
+    "category": "vocabulary",
+    "synonym": "limited quantity, LQ"
+  }
+}

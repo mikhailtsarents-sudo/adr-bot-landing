@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrnummer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrnummer",
+    "translations": {
+      "ru": "Номер опасности (верхнее число на табличке)",
+      "tr": "Tehlike numarası (üst sayı)",
+      "ar": "رقم الخطر (الرقم العلوي)",
+      "uk": "Номер небезпеки (верхнє число на табличці)",
+      "pl": "Numer zagrożenia (górna liczba na tablicy)",
+      "ro": "Numărul pericolului (cifra superioară)",
+      "en": "Hazard identification number (upper number)",
+      "bg": "Номер на опасността (горна цифра)",
+      "hr": "Broj opasnosti (gornji broj na ploči)"
+    },
+    "simple_explanation": "Kemler-Zahl",
+    "category": "vocabulary",
+    "synonym": "Kemler-Zahl"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-schutzhelm",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Schutzhelm",
+    "translations": {
+      "ru": "Защитная каска",
+      "tr": "Koruyucu kask",
+      "ar": "خوذة واقية",
+      "uk": "Захисна каска",
+      "pl": "Kask ochronny",
+      "ro": "Cască de protecție",
+      "en": "Protective helmet",
+      "bg": "Защитна каска",
+      "hr": "Zaštitna kaciga"
+    },
+    "simple_explanation": "Helm",
+    "category": "vocabulary",
+    "synonym": "Helm"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-schuettgut",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Schüttgut",
+    "translations": {
+      "ru": "Насыпной / сыпучий груз",
+      "tr": "Dökme / Kuru yük",
+      "ar": "بضاعة سائبة / جافة",
+      "uk": "Насипний / сипучий вантаж",
+      "pl": "Ładunek sypki / masowy",
+      "ro": "Marfă vrac / în vrac",
+      "en": "Bulk cargo",
+      "bg": "Насипен товар",
+      "hr": "Rasuti teret"
+    },
+    "simple_explanation": "Auch: loser Schüttung",
+    "category": "vocabulary",
+    "synonym": "loser Schüttung"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-hauptgefahr",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Hauptgefahr",
+    "translations": {
+      "ru": "Основная опасность / Главная угроза",
+      "tr": "Ana tehlike",
+      "ar": "الخطر الرئيسي",
+      "uk": "Основна небезпека",
+      "pl": "Zagrożenie główne",
+      "ro": "Pericol principal",
+      "en": "Primary hazard",
+      "bg": "Основна опасност",
+      "hr": "Glavna opasnost"
+    },
+    "simple_explanation": "Nebengefahr",
+    "category": "vocabulary",
+    "synonym": "Nebengefahr"
+  }
+}

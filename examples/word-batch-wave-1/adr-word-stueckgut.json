@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-stueckgut",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Stückgut",
+    "translations": {
+      "ru": "Штучный груз (упакованный)",
+      "tr": "Parça yük (ambalajlı)",
+      "ar": "بضاعة قطعية (معبأة)",
+      "uk": "Штучний вантаж (упакований)",
+      "pl": "Ładunek sztukowy (pakowany)",
+      "ro": "Colet / Marfă ambalată",
+      "en": "General cargo / Piece goods",
+      "bg": "Пакетен товар",
+      "hr": "Komadna roba"
+    },
+    "simple_explanation": "Schüttgut",
+    "category": "vocabulary",
+    "synonym": "Schüttgut"
+  }
+}

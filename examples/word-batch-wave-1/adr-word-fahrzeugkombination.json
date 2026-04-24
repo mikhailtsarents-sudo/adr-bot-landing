@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-fahrzeugkombination",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Fahrzeugkombination",
+    "translations": {
+      "ru": "Транспортное средство с прицепом",
+      "tr": "Araç kombinasyonu",
+      "ar": "مجموعة المركبات",
+      "uk": "Транспортний засіб з причепом",
+      "pl": "Zestaw pojazdów",
+      "ro": "Combinație de vehicule",
+      "en": "Vehicle combination",
+      "bg": "Комбинация от превозни средства",
+      "hr": "Kombinacija vozila"
+    },
+    "simple_explanation": "Beförderungseinheit",
+    "category": "vocabulary",
+    "synonym": "Beförderungseinheit"
+  }
+}

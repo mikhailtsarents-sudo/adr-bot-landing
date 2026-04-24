@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-radkeil",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Radkeil",
+    "translations": {
+      "ru": "Клин под колесо",
+      "tr": "Tekerlek takoz",
+      "ar": "إسفين العجلة",
+      "uk": "Клин під колесо",
+      "pl": "Klin kołowy",
+      "ro": "Cală de roată",
+      "en": "Wheel chock",
+      "bg": "Клин за колело",
+      "hr": "Graničnik za kotač"
+    },
+    "simple_explanation": "Unterlegkeil",
+    "category": "vocabulary",
+    "synonym": "Unterlegkeil"
+  }
+}

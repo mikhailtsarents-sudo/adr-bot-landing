@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-taschenlampe",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Taschenlampe",
+    "translations": {
+      "ru": "Фонарик",
+      "tr": "El feneri",
+      "ar": "مصباح يدوي",
+      "uk": "Ліхтарик",
+      "pl": "Latarka",
+      "ro": "Lanternă",
+      "en": "Torch / Flashlight",
+      "bg": "Фенерче",
+      "hr": "Baterijska lampa"
+    },
+    "simple_explanation": "Handlampe",
+    "category": "vocabulary",
+    "synonym": "Handlampe"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-abfahrtskontrolle",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Abfahrtskontrolle",
+    "translations": {
+      "ru": "Предрейсовая проверка",
+      "tr": "Hareket öncesi kontrol",
+      "ar": "فحص ما قبل المغادرة",
+      "uk": "Передрейсова перевірка",
+      "pl": "Kontrola przed odjazdem",
+      "ro": "Verificare înainte de plecare",
+      "en": "Pre-departure check",
+      "bg": "Проверка преди тръгване",
+      "hr": "Provjera prije polaska"
+    },
+    "simple_explanation": "Fahrzeugkontrolle",
+    "category": "vocabulary",
+    "synonym": "Fahrzeugkontrolle"
+  }
+}

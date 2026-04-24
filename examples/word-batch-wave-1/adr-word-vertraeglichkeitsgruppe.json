@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-vertraeglichkeitsgruppe",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Verträglichkeitsgruppe",
+    "translations": {
+      "ru": "Группа совместимости (для класса 1)",
+      "tr": "Uyumluluk grubu",
+      "ar": "مجموعة التوافق",
+      "uk": "Група сумісності",
+      "pl": "Grupa zgodności",
+      "ro": "Grup de compatibilitate",
+      "en": "Compatibility group",
+      "bg": "Група на съвместимост",
+      "hr": "Skupina kompatibilnosti"
+    },
+    "simple_explanation": "Verträglichkeitsgruppe",
+    "category": "vocabulary",
+    "synonym": ""
+  }
+}

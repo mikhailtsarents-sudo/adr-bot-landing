@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-tunnelbeschraenkung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Tunnelbeschränkung",
+    "translations": {
+      "ru": "Ограничение для проезда через тоннели",
+      "tr": "Tünel kısıtlaması",
+      "ar": "قيود النفق",
+      "uk": "Обмеження для тунелів",
+      "pl": "Ograniczenie dla tuneli",
+      "ro": "Restricție pentru tunele",
+      "en": "Tunnel restriction",
+      "bg": "Ограничение за тунели",
+      "hr": "Ograničenje za tunele"
+    },
+    "simple_explanation": "Tunnelkategorie",
+    "category": "vocabulary",
+    "synonym": "Tunnelkategorie"
+  }
+}

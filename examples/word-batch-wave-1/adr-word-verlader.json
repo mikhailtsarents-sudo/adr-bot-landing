@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-verlader",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Verlader",
+    "translations": {
+      "ru": "Грузчик / Тот кто грузит",
+      "tr": "Yükleyen kişi",
+      "ar": "الشاحن (من يحمّل)",
+      "uk": "Вантажник / Той хто вантажить",
+      "pl": "Załadowca",
+      "ro": "Încărcător",
+      "en": "Loader",
+      "bg": "Товарач",
+      "hr": "Utovarivač"
+    },
+    "simple_explanation": "Absender (разные роли)",
+    "category": "vocabulary",
+    "synonym": "Absender (разные роли)"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-aerosolpackung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Aerosolpackung",
+    "translations": {
+      "ru": "Аэрозольная упаковка",
+      "tr": "Aerosol ambalaj",
+      "ar": "عبوة رذاذ (إيروسول)",
+      "uk": "Аерозольна упаковка",
+      "pl": "Opakowanie aerozolowe",
+      "ro": "Ambalaj aerosol",
+      "en": "Aerosol packaging",
+      "bg": "Аерозолна опаковка",
+      "hr": "Aerosolna ambalaža"
+    },
+    "simple_explanation": "Druckgaspackung",
+    "category": "vocabulary",
+    "synonym": "Druckgaspackung"
+  }
+}

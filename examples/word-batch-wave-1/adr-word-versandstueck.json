@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-versandstueck",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Versandstück",
+    "translations": {
+      "ru": "Грузовое место / Единица упаковки",
+      "tr": "Sevkiyat birimi / Koli",
+      "ar": "وحدة الشحن / طرد",
+      "uk": "Вантажне місце / Одиниця пакування",
+      "pl": "Sztuka przesyłki",
+      "ro": "Colet / Unitate de expediere",
+      "en": "Package / Consignment unit",
+      "bg": "Колет / Единица пратка",
+      "hr": "Koleto / Jedinica pošiljke"
+    },
+    "simple_explanation": "Packstück, Kollieinheit",
+    "category": "vocabulary",
+    "synonym": "Packstück, Kollieinheit"
+  }
+}

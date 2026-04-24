@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-nebenrisiko",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Nebenrisiko",
+    "translations": {
+      "ru": "Дополнительная опасность / Вторичная угроза",
+      "tr": "İkincil risk",
+      "ar": "خطر ثانوي",
+      "uk": "Вторинний ризик",
+      "pl": "Zagrożenie wtórne",
+      "ro": "Risc secundar",
+      "en": "Subsidiary risk",
+      "bg": "Допълнителен риск",
+      "hr": "Sporedni rizik"
+    },
+    "simple_explanation": "Nebengefahr",
+    "category": "vocabulary",
+    "synonym": "Nebengefahr"
+  }
+}

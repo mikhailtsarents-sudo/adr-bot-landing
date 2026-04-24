@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-un-nummer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "UN-Nummer",
+    "translations": {
+      "ru": "Номер ООН (4-значный код вещества)",
+      "tr": "BM numarası (4 haneli madde kodu)",
+      "ar": "رقم الأمم المتحدة (4 أرقام)",
+      "uk": "Номер ООН (4-значний код речовини)",
+      "pl": "Numer ONZ (4-cyfrowy kod substancji)",
+      "ro": "Număr ONU (cod 4 cifre)",
+      "en": "UN number (4-digit substance code)",
+      "bg": "Номер на ООН (4-цифрен код)",
+      "hr": "UN broj (4-znamenkasti kod tvari)"
+    },
+    "simple_explanation": "UN-Nr., Stoffnummer",
+    "category": "vocabulary",
+    "synonym": "UN-Nr., Stoffnummer"
+  }
+}

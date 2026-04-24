@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-grosszettel",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Großzettel",
+    "translations": {
+      "ru": "Большой знак опасности (на транспортном средстве 25×25 см)",
+      "tr": "Büyük tehlike etiketi (araçta 25×25 cm)",
+      "ar": "ملصق الخطر الكبير (على المركبة 25×25 سم)",
+      "uk": "Великий знак небезпеки (на ТЗ 25×25 см)",
+      "pl": "Duża nalepka ostrzegawcza (na pojeździe 25×25 cm)",
+      "ro": "Etichetă mare de pericol (pe vehicul 25×25 cm)",
+      "en": "Large hazard label / Placard (on vehicle 25×25 cm)",
+      "bg": "Голям етикет за опасност (на МПС 25×25 см)",
+      "hr": "Velika oznaka opasnosti (na vozilu 25×25 cm)"
+    },
+    "simple_explanation": "Placard, ≠ Gefahrzettel",
+    "category": "vocabulary",
+    "synonym": "Placard, ≠ Gefahrzettel"
+  }
+}

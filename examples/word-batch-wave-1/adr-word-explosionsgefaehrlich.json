@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-explosionsgefaehrlich",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "explosionsgefährlich",
+    "translations": {
+      "ru": "Взрывоопасный",
+      "tr": "Patlama tehlikesi olan",
+      "ar": "خطر الانفجار",
+      "uk": "Вибухонебезпечний",
+      "pl": "Grożący wybuchem",
+      "ro": "Pericol de explozie",
+      "en": "Risk of explosion",
+      "bg": "Опасен от взрив",
+      "hr": "Opasnost od eksplozije"
+    },
+    "simple_explanation": "Auch: explosiv",
+    "category": "vocabulary",
+    "synonym": "explosiv"
+  }
+}

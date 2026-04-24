@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-notfallsituation",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Notfallsituation",
+    "translations": {
+      "ru": "Аварийная ситуация",
+      "tr": "Acil durum",
+      "ar": "موقف طارئ",
+      "uk": "Аварійна ситуація",
+      "pl": "Sytuacja awaryjna",
+      "ro": "Situație de urgență",
+      "en": "Emergency situation",
+      "bg": "Аварийна ситуация",
+      "hr": "Hitna situacija"
+    },
+    "simple_explanation": "Notfall",
+    "category": "vocabulary",
+    "synonym": "Notfall"
+  }
+}

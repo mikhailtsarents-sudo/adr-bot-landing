@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-schutzhandschuhe",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Schutzhandschuhe",
+    "translations": {
+      "ru": "Защитные перчатки",
+      "tr": "Koruyucu eldiven",
+      "ar": "قفازات واقية",
+      "uk": "Захисні рукавички",
+      "pl": "Rękawice ochronne",
+      "ro": "Mănuși de protecție",
+      "en": "Protective gloves",
+      "bg": "Защитни ръкавици",
+      "hr": "Zaštitne rukavice"
+    },
+    "simple_explanation": "Handschuhe",
+    "category": "vocabulary",
+    "synonym": "Handschuhe"
+  }
+}

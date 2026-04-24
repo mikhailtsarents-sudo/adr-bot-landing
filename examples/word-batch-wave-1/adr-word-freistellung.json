@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-freistellung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Freistellung",
+    "translations": {
+      "ru": "Освобождение / Исключение из правил",
+      "tr": "Muafiyet",
+      "ar": "إعفاء",
+      "uk": "Звільнення / Виняток",
+      "pl": "Wyłączenie / Zwolnienie",
+      "ro": "Exceptare / Scutire",
+      "en": "Exemption",
+      "bg": "Освобождаване / Изключение",
+      "hr": "Izuzeće"
+    },
+    "simple_explanation": "Ausnahme, Befreiung",
+    "category": "vocabulary",
+    "synonym": "Ausnahme, Befreiung"
+  }
+}

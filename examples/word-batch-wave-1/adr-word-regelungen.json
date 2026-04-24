@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-regelungen",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Regelungen",
+    "translations": {
+      "ru": "Регламент / Нормы",
+      "tr": "Düzenlemeler",
+      "ar": "أنظمة / تعليمات",
+      "uk": "Регламент / Норми",
+      "pl": "Przepisy",
+      "ro": "Reglementări",
+      "en": "Regulations",
+      "bg": "Регламенти",
+      "hr": "Propisi"
+    },
+    "simple_explanation": "Vorschriften, Bestimmungen",
+    "category": "vocabulary",
+    "synonym": "Vorschriften, Bestimmungen"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-toxisch",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "toxisch",
+    "translations": {
+      "ru": "Токсичный (научный термин)",
+      "tr": "Toksik",
+      "ar": "سام (مصطلح علمي)",
+      "uk": "Токсичний (науковий термін)",
+      "pl": "Toksyczny",
+      "ro": "Toxic",
+      "en": "Toxic",
+      "bg": "Токсичен",
+      "hr": "Toksičan"
+    },
+    "simple_explanation": "Auch: giftig",
+    "category": "vocabulary",
+    "synonym": "giftig"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kleincontainer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Kleincontainer",
+    "translations": {
+      "ru": "Малый контейнер (≤ 3 м³)",
+      "tr": "Küçük konteyner (3m³ altı)",
+      "ar": "حاوية صغيرة (أقل من 3م³)",
+      "uk": "Малий контейнер (до 3 м³)",
+      "pl": "Mały kontener (do 3 m³)",
+      "ro": "Container mic (sub 3 m³)",
+      "en": "Small container (up to 3 m³)",
+      "bg": "Малък контейнер (до 3 м³)",
+      "hr": "Mali kontejner (do 3 m³)"
+    },
+    "simple_explanation": "Großcontainer",
+    "category": "vocabulary",
+    "synonym": "Großcontainer"
+  }
+}

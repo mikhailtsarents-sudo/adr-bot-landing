@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-warnzeichen",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Warnzeichen",
+    "translations": {
+      "ru": "Предупредительный знак / Конус",
+      "tr": "Uyarı işareti (koni)",
+      "ar": "إشارة تحذيرية (مخروط)",
+      "uk": "Попереджувальний знак",
+      "pl": "Znak ostrzegawczy",
+      "ro": "Semn de avertizare",
+      "en": "Warning sign / Cone",
+      "bg": "Предупредителен знак",
+      "hr": "Znak upozorenja"
+    },
+    "simple_explanation": "Auch: selbststehendes Warnzeichen",
+    "category": "vocabulary",
+    "synonym": "selbststehendes Warnzeichen"
+  }
+}

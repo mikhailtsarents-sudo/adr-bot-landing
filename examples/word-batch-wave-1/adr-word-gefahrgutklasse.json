@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrgutklasse",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrgutklasse",
+    "translations": {
+      "ru": "Класс опасного груза (1-9)",
+      "tr": "Tehlikeli madde sınıfı (1-9)",
+      "ar": "فئة البضائع الخطرة (1-9)",
+      "uk": "Клас небезпечного вантажу (1-9)",
+      "pl": "Klasa towarów niebezpiecznych (1-9)",
+      "ro": "Clasa de mărfuri periculoase (1-9)",
+      "en": "Dangerous goods class (1-9)",
+      "bg": "Клас опасни товари (1-9)",
+      "hr": "Razred opasne robe (1-9)"
+    },
+    "simple_explanation": "Klasse, Gefahrenklasse",
+    "category": "vocabulary",
+    "synonym": "Klasse, Gefahrenklasse"
+  }
+}

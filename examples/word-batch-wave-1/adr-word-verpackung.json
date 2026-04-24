@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-verpackung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Verpackung",
+    "translations": {
+      "ru": "Упаковка",
+      "tr": "Ambalaj",
+      "ar": "تغليف / عبوة",
+      "uk": "Упаковка",
+      "pl": "Opakowanie",
+      "ro": "Ambalaj",
+      "en": "Packaging",
+      "bg": "Опаковка",
+      "hr": "Ambalaža"
+    },
+    "simple_explanation": "Umverpackung, Behältnis",
+    "category": "vocabulary",
+    "synonym": "Umverpackung, Behältnis"
+  }
+}

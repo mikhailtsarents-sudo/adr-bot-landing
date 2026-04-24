@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-versender",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Versender",
+    "translations": {
+      "ru": "Отправитель / Грузоотправитель",
+      "tr": "Gönderici / Yükleten",
+      "ar": "المرسِل / الشاحن",
+      "uk": "Відправник / Вантажовідправник",
+      "pl": "Nadawca / Wysyłający",
+      "ro": "Expeditor",
+      "en": "Consignor / Shipper",
+      "bg": "Изпращач / Товародател",
+      "hr": "Pošiljatelj / Otpremnik"
+    },
+    "simple_explanation": "Absender",
+    "category": "vocabulary",
+    "synonym": "Absender"
+  }
+}

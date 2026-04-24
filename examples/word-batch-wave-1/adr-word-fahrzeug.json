@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-fahrzeug",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Fahrzeug",
+    "translations": {
+      "ru": "Транспортное средство",
+      "tr": "Araç / Taşıt",
+      "ar": "مركبة / شاحنة",
+      "uk": "Транспортний засіб",
+      "pl": "Pojazd",
+      "ro": "Vehicul",
+      "en": "Vehicle",
+      "bg": "Превозно средство",
+      "hr": "Vozilo"
+    },
+    "simple_explanation": "Kraftfahrzeug, LKW",
+    "category": "vocabulary",
+    "synonym": "Kraftfahrzeug, LKW"
+  }
+}

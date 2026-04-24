@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-verbringung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Verbringung",
+    "translations": {
+      "ru": "Перемещение / Перевозка",
+      "tr": "Taşıma / Nakil",
+      "ar": "نقل / تنقيل",
+      "uk": "Переміщення / Перевезення",
+      "pl": "Przemieszczenie",
+      "ro": "Deplasare / Mutare",
+      "en": "Transfer / Conveyance",
+      "bg": "Преместване",
+      "hr": "Premještanje"
+    },
+    "simple_explanation": "Beförderung, Transport",
+    "category": "vocabulary",
+    "synonym": "Beförderung, Transport"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-fahrzeugfuehrer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Fahrzeugführer",
+    "translations": {
+      "ru": "Водитель транспортного средства",
+      "tr": "Araç sürücüsü",
+      "ar": "سائق المركبة",
+      "uk": "Водій транспортного засобу",
+      "pl": "Kierowca pojazdu",
+      "ro": "Conducătorul vehiculului",
+      "en": "Vehicle driver",
+      "bg": "Водач на превозното средство",
+      "hr": "Vozač vozila"
+    },
+    "simple_explanation": "Fahrer, Kraftfahrer",
+    "category": "vocabulary",
+    "synonym": "Fahrer, Kraftfahrer"
+  }
+}

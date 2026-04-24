@@ -1,0 +1,29 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-placard",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Placard",
+    "translations": {
+      "ru": "Крупный знак опасности (международное название)",
+      "tr": "Plakar (uluslararası terim)",
+      "ar": "لوحة الخطر (المصطلح الدولي)",
+      "uk": "Плакард (міжнародна назва)",
+      "pl": "Tablica (nazwa międzynarodowa)",
+      "ro": "Placardă (denumire internațională)",
+      "bg": "Плакард (международен термин)",
+      "hr": "Placarda (međunarodni izraz)"
+    },
+    "simple_explanation": "Großzettel",
+    "category": "vocabulary",
+    "synonym": "Großzettel"
+  }
+}

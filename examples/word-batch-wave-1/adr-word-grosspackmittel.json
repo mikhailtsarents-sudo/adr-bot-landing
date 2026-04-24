@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-grosspackmittel",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Großpackmittel",
+    "translations": {
+      "ru": "Крупногабаритная тара (IBC)",
+      "tr": "Büyük ambalaj (IBC)",
+      "ar": "عبوة كبيرة (IBC)",
+      "uk": "Велика тара (IBC)",
+      "pl": "Duże opakowanie (IBC)",
+      "ro": "Ambalaj mare (IBC)",
+      "en": "Large packaging (IBC)",
+      "bg": "Голяма опаковка (IBC)",
+      "hr": "Velika ambalaža (IBC)"
+    },
+    "simple_explanation": "IBC",
+    "category": "vocabulary",
+    "synonym": "IBC"
+  }
+}

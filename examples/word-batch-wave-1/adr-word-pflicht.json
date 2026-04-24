@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-pflicht",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Pflicht",
+    "translations": {
+      "ru": "Обязанность / Долг",
+      "tr": "Yükümlülük",
+      "ar": "واجب / التزام",
+      "uk": "Обов'язок",
+      "pl": "Obowiązek",
+      "ro": "Obligație",
+      "en": "Duty / Obligation",
+      "bg": "Задължение",
+      "hr": "Obveza / Dužnost"
+    },
+    "simple_explanation": "Verpflichtung",
+    "category": "vocabulary",
+    "synonym": "Verpflichtung"
+  }
+}

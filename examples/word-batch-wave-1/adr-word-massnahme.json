@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-massnahme",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Maßnahme",
+    "translations": {
+      "ru": "Мера / Действие",
+      "tr": "Tedbir / Önlem",
+      "ar": "إجراء / تدبير",
+      "uk": "Захід / Дія",
+      "pl": "Środek / Działanie",
+      "ro": "Măsură / Acțiune",
+      "en": "Measure / Action",
+      "bg": "Мярка / Действие",
+      "hr": "Mjera / Radnja"
+    },
+    "simple_explanation": "Sicherheitsmaßnahme",
+    "category": "vocabulary",
+    "synonym": "Sicherheitsmaßnahme"
+  }
+}

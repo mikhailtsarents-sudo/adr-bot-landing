@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-verbot",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Verbot",
+    "translations": {
+      "ru": "Запрет",
+      "tr": "Yasak",
+      "ar": "حظر",
+      "uk": "Заборона",
+      "pl": "Zakaz",
+      "ro": "Interdicție",
+      "en": "Prohibition / Ban",
+      "bg": "Забрана",
+      "hr": "Zabrana"
+    },
+    "simple_explanation": "Verbot",
+    "category": "vocabulary",
+    "synonym": ""
+  }
+}

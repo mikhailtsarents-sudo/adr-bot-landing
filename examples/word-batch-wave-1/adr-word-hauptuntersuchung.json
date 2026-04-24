@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-hauptuntersuchung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Hauptuntersuchung",
+    "translations": {
+      "ru": "Технический осмотр (TÜV)",
+      "tr": "Teknik muayene (TÜV)",
+      "ar": "الفحص التقني (TÜV)",
+      "uk": "Технічний огляд (TÜV)",
+      "pl": "Badanie techniczne (TÜV)",
+      "ro": "Inspecție tehnică (TÜV)",
+      "en": "Technical inspection (TÜV)",
+      "bg": "Технически преглед (TÜV)",
+      "hr": "Tehnički pregled (TÜV)"
+    },
+    "simple_explanation": "HU, TÜV-Prüfung",
+    "category": "vocabulary",
+    "synonym": "HU, TÜV-Prüfung"
+  }
+}

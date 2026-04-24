@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-giftig",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "giftig",
+    "translations": {
+      "ru": "Токсичный / Ядовитый",
+      "tr": "Zehirli",
+      "ar": "سام / زهري",
+      "uk": "Токсичний / Отруйний",
+      "pl": "Toksyczny / Trujący",
+      "ro": "Toxic / Otrăvitor",
+      "en": "Toxic / Poisonous",
+      "bg": "Токсичен / Отровен",
+      "hr": "Otrovan / Toksičan"
+    },
+    "simple_explanation": "Auch: toxisch",
+    "category": "vocabulary",
+    "synonym": "toxisch"
+  }
+}

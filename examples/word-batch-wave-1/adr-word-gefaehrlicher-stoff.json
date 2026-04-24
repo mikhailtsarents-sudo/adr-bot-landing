@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefaehrlicher-stoff",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "gefährlicher Stoff",
+    "translations": {
+      "ru": "Опасное вещество",
+      "tr": "Tehlikeli madde",
+      "ar": "مادة خطرة",
+      "uk": "Небезпечна речовина",
+      "pl": "Substancja niebezpieczna",
+      "ro": "Substanță periculoasă",
+      "en": "Hazardous substance",
+      "bg": "Опасно вещество",
+      "hr": "Opasna tvar"
+    },
+    "simple_explanation": "Gefahrstoff",
+    "category": "vocabulary",
+    "synonym": "Gefahrstoff"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-befoerderer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Beförderer",
+    "translations": {
+      "ru": "Перевозчик",
+      "tr": "Taşıyıcı",
+      "ar": "الناقل",
+      "uk": "Перевізник",
+      "pl": "Przewoźnik",
+      "ro": "Transportator",
+      "en": "Carrier",
+      "bg": "Превозвач",
+      "hr": "Prijevoznik"
+    },
+    "simple_explanation": "Transportunternehmer, Spediteur",
+    "category": "vocabulary",
+    "synonym": "Transportunternehmer, Spediteur"
+  }
+}

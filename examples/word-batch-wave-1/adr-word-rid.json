@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-rid",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "RID",
+    "translations": {
+      "ru": "Правила перевозки опасных грузов по железной дороге",
+      "tr": "Demiryolu tehlikeli madde yönetmeliği",
+      "ar": "قواعد نقل البضائع الخطرة بالسكك الحديدية",
+      "uk": "Правила перевезення небезпечних вантажів залізницею",
+      "pl": "Regulamin przewozu koleją",
+      "ro": "Regulamentul transport feroviar",
+      "en": "Regulations for rail transport",
+      "bg": "Правила за железопътен транспорт",
+      "hr": "Propisi za željeznički prijevoz"
+    },
+    "simple_explanation": "Eisenbahnbeförderung",
+    "category": "vocabulary",
+    "synonym": "Eisenbahnbeförderung"
+  }
+}

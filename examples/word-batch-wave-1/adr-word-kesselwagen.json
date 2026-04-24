@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kesselwagen",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Kesselwagen",
+    "translations": {
+      "ru": "Цистерна (ж/д или авто)",
+      "tr": "Sarnıç / Tank araç",
+      "ar": "عربة صهريج",
+      "uk": "Цистерна",
+      "pl": "Wagon cysterna",
+      "ro": "Vagon cisternă",
+      "en": "Tanker / Tank wagon",
+      "bg": "Цистерна",
+      "hr": "Cisterna"
+    },
+    "simple_explanation": "Tankfahrzeug",
+    "category": "vocabulary",
+    "synonym": "Tankfahrzeug"
+  }
+}

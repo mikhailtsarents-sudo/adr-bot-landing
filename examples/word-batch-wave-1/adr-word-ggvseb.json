@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-ggvseb",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "GGVSEB",
+    "translations": {
+      "ru": "Нем. закон о перевозке опасных грузов (Gefahrgutverordnung Straße, Eisenbahn und Binnenschifffahrt)",
+      "tr": "Alman tehlikeli madde taşıma yönetmeliği",
+      "ar": "اللائحة الألمانية لنقل البضائع الخطرة",
+      "uk": "Нім. закон про перевезення небезпечних вантажів",
+      "pl": "Niemieckie rozporządzenie o towarach niebezpiecznych",
+      "ro": "Regulamentul german privind mărfurile periculoase",
+      "en": "German dangerous goods transport regulation",
+      "bg": "Немска наредба за опасни товари",
+      "hr": "Njemačka uredba o prijevozu opasne robe"
+    },
+    "simple_explanation": "Auch: nationale ADR-Umsetzung",
+    "category": "vocabulary",
+    "synonym": "nationale ADR-Umsetzung"
+  }
+}

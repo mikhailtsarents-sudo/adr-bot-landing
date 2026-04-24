@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-fahrzeugbesatzung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Fahrzeugbesatzung",
+    "translations": {
+      "ru": "Экипаж транспортного средства (водитель + бортовой)",
+      "tr": "Araç mürettebatı",
+      "ar": "طاقم المركبة",
+      "uk": "Екіпаж транспортного засобу",
+      "pl": "Załoga pojazdu",
+      "ro": "Echipajul vehiculului",
+      "en": "Vehicle crew",
+      "bg": "Екипаж на превозното средство",
+      "hr": "Posada vozila"
+    },
+    "simple_explanation": "Besatzung",
+    "category": "vocabulary",
+    "synonym": "Besatzung"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-ansteckungsgefaehrlich",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "ansteckungsgefährlich",
+    "translations": {
+      "ru": "Инфекционно опасный",
+      "tr": "Bulaşıcı / Enfeksiyon tehlikeli",
+      "ar": "خطر العدوى",
+      "uk": "Інфекційно небезпечний",
+      "pl": "Zakaźny",
+      "ro": "Infecțios / Contagios",
+      "en": "Infectious / Biohazard",
+      "bg": "Заразен / Инфекциозен",
+      "hr": "Zarazan / Infektivan"
+    },
+    "simple_explanation": "Auch: infektiös",
+    "category": "vocabulary",
+    "synonym": "infektiös"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-vorschriften",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Vorschriften",
+    "translations": {
+      "ru": "Правила / Предписания",
+      "tr": "Yönetmelikler",
+      "ar": "لوائح / قواعد",
+      "uk": "Правила / Приписи",
+      "pl": "Przepisy / Regulacje",
+      "ro": "Reglementări / Norme",
+      "en": "Regulations",
+      "bg": "Правила / Разпоредби",
+      "hr": "Propisi / Uredbe"
+    },
+    "simple_explanation": "Regelungen, Bestimmungen",
+    "category": "vocabulary",
+    "synonym": "Regelungen, Bestimmungen"
+  }
+}

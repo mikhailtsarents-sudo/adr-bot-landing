@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-tankfahrzeug",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Tankfahrzeug",
+    "translations": {
+      "ru": "Автоцистерна (бак постоянно закреплён)",
+      "tr": "Sabit tanklı araç (sarnıçlı kamyon)",
+      "ar": "ناقلة خزان (خزان ثابت)",
+      "uk": "Автоцистерна (бак постійно закріплений)",
+      "pl": "Cysterna (stały zbiornik)",
+      "ro": "Autocisternă (rezervor fix)",
+      "en": "Tank vehicle (fixed tank)",
+      "bg": "Автоцистерна (фиксиран резервоар)",
+      "hr": "Autocisterna (fiksni spremnik)"
+    },
+    "simple_explanation": "Kesselwagen",
+    "category": "vocabulary",
+    "synonym": "Kesselwagen"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-selbstentzuendlich",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "selbstentzündlich",
+    "translations": {
+      "ru": "Самовоспламеняющийся",
+      "tr": "Kendiliğinden tutuşan",
+      "ar": "ذاتي الاشتعال",
+      "uk": "Самозаймистий",
+      "pl": "Samozapalny",
+      "ro": "Autoaprindere",
+      "en": "Self-igniting / Pyrophoric",
+      "bg": "Самозапалващ се",
+      "hr": "Samozapaljiv"
+    },
+    "simple_explanation": "Auch: pyrophor",
+    "category": "vocabulary",
+    "synonym": "pyrophor"
+  }
+}

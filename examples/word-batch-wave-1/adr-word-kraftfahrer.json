@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kraftfahrer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Kraftfahrer",
+    "translations": {
+      "ru": "Водитель моторного транспорта",
+      "tr": "Motorlu araç sürücüsü",
+      "ar": "سائق مركبة آلية",
+      "uk": "Водій моторного транспорту",
+      "pl": "Kierowca pojazdu silnikowego",
+      "ro": "Conducător auto",
+      "en": "Motor vehicle driver",
+      "bg": "Шофьор на МПС",
+      "hr": "Vozač motornog vozila"
+    },
+    "simple_explanation": "Fahrer, Fahrzeugführer",
+    "category": "vocabulary",
+    "synonym": "Fahrer, Fahrzeugführer"
+  }
+}

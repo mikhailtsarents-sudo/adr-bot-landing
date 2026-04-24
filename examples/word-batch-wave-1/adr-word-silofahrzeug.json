@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-silofahrzeug",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Silofahrzeug",
+    "translations": {
+      "ru": "Силосовоз (для сыпучих грузов)",
+      "tr": "Silo aracı (dökme yük için)",
+      "ar": "مركبة الصوامع (للبضائع السائبة)",
+      "uk": "Силосовоз",
+      "pl": "Pojazd silosowy",
+      "ro": "Vehicul siloz",
+      "en": "Silo vehicle / Bulk tanker",
+      "bg": "Силозен автомобил",
+      "hr": "Silosi vozilo"
+    },
+    "simple_explanation": "Tankfahrzeug für Schüttgut",
+    "category": "vocabulary",
+    "synonym": "Tankfahrzeug für Schüttgut"
+  }
+}

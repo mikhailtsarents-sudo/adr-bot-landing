@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-befoerderungspapier",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Beförderungspapier",
+    "translations": {
+      "ru": "Транспортный документ / Накладная",
+      "tr": "Taşıma belgesi / Konşimento",
+      "ar": "وثيقة النقل / بوليصة الشحن",
+      "uk": "Транспортний документ / Накладна",
+      "pl": "Dokument przewozowy",
+      "ro": "Document de transport",
+      "en": "Transport document",
+      "bg": "Транспортен документ",
+      "hr": "Prijevozni dokument"
+    },
+    "simple_explanation": "Frachtbrief, Beförderungsdokument",
+    "category": "vocabulary",
+    "synonym": "Frachtbrief, Beförderungsdokument"
+  }
+}

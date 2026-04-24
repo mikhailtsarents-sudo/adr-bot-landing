@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-aufsetztank",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Aufsetztank",
+    "translations": {
+      "ru": "Съёмная цистерна (снимается в пустом состоянии)",
+      "tr": "Çıkarılabilir tank",
+      "ar": "خزان قابل للفصل",
+      "uk": "Знімна цистерна",
+      "pl": "Zbiornik zdejmowany",
+      "ro": "Rezervor detașabil",
+      "en": "Demountable tank",
+      "bg": "Сменяем резервоар",
+      "hr": "Izmjenjivi spremnik"
+    },
+    "simple_explanation": "Tankcontainer",
+    "category": "vocabulary",
+    "synonym": "Tankcontainer"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-fahrer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Fahrer",
+    "translations": {
+      "ru": "Водитель",
+      "tr": "Sürücü",
+      "ar": "سائق",
+      "uk": "Водій",
+      "pl": "Kierowca",
+      "ro": "Șofer",
+      "en": "Driver",
+      "bg": "Шофьор",
+      "hr": "Vozač"
+    },
+    "simple_explanation": "Fahrzeugführer, Kraftfahrer",
+    "category": "vocabulary",
+    "synonym": "Fahrzeugführer, Kraftfahrer"
+  }
+}

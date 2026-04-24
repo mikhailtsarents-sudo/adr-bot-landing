@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrstoff",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrstoff",
+    "translations": {
+      "ru": "Опасное вещество (на рабочем месте)",
+      "tr": "Tehlikeli madde (işyerinde)",
+      "ar": "مادة خطرة (في مكان العمل)",
+      "uk": "Небезпечна речовина (на робочому місці)",
+      "pl": "Substancja niebezpieczna (w miejscu pracy)",
+      "ro": "Substanță periculoasă (la locul de muncă)",
+      "en": "Hazardous substance (at the workplace)",
+      "bg": "Опасно вещество (на работното място)",
+      "hr": "Opasna tvar (na radnom mjestu)"
+    },
+    "simple_explanation": "Gefahrgut (разные законы!)",
+    "category": "vocabulary",
+    "synonym": "Gefahrgut (разные законы!)"
+  }
+}

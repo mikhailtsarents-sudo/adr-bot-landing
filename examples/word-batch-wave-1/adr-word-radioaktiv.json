@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-radioaktiv",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "radioaktiv",
+    "translations": {
+      "ru": "Радиоактивный",
+      "tr": "Radyoaktif",
+      "ar": "مشع / إشعاعي",
+      "uk": "Радіоактивний",
+      "pl": "Radioaktywny",
+      "ro": "Radioactiv",
+      "en": "Radioactive",
+      "bg": "Радиоактивен",
+      "hr": "Radioaktivan"
+    },
+    "simple_explanation": "radioaktiv",
+    "category": "vocabulary",
+    "synonym": ""
+  }
+}

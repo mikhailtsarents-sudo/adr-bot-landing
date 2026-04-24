@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-persoenliche-schutzausruestung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "persönliche Schutzausrüstung",
+    "translations": {
+      "ru": "Личные средства защиты (СИЗ)",
+      "tr": "Kişisel koruyucu donanım (KKD)",
+      "ar": "معدات الوقاية الشخصية",
+      "uk": "Особисті засоби захисту (ЗІЗ)",
+      "pl": "Osobiste środki ochrony (ŚOI)",
+      "ro": "Echipament personal de protecție (EIP)",
+      "en": "Personal protective equipment (PPE)",
+      "bg": "Лични предпазни средства (ЛПС)",
+      "hr": "Osobna zaštitna oprema (OZO)"
+    },
+    "simple_explanation": "Schutzausrüstung, PSA",
+    "category": "vocabulary",
+    "synonym": "Schutzausrüstung, PSA"
+  }
+}

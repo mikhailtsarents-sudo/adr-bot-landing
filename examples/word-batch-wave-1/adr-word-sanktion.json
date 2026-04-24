@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-sanktion",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Sanktion",
+    "translations": {
+      "ru": "Санкция / Наказание",
+      "tr": "Yaptırım",
+      "ar": "عقوبة / جزاء",
+      "uk": "Санкція / Покарання",
+      "pl": "Sankcja / Kara",
+      "ro": "Sancțiune",
+      "en": "Sanction / Penalty",
+      "bg": "Санкция",
+      "hr": "Sankcija / Kazna"
+    },
+    "simple_explanation": "Strafe, Bußgeld",
+    "category": "vocabulary",
+    "synonym": "Strafe, Bußgeld"
+  }
+}

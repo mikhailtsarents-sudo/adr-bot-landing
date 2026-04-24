@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-aetzend",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "ätzend",
+    "translations": {
+      "ru": "Едкий / Коррозионный",
+      "tr": "Aşındırıcı / Korozif",
+      "ar": "مسبب للتآكل / حارق",
+      "uk": "Їдкий / Корозійний",
+      "pl": "Żrący / Korozyjny",
+      "ro": "Coroziv / Caustic",
+      "en": "Corrosive / Caustic",
+      "bg": "Корозивен / Разяждащ",
+      "hr": "Nagrizajući / Korozivan"
+    },
+    "simple_explanation": "Auch: korrosiv",
+    "category": "vocabulary",
+    "synonym": "korrosiv"
+  }
+}

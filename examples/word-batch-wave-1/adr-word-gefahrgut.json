@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrgut",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrgut",
+    "translations": {
+      "ru": "Опасный груз",
+      "tr": "Tehlikeli madde",
+      "ar": "بضاعة خطرة",
+      "uk": "Небезпечний вантаж",
+      "pl": "Towar niebezpieczny",
+      "ro": "Mărfuri periculoase",
+      "en": "Dangerous goods",
+      "bg": "Опасен товар",
+      "hr": "Opasna roba"
+    },
+    "simple_explanation": "Auch: gefährliche Güter, Gefahrengut",
+    "category": "vocabulary",
+    "synonym": "gefährliche Güter, Gefahrengut"
+  }
+}

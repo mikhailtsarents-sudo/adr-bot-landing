@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrentafel",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrentafel",
+    "translations": {
+      "ru": "Оранжевая табличка с номерами на транспортном средстве",
+      "tr": "Turuncu uyarı levhası (Kemler + UN numaralı)",
+      "ar": "اللوحة البرتقالية (بأرقام Kemler و UN)",
+      "uk": "Оранжева табличка з номерами на ТЗ",
+      "pl": "Pomarańczowa tablica z numerami na pojeździe",
+      "ro": "Tablă portocalie cu numere pe vehicul",
+      "en": "Orange panel with numbers on vehicle",
+      "bg": "Оранжева табела с номера на МПС",
+      "hr": "Narančasta ploča s brojevima na vozilu"
+    },
+    "simple_explanation": "Warntafel, orangefarbene Tafel",
+    "category": "vocabulary",
+    "synonym": "Warntafel, orangefarbene Tafel"
+  }
+}

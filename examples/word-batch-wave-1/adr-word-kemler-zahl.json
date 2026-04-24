@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kemler-zahl",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Kemler-Zahl",
+    "translations": {
+      "ru": "Число Кемлера (код опасности)",
+      "tr": "Kemler sayısı",
+      "ar": "رقم كيملر",
+      "uk": "Число Кемлера (код небезпеки)",
+      "pl": "Liczba Kemlera (kod zagrożenia)",
+      "ro": "Cifra Kemler (cod pericol)",
+      "en": "Kemler number (hazard code)",
+      "bg": "Число на Кемлер",
+      "hr": "Kemlerov broj (kod opasnosti)"
+    },
+    "simple_explanation": "Gefahrnummer",
+    "category": "vocabulary",
+    "synonym": "Gefahrnummer"
+  }
+}

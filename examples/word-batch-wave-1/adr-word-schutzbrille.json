@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-schutzbrille",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Schutzbrille",
+    "translations": {
+      "ru": "Защитные очки",
+      "tr": "Koruyucu gözlük",
+      "ar": "نظارات واقية",
+      "uk": "Захисні окуляри",
+      "pl": "Okulary ochronne",
+      "ro": "Ochelari de protecție",
+      "en": "Safety goggles",
+      "bg": "Предпазни очила",
+      "hr": "Zaštitne naočale"
+    },
+    "simple_explanation": "Schutzbrille",
+    "category": "vocabulary",
+    "synonym": ""
+  }
+}

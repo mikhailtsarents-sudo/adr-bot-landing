@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefahrzettel",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Gefahrzettel",
+    "translations": {
+      "ru": "Знак опасности (ромб на упаковке 10×10 см)",
+      "tr": "Tehlike etiketi (ambalajda 10×10 cm)",
+      "ar": "ملصق الخطر (على العبوة 10×10 سم)",
+      "uk": "Знак небезпеки (ромб на упаковці 10×10 см)",
+      "pl": "Nalepka ostrzegawcza (romb na opakowaniu 10×10 cm)",
+      "ro": "Etichetă de pericol (romb pe ambalaj 10×10 cm)",
+      "en": "Hazard label (diamond on package 10×10 cm)",
+      "bg": "Етикет за опасност (ромб върху опаковката 10×10 см)",
+      "hr": "Oznaka opasnosti (romb na ambalaži 10×10 cm)"
+    },
+    "simple_explanation": "Großzettel (разный размер!)",
+    "category": "vocabulary",
+    "synonym": "Großzettel (разный размер!)"
+  }
+}

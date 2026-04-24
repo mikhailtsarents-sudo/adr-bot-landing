@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-brandfoerdend",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "brandfördend",
+    "translations": {
+      "ru": "Способствующий горению",
+      "tr": "Yanmayı destekleyen",
+      "ar": "محفز الاحتراق",
+      "uk": "Що сприяє горінню",
+      "pl": "Podtrzymujący palenie",
+      "ro": "Care favorizează arderea",
+      "en": "Fire promoting / Oxidizing",
+      "bg": "Поддържащ горенето",
+      "hr": "Potiče gorenje"
+    },
+    "simple_explanation": "Auch: oxidierend",
+    "category": "vocabulary",
+    "synonym": "oxidierend"
+  }
+}

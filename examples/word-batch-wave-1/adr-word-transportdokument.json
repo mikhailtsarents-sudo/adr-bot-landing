@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-transportdokument",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Transportdokument",
+    "translations": {
+      "ru": "Транспортный документ",
+      "tr": "Taşıma belgesi",
+      "ar": "وثيقة النقل",
+      "uk": "Транспортний документ",
+      "pl": "Dokument transportowy",
+      "ro": "Document de transport",
+      "en": "Transport document",
+      "bg": "Транспортен документ",
+      "hr": "Transportni dokument"
+    },
+    "simple_explanation": "Beförderungspapier",
+    "category": "vocabulary",
+    "synonym": "Beförderungspapier"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-unterlegkeil",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Unterlegkeil",
+    "translations": {
+      "ru": "Противооткатный упор / Клин под колесо",
+      "tr": "Takoz / Tekerlek durdurucu",
+      "ar": "إسفين العجلة / حاجز الإطار",
+      "uk": "Протиоткатний упор / Клин під колесо",
+      "pl": "Klin pod koło",
+      "ro": "Cală de roată",
+      "en": "Wheel chock",
+      "bg": "Подпор за колело",
+      "hr": "Klinasti graničnik za kotač"
+    },
+    "simple_explanation": "Radkeil",
+    "category": "vocabulary",
+    "synonym": "Radkeil"
+  }
+}

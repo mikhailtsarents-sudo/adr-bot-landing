@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-befreiung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Befreiung",
+    "translations": {
+      "ru": "Освобождение (от требований)",
+      "tr": "Muafiyet",
+      "ar": "إعفاء",
+      "uk": "Звільнення",
+      "pl": "Zwolnienie",
+      "ro": "Scutire",
+      "en": "Exemption",
+      "bg": "Освобождаване",
+      "hr": "Oslobođenje"
+    },
+    "simple_explanation": "Freistellung",
+    "category": "vocabulary",
+    "synonym": "Freistellung"
+  }
+}

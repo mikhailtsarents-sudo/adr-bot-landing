@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-befoerderungseinheit",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Beförderungseinheit",
+    "translations": {
+      "ru": "Транспортная единица (тягач + прицеп)",
+      "tr": "Taşıma birimi (çekici + dorse)",
+      "ar": "وحدة النقل (جرار + مقطورة)",
+      "uk": "Транспортна одиниця (тягач + причіп)",
+      "pl": "Jednostka transportowa (ciągnik + naczepa)",
+      "ro": "Unitate de transport (tractor + semiremorcă)",
+      "en": "Transport unit (tractor + trailer)",
+      "bg": "Транспортна единица (влекач + ремарке)",
+      "hr": "Transportna jedinica (tegljač + prikolica)"
+    },
+    "simple_explanation": "Fahrzeugkombination",
+    "category": "vocabulary",
+    "synonym": "Fahrzeugkombination"
+  }
+}

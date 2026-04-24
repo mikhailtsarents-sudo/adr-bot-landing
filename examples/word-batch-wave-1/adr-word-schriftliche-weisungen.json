@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-schriftliche-weisungen",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "schriftliche Weisungen",
+    "translations": {
+      "ru": "Письменные инструкции (в кабине водителя)",
+      "tr": "Yazılı talimatlar (sürücü kabininde)",
+      "ar": "التعليمات الكتابية (في مقصورة السائق)",
+      "uk": "Письмові інструкції (в кабіні водія)",
+      "pl": "Pisemne instrukcje (w kabinie kierowcy)",
+      "ro": "Instrucțiuni scrise (în cabina șoferului)",
+      "en": "Written instructions (in driver's cab)",
+      "bg": "Писмени инструкции (в кабината на шофьора)",
+      "hr": "Pisane upute (u kabini vozača)"
+    },
+    "simple_explanation": "Unfallmerkblatt",
+    "category": "vocabulary",
+    "synonym": "Unfallmerkblatt"
+  }
+}

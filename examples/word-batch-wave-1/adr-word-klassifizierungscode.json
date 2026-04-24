@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-klassifizierungscode",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Klassifizierungscode",
+    "translations": {
+      "ru": "Код классификации вещества",
+      "tr": "Sınıflandırma kodu",
+      "ar": "رمز التصنيف",
+      "uk": "Код класифікації речовини",
+      "pl": "Kod klasyfikacji",
+      "ro": "Cod de clasificare",
+      "en": "Classification code",
+      "bg": "Код на класификация",
+      "hr": "Klasifikacijski kod"
+    },
+    "simple_explanation": "Klassifizierungskennzeichen",
+    "category": "vocabulary",
+    "synonym": "Klassifizierungskennzeichen"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-druckgaspackung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Druckgaspackung",
+    "translations": {
+      "ru": "Аэрозольный баллончик под давлением",
+      "tr": "Basınçlı gaz ambalajı",
+      "ar": "عبوة غاز مضغوط",
+      "uk": "Аерозольний балончик під тиском",
+      "pl": "Opakowanie z gazem pod ciśnieniem",
+      "ro": "Recipient sub presiune",
+      "en": "Pressurized gas packaging / Aerosol",
+      "bg": "Опаковка под налягане",
+      "hr": "Tlačna ambalaža za plin"
+    },
+    "simple_explanation": "Aerosolpackung",
+    "category": "vocabulary",
+    "synonym": "Aerosolpackung"
+  }
+}

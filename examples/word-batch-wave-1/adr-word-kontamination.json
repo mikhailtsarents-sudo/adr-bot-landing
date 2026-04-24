@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kontamination",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Kontamination",
+    "translations": {
+      "ru": "Заражение / Загрязнение",
+      "tr": "Kirlenme",
+      "ar": "تلوث",
+      "uk": "Зараження / Забруднення",
+      "pl": "Skażenie / Zanieczyszczenie",
+      "ro": "Contaminare",
+      "en": "Contamination",
+      "bg": "Замърсяване / Контаминация",
+      "hr": "Kontaminacija / Zagađenje"
+    },
+    "simple_explanation": "Verunreinigung",
+    "category": "vocabulary",
+    "synonym": "Verunreinigung"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-warnschutzweste",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Warnschutzweste",
+    "translations": {
+      "ru": "Защитный светоотражающий жилет",
+      "tr": "Koruyucu reflektif yelek",
+      "ar": "سترة واقية عاكسة",
+      "uk": "Захисний світловідбивний жилет",
+      "pl": "Kamizelka ochronna odblaskowa",
+      "ro": "Vestă de protecție reflectorizantă",
+      "en": "Protective high-vis vest",
+      "bg": "Защитна сигнална жилетка",
+      "hr": "Zaštitni reflektirajući prsluk"
+    },
+    "simple_explanation": "Warnweste",
+    "category": "vocabulary",
+    "synonym": "Warnweste"
+  }
+}

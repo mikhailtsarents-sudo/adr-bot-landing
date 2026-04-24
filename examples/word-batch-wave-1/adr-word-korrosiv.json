@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-korrosiv",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "korrosiv",
+    "translations": {
+      "ru": "Коррозионный (научный термин)",
+      "tr": "Korozif",
+      "ar": "مسبب للتآكل",
+      "uk": "Корозійний",
+      "pl": "Korozyjny",
+      "ro": "Coroziv",
+      "en": "Corrosive",
+      "bg": "Корозивен",
+      "hr": "Korozivan"
+    },
+    "simple_explanation": "Auch: ätzend",
+    "category": "vocabulary",
+    "synonym": "ätzend"
+  }
+}

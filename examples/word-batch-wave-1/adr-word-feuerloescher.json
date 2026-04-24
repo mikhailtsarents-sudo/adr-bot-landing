@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-feuerloescher",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Feuerlöscher",
+    "translations": {
+      "ru": "Огнетушитель",
+      "tr": "Yangın söndürücü",
+      "ar": "طفاية الحريق",
+      "uk": "Вогнегасник",
+      "pl": "Gaśnica",
+      "ro": "Extinctor",
+      "en": "Fire extinguisher",
+      "bg": "Пожарогасител",
+      "hr": "Aparat za gašenje požara"
+    },
+    "simple_explanation": "Feuerlöscher",
+    "category": "vocabulary",
+    "synonym": ""
+  }
+}

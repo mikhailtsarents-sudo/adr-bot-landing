@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-entzuendlich",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "entzündlich",
+    "translations": {
+      "ru": "Легковоспламеняющийся",
+      "tr": "Kolay tutuşabilir",
+      "ar": "سريع الاشتعال",
+      "uk": "Легкозаймистий",
+      "pl": "Łatwo zapalny",
+      "ro": "Ușor inflamabil",
+      "en": "Easily flammable",
+      "bg": "Лесно запалим",
+      "hr": "Lako zapaljiv"
+    },
+    "simple_explanation": "Auch: entzündbar, brennbar",
+    "category": "vocabulary",
+    "synonym": "entzündbar, brennbar"
+  }
+}

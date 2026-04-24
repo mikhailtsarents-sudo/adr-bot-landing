@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-innenverpackung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Innenverpackung",
+    "translations": {
+      "ru": "Внутренняя упаковка",
+      "tr": "İç ambalaj",
+      "ar": "العبوة الداخلية",
+      "uk": "Внутрішня упаковка",
+      "pl": "Opakowanie wewnętrzne",
+      "ro": "Ambalaj interior",
+      "en": "Inner packaging",
+      "bg": "Вътрешна опаковка",
+      "hr": "Unutarnja ambalaža"
+    },
+    "simple_explanation": "Außenverpackung",
+    "category": "vocabulary",
+    "synonym": "Außenverpackung"
+  }
+}

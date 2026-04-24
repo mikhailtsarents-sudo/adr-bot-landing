@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-klasse",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Klasse",
+    "translations": {
+      "ru": "Класс (опасности)",
+      "tr": "Sınıf",
+      "ar": "فئة / صنف",
+      "uk": "Клас",
+      "pl": "Klasa",
+      "ro": "Clasă",
+      "en": "Class",
+      "bg": "Клас",
+      "hr": "Razred"
+    },
+    "simple_explanation": "Gefahrgutklasse",
+    "category": "vocabulary",
+    "synonym": "Gefahrgutklasse"
+  }
+}

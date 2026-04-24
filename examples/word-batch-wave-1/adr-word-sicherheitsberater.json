@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-sicherheitsberater",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Sicherheitsberater",
+    "translations": {
+      "ru": "Советник по безопасности",
+      "tr": "Güvenlik danışmanı",
+      "ar": "مستشار السلامة",
+      "uk": "Радник з безпеки",
+      "pl": "Doradca ds. bezpieczeństwa",
+      "ro": "Consilier de siguranță",
+      "en": "Safety adviser",
+      "bg": "Съветник по безопасност",
+      "hr": "Sigurnosni savjetnik"
+    },
+    "simple_explanation": "Gefahrgutbeauftragter",
+    "category": "vocabulary",
+    "synonym": "Gefahrgutbeauftragter"
+  }
+}

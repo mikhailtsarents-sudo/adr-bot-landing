@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-warntafel",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Warntafel",
+    "translations": {
+      "ru": "Предупредительная табличка (оранжевая)",
+      "tr": "Uyarı levhası",
+      "ar": "لوحة تحذيرية",
+      "uk": "Попереджувальна табличка",
+      "pl": "Tablica ostrzegawcza",
+      "ro": "Tablă de avertizare",
+      "en": "Warning panel",
+      "bg": "Предупредителна табела",
+      "hr": "Upozoravajuća ploča"
+    },
+    "simple_explanation": "Gefahrentafel",
+    "category": "vocabulary",
+    "synonym": "Gefahrentafel"
+  }
+}

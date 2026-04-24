@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-lastkraftwagen",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Lastkraftwagen",
+    "translations": {
+      "ru": "Грузовой автомобиль",
+      "tr": "Ağır taşıt aracı",
+      "ar": "شاحنة ثقيلة",
+      "uk": "Вантажний автомобіль",
+      "pl": "Pojazd ciężarowy",
+      "ro": "Autovehicul de marfă",
+      "en": "Heavy goods vehicle (HGV)",
+      "bg": "Товарен автомобил",
+      "hr": "Teretno vozilo"
+    },
+    "simple_explanation": "LKW",
+    "category": "vocabulary",
+    "synonym": "LKW"
+  }
+}

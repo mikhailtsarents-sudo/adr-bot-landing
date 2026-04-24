@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-lkw",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "LKW",
+    "translations": {
+      "ru": "Грузовик (Lastkraftwagen)",
+      "tr": "Kamyon (Lastkraftwagen)",
+      "ar": "شاحنة (Lastkraftwagen)",
+      "uk": "Вантажівка (Lastkraftwagen)",
+      "pl": "Ciężarówka (Lastkraftwagen)",
+      "ro": "Camion (Lastkraftwagen)",
+      "en": "Truck / Lorry (Lastkraftwagen)",
+      "bg": "Камион (Lastkraftwagen)",
+      "hr": "Kamion (Lastkraftwagen)"
+    },
+    "simple_explanation": "Lastkraftwagen, Fahrzeug",
+    "category": "vocabulary",
+    "synonym": "Lastkraftwagen, Fahrzeug"
+  }
+}

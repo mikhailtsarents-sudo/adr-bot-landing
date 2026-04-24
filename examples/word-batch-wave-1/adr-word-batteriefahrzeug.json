@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-batteriefahrzeug",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Batteriefahrzeug",
+    "translations": {
+      "ru": "Батарейный автомобиль (баллоны на шасси)",
+      "tr": "Tüp demeti aracı",
+      "ar": "مركبة بطاريات الأسطوانات",
+      "uk": "Батарейний автомобіль",
+      "pl": "Pojazd bateryjny",
+      "ro": "Vehicul cu baterie de butelii",
+      "en": "Battery vehicle",
+      "bg": "Батерийно превозно средство",
+      "hr": "Baterijsko vozilo"
+    },
+    "simple_explanation": "Batterie-Fahrzeug",
+    "category": "vocabulary",
+    "synonym": "Batterie-Fahrzeug"
+  }
+}

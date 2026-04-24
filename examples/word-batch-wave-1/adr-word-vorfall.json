@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-vorfall",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Vorfall",
+    "translations": {
+      "ru": "Происшествие / Случай",
+      "tr": "Olay",
+      "ar": "حادثة",
+      "uk": "Подія",
+      "pl": "Zdarzenie",
+      "ro": "Eveniment / Incident",
+      "en": "Occurrence / Event",
+      "bg": "Събитие / Случай",
+      "hr": "Događaj / Slučaj"
+    },
+    "simple_explanation": "Zwischenfall, Unfall",
+    "category": "vocabulary",
+    "synonym": "Zwischenfall, Unfall"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-befoerderung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Beförderung",
+    "translations": {
+      "ru": "Перевозка / Транспортировка",
+      "tr": "Taşıma / Nakliye",
+      "ar": "نقل / شحن",
+      "uk": "Перевезення / Транспортування",
+      "pl": "Przewóz / Transport",
+      "ro": "Transport / Expediere",
+      "en": "Carriage / Transport",
+      "bg": "Превоз / Транспортиране",
+      "hr": "Prijevoz / Transport"
+    },
+    "simple_explanation": "Transport, Verbringung",
+    "category": "vocabulary",
+    "synonym": "Transport, Verbringung"
+  }
+}

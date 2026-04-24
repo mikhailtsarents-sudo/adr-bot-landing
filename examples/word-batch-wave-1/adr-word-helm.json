@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-helm",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Helm",
+    "translations": {
+      "ru": "Каска / Шлем",
+      "tr": "Kask / Baret",
+      "ar": "خوذة",
+      "uk": "Каска / Шолом",
+      "pl": "Kask / Hełm",
+      "ro": "Cască de protecție",
+      "en": "Helmet / Hard hat",
+      "bg": "Каска",
+      "hr": "Kaciga / Šljem"
+    },
+    "simple_explanation": "Schutzhelm",
+    "category": "vocabulary",
+    "synonym": "Schutzhelm"
+  }
+}

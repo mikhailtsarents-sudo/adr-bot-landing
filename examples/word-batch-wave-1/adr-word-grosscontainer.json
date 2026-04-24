@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-grosscontainer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Großcontainer",
+    "translations": {
+      "ru": "Большой контейнер (> 3 м³)",
+      "tr": "Büyük konteyner (3m³ üzeri)",
+      "ar": "حاوية كبيرة (أكثر من 3م³)",
+      "uk": "Великий контейнер (понад 3 м³)",
+      "pl": "Duży kontener (ponad 3 m³)",
+      "ro": "Container mare (peste 3 m³)",
+      "en": "Large container (over 3 m³)",
+      "bg": "Голям контейнер (над 3 м³)",
+      "hr": "Veliki kontejner (više od 3 m³)"
+    },
+    "simple_explanation": "Kleincontainer",
+    "category": "vocabulary",
+    "synonym": "Kleincontainer"
+  }
+}

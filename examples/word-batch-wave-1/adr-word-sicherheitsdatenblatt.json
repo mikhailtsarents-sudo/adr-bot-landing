@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-sicherheitsdatenblatt",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Sicherheitsdatenblatt",
+    "translations": {
+      "ru": "Паспорт безопасности вещества",
+      "tr": "Güvenlik bilgi formu",
+      "ar": "صحيفة بيانات السلامة",
+      "uk": "Паспорт безпеки речовини",
+      "pl": "Karta charakterystyki substancji",
+      "ro": "Fișa de securitate a substanței",
+      "en": "Safety data sheet (SDS)",
+      "bg": "Паспорт за безопасност",
+      "hr": "Sigurnosno-tehnički list"
+    },
+    "simple_explanation": "SDB",
+    "category": "vocabulary",
+    "synonym": "SDB"
+  }
+}

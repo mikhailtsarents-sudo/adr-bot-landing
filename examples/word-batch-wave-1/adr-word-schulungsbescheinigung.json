@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-schulungsbescheinigung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Schulungsbescheinigung",
+    "translations": {
+      "ru": "Свидетельство об обучении",
+      "tr": "Eğitim belgesi",
+      "ar": "شهادة التدريب",
+      "uk": "Свідоцтво про навчання",
+      "pl": "Zaświadczenie o szkoleniu",
+      "ro": "Certificat de instruire",
+      "en": "Training certificate",
+      "bg": "Свидетелство за обучение",
+      "hr": "Svjedodžba o osposobljavanju"
+    },
+    "simple_explanation": "ADR-Bescheinigung",
+    "category": "vocabulary",
+    "synonym": "ADR-Bescheinigung"
+  }
+}

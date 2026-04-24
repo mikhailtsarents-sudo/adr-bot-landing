@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-vollladung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Vollladung",
+    "translations": {
+      "ru": "Полная загрузка (один отправитель)",
+      "tr": "Tam yük (tek gönderici)",
+      "ar": "تحميل كامل (مرسل واحد)",
+      "uk": "Повне завантаження (один відправник)",
+      "pl": "Pełny ładunek (jeden nadawca)",
+      "ro": "Încărcare completă",
+      "en": "Full load (single consignor)",
+      "bg": "Пълен товар",
+      "hr": "Puni teret"
+    },
+    "simple_explanation": "Teilladung",
+    "category": "vocabulary",
+    "synonym": "Teilladung"
+  }
+}

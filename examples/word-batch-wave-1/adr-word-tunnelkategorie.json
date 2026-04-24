@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-tunnelkategorie",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Tunnelkategorie",
+    "translations": {
+      "ru": "Категория тоннеля (A, B, C, D, E)",
+      "tr": "Tünel kategorisi (A-E)",
+      "ar": "فئة النفق (A-E)",
+      "uk": "Категорія тунелю (A-E)",
+      "pl": "Kategoria tunelu (A-E)",
+      "ro": "Categoria tunelului (A-E)",
+      "en": "Tunnel category (A-E)",
+      "bg": "Категория тунел (A-E)",
+      "hr": "Kategorija tunela (A-E)"
+    },
+    "simple_explanation": "Tunnelbeschränkungscode",
+    "category": "vocabulary",
+    "synonym": "Tunnelbeschränkungscode"
+  }
+}

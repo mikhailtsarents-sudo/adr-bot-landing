@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-ueberpruefung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Überprüfung",
+    "translations": {
+      "ru": "Проверка",
+      "tr": "Kontrol",
+      "ar": "فحص / مراجعة",
+      "uk": "Перевірка",
+      "pl": "Sprawdzenie / Kontrola",
+      "ro": "Verificare",
+      "en": "Verification / Check",
+      "bg": "Проверка",
+      "hr": "Provjera"
+    },
+    "simple_explanation": "Kontrolle",
+    "category": "vocabulary",
+    "synonym": "Kontrolle"
+  }
+}

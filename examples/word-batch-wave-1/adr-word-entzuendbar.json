@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-entzuendbar",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "entzündbar",
+    "translations": {
+      "ru": "Воспламеняемый",
+      "tr": "Tutuşabilir",
+      "ar": "قابل للاشتعال",
+      "uk": "Займистий",
+      "pl": "Łatwopalny",
+      "ro": "Inflamabil",
+      "en": "Flammable",
+      "bg": "Запалим",
+      "hr": "Zapaljiv"
+    },
+    "simple_explanation": "Auch: entzündlich, brennbar, leichtentzündlich",
+    "category": "vocabulary",
+    "synonym": "entzündlich, brennbar, leichtentzündlich"
+  }
+}

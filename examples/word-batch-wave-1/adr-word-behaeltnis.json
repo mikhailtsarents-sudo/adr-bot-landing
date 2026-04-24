@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-behaeltnis",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Behältnis",
+    "translations": {
+      "ru": "Ёмкость / Резервуар",
+      "tr": "Kap / Rezervuar",
+      "ar": "وعاء / خزان",
+      "uk": "Ємність / Резервуар",
+      "pl": "Pojemnik",
+      "ro": "Recipient",
+      "en": "Receptacle",
+      "bg": "Съд",
+      "hr": "Posuda"
+    },
+    "simple_explanation": "Behälter",
+    "category": "vocabulary",
+    "synonym": "Behälter"
+  }
+}

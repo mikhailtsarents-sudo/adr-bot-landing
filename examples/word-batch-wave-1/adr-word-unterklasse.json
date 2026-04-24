@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-unterklasse",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Unterklasse",
+    "translations": {
+      "ru": "Подкласс",
+      "tr": "Alt sınıf",
+      "ar": "فئة فرعية",
+      "uk": "Підклас",
+      "pl": "Podklasa",
+      "ro": "Subclasă",
+      "en": "Sub-class / Division",
+      "bg": "Подклас",
+      "hr": "Podrazred"
+    },
+    "simple_explanation": "Subklasse",
+    "category": "vocabulary",
+    "synonym": "Subklasse"
+  }
+}

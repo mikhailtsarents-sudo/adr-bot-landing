@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-siedepunkt",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Siedepunkt",
+    "translations": {
+      "ru": "Точка кипения",
+      "tr": "Kaynama noktası",
+      "ar": "نقطة الغليان",
+      "uk": "Точка кипіння",
+      "pl": "Temperatura wrzenia",
+      "ro": "Punct de fierbere",
+      "en": "Boiling point",
+      "bg": "Точка на кипене",
+      "hr": "Točka vrenja"
+    },
+    "simple_explanation": "Siedepunkt",
+    "category": "vocabulary",
+    "synonym": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-sondervorschrift",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Sondervorschrift",
+    "translations": {
+      "ru": "Специальное положение / Особое условие",
+      "tr": "Özel düzenleme",
+      "ar": "حكم خاص",
+      "uk": "Спеціальне положення",
+      "pl": "Przepis szczególny",
+      "ro": "Dispoziție specială",
+      "en": "Special provision",
+      "bg": "Специална разпоредба",
+      "hr": "Posebna odredba"
+    },
+    "simple_explanation": "Sonderregelung",
+    "category": "vocabulary",
+    "synonym": "Sonderregelung"
+  }
+}

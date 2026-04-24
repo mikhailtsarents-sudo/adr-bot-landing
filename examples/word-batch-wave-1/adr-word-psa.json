@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-psa",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "PSA",
+    "translations": {
+      "ru": "Аббревиатура СИЗ (persönliche Schutzausrüstung)",
+      "tr": "KKD kısaltması",
+      "ar": "اختصار معدات الحماية",
+      "uk": "Скорочення ЗІЗ",
+      "pl": "Skrót ŚOI",
+      "ro": "Abrevierea EIP",
+      "en": "PPE abbreviation",
+      "bg": "Съкращение ЛПС",
+      "hr": "Kratica OZO"
+    },
+    "simple_explanation": "Schutzausrüstung",
+    "category": "vocabulary",
+    "synonym": "Schutzausrüstung"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kennzeichnung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Kennzeichnung",
+    "translations": {
+      "ru": "Маркировка / Обозначение",
+      "tr": "İşaretleme / Etiketleme",
+      "ar": "وسم / تصنيف",
+      "uk": "Маркування / Позначення",
+      "pl": "Oznakowanie",
+      "ro": "Marcare / Etichetare",
+      "en": "Marking / Labelling",
+      "bg": "Маркировка / Обозначение",
+      "hr": "Označavanje"
+    },
+    "simple_explanation": "Bezettelung, Markierung",
+    "category": "vocabulary",
+    "synonym": "Bezettelung, Markierung"
+  }
+}

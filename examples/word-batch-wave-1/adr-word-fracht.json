@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-fracht",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Fracht",
+    "translations": {
+      "ru": "Груз / Фрахт",
+      "tr": "Yük / Navlun",
+      "ar": "بضاعة / شحنة",
+      "uk": "Вантаж / Фрахт",
+      "pl": "Fracht / Ładunek",
+      "ro": "Marfă / Fracht",
+      "en": "Freight / Cargo",
+      "bg": "Товар / Фрахт",
+      "hr": "Teret / Vozarina"
+    },
+    "simple_explanation": "Ladung",
+    "category": "vocabulary",
+    "synonym": "Ladung"
+  }
+}

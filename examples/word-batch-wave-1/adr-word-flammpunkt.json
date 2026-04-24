@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-flammpunkt",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Flammpunkt",
+    "translations": {
+      "ru": "Температура вспышки (воспламенения паров)",
+      "tr": "Parlama noktası",
+      "ar": "نقطة الاشتعال",
+      "uk": "Температура спалаху",
+      "pl": "Temperatura zapłonu",
+      "ro": "Punct de aprindere",
+      "en": "Flash point",
+      "bg": "Температура на запалване",
+      "hr": "Temperatura paljenja"
+    },
+    "simple_explanation": "Flammpunkt",
+    "category": "vocabulary",
+    "synonym": ""
+  }
+}

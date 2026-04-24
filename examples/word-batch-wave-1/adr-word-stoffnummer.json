@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-stoffnummer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Stoffnummer",
+    "translations": {
+      "ru": "Номер вещества",
+      "tr": "Madde numarası",
+      "ar": "رقم المادة",
+      "uk": "Номер речовини",
+      "pl": "Numer substancji",
+      "ro": "Numărul substanței",
+      "en": "Substance number",
+      "bg": "Номер на веществото",
+      "hr": "Broj tvari"
+    },
+    "simple_explanation": "UN-Nummer",
+    "category": "vocabulary",
+    "synonym": "UN-Nummer"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-begleitpapiere",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Begleitpapiere",
+    "translations": {
+      "ru": "Сопроводительные документы",
+      "tr": "Eşlik eden belgeler",
+      "ar": "الوثائق المرافقة",
+      "uk": "Супровідні документи",
+      "pl": "Dokumenty towarzyszące",
+      "ro": "Documente însoțitoare",
+      "en": "Accompanying documents",
+      "bg": "Придружаващи документи",
+      "hr": "Prateći dokumenti"
+    },
+    "simple_explanation": "Beförderungspapier + schriftliche Weisungen",
+    "category": "vocabulary",
+    "synonym": "Beförderungspapier + schriftliche Weisungen"
+  }
+}

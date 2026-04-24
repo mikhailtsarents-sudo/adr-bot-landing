@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-wassergefaehrdend",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "wassergefährdend",
+    "translations": {
+      "ru": "Опасный для водной среды",
+      "tr": "Suya zararlı",
+      "ar": "ضار بالمياه",
+      "uk": "Небезпечний для водного середовища",
+      "pl": "Zagrażający środowisku wodnemu",
+      "ro": "Periculos pentru mediul acvatic",
+      "en": "Hazardous to aquatic environment",
+      "bg": "Опасен за водната среда",
+      "hr": "Opasan za vodeni okoliš"
+    },
+    "simple_explanation": "Auch: umweltgefährlich",
+    "category": "vocabulary",
+    "synonym": "umweltgefährlich"
+  }
+}

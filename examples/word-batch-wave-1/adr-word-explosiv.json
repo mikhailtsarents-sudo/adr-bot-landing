@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-explosiv",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "explosiv",
+    "translations": {
+      "ru": "Взрывоопасный",
+      "tr": "Patlayıcı",
+      "ar": "متفجر",
+      "uk": "Вибухонебезпечний",
+      "pl": "Wybuchowy",
+      "ro": "Exploziv",
+      "en": "Explosive",
+      "bg": "Взривоопасен",
+      "hr": "Eksplozivan"
+    },
+    "simple_explanation": "Auch: explosionsgefährlich, explosionsfähig",
+    "category": "vocabulary",
+    "synonym": "explosionsgefährlich, explosionsfähig"
+  }
+}

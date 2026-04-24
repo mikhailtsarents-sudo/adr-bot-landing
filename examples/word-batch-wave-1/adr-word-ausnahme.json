@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-ausnahme",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Ausnahme",
+    "translations": {
+      "ru": "Исключение",
+      "tr": "İstisna",
+      "ar": "استثناء",
+      "uk": "Виняток",
+      "pl": "Wyjątek",
+      "ro": "Excepție",
+      "en": "Exception",
+      "bg": "Изключение",
+      "hr": "Iznimka"
+    },
+    "simple_explanation": "Freistellung",
+    "category": "vocabulary",
+    "synonym": "Freistellung"
+  }
+}

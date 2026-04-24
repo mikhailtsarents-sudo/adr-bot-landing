@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-befueller",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Befüller",
+    "translations": {
+      "ru": "Тот кто заполняет цистерну",
+      "tr": "Dolduran kişi (tank)",
+      "ar": "الممتلئ (من يملأ الخزان)",
+      "uk": "Той хто заповнює цистерну",
+      "pl": "Napełniający (cysternę)",
+      "ro": "Persoana care umple cisterna",
+      "en": "Filler (of tank)",
+      "bg": "Пълнач (на цистерна)",
+      "hr": "Punilac (cisterne)"
+    },
+    "simple_explanation": "Verlader",
+    "category": "vocabulary",
+    "synonym": "Verlader"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-transportunternehmer",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Transportunternehmer",
+    "translations": {
+      "ru": "Транспортная компания",
+      "tr": "Taşımacı firma",
+      "ar": "شركة النقل",
+      "uk": "Транспортна компанія",
+      "pl": "Firma transportowa",
+      "ro": "Companie de transport",
+      "en": "Transport company",
+      "bg": "Транспортна фирма",
+      "hr": "Transportno poduzeće"
+    },
+    "simple_explanation": "Beförderer",
+    "category": "vocabulary",
+    "synonym": "Beförderer"
+  }
+}

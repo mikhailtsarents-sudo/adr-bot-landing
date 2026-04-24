@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-frachtbrief",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Frachtbrief",
+    "translations": {
+      "ru": "Транспортная накладная",
+      "tr": "Konşimento",
+      "ar": "بوليصة الشحن",
+      "uk": "Транспортна накладна",
+      "pl": "List przewozowy",
+      "ro": "Scrisoare de trăsură",
+      "en": "Consignment note / Waybill",
+      "bg": "Товарителница",
+      "hr": "Teretni list"
+    },
+    "simple_explanation": "Beförderungspapier",
+    "category": "vocabulary",
+    "synonym": "Beförderungspapier"
+  }
+}

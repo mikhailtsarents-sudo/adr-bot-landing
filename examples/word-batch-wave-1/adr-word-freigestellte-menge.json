@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-freigestellte-menge",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "freigestellte Menge",
+    "translations": {
+      "ru": "Освобождённое количество (очень малые объёмы)",
+      "tr": "Muaf miktar (EQ)",
+      "ar": "الكمية المعفاة (EQ)",
+      "uk": "Звільнена кількість (EQ)",
+      "pl": "Ilość wyłączona (EQ)",
+      "ro": "Cantitate exceptată (EQ)",
+      "en": "Excepted quantity (EQ)",
+      "bg": "Освободено количество (EQ)",
+      "hr": "Izuzeta količina (EQ)"
+    },
+    "simple_explanation": "Auch: excepted quantity, EQ",
+    "category": "vocabulary",
+    "synonym": "excepted quantity, EQ"
+  }
+}

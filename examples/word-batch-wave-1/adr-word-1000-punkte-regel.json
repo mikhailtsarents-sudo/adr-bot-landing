@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-1000-punkte-regel",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "1000-Punkte-Regel",
+    "translations": {
+      "ru": "Правило 1000 баллов (расчёт опасности)",
+      "tr": "1000 puan kuralı",
+      "ar": "قاعدة 1000 نقطة",
+      "uk": "Правило 1000 балів",
+      "pl": "Reguła 1000 punktów",
+      "ro": "Regula 1000 de puncte",
+      "en": "1000-point rule",
+      "bg": "Правило от 1000 точки",
+      "hr": "Pravilo 1000 bodova"
+    },
+    "simple_explanation": "Auch: 1.1.3.6-Freistellung",
+    "category": "vocabulary",
+    "synonym": "1.1.3.6-Freistellung"
+  }
+}

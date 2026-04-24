@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-verpackungsgruppe",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Verpackungsgruppe",
+    "translations": {
+      "ru": "Группа упаковки (I=высокая, II=средняя, III=низкая опасность)",
+      "tr": "Ambalaj grubu (I=yüksek, II=orta, III=düşük tehlike)",
+      "ar": "مجموعة التعبئة (I=عالي، II=متوسط، III=منخفض الخطر)",
+      "uk": "Група пакування (I=висока, II=середня, III=низька небезпека)",
+      "pl": "Grupa pakowania (I=wysokie, II=średnie, III=niskie ryzyko)",
+      "ro": "Grupa de ambalare (I=pericol ridicat, II=mediu, III=scăzut)",
+      "en": "Packing group (I=high, II=medium, III=low danger)",
+      "bg": "Група на опаковане (I=висок, II=среден, III=нисък риск)",
+      "hr": "Skupina pakiranja (I=visoka, II=srednja, III=niska opasnost)"
+    },
+    "simple_explanation": "VG",
+    "category": "vocabulary",
+    "synonym": "VG"
+  }
+}

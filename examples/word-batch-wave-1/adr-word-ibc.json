@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-ibc",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "IBC",
+    "translations": {
+      "ru": "Средний контейнер для массовых грузов (Intermediate Bulk Container)",
+      "tr": "Orta boy dökme konteyner",
+      "ar": "حاوية وسيطة للبضائع السائبة",
+      "uk": "Середній контейнер для масових вантажів",
+      "pl": "Duże opakowanie luzem (IBC)",
+      "ro": "Container intermediar pentru vrac (IBC)",
+      "en": "Intermediate Bulk Container (IBC)",
+      "bg": "Контейнер за насипни товари (IBC)",
+      "hr": "Srednji kontejner za rasuti teret (IBC)"
+    },
+    "simple_explanation": "Großpackmittel",
+    "category": "vocabulary",
+    "synonym": "Großpackmittel"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-fahrzeugkontrolle",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Fahrzeugkontrolle",
+    "translations": {
+      "ru": "Техническое обслуживание / Проверка ТС",
+      "tr": "Araç kontrolü",
+      "ar": "فحص المركبة",
+      "uk": "Технічне обслуговування ТЗ",
+      "pl": "Kontrola pojazdu",
+      "ro": "Verificarea vehiculului",
+      "en": "Vehicle inspection",
+      "bg": "Проверка на превозното средство",
+      "hr": "Pregled vozila"
+    },
+    "simple_explanation": "Abfahrtskontrolle",
+    "category": "vocabulary",
+    "synonym": "Abfahrtskontrolle"
+  }
+}

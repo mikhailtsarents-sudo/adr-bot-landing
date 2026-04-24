@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-kontrolle",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Kontrolle",
+    "translations": {
+      "ru": "Проверка / Контроль",
+      "tr": "Kontrol / Denetim",
+      "ar": "فحص / مراقبة",
+      "uk": "Перевірка / Контроль",
+      "pl": "Kontrola",
+      "ro": "Control",
+      "en": "Check / Inspection",
+      "bg": "Проверка / Контрол",
+      "hr": "Provjera / Kontrola"
+    },
+    "simple_explanation": "Überprüfung, Inspektion",
+    "category": "vocabulary",
+    "synonym": "Überprüfung, Inspektion"
+  }
+}

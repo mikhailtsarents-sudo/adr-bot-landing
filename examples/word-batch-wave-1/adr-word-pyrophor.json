@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-pyrophor",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "pyrophor",
+    "translations": {
+      "ru": "Пирофорный (самовоспламеняется на воздухе)",
+      "tr": "Pirofor",
+      "ar": "بيروفوري (يشتعل في الهواء)",
+      "uk": "Піrofорний (займається на повітрі)",
+      "pl": "Piroforyczny",
+      "ro": "Piroforic",
+      "en": "Pyrophoric",
+      "bg": "Пирофорен",
+      "hr": "Piroforičan"
+    },
+    "simple_explanation": "Auch: selbstentzündlich",
+    "category": "vocabulary",
+    "synonym": "selbstentzündlich"
+  }
+}

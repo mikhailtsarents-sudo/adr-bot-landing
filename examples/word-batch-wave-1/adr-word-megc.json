@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-megc",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "MEGC",
+    "translations": {
+      "ru": "Батарея газовых баллонов (Multiple Element Gas Container)",
+      "tr": "Çok elemanlı gaz konteyneri (tüp demeti)",
+      "ar": "حاوية عناصر متعددة للغاز (أسطوانات)",
+      "uk": "Батарея газових балонів",
+      "pl": "Wiązka elementów zbiornikowych (MEGC)",
+      "ro": "Container cu elemente multiple de gaz",
+      "en": "Multiple Element Gas Container (MEGC)",
+      "bg": "Батерия от газови бутилки (MEGC)",
+      "hr": "Baterija plinskih boca (MEGC)"
+    },
+    "simple_explanation": "Gascontainer с несколькими трубами",
+    "category": "vocabulary",
+    "synonym": "Gascontainer с несколькими трубами"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-nebengefahr",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Nebengefahr",
+    "translations": {
+      "ru": "Вторичная угроза",
+      "tr": "İkincil tehlike",
+      "ar": "خطر فرعي",
+      "uk": "Вторинна небезпека",
+      "pl": "Zagrożenie dodatkowe",
+      "ro": "Pericol secundar",
+      "en": "Secondary hazard",
+      "bg": "Вторична опасност",
+      "hr": "Sporedna opasnost"
+    },
+    "simple_explanation": "Nebenrisiko",
+    "category": "vocabulary",
+    "synonym": "Nebenrisiko"
+  }
+}

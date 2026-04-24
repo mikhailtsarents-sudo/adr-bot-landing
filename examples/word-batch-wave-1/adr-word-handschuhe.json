@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-handschuhe",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Handschuhe",
+    "translations": {
+      "ru": "Перчатки",
+      "tr": "Eldiven",
+      "ar": "قفازات",
+      "uk": "Рукавички",
+      "pl": "Rękawice",
+      "ro": "Mănuși",
+      "en": "Gloves",
+      "bg": "Ръкавици",
+      "hr": "Rukavice"
+    },
+    "simple_explanation": "Schutzhandschuhe",
+    "category": "vocabulary",
+    "synonym": "Schutzhandschuhe"
+  }
+}

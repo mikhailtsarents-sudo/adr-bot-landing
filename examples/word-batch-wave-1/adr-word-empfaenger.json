@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-empfaenger",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Empfänger",
+    "translations": {
+      "ru": "Получатель",
+      "tr": "Alıcı",
+      "ar": "المستلم",
+      "uk": "Одержувач",
+      "pl": "Odbiorca",
+      "ro": "Destinatar",
+      "en": "Consignee / Recipient",
+      "bg": "Получател",
+      "hr": "Primatelj"
+    },
+    "simple_explanation": "Adressat",
+    "category": "vocabulary",
+    "synonym": "Adressat"
+  }
+}

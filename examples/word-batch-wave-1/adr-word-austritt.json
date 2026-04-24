@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-austritt",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Austritt",
+    "translations": {
+      "ru": "Вытекание / Выход вещества",
+      "tr": "Çıkış / Sızma",
+      "ar": "خروج / تسرب مادة",
+      "uk": "Витікання / Вихід речовини",
+      "pl": "Wypływ / Wydostawanie się substancji",
+      "ro": "Ieșire / Scurgere de substanță",
+      "en": "Escape / Release of substance",
+      "bg": "Изтичане на вещество",
+      "hr": "Istjecanje tvari"
+    },
+    "simple_explanation": "Leckage, Freisetzung",
+    "category": "vocabulary",
+    "synonym": "Leckage, Freisetzung"
+  }
+}

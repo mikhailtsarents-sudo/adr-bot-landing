@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-zulassung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Zulassung",
+    "translations": {
+      "ru": "Допуск / Разрешение / Лицензия",
+      "tr": "Ruhsat / İzin",
+      "ar": "ترخيص / إذن",
+      "uk": "Допуск / Дозвіл",
+      "pl": "Dopuszczenie / Zezwolenie",
+      "ro": "Autorizație / Aprobare",
+      "en": "Approval / Authorization",
+      "bg": "Одобрение / Разрешение",
+      "hr": "Odobrenje / Homologacija"
+    },
+    "simple_explanation": "Genehmigung, Erlaubnis",
+    "category": "vocabulary",
+    "synonym": "Genehmigung, Erlaubnis"
+  }
+}

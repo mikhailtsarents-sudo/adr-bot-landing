@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-zwischenfall",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Zwischenfall",
+    "translations": {
+      "ru": "Инцидент / Происшествие",
+      "tr": "Olay / Hadise",
+      "ar": "حادثة / واقعة",
+      "uk": "Інцидент / Подія",
+      "pl": "Zdarzenie / Incydent",
+      "ro": "Incident",
+      "en": "Incident",
+      "bg": "Инцидент",
+      "hr": "Incident"
+    },
+    "simple_explanation": "Unfall, Vorfall",
+    "category": "vocabulary",
+    "synonym": "Unfall, Vorfall"
+  }
+}

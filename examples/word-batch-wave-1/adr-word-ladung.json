@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-ladung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Ladung",
+    "translations": {
+      "ru": "Груз / Нагрузка",
+      "tr": "Yük / Kargo",
+      "ar": "حمولة / شحنة",
+      "uk": "Вантаж / Навантаження",
+      "pl": "Ładunek",
+      "ro": "Încărcătură / Marfă",
+      "en": "Load / Cargo",
+      "bg": "Товар",
+      "hr": "Teret"
+    },
+    "simple_explanation": "Fracht, Ware",
+    "category": "vocabulary",
+    "synonym": "Fracht, Ware"
+  }
+}

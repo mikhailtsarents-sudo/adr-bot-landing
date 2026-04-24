@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-unfallmerkblatt",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Unfallmerkblatt",
+    "translations": {
+      "ru": "Аварийная карточка / Инструкция при аварии",
+      "tr": "Kaza talimatı",
+      "ar": "بطاقة الحوادث / تعليمات الطوارئ",
+      "uk": "Аварійна картка",
+      "pl": "Karta wypadkowa",
+      "ro": "Fișă de urgență",
+      "en": "Emergency action card",
+      "bg": "Аварийна карта",
+      "hr": "Kartica hitnih uputa"
+    },
+    "simple_explanation": "Auch: schriftliche Weisungen",
+    "category": "vocabulary",
+    "synonym": "schriftliche Weisungen"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-behaelter",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Behälter",
+    "translations": {
+      "ru": "Ёмкость / Сосуд / Контейнер",
+      "tr": "Kap / Tank",
+      "ar": "وعاء / خزان",
+      "uk": "Ємність / Посудина",
+      "pl": "Pojemnik / Zbiornik",
+      "ro": "Recipient / Rezervor",
+      "en": "Container / Receptacle",
+      "bg": "Съд / Резервоар",
+      "hr": "Posuda / Spremnik"
+    },
+    "simple_explanation": "Behältnis, Gefäß",
+    "category": "vocabulary",
+    "synonym": "Behältnis, Gefäß"
+  }
+}

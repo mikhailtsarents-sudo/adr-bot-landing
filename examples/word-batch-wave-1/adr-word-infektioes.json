@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-infektioes",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "infektiös",
+    "translations": {
+      "ru": "Инфекционный",
+      "tr": "Enfeksiyoz",
+      "ar": "معدٍ / مُعدٍ",
+      "uk": "Інфекційний",
+      "pl": "Zakaźny",
+      "ro": "Infecțios",
+      "en": "Infectious",
+      "bg": "Инфекциозен",
+      "hr": "Infektivan"
+    },
+    "simple_explanation": "Auch: ansteckungsgefährlich",
+    "category": "vocabulary",
+    "synonym": "ansteckungsgefährlich"
+  }
+}

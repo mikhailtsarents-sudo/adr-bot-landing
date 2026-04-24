@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-leckage",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Leckage",
+    "translations": {
+      "ru": "Утечка",
+      "tr": "Sızıntı / Kaçak",
+      "ar": "تسرب",
+      "uk": "Витік",
+      "pl": "Wyciek",
+      "ro": "Scurgere",
+      "en": "Leakage",
+      "bg": "Изтичане",
+      "hr": "Curenje"
+    },
+    "simple_explanation": "Austritt, Ausfluss, Freisetzung",
+    "category": "vocabulary",
+    "synonym": "Austritt, Ausfluss, Freisetzung"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-imdg",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "IMDG",
+    "translations": {
+      "ru": "Кодекс перевозки опасных грузов по морю",
+      "tr": "Deniz yolu tehlikeli madde kodu",
+      "ar": "قواعد نقل البضائع الخطرة بحراً",
+      "uk": "Кодекс перевезення небезпечних вантажів морем",
+      "pl": "Kodeks IMDG (transport morski)",
+      "ro": "Codul IMDG (transport maritim)",
+      "en": "IMDG Code (maritime transport)",
+      "bg": "Кодекс IMDG (морски транспорт)",
+      "hr": "IMDG kod (pomorski prijevoz)"
+    },
+    "simple_explanation": "Seeschifffahrt",
+    "category": "vocabulary",
+    "synonym": "Seeschifffahrt"
+  }
+}

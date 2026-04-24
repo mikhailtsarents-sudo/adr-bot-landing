@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-teilladung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Teilladung",
+    "translations": {
+      "ru": "Частичная загрузка",
+      "tr": "Kısmi yük",
+      "ar": "تحميل جزئي",
+      "uk": "Часткове завантаження",
+      "pl": "Częściowy ładunek",
+      "ro": "Încărcare parțială",
+      "en": "Part load",
+      "bg": "Частичен товар",
+      "hr": "Djelomični teret"
+    },
+    "simple_explanation": "Vollladung",
+    "category": "vocabulary",
+    "synonym": "Vollladung"
+  }
+}

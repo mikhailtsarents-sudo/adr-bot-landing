@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-bezettelung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Bezettelung",
+    "translations": {
+      "ru": "Наклейка знаков опасности на упаковку",
+      "tr": "Tehlike etiketi yapıştırma",
+      "ar": "لصق ملصقات الخطر",
+      "uk": "Наклейка знаків небезпеки на упаковку",
+      "pl": "Naklejanie nalepek ostrzegawczych",
+      "ro": "Aplicarea etichetelor de pericol",
+      "en": "Labelling (applying hazard labels)",
+      "bg": "Залепване на етикети за опасност",
+      "hr": "Lijepljenje oznaka opasnosti"
+    },
+    "simple_explanation": "Kennzeichnung",
+    "category": "vocabulary",
+    "synonym": "Kennzeichnung"
+  }
+}

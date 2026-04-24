@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-aussenverpackung",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Außenverpackung",
+    "translations": {
+      "ru": "Наружная упаковка",
+      "tr": "Dış ambalaj",
+      "ar": "العبوة الخارجية",
+      "uk": "Зовнішня упаковка",
+      "pl": "Opakowanie zewnętrzne",
+      "ro": "Ambalaj exterior",
+      "en": "Outer packaging",
+      "bg": "Външна опаковка",
+      "hr": "Vanjska ambalaža"
+    },
+    "simple_explanation": "Umverpackung",
+    "category": "vocabulary",
+    "synonym": "Umverpackung"
+  }
+}

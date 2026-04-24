@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-packstueck",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Packstück",
+    "translations": {
+      "ru": "Упаковочная единица",
+      "tr": "Ambalaj birimi",
+      "ar": "وحدة تعبئة",
+      "uk": "Пакувальна одиниця",
+      "pl": "Jednostka pakowania",
+      "ro": "Unitate de ambalare",
+      "en": "Package",
+      "bg": "Единица опаковка",
+      "hr": "Jedinica pakiranja"
+    },
+    "simple_explanation": "Versandstück",
+    "category": "vocabulary",
+    "synonym": "Versandstück"
+  }
+}

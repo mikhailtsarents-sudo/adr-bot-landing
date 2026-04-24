@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-gefaehrliche-gueter",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "gefährliche Güter",
+    "translations": {
+      "ru": "Опасные грузы (официально в документах)",
+      "tr": "Tehlikeli maddeler (resmi belgelerde)",
+      "ar": "البضائع الخطرة (رسمياً في الوثائق)",
+      "uk": "Небезпечні вантажі (офіційно в документах)",
+      "pl": "Towary niebezpieczne (oficjalnie w dokumentach)",
+      "ro": "Mărfuri periculoase (oficial în documente)",
+      "en": "Dangerous goods (official term in documents)",
+      "bg": "Опасни товари (официално в документите)",
+      "hr": "Opasna roba (službeno u dokumentima)"
+    },
+    "simple_explanation": "Gefahrgut",
+    "category": "vocabulary",
+    "synonym": "Gefahrgut"
+  }
+}

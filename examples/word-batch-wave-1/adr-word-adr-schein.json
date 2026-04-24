@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-adr-schein",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "ADR-Schein",
+    "translations": {
+      "ru": "Разговорное название ADR-Bescheinigung",
+      "tr": "ADR kartı (konuşma dili)",
+      "ar": "بطاقة ADR (عامية)",
+      "uk": "Карта ADR (розмовна назва)",
+      "pl": "Karta ADR (potocznie)",
+      "ro": "Cartela ADR (termen colocvial)",
+      "en": "ADR card (colloquial)",
+      "bg": "Карта ADR (разговорно)",
+      "hr": "ADR kartica (kolokvijalno)"
+    },
+    "simple_explanation": "ADR-Bescheinigung",
+    "category": "vocabulary",
+    "synonym": "ADR-Bescheinigung"
+  }
+}

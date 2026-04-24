@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-befoerderungsdokument",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Beförderungsdokument",
+    "translations": {
+      "ru": "Документ перевозки",
+      "tr": "Taşıma dokümanı",
+      "ar": "وثيقة الشحن",
+      "uk": "Документ перевезення",
+      "pl": "Dokument transportowy",
+      "ro": "Document de expediere",
+      "en": "Transport document",
+      "bg": "Документ за превоз",
+      "hr": "Transportni dokument"
+    },
+    "simple_explanation": "Beförderungspapier, Frachtbrief",
+    "category": "vocabulary",
+    "synonym": "Beförderungspapier, Frachtbrief"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-bussgeld",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "Bußgeld",
+    "translations": {
+      "ru": "Штраф (административный)",
+      "tr": "Para cezası",
+      "ar": "غرامة مالية",
+      "uk": "Штраф",
+      "pl": "Kara pieniężna / Mandat",
+      "ro": "Amendă",
+      "en": "Fine / Penalty",
+      "bg": "Глоба",
+      "hr": "Novčana kazna"
+    },
+    "simple_explanation": "Geldstrafe",
+    "category": "vocabulary",
+    "synonym": "Geldstrafe"
+  }
+}

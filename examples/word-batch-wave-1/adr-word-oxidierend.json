@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-oxidierend",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "oxidierend",
+    "translations": {
+      "ru": "Окисляющий / Оксидирующий",
+      "tr": "Oksitleyici",
+      "ar": "مؤكسد",
+      "uk": "Окиснювальний",
+      "pl": "Utleniający",
+      "ro": "Oxidant",
+      "en": "Oxidizing",
+      "bg": "Окисляващ",
+      "hr": "Oksidirajući"
+    },
+    "simple_explanation": "Auch: brandfördend",
+    "category": "vocabulary",
+    "synonym": "brandfördend"
+  }
+}

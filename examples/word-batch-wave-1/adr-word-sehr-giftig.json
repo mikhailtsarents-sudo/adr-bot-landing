@@ -1,0 +1,30 @@
+{
+  "source_type": "WORD",
+  "source_id": "adr-word-sehr-giftig",
+  "source_version": "word-wave-1",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "vocabulary",
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "de_term": "sehr giftig",
+    "translations": {
+      "ru": "Очень токсичный",
+      "tr": "Çok zehirli",
+      "ar": "شديد السمية",
+      "uk": "Дуже токсичний",
+      "pl": "Bardzo toksyczny",
+      "ro": "Foarte toxic",
+      "en": "Very toxic",
+      "bg": "Много токсичен",
+      "hr": "Vrlo otrovan"
+    },
+    "simple_explanation": "Auch: akut toxisch Kat.1-2",
+    "category": "vocabulary",
+    "synonym": "akut toxisch Kat.1-2"
+  }
+}
