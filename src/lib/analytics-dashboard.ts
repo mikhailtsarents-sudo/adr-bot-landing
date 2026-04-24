@@ -1,4 +1,4 @@
-import { analyticsEventNames } from "@/lib/analytics";
+import { analyticsEventNames, shouldCountTelegramRedirect } from "@/lib/analytics";
 import type { StoredAnalyticsRow } from "@/lib/analytics-storage";
 
 export type DashboardPeriodKey = "today" | "days_7" | "days_30";
@@ -17,6 +17,7 @@ export type DashboardBucket = {
   unique_page_paths: number;
   redirect_rate_from_views: number;
   redirect_rate_from_cta: number;
+  excluded_bot_redirects: number;
 };
 
 export type DashboardDimensionRow = {
@@ -60,6 +61,7 @@ export type AnalyticsDashboard = {
     page_path: string;
     occurred_at: string;
   }>;
+  excluded_bot_redirects_30d: number;
 };
 
 function text(value: unknown) {
@@ -159,11 +161,17 @@ function buildPeriodBucket({
   sinceTs: number;
   untilTs: number;
 }): DashboardBucket {
-  const filtered = rows.filter((row) => inRange(parseTimestamp(row), sinceTs, untilTs));
+  const rawPeriodRows = rows.filter((row) => inRange(parseTimestamp(row), sinceTs, untilTs));
+  const filtered = rawPeriodRows.filter((row) => shouldCountTelegramRedirect(row));
 
   const sitePageViews = filtered.filter((row) => row.event === analyticsEventNames.sitePageView).length;
   const telegramCtaClicks = filtered.filter((row) => row.event === analyticsEventNames.telegramCtaClick).length;
   const telegramRedirects = filtered.filter((row) => row.event === analyticsEventNames.telegramRedirect).length;
+  const excludedBotRedirects = rawPeriodRows.filter(
+    (row) =>
+      row.event === analyticsEventNames.telegramRedirect &&
+      !shouldCountTelegramRedirect(row),
+  ).length;
 
   const uniqueSources = new Set(filtered.map((row) => text(row.source)).filter(Boolean)).size;
   const uniquePagePaths = new Set(filtered.map((row) => text(row.page_path)).filter(Boolean)).size;
@@ -182,6 +190,7 @@ function buildPeriodBucket({
     unique_page_paths: uniquePagePaths,
     redirect_rate_from_views: roundRate(sitePageViews > 0 ? telegramRedirects / sitePageViews : 0),
     redirect_rate_from_cta: roundRate(telegramCtaClicks > 0 ? telegramRedirects / telegramCtaClicks : 0),
+    excluded_bot_redirects: excludedBotRedirects,
   };
 }
 
@@ -199,14 +208,21 @@ export function buildAnalyticsDashboard(
   const nowTs = Date.now();
   const timeZone = options?.timeZone || process.env.ANALYTICS_DASHBOARD_TIMEZONE || "Europe/Berlin";
   const orderedRows = [...rows].sort((left, right) => parseTimestamp(right) - parseTimestamp(left));
+  const filteredRows = orderedRows.filter((row) => shouldCountTelegramRedirect(row));
   const startOfTodayTs = getStartOfDayInTimezone(nowTs, timeZone);
   const startOf7dTs = shiftDays(startOfTodayTs, -6);
   const startOf30dTs = shiftDays(startOfTodayTs, -29);
-  const latest30d = orderedRows.filter((row) => inRange(parseTimestamp(row), startOf30dTs, nowTs));
+  const latest30d = filteredRows.filter((row) => inRange(parseTimestamp(row), startOf30dTs, nowTs));
+  const excludedBotRedirects30d = orderedRows.filter(
+    (row) =>
+      inRange(parseTimestamp(row), startOf30dTs, nowTs) &&
+      row.event === analyticsEventNames.telegramRedirect &&
+      !shouldCountTelegramRedirect(row),
+  ).length;
 
   const periods = [
     buildPeriodBucket({
-      rows: orderedRows,
+      rows: filteredRows,
       periodKey: "today",
       labelRu: "Сегодня",
       windowDays: 1,
@@ -214,7 +230,7 @@ export function buildAnalyticsDashboard(
       untilTs: nowTs,
     }),
     buildPeriodBucket({
-      rows: orderedRows,
+      rows: filteredRows,
       periodKey: "days_7",
       labelRu: "7 дней",
       windowDays: 7,
@@ -222,7 +238,7 @@ export function buildAnalyticsDashboard(
       untilTs: nowTs,
     }),
     buildPeriodBucket({
-      rows: orderedRows,
+      rows: filteredRows,
       periodKey: "days_30",
       labelRu: "30 дней",
       windowDays: 30,
@@ -237,7 +253,7 @@ export function buildAnalyticsDashboard(
     days_30: periods[2],
   } satisfies Record<DashboardPeriodKey, DashboardBucket>;
 
-  const latestRedirects = orderedRows
+  const latestRedirects = filteredRows
     .filter((row) => row.event === analyticsEventNames.telegramRedirect)
     .slice(0, 10)
     .map((row) => ({
@@ -250,7 +266,7 @@ export function buildAnalyticsDashboard(
     refreshed_at: new Date(nowTs).toISOString(),
     source: "n8n_data_table_site_analytics",
     timezone: timeZone,
-    total_rows_considered: rows.length,
+    total_rows_considered: filteredRows.length,
     periods,
     period_map: periodMap,
     funnel_30d: {
@@ -274,12 +290,13 @@ export function buildAnalyticsDashboard(
         .filter((row) => row.event === analyticsEventNames.telegramRedirect)
         .map((row) => text(row.source)),
     ),
-    latest_events: orderedRows.slice(0, 15).map((row) => ({
+    latest_events: filteredRows.slice(0, 15).map((row) => ({
       event: text(row.event),
       source: text(row.source),
       page_path: text(row.page_path),
       occurred_at: text(row.occurred_at) || text(row.received_at) || text(row.createdAt),
     })),
     latest_redirects: latestRedirects,
+    excluded_bot_redirects_30d: excludedBotRedirects30d,
   };
 }

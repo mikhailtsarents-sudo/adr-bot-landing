@@ -22,6 +22,41 @@ export type AnalyticsEventPayload = {
   occurred_at?: string;
 };
 
+const botUserAgentPatterns = [
+  /claudebot/i,
+  /gptbot/i,
+  /chatgpt-user/i,
+  /googleother/i,
+  /ccbot/i,
+  /bytespider/i,
+  /petalbot/i,
+  /facebookexternalhit/i,
+  /slackbot/i,
+  /linkedinbot/i,
+  /twitterbot/i,
+  /bingbot/i,
+  /crawler/i,
+  /spider/i,
+  /bot\b/i,
+];
+
+export function isBotLikeUserAgent(userAgent: string) {
+  const value = String(userAgent || "").trim();
+  if (!value) return false;
+  return botUserAgentPatterns.some((pattern) => pattern.test(value));
+}
+
+export function shouldCountTelegramRedirect(input: {
+  event?: string;
+  user_agent?: string;
+}) {
+  if (input.event !== analyticsEventNames.telegramRedirect) {
+    return true;
+  }
+
+  return !isBotLikeUserAgent(String(input.user_agent || ""));
+}
+
 function sanitizeTelegramStartChunk(value: string, fallback: string, maxLength = 24) {
   const normalized = value
     .toLowerCase()

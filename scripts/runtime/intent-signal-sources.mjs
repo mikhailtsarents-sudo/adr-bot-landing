@@ -16,6 +16,38 @@ function toIsoDate(value) {
   return safe.slice(0, 10);
 }
 
+const botUserAgentPatterns = [
+  /claudebot/i,
+  /gptbot/i,
+  /chatgpt-user/i,
+  /googleother/i,
+  /ccbot/i,
+  /bytespider/i,
+  /petalbot/i,
+  /facebookexternalhit/i,
+  /slackbot/i,
+  /linkedinbot/i,
+  /twitterbot/i,
+  /bingbot/i,
+  /crawler/i,
+  /spider/i,
+  /bot\b/i,
+];
+
+function isBotLikeUserAgent(userAgent) {
+  const value = text(userAgent);
+  if (!value) return false;
+  return botUserAgentPatterns.some((pattern) => pattern.test(value));
+}
+
+function shouldCountTelegramRedirect(row) {
+  if (text(row?.event) !== "telegram_redirect") {
+    return true;
+  }
+
+  return !isBotLikeUserAgent(row?.user_agent);
+}
+
 export async function loadJsonIfExists(filePath) {
   if (!text(filePath)) return [];
   try {
@@ -58,17 +90,19 @@ export async function fetchAnalyticsRowsFromTable({
 }
 
 export function normalizeSiteAnalyticsRows(rows) {
-  return rows.map((row) => ({
-    event: text(row.event),
-    source: text(row.source),
-    page_path: text(row.page_path),
-    page_slug: text(row.page_slug),
-    page_type: text(row.page_type),
-    locale: text(row.locale),
-    target: text(row.target),
-    occurred_at: text(row.occurred_at),
-    received_at: text(row.received_at || row.createdAt),
-  }));
+  return rows
+    .filter((row) => shouldCountTelegramRedirect(row))
+    .map((row) => ({
+      event: text(row.event),
+      source: text(row.source),
+      page_path: text(row.page_path),
+      page_slug: text(row.page_slug),
+      page_type: text(row.page_type),
+      locale: text(row.locale),
+      target: text(row.target),
+      occurred_at: text(row.occurred_at),
+      received_at: text(row.received_at || row.createdAt),
+    }));
 }
 
 export async function fetchSearchConsoleRows({
