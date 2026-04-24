@@ -120,17 +120,23 @@ function probeAudioDurationSec(localPath) {
   if (!text(localPath)) {
     return 0;
   }
-  const result = spawnSync("afinfo", [localPath], {
-    cwd: repoRoot,
-    encoding: "utf8",
-    stdio: "pipe",
-  });
-  if (result.status !== 0) {
-    return 0;
+  // Try ffprobe first (Linux/VPS)
+  const ffprobe = spawnSync(
+    "ffprobe",
+    ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", localPath],
+    { cwd: repoRoot, encoding: "utf8", stdio: "pipe" },
+  );
+  if (ffprobe.status === 0 && text(ffprobe.stdout)) {
+    const dur = Number(ffprobe.stdout.trim());
+    if (dur > 0) return dur;
   }
-  const output = `${result.stdout || ""}\n${result.stderr || ""}`;
-  const match = output.match(/estimated duration:\s*([0-9.]+)\s*sec/i);
-  return match ? Number(match[1]) || 0 : 0;
+  // Fallback: afinfo (macOS)
+  const afinfo = spawnSync("afinfo", [localPath], { cwd: repoRoot, encoding: "utf8", stdio: "pipe" });
+  if (afinfo.status === 0) {
+    const match = `${afinfo.stdout || ""}\n${afinfo.stderr || ""}`.match(/estimated duration:\s*([0-9.]+)\s*sec/i);
+    if (match) return Number(match[1]) || 0;
+  }
+  return 0;
 }
 
 function buildClassification(wordInput) {
@@ -201,7 +207,8 @@ function buildRenderTask(wordInput, scenario, audioSource = {}) {
     text(wordInput.payload?.translations?.[wordInput.target_lang || "ru"]) ||
     text(wordInput.payload?.translations?.ru);
   const voiceoverDurationSec = Number(audioSource.voiceoverDurationSec || 0);
-  const durationTargetSec = voiceoverDurationSec > 0 ? Math.max(12, Math.ceil(voiceoverDurationSec) + 2) : 9;
+  // Duration = audio length + 2s buffer so nothing gets cut. Minimum 9s if no audio.
+  const durationTargetSec = voiceoverDurationSec > 0 ? Math.ceil(voiceoverDurationSec) + 2 : 9;
 
   return {
     trace_id: scenario.trace_id,

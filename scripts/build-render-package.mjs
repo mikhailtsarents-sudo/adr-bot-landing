@@ -212,9 +212,12 @@ function buildRoleDurations(slides, durationTargetSec) {
     });
   }
 
-  // Text-based: duration = reading time + 1s buffer per slide
+  // Text-based: duration = reading time + 1s buffer per slide.
+  // If durationTargetSec (set from actual audio length) is longer than the sum of
+  // reading times, stretch the last slide so the image track covers the full audio.
+  const target = Number(durationTargetSec || 0);
   let elapsed = 0;
-  return slides.map((slide) => {
+  const result = slides.map((slide) => {
     const dur = readingDurationSec(slide.text);
     const start = Number(elapsed.toFixed(2));
     const end = Number((start + dur).toFixed(2));
@@ -229,6 +232,10 @@ function buildRoleDurations(slides, durationTargetSec) {
       subtitle_ref: "",
     };
   });
+  if (target > elapsed && result.length > 0) {
+    result[result.length - 1].end_sec = Number(target.toFixed(2));
+  }
+  return result;
 }
 
 function normalizeSceneTextEntries(input) {
