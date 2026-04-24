@@ -28,6 +28,11 @@ This file is the current execution snapshot for the ADR Bot landing project.
   - 30d funnel summary
   - top sources / pages / page types
   - latest events and latest Telegram redirects
+- Prepared locally on `2026-04-24`:
+  - YouTube-bound render packages now append a tracked Telegram deep-link into the description
+  - token format:
+    - `yt--shorts--<render_task_id>`
+  - this is the new handoff for future `YouTube -> Bot` attribution
 
 ### Google Search Console
 

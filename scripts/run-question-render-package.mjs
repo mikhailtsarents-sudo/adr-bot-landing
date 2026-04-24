@@ -13,6 +13,7 @@ import { generateQuestionVisualBundle } from "./render/generate-question-visual-
 import { enhanceQuestionScenesWithGpt } from "./render/question-scene-enhancer.mjs";
 import { DEFAULT_SCENARIO_ID, applyScenarioAnchor } from "./render/question-scenario-pool.mjs";
 import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
+import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -701,6 +702,10 @@ function buildRenderTask(questionInput, scenario, audioSource = {}, options = {}
   const voiceoverDurationSec = Number(audioSource.voiceoverDurationSec || 0);
   const durationTargetSec = voiceoverDurationSec > 0 ? Math.max(11, Math.ceil(voiceoverDurationSec)) : 10;
   const titles = buildQuestionTitleVariants(questionInput, scenario);
+  const youtubeAttribution = appendYoutubeTelegramAttribution(
+    titles.description || [shortenedTitle, correctAnswer, explanation].filter(Boolean).join("\n"),
+    { contentId: renderTaskId, surface: "shorts" },
+  );
 
   return {
     trace_id: scenario.trace_id,
@@ -719,9 +724,11 @@ function buildRenderTask(questionInput, scenario, audioSource = {}, options = {}
     title_variant_a: titles.title_variant_a,
     title_variant_b: titles.title_variant_b,
     title_variant_c: titles.title_variant_c,
-    description: titles.description || [shortenedTitle, correctAnswer, explanation].filter(Boolean).join("\n"),
+    description: youtubeAttribution.description,
     caption_text: scenario.caption_text,
     cta_text: scenario.cta_text,
+    cta_url: youtubeAttribution.ctaUrl,
+    entry_source_token: youtubeAttribution.startToken,
     scene_plan: scenario.scene_plan,
     shortform_contract: scenario.shortform_contract,
     retry_policy: retryPolicy,

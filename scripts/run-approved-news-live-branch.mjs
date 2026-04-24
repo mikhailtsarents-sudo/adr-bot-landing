@@ -7,6 +7,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { prepareGenericGeneratedVisualPackage } from "./render/prepare-generic-generated-visuals.mjs";
+import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -334,18 +335,9 @@ function buildRenderTask(approvedNews, scenarioResponse, newsPackage) {
   const sourceTitle = text(row.source_title) || text(approvedNews.payload.source) || text(row.source_name) || "ADR News";
   const voiceoverDurationSec = Number(approvedNews.voiceover_duration_sec || 0);
   const durationTargetSec = voiceoverDurationSec > 0 ? Math.max(13, Math.ceil(voiceoverDurationSec) + 2) : 12;
-  return {
-    trace_id: approvedNews.trace_id,
-    scenario_id: scenarioResponse.scenario_id,
-    render_task_id: `${approvedNews.news_id}-render-01`,
-    source_type: "NEWS",
-    source_id: approvedNews.news_id,
-    source_family: "NEWS",
-    content_family: "NEWS",
-    template_id: "T5",
-    render_family: "News Card",
-    title: approvedNews.payload.title_de,
-    description: [
+  const renderTaskId = `${approvedNews.news_id}-render-01`;
+  const youtubeAttribution = appendYoutubeTelegramAttribution(
+    [
       approvedNews.payload.summary_de,
       "",
       approvedNews.payload.cta_variant,
@@ -355,8 +347,24 @@ function buildRenderTask(approvedNews, scenarioResponse, newsPackage) {
     ]
       .filter(Boolean)
       .join("\n"),
+    { contentId: renderTaskId, surface: "shorts" },
+  );
+  return {
+    trace_id: approvedNews.trace_id,
+    scenario_id: scenarioResponse.scenario_id,
+    render_task_id: renderTaskId,
+    source_type: "NEWS",
+    source_id: approvedNews.news_id,
+    source_family: "NEWS",
+    content_family: "NEWS",
+    template_id: "T5",
+    render_family: "News Card",
+    title: approvedNews.payload.title_de,
+    description: youtubeAttribution.description,
     caption_text: scenarioResponse.caption_text,
     cta_text: scenarioResponse.cta_text,
+    cta_url: youtubeAttribution.ctaUrl,
+    entry_source_token: youtubeAttribution.startToken,
     scene_plan: scenarioResponse.scene_plan,
     hashtags: scenarioResponse.hashtags,
     analytics_tag: scenarioResponse.analytics_tag,

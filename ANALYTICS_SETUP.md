@@ -179,6 +179,20 @@ Important detail:
 
 ## Recommended views
 
+## YouTube -> Bot attribution
+
+Prepared locally on `2026-04-24`:
+
+- render packages for `QUESTION / WORD / NEWS` now append a Telegram deep-link into the YouTube description;
+- the token format is:
+  - `yt--shorts--<render_task_id>`
+- the same deep-link is also written into `cta_url` inside `publish_ready_package.json`
+
+Practical meaning:
+
+- when a user opens the bot from a YouTube description, `/start` can now be attributed as a YouTube entry instead of generic direct traffic;
+- this closes the missing `YouTube -> Bot` handoff on the content-package layer.
+
 In the sheet, add three pivot views:
 
 1. Page views by URL

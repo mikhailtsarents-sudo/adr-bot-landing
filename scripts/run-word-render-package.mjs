@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { prepareGenericGeneratedVisualPackage } from "./render/prepare-generic-generated-visuals.mjs";
 import { bootstrapLocalRuntimeEnv } from "./runtime/local-runtime-env.mjs";
+import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -209,19 +210,9 @@ function buildRenderTask(wordInput, scenario, audioSource = {}) {
   const voiceoverDurationSec = Number(audioSource.voiceoverDurationSec || 0);
   // Duration = audio length + 2s buffer so nothing gets cut. Minimum 9s if no audio.
   const durationTargetSec = voiceoverDurationSec > 0 ? Math.ceil(voiceoverDurationSec) + 2 : 9;
-
-  return {
-    trace_id: scenario.trace_id,
-    scenario_id: scenario.scenario_id,
-    render_task_id: `${text(wordInput.source_id)}-render-01`,
-    source_type: "WORD",
-    source_id: text(wordInput.source_id),
-    source_family: "WORD",
-    content_family: "WORD",
-    template_id: "T2",
-    render_family: "Word Card Short",
-    title: `Was bedeutet ${term}?`,
-    description: [
+  const renderTaskId = `${text(wordInput.source_id)}-render-01`;
+  const youtubeAttribution = appendYoutubeTelegramAttribution(
+    [
       `${term} = ${translation}.`,
       scenario.short_explanation,
       "",
@@ -229,8 +220,25 @@ function buildRenderTask(wordInput, scenario, audioSource = {}) {
     ]
       .filter(Boolean)
       .join("\n"),
+    { contentId: renderTaskId, surface: "shorts" },
+  );
+
+  return {
+    trace_id: scenario.trace_id,
+    scenario_id: scenario.scenario_id,
+    render_task_id: renderTaskId,
+    source_type: "WORD",
+    source_id: text(wordInput.source_id),
+    source_family: "WORD",
+    content_family: "WORD",
+    template_id: "T2",
+    render_family: "Word Card Short",
+    title: `Was bedeutet ${term}?`,
+    description: youtubeAttribution.description,
     caption_text: scenario.caption_text,
     cta_text: scenario.cta_text,
+    cta_url: youtubeAttribution.ctaUrl,
+    entry_source_token: youtubeAttribution.startToken,
     scene_plan: scenario.scene_plan,
     hashtags: scenario.hashtags,
     analytics_tag: scenario.analytics_tag,
