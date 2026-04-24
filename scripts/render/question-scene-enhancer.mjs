@@ -34,7 +34,7 @@ export const QUESTION_SCENE_ENHANCER_SYSTEM_PROMPT = [
   "packaging/containers → warehouse worker handling ADR-labeled containers or drums;",
   "training/certification → classroom or practical ADR exam situation;",
   "news/regulation → official reviewing ADR regulation document or safety briefing;",
-  "word/vocabulary → show the SPECIFIC PHYSICAL OBJECT named by the term being handled, placed, or used by a worker; the object itself must be the visual hero of the frame; DO NOT show ADR orange danger placards or hazmat diamond signs unless the word specifically means a label/sign.",
+  "word/vocabulary → the term itself determines what is shown: if the term names a physical object (wheel chock, fire extinguisher, etc.) show that object being used; if the term refers to a label, sign, or document show that; always make the named concept visually present and recognisable in the frame.",
   "Create a real moment in time with interaction, context, and tension specific to the actual topic.",
   "Avoid generic roadside scenes, abstract backgrounds, floating icons, and decorative filler.",
   "Return strict JSON only: {\"slides\":[...]} with fields: id, scene_intent, visual_hint, subject, context, tension.",

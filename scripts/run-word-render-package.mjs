@@ -7,6 +7,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { prepareGenericGeneratedVisualPackage } from "./render/prepare-generic-generated-visuals.mjs";
+import { bootstrapLocalRuntimeEnv } from "./runtime/local-runtime-env.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -455,6 +456,7 @@ async function resolveWordVoiceoverAsset(tempDir, outputDir, wordInput, scenario
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  await bootstrapLocalRuntimeEnv(repoRoot);
   const wordInput = await loadJson(args.inputPath);
 
   if (text(wordInput.source_type) !== "WORD") {
