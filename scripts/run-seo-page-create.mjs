@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
+import { runLegalGuard } from "./runtime/legal-guard-engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -304,15 +305,28 @@ async function main() {
 
   let seoPagesSource = await readFile(args.seoPagesPath, "utf8");
   const created = [];
+  const legalResults = [];
 
   for (const task of tasks) {
     const slug = text(task.recommended_slug).replace(/^\//, "");
+    const newBlock = buildNewSeoConfigBlock(task);
+    const legalResult = runLegalGuard(newBlock, { source: "seo_page_create", slug });
+    legalResults.push(legalResult);
+
+    if (!legalResult.approved) {
+      throw new Error(
+        `Legal guard blocked create for /${slug}: ${legalResult.short_summary}\n` +
+          legalResult.required_changes.map((c) => `  - ${c}`).join("\n"),
+      );
+    }
+
     seoPagesSource = insertConfigAndList(seoPagesSource, task);
     created.push({
       task_id: task.task_id,
       slug: `/${slug}`,
       page_path: path.join(args.appDir, slug, "page.tsx"),
       created_const: toConstName(slug),
+      legal_risk_level: legalResult.risk_level,
     });
   }
 
@@ -342,15 +356,19 @@ async function main() {
     only_auto_eligible: args.onlyAutoEligible,
     dry_run: args.dryRun,
     created,
+    legal_review: legalResults,
   };
   const reportPath = path.join(outputDir, "seo_create_report.json");
   const latestReportPath = path.join(latestDir, "seo_create_report.latest.json");
+  const legalReportPath = path.join(outputDir, "legal_review_result.json");
   await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
   await writeFile(latestReportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  await writeFile(legalReportPath, `${JSON.stringify(legalResults, null, 2)}\n`, "utf8");
 
   logAutonomousDecision("seo page create applied", {
     applied_count: created.length,
     seo_pages_path: args.seoPagesPath,
+    legal_risk_levels: legalResults.map((r) => `${r.slug}:${r.risk_level}`).join(", "),
   });
 
   console.log(`output_dir=${outputDir}`);

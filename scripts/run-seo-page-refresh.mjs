@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
+import { runLegalGuard } from "./runtime/legal-guard-engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -228,12 +229,25 @@ async function main() {
 
   let seoPagesSource = await readFile(args.seoPagesPath, "utf8");
   const updated = [];
+  const legalResults = [];
 
   for (const task of refreshTasks) {
     const slug = text(task.recommended_slug).replace(/^\//, "");
     const located = findSeoBlock(seoPagesSource, slug);
     if (!located) continue;
     const updatedBlock = updateSeoBlock(located.block, task);
+
+    const legalResult = runLegalGuard(updatedBlock, { source: "seo_page_refresh", slug });
+    legalResults.push(legalResult);
+
+    if (!legalResult.approved) {
+      console.error(
+        `Legal guard blocked refresh for /${slug}: ${legalResult.short_summary}\n` +
+          legalResult.required_changes.map((c) => `  - ${c}`).join("\n"),
+      );
+      continue;
+    }
+
     seoPagesSource = `${seoPagesSource.slice(0, located.start)}${updatedBlock}${seoPagesSource.slice(located.end)}`;
     updated.push({
       task_id: task.task_id,
@@ -241,6 +255,7 @@ async function main() {
       task_type: task.task_type,
       intent_kind: task.intent_kind,
       opportunity_score: task.opportunity_score,
+      legal_risk_level: legalResult.risk_level,
     });
   }
 
@@ -264,16 +279,20 @@ async function main() {
     applied_count: updated.length,
     top_limit: Number.isFinite(args.top) && args.top > 0 ? args.top : 3,
     updated,
+    legal_review: legalResults,
   };
 
   const reportPath = path.join(outputDir, "seo_refresh_report.json");
   const latestReportPath = path.join(latestDir, "seo_refresh_report.latest.json");
+  const legalReportPath = path.join(outputDir, "legal_review_result.json");
   await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
   await writeFile(latestReportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  await writeFile(legalReportPath, `${JSON.stringify(legalResults, null, 2)}\n`, "utf8");
 
   logAutonomousDecision("seo page refresh applied", {
     applied_count: updated.length,
     seo_pages_path: args.seoPagesPath,
+    legal_risk_levels: legalResults.map((r) => `${r.slug}:${r.risk_level}`).join(", "),
   });
 
   console.log(`output_dir=${outputDir}`);
