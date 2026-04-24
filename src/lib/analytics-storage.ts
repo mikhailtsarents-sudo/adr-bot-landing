@@ -57,6 +57,8 @@ export async function insertAnalyticsRow(row: AnalyticsEventPayload) {
   }
 }
 
+const N8N_MAX_PAGE_SIZE = 250;
+
 export async function readAnalyticsRows({
   limit = 500,
   event,
@@ -68,28 +70,44 @@ export async function readAnalyticsRows({
     throw new Error("Missing direct analytics storage config");
   }
 
-  const url = new URL(
-    `${n8nBaseUrl}/api/v1/data-tables/${n8nAnalyticsTableId}/rows`,
-  );
-  url.searchParams.set("limit", String(limit));
+  const totalTarget = Math.min(Math.max(1, limit), 5000);
+  const pageSize = Math.min(N8N_MAX_PAGE_SIZE, totalTarget);
+  const allRows: StoredAnalyticsRow[] = [];
+  let cursor: string | undefined;
 
-  const response = await fetch(url.toString(), {
-    method: "GET",
-    headers: {
-      "X-N8N-API-KEY": n8nApiKey,
-    },
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(
-      `n8n analytics read failed with ${response.status}: ${body.slice(0, 400)}`,
+  while (allRows.length < totalTarget) {
+    const url = new URL(
+      `${n8nBaseUrl}/api/v1/data-tables/${n8nAnalyticsTableId}/rows`,
     );
+    url.searchParams.set("limit", String(Math.min(pageSize, totalTarget - allRows.length)));
+    if (cursor) {
+      url.searchParams.set("cursor", cursor);
+    }
+
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      headers: {
+        "X-N8N-API-KEY": n8nApiKey,
+      },
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(
+        `n8n analytics read failed with ${response.status}: ${body.slice(0, 400)}`,
+      );
+    }
+
+    const json = (await response.json()) as { data?: StoredAnalyticsRow[]; nextCursor?: string };
+    const page = Array.isArray(json.data) ? json.data : [];
+    allRows.push(...page);
+
+    if (!json.nextCursor || page.length === 0) break;
+    cursor = json.nextCursor;
   }
 
-  const json = (await response.json()) as { data?: StoredAnalyticsRow[] };
-  const rows = Array.isArray(json.data) ? json.data : [];
+  const rows = allRows.slice(0, totalTarget);
 
   if (!event) {
     return rows;
