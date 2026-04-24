@@ -5,8 +5,6 @@ import {
 } from "@/lib/analytics-storage";
 
 const analyticsWebhookUrl = process.env.ANALYTICS_WEBHOOK_URL ?? "";
-const n8nBaseUrl = process.env.N8N_BASE_URL ?? "";
-const n8nAnalyticsTableId = process.env.N8N_ANALYTICS_TABLE_ID ?? "";
 
 export async function forwardAnalyticsEvent(event: AnalyticsEventPayload) {
   const payload = {
@@ -16,22 +14,13 @@ export async function forwardAnalyticsEvent(event: AnalyticsEventPayload) {
 
   console.info("[site-analytics]", JSON.stringify(payload));
 
-  if (!analyticsWebhookUrl) {
-    if (!hasDirectAnalyticsStorageConfig()) {
-      return {
-        delivered: false,
-        destination: "console-only",
-      };
-    }
-  }
-
   if (hasDirectAnalyticsStorageConfig()) {
     await insertAnalyticsRow(payload);
+    return { delivered: true, destination: "adr-ingest-vps" };
+  }
 
-    return {
-      delivered: true,
-      destination: `${n8nBaseUrl}/api/v1/data-tables/${n8nAnalyticsTableId}/rows`,
-    };
+  if (!analyticsWebhookUrl) {
+    return { delivered: false, destination: "console-only" };
   }
 
   const url = new URL(analyticsWebhookUrl);
@@ -46,20 +35,12 @@ export async function forwardAnalyticsEvent(event: AnalyticsEventPayload) {
   if (payload.user_agent) url.searchParams.set("user_agent", payload.user_agent);
   if (payload.occurred_at) url.searchParams.set("occurred_at", payload.occurred_at);
 
-  const response = await fetch(url.toString(), {
-    method: "GET",
-    cache: "no-store",
-  });
+  const response = await fetch(url.toString(), { method: "GET", cache: "no-store" });
 
   if (!response.ok) {
     const body = await response.text();
-    throw new Error(
-      `Analytics webhook failed with ${response.status}: ${body.slice(0, 400)}`,
-    );
+    throw new Error(`Analytics webhook failed with ${response.status}: ${body.slice(0, 400)}`);
   }
 
-  return {
-    delivered: true,
-    destination: analyticsWebhookUrl,
-  };
+  return { delivered: true, destination: analyticsWebhookUrl };
 }

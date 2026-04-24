@@ -9,28 +9,26 @@
  *   medium — publishable, note the issues
  *   high   — block: must fix before publish
  *
- * Results are written to n8n Cloud:
- *   - Yura Legal Review Queue  (medium + high) — for human review
- *   - Yura Legal Review Results (all)           — audit trail
+ * Results are written to VPS adr-ingest server (Postgres):
+ *   - /v1/legal/queue   (medium + high) — for human review
+ *   - /v1/legal/result  (all)           — audit trail
  */
 
 import { spawnSync } from "node:child_process";
 
-const N8N_BASE_URL = process.env.N8N_BASE_URL ?? "https://tsarents.app.n8n.cloud";
-const N8N_API_KEY = process.env.N8N_API_KEY ?? "";
-const YURA_QUEUE_TABLE_ID = "7MEY9Rqyt6Ls734m";
-const YURA_RESULTS_TABLE_ID = "cZuso8N5vniKgdth";
+const ADR_INGEST_URL = process.env.ADR_INGEST_URL ?? "http://46.225.170.55:3456";
+const ADR_INGEST_API_KEY = process.env.ADR_INGEST_API_KEY ?? "";
 
-function postToN8nTable(tableId, row) {
-  if (!N8N_API_KEY) return;
-  const body = JSON.stringify({ data: [row] });
+function postToIngest(path, row) {
+  if (!ADR_INGEST_API_KEY) return;
+  const body = JSON.stringify(row);
   spawnSync(
     "curl",
     [
       "-s", "-X", "POST",
-      `${N8N_BASE_URL}/api/v1/data-tables/${tableId}/rows`,
+      `${ADR_INGEST_URL}${path}`,
       "-H", "Content-Type: application/json",
-      "-H", `X-N8N-API-KEY: ${N8N_API_KEY}`,
+      "-H", `X-ADR-API-KEY: ${ADR_INGEST_API_KEY}`,
       "-d", body,
       "--max-time", "8",
     ],
@@ -135,7 +133,7 @@ export function runLegalGuard(content, context = {}) {
   const status = approved ? (risk_level === "low" ? "approved" : "approved_with_notes") : "blocked";
 
   // Always write result to audit trail
-  postToN8nTable(YURA_RESULTS_TABLE_ID, {
+  postToIngest("/v1/legal/result", {
     task_id: taskId,
     status,
     risk_level,
@@ -148,7 +146,7 @@ export function runLegalGuard(content, context = {}) {
 
   // Write to review queue only when human attention needed (medium or high)
   if (risk_level !== "low") {
-    postToN8nTable(YURA_QUEUE_TABLE_ID, {
+    postToIngest("/v1/legal/queue", {
       task_id: taskId,
       task_type: "legal_review",
       title: `Legal review: /${context.slug || "unknown"}`,
