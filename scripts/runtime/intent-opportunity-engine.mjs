@@ -75,6 +75,19 @@ function inferIntentKind(label) {
   const safe = normalizeIntentLabel(label);
   if (!safe) return "generic";
   if (
+    safe.includes("bot")
+    || safe.includes("telegram")
+    || safe.includes("app")
+    || safe.includes("kurs")
+    || safe.includes("schein")
+    || safe.includes("pruefungsvorbereitung")
+    || safe.includes("prüfungsvorbereitung")
+    || safe.includes("vorbereitungskurs")
+    || safe.includes("lernen mit")
+  ) {
+    return "product";
+  }
+  if (
     safe.includes("frage")
     || safe.includes("pruefung")
     || safe.includes("prüfung")
@@ -100,9 +113,6 @@ function inferIntentKind(label) {
     || safe.includes("kurs")
   ) {
     return "learning";
-  }
-  if (safe.includes("bot") || safe.includes("telegram") || safe.includes("app")) {
-    return "product";
   }
   return "generic";
 }
@@ -277,7 +287,7 @@ function finalizeIntent(intent) {
   } else if (intent.intent_kind === "learning") {
     recommendations.push("Expand this intent with a focused landing page and beginner onboarding angle.");
   } else if (intent.intent_kind === "product") {
-    recommendations.push("Use this intent to explain why the bot/app is useful and lower friction to first Telegram start.");
+    recommendations.push("Use this intent as a conversion page plus product-explainer angle that moves the user into Telegram.");
   }
 
   return {

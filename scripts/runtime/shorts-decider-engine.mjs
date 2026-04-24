@@ -60,6 +60,7 @@ function mapRecommendedFormatsToFamily(formats = [], intentKind = "") {
   if (normalized.includes("term_short_video") || normalized.includes("telegram_vocab_drill")) return "WORD";
   if (normalized.includes("quiz_short_video") || normalized.includes("telegram_quiz_entry")) return "QUESTION";
   if (normalized.includes("trust_building_short_video")) return "QUESTION";
+  if (normalized.includes("product_explainer_video") || normalized.includes("telegram_conversion_offer")) return "QUESTION";
   return mapIntentKindToFamily(intentKind);
 }
 
@@ -68,6 +69,7 @@ function mapIntentKindToFamily(intentKind) {
   if (normalized === "vocabulary") return "WORD";
   if (normalized === "question") return "QUESTION";
   if (normalized === "learning") return "QUESTION";
+  if (normalized === "product") return "QUESTION";
   return "";
 }
 

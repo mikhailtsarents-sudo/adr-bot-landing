@@ -85,6 +85,13 @@ function buildHookOptions(brief) {
       `Mini-Quiz fuer ADR auf Deutsch: Einstieg ohne Ueberforderung`,
     ];
   }
+  if (brief.intent_kind === "product" || brief.content_type === "telegram_conversion_offer") {
+    return [
+      `Wie hilft dir ${angle} schneller in die ADR-Praxis auf Deutsch zu kommen?`,
+      `Was bringt dir ein ADR-Deutsch-Bot wirklich im Alltag?`,
+      `Der schnellste Einstieg in ADR-Deutsch: ohne langen Kursblock starten`,
+    ];
+  }
   return [
     `ADR auf Deutsch starten, ohne von Fachsprache erschlagen zu werden`,
     `Wie du schneller in technisches Deutsch fuer ADR reinkommst`,
@@ -105,6 +112,13 @@ function buildFormatNotes(brief) {
       "Use one lead question plus 2-3 short follow-up prompts.",
       "Keep answers concise and confidence-building.",
       "Guide the user into the next quiz step inside Telegram.",
+    ];
+  }
+  if (brief.content_type === "telegram_conversion_offer") {
+    return [
+      "Keep the message commercially clear but low-pressure.",
+      "Focus on one concrete benefit and one next Telegram step.",
+      "Avoid sounding like a broad course landing page.",
     ];
   }
   return [
@@ -129,6 +143,13 @@ function buildMessageSkeleton(brief) {
       "Move the user to the next quiz step in Telegram.",
     ];
   }
+  if (brief.content_type === "telegram_conversion_offer") {
+    return [
+      "Start with the user pain or obstacle in plain language.",
+      "Show one concrete product or bot benefit immediately.",
+      "Close with one direct Telegram step and no extra branches.",
+    ];
+  }
   return [
     "Start with the user problem in plain language.",
     "Offer one small trust-building example.",
@@ -146,6 +167,9 @@ function buildCoordinationNotes(brief) {
   }
   if (brief.intent_kind === "question") {
     notes.push("Question-led tasks should feel like a quiz entry, not a full lesson.");
+  }
+  if (brief.intent_kind === "product" || brief.content_type === "telegram_conversion_offer") {
+    notes.push("Product-led tasks should reduce friction and point to one concrete Telegram action.");
   }
   return notes;
 }

@@ -103,6 +103,44 @@ function inferExecutionState({ decisionState, skipExecute, skipPublish, downstre
   return "executed_without_publish_confirmation";
 }
 
+function buildAlertPayload(summary, context) {
+  const base = {
+    alert_needed: false,
+    alert_code: "",
+    alert_severity: "info",
+    recommended_alert_message: "",
+  };
+
+  if (summary.execution_state === "blocked_before_execute") {
+    return {
+      alert_needed: true,
+      alert_code: "slot_blocked_before_execute",
+      alert_severity: "high",
+      recommended_alert_message: `Слот заблокирован: ${summary.blocking_reason || "не удалось выбрать готовый контент."}`,
+    };
+  }
+
+  if (summary.execution_state === "executor_failed") {
+    return {
+      alert_needed: true,
+      alert_code: "slot_executor_failed",
+      alert_severity: "high",
+      recommended_alert_message: `Слот упал после выбора ${summary.selected_family || "семейства"}: ${summary.downstream_error || "ошибка downstream executor."}`,
+    };
+  }
+
+  if (summary.execution_state === "executed_without_publish_confirmation" && !context.skip_publish) {
+    return {
+      alert_needed: true,
+      alert_code: "slot_publish_confirmation_missing",
+      alert_severity: "medium",
+      recommended_alert_message: `Слот ${summary.selected_family || "unknown"} отработал без явного подтверждения публикации. Нужна ручная проверка downstream path.`,
+    };
+  }
+
+  return base;
+}
+
 function buildSlotSummary(decision, context) {
   const executionState = inferExecutionState({
     decisionState: decision?.decision_state,
@@ -137,19 +175,13 @@ function buildSlotSummary(decision, context) {
     downstream_report_path: text(context.downstream_report_path),
     blocking_reason: text(decision?.blocking_reason),
     downstream_error: text(context.downstream_error),
-    alert_needed: ["blocked_before_execute", "executor_failed"].includes(executionState),
+    alert_needed: false,
+    alert_code: "",
+    alert_severity: "info",
     recommended_alert_message: "",
   };
 
-  if (summary.execution_state === "blocked_before_execute") {
-    summary.recommended_alert_message = `Слот заблокирован: ${summary.blocking_reason || "не удалось выбрать готовый контент."}`;
-  } else if (summary.execution_state === "executor_failed") {
-    summary.recommended_alert_message = `Слот упал после выбора ${summary.selected_family || "семейства"}: ${summary.downstream_error || "ошибка downstream executor."}`;
-  } else if (summary.execution_state === "published") {
-    summary.recommended_alert_message = `Слот успешно опубликован: ${summary.selected_family} -> ${summary.youtube_url}`;
-  } else {
-    summary.recommended_alert_message = `Слот обработан: ${summary.execution_state}`;
-  }
+  Object.assign(summary, buildAlertPayload(summary, context));
 
   return summary;
 }
@@ -210,7 +242,13 @@ function buildSlotMarkdown(decision, summary, context) {
   lines.push("## Alert");
   lines.push("");
   lines.push(`- Нужно ли тревожить оператора: ${summary.alert_needed ? "Да" : "Нет"}`);
-  lines.push(`- Короткое сообщение: ${summary.recommended_alert_message}`);
+  lines.push(`- Alert code: ${summary.alert_code || "none"}`);
+  lines.push(`- Severity: ${summary.alert_severity || "info"}`);
+  if (summary.alert_needed) {
+    lines.push(`- Короткое сообщение: ${summary.recommended_alert_message}`);
+  } else {
+    lines.push("- Успешные слоты не шлют отдельное Telegram-уведомление.");
+  }
   lines.push("");
   lines.push("## Артефакты");
   lines.push("");

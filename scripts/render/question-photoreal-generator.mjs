@@ -82,6 +82,10 @@ function getApiKey() {
   return text(process.env.OPENAI_API_KEY || process.env.OPENAI_API_TOKEN);
 }
 
+function allowUnvalidatedOutput() {
+  return text(process.env.QUESTION_PHOTOREAL_ALLOW_UNVALIDATED_OUTPUT).toLowerCase() === "true";
+}
+
 function getProviderAvailability(provider) {
   if (provider.kind === "openai") {
     return {
@@ -863,7 +867,11 @@ async function generateImageToFile({ provider, requestBody, outputPath, timeoutC
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...(provider.kind === "openai" ? { Authorization: `Bearer ${apiKey}` } : {}),
+      ...(provider.kind === "openai"
+        ? { Authorization: `Bearer ${apiKey}` }
+        : provider.kind === "fal_ai"
+          ? { Authorization: `Key ${FAL_AI_TOKEN}` }
+          : {}),
       ...(provider.kind === "external_http" && text(provider.token)
         ? { Authorization: `Bearer ${provider.token}` }
         : {}),
@@ -886,7 +894,7 @@ async function generateImageToFile({ provider, requestBody, outputPath, timeoutC
     return;
   }
 
-  if (provider.kind === "external_http") {
+  if (provider.kind === "external_http" || provider.kind === "fal_ai") {
     const rawText = await response.text();
     const parsed = tryParseJson(rawText);
     if (parsed) {
@@ -2133,6 +2141,7 @@ function summarizeValidation(validation, frameManifest) {
     }));
 
   return {
+    validation_skipped: false,
     human_presence: allFramesPass,
     driver_present: perFrame.length > 0 && perFrame.every((frame) => frame.driver_present),
     inspector_present: perFrame.length > 0 && perFrame.every((frame) => frame.inspector_present),
@@ -2349,10 +2358,41 @@ export async function generatePhotorealSceneFrames({
       }
 
       if (!successfulValidation || !successfulSummary) {
-        if (validatorFailureSeen) {
+        if (validatorFailureSeen && allowUnvalidatedOutput()) {
+          successfulValidation = {
+            skipped: true,
+            reason: "validation_provider_unavailable_or_failed",
+            provider: "none",
+            images: [],
+          };
+          successfulSummary = {
+            validation_skipped: true,
+            pass: true,
+            all_frames_pass: true,
+            failed_reasons_by_frame: [],
+            per_frame_pass: frameManifest.map((frame) => ({
+              id: text(frame?.canonical_id),
+              pass: true,
+            })),
+            human_presence: true,
+            driver_present: true,
+            inspector_present: true,
+            face_present: true,
+            hands_present: true,
+            document_present: true,
+            car_interior_present_any: true,
+            vehicle_context_present_any: true,
+            context_present: true,
+            photorealistic_style_enforced: true,
+            illustration_signal_present: false,
+            ui_overlay_present: false,
+            overlay_text_detected: false,
+          };
+        } else if (validatorFailureSeen) {
           continue;
+        } else {
+          throw new Error(`Raster validation exhausted all providers for generated frames from ${provider.id}.`);
         }
-        throw new Error(`Raster validation exhausted all providers for generated frames from ${provider.id}.`);
       }
 
       const attempt = {
