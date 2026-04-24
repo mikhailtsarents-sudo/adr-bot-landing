@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q001",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was wird mit dem Flammpunkt bezeichnet?",
+    "answer_options": [
+      "Die niedrigste Temperatur, bei der eine brennbare Flüssigkeit entzündliche Dämpfe bildet",
+      "Die höchste Temperatur, bei der eine brennbare Flüssigkeit noch entzündliche Dämpfe aufweist",
+      "Die Stelle, an der ein Feuer beginnt",
+      "Die Spitze einer Flamme"
+    ],
+    "correct_answer": "Die niedrigste Temperatur, bei der eine brennbare Flüssigkeit entzündliche Dämpfe bildet",
+    "simple_explanation": "Die niedrigste Temperatur, bei der eine brennbare Flüssigkeit entzündliche Dämpfe bildet.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

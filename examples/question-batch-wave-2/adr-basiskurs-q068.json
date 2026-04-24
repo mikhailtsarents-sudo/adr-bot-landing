@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q068",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Tunnelkategorie lässt alle Gefahrguttransporte passieren?",
+    "answer_options": [
+      "Kategorie A — keine Einschränkungen",
+      "Kategorie B",
+      "Kategorie C",
+      "Kategorie D"
+    ],
+    "correct_answer": "Kategorie A — keine Einschränkungen",
+    "simple_explanation": "Kategorie A — keine Einschränkungen.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

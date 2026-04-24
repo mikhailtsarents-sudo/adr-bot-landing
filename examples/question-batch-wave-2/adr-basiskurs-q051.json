@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q051",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Stoffe gehören zur Klasse 9 des ADR?",
+    "answer_options": [
+      "Verschiedenartige gefährliche Stoffe und Gegenstände, die keiner anderen Klasse zugeordnet werden können",
+      "Radioaktive Stoffe",
+      "Infektiöse Stoffe",
+      "Oxidationsmittel"
+    ],
+    "correct_answer": "Verschiedenartige gefährliche Stoffe und Gegenstände, die keiner anderen Klasse zugeordnet werden können",
+    "simple_explanation": "Verschiedenartige gefährliche Stoffe und Gegenstände, die keiner anderen Klasse zugeordnet werden können.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q018",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Bedeutung hat die Gefahrnummer „33“?",
+    "answer_options": [
+      "Leicht entzündbares Gas (Flammpunkt < 23°C)",
+      "Leicht entzündbarer flüssiger Stoff (Flammpunkt < 23°C)",
+      "Entzündbar fest, sehr gefährlich",
+      "Normal entzündbar"
+    ],
+    "correct_answer": "Leicht entzündbarer flüssiger Stoff (Flammpunkt < 23°C)",
+    "simple_explanation": "Leicht entzündbarer flüssiger Stoff (Flammpunkt < 23°C).",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q064",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was bedeutet der Begriff 'Pyrophor' bei gefährlichen Stoffen?",
+    "answer_options": [
+      "Ein Stoff, der sich an der Luft spontan entzünden kann",
+      "Ein Stoff, der nur unter Druck brennt",
+      "Ein Stoff, der nur im Wasser reagiert",
+      "Ein Stoff mit besonders hohem Siedepunkt"
+    ],
+    "correct_answer": "Ein Stoff, der sich an der Luft spontan entzünden kann",
+    "simple_explanation": "Ein Stoff, der sich an der Luft spontan entzünden kann.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

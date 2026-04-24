@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q019",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wie werden Großcontainer im reinen Straßenverkehr mit Großzetteln (Placards) gekennzeichnet?",
+    "answer_options": [
+      "Gar nicht",
+      "An beiden Längsseiten",
+      "Vorn und hinten",
+      "An allen vier Seiten"
+    ],
+    "correct_answer": "An allen vier Seiten",
+    "simple_explanation": "An allen vier Seiten.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

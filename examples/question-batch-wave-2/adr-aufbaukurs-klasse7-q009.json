@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q009",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welches Begleitpapier müssen Sie bei der Beförderung von kennzeichnungspflichtigen, radioaktiven Stoffen mitführen?",
+    "answer_options": [
+      "Führungszeugnis",
+      "ADR-Bescheinigung mit Aufbaukurs Klasse 7",
+      "Nachweis über Strahlenschutzuntersuchung",
+      "Wertangabe der Versandstücke"
+    ],
+    "correct_answer": "ADR-Bescheinigung mit Aufbaukurs Klasse 7",
+    "simple_explanation": "ADR-Bescheinigung mit Aufbaukurs Klasse 7.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q001",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wer ist für die Diebstahlmeldung von radioaktiven Stoffen verantwortlich?",
+    "answer_options": [
+      "Der Verlader",
+      "Der Fahrzeugführer",
+      "Der Gefahrgutbeauftragte",
+      "Der Kontrollbeamte"
+    ],
+    "correct_answer": "Der Fahrzeugführer",
+    "simple_explanation": "Der Fahrzeugführer.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

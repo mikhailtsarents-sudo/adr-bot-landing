@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q065",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was ist bei einem Brand am Gefahrgutfahrzeug als erste Maßnahme zu tun?",
+    "answer_options": [
+      "Fahrzeug sofort anhalten, Motor abstellen, Fahrzeug verlassen und Rettungskräfte alarmieren",
+      "Sofort weiterfahren um den Brand zu löschen",
+      "Den Tank öffnen um den Druck abzulassen",
+      "Zuerst das Beförderungspapier sichern"
+    ],
+    "correct_answer": "Fahrzeug sofort anhalten, Motor abstellen, Fahrzeug verlassen und Rettungskräfte alarmieren",
+    "simple_explanation": "Fahrzeug sofort anhalten, Motor abstellen, Fahrzeug verlassen und Rettungskräfte alarmieren.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

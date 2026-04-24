@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q020",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wer muß für die Erneuerung der ADR Zulassungsbescheinigung sorgen?",
+    "answer_options": [
+      "Beförderer",
+      "Fahrzeugführer",
+      "Verlader",
+      "Befüller"
+    ],
+    "correct_answer": "Beförderer",
+    "simple_explanation": "Beförderer.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

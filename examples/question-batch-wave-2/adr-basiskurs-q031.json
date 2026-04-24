@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q031",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahrgutklasse wird durch diesen Gefahrzettel gekennzeichnet?",
+    "answer_options": [
+      "Klasse 3 — Entzündbare Flüssigkeiten",
+      "Klasse 2.1 — Entzündbare Gase",
+      "Klasse 4.1 — Entzündbare feste Stoffe",
+      "Klasse 5.2 — Organische Peroxide"
+    ],
+    "correct_answer": "Klasse 3 — Entzündbare Flüssigkeiten",
+    "simple_explanation": "Klasse 3 — Entzündbare Flüssigkeiten.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

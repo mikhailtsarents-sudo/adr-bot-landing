@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q061",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was bedeutet die Kemler-Zahl '80' auf der orangefarbenen Tafel?",
+    "answer_options": [
+      "Ätzender oder korrosiver Stoff",
+      "Explosiver Stoff",
+      "Radioaktiver Stoff",
+      "Umweltgefährlicher Stoff"
+    ],
+    "correct_answer": "Ätzender oder korrosiver Stoff",
+    "simple_explanation": "Ätzender oder korrosiver Stoff.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

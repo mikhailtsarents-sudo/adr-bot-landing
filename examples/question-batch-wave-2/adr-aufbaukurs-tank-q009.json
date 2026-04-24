@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q009",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was versteht man unter einer Tankakte?",
+    "answer_options": [
+      "Ein Dokument, das alle technisch relevanten Informationen eines Tanks enthält",
+      "Eine Akte, die der Fahrzeugführer mitführen muss, in die er seine Beförderungspapiere einfügt",
+      "Eine Akte, die z.B. am Tankcontainer außen befestigt werden muss",
+      "Ein Einzeldokument, das der Fahrzeugführer vor Fahrtantritt ausfüllt"
+    ],
+    "correct_answer": "Ein Dokument, das alle technisch relevanten Informationen eines Tanks enthält",
+    "simple_explanation": "Ein Dokument, das alle technisch relevanten Informationen eines Tanks enthält.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

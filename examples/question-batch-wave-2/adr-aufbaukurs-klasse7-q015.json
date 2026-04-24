@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q015",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche kleinste Abmessung ist für Typ A Versandstücke der Klasse 7 zugelassen?",
+    "answer_options": [
+      "10 cm",
+      "50 cm",
+      "20 cm",
+      "5 cm"
+    ],
+    "correct_answer": "10 cm",
+    "simple_explanation": "10 cm.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

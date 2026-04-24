@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q013",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was müssen Sie bei einem Zwischenfall unverzüglich tun?",
+    "answer_options": [
+      "Den Gefahrgutbeauftragten anrufen",
+      "Den Verkehrsleiter anrufen",
+      "Den Notarzt aufsuchen",
+      "Die verantwortlichen Personen benachrichtigen"
+    ],
+    "correct_answer": "Die verantwortlichen Personen benachrichtigen",
+    "simple_explanation": "Die verantwortlichen Personen benachrichtigen.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

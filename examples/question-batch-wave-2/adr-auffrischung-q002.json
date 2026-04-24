@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q002",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Darf bei einer Ladung auf einem Fahrzeug, das Gefahrgut der Klasse 5.2 mit Nebengefahr der Klasse 1 ein Gefahrgut der Klasse 5.2 zusammen geladen werden?",
+    "answer_options": [
+      "Grundsätzlich nein",
+      "Ja, es ist erlaubt",
+      "Nur wenn das zugeladene Gut auch die Nebengefahr der Klasse 1 hat",
+      "Nur mit Genehmigung der Polizei"
+    ],
+    "correct_answer": "Ja, es ist erlaubt",
+    "simple_explanation": "Ja, es ist erlaubt.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q020",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was sind ortsbewegliche Tanks?",
+    "answer_options": [
+      "Heizöltanks für Mobilheime",
+      "Tanks für Vorräte auf Baustellen",
+      "Spezielle Tankform für den multimodalen Einsatz, insbesondere für den Seeverkehr",
+      "Dieseltanks am Fahrzeug"
+    ],
+    "correct_answer": "Spezielle Tankform für den multimodalen Einsatz, insbesondere für den Seeverkehr",
+    "simple_explanation": "Spezielle Tankform für den multimodalen Einsatz, insbesondere für den Seeverkehr.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

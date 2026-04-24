@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q028",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Stoffe werden der Klasse 5.1 zugeordnet?",
+    "answer_options": [
+      "Entzündend (oxidierend) wirkende Stoffe",
+      "Entzündbare flüssige Stoffe",
+      "Stoffe, die in Berührung mit Wasser",
+      "Selbstentzündliche Stoffe"
+    ],
+    "correct_answer": "Entzündend (oxidierend) wirkende Stoffe",
+    "simple_explanation": "Entzündend (oxidierend) wirkende Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

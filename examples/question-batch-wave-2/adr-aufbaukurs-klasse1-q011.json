@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q011",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welches Gefahrenpotential hat die Unterklasse 1.2 ?",
+    "answer_options": [
+      "Geringe Explosionsgefahr",
+      "Feuergefahr in Verbindung mit beträchtlicher Strahlungswärme",
+      "Gefahr der Bildung von Splittern",
+      "Massenexplosionsfähig"
+    ],
+    "correct_answer": "Gefahr der Bildung von Splittern",
+    "simple_explanation": "Gefahr der Bildung von Splittern.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

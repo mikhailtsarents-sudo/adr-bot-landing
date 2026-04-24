@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q012",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was wird mit dem Flammpunkt bezeichnet?",
+    "answer_options": [
+      "Die Spitze einer Flamme",
+      "Die Stelle, an der ein Feuer beginnt",
+      "Die höchste Temperatur, bei der eine brennbare Flüssigkeit noch entzündliche Dämpfe aufweist",
+      "Die niedrigste Temperatur, bei der eine brennbare Flüssigkeit entzündliche Dämpfe bildet"
+    ],
+    "correct_answer": "Die niedrigste Temperatur, bei der eine brennbare Flüssigkeit entzündliche Dämpfe bildet",
+    "simple_explanation": "Die niedrigste Temperatur, bei der eine brennbare Flüssigkeit entzündliche Dämpfe bildet.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

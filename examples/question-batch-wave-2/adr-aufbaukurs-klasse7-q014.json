@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q014",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Aussage ist nach dem Atomgesetz richtig?",
+    "answer_options": [
+      "Wer radioaktive Stoffe befördert, benötigt einen Bleianzug",
+      "Für die Beförderung von radioaktiven Stoffen ist eine Genehmigung erforderlich",
+      "Wer radioaktive Stoffe transportieren will, muss Physiker oder Chemiker sein",
+      "Radioaktive Stoffe dürfen nur offen transportiert werden"
+    ],
+    "correct_answer": "Für die Beförderung von radioaktiven Stoffen ist eine Genehmigung erforderlich",
+    "simple_explanation": "Für die Beförderung von radioaktiven Stoffen ist eine Genehmigung erforderlich.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

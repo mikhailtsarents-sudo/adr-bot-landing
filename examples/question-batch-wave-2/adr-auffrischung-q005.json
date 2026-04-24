@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q005",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Bedeutung hat allgemein die Verpackungsgruppe II?",
+    "answer_options": [
+      "Stoffe mit hoher Gefahr",
+      "Stoffe mit geringer Gefahr",
+      "Stoffe mit mittlerer Gefahr",
+      "Keine Bedeutung für die Gefahr"
+    ],
+    "correct_answer": "Stoffe mit mittlerer Gefahr",
+    "simple_explanation": "Stoffe mit mittlerer Gefahr.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

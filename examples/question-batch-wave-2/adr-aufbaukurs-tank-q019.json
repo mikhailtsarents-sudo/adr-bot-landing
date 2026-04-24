@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q019",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was ist zu berücksichtigen, wenn gefährliche Güter mit verschiedenen Tunnelcodes in einer Beförderungseinheit befördert werden?",
+    "answer_options": [
+      "Für die Tunneldurchfahrt gelten keine besonderen Regelungen",
+      "Es gilt nur der Code, der die schärfsten (restriktivsten) Beschränkungen für das gefährlichste Gut festlegt",
+      "Es gilt nur der Code, der die geringsten Beschränkungen für das gefährlichste Gut festlegt",
+      "Es gilt nur ein besonderer separater Code, den der Beförderer festlegt und der für solche Fälle geschaffen wurde"
+    ],
+    "correct_answer": "Es gilt nur der Code, der die schärfsten (restriktivsten) Beschränkungen für das gefährlichste Gut festlegt",
+    "simple_explanation": "Es gilt nur der Code, der die schärfsten (restriktivsten) Beschränkungen für das gefährlichste Gut festlegt.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

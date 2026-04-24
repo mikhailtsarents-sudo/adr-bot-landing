@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q012",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Bei einem Unfall muss von einer Beschädigung der Versandstücke mit radioaktiven Stoffen ausgegangen werden. Was ist zu tun?",
+    "answer_options": [
+      "Strahlenschutzbeauftragten anrufen",
+      "Behälter untersuchen und evtl. abdichten",
+      "Die schriftlichen Weisungen durchlesen",
+      "Unfallstelle sichern, absperren und zuständige Behörde benachrichtigen"
+    ],
+    "correct_answer": "Unfallstelle sichern, absperren und zuständige Behörde benachrichtigen",
+    "simple_explanation": "Unfallstelle sichern, absperren und zuständige Behörde benachrichtigen.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

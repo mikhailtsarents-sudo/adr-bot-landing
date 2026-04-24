@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q045",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was zeigt die untere Zahl 1203 auf dieser orangefarbenen Gefahrentafel?",
+    "answer_options": [
+      "UN-Nummer — identifiziert den Stoff (1203 = Benzin/Kraftstoff)",
+      "Gefahrnummer — beschreibt die Art der Gefahr",
+      "Verpackungsgruppe I, II oder III",
+      "Flammpunkt des Stoffes in Grad Celsius"
+    ],
+    "correct_answer": "UN-Nummer — identifiziert den Stoff (1203 = Benzin/Kraftstoff)",
+    "simple_explanation": "UN-Nummer — identifiziert den Stoff (1203 = Benzin/Kraftstoff).",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

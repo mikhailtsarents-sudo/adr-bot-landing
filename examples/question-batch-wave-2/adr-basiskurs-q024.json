@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q024",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welchem Zweck dient die ADR-Zulassungsbescheinigung für Fahrzeuge?",
+    "answer_options": [
+      "Dass das Fahrzeug den jeweils zutreffenden Bau- und Zulassungsvorschriften des Teils 9 ADR entspricht",
+      "Dass der Halter das Fahrzeug zum Verkehr zugelassen hat",
+      "Dass der Beförderer gefährliche Güter befördern darf",
+      "Als technische Beschreibung des Fahrzeugs und seiner Aufbauten"
+    ],
+    "correct_answer": "Dass das Fahrzeug den jeweils zutreffenden Bau- und Zulassungsvorschriften des Teils 9 ADR entspricht",
+    "simple_explanation": "Dass das Fahrzeug den jeweils zutreffenden Bau- und Zulassungsvorschriften des Teils 9 ADR entspricht.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q026",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahrgutklasse wird durch diesen Gefahrzettel gekennzeichnet? (Aufbaukurs Tank)",
+    "answer_options": [
+      "Klasse 3 — Entzündbare Flüssigkeiten (häufig in Tankfahrzeugen)",
+      "Klasse 4.1 — Entzündbare feste Stoffe",
+      "Klasse 6.1 — Giftige Stoffe",
+      "Klasse 9 — Verschiedene Stoffe"
+    ],
+    "correct_answer": "Klasse 3 — Entzündbare Flüssigkeiten (häufig in Tankfahrzeugen)",
+    "simple_explanation": "Klasse 3 — Entzündbare Flüssigkeiten (häufig in Tankfahrzeugen).",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

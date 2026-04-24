@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q009",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wieviele Unterklassen hat die Klasse 1?",
+    "answer_options": [
+      "6",
+      "4",
+      "2",
+      "8"
+    ],
+    "correct_answer": "6",
+    "simple_explanation": "6.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

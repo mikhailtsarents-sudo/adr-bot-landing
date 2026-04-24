@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q011",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Stoffe werden der Klasse 1 zugeordnet?",
+    "answer_options": [
+      "Desensibilisierte explosive feste Stoffe",
+      "Entzündbare flüssige Stoffe",
+      "Explosive Stoffe und Gegenstände mit Explosivstoff",
+      "Verschiedene gefährliche Stoffe"
+    ],
+    "correct_answer": "Explosive Stoffe und Gegenstände mit Explosivstoff",
+    "simple_explanation": "Explosive Stoffe und Gegenstände mit Explosivstoff.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

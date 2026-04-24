@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q004",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was ist unter einer geschlossenen Ladung zu verstehen?",
+    "answer_options": [
+      "Der Fahrzeugführer kennt den Inhalt seiner Ladung nicht",
+      "Die Beförderung einer Ladung von einem Absender, dem der alleinige Gebrauch des Fahrzeugs vorbehalten ist",
+      "Die Beförderung erfolgt mit einem gedeckten Fahrzeug",
+      "Der Laderaum ist abgeschlossen"
+    ],
+    "correct_answer": "Die Beförderung einer Ladung von einem Absender, dem der alleinige Gebrauch des Fahrzeugs vorbehalten ist",
+    "simple_explanation": "Die Beförderung einer Ladung von einem Absender, dem der alleinige Gebrauch des Fahrzeugs vorbehalten ist.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

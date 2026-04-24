@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q058",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was bedeutet die Kemler-Zahl '60' auf der orangefarbenen Tafel?",
+    "answer_options": [
+      "Giftiger Stoff",
+      "Entzündbarer fester Stoff",
+      "Ätzender Stoff",
+      "Oxidierender Stoff"
+    ],
+    "correct_answer": "Giftiger Stoff",
+    "simple_explanation": "Giftiger Stoff.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

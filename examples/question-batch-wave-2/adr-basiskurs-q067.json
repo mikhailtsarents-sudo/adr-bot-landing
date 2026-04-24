@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q067",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was versteht man unter dem Begriff 'Absender' im ADR?",
+    "answer_options": [
+      "Das Unternehmen, das das Gefahrgut zur Beförderung aufgibt",
+      "Das Unternehmen, das das Gefahrgut transportiert",
+      "Der Empfänger des Gefahrguts",
+      "Der Sicherheitsberater des Transportunternehmens"
+    ],
+    "correct_answer": "Das Unternehmen, das das Gefahrgut zur Beförderung aufgibt",
+    "simple_explanation": "Das Unternehmen, das das Gefahrgut zur Beförderung aufgibt.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

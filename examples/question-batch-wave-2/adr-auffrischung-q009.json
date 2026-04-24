@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q009",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wodurch entsteht statische Aufladung?",
+    "answer_options": [
+      "Durch Wind",
+      "Durch das Reiben von Kabeln am Fahrzeug",
+      "Durch Reibung schlecht leitender Materialen (z.B. synthetischer Kleidung oder Flüssigkeiten in Tanks)",
+      "Durch den Anschluss einer Stromquelle, z.B. eines Akkus"
+    ],
+    "correct_answer": "Durch Reibung schlecht leitender Materialen (z.B. synthetischer Kleidung oder Flüssigkeiten in Tanks)",
+    "simple_explanation": "Durch Reibung schlecht leitender Materialen (z.B. synthetischer Kleidung oder Flüssigkeiten in Tanks).",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

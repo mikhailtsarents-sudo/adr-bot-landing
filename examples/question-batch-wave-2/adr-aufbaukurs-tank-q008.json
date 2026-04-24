@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q008",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "In welcher Reihenfolge müssen hintereinander liegende Absperreinrichtungen geschlossen werden?",
+    "answer_options": [
+      "Zuerst ist die Drosselklappe zu schließen",
+      "Zuerst ist der Blindflansch anzubringen",
+      "Zuerst ist die dem Füllgut Nächstliegende zu schließen",
+      "Gar nicht"
+    ],
+    "correct_answer": "Zuerst ist die dem Füllgut Nächstliegende zu schließen",
+    "simple_explanation": "Zuerst ist die dem Füllgut Nächstliegende zu schließen.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

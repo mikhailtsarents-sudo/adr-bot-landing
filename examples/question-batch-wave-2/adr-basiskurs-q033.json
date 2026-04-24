@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q033",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahrgutklasse wird durch diesen Gefahrzettel gekennzeichnet?",
+    "answer_options": [
+      "Klasse 8 — Ätzende Stoffe",
+      "Klasse 6.1 — Giftige Stoffe",
+      "Klasse 5.1 — Oxidierende Stoffe",
+      "Klasse 4.3 — Stoffe die mit Wasser entzündbare Gase bilden"
+    ],
+    "correct_answer": "Klasse 8 — Ätzende Stoffe",
+    "simple_explanation": "Klasse 8 — Ätzende Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

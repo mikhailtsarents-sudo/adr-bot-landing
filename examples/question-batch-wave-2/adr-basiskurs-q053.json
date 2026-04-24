@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q053",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Ab welcher Gesamtmenge müssen Fahrzeuge beim Gefahrguttransport mit orangefarbenen Tafeln gekennzeichnet werden?",
+    "answer_options": [
+      "Wenn die Kennzeichnungspflichtige Menge überschritten wird (1000-Punkte-Regel)",
+      "Ab 500 kg Gefahrgut",
+      "Ab 1 Tonne Gefahrgut",
+      "Immer, unabhängig von der Menge"
+    ],
+    "correct_answer": "Wenn die Kennzeichnungspflichtige Menge überschritten wird (1000-Punkte-Regel)",
+    "simple_explanation": "Wenn die Kennzeichnungspflichtige Menge überschritten wird (1000-Punkte-Regel).",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

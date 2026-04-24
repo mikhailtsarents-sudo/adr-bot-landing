@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q009",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welcher Stoff hat nur die Aggregatzustände fest und gasförmig?",
+    "answer_options": [
+      "schweres Wasser",
+      "Organische Peroxide",
+      "Trockeneis",
+      "Propan"
+    ],
+    "correct_answer": "Trockeneis",
+    "simple_explanation": "Trockeneis.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

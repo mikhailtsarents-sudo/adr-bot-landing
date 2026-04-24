@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q002",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Nach welchen Gesichtspunkten wurde die Unterteilung der Klasse 7 vorgenommen?",
+    "answer_options": [
+      "Art und Menge der radioaktiven Stoffe, sowie der verwendeten Verpackung",
+      "Strahlungsart",
+      "Verpackungsabmessung",
+      "Gewicht der Verpackung"
+    ],
+    "correct_answer": "Art und Menge der radioaktiven Stoffe, sowie der verwendeten Verpackung",
+    "simple_explanation": "Art und Menge der radioaktiven Stoffe, sowie der verwendeten Verpackung.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

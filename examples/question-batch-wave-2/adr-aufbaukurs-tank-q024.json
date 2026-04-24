@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q024",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wie kann der Gefahr schwierigen Fahrverhaltens von Mehrkammer-Tankfahrzeugen entgegen gewirkt werden, wenn unterwegs Teilentladungen erfolgen?",
+    "answer_options": [
+      "Durch eine geeignete Reihenfolge beim Entladen der Tankkammern",
+      "Durch Reduzierung der Geschwindigkeit nach jedem Entladevorgang",
+      "Durch Füllstandsausgleich zwischen den Tankkammern",
+      "Gar nicht, Zustand muss hingenommen werden"
+    ],
+    "correct_answer": "Durch eine geeignete Reihenfolge beim Entladen der Tankkammern",
+    "simple_explanation": "Durch eine geeignete Reihenfolge beim Entladen der Tankkammern.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

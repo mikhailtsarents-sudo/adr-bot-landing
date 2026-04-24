@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q010",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche der folgenden Antworten stellt eine UN-Nummer dar?",
+    "answer_options": [
+      "0337",
+      "D1000C",
+      "333",
+      "X863"
+    ],
+    "correct_answer": "0337",
+    "simple_explanation": "0337.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

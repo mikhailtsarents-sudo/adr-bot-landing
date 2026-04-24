@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q010",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Maßnahme vor Antritt der Fahrt erhöht die Sicherheit eines Tanktransportes, wenn der Fahrzeugführer auf einem ihm unbekannten Tankfahrzeug eingesetzt werden soll?",
+    "answer_options": [
+      "Einlesen in das Bordhandbuch mit abschließender Befragung durch den Disponenten",
+      "Keine weiteren Maßnahmen erforderlich, wenn die Fahrerlaubnis der Klasse CE mit Schlüsselnummer 95 vorhanden ist",
+      "Aus Sicherheitsgründen sollte eine Einweisung des Fahrzeugführers in alle Besonderheiten des Tankfahrzeugs vorgenommen werden",
+      "Da die technischen Einrichtungen an jedem Tankfahrzeug gleich sind, muss lediglich eine Einweisung in die im Fahrzeug befindlichen Papiere erfolgen"
+    ],
+    "correct_answer": "Aus Sicherheitsgründen sollte eine Einweisung des Fahrzeugführers in alle Besonderheiten des Tankfahrzeugs vorgenommen werden",
+    "simple_explanation": "Aus Sicherheitsgründen sollte eine Einweisung des Fahrzeugführers in alle Besonderheiten des Tankfahrzeugs vorgenommen werden.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

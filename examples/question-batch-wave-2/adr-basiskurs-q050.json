@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q050",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was ist der Unterschied zwischen einem 'Großzettel' (Placard) und einem 'Gefahrzettel'?",
+    "answer_options": [
+      "Großzettel (25x25 cm) werden an Fahrzeugen angebracht, Gefahrzettel (10x10 cm) an Versandstücken",
+      "Großzettel werden an Versandstücken angebracht, Gefahrzettel an Fahrzeugen",
+      "Beide haben die gleiche Größe, aber verschiedene Farben",
+      "Großzettel werden nur bei radioaktiven Stoffen verwendet"
+    ],
+    "correct_answer": "Großzettel (25x25 cm) werden an Fahrzeugen angebracht, Gefahrzettel (10x10 cm) an Versandstücken",
+    "simple_explanation": "Großzettel (25x25 cm) werden an Fahrzeugen angebracht, Gefahrzettel (10x10 cm) an Versandstücken.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q056",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Aussage zum Beförderungspapier ist korrekt?",
+    "answer_options": [
+      "Es muss die UN-Nummer, die offizielle Benennung, die Klasse und die Verpackungsgruppe enthalten",
+      "Es reicht aus, nur den Handelsnamen des Stoffes anzugeben",
+      "Das Beförderungspapier ist nur bei internationalen Transporten erforderlich",
+      "Es muss handschriftlich ausgefüllt werden"
+    ],
+    "correct_answer": "Es muss die UN-Nummer, die offizielle Benennung, die Klasse und die Verpackungsgruppe enthalten",
+    "simple_explanation": "Es muss die UN-Nummer, die offizielle Benennung, die Klasse und die Verpackungsgruppe enthalten.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

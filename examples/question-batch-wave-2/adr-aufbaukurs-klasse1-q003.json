@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q003",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Sie befördern Güter der Gefahrenklasse 1. Was haben Sie während der Fahrt zusätzlich zu beachten?",
+    "answer_options": [
+      "Das Radio muss eingeschaltet sein. Damit der Verkehrsfunk empfanden wird",
+      "Das Fahrzeug muss verschlossen sein",
+      "Die Höchstgeschwindigkeit beträgt auf der Autobahn 100km/h",
+      "Ich darf das Fahrerhaus aufgrund der Security Vorschriften nie verlassen"
+    ],
+    "correct_answer": "Das Fahrzeug muss verschlossen sein",
+    "simple_explanation": "Das Fahrzeug muss verschlossen sein.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

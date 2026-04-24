@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q010",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wie müssen Gefahrgüter der Klasse 1 verpackt sein?",
+    "answer_options": [
+      "Es gibt keine Verpackungsvorschriften",
+      "Entscheidet der Hersteller des Gefahrgutes",
+      "Entscheidet der Verpacker",
+      "Nach vorgeschriebenen Verpackungsanweisungen"
+    ],
+    "correct_answer": "Nach vorgeschriebenen Verpackungsanweisungen",
+    "simple_explanation": "Nach vorgeschriebenen Verpackungsanweisungen.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

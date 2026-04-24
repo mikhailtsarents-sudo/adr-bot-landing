@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q015",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wie muss die Beförderungseinheit beim Transport kennzeichnungspflichtiger Abfälle gekennzeichnet sein?",
+    "answer_options": [
+      "Da Abfälle besonders gefährlich sind, muss die Beförderungs- einheit vorne und hinten mit einer gelben Rundumleuchte versehen sein",
+      "Vorne und hinten mit den orangefarbenen Tafeln auf denen ein großes \"A\" steht",
+      "Vorne und hinten mit dem A-Schild und ggf den orangefarbenen Tafeln",
+      "Abfälle können nicht kennzeichnungspflichtig sein, da es ein Wirtschaftsgut ist. Es muss folglich nicht gekennzeichnet werden"
+    ],
+    "correct_answer": "Vorne und hinten mit dem A-Schild und ggf den orangefarbenen Tafeln",
+    "simple_explanation": "Vorne und hinten mit dem A-Schild und ggf den orangefarbenen Tafeln.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

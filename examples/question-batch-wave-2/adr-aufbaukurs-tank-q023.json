@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q023",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wo sind alle wichtigen Informationen zum Tank zu finden?",
+    "answer_options": [
+      "In der ADR-Bescheinigung des Fahrzeugführers",
+      "Auf dem Tankschild",
+      "Im Beförderungspapier",
+      "Auf dem amtlichen Kennzeichen"
+    ],
+    "correct_answer": "Auf dem Tankschild",
+    "simple_explanation": "Auf dem Tankschild.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

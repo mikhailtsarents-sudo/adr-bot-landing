@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q023",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "In welchem der nachstehenden Fälle wird bei Gefahrgutbeförderungen kein Beförderungspapier benötigt?",
+    "answer_options": [
+      "Ausnahmsweise, wenn der Absender keine Zeit mehr hatte, eins zu erstellen",
+      "Bei Beförderungen in begrenzten Mengen und in freigestellten Mengen",
+      "Bei Beförderungen mit Fahrzeugen unter 7,5 Tonnen zul. Gesamtgewicht",
+      "Bei Kurzstreckenfahrten unter 30 km"
+    ],
+    "correct_answer": "Bei Beförderungen in begrenzten Mengen und in freigestellten Mengen",
+    "simple_explanation": "Bei Beförderungen in begrenzten Mengen und in freigestellten Mengen.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

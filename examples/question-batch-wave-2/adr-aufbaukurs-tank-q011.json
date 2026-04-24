@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q011",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Dürfen sie als Fahrzeugführer in einen leeren ungereinigten Tank, in dem sich vorher ein Gefahrgut der Klasse 6.1 befunden hat, einsteigen?",
+    "answer_options": [
+      "Nur nach Sicherung mittels Halteleine und einer beaufsichtigenden Person",
+      "Ja, wenn eine Handlampe mit einer nicht metallenen Oberfläche zur Ausleuchtung verwendet wird",
+      "Ja",
+      "In keinem Fall"
+    ],
+    "correct_answer": "In keinem Fall",
+    "simple_explanation": "In keinem Fall.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

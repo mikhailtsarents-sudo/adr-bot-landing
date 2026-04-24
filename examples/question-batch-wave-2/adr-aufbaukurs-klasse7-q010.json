@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q010",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was bedeutet die Transportkennzahl?",
+    "answer_options": [
+      "Eine Zahl, anhand derer die Strahlengefahr überwacht werden kann",
+      "Die Auftragsnummer des Transportes",
+      "Die Verpackungscodierung",
+      "Die Dosisleistung an der Versandstückoberfläche"
+    ],
+    "correct_answer": "Eine Zahl, anhand derer die Strahlengefahr überwacht werden kann",
+    "simple_explanation": "Eine Zahl, anhand derer die Strahlengefahr überwacht werden kann.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

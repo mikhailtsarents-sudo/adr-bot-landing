@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q002",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wo sind bei einem Tankfahrzeug, in dem verschiedene gefährliche Güter befördert werden, Großzettel (Placards) anzubringen?",
+    "answer_options": [
+      "An allen vier Seiten",
+      "An beiden Längsseiten jedes Tankabteils und hinten",
+      "An beiden Längsseiten",
+      "Nur vorne und hinten"
+    ],
+    "correct_answer": "An beiden Längsseiten jedes Tankabteils und hinten",
+    "simple_explanation": "An beiden Längsseiten jedes Tankabteils und hinten.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

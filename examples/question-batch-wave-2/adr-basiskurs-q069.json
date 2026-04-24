@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q069",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was bedeutet die Kemler-Zahl '20' auf der orangefarbenen Tafel?",
+    "answer_options": [
+      "Erstickend wirkendes Gas oder Gas ohne Nebengefahr",
+      "Entzündbares Gas",
+      "Giftiges Gas",
+      "Ätzendes Gas"
+    ],
+    "correct_answer": "Erstickend wirkendes Gas oder Gas ohne Nebengefahr",
+    "simple_explanation": "Erstickend wirkendes Gas oder Gas ohne Nebengefahr.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

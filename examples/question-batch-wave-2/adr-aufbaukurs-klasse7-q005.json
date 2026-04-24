@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q005",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welches Versandstück muss unfallsicher sein?",
+    "answer_options": [
+      "Typ A-Versandstück",
+      "Typ B-Versandstück",
+      "Industrieverpackung Typ 1",
+      "Freigestelltes Versandstück"
+    ],
+    "correct_answer": "Typ B-Versandstück",
+    "simple_explanation": "Typ B-Versandstück.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q012",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Ab welchem Fassungsraum des Tanks ist eine ADR-Zulassungsbescheinigung erforderlich, wenn es sich um ein Batterie-Fahrzeug handelt?",
+    "answer_options": [
+      "mehr als 1.000 l",
+      "mehr als 3.000l",
+      "immer",
+      "mehr als 450 l"
+    ],
+    "correct_answer": "mehr als 1.000 l",
+    "simple_explanation": "mehr als 1.000 l.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

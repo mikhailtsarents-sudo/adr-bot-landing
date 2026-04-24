@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q003",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welchen Stoffen wird die UN 1202 zugeordnet?",
+    "answer_options": [
+      "Ätzende Stoffe",
+      "Selbstentzündliche Stoffe",
+      "Entzündbare flüssige Stoffe",
+      "Verschiedene gefährliche Stoffe und Gegenstände"
+    ],
+    "correct_answer": "Entzündbare flüssige Stoffe",
+    "simple_explanation": "Entzündbare flüssige Stoffe.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

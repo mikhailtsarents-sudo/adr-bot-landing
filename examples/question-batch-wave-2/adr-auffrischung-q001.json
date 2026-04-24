@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q001",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was versteht man unter einem Kryobehälter?",
+    "answer_options": [
+      "Ein wärmeisolierendes Druckgefäß für tiefkalt verflüssigte Gase",
+      "Einen Behälter für den Stoff Kryo",
+      "Ein wärmeisolierendes Druckgefäß für flüssige Stoffe",
+      "Ein wärmeisolierendes Gefäß für ätzende Stoffe"
+    ],
+    "correct_answer": "Ein wärmeisolierendes Druckgefäß für tiefkalt verflüssigte Gase",
+    "simple_explanation": "Ein wärmeisolierendes Druckgefäß für tiefkalt verflüssigte Gase.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

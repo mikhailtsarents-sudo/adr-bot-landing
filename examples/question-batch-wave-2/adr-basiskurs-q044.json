@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q044",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was zeigt die obere Zahl auf dieser orangefarbenen Gefahrentafel?",
+    "answer_options": [
+      "Gefahrnummer (Kemler-Zahl) — beschreibt die Art der Gefahr",
+      "UN-Nummer — identifiziert den Stoff",
+      "Verpackungsgruppe — gibt die Gefährlichkeit an",
+      "Tunnelkategorie — zeigt Durchfahrtsbeschränkungen"
+    ],
+    "correct_answer": "Gefahrnummer (Kemler-Zahl) — beschreibt die Art der Gefahr",
+    "simple_explanation": "Gefahrnummer (Kemler-Zahl) — beschreibt die Art der Gefahr.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

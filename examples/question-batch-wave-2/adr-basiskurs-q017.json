@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q017",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welcher ADR-Kurs wird benötigt, um einen Container mit explosiven Gegenständen zu befördern?",
+    "answer_options": [
+      "Basis",
+      "Tank",
+      "Klasse 7",
+      "Klasse 1"
+    ],
+    "correct_answer": "Klasse 1",
+    "simple_explanation": "Klasse 1.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

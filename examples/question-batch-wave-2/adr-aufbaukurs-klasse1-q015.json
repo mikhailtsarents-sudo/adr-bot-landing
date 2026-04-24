@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q015",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Ein Fahrzeug hat Güter der Unterklasse 1.4 und 1.5 geladen. Welche(r) Großzettel sind/ist am Fahrzeug anzubringen?",
+    "answer_options": [
+      "Großzettel 1.4 und 1.5",
+      "Großzettel Nummer 1",
+      "Großzettel Nummer 1.4",
+      "Großzettel Nummer 1.5"
+    ],
+    "correct_answer": "Großzettel Nummer 1.5",
+    "simple_explanation": "Großzettel Nummer 1.5.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

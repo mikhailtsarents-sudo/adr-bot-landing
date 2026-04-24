@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q002",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Stoffe werden der Klasse 4.1 zugeordnet?",
+    "answer_options": [
+      "Entzündbare flüssige Stoffe",
+      "Desensibilisierte explosive feste Stoffe",
+      "Entzündbare feste Stoffe, selbstzersetzliche Stoffe und desensibilisierte explosive feste Stoffe",
+      "Verschiedene gefährliche Stoffe"
+    ],
+    "correct_answer": "Entzündbare feste Stoffe, selbstzersetzliche Stoffe und desensibilisierte explosive feste Stoffe",
+    "simple_explanation": "Entzündbare feste Stoffe, selbstzersetzliche Stoffe und desensibilisierte explosive feste Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

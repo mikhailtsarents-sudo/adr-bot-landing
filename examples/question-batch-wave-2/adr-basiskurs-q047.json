@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q047",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wer ist der 'Beförderer' im Sinne des ADR?",
+    "answer_options": [
+      "Das Unternehmen, das die Beförderung mit einem Fahrzeug durchführt",
+      "Der Fahrer des Fahrzeugs",
+      "Das Unternehmen, das das Gefahrgut versendet",
+      "Der Empfänger des Gefahrguts"
+    ],
+    "correct_answer": "Das Unternehmen, das die Beförderung mit einem Fahrzeug durchführt",
+    "simple_explanation": "Das Unternehmen, das die Beförderung mit einem Fahrzeug durchführt.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

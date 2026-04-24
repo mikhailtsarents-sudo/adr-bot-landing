@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q036",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahrgutklasse wird durch diesen Gefahrzettel gekennzeichnet?",
+    "answer_options": [
+      "Klasse 2.3 — Giftige Gase",
+      "Klasse 6.1 — Giftige Stoffe",
+      "Klasse 2.2 — Nicht entzündbare Gase",
+      "Klasse 2.1 — Entzündbare Gase"
+    ],
+    "correct_answer": "Klasse 2.3 — Giftige Gase",
+    "simple_explanation": "Klasse 2.3 — Giftige Gase.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

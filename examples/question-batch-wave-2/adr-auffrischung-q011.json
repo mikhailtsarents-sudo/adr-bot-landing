@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q011",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Darf ein Beförderungsdokument nach dem IMDG-Code zur Weiterbeförderung per Schiff auf der Zufahrt zu einem Hafen oder nach dem ICAO-TI/IATA-DRG zur Weiterbeförderung per Flugzeug auf der Zufahrt zum Flughafen als Beförderungspapier nach dem ADR verwendet werden?",
+    "answer_options": [
+      "Nein",
+      "Wenn es der Zoll zulässt",
+      "Ja, eine solche Verwendung ist möglich, wenn es den Sondervermerk „Beförderung nach Absatz 1.1.4.2.1„ enthält",
+      "Nur mit Genehmigung des Absenders"
+    ],
+    "correct_answer": "Ja, eine solche Verwendung ist möglich, wenn es den Sondervermerk „Beförderung nach Absatz 1.1.4.2.1„ enthält",
+    "simple_explanation": "Ja, eine solche Verwendung ist möglich, wenn es den Sondervermerk „Beförderung nach Absatz 1.1.4.2.1„ enthält.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

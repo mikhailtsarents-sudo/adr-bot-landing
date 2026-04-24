@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q021",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was bedeutet dieses Zeichen?",
+    "answer_options": [
+      "Keine besondere Bedeutung",
+      "Lufttemperatur darf 20° C nicht überschreiten",
+      "Kennzeichen für erwärmte Stoffe",
+      "Regelmäßige Messung der Außentemperatur erforderlich"
+    ],
+    "correct_answer": "Kennzeichen für erwärmte Stoffe",
+    "simple_explanation": "Kennzeichen für erwärmte Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q055",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was versteht man unter 'Sublimation' bei gefährlichen Stoffen?",
+    "answer_options": [
+      "Der direkte Übergang eines Stoffes vom festen in den gasförmigen Zustand ohne flüssige Phase",
+      "Die Auflösung eines Stoffes in Wasser",
+      "Der Übergang eines Stoffes vom gasförmigen in den flüssigen Zustand",
+      "Die chemische Reaktion eines Stoffes mit Sauerstoff"
+    ],
+    "correct_answer": "Der direkte Übergang eines Stoffes vom festen in den gasförmigen Zustand ohne flüssige Phase",
+    "simple_explanation": "Der direkte Übergang eines Stoffes vom festen in den gasförmigen Zustand ohne flüssige Phase.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q057",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was versteht man unter dem Begriff 'Siedepunkt'?",
+    "answer_options": [
+      "Die Temperatur, bei der ein flüssiger Stoff in den gasförmigen Zustand übergeht",
+      "Die Temperatur, bei der ein Stoff zu brennen beginnt",
+      "Die Temperatur, bei der sich ein Stoff selbst entzündet",
+      "Die Temperatur, bei der ein Stoff gefriert"
+    ],
+    "correct_answer": "Die Temperatur, bei der ein flüssiger Stoff in den gasförmigen Zustand übergeht",
+    "simple_explanation": "Die Temperatur, bei der ein flüssiger Stoff in den gasförmigen Zustand übergeht.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

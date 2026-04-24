@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q026",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Eine zusammengesetze Verpackung ist....",
+    "answer_options": [
+      "Ein Kryptobehälter",
+      "Ein Eimer mit Deckel",
+      "Eine Verpackung mit einer oder mehreren inneren Verpackungen",
+      "Ein Karton aus Kunststoff"
+    ],
+    "correct_answer": "Eine Verpackung mit einer oder mehreren inneren Verpackungen",
+    "simple_explanation": "Eine Verpackung mit einer oder mehreren inneren Verpackungen.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

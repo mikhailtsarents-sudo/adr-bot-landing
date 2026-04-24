@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q029",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Worauf muss der Fahrzeugführer bei Teilentladungen achten?",
+    "answer_options": [
+      "Die Mengenangaben im Beförderungspapier müssen angepasst werden",
+      "Die annehmende Person muss persönlich bekannt sein",
+      "Nach dem Abladen sofort auftanken, um das fehlende Ladungsgewicht auszugleichen",
+      "Es sind keine besonderen Aufgaben zu erledigen"
+    ],
+    "correct_answer": "Die Mengenangaben im Beförderungspapier müssen angepasst werden",
+    "simple_explanation": "Die Mengenangaben im Beförderungspapier müssen angepasst werden.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

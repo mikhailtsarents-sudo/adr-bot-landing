@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q008",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Person muss beim Transport von Stoffen der Klasse 7 unbedingt fachkundig und zuverlässig sein?",
+    "answer_options": [
+      "Fuhrparkleiter",
+      "Werkstattmeister",
+      "Fahrzeugführer",
+      "Disponent"
+    ],
+    "correct_answer": "Fahrzeugführer",
+    "simple_explanation": "Fahrzeugführer.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

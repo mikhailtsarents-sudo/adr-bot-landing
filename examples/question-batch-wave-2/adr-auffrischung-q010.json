@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q010",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wann ist eine Reservierungsbestätigung mitzuführen?",
+    "answer_options": [
+      "Im Zulauf zum Bahnhof, wenn für ein Gefahrgut die Eisenbahnbeförderung nach § 35 GGVSEB vorgeschrieben ist",
+      "Bei stark frequentierten Entladestellen",
+      "Nie",
+      "Bei der Wahl von Fahrtstrecken mit stark frequentierten Rastplätzen"
+    ],
+    "correct_answer": "Im Zulauf zum Bahnhof, wenn für ein Gefahrgut die Eisenbahnbeförderung nach § 35 GGVSEB vorgeschrieben ist",
+    "simple_explanation": "Im Zulauf zum Bahnhof, wenn für ein Gefahrgut die Eisenbahnbeförderung nach § 35 GGVSEB vorgeschrieben ist.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

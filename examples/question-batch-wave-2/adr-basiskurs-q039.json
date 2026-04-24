@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q039",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahrgutklasse wird durch diesen Gefahrzettel gekennzeichnet?",
+    "answer_options": [
+      "Klasse 4.2 — Selbstentzündliche Stoffe",
+      "Klasse 4.1 — Entzündbare feste Stoffe",
+      "Klasse 4.3 — Stoffe die mit Wasser Gase bilden",
+      "Klasse 3 — Entzündbare Flüssigkeiten"
+    ],
+    "correct_answer": "Klasse 4.2 — Selbstentzündliche Stoffe",
+    "simple_explanation": "Klasse 4.2 — Selbstentzündliche Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

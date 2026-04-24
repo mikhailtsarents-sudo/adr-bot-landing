@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q015",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahr besteht, wenn Bodenventile während der Fahrt nicht geschlossen sind?",
+    "answer_options": [
+      "Austritt von Gefahrgut auf Neigungsstrecken über das Bodenventil",
+      "Vermischung des Gefahrguts",
+      "Überhöhter Druck auf das Abgabesystem",
+      "Verlagerung des Schwerpunkts"
+    ],
+    "correct_answer": "Austritt von Gefahrgut auf Neigungsstrecken über das Bodenventil",
+    "simple_explanation": "Austritt von Gefahrgut auf Neigungsstrecken über das Bodenventil.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

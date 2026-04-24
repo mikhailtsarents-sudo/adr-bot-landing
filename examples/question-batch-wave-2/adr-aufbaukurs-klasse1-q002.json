@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q002",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Unter welchen Voraussetzungen dürfen Sie das Fahrzeug nicht beladen?",
+    "answer_options": [
+      "Ein anderes Fahrzeug wird bereits beladen",
+      "Die Angaben im Beförderungspapier entsprechen nicht der bereitgestellten Ladung",
+      "Die Ladung besteht aus unterschiedlichen Versandstücken, z.B. Kisten und Säcke",
+      "Für das Beladen steht kein Ladehilfsmittel zur Verfügung"
+    ],
+    "correct_answer": "Die Angaben im Beförderungspapier entsprechen nicht der bereitgestellten Ladung",
+    "simple_explanation": "Die Angaben im Beförderungspapier entsprechen nicht der bereitgestellten Ladung.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

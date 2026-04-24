@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q008",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welches der nachstehenden Dokumente ist kein gefahrgutrechtliches Beförderungsdokument?",
+    "answer_options": [
+      "Lichtbildausweis",
+      "ADR-Bescheinigung",
+      "Prüfbuch SP",
+      "Beförderungspapier"
+    ],
+    "correct_answer": "Prüfbuch SP",
+    "simple_explanation": "Prüfbuch SP.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

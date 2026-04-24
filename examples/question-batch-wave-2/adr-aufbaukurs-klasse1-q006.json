@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q006",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Dürfen Anhänger vom Typ EX/II oder EX/III von einem Fahrzeug gezogen werden, das nicht die Anforderungen für ein Typ EX/II oder EX/III Fahrzeug erfüllt?",
+    "answer_options": [
+      "Ja, nur dann, wenn das Gefahrgut besonders sicher verpackt ist",
+      "Nein, das Zugfahrzeug muss auch ein EX/II- oder EX/III- Fahrzeug sein",
+      "Ja, nur mit Genehmigung vom TÜV bzw. der DEKRA",
+      "Ja"
+    ],
+    "correct_answer": "Ja",
+    "simple_explanation": "Ja.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

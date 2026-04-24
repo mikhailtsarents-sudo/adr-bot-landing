@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q027",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was zeigt diese orangefarbene Gefahrentafel an einem Tankfahrzeug?",
+    "answer_options": [
+      "Oben: Gefahrnummer (33 = hochentzündliche Flüssigkeit), Unten: UN-Nummer (1203 = Benzin)",
+      "Oben: UN-Nummer, Unten: Verpackungsgruppe",
+      "Oben: Tunnelkategorie, Unten: Gefahrgutklasse",
+      "Oben: Flammpunkt, Unten: Siedepunkt des Stoffes"
+    ],
+    "correct_answer": "Oben: Gefahrnummer (33 = hochentzündliche Flüssigkeit), Unten: UN-Nummer (1203 = Benzin)",
+    "simple_explanation": "Oben: Gefahrnummer (33 = hochentzündliche Flüssigkeit), Unten: UN-Nummer (1203 = Benzin).",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

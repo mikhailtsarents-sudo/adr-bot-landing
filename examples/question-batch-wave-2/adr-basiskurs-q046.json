@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q046",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Stoffe gehören zur Klasse 2 des ADR?",
+    "answer_options": [
+      "Gase (verdichtet, verflüssigt oder gelöst unter Druck)",
+      "Entzündbare flüssige Stoffe",
+      "Giftige Stoffe",
+      "Radioaktive Stoffe"
+    ],
+    "correct_answer": "Gase (verdichtet, verflüssigt oder gelöst unter Druck)",
+    "simple_explanation": "Gase (verdichtet, verflüssigt oder gelöst unter Druck).",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

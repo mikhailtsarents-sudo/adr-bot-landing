@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q013",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wann ist die Explosionsgefahr am größten?",
+    "answer_options": [
+      "Bei leeren, ungereinigten Tanks",
+      "Bei viertel gefüllten Tanks",
+      "Bei bis zum höchsten zulässigen Füllungsgrad gefüllten Tanks",
+      "Bei halb gefüllten Tanks"
+    ],
+    "correct_answer": "Bei leeren, ungereinigten Tanks",
+    "simple_explanation": "Bei leeren, ungereinigten Tanks.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

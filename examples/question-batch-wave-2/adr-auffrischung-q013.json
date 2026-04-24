@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q013",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Angaben sind bei der Beförderung in freigestellten Mengen auf der Kennzeichnung erforderlich?",
+    "answer_options": [
+      "Nummer des ersten oder einzigen Gefahrzettels, Name des Absenders oder Empfängers, sofern nicht schon auf dem Versandstück angegeben",
+      "Name des Verpackers",
+      "Alle Gefahrzettelmuster der Nebengefahr",
+      "Alle UN-Nr. der Verpackung"
+    ],
+    "correct_answer": "Nummer des ersten oder einzigen Gefahrzettels, Name des Absenders oder Empfängers, sofern nicht schon auf dem Versandstück angegeben",
+    "simple_explanation": "Nummer des ersten oder einzigen Gefahrzettels, Name des Absenders oder Empfängers, sofern nicht schon auf dem Versandstück angegeben.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

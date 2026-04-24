@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q060",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was ist beim Beladen eines Fahrzeugs mit Gefahrgut grundsätzlich zu beachten?",
+    "answer_options": [
+      "Zusammenladeverbote müssen eingehalten werden",
+      "Alle Gefahrgüter dürfen immer zusammen geladen werden",
+      "Das Beförderungspapier muss erst nach der Beladung erstellt werden",
+      "Die Verpackungen dürfen geöffnet werden, um Platz zu sparen"
+    ],
+    "correct_answer": "Zusammenladeverbote müssen eingehalten werden",
+    "simple_explanation": "Zusammenladeverbote müssen eingehalten werden.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

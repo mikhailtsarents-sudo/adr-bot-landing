@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q011",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Für welche Stoffe gibt es im Zusammenhang mit den radioaktiven Stoffen Zusammenladeverbote?",
+    "answer_options": [
+      "Für Stoffe der Klassen 6.1 und 6.2",
+      "Für Stoffe der Klasse 8",
+      "Für Lebensmittel",
+      "Für Stoffe der Klasse 1"
+    ],
+    "correct_answer": "Für Stoffe der Klasse 1",
+    "simple_explanation": "Für Stoffe der Klasse 1.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

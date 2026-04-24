@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q027",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Bedeutung hat allgemein die Verpackungsgruppe I?",
+    "answer_options": [
+      "Keine Bedeutung für die Gefahr",
+      "Stoffe mit hoher Gefahr",
+      "Stoffe mit geringer Gefahr",
+      "Stoffe mit mittlerer Gefahr"
+    ],
+    "correct_answer": "Stoffe mit hoher Gefahr",
+    "simple_explanation": "Stoffe mit hoher Gefahr.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

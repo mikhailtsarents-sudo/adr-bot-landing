@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q032",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahrgutklasse wird durch diesen Gefahrzettel gekennzeichnet?",
+    "answer_options": [
+      "Klasse 6.1 — Giftige Stoffe",
+      "Klasse 2.3 — Giftige Gase",
+      "Klasse 8 — Ätzende Stoffe",
+      "Klasse 6.2 — Ansteckungsgefährliche Stoffe"
+    ],
+    "correct_answer": "Klasse 6.1 — Giftige Stoffe",
+    "simple_explanation": "Klasse 6.1 — Giftige Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

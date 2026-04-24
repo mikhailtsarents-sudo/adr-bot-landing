@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q005",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Ist für alle Fahrzeuge ein Fahrtenschreiber Pflicht, wenn sie gefährlicher Güter befördern?",
+    "answer_options": [
+      "Nur bei Beförderungen über 1000 Punkte",
+      "Nur bei Stoffe der Klasse 7",
+      "Ja",
+      "Es hängt von der Art des Fahrzeugs ab"
+    ],
+    "correct_answer": "Es hängt von der Art des Fahrzeugs ab",
+    "simple_explanation": "Es hängt von der Art des Fahrzeugs ab.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

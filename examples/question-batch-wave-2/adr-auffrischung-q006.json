@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q006",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Ist es möglich, ein Beförderungspapier in elektronischer Form mitzuführen?",
+    "answer_options": [
+      "Nur bei Genehmigung",
+      "Ja, wenn es die Möglichkeit zum Ausdruck gibt",
+      "Grundsätzlich nur auf CD",
+      "Nein"
+    ],
+    "correct_answer": "Ja, wenn es die Möglichkeit zum Ausdruck gibt",
+    "simple_explanation": "Ja, wenn es die Möglichkeit zum Ausdruck gibt.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q007",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wie und warum werden Beförderungseinheiten mit Versandstücken in einer kennzeichnungspflichtigen Menge mit orangefarbenen Tafeln gekennzeichnet?",
+    "answer_options": [
+      "Vorn und hinten am Zugfahrzeug sowie vorn und hinten am Anhänger, damit jeder Verkehrsteilnehmer sehen kann, dass ich eine permanente Gefahr für ihn bin",
+      "Vorn am Zugfahrzeug und hinten am Anhänger, damit erkennbar ist, dass auf der Beförderungseinheit Gefahrguttransportiert wird",
+      "Vorn am Zugfahrzeug und hinten am Anhänger sowie auf jeder Seite des Zugfahrzeugs und des Anhängers, damit jederzeit eine gute Erkennbarkeit für eine Kontrolle gegeben ist",
+      "Keine Kennzeichnung mit orangefarbenen Tafeln erforderlich, da sonst die Bevölkerung nur unnötig beunruhigt wird."
+    ],
+    "correct_answer": "Vorn am Zugfahrzeug und hinten am Anhänger, damit erkennbar ist, dass auf der Beförderungseinheit Gefahrguttransportiert wird",
+    "simple_explanation": "Vorn am Zugfahrzeug und hinten am Anhänger, damit erkennbar ist, dass auf der Beförderungseinheit Gefahrguttransportiert wird.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

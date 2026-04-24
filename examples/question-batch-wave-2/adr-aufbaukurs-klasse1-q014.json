@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q014",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Feststellung ist korrekt?",
+    "answer_options": [
+      "Es besteht ein Rauchverbot in den Fahrzeugen, wenn es durch den Gefahrgutbeauftragten festgelegt wurde",
+      "Während des gesamten Beförderungsvorganges ist in den Fahrzeugen, in ihrer Nähe sowie bei den Be- und Entladearbeiten das Rauchen verboten",
+      "Das Rauchen ist ausschließlich auf der Ladefläche verboten",
+      "Während der Be- und Entladearbeiten ist das Rauchen untersagt"
+    ],
+    "correct_answer": "Während des gesamten Beförderungsvorganges ist in den Fahrzeugen, in ihrer Nähe sowie bei den Be- und Entladearbeiten das Rauchen verboten",
+    "simple_explanation": "Während des gesamten Beförderungsvorganges ist in den Fahrzeugen, in ihrer Nähe sowie bei den Be- und Entladearbeiten das Rauchen verboten.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

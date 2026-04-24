@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q022",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Löschmittelmenge muss bei Beförderungseinheiten unterhalb der Kennzeichnungspflicht mit mehr als 7,5 t zulässigem Gesamtgewicht ein Feuerlöscher mindestens enthalten?",
+    "answer_options": [
+      "1kg",
+      "2kg",
+      "4kg",
+      "6kg"
+    ],
+    "correct_answer": "2kg",
+    "simple_explanation": "2kg.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

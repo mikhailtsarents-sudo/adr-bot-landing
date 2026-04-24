@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q030",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welches ist ein korrekter Eintrag im Beförderungspapier nach ADR für Benzin?",
+    "answer_options": [
+      "UN 1203 Benzin 3 II C1E",
+      "UN 1203 Benzin, 3, II, (D/E), umweltgefährdend",
+      "Benzin 3 II A/B",
+      "UN 1203 Benzin 3 III (X/2)"
+    ],
+    "correct_answer": "UN 1203 Benzin, 3, II, (D/E), umweltgefährdend",
+    "simple_explanation": "UN 1203 Benzin, 3, II, (D/E), umweltgefährdend.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

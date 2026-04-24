@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q059",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Stoffe werden der Klasse 5.2 zugeordnet?",
+    "answer_options": [
+      "Organische Peroxide",
+      "Entzündend (oxidierend) wirkende Stoffe",
+      "Giftige Stoffe",
+      "Ansteckungsgefährliche Stoffe"
+    ],
+    "correct_answer": "Organische Peroxide",
+    "simple_explanation": "Organische Peroxide.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

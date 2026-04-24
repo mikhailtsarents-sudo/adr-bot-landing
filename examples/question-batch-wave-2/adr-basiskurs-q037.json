@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q037",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahrgutklasse wird durch diesen Gefahrzettel gekennzeichnet?",
+    "answer_options": [
+      "Klasse 5.1 — Oxidierende Stoffe",
+      "Klasse 5.2 — Organische Peroxide",
+      "Klasse 3 — Entzündbare Flüssigkeiten",
+      "Klasse 4.1 — Entzündbare feste Stoffe"
+    ],
+    "correct_answer": "Klasse 5.1 — Oxidierende Stoffe",
+    "simple_explanation": "Klasse 5.1 — Oxidierende Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

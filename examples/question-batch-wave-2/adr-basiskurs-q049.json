@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q049",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was versteht man unter 'begrenzten Mengen' (LQ) im ADR?",
+    "answer_options": [
+      "Kleine Mengen gefährlicher Güter in Innenverpackungen, die von bestimmten ADR-Vorschriften befreit sind",
+      "Die maximale Menge gefährlicher Güter pro Fahrzeug",
+      "Mengen gefährlicher Güter, die nur mit Sondergenehmigung befördert werden dürfen",
+      "Mengen, die ausschließlich per Luftfracht transportiert werden dürfen"
+    ],
+    "correct_answer": "Kleine Mengen gefährlicher Güter in Innenverpackungen, die von bestimmten ADR-Vorschriften befreit sind",
+    "simple_explanation": "Kleine Mengen gefährlicher Güter in Innenverpackungen, die von bestimmten ADR-Vorschriften befreit sind.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

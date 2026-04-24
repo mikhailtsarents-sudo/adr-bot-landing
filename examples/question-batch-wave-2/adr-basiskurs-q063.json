@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q063",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Aussage zur Abfahrtskontrolle vor einem Gefahrguttransport ist korrekt?",
+    "answer_options": [
+      "Der Fahrzeugführer muss vor Antritt der Fahrt prüfen, ob das Fahrzeug ordnungsgemäß beladen und ausgerüstet ist",
+      "Die Abfahrtskontrolle ist nur bei Tankfahrzeugen erforderlich",
+      "Die Kontrolle kann auch nach der ersten Stunde Fahrt durchgeführt werden",
+      "Die Abfahrtskontrolle ist freiwillig und nicht vorgeschrieben"
+    ],
+    "correct_answer": "Der Fahrzeugführer muss vor Antritt der Fahrt prüfen, ob das Fahrzeug ordnungsgemäß beladen und ausgerüstet ist",
+    "simple_explanation": "Der Fahrzeugführer muss vor Antritt der Fahrt prüfen, ob das Fahrzeug ordnungsgemäß beladen und ausgerüstet ist.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

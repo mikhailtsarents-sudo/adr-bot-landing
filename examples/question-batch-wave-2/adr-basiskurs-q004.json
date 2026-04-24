@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q004",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Behörden müssen evtl. vor Erstellung einer Fahrwegbestimmung beteiligt werden?",
+    "answer_options": [
+      "Bundespolizei",
+      "WSD (Wasser- und Schifffahrtsdirektion) und EBA (Eisenbahnbundesamt)",
+      "Luftfahrtbundesamt",
+      "Ortsamt"
+    ],
+    "correct_answer": "WSD (Wasser- und Schifffahrtsdirektion) und EBA (Eisenbahnbundesamt)",
+    "simple_explanation": "WSD (Wasser- und Schifffahrtsdirektion) und EBA (Eisenbahnbundesamt).",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

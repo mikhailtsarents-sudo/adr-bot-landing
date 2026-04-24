@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q008",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was ist bei der Beförderung von giftigen Stoffen der Klasse 6.1 besonderes zu beachten?",
+    "answer_options": [
+      "Trenngebote gibt es nur zwischen der Klasse 6.1 und der Klasse 6.2",
+      "Es gilt ein generelles Trenngebot mit allen anderen gefährlichen Gütern",
+      "Trenngebote müssen nur in Deutschland beachtet werden",
+      "Trenngebote müssen immer dann beachtet werden, wenn Nahrungs-, Genuss-, Futtermittel mit Gütern der Klasse 6.1 nebeneinander oder übereinander befördert werden sollen"
+    ],
+    "correct_answer": "Trenngebote müssen immer dann beachtet werden, wenn Nahrungs-, Genuss-, Futtermittel mit Gütern der Klasse 6.1 nebeneinander oder übereinander befördert werden sollen",
+    "simple_explanation": "Trenngebote müssen immer dann beachtet werden, wenn Nahrungs-, Genuss-, Futtermittel mit Gütern der Klasse 6.1 nebeneinander oder übereinander befördert werden sollen.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

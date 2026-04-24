@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q004",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was regelt das Sprengstoffrecht?",
+    "answer_options": [
+      "Den Umgang und Verkehr mit Stoffen",
+      "Den Umgang und Verkehr mit explosionsgefährlichen Stoffen",
+      "Den Umgang mit explosionsgefährlichen Stoffen",
+      "Den Verkehr mit explosionsgefährlichen Stoffen"
+    ],
+    "correct_answer": "Den Umgang und Verkehr mit explosionsgefährlichen Stoffen",
+    "simple_explanation": "Den Umgang und Verkehr mit explosionsgefährlichen Stoffen.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

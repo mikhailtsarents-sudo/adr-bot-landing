@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q007",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was bedeutet das nachstehende Zeichen?",
+    "answer_options": [
+      "Regelmäßige Messung der Außentemperatur erforderlich",
+      "Lufttemperatur darf 20° C nicht überschreiten",
+      "Keine besondere Bedeutung",
+      "Kennzeichen für erwärmte Stoffe"
+    ],
+    "correct_answer": "Kennzeichen für erwärmte Stoffe",
+    "simple_explanation": "Kennzeichen für erwärmte Stoffe.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

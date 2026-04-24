@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q005",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "In welchen Fahrzeugarten dürfen Versandstücke der Klasse 1 nicht befördert werden?",
+    "answer_options": [
+      "MEMU",
+      "Gedeckte Fahrzeuge",
+      "Offene Fahrzeuge",
+      "Bedeckte Fahrzeuge"
+    ],
+    "correct_answer": "Offene Fahrzeuge",
+    "simple_explanation": "Offene Fahrzeuge.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

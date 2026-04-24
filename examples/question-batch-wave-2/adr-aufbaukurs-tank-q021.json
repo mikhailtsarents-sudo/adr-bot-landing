@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q021",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Unter welcher Telefonnummer erreichen Sie in Deutschland die Polizei?",
+    "answer_options": [
+      "110",
+      "0190",
+      "11880",
+      "112"
+    ],
+    "correct_answer": "110",
+    "simple_explanation": "110.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

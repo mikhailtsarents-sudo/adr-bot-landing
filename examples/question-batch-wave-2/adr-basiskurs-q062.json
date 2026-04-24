@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q062",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Stoffe gehören zur Klasse 6.2 des ADR?",
+    "answer_options": [
+      "Ansteckungsgefährliche Stoffe",
+      "Giftige Stoffe",
+      "Radioaktive Stoffe",
+      "Ätzende Stoffe"
+    ],
+    "correct_answer": "Ansteckungsgefährliche Stoffe",
+    "simple_explanation": "Ansteckungsgefährliche Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

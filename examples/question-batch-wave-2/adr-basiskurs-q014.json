@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q014",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Worauf hat der Fahrzeugführer bei der Beladung mit Gefahrgut-Versandstücken zu achten?",
+    "answer_options": [
+      "Keine beschädigten oder mit verschiedenen durchgestrichenen Gefahrzetteln versehene Versandstücke verladen",
+      "Gefahrgut zuerst verladen",
+      "Gefahrgut nur von Personen mit einer ADR-Bescheinigung verladen lassen",
+      "Güter nur mit Gabelstapler verladen"
+    ],
+    "correct_answer": "Keine beschädigten oder mit verschiedenen durchgestrichenen Gefahrzetteln versehene Versandstücke verladen",
+    "simple_explanation": "Keine beschädigten oder mit verschiedenen durchgestrichenen Gefahrzetteln versehene Versandstücke verladen.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

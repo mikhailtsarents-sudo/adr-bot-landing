@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q007",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Bedeutung hat die Zahl in der unteren Hälfte der orangefarbenen Tafel?",
+    "answer_options": [
+      "Nummer zu Kennzeichnung der Gefahr",
+      "UN-Nummer",
+      "Nummer des Beförderungspapiers für die Zuordnung im Gefahrfall",
+      "Registriernummer des Beförderungsunternehmens"
+    ],
+    "correct_answer": "UN-Nummer",
+    "simple_explanation": "UN-Nummer.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

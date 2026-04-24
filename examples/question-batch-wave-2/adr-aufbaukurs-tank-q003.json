@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q003",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Ab welchem Fassungsraum eines Aufsetztanks muss der Fahrzeugführer eine Bescheinigung über die Prüfung des Aufsetztanks mitführen?",
+    "answer_options": [
+      "mehr als 1.000 l",
+      "mehr als 450 l",
+      "immer",
+      "mehr als 3.000l"
+    ],
+    "correct_answer": "mehr als 450 l",
+    "simple_explanation": "mehr als 450 l.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

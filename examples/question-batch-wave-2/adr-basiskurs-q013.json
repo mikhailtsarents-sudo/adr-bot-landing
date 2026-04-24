@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q013",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Die Angaben zur Klassifizierung des Gefahrgutes sind im Beförderungspapier vorgeschrieben?",
+    "answer_options": [
+      "Nein",
+      "Das steht in den schriftlichen Weisungen",
+      "Egal, Hauptsache die UN Nr. ist vorhanden",
+      "Ja, in vorgeschriebener Reihenfolge"
+    ],
+    "correct_answer": "Ja, in vorgeschriebener Reihenfolge",
+    "simple_explanation": "Ja, in vorgeschriebener Reihenfolge.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

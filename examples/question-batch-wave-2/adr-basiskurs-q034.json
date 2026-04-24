@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q034",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Gefahrgutklasse wird durch diesen Gefahrzettel gekennzeichnet?",
+    "answer_options": [
+      "Klasse 2.2 — Nicht entzündbare, nicht giftige Gase",
+      "Klasse 2.1 — Entzündbare Gase",
+      "Klasse 2.3 — Giftige Gase",
+      "Klasse 3 — Entzündbare Flüssigkeiten"
+    ],
+    "correct_answer": "Klasse 2.2 — Nicht entzündbare, nicht giftige Gase",
+    "simple_explanation": "Klasse 2.2 — Nicht entzündbare, nicht giftige Gase.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

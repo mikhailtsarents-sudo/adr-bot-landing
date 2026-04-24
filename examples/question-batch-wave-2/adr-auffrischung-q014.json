@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q014",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was ist eine Beförderung in loser Schüttung und wie dürfen diese Gefahrgüter befördert werden?",
+    "answer_options": [
+      "Beförderung eines gasförmigen Stoffes in Flaschen ohne Ladungssicherung",
+      "Beförderung von flüssigen Stoffen ohne Verpackung in einem gedeckten oder bedeckten Fahrzeug",
+      "Alle Beförderungen von Gefahrgütern in Wechselbrücken",
+      "Beförderung von unverpackten festen Stoffen und Gegenständen in Fahrzeugen oder Containern, für die im ADR ein entsprechender VV-Code ausgewiesen ist"
+    ],
+    "correct_answer": "Beförderung von unverpackten festen Stoffen und Gegenständen in Fahrzeugen oder Containern, für die im ADR ein entsprechender VV-Code ausgewiesen ist",
+    "simple_explanation": "Beförderung von unverpackten festen Stoffen und Gegenständen in Fahrzeugen oder Containern, für die im ADR ein entsprechender VV-Code ausgewiesen ist.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

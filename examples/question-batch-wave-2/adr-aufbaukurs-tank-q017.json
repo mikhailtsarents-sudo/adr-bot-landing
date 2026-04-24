@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q017",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Sie wollen einen 5000l Tank mit Heizöl befüllen. Der Tank ist nicht ganz leer und hat keinen Peilstab/Anschluß Grenzwertgeber. Was machen Sie?",
+    "answer_options": [
+      "Nur zu Hälfte befüllen",
+      "Wie jeden Tank befüllen",
+      "Den Tank nicht befüllen",
+      "Vorsicht den Tank befüllen"
+    ],
+    "correct_answer": "Den Tank nicht befüllen",
+    "simple_explanation": "Den Tank nicht befüllen.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

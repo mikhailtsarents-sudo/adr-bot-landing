@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q005",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "B1000C ist ein TBC.Was bedeutet beim TBC(Tunnelbeschränkungscode) die Zahl 1000?",
+    "answer_options": [
+      "1.000 zGm des Fahrzeugs",
+      "1.000 Punkte darf die Ladung haben",
+      "1.000 Versandstücke",
+      "1.000 kg Nettoexplosivmasse"
+    ],
+    "correct_answer": "1.000 kg Nettoexplosivmasse",
+    "simple_explanation": "1.000 kg Nettoexplosivmasse.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

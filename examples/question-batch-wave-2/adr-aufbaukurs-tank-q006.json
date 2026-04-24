@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q006",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Anforderung wird an eine Handlampe gestellt, um Sie im Amaturenschrank zu benutzen?",
+    "answer_options": [
+      "Lampe Zulassung IP54",
+      "Lampe wiederaufladbar",
+      "Lampe mit Gehäuse nicht funkenschlagend",
+      "Lampe gewöhnlich"
+    ],
+    "correct_answer": "Lampe mit Gehäuse nicht funkenschlagend",
+    "simple_explanation": "Lampe mit Gehäuse nicht funkenschlagend.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

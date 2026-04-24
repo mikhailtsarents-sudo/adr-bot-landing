@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q007",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Muss eine Beförderungseinheit, auf der sich nur Versandstücke in „freigestellten Mengen“ befinden mit orangefarbenen Tafeln gekennzeichnet sein?",
+    "answer_options": [
+      "Nein",
+      "Das richtet sich nach der Menge der radioaktiven Stoffe",
+      "Immer",
+      "Ab 10 Versandstücken"
+    ],
+    "correct_answer": "Nein",
+    "simple_explanation": "Nein.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q003",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Ab welcher Transportkennzahl auf einem Versandstück ist die Beförderung „unter ausschließlicher Verwendung“ Pflicht?",
+    "answer_options": [
+      "> 10",
+      "> 20",
+      "> 50",
+      "> 100"
+    ],
+    "correct_answer": "> 10",
+    "simple_explanation": "> 10.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse1-q007",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Das Waffengesetz regelt unter anderem Vorkehrungen gegen ein Abhandenkommen von Munition. Was noch?",
+    "answer_options": [
+      "Die Ballistik",
+      "Güteklasse der Treibladung",
+      "Kontrolle von Kriegswaffen",
+      "Abgabe von Munition nur in verschlossenen Packungen"
+    ],
+    "correct_answer": "Abgabe von Munition nur in verschlossenen Packungen",
+    "simple_explanation": "Abgabe von Munition nur in verschlossenen Packungen.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

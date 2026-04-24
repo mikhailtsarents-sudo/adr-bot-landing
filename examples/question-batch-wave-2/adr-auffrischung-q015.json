@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-auffrischung-q015",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "auffrischung",
+    "wiederholung"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wo gilt das ADR?",
+    "answer_options": [
+      "Nur in Deutschland",
+      "Nur in den Mitgliedstaaten der Europäischen Union",
+      "Weltweit",
+      "In allen ADR-Vertragsstaaten"
+    ],
+    "correct_answer": "In allen ADR-Vertragsstaaten",
+    "simple_explanation": "In allen ADR-Vertragsstaaten.",
+    "category": "auffrischung",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

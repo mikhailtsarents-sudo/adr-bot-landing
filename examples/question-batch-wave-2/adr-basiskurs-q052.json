@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q052",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was bedeutet die Abkürzung 'GGVSEB'?",
+    "answer_options": [
+      "Gefahrgutverordnung Straße, Eisenbahn und Binnenschifffahrt",
+      "Gefahrgutverbote für Straßen und Eisenbahn in Bayern",
+      "Gesetz zur Gefahrgutvorschrift für Sonderfahrzeuge und Eisenbahn",
+      "Gefahrengutsverordnung für Straßen, Expressrouten und Bundesbahnen"
+    ],
+    "correct_answer": "Gefahrgutverordnung Straße, Eisenbahn und Binnenschifffahrt",
+    "simple_explanation": "Gefahrgutverordnung Straße, Eisenbahn und Binnenschifffahrt.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q025",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Was ist auf diesem Fahrzeug zu sehen und was bedeutet es für den Aufbaukurs Tank?",
+    "answer_options": [
+      "Tankfahrzeug mit orangefarbener Gefahrentafel — kennzeichnungspflichtig nach ADR",
+      "Normales Fahrzeug ohne besondere Anforderungen",
+      "Fahrzeug nur für Schüttgut geeignet",
+      "Fahrzeug benötigt keine ADR-Kennzeichnung"
+    ],
+    "correct_answer": "Tankfahrzeug mit orangefarbener Gefahrentafel — kennzeichnungspflichtig nach ADR",
+    "simple_explanation": "Tankfahrzeug mit orangefarbener Gefahrentafel — kennzeichnungspflichtig nach ADR.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

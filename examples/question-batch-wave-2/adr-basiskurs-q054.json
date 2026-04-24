@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q054",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Aussage zur Tunnelkategorie B ist korrekt?",
+    "answer_options": [
+      "Verboten sind Transporte, die eine sehr große Explosion verursachen könnten",
+      "Alle Gefahrguttransporte sind verboten",
+      "Nur Transporte mit Kraftstoffen sind verboten",
+      "Keine Beschränkungen für Gefahrguttransporte"
+    ],
+    "correct_answer": "Verboten sind Transporte, die eine sehr große Explosion verursachen könnten",
+    "simple_explanation": "Verboten sind Transporte, die eine sehr große Explosion verursachen könnten.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

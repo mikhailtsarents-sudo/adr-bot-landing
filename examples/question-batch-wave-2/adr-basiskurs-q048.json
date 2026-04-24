@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q048",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welche Stoffe gehören zur Klasse 8 des ADR?",
+    "answer_options": [
+      "Ätzende Stoffe",
+      "Explosive Stoffe",
+      "Giftige Stoffe",
+      "Entzündbare feste Stoffe"
+    ],
+    "correct_answer": "Ätzende Stoffe",
+    "simple_explanation": "Ätzende Stoffe.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q006",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wann ist es zulässig, Äpfel zeitgleich mit Gefahrgut zu befördern, das mit einem weißen Gefahrzettel mit Totenkopf versehen ist?",
+    "answer_options": [
+      "Wenn eine komplette Vollwand Äpfel und Gefahrgut trennt.",
+      "Wenn die Äpfel verpackt sind.",
+      "Wenn der Zwischenraum zwischen Äpfeln und Gefahrgut mehr als 60cm beträgt.",
+      "Ein solcher Transport ist in keinem Fall zulässig."
+    ],
+    "correct_answer": "Wenn eine komplette Vollwand Äpfel und Gefahrgut trennt.",
+    "simple_explanation": "Wenn eine komplette Vollwand Äpfel und Gefahrgut trennt.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

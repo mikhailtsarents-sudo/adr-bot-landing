@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q018",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Dürfen feste Stoffe(Solid) grundsätzlich in einem Tank für flüssige Stoffe(Liquid) mit der Codierung LGBF gefahren werden?",
+    "answer_options": [
+      "Ja",
+      "Nein",
+      "Nur bestimmte feste Stoffe",
+      "Nur UN-Nr.1361 Kohlenstaub"
+    ],
+    "correct_answer": "Ja",
+    "simple_explanation": "Ja.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

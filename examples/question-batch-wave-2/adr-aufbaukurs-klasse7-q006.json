@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-klasse7-q006",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welches Papier kann Angaben über zusätzliche Pflichten des Fahrzeugführers enthalten?",
+    "answer_options": [
+      "Schriftliche Weisungen",
+      "Auf dem Versandstück selbst enthaltene Aufkleber",
+      "Beförderungsgenehmigung nach AtG / StrSchV",
+      "Pflichtenheft vom Hersteller der Ware"
+    ],
+    "correct_answer": "Beförderungsgenehmigung nach AtG / StrSchV",
+    "simple_explanation": "Beförderungsgenehmigung nach AtG / StrSchV.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

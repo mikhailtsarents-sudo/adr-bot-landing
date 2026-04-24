@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q016",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Welches der nachfolgenden Fahrzeuge ist kein AT Fahrzeug?",
+    "answer_options": [
+      "Trägerfahrzeug mit Tankcontainer Fassungsvermögen von 1500l",
+      "Trägerfahrzeug mit Aufsetztank Fassungsvermögen von 1500l",
+      "Tankanhänger Fassungsvermögen von 1500l",
+      "Trägerfahrzeug mit ortsbeweglichem Tank Fassungsvermögen von 4500l"
+    ],
+    "correct_answer": "Trägerfahrzeug mit Tankcontainer Fassungsvermögen von 1500l",
+    "simple_explanation": "Trägerfahrzeug mit Tankcontainer Fassungsvermögen von 1500l.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q004",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Ein Tankfahrzeug hat fünf Kammern. Wieviele orangenfarbene Tafeln müssen bei 4 vollen Kammern, am Fahrzeug angebracht sein?",
+    "answer_options": [
+      "2",
+      "4",
+      "8",
+      "10"
+    ],
+    "correct_answer": "10",
+    "simple_explanation": "10.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

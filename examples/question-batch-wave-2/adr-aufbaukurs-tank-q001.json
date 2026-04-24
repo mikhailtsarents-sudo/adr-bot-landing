@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q001",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Beim Entladen von Kohlestaub ist ein Schlauch am Silofahrzeug geplatzt. Was ist zu tun?",
+    "answer_options": [
+      "Warten bis sich der Kohlestaub verzogen hat",
+      "Den Kohlestaub zusammenfegen",
+      "Maßnahmen gemäß den Schriftlichen Weisungen ergreifen",
+      "Zuerst den Kohlestaub mit Druckluft wegblasen"
+    ],
+    "correct_answer": "Maßnahmen gemäß den Schriftlichen Weisungen ergreifen",
+    "simple_explanation": "Maßnahmen gemäß den Schriftlichen Weisungen ergreifen.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

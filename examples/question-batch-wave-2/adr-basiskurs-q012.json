@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q012",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wer muss das Fahrpersonal im richtigen Umgang mit der persönlichen Schutzausrüstung einweisen?",
+    "answer_options": [
+      "Der Hersteller der Schutzausrüstung weist das Fahrpersonal schriftlich mittels der Kurzanleitung \"Ordnungsgemäßer Umgang mit der Schutzausrüstung\" ein",
+      "Damit der Schutzzweck erreicht wird, muss der Beförderer das Fahrpersonal in die Handhabung der Schutzausrüstung einweisen",
+      "Der Fahrzeugführer muss sich selbst kundig machen und das übrige Fahrpersonal ordnungsgemäß einweisen",
+      "Bei der nächsten Kontrolle wird mir das durch meinen Freund und Helfer beigebracht"
+    ],
+    "correct_answer": "Damit der Schutzzweck erreicht wird, muss der Beförderer das Fahrpersonal in die Handhabung der Schutzausrüstung einweisen",
+    "simple_explanation": "Damit der Schutzzweck erreicht wird, muss der Beförderer das Fahrpersonal in die Handhabung der Schutzausrüstung einweisen.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

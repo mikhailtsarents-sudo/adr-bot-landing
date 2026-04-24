@@ -1,0 +1,26 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-aufbaukurs-tank-q014",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "adr"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Wie kann man die Funktion des „Grenzwertgeber-Abfüllsicherung-Systems“ prüfen?",
+    "answer_options": [
+      "Durch Herausziehen des Befüllschlauches aus dem Empfängertank",
+      "Durch Trennen der Steckverbindung am Grenzwertgeber",
+      "Durch Ein- und Ausschalten der Zündung",
+      "Diese Funktion ist nicht überprüfbar"
+    ],
+    "correct_answer": "Durch Trennen der Steckverbindung am Grenzwertgeber",
+    "simple_explanation": "Durch Trennen der Steckverbindung am Grenzwertgeber.",
+    "category": "adr",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}

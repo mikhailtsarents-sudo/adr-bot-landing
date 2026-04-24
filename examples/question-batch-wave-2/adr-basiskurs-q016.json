@@ -1,0 +1,27 @@
+{
+  "source_type": "QUESTION",
+  "source_id": "adr-basiskurs-q016",
+  "source_version": "question-wave-2",
+  "base_lang": "de",
+  "target_lang": "ru",
+  "audience": "ADR",
+  "topic_tags": [
+    "basiskurs",
+    "allgemein"
+  ],
+  "difficulty": "medium",
+  "payload": {
+    "question_text": "Unter welchen Bedingungen darf ein Eisenbahnfrachtbrief beim Gefahrguttransport vom Empfängerbahnhof zum Empfänger mitgeführt werden?",
+    "answer_options": [
+      "Nie, denn dieses ist nicht möglich",
+      "Wenn eine Genehmigung der Wasser- und Schifffahrtsdirektion vorliegt",
+      "Wenn er die erforderlichen Angaben des ADR enthält",
+      "Wenn der Gefahrgutbeauftragte zugestimmt hat"
+    ],
+    "correct_answer": "Wenn er die erforderlichen Angaben des ADR enthält",
+    "simple_explanation": "Wenn er die erforderlichen Angaben des ADR enthält.",
+    "category": "basiskurs",
+    "keywords": [],
+    "trap_level": "medium"
+  }
+}
