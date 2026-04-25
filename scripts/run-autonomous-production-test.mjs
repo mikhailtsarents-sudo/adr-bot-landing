@@ -9,6 +9,11 @@ import { listValidProductionSourceItems, selectAutomaticSourceItem } from "./run
 import { postStorageRowWithDiagnostics } from "./runtime/storage-row-contract.mjs";
 import { bootstrapPhotorealRuntimeEnv } from "./runtime/photoreal-runtime-env.mjs";
 import { resolveTemporaryUploadProviders } from "./runtime/temporary-upload.mjs";
+import {
+  resolveDraftStorageApiUrl,
+  resolveN8nApiKey,
+  resolveYoutubeBridgeWebhookUrl,
+} from "./runtime/selfhost-n8n-defaults.mjs";
 
 enableStrictNonInteractiveMode("run-autonomous-production-test");
 
@@ -17,12 +22,10 @@ const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 const outputRoot = path.join(repoRoot, "autonomous-production-test-runs", `run-${Date.now()}`);
 const shotstackApiBase = "https://api.shotstack.io/edit/v1";
-const tableUrl = "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows";
-const webhookUrl = "https://tsarents.app.n8n.cloud/webhook/adr-youtube-execution-bridge-run";
 const visibility = "unlisted";
 const fixedScenario = "";
-const LEGACY_SHOTSTACK_API_KEY = "c32NRtq3aKDXSJvWIOpzQfH4T2DHxFjjeZWoTB3n";
-const LEGACY_N8N_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZTkxZTExOC02NWIyLTRmMWYtYTA0Yy1kM2JhMmVjOGU1NWQiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiNWY1MjkwMTAtYTgxNC00NDJlLThiN2QtNDIzOTNiMzljYTQ3IiwiaWF0IjoxNzc1NTc0NDc2LCJleHAiOjE3NzgxMDQ4MDB9.c8WoeJjpCDuqNpgvllyrgDAqh4P1Na_GKHZfh6EY-V4";
+let tableUrl = "";
+let webhookUrl = "";
 
 function text(value) { return value == null ? "" : String(value).trim(); }
 
@@ -418,13 +421,19 @@ const env = {
     || dotenv.SHOTSTACK_API_KEY
     || process.env.SHOTSTACK_API_TOKEN
     || dotenv.SHOTSTACK_API_TOKEN
-    || LEGACY_SHOTSTACK_API_KEY,
-  N8N_API_KEY:
-    process.env.N8N_API_KEY
-    || dotenv.N8N_API_KEY
-    || LEGACY_N8N_API_KEY,
+    || "",
+  N8N_API_KEY: resolveN8nApiKey({ ...dotenv, ...process.env }),
   ADR_STRICT_NON_INTERACTIVE: "true",
 };
+tableUrl = resolveDraftStorageApiUrl(env);
+webhookUrl = resolveYoutubeBridgeWebhookUrl(env);
+
+if (!text(env.SHOTSTACK_API_KEY)) {
+  throw new Error("Missing Shotstack API key. Set SHOTSTACK_API_KEY or SHOTSTACK_API_TOKEN in env.");
+}
+if (!text(env.N8N_API_KEY)) {
+  throw new Error("Missing storage API key. Set INTERNAL_N8N_API_KEY, ADR_INGEST_API_KEY, or N8N_API_KEY in env.");
+}
 
 await mkdir(outputRoot, { recursive: true });
 const resultPath = path.join(outputRoot, "autonomous-production-test-result.json");

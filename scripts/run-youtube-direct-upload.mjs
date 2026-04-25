@@ -15,6 +15,10 @@ import {
   writeJson,
 } from "./runtime/youtube-direct-client.mjs";
 import { postStorageRowWithDiagnostics } from "./runtime/storage-row-contract.mjs";
+import {
+  resolveDraftStorageApiUrl,
+  resolveN8nApiKey,
+} from "./runtime/selfhost-n8n-defaults.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,8 +34,8 @@ Options:
   --privacy-status <v>     YouTube privacy status (default: unlisted)
   --video-file <file>      Optional local MP4 override
   --video-url <url>        Optional remote MP4 override
-  --table-url <url>        Optional n8n data table URL for writeback
-  --n8n-api-key <key>      Optional n8n API key for writeback
+  --table-url <url>        Optional draft storage API URL for writeback
+  --n8n-api-key <key>      Optional storage API key for writeback
   --help                   Show this help
 `);
 }
@@ -44,8 +48,8 @@ function parseArgs(argv) {
     privacyStatus: "unlisted",
     videoFilePath: "",
     videoUrl: "",
-    tableUrl: "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows",
-    n8nApiKey: process.env.N8N_API_KEY || "",
+    tableUrl: resolveDraftStorageApiUrl(process.env),
+    n8nApiKey: resolveN8nApiKey(process.env),
   };
 
   for (let i = 0; i < argv.length; i += 1) {

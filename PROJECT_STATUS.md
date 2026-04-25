@@ -334,7 +334,7 @@ The missing automation link has been implemented:
 
 - **`scripts/run-post-render-pipeline.mjs`** — standalone wrapper that chains Shotstack → finalize → YouTube publish.
   - Takes `--packages-root <dir>` (same as dispatch's `output_dir`)
-  - Reads env vars `SHOTSTACK_API_KEY` and `N8N_API_KEY` automatically
+  - Reads `SHOTSTACK_API_KEY` and the self-host storage / bridge env vars automatically
   - Use `--skip-youtube` to stop after finalize (useful for testing renders)
 
 - **`run-daily-content-dispatch.mjs`** — now accepts `--full-pipeline` flag.

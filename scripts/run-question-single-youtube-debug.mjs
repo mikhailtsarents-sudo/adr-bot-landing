@@ -6,6 +6,11 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { postStorageRowWithDiagnostics } from "./runtime/storage-row-contract.mjs";
 import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
+import {
+  resolveDraftStorageApiUrl,
+  resolveN8nApiKey,
+  resolveYoutubeBridgeWebhookUrl,
+} from "./runtime/selfhost-n8n-defaults.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,8 +25,8 @@ const DEFAULT_INPUT_PATH = path.join(
 const DEFAULT_OUTPUT_ROOT = "/tmp/question-single-youtube-debug";
 const DEFAULT_FIXED_SCENARIO = "scenario_license";
 const DEFAULT_SHOTSTACK_API_BASE = "https://api.shotstack.io/edit/v1";
-const DEFAULT_TABLE_URL = "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows";
-const DEFAULT_WEBHOOK_URL = "https://tsarents.app.n8n.cloud/webhook/adr-youtube-execution-bridge-run";
+const DEFAULT_TABLE_URL = resolveDraftStorageApiUrl(process.env);
+const DEFAULT_WEBHOOK_URL = resolveYoutubeBridgeWebhookUrl(process.env);
 const DEFAULT_VISIBILITY = "unlisted";
 
 enableStrictNonInteractiveMode("run-question-single-youtube-debug");
@@ -35,8 +40,8 @@ Options:
   --fixed-scenario <id>       Fixed scenario id (default: ${DEFAULT_FIXED_SCENARIO})
   --shotstack-api-key <key>   Shotstack API key (or SHOTSTACK_API_KEY)
   --shotstack-api-base <url>  Shotstack API base (default: ${DEFAULT_SHOTSTACK_API_BASE})
-  --n8n-api-key <key>         N8N API key (or N8N_API_KEY)
-  --table-url <url>           N8N table URL (default: ${DEFAULT_TABLE_URL})
+  --n8n-api-key <key>         Storage API key (INTERNAL_N8N_API_KEY / ADR_INGEST_API_KEY / N8N_API_KEY)
+  --table-url <url>           Draft storage API URL (default: ${DEFAULT_TABLE_URL})
   --webhook-url <url>         YouTube bridge webhook (default: ${DEFAULT_WEBHOOK_URL})
   --use-approved-preview-bundle  Reuse an already approved preview bundle instead of regenerating visuals
   --approved-preview-bundle <f>  Path to approved public_preview_result.json
@@ -59,7 +64,7 @@ function parseArgs(argv) {
     fixedScenario: DEFAULT_FIXED_SCENARIO,
     shotstackApiKey: process.env.SHOTSTACK_API_KEY || "",
     shotstackApiBase: DEFAULT_SHOTSTACK_API_BASE,
-    n8nApiKey: process.env.N8N_API_KEY || "",
+    n8nApiKey: resolveN8nApiKey(process.env),
     tableUrl: DEFAULT_TABLE_URL,
     webhookUrl: DEFAULT_WEBHOOK_URL,
     useApprovedPreviewBundle: false,
@@ -106,7 +111,7 @@ function parseArgs(argv) {
     throw new Error("Missing Shotstack API key. Pass --shotstack-api-key or set SHOTSTACK_API_KEY.");
   }
   if (!args.n8nApiKey) {
-    throw new Error("Missing N8N API key. Pass --n8n-api-key or set N8N_API_KEY.");
+    throw new Error("Missing storage API key. Pass --n8n-api-key or set INTERNAL_N8N_API_KEY / ADR_INGEST_API_KEY / N8N_API_KEY.");
   }
 
   return args;

@@ -6,6 +6,11 @@ import { fileURLToPath } from "node:url";
 import { postStorageRowWithDiagnostics } from "./runtime/storage-row-contract.mjs";
 import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
 import { bootstrapLocalRuntimeEnv } from "./runtime/local-runtime-env.mjs";
+import {
+  resolveDraftStorageApiUrl,
+  resolveN8nApiKey,
+  resolveYoutubeBridgeWebhookUrl,
+} from "./runtime/selfhost-n8n-defaults.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,11 +21,9 @@ function text(value) {
 }
 
 const DEFAULT_DRAFT_STORAGE_URL =
-  text(process.env.DRAFT_STORAGE_API_URL)
-  || "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows";
+  resolveDraftStorageApiUrl(process.env);
 const DEFAULT_YOUTUBE_BRIDGE_WEBHOOK_URL =
-  text(process.env.YOUTUBE_BRIDGE_WEBHOOK_URL)
-  || "http://46.225.170.55:5678/webhook/adr-youtube-execution-bridge-run";
+  resolveYoutubeBridgeWebhookUrl(process.env);
 
 const DEFAULT_PACKAGE_DIR = path.join(
   repoRoot,
@@ -40,8 +43,8 @@ Options:
   --package-dir <dir>      Render package directory with g3_bridge_row.json
                            (default: ${DEFAULT_PACKAGE_DIR})
   --draft-id-suffix <txt>  Append a unique suffix to draft/package ids before publish
-  --n8n-api-key <key>      N8N API key (or N8N_API_KEY)
-  --table-url <url>        N8N table URL (default: ${DEFAULT_TABLE_URL})
+  --n8n-api-key <key>      Storage API key (INTERNAL_N8N_API_KEY / ADR_INGEST_API_KEY / N8N_API_KEY)
+  --table-url <url>        Draft storage API URL (default: ${DEFAULT_TABLE_URL})
   --webhook-url <url>      YouTube bridge webhook (default: ${DEFAULT_WEBHOOK_URL})
   --poll-ms <ms>           Poll interval for publish result (default: 8000)
   --timeout-ms <ms>        Publish timeout (default: 480000)
@@ -53,7 +56,7 @@ function parseArgs(argv) {
   const args = {
     packageDir: DEFAULT_PACKAGE_DIR,
     draftIdSuffix: "",
-    n8nApiKey: process.env.ADR_INGEST_API_KEY || process.env.N8N_API_KEY || "",
+    n8nApiKey: resolveN8nApiKey(process.env),
     tableUrl: DEFAULT_TABLE_URL,
     webhookUrl: DEFAULT_WEBHOOK_URL,
     pollMs: 8000,
@@ -78,7 +81,7 @@ function parseArgs(argv) {
   }
 
   if (!args.n8nApiKey) {
-    throw new Error("Missing N8N API key. Pass --n8n-api-key or set N8N_API_KEY.");
+    throw new Error("Missing storage API key. Pass --n8n-api-key or set INTERNAL_N8N_API_KEY / ADR_INGEST_API_KEY / N8N_API_KEY.");
   }
 
   return args;

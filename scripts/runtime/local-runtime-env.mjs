@@ -56,7 +56,10 @@ export async function bootstrapLocalRuntimeEnv(repoRoot, options = {}) {
 
   return {
     loaded_from: loadedFrom,
-    n8n_configured: Boolean(text(process.env.N8N_BASE_URL) && text(process.env.N8N_API_KEY) && text(process.env.N8N_ANALYTICS_TABLE_ID)),
+    n8n_configured: Boolean(
+      (text(process.env.SELF_HOST_N8N_BASE_URL) || text(process.env.ACTIVE_N8N_BASE_URL) || text(process.env.N8N_BASE_URL) || text(process.env.DRAFT_STORAGE_API_URL)) &&
+      (text(process.env.INTERNAL_N8N_API_KEY) || text(process.env.ADR_INGEST_API_KEY) || text(process.env.N8N_API_KEY)),
+    ),
     gsc_configured: Boolean(
       (text(process.env.GSC_ACCESS_TOKEN) || text(process.env.GSC_SERVICE_ACCOUNT_KEY_PATH)) &&
         text(process.env.GSC_SITE_URL),

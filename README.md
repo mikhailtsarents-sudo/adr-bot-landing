@@ -166,7 +166,7 @@ node scripts/run-daily-content-dispatch.mjs \
 | 4 | `run-daily-content-dispatch.mjs` | Routes by type → calls render-package script |
 | 5 | `run-question-batch-shotstack.mjs` | Sends render payload to Shotstack, polls until MP4 is ready |
 | 6 | `finalize-render-package.mjs` | Writes `final_mp4_url` into the package JSON |
-| 7 | `run-package-youtube-publish.mjs` | Posts to n8n, triggers YouTube upload, polls for result |
+| 7 | `run-package-youtube-publish.mjs` | Posts to self-host bridge/storage, triggers YouTube upload, polls for result |
 
 Steps 5–7 are chained automatically by `run-post-render-pipeline.mjs`. The `--full-pipeline` flag on dispatch calls it automatically after step 4.
 
@@ -183,8 +183,12 @@ Use `--skip-youtube` to stop after finalize — useful when testing Shotstack re
 
 ```text
 SHOTSTACK_API_KEY=...     # Shotstack render API key
-N8N_API_KEY=...           # n8n API key (cloud or VPS)
-N8N_BASE_URL=...          # n8n instance base URL
+INTERNAL_N8N_API_KEY=...  # preferred self-host n8n storage key
+ADR_INGEST_API_KEY=...    # acceptable fallback where the same key is accepted
+N8N_API_KEY=...           # legacy compatibility fallback only
+DRAFT_STORAGE_API_URL=... # preferred draft storage API URL
+YOUTUBE_BRIDGE_WEBHOOK_URL=... # preferred self-host bridge webhook
+SELF_HOST_N8N_BASE_URL=...     # optional base URL if explicit endpoints are not set
 ```
 
 ### Image generation (Flux AI)
@@ -219,7 +223,13 @@ Provider priority is controlled by `QUESTION_PHOTOREAL_PROVIDER_PRIORITY` (comma
 
 ### n8n infrastructure
 
-YouTube upload is handled by the **"ADR YouTube Execution Bridge"** n8n workflow. It is deployed on the self-hosted VPS instance (`46.225.170.55`) and authorized with the `mikhail.tsarents@gmail.com` Google account.
+YouTube upload is handled by the **"ADR YouTube Execution Bridge"** workflow on the self-hosted VPS instance (`46.225.170.55`).
+
+Active runtime rule:
+
+- live scripts now prefer explicit self-host endpoint env vars over generic `N8N_BASE_URL`;
+- stale `n8n.cloud` values are intentionally ignored by default resolution;
+- if you want zero ambiguity, set `DRAFT_STORAGE_API_URL` and `YOUTUBE_BRIDGE_WEBHOOK_URL`.
 
 Access the VPS n8n instance via SSH tunnel:
 

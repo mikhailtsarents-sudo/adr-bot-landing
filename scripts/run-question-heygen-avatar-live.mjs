@@ -8,13 +8,18 @@ import {
   buildQuestionVariantAttempts,
   getQuestionTemplateProfile,
 } from "./render/question-quality.mjs";
+import {
+  resolveDraftStorageApiUrl,
+  resolveN8nApiKey,
+  resolveYoutubeBridgeWebhookUrl,
+} from "./runtime/selfhost-n8n-defaults.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 
-const DEFAULT_TABLE_URL = "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows";
-const DEFAULT_WEBHOOK_URL = "https://tsarents.app.n8n.cloud/webhook/adr-youtube-execution-bridge-run";
+const DEFAULT_TABLE_URL = resolveDraftStorageApiUrl(process.env);
+const DEFAULT_WEBHOOK_URL = resolveYoutubeBridgeWebhookUrl(process.env);
 
 function parseArgs(argv) {
   const args = {
@@ -26,7 +31,7 @@ function parseArgs(argv) {
     renderTaskId: "",
     publishReadyId: "",
     requestedBy: "codex_question_heygen_avatar_live",
-    n8nApiKey: process.env.N8N_API_KEY || "",
+    n8nApiKey: resolveN8nApiKey(process.env),
     shotstackApiKey: process.env.SHOTSTACK_API_KEY || "",
     tableUrl: DEFAULT_TABLE_URL,
     webhookUrl: DEFAULT_WEBHOOK_URL,
