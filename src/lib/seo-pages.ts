@@ -1193,7 +1193,7 @@ export const adrFragenAufDeutsch: SeoPageConfig = {
   slug: "adr-fragen-auf-deutsch",
   path: "/adr-fragen-auf-deutsch",
   pageTitle: "ADR Fragen auf Deutsch",
-  metaTitle: "ADR Fragen auf Deutsch | Fragen verstehen und ueben",
+  metaTitle: "ADR Fragen auf Deutsch | Formulierungen verstehen und ueben",
   metaDescription:
     "Uebungsnahe ADR Fragen auf Deutsch mit kurzem Sample, typischen Formulierungen und klarem Weiterweg in den Telegram-Bot.",
   heroKicker: SEO_PAGE_KICKER,
@@ -1276,7 +1276,7 @@ export const adrFragenAufDeutsch: SeoPageConfig = {
   keywords: [
     "ADR Fragen auf Deutsch",
     "ADR Fragen Deutsch",
-    "ADR Fragebogen Deutsch",
+    "ADR Formulierungen Deutsch",
     "ADR Fragen lernen",
   ],
 };
@@ -1858,23 +1858,23 @@ export const adrFragebogenDeutsch: SeoPageConfig = {
   slug: "adr-fragebogen-deutsch",
   path: "/adr-fragebogen-deutsch",
   pageTitle: "ADR Fragebogen Deutsch",
-  metaTitle: "ADR Fragebogen Deutsch | Fragen verstehen und ueben | ADR Bot",
+  metaTitle: "ADR Fragebogen Deutsch | Pruefungsnahe Uebungsboegen | ADR Bot",
   metaDescription:
-    "ADR Fragebogen auf Deutsch mit kurzen Beispielfragen, typischem Pruefungsdeutsch und klarem Weiterweg in den Telegram-Bot.",
+    "ADR Fragebogen auf Deutsch mit pruefungsnahen Beispielfragen, Uebungsbogen-Charakter und klarem Weiterweg in den Telegram-Bot.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Fragebogen Deutsch",
   heroLead:
-    "Wenn du nach einem ADR Fragebogen auf Deutsch suchst, hilft dir diese Vorschau beim Verstehen von Ton, Sprache und typischen Fragestellungen.",
+    "Wenn du nach einem ADR Fragebogen auf Deutsch suchst, zeigt dir diese Vorschau eher den Charakter eines Uebungsbogens mit kurzen Frage-Serien statt nur einzelne Formulierungen.",
   heroSupport:
     "Die Seite bleibt absichtlich kompakt und fuehrt danach in den Bot mit mehr Fragen und mehr Wiederholung.",
   intentTitle: "Warum diese Seite existiert",
   intentParagraphs: [
-    "Viele Lernende suchen nach Fragebogen, weil sie konkrete Fragen sehen wollen statt allgemeiner Erklaerungen. Diese Seite beantwortet genau diesen Einstieg.",
-    "Sie zeigt, wie deutsches Pruefungsdeutsch im ADR-Kontext klingt, ohne den eigentlichen Trainingskern komplett oeffentlich zu machen.",
+    "Viele Lernende suchen gezielt nach einem Fragebogen oder Uebungsbogen, weil sie nicht nur einzelne Fragen, sondern ein pruefungsnahes Format sehen wollen. Genau dafuer ist diese Seite gedacht.",
+    "Sie zeigt den Stil eines kleinen ADR-Uebungsbogens, ohne den eigentlichen Trainingskern komplett oeffentlich zu machen.",
   ],
   sampleTitle: "Ausschnitt aus einem Fragebogenstil",
   sampleLead:
-    "Einige typische Formulierungen reichen oft schon, um den Schwierigkeitsgrad besser zu verstehen.",
+    "Ein paar kurze Frage-Serien reichen oft schon, um Aufbau und Schwierigkeitsgrad eines ADR-Uebungsbogens besser zu verstehen.",
   sampleQuestions: [
     {
       question: "Welche Information muss eindeutig zugeordnet werden koennen?",
@@ -1884,7 +1884,7 @@ export const adrFragebogenDeutsch: SeoPageConfig = {
     {
       question: "Warum wirken Frageboegen oft schwieriger als sie sind?",
       answer:
-        "Weil die Sprache sehr formal ist und nicht wie Alltagssprache klingt.",
+        "Weil mehrere knappe Fragen hintereinander schnell wie ein kompletter Pruefungsblock wirken.",
     },
     {
       question: "Was hilft beim Lernen mit Frageboegen?",
@@ -1917,14 +1917,14 @@ export const adrFragebogenDeutsch: SeoPageConfig = {
   relatedLinks: [
     { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
     {
+      href: "/adr-fragen-auf-deutsch",
+      label: "ADR Fragen auf Deutsch",
+      note: "Mehr Fokus auf Formulierungen und Sprachverstaendnis",
+    },
+    {
       href: "/adr-test-deutsch",
       label: "ADR Test Deutsch",
       note: "Aehnlicher Suchintent mit Testfokus",
-    },
-    {
-      href: "/adr-pruefungsfragen-app-deutsch",
-      label: "ADR Pruefungsfragen App Deutsch",
-      note: "App-orientierter Zugang fuer dieselbe Nachfrage",
     },
   ],
   ctaTitle: "Mit mehr Frageboegen im Bot weiterlernen",
@@ -1937,8 +1937,8 @@ export const adrFragebogenDeutsch: SeoPageConfig = {
   keywords: [
     "ADR Fragebogen Deutsch",
     "ADR Fragebogen auf Deutsch",
-    "ADR Fragenbogen lernen",
-    "ADR Fragen Deutsch",
+    "ADR Uebungsbogen Deutsch",
+    "ADR Fragebogen lernen",
   ],
 };
 
