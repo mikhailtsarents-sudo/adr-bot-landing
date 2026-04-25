@@ -261,6 +261,71 @@ function buildReadableSummaryRows_(context) {
   rows.push(["", "", "", "", "", "", ""]);
 
   rows.push([
+    "Measurement reconciliation",
+    "Сегодня",
+    "7 дней",
+    "30 дней",
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Views -> CTA",
+    percent_(ratio_(siteToday.telegram_cta_clicks, siteToday.site_page_views)),
+    percent_(ratio_(site7d.telegram_cta_clicks, site7d.site_page_views)),
+    percent_(ratio_(site30d.telegram_cta_clicks, site30d.site_page_views)),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "CTA -> redirect",
+    percent_(ratio_(siteToday.telegram_redirects, siteToday.telegram_cta_clicks)),
+    percent_(ratio_(site7d.telegram_redirects, site7d.telegram_cta_clicks)),
+    percent_(ratio_(site30d.telegram_redirects, site30d.telegram_cta_clicks)),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Redirect -> /start",
+    percent_(ratio_(botToday.bot_starts, siteToday.telegram_redirects)),
+    percent_(ratio_(bot7d.bot_starts, site7d.telegram_redirects)),
+    percent_(ratio_(bot30d.bot_starts, site30d.telegram_redirects)),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "/start -> first action",
+    percent_(ratio_(botToday.first_actions, botToday.bot_starts)),
+    percent_(ratio_(bot7d.first_actions, bot7d.bot_starts)),
+    percent_(ratio_(bot30d.first_actions, bot30d.bot_starts)),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "First action -> buy intent",
+    percent_(ratio_(botToday.buy_intent, botToday.first_actions)),
+    percent_(ratio_(bot7d.buy_intent, bot7d.first_actions)),
+    percent_(ratio_(bot30d.buy_intent, bot30d.first_actions)),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Redirect minus /start",
+    number_(siteToday.telegram_redirects - botToday.bot_starts),
+    number_(site7d.telegram_redirects - bot7d.bot_starts),
+    number_(site30d.telegram_redirects - bot30d.bot_starts),
+    "",
+    "",
+    "",
+  ]);
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push([
     "Bot funnel operator panel",
     "Сегодня",
     "7 дней",
@@ -642,6 +707,13 @@ function percent_(value) {
 
 function percentFromWhole_(value) {
   return Math.round(Number(value || 0)) + "%";
+}
+
+function ratio_(numerator, denominator) {
+  const num = Number(numerator || 0);
+  const den = Number(denominator || 0);
+  if (!den) return 0;
+  return num / den;
 }
 
 function stringOrEmpty_(value) {
