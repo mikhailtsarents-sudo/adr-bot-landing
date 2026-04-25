@@ -99,7 +99,13 @@ Production exports:
 
 Preferred sink:
 
-- n8n Data Table via `N8N_BASE_URL`, `N8N_API_KEY`, `N8N_ANALYTICS_TABLE_ID`
+- `adr-ingest` on VPS via `ADR_INGEST_URL` and `ADR_INGEST_API_KEY`
+
+Canonical reading:
+
+- raw site analytics truth = VPS Postgres through `adr-ingest`
+- dashboard routes = derived machine-readable views
+- Google Sheet = presentation only
 
 ## Content Video Pipeline
 

@@ -38,7 +38,9 @@ This file is the current execution snapshot for the ADR Bot landing project.
   - `/api/analytics/dashboard.json`
 - Bot funnel summary endpoint is now also implemented:
   - `/api/analytics/bot-funnel.json`
-- n8n Data Table sink is configured as the preferred production sink
+- `adr-ingest` on VPS is the preferred production sink
+- canonical raw storage is VPS Postgres table:
+  - `adr_site_analytics_events`
 - Google Sheets bridge works
 - In practice, Google Sheets is more reliable via Apps Script than plain `IMPORTDATA`
 - The dashboard layer now exposes:

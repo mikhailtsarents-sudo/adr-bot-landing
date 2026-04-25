@@ -8,13 +8,17 @@ This landing now emits three event types:
 
 ## Current Real Status
 
-As of April 21, 2026:
+As of April 25, 2026:
 
 - production analytics export is live on `adr-bot.de`;
-- n8n Data Table is the intended source of truth;
+- canonical raw site analytics truth now lives in `adr-ingest` on the VPS;
+- canonical storage is Postgres table:
+  - `adr_site_analytics_events`
+- cross-project canonical analytics map:
+  - `/Users/mihailcarenc/Documents/New project/adr-control-center/analytics-source-of-truth-map.md`
 - Google Sheets reporting works;
 - plain `IMPORTDATA(...)` in Google Sheets proved unreliable in practice;
-- the reliable working bridge is a small Apps Script function that fetches the CSV export directly.
+- the reliable working bridge is the dedicated Apps Script refresh layer for `Понятная сводка`.
 
 ## What works immediately
 
@@ -24,13 +28,12 @@ Without any extra setup, you can already see:
 - custom `telegram_cta_click` events in Vercel Analytics;
 - server-side redirect hits in Vercel function logs.
 
-## Recommended sink: n8n Data Table
+## Recommended sink: adr-ingest on VPS
 
-The app can now write every analytics event directly into an n8n Data Table with:
+The app now writes analytics events directly into the VPS ingest service with:
 
-- `N8N_BASE_URL`
-- `N8N_API_KEY`
-- `N8N_ANALYTICS_TABLE_ID`
+- `ADR_INGEST_URL`
+- `ADR_INGEST_API_KEY`
 
 Each inserted row contains these fields:
 
@@ -53,18 +56,20 @@ Each inserted row contains these fields:
 
 The current preferred path is:
 
-1. The landing writes events directly into the n8n Data Table API.
-2. The Data Table acts as the source of truth for:
+1. The landing writes events directly into `adr-ingest`.
+2. `adr-ingest` writes raw site analytics into VPS Postgres.
+3. That raw storage acts as the source of truth for:
    - site visits
    - Telegram CTA clicks
    - Telegram redirect hits
-3. If needed later, n8n can sync this table into Google Sheets for reporting.
+4. Vercel-facing summary routes derive dashboards from that raw storage.
+5. Google Sheets reads those summary routes as a presentation layer.
 
 This avoids:
 
 - paid Vercel custom events;
-- brittle anonymous Google Apps Script deployments;
-- n8n workflow execution limits for webhook-based sinks.
+- stale split-state reporting;
+- treating Google Sheets as raw persistence.
 
 ## Google Sheets bridge without Google API auth
 
@@ -163,7 +168,7 @@ Current live state:
 - the tab is already created and populated;
 - hourly trigger is already installed;
 - `bot-funnel.json` is live and returns `ok: true`;
-- `N8N_BOT_FUNNEL_TABLE_ID` is deployed in Vercel runtime.
+- `ADR_INGEST_URL` / `ADR_INGEST_API_KEY` are the canonical storage path for machine-readable analytics.
 
 This is the preferred fix for the old problem where the lower event list in `Понятная сводка` stopped at an older date even though newer live activity existed.
 
@@ -248,7 +253,7 @@ In the sheet, add three pivot views:
 
 ## Fallback path
 
-If direct n8n Data Table access is not available, the app still supports a generic webhook sink via:
+If direct `adr-ingest` access is not available, the app still supports a generic webhook sink via:
 
 - `ANALYTICS_WEBHOOK_URL`
 
