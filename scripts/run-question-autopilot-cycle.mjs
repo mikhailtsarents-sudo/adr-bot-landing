@@ -24,6 +24,7 @@ const repoRoot = path.resolve(__dirname, "..");
 const controlCenterRoot = path.resolve(repoRoot, "..", "adr-control-center");
 const DEFAULT_OUTPUT_ROOT = path.join(repoRoot, "question-autopilot-runs");
 const DEFAULT_CREATOR_OUTPUT_ROOT = path.join(controlCenterRoot, "runtime", "queues", "question-content-creator");
+const DEFAULT_QUESTION_DIR = path.join(repoRoot, "examples", "question-batch-wave-1");
 const DEFAULT_HISTORY_PATH = path.join(
   controlCenterRoot,
   "runtime",
@@ -74,6 +75,7 @@ Options:
   --creator-output-root <dir> Content creator output root (default: ${DEFAULT_CREATOR_OUTPUT_ROOT})
   --history <file>       Publish history JSON (default: ${DEFAULT_HISTORY_PATH})
   --output-root <dir>    Output root (default: ${DEFAULT_OUTPUT_ROOT})
+  --question-dir <dir>   Question source catalog (default: ${DEFAULT_QUESTION_DIR})
   --recent-limit <n>     Avoid the most recent N published questions when possible (default: 3)
   --keep-temp            Preserve downstream temporary files where supported
   --verify-remote        Pass remote verification to downstream runners where supported
@@ -84,6 +86,7 @@ Options:
 
 function parseArgs(argv) {
   const args = {
+    questionDir: DEFAULT_QUESTION_DIR,
     preparedQueuePath: DEFAULT_PREPARED_QUEUE_PATH,
     issuedHistoryPath: DEFAULT_ISSUED_HISTORY_PATH,
     creatorOutputRoot: DEFAULT_CREATOR_OUTPUT_ROOT,
@@ -97,7 +100,8 @@ function parseArgs(argv) {
 
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
-    if (token === "--prepared-queue") args.preparedQueuePath = path.resolve(argv[++i]);
+    if (token === "--question-dir") args.questionDir = path.resolve(argv[++i]);
+    else if (token === "--prepared-queue") args.preparedQueuePath = path.resolve(argv[++i]);
     else if (token === "--issued-history") args.issuedHistoryPath = path.resolve(argv[++i]);
     else if (token === "--creator-output-root") args.creatorOutputRoot = path.resolve(argv[++i]);
     else if (token === "--history") args.historyPath = path.resolve(argv[++i]);
@@ -159,6 +163,7 @@ async function main() {
   const creatorOutput = runNodeScript(
     path.join(repoRoot, "scripts", "run-question-content-creator.mjs"),
     [
+      "--question-dir", args.questionDir,
       "--output-root", args.creatorOutputRoot,
       "--publish-history", args.historyPath,
       "--issued-history", args.issuedHistoryPath,

@@ -370,7 +370,7 @@ function buildExecutorInvocation(family, args) {
   if (family === "QUESTION") {
     return {
       scriptPath: path.join(repoRoot, "scripts", "run-question-autopilot-cycle.mjs"),
-      scriptArgs: common,
+      scriptArgs: [...common, "--question-dir", args.questionDir],
     };
   }
   if (family === "WORD") {
