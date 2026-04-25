@@ -13,7 +13,7 @@ const repoRoot = path.resolve(__dirname, "..");
 const DEFAULT_OUTPUT_ROOT = path.join(repoRoot, "news-upstream-runs");
 const DEFAULT_TABLE_URL =
   process.env.DRAFT_STORAGE_API_URL
-  || "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows";
+  || "http://46.225.170.55:3456/v1/youtube-bridge/rows";
 
 const FEEDS = [
   {
@@ -149,7 +149,7 @@ function buildDraftFromCandidate(candidate) {
 
 async function loadExistingRows(tableUrl, n8nApiKey) {
   const response = await fetch(`${tableUrl}${tableUrl.includes("?") ? "&" : "?"}limit=250`, {
-    headers: { "X-N8N-API-KEY": n8nApiKey },
+    headers: { "X-ADR-API-KEY": n8nApiKey, "X-N8N-API-KEY": n8nApiKey },
   });
   if (!response.ok) {
     throw new Error(`Existing rows fetch failed: ${response.status} ${await response.text()}`);
@@ -215,8 +215,8 @@ async function writeJson(filePath, payload) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   await bootstrapLocalRuntimeEnv(repoRoot);
-  const n8nApiKey = text(process.env.N8N_API_KEY);
-  if (!n8nApiKey) throw new Error("Missing N8N_API_KEY for NEWS upstream cycle.");
+  const n8nApiKey = text(process.env.ADR_INGEST_API_KEY || process.env.N8N_API_KEY);
+  if (!n8nApiKey) throw new Error("Missing ADR_INGEST_API_KEY for NEWS upstream cycle.");
 
   const slug = `news-upstream-${Date.now()}`;
   const outputDir = path.join(args.outputRoot, slug);

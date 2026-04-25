@@ -125,10 +125,16 @@ async function main() {
 
   let analyticsRows = [];
   try {
+    const ingestUrl = process.env.ADR_INGEST_URL || "";
+    const analyticsBaseUrl = ingestUrl
+      ? `${ingestUrl.replace(/\/+$/, "")}/v1/analytics/rows`
+      : (process.env.N8N_BASE_URL || "");
+    const analyticsApiKey = process.env.ADR_INGEST_API_KEY || process.env.N8N_API_KEY || "";
+    const analyticsTableId = ingestUrl ? "" : (process.env.N8N_ANALYTICS_TABLE_ID || "");
     analyticsRows = await fetchAnalyticsRowsFromTable({
-      baseUrl: process.env.N8N_BASE_URL || "",
-      apiKey: process.env.N8N_API_KEY || "",
-      tableId: process.env.N8N_ANALYTICS_TABLE_ID || "",
+      baseUrl: analyticsBaseUrl,
+      apiKey: analyticsApiKey,
+      tableId: analyticsTableId,
       limit: Number.isFinite(args.analyticsLimit) ? args.analyticsLimit : 250,
     });
     sourceStatus.analytics = {

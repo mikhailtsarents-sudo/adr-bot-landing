@@ -32,7 +32,7 @@ const DEFAULT_ISSUED_HISTORY_PATH = path.join(
 );
 const DEFAULT_TABLE_URL =
   process.env.DRAFT_STORAGE_API_URL
-  || "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows";
+  || "http://46.225.170.55:3456/v1/youtube-bridge/rows";
 
 enableStrictNonInteractiveMode("run-news-content-creator");
 
@@ -109,7 +109,7 @@ async function main() {
   const queueResult = await buildPreparedNewsQueue({
     newsDir: args.newsDir,
     tableUrl: args.tableUrl,
-    n8nApiKey: process.env.N8N_API_KEY,
+    n8nApiKey: process.env.ADR_INGEST_API_KEY || process.env.N8N_API_KEY,
     horizon: args.horizon,
     recentLimit: args.recentLimit,
     publishedHistory: publishedPayload,

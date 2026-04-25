@@ -35,7 +35,7 @@ function parseArgs(argv) {
     packagesRoot: "",
     shotstackApiKey: process.env.SHOTSTACK_API_KEY || "",
     shotstackApiBase: "",
-    n8nApiKey: process.env.N8N_API_KEY || "",
+    n8nApiKey: process.env.ADR_INGEST_API_KEY || process.env.N8N_API_KEY || "",
     n8nTableUrl: "",
     n8nWebhookUrl: "",
     skipYoutube: false,
@@ -60,7 +60,7 @@ function parseArgs(argv) {
 
   if (!args.packagesRoot) throw new Error("Missing --packages-root <dir>.");
   if (!args.shotstackApiKey) throw new Error("Shotstack API key required. Pass --shotstack-api-key or set SHOTSTACK_API_KEY.");
-  if (!args.skipYoutube && !args.n8nApiKey) throw new Error("n8n API key required for YouTube publish. Pass --n8n-api-key, set N8N_API_KEY, or use --skip-youtube.");
+  if (!args.skipYoutube && !args.n8nApiKey) throw new Error("n8n API key required for YouTube publish. Pass --n8n-api-key, set ADR_INGEST_API_KEY, or use --skip-youtube.");
 
   return args;
 }

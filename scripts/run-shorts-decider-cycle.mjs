@@ -36,7 +36,7 @@ const DEFAULT_WORD_DIR = path.join(repoRoot, "examples");
 const DEFAULT_NEWS_DIR = path.join(repoRoot, "examples", "approved-news");
 const DEFAULT_NEWS_TABLE_URL =
   process.env.DRAFT_STORAGE_API_URL
-  || "https://tsarents.app.n8n.cloud/api/v1/data-tables/o3VHi3uQOI2y0z1o/rows";
+  || "http://46.225.170.55:3456/v1/youtube-bridge/rows";
 const DEFAULT_QUESTION_HISTORY_PATH = path.join(
   controlCenterRoot,
   "runtime",
@@ -408,7 +408,7 @@ async function main() {
     wordDir: args.wordDir,
     newsDir: args.newsDir,
     newsTableUrl: args.newsTableUrl,
-    n8nApiKey: process.env.N8N_API_KEY,
+    n8nApiKey: process.env.ADR_INGEST_API_KEY || process.env.N8N_API_KEY,
     questionHistoryPath: args.questionHistoryPath,
     wordHistoryPath: args.wordHistoryPath,
     newsHistoryPath: args.newsHistoryPath,

@@ -65,18 +65,23 @@ export async function fetchAnalyticsRowsFromTable({
   tableId,
   limit = 250,
 }) {
-  if (!text(baseUrl) || !text(apiKey) || !text(tableId)) {
-    throw new Error("Missing N8N_BASE_URL, N8N_API_KEY, or N8N_ANALYTICS_TABLE_ID for live analytics fetch.");
+  if (!text(baseUrl) || !text(apiKey)) {
+    throw new Error("Missing base URL or API key for live analytics fetch.");
   }
 
-  const url = new URL(`${baseUrl.replace(/\/+$/g, "")}/api/v1/data-tables/${tableId}/rows`);
+  // When tableId is empty, baseUrl is the full endpoint (adr-ingest); otherwise build n8n Cloud path.
+  const url = text(tableId)
+    ? new URL(`${baseUrl.replace(/\/+$/g, "")}/api/v1/data-tables/${tableId}/rows`)
+    : new URL(baseUrl.replace(/\/+$/, ""));
   url.searchParams.set("limit", String(Math.max(1, Math.min(limit, 250))));
+
+  const headers = text(tableId)
+    ? { "X-N8N-API-KEY": apiKey }
+    : { "X-ADR-API-KEY": apiKey, "X-N8N-API-KEY": apiKey };
 
   const response = await fetch(url.toString(), {
     method: "GET",
-    headers: {
-      "X-N8N-API-KEY": apiKey,
-    },
+    headers,
     cache: "no-store",
   });
 
