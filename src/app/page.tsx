@@ -3,9 +3,9 @@ import { LandingPage } from "@/components/landing/landing-page";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ADR Prüfung Deutsch | ADR Bot zur Prüfungsvorbereitung per Telegram",
+  title: "ADR-Prüfung auf Deutsch | Fragen und Begriffe in Telegram",
   description:
-    "Kostenlose ADR Prüfungsvorbereitung auf Deutsch per Telegram. ADR Bot hilft bei Begriffen, Prüfungsdeutsch, ADR-Fragen und dem Einstieg zum ADR-Schein.",
+    "ADR-Vorbereitung in Telegram: Fragen, Begriffe und kurze Erklärungen für Basiskurs, Tank und Menschen, denen die Sprache im Weg steht.",
   alternates: {
     canonical: "/",
     languages: {
@@ -42,7 +42,7 @@ export default function Home() {
         applicationCategory: "EducationalApplication",
         operatingSystem: "Telegram",
         description:
-          "Telegram-basierte Lernhilfe fuer die ADR-Pruefung auf Deutsch.",
+          "Telegram-basierte Vorbereitungshilfe fuer ADR-Fragen, Begriffe und typische Formulierungen auf Deutsch.",
         offers: {
           "@type": "Offer",
           price: "0",
@@ -78,10 +78,10 @@ export default function Home() {
           },
           {
             "@type": "Question",
-            name: "Hilft ADR Bot beim Verstaendnis von ADR-Fachbegriffen und offiziellen Formulierungen?",
+            name: "Hilft ADR Bot beim Verstaendnis von ADR-Fachbegriffen und pruefungsnahen Formulierungen?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Ja. Der Fokus liegt auf Begriffen, typischen Fragestellungen und technischem Deutsch rund um die ADR-Pruefung.",
+              text: "Ja. Der Fokus liegt auf Begriffen, typischen Fragestellungen und technischem Deutsch rund um die ADR-Vorbereitung.",
             },
           },
         ],

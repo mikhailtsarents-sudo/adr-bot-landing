@@ -9,6 +9,24 @@ This file is the current execution snapshot for the ADR Bot landing project.
 - Main landing is live on [https://www.adr-bot.de](https://www.adr-bot.de)
 - Telegram CTA and redirect flow are implemented
 - Bing verification meta tag is in place
+- New landing conversion pass is now prepared locally on `2026-04-24`:
+  - stronger language-barrier hero
+  - `Basiskurs / Tank / Begriffe` path selection
+  - focused `QUESTION + WORD` product proof
+  - explicit `free start` vs `full access`
+  - visible trust/disclaimer and short FAQ
+  - low-friction final Telegram CTA
+- Local landing files for this pass:
+  - `src/components/landing/landing-copy.ts`
+  - `src/components/landing/landing-page.tsx`
+  - `src/components/landing/phone-carousel.tsx`
+  - `src/app/page.tsx`
+  - `src/app/ru/page.tsx`
+- Local validation passed:
+  - `npx tsc --noEmit`
+- Deploy state:
+  - ready for the next bounded Vercel deploy
+  - not yet confirmed live from this side
 
 ### Analytics
 
@@ -18,6 +36,8 @@ This file is the current execution snapshot for the ADR Bot landing project.
   - `/api/analytics/export.json`
 - Dashboard summary endpoint is now implemented:
   - `/api/analytics/dashboard.json`
+- Bot funnel summary endpoint is now also implemented:
+  - `/api/analytics/bot-funnel.json`
 - n8n Data Table sink is configured as the preferred production sink
 - Google Sheets bridge works
 - In practice, Google Sheets is more reliable via Apps Script than plain `IMPORTDATA`
@@ -28,11 +48,20 @@ This file is the current execution snapshot for the ADR Bot landing project.
   - 30d funnel summary
   - top sources / pages / page types
   - latest events and latest Telegram redirects
-- Prepared locally on `2026-04-24`:
+- Live on `2026-04-24`:
   - YouTube-bound render packages now append a tracked Telegram deep-link into the description
   - token format:
     - `yt--shorts--<render_task_id>`
   - this is the new handoff for future `YouTube -> Bot` attribution
+  - bot funnel events also have a dedicated dashboard path now, not only storage
+
+### Content Catalogs
+
+- VPS live `WORD` catalog now uses:
+  - `examples/word-batch-wave-1`
+  - `174` active entries
+- Live `QUESTION` catalog now contains:
+  - `141` questions
 
 ### Google Search Console
 

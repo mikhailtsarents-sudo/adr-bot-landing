@@ -2,9 +2,9 @@ import { LandingPage } from "@/components/landing/landing-page";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: { absolute: "Подготовка к экзамену ADR на немецком | ADR Bot в Telegram" },
+  title: { absolute: "Экзамен ADR на немецком | Вопросы и термины в Telegram" },
   description:
-    "Подготовка к экзамену ADR на немецком через Telegram. ADR Bot помогает с терминами, формулировками экзамена и вопросами по шагам.",
+    "Подготовка к ADR в Telegram: вопросы, термины и короткие объяснения для Basiskurs, Tank и тех, кому мешает язык.",
   alternates: {
     canonical: "/ru",
     languages: {

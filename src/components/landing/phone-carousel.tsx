@@ -1,5 +1,6 @@
 "use client";
 
+import { getLandingConversionCopy } from "@/components/landing/landing-copy";
 import { useLang } from "@/lib/i18n/use-lang";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
@@ -25,8 +26,8 @@ const screens = [
 ];
 
 export function PhoneCarousel() {
-  const { t } = useLang();
-  const caption = t.carousel.caption;
+  const { lang } = useLang();
+  const caption = getLandingConversionCopy(lang).proof.screenshotCaption;
   const shouldReduceMotion = useReducedMotion();
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
