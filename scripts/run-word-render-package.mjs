@@ -10,6 +10,7 @@ import { prepareGenericGeneratedVisualPackage } from "./render/prepare-generic-g
 import { bootstrapLocalRuntimeEnv } from "./runtime/local-runtime-env.mjs";
 import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
 import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
+import { enhanceWordScenesWithGpt } from "./render/creative-planner.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -454,7 +455,19 @@ async function main() {
   const planPath = path.join(tempDir, "word-plan.json");
   const packagePath = path.join(tempDir, "word-render-package.json");
   const outputDir = path.join(args.outputRoot, slug);
-  const visualBrief = buildWordVisualBrief(wordInput, scenario);
+  const visualBriefBase = buildWordVisualBrief(wordInput, scenario);
+  const wordSceneEnhancement = await enhanceWordScenesWithGpt({
+    brief: visualBriefBase,
+    wordContent: {
+      term: text(wordInput.payload?.de_term),
+      translation:
+        text(wordInput.payload?.translations?.[wordInput.target_lang || "ru"]) ||
+        text(wordInput.payload?.translations?.ru),
+      explanation: text(wordInput.payload?.simple_explanation),
+      synonym: text(wordInput.payload?.synonym),
+    },
+  }).catch(() => ({ usedGpt: false, reason: "enhancer_error", mergedBrief: visualBriefBase }));
+  const visualBrief = wordSceneEnhancement.mergedBrief || visualBriefBase;
   const shortform = buildWordShortformContract(wordInput, scenario);
   await writeFile(packagePath, `${JSON.stringify(renderTask, null, 2)}\n`, "utf8");
 

@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { prepareGenericGeneratedVisualPackage } from "./render/prepare-generic-generated-visuals.mjs";
 import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
+import { enhanceNewsScenesWithGpt } from "./render/creative-planner.mjs";
 import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -555,7 +556,17 @@ async function main() {
   const approvedNewsPath = path.join(outputDir, "approved_news.json");
   const scenarioRequest = buildScenarioRequest(approvedNews);
   const scenarioResponse = buildScenarioResponse(approvedNews, scenarioRequest);
-  const canvaBrief = buildCanvaBrief(approvedNews, scenarioResponse);
+  const canvaBriefBase = buildCanvaBrief(approvedNews, scenarioResponse);
+  const sceneEnhancement = await enhanceNewsScenesWithGpt({
+    brief: canvaBriefBase,
+    newsContent: {
+      headline: text(approvedNews.payload?.headline_de || approvedNews.payload?.headline),
+      summary: text(approvedNews.payload?.summary_de || approvedNews.payload?.summary),
+      category: text(approvedNews.payload?.category || scenarioRequest.analytics_tag),
+      hook_text: text(scenarioResponse.hook_text),
+    },
+  }).catch(() => ({ usedGpt: false, reason: "enhancer_error", mergedBrief: canvaBriefBase }));
+  const canvaBrief = sceneEnhancement.mergedBrief || canvaBriefBase;
   const shortform = buildNewsShortformContract(approvedNews, scenarioResponse);
   const newsPackage = buildNewsPackage(approvedNews, scenarioResponse, canvaBrief);
   const voiceoverAsset = await resolveNewsVoiceoverAsset(outputDir, approvedNews, scenarioResponse);
@@ -575,6 +586,12 @@ async function main() {
   await writeJson(scenarioRequestPath, scenarioRequest);
   await writeJson(scenarioResponsePath, scenarioResponse);
   await writeJson(canvaBriefPath, canvaBrief);
+  await writeJson(path.join(outputDir, "scene_enhancement.json"), {
+    used_gpt: sceneEnhancement.usedGpt,
+    reason: sceneEnhancement.reason,
+    news_type: sceneEnhancement.news_type || null,
+    main_entity: sceneEnhancement.main_entity || null,
+  });
   await writeJson(newsPackagePath, newsPackage);
   await writeJson(renderTaskPath, renderTask);
   const visualBundle = await prepareGenericGeneratedVisualPackage({
