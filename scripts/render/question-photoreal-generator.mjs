@@ -400,6 +400,14 @@ function buildSceneNegativePrompt() {
     "hands-only crop",
     "isolated portrait",
     "wide cinematic establishing shot",
+    "logo",
+    "watermark",
+    "brand mark",
+    "fake letters",
+    "fake text",
+    "random characters",
+    "lens distortion",
+    "distortion",
   ].join(", ");
 }
 

@@ -126,6 +126,23 @@ function buildAnswerLines(text) {
     });
 }
 
+// Subtle dark gradient behind text zone — ensures readability regardless of image content
+function buildTextZoneGradientClip({ start, length, offsetY = -0.05 }) {
+  const w = 960;
+  const h = 560;
+  const css =
+    `body{margin:0;padding:0;background:transparent;}` +
+    `.g{width:${w}px;height:${h}px;` +
+    `background:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.18) 30%,rgba(0,0,0,0.22) 50%,rgba(0,0,0,0.18) 70%,transparent 100%);}`;
+  return {
+    asset: { type: "html", html: `<div class="g"></div>`, css, width: w, height: h },
+    position: "center",
+    start: Number((start || 0).toFixed(2)),
+    length: Number(Math.max(length || 0.1, 0.1).toFixed(2)),
+    offset: { x: 0, y: Number(offsetY.toFixed(6)) },
+  };
+}
+
 // Build per-line clips for a given role/text/timing
 export function buildCaptionClip({ role, text: captionText, start, length }) {
   const r = String(role || "").toLowerCase();
@@ -142,16 +159,19 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     const fs = 42;
     const step = lineStep(fs);
     const baseY = -0.05;
-    return answerLines.map((html, i) =>
-      buildLineClip({
-        html,
-        color: "#FFFFFF",
-        fontSize: fs,
-        start: s,
-        length: l,
-        offsetY: baseY + (i - (answerLines.length - 1) / 2) * step,
-      }),
-    );
+    return [
+      buildTextZoneGradientClip({ start: s, length: l, offsetY: baseY }),
+      ...answerLines.map((html, i) =>
+        buildLineClip({
+          html,
+          color: "#FFFFFF",
+          fontSize: fs,
+          start: s,
+          length: l,
+          offsetY: baseY + (i - (answerLines.length - 1) / 2) * step,
+        }),
+      ),
+    ];
   }
 
   if (r === "hook" || r === "question") {
@@ -160,16 +180,19 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     const fs = 52;
     const step = lineStep(fs);
     const baseY = -0.05;
-    return lines.map((line, i) =>
-      buildLineClip({
-        html: esc(line),
-        color: "#FFFFFF",
-        fontSize: fs,
-        start: s,
-        length: l,
-        offsetY: baseY + (i - (lines.length - 1) / 2) * step,
-      }),
-    );
+    return [
+      buildTextZoneGradientClip({ start: s, length: l, offsetY: baseY }),
+      ...lines.map((line, i) =>
+        buildLineClip({
+          html: esc(line),
+          color: "#FFFFFF",
+          fontSize: fs,
+          start: s,
+          length: l,
+          offsetY: baseY + (i - (lines.length - 1) / 2) * step,
+        }),
+      ),
+    ];
   }
 
   if (r === "timer") {
@@ -177,16 +200,19 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     if (lines.length === 0) return [];
     const fs = 54;
     const step = lineStep(fs);
-    return lines.map((line, i) =>
-      buildLineClip({
-        html: esc(line),
-        color: "#FACC15",
-        fontSize: fs,
-        start: s,
-        length: l,
-        offsetY: (i - (lines.length - 1) / 2) * step,
-      }),
-    );
+    return [
+      buildTextZoneGradientClip({ start: s, length: l, offsetY: 0 }),
+      ...lines.map((line, i) =>
+        buildLineClip({
+          html: esc(line),
+          color: "#FACC15",
+          fontSize: fs,
+          start: s,
+          length: l,
+          offsetY: (i - (lines.length - 1) / 2) * step,
+        }),
+      ),
+    ];
   }
 
   if (r === "answer") {
@@ -194,16 +220,19 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     if (lines.length === 0) return [];
     const fs = 52;
     const step = lineStep(fs);
-    return lines.map((line, i) =>
-      buildLineClip({
-        html: esc(line),
-        color: "#4ADE80",
-        fontSize: fs,
-        start: s,
-        length: l,
-        offsetY: (i - (lines.length - 1) / 2) * step,
-      }),
-    );
+    return [
+      buildTextZoneGradientClip({ start: s, length: l, offsetY: 0 }),
+      ...lines.map((line, i) =>
+        buildLineClip({
+          html: esc(line),
+          color: "#4ADE80",
+          fontSize: fs,
+          start: s,
+          length: l,
+          offsetY: (i - (lines.length - 1) / 2) * step,
+        }),
+      ),
+    ];
   }
 
   // Default (transcript etc)
