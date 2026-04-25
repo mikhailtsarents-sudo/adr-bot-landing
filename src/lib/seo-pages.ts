@@ -2643,12 +2643,145 @@ export const seoPageList = [
   adrLernhilfeDeutsch,
 ] as const;
 
+const GENERIC_RELATED_PATHS = new Set([
+  "/",
+  "/adr-pruefung-auf-deutsch",
+  "/adr-begriffe",
+  "/basiskurs-preview",
+  "/adr-faq-fuer-fahrer",
+]);
+
+function tokenizeSeoText(value: string): string[] {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9äöüß ]+/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter(
+      (token) =>
+        ![
+          "adr",
+          "bot",
+          "deutsch",
+          "deutsche",
+          "fuer",
+          "und",
+          "mit",
+          "auf",
+          "der",
+          "die",
+          "das",
+          "ein",
+          "eine",
+          "im",
+          "in",
+          "zu",
+          "von",
+          "fragen",
+          "frage",
+          "preview",
+          "pruefung",
+          "lernen",
+        ].includes(token),
+    );
+}
+
+function seoTokenSet(page: SeoPageConfig): Set<string> {
+  return new Set(
+    tokenizeSeoText(
+      [
+        page.slug,
+        page.pageTitle,
+        page.metaTitle,
+        page.heroTitle,
+        ...(page.keywords || []),
+      ].join(" "),
+    ),
+  );
+}
+
+function seoSimilarity(left: SeoPageConfig, right: SeoPageConfig): number {
+  const leftTokens = seoTokenSet(left);
+  const rightTokens = seoTokenSet(right);
+  const intersection = [...leftTokens].filter((token) => rightTokens.has(token)).length;
+  const union = new Set([...leftTokens, ...rightTokens]).size;
+  return union > 0 ? intersection / union : 0;
+}
+
+function fallbackFaqsForPage(page: SeoPageConfig): SeoFaqCard[] {
+  return [
+    {
+      question: `Ist ${page.pageTitle} hier komplett erklärt?`,
+      answer:
+        `Nein. Diese Seite bleibt bewusst kompakt und zeigt nur eine Vorschau zu ${page.pageTitle}. Die eigentliche Tiefe und Wiederholung läuft im Telegram-Bot.`,
+    },
+    {
+      question: `Für wen ist ${page.pageTitle} besonders hilfreich?`,
+      answer:
+        `Vor allem für Menschen, die bei ADR erst Orientierung brauchen, mit dem Prüfungsdeutsch ringen oder vor dem Bot zuerst ein kleines verständliches Sample sehen möchten.`,
+    },
+    {
+      question: `Was ist der nächste sinnvolle Schritt nach ${page.pageTitle}?`,
+      answer:
+        "Nach der kurzen Vorschau direkt in den Telegram-Bot wechseln und dort mit mehr Fragen, Begriffen und Wiederholung weitermachen.",
+    },
+  ];
+}
+
+export function getSeoPageFaqs(page: SeoPageConfig): SeoFaqCard[] {
+  const manual = page.faqs ?? [];
+  if (manual.length >= 3) return manual;
+
+  const seen = new Set(manual.map((item) => item.question.trim().toLowerCase()));
+  const filled = [...manual];
+  for (const item of fallbackFaqsForPage(page)) {
+    const key = item.question.trim().toLowerCase();
+    if (seen.has(key)) continue;
+    filled.push(item);
+    seen.add(key);
+    if (filled.length >= 3) break;
+  }
+  return filled;
+}
+
+function autoRelatedLinks(page: SeoPageConfig): SeoRelatedLink[] {
+  return seoPageList
+    .filter((entry) => entry.path !== page.path)
+    .map((entry) => ({ entry, score: seoSimilarity(page, entry) }))
+    .filter(({ score }) => score > 0)
+    .sort((left, right) => right.score - left.score || left.entry.pageTitle.localeCompare(right.entry.pageTitle))
+    .slice(0, 4)
+    .map(({ entry }) => ({
+      href: entry.path,
+      label: entry.pageTitle,
+      note: "Passender nächster Schritt im selben ADR-Intent-Cluster.",
+    }));
+}
+
+export function getSeoPageRelatedLinks(page: SeoPageConfig): SeoRelatedLink[] {
+  const manualSpecific = page.relatedLinks.filter((link) => !GENERIC_RELATED_PATHS.has(link.href));
+  const manualGeneric = page.relatedLinks.filter((link) => GENERIC_RELATED_PATHS.has(link.href));
+  const auto = autoRelatedLinks(page);
+  const merged: SeoRelatedLink[] = [];
+  const seen = new Set<string>();
+
+  for (const link of [...manualSpecific, ...auto, ...manualGeneric]) {
+    if (!link.href || link.href === page.path || seen.has(link.href)) continue;
+    merged.push(link);
+    seen.add(link.href);
+    if (merged.length >= 3) break;
+  }
+
+  return merged;
+}
+
 export function buildSeoPageStructuredData(
   page: SeoPageConfig,
 ): StructuredDataRecord[] {
   const pageUrl = `${siteUrl}${page.path}`;
   const webpageId = `${pageUrl}#webpage`;
   const breadcrumbId = `${pageUrl}#breadcrumb`;
+  const faqs = getSeoPageFaqs(page);
 
   const data: StructuredDataRecord[] = [
     {
@@ -2693,12 +2826,12 @@ export function buildSeoPageStructuredData(
     },
   ];
 
-  if (page.faqs?.length) {
+  if (faqs.length) {
     data.push({
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "@id": `${pageUrl}#faq`,
-      mainEntity: page.faqs.map((item) => ({
+      mainEntity: faqs.map((item) => ({
         "@type": "Question",
         name: item.question,
         acceptedAnswer: {

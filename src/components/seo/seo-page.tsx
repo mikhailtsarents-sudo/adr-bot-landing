@@ -9,7 +9,11 @@ import type {
   SeoFaqCard,
   SeoRelatedLink,
 } from "@/lib/seo-pages";
-import { buildSeoPageStructuredData } from "@/lib/seo-pages";
+import {
+  buildSeoPageStructuredData,
+  getSeoPageFaqs,
+  getSeoPageRelatedLinks,
+} from "@/lib/seo-pages";
 import {
   ArrowRight,
   ChevronRight,
@@ -111,9 +115,11 @@ function FaqCard({ item }: { item: SeoFaqCard }) {
 }
 
 export function SeoPage({ page }: { page: SeoPageConfig }) {
+  const faqs = getSeoPageFaqs(page);
+  const relatedLinks = getSeoPageRelatedLinks(page);
   const hasSampleQuestions = Boolean(page.sampleQuestions?.length);
   const hasSampleTerms = Boolean(page.sampleTerms?.length);
-  const hasFaqs = Boolean(page.faqs?.length);
+  const hasFaqs = Boolean(faqs.length);
   const structuredData = buildSeoPageStructuredData(page);
 
   return (
@@ -176,10 +182,10 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <TelegramButton source={`${page.telegramSource}_hero`} label={page.ctaButton} />
               <Link
-                href={page.relatedLinks[0]?.href ?? "/"}
+                href={relatedLinks[0]?.href ?? "/"}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
               >
-                {page.relatedLinks[0]?.label ?? "Zur Startseite"}
+                  {relatedLinks[0]?.label ?? "Zur Startseite"}
                 <ChevronRight className="h-4 w-4 shrink-0" />
               </Link>
             </div>
@@ -375,7 +381,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
             />
           </Reveal>
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            {page.faqs!.map((item, index) => (
+            {faqs.map((item, index) => (
               <Reveal key={item.question} delay={index * 0.05}>
                 <FaqCard item={item} />
               </Reveal>
@@ -393,7 +399,7 @@ export function SeoPage({ page }: { page: SeoPageConfig }) {
           />
         </Reveal>
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {page.relatedLinks.map((link, index) => (
+          {relatedLinks.map((link, index) => (
             <Reveal key={link.href} delay={index * 0.05}>
               <InternalLinkCard link={link} />
             </Reveal>
