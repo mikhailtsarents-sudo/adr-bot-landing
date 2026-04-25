@@ -53,19 +53,25 @@ export type BotFunnelPeriodBucket = {
   referral_rejected: number;
   reminder_sent: number;
   reminder_clicked: number;
+  reminder_snoozed: number;
   reminder_reactivated: number;
   reminder_opted_out: number;
+  reminder_delivery_failed: number;
   start_to_first_action_rate: number;
   start_to_buy_intent_rate: number;
+  reminder_click_rate: number;
+  reminder_reactivation_rate: number;
 };
 
 export type ReminderSummary = {
   sent: number;
   clicked: number;
+  snoozed: number;
   reactivated: number;
   opted_out: number;
   delivery_failed: number;
   click_rate: number;
+  reactivation_rate: number;
 };
 
 export type BotFunnelDashboard = {
@@ -170,8 +176,10 @@ function buildPeriodBucket({
   const referralRejected = count(scopedRows, (r) => r.event_type === "referral_rejected");
   const reminderSent = count(scopedRows, (r) => r.event_type === "reminder_sent");
   const reminderClicked = count(scopedRows, (r) => r.event_type === "reminder_clicked");
+  const reminderSnoozed = count(scopedRows, (r) => r.event_type === "reminder_snoozed");
   const reminderReactivated = count(scopedRows, (r) => r.event_type === "reminder_reactivated");
   const reminderOptedOut = count(scopedRows, (r) => r.event_type === "reminder_opted_out");
+  const reminderDeliveryFailed = count(scopedRows, (r) => r.event_type === "reminder_delivery_failed");
 
   return {
     period_key: periodKey,
@@ -189,10 +197,14 @@ function buildPeriodBucket({
     referral_rejected: referralRejected,
     reminder_sent: reminderSent,
     reminder_clicked: reminderClicked,
+    reminder_snoozed: reminderSnoozed,
     reminder_reactivated: reminderReactivated,
     reminder_opted_out: reminderOptedOut,
+    reminder_delivery_failed: reminderDeliveryFailed,
     start_to_first_action_rate: roundRate(botStarts > 0 ? firstActions / botStarts : 0),
     start_to_buy_intent_rate: roundRate(botStarts > 0 ? buyIntent / botStarts : 0),
+    reminder_click_rate: roundRate(reminderSent > 0 ? reminderClicked / reminderSent : 0),
+    reminder_reactivation_rate: roundRate(reminderSent > 0 ? reminderReactivated / reminderSent : 0),
   };
 }
 
@@ -250,6 +262,7 @@ export function buildBotFunnelDashboard(
   );
   const reminderSent = count(rows30d, (r) => r.event_type === "reminder_sent");
   const reminderClicked = count(rows30d, (r) => r.event_type === "reminder_clicked");
+  const reminderSnoozed = count(rows30d, (r) => r.event_type === "reminder_snoozed");
   const reminderReactivated = count(rows30d, (r) => r.event_type === "reminder_reactivated");
   const reminderOptedOut = count(rows30d, (r) => r.event_type === "reminder_opted_out");
   const reminderDeliveryFailed = count(rows30d, (r) => r.event_type === "reminder_delivery_failed");
@@ -379,10 +392,12 @@ export function buildBotFunnelDashboard(
     reminder_30d: {
       sent: reminderSent,
       clicked: reminderClicked,
+      snoozed: reminderSnoozed,
       reactivated: reminderReactivated,
       opted_out: reminderOptedOut,
       delivery_failed: reminderDeliveryFailed,
       click_rate: reminderSent > 0 ? Math.round((reminderClicked / reminderSent) * 100) : 0,
+      reactivation_rate: reminderSent > 0 ? Math.round((reminderReactivated / reminderSent) * 100) : 0,
     },
     top_sources_30d,
     top_kurs_30d,

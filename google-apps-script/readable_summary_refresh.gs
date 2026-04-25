@@ -138,6 +138,16 @@ function emptyBotFunnelDashboard_() {
       rejection_reasons_30d: [],
       grant_variants_30d: [],
     },
+    reminder_30d: {
+      sent: 0,
+      clicked: 0,
+      snoozed: 0,
+      reactivated: 0,
+      opted_out: 0,
+      delivery_failed: 0,
+      click_rate: 0,
+      reactivation_rate: 0,
+    },
     top_sources_30d: [],
     top_kurs_30d: [],
     event_mix_30d: [],
@@ -161,8 +171,16 @@ function emptyBotFunnelPeriod_(periodKey, labelRu, windowDays) {
     buy_intent: 0,
     referral_granted: 0,
     referral_rejected: 0,
+    reminder_sent: 0,
+    reminder_clicked: 0,
+    reminder_snoozed: 0,
+    reminder_reactivated: 0,
+    reminder_opted_out: 0,
+    reminder_delivery_failed: 0,
     start_to_first_action_rate: 0,
     start_to_buy_intent_rate: 0,
+    reminder_click_rate: 0,
+    reminder_reactivation_rate: 0,
   };
 }
 
@@ -178,6 +196,7 @@ function buildReadableSummaryRows_(context) {
   const bot30d = safePath_(botFunnelDashboard, ["period_map", "days_30"]) || emptyBotFunnelPeriod_("days_30", "30 дней", 30);
   const funnel30d = botFunnelDashboard.funnel_30d || [];
   const referral30d = botFunnelDashboard.referral_30d || {};
+  const reminder30d = botFunnelDashboard.reminder_30d || {};
   const sourceCounts30d = botFunnelDashboard.top_sources_30d || [];
   const eventMix30d = botFunnelDashboard.event_mix_30d || [];
   const topKurs30d = botFunnelDashboard.top_kurs_30d || [];
@@ -315,6 +334,89 @@ function buildReadableSummaryRows_(context) {
   ]);
   rows.push(["", "", "", "", "", "", ""]);
 
+  rows.push([
+    "Reminder operator panel",
+    "Сегодня",
+    "7 дней",
+    "30 дней",
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Reminder sent",
+    number_(botToday.reminder_sent),
+    number_(bot7d.reminder_sent),
+    number_(bot30d.reminder_sent),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Reminder clicked",
+    number_(botToday.reminder_clicked),
+    number_(bot7d.reminder_clicked),
+    number_(bot30d.reminder_clicked),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Reminder snoozed",
+    number_(botToday.reminder_snoozed),
+    number_(bot7d.reminder_snoozed),
+    number_(bot30d.reminder_snoozed),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Reminder reactivated",
+    number_(botToday.reminder_reactivated),
+    number_(bot7d.reminder_reactivated),
+    number_(bot30d.reminder_reactivated),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Reminder opt-out",
+    number_(botToday.reminder_opted_out),
+    number_(bot7d.reminder_opted_out),
+    number_(bot30d.reminder_opted_out),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Reminder delivery failed",
+    number_(botToday.reminder_delivery_failed),
+    number_(bot7d.reminder_delivery_failed),
+    number_(bot30d.reminder_delivery_failed),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Reminder click rate",
+    percent_(botToday.reminder_click_rate),
+    percent_(bot7d.reminder_click_rate),
+    percent_(bot30d.reminder_click_rate),
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Reminder reactivation rate",
+    percent_(botToday.reminder_reactivation_rate),
+    percent_(bot7d.reminder_reactivation_rate),
+    percent_(bot30d.reminder_reactivation_rate),
+    "",
+    "",
+    "",
+  ]);
+  rows.push(["", "", "", "", "", "", ""]);
+
   rows.push(["Bot funnel за 30 дней", "Количество", "Drop-off %", "", "", "", ""]);
   if (funnel30d.length === 0) {
     rows.push(["Нет свежих funnel-событий", "", "", "", "", "", ""]);
@@ -331,6 +433,17 @@ function buildReadableSummaryRows_(context) {
       ]);
     }
   }
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push(["Reminder summary (30 дней)", "Количество", "", "", "", "", ""]);
+  rows.push(["Reminder sent", number_(reminder30d.sent), "", "", "", "", ""]);
+  rows.push(["Reminder clicked", number_(reminder30d.clicked), "", "", "", "", ""]);
+  rows.push(["Reminder snoozed", number_(reminder30d.snoozed), "", "", "", "", ""]);
+  rows.push(["Reminder reactivated", number_(reminder30d.reactivated), "", "", "", "", ""]);
+  rows.push(["Reminder opt-out", number_(reminder30d.opted_out), "", "", "", "", ""]);
+  rows.push(["Reminder delivery failed", number_(reminder30d.delivery_failed), "", "", "", "", ""]);
+  rows.push(["Reminder click rate", percentFromWhole_(reminder30d.click_rate), "", "", "", "", ""]);
+  rows.push(["Reminder reactivation rate", percentFromWhole_(reminder30d.reactivation_rate), "", "", "", "", ""]);
   rows.push(["", "", "", "", "", "", ""]);
 
   rows.push(["Рефералы и входы (30 дней)", "Количество", "", "", "", "", ""]);
