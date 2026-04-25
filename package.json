@@ -24,6 +24,7 @@
     "run:question-content-creator": "node scripts/run-question-content-creator.mjs",
     "run:question-autopilot-cycle": "node scripts/run-question-autopilot-cycle.mjs",
     "run:shorts-decider-cycle": "node scripts/run-shorts-decider-cycle.mjs",
+    "run:bot-reminder-cycle": "node scripts/run-bot-reminder-cycle.mjs",
     "run:daily-content-chooser": "node scripts/run-daily-content-chooser.mjs",
     "run:daily-content-dispatch": "node scripts/run-daily-content-dispatch.mjs",
     "run:daily-content-cycle": "node scripts/run-daily-content-cycle.mjs",
