@@ -418,3 +418,31 @@ Bot-funnel observability now includes callback lifecycle quality, not just remin
   - average and p95 completion time
 
 This is intended to surface “tap -> spinner -> no obvious UI change” regressions before they have to be diagnosed only from manual user reports.
+
+## SEO Performance Board (2026-04-25)
+
+A reproducible SEO performance board now exists:
+
+- script:
+  - `scripts/run-seo-performance-board.mjs`
+- npm command:
+  - `npm run run:seo-performance-board`
+
+The board reports:
+
+- top pages by impressions / clicks
+- low-CTR opportunities
+- high-CTR low-impression pages
+- impression-to-redirect gaps
+- zero-visibility SEO pages
+- top queries
+- cannibalization candidates
+
+Current practical reading after a VPS-backed GSC smoke:
+
+- the tooling is now ready
+- real live Search Console signal is still extremely small
+- `/` is currently the only clearly visible path in the sampled window
+- most SEO landing pages still behave like zero-visibility inventory
+
+This means the immediate constraint is no longer “missing SEO observability”, but low live search/indexing volume for the newer landing-page cluster.

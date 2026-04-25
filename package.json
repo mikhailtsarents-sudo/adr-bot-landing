@@ -41,6 +41,7 @@
     "run:seo-page-refresh": "node scripts/run-seo-page-refresh.mjs",
     "run:seo-page-create": "node scripts/run-seo-page-create.mjs",
     "run:seo-page-audit": "node scripts/run-seo-page-audit.mjs",
+    "run:seo-performance-board": "node scripts/run-seo-performance-board.mjs",
     "run:runtime-health-snapshot": "node scripts/run-runtime-health-snapshot.mjs",
     "run:youtube-oauth-bootstrap": "node scripts/run-youtube-oauth-bootstrap.mjs",
     "run:youtube-direct-upload": "node scripts/run-youtube-direct-upload.mjs",

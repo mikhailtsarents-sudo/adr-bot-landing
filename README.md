@@ -44,6 +44,22 @@ Callback UX telemetry is now also available in the bot-funnel dashboard layer:
   - render modes
   - average + p95 completion time
 
+SEO performance board is now also available:
+
+```bash
+npm run run:seo-performance-board
+```
+
+It builds a reusable SEO report for:
+
+- top pages by impressions / clicks
+- low-CTR opportunities
+- high-CTR low-impression pages
+- impression-to-redirect gaps
+- zero-visibility SEO pages
+- top queries
+- cannibalization candidates
+
 ## Local Development
 
 Run the dev server:

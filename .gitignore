@@ -47,6 +47,7 @@ yarn-error.log*
 /question-autopilot-runs/
 /autonomous-production-test-runs/
 /intent-to-content-runs/
+/seo-performance-runs/
 /preview-smoke-runs/
 /runtime-health-runs/
 /runtime-archive/
