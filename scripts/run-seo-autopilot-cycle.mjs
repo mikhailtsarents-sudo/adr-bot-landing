@@ -165,7 +165,10 @@ function buildCommitMessage(refreshedSlugs, createdSlugs) {
 }
 
 async function gitCommitAndPush(refreshedSlugs, createdSlugs, dryRun) {
-  const stagePaths = ["src/lib/seo-pages.ts", "src/app/"];
+  const stagePaths = [
+    "src/lib/seo-pages.ts",
+    ...createdSlugs.map((slug) => path.join("src", "app", slug, "page.tsx")),
+  ];
   const commitMsg = buildCommitMessage(refreshedSlugs, createdSlugs);
 
   if (dryRun) {
@@ -177,7 +180,7 @@ async function gitCommitAndPush(refreshedSlugs, createdSlugs, dryRun) {
     };
   }
 
-  for (const stagePath of stagePaths) {
+  for (const stagePath of [...new Set(stagePaths)]) {
     const addResult = runGit(["add", stagePath]);
     if (addResult.status !== 0) {
       throw new Error(`git add failed for ${stagePath}: ${addResult.stderr}`);
