@@ -313,7 +313,16 @@ function clampTitle(value, limit = 50) {
   return (boundary > 18 ? slice.slice(0, boundary) : source.slice(0, limit)).trim();
 }
 
-function buildQuestionTitleVariants(questionInput, scenario, variation = null) {
+function pickTitleVariantIndex(renderTaskId) {
+  if (!renderTaskId) return 0;
+  let hash = 0;
+  for (let i = 0; i < renderTaskId.length; i++) {
+    hash = (hash * 31 + renderTaskId.charCodeAt(i)) >>> 0;
+  }
+  return hash % 3;
+}
+
+function buildQuestionTitleVariants(questionInput, scenario, variation = null, renderTaskId = "") {
   const questionText = text(questionInput.payload?.question_text);
   const correctAnswer = text(questionInput.payload?.correct_answer);
   const category = text(questionInput.payload?.category);
@@ -363,8 +372,11 @@ function buildQuestionTitleVariants(questionInput, scenario, variation = null) {
     .filter(Boolean)
     .join("\n");
 
+  const variantIndex = pickTitleVariantIndex(renderTaskId);
+  const selected = variants[variantIndex] || variants[0] || clampTitle(text(scenario.hook_text) || questionText);
+
   return {
-    selected_title: variants[0] || clampTitle(text(scenario.hook_text) || questionText),
+    selected_title: selected,
     title_variant_a: variants[0] || "",
     title_variant_b: variants[1] || "",
     title_variant_c: variants[2] || "",
@@ -703,7 +715,7 @@ function buildRenderTask(questionInput, scenario, audioSource = {}, options = {}
 
   const voiceoverDurationSec = Number(audioSource.voiceoverDurationSec || 0);
   const durationTargetSec = voiceoverDurationSec > 0 ? Math.max(11, Math.ceil(voiceoverDurationSec)) : 10;
-  const titles = buildQuestionTitleVariants(questionInput, scenario);
+  const titles = buildQuestionTitleVariants(questionInput, scenario, null, renderTaskId);
   const youtubeAttribution = appendYoutubeTelegramAttribution(
     titles.description || [shortenedTitle, correctAnswer, explanation].filter(Boolean).join("\n"),
     { contentId: renderTaskId, surface: "shorts" },
@@ -1123,7 +1135,7 @@ async function main() {
   renderTask.voice_script = text(voiceoverAsset.voiceScript);
   renderTask.voice_generated_from_question = Boolean(voiceoverAsset.generatedFromQuestion);
   renderTask.variation = buildVariationTag(args);
-  const finalTitles = buildQuestionTitleVariants(questionInput, scenario, renderTask.variation);
+  const finalTitles = buildQuestionTitleVariants(questionInput, scenario, renderTask.variation, renderTask.render_task_id);
   renderTask.title = finalTitles.selected_title;
   renderTask.title_variant_a = finalTitles.title_variant_a;
   renderTask.title_variant_b = finalTitles.title_variant_b;

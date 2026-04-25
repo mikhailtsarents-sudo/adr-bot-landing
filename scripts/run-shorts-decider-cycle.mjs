@@ -502,6 +502,21 @@ async function main() {
   let youtubeUrl = "";
   let downstreamError = "";
 
+  // Save family history immediately after decision so streak penalties apply
+  // even if the downstream executor fails. Without this, a family that always
+  // fails never accumulates streak entries and keeps winning on base score.
+  if (!args.skipExecute && !args.skipPublish) {
+    const earlyHistory = appendShortsFamilyHistory(familyHistoryEntries, {
+      family: decision.selected_family,
+      selected_at: new Date().toISOString(),
+      trace_id: traceId,
+      selected_source_id: decision.selected_source_id,
+      youtube_url: "",
+      downstream_report_path: "",
+    });
+    await saveShortsFamilyHistory(args.familyHistoryPath, earlyHistory);
+  }
+
   try {
     if (!args.skipExecute) {
       const invocation = buildExecutorInvocation(decision.selected_family, args);
@@ -511,18 +526,6 @@ async function main() {
         || parseOutputPath(downstreamStdout, "dispatch_report");
       const publishUrlMatch = String(downstreamStdout).match(/youtube_urls=([^\n]+)/);
       youtubeUrl = publishUrlMatch ? text(publishUrlMatch[1].split(",")[0]) : "";
-
-      if (!args.skipPublish) {
-        const nextFamilyHistory = appendShortsFamilyHistory(familyHistoryEntries, {
-          family: decision.selected_family,
-          selected_at: new Date().toISOString(),
-          trace_id: traceId,
-          selected_source_id: decision.selected_source_id,
-          youtube_url: youtubeUrl,
-          downstream_report_path: downstreamReportPath,
-        });
-        await saveShortsFamilyHistory(args.familyHistoryPath, nextFamilyHistory);
-      }
     }
   } catch (error) {
     downstreamError = text(error?.message || error);
