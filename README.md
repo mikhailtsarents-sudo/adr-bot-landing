@@ -69,6 +69,21 @@ Live/managed paths include:
 
 These pages are intended to stay public and indexable. They do not need to dominate the main navigation to be valuable for Google.
 
+Deep local audit of these pages is now reproducible:
+
+```bash
+npm run run:seo-page-audit
+```
+
+This generates a local JSON + Markdown report under `reports/<slug>/` with:
+
+- top pages by views and redirects
+- overlap / cannibalization pairs
+- thin-page warnings
+- FAQ gaps
+- internal linking gaps
+- Search Console winners when GSC auth is configured
+
 ## Analytics
 
 The landing emits:

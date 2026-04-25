@@ -160,6 +160,55 @@ node scripts/run-seo-autopilot-cycle.mjs
 - Monitor which landing pages earn impressions and clicks via [[📡 Google Search Console]]
 - VPS needs git push credentials configured for the full automated loop
 
+### SEO Winner Audit — reproducible audit layer added (2026-04-25)
+
+A deep winner-page audit is no longer just a manual one-off review.
+
+New local script:
+
+```bash
+npm run run:seo-page-audit
+```
+
+It now generates:
+
+- `reports/<slug>/seo_page_audit.json`
+- `reports/<slug>/seo_page_audit.md`
+
+Current audit checks:
+
+- top pages by 30d views
+- top pages by 30d redirects
+- overlap / cannibalization pairs
+- thin or weak pages
+- FAQ gaps
+- internal linking gaps
+- Search Console winners when local/server GSC auth exists
+
+First local result on `2026-04-25`:
+
+- `30` SEO pages audited
+- analytics rows available:
+  - `33`
+- Search Console rows:
+  - `0`
+- local blocker:
+  - no local `GSC_ACCESS_TOKEN` or `GSC_SERVICE_ACCOUNT_KEY_PATH`
+
+Main current findings:
+
+- measurable 30d traffic is still concentrated almost entirely in:
+  - `/adr-pruefung-auf-deutsch`
+  - `/adr-begriffe`
+- strongest remaining overlap pairs now include:
+  - `/adr-pruefung-auf-deutsch` <-> `/adr-pruefung-deutsch-lernen`
+  - `/adr-kurs-deutsch` <-> `/adr-schein-deutsch`
+  - `/adr-telegram-bot-deutsch` <-> `/adr-lernhilfe-deutsch`
+- biggest remaining page-quality debt now is:
+  - thin FAQ depth on many pages
+  - overly generic hub-heavy related links on many pages
+  - very little real traffic yet on most newly created SEO pages
+
 ### Image Generation — Flux AI upgrade (done 2026-04-22)
 
 - Default model switched from `fal-ai/flux/dev` → `fal-ai/flux-realism` (photorealism LoRA, better skin/material detail)

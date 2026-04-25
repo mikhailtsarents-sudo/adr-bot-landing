@@ -40,6 +40,7 @@
     "run:seo-expansion-worker": "node scripts/run-seo-expansion-worker.mjs",
     "run:seo-page-refresh": "node scripts/run-seo-page-refresh.mjs",
     "run:seo-page-create": "node scripts/run-seo-page-create.mjs",
+    "run:seo-page-audit": "node scripts/run-seo-page-audit.mjs",
     "run:youtube-oauth-bootstrap": "node scripts/run-youtube-oauth-bootstrap.mjs",
     "run:youtube-direct-upload": "node scripts/run-youtube-direct-upload.mjs",
     "generate:canva-manifest": "node scripts/generate-canva-manifest.mjs",
