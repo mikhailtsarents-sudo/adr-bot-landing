@@ -183,6 +183,15 @@ export function inHolidaySkipWindow(now = new Date()) {
   return ["12-24", "12-25", "12-26", "12-31", "01-01"].includes(monthDay);
 }
 
+function withinPreferredHourWindow(now, preferredHour, toleranceHours = 2) {
+  const hour = Number(preferredHour);
+  if (!Number.isFinite(hour) || hour < 0 || hour > 23) return true;
+  const currentHour = berlinHour(now);
+  const directGap = Math.abs(currentHour - hour);
+  const wrappedGap = 24 - directGap;
+  return Math.min(directGap, wrappedGap) <= toleranceHours;
+}
+
 function daysBetween(now, isoOrDate) {
   const value = isoOrDate ? new Date(isoOrDate) : null;
   if (!value || Number.isNaN(value.getTime())) return Number.POSITIVE_INFINITY;
@@ -328,6 +337,17 @@ export function decideReminder(candidate, now = new Date()) {
   ) {
     return { send: false, reason: "too_many_ignored", promote_to_rare: true };
   }
+  if (
+    segment !== "start_no_action" &&
+    segment !== "exam_mode" &&
+    !withinPreferredHourWindow(now, candidate.preferred_learning_hour_berlin)
+  ) {
+    return {
+      send: false,
+      reason: "preferred_hour_window",
+      preferred_learning_hour_berlin: Number(candidate.preferred_learning_hour_berlin),
+    };
+  }
 
   const language = resolveReminderLanguage(candidate);
   const reminderType = reminderTypeForDecision(segment, sequenceStep);
@@ -403,6 +423,9 @@ export function decideReminder(candidate, now = new Date()) {
     recent_learning_actions_7d: Number(candidate.recent_learning_actions_7d || 0),
     recent_learning_actions_30d: Number(candidate.recent_learning_actions_30d || 0),
     recent_active_days_7d: Number(candidate.recent_active_days_7d || 0),
+    preferred_learning_hour_berlin: Number.isFinite(Number(candidate.preferred_learning_hour_berlin))
+      ? Number(candidate.preferred_learning_hour_berlin)
+      : null,
     exam_days_left: examText?.daysLeft ?? null,
     exam_intensity: segment === "exam_mode" ? text(candidate.exam_reminder_intensity || "normal") : "",
     hours_since_meaningful_activity: Number.isFinite(hoursBetween(now, candidate.last_meaningful_activity_at))
