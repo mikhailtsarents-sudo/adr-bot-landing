@@ -211,10 +211,32 @@ export function deriveReminderSegment(candidate) {
   return "free_inactive";
 }
 
+function roundCadenceDay(value) {
+  return Math.max(1, Math.round(value));
+}
+
+export function deriveCadenceModifier(segment, candidate) {
+  if (segment === "exam_mode" || segment === "rare_mode" || segment === "start_no_action") {
+    return { modifier: "none", factor: 1 };
+  }
+
+  const learning7d = Number(candidate.recent_learning_actions_7d || 0);
+  const learning30d = Number(candidate.recent_learning_actions_30d || 0);
+  const activeDays7d = Number(candidate.recent_active_days_7d || 0);
+
+  if (learning7d >= 10 || activeDays7d >= 4) {
+    return { modifier: "sprint", factor: 1.5 };
+  }
+
+  if (learning30d > 0 && learning30d <= 2 && activeDays7d <= 1) {
+    return { modifier: "slow_burn", factor: 2 };
+  }
+
+  return { modifier: "none", factor: 1 };
+}
+
 function cadenceDaysForSegment(segment, candidate, now = new Date()) {
   if (segment === "start_no_action") return [1, 4, 10];
-  if (segment === "free_inactive") return [5, 14, 30];
-  if (segment === "full_access_inactive") return [4, 10, 21];
   if (segment === "rare_mode") return [60];
   if (segment === "exam_mode") {
     const daysLeft = examDaysLeft(now, candidate.exam_date);
@@ -226,7 +248,11 @@ function cadenceDaysForSegment(segment, candidate, now = new Date()) {
     if (daysLeft < 30) return [2];
     return [4];
   }
-  return [5];
+
+  const baseCadence = segment === "full_access_inactive" ? [4, 10, 21] : [5, 14, 30];
+  const { factor } = deriveCadenceModifier(segment, candidate);
+  if (factor === 1) return baseCadence;
+  return baseCadence.map((days) => roundCadenceDay(days * factor));
 }
 
 function baseTimestampForSegment(segment, candidate) {
@@ -284,6 +310,7 @@ export function decideReminder(candidate, now = new Date()) {
   const segment = deriveReminderSegment(candidate);
   const cadenceDays = cadenceDaysForSegment(segment, candidate, now);
   if (!cadenceDays.length) return { send: false, reason: "no_cadence" };
+  const cadenceModifier = deriveCadenceModifier(segment, candidate);
 
   const sequenceStep = Math.max(0, Number(candidate.reminder_sequence_step || 0));
   const cadenceIndex = Math.min(sequenceStep, cadenceDays.length - 1);
@@ -371,6 +398,11 @@ export function decideReminder(candidate, now = new Date()) {
     text: textBody,
     reply_markup: { inline_keyboard: buttons },
     next_reminder_due_at: nextReminderDueAt,
+    cadence_modifier: cadenceModifier.modifier,
+    cadence_days: cadenceDays,
+    recent_learning_actions_7d: Number(candidate.recent_learning_actions_7d || 0),
+    recent_learning_actions_30d: Number(candidate.recent_learning_actions_30d || 0),
+    recent_active_days_7d: Number(candidate.recent_active_days_7d || 0),
     exam_days_left: examText?.daysLeft ?? null,
     exam_intensity: segment === "exam_mode" ? text(candidate.exam_reminder_intensity || "normal") : "",
     hours_since_meaningful_activity: Number.isFinite(hoursBetween(now, candidate.last_meaningful_activity_at))
