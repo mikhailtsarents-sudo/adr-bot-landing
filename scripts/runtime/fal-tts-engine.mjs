@@ -26,7 +26,7 @@ export async function synthesizeVoiceoverToFile(outputPath, scriptText, voice = 
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      input: scriptText,
+      prompt: scriptText,
       voice,
       speed: 0.95,
     }),
