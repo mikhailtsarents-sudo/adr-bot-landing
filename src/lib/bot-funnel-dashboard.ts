@@ -1,4 +1,5 @@
 import type { BotFunnelRow } from "@/lib/bot-funnel-storage";
+import type { ReminderPhase12LivePreview } from "@/lib/reminder-phase12-preview";
 import type { ReminderStateSnapshot } from "@/lib/reminder-state-storage";
 
 export type DashboardPeriodKey = "today" | "days_7" | "days_30";
@@ -95,6 +96,7 @@ export type BotFunnelDashboard = {
     weak_tracks: SourceBreakdown[];
     preferred_hours: SourceBreakdown[];
   };
+  reminder_phase12_live_preview: ReminderPhase12LivePreview;
   top_sources_30d: SourceBreakdown[];
   top_kurs_30d: SourceBreakdown[];
   event_mix_30d: { event_type: string; count: number }[];
@@ -265,10 +267,15 @@ function buildPeriodBucket({
 
 export function buildBotFunnelDashboard(
   rows: BotFunnelRow[],
-  options: { timeZone?: string; reminderState?: ReminderStateSnapshot | null } = {},
+  options: {
+    timeZone?: string;
+    reminderState?: ReminderStateSnapshot | null;
+    reminderPhase12LivePreview?: ReminderPhase12LivePreview | null;
+  } = {},
 ): BotFunnelDashboard {
   const timeZone = options.timeZone ?? "Europe/Berlin";
   const reminderState = options.reminderState ?? null;
+  const reminderPhase12LivePreview = options.reminderPhase12LivePreview ?? null;
   const now = new Date();
   const sinceToday = getStartOfDayInTimezone(0, timeZone);
   const since7d = getStartOfDayInTimezone(6, timeZone);
@@ -489,6 +496,13 @@ export function buildBotFunnelDashboard(
       cadence_modifiers: cadenceModifiers30d,
       weak_tracks: weakTracks30d,
       preferred_hours: preferredHours30d,
+    },
+    reminder_phase12_live_preview: {
+      candidate_total: Number(reminderPhase12LivePreview?.candidate_total || 0),
+      due_now: Number(reminderPhase12LivePreview?.due_now || 0),
+      due_segments: reminderPhase12LivePreview?.due_segments ?? [],
+      due_modifiers: reminderPhase12LivePreview?.due_modifiers ?? [],
+      skip_reasons: reminderPhase12LivePreview?.skip_reasons ?? [],
     },
     top_sources_30d,
     top_kurs_30d,

@@ -1,6 +1,7 @@
 import { buildBotFunnelDashboard } from "@/lib/bot-funnel-dashboard";
 import { hasBotFunnelStorageConfig, readBotFunnelRows } from "@/lib/bot-funnel-storage";
-import { readReminderStateSnapshot } from "@/lib/reminder-state-storage";
+import { buildReminderPhase12LivePreview } from "@/lib/reminder-phase12-preview";
+import { readReminderCandidates, readReminderStateSnapshot } from "@/lib/reminder-state-storage";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -24,13 +25,21 @@ export async function GET(request: Request) {
     });
 
     let reminderState = null;
+    let reminderPhase12LivePreview = null;
     try {
       reminderState = await readReminderStateSnapshot();
+      const reminderCandidates = await readReminderCandidates(500);
+      reminderPhase12LivePreview = buildReminderPhase12LivePreview(reminderCandidates);
     } catch {
       reminderState = null;
+      reminderPhase12LivePreview = null;
     }
 
-    const dashboard = buildBotFunnelDashboard(rows, { timeZone, reminderState });
+    const dashboard = buildBotFunnelDashboard(rows, {
+      timeZone,
+      reminderState,
+      reminderPhase12LivePreview,
+    });
 
     return NextResponse.json(
       { ok: true, dashboard },

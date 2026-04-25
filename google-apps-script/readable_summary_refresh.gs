@@ -166,6 +166,13 @@ function emptyBotFunnelDashboard_() {
       weak_tracks: [],
       preferred_hours: [],
     },
+    reminder_phase12_live_preview: {
+      candidate_total: 0,
+      due_now: 0,
+      due_segments: [],
+      due_modifiers: [],
+      skip_reasons: [],
+    },
     top_sources_30d: [],
     top_kurs_30d: [],
     event_mix_30d: [],
@@ -217,6 +224,7 @@ function buildReadableSummaryRows_(context) {
   const reminder30d = botFunnelDashboard.reminder_30d || {};
   const reminderState = botFunnelDashboard.reminder_state || {};
   const reminderPhase12 = botFunnelDashboard.reminder_phase12_30d || {};
+  const reminderPhase12LivePreview = botFunnelDashboard.reminder_phase12_live_preview || {};
   const sourceCounts30d = botFunnelDashboard.top_sources_30d || [];
   const eventMix30d = botFunnelDashboard.event_mix_30d || [];
   const topKurs30d = botFunnelDashboard.top_kurs_30d || [];
@@ -574,6 +582,38 @@ function buildReadableSummaryRows_(context) {
   rows.push([
     "Preferred hours",
     formatSourceBreakdown_(reminderPhase12.preferred_hours || []),
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push(["Reminder Phase 12 live preview", "Количество", "", "", "", "", ""]);
+  rows.push(["Candidates now", number_(reminderPhase12LivePreview.candidate_total), "", "", "", "", ""]);
+  rows.push(["Due now", number_(reminderPhase12LivePreview.due_now), "", "", "", "", ""]);
+  rows.push([
+    "Due segments",
+    formatSourceBreakdown_(reminderPhase12LivePreview.due_segments || []),
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Due modifiers",
+    formatSourceBreakdown_(reminderPhase12LivePreview.due_modifiers || []),
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Skip reasons now",
+    formatSourceBreakdown_(reminderPhase12LivePreview.skip_reasons || []),
     "",
     "",
     "",
