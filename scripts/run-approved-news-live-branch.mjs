@@ -405,32 +405,46 @@ function buildNewsVoiceoverScript(approvedNews, scenarioResponse) {
 
 function probeAudioDurationSec(localPath) {
   if (!text(localPath)) return 0;
-  const result = spawnSync("afinfo", [localPath], {
-    cwd: repoRoot,
-    encoding: "utf8",
-    stdio: "pipe",
-  });
-  if (result.status !== 0) return 0;
-  const output = `${result.stdout || ""}\n${result.stderr || ""}`;
-  const match = output.match(/estimated duration:\s*([0-9.]+)\s*sec/i);
-  return match ? Number(match[1]) || 0 : 0;
+  const ffprobe = spawnSync(
+    "ffprobe",
+    ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", localPath],
+    { cwd: repoRoot, encoding: "utf8", stdio: "pipe" },
+  );
+  if (ffprobe.status === 0 && text(ffprobe.stdout)) {
+    const dur = Number(ffprobe.stdout.trim());
+    if (dur > 0) return dur;
+  }
+  const afinfo = spawnSync("afinfo", [localPath], { cwd: repoRoot, encoding: "utf8", stdio: "pipe" });
+  if (afinfo.status === 0) {
+    const match = `${afinfo.stdout || ""}\n${afinfo.stderr || ""}`.match(/estimated duration:\s*([0-9.]+)\s*sec/i);
+    if (match) return Number(match[1]) || 0;
+  }
+  return 0;
 }
 
 async function resolveNewsVoiceoverAsset(outputDir, approvedNews, scenarioResponse) {
   const voiceScript = buildNewsVoiceoverScript(approvedNews, scenarioResponse);
   const voiceoverTargetPath = path.join(outputDir, "voiceover.mp3");
-  await synthesizeVoiceoverToFile(voiceoverTargetPath, voiceScript, DEFAULT_NEWS_TTS_VOICE);
-  const temporaryUpload = await uploadFileToTemporaryHost(voiceoverTargetPath, {
-    diagnosticsDir: outputDir,
-    frameId: "news_voiceover",
-    expectedMimePrefixes: ["audio/", "application/octet-stream"],
-  });
-  return {
-    voiceoverUrl: temporaryUpload.uploadedUrl,
-    voiceScript,
-    voiceMode: "tts",
-    voiceoverDurationSec: probeAudioDurationSec(voiceoverTargetPath),
-  };
+  try {
+    const generated = await synthesizeVoiceoverToFile(voiceoverTargetPath, voiceScript, DEFAULT_NEWS_TTS_VOICE);
+    if (!generated) {
+      return { voiceoverUrl: "", voiceScript, voiceMode: "tts_skipped", voiceoverDurationSec: 0 };
+    }
+    const temporaryUpload = await uploadFileToTemporaryHost(voiceoverTargetPath, {
+      diagnosticsDir: outputDir,
+      frameId: "news_voiceover",
+      expectedMimePrefixes: ["audio/", "application/octet-stream"],
+    });
+    return {
+      voiceoverUrl: temporaryUpload.uploadedUrl,
+      voiceScript,
+      voiceMode: "tts",
+      voiceoverDurationSec: probeAudioDurationSec(voiceoverTargetPath),
+    };
+  } catch (error) {
+    console.warn(`NEWS TTS generation failed, continuing without audio: ${error.message}`);
+    return { voiceoverUrl: "", voiceScript, voiceMode: "tts_failed", voiceoverDurationSec: 0 };
+  }
 }
 
 function extractTimelineEnd(renderPayload) {
@@ -498,12 +512,6 @@ async function validatePreparedNewsPackage(packageDir) {
     issues.push(`Expected 6 image slides, got ${slideSrcs.length}`);
   }
   const shotstackVoiceoverUrl = text(shotstackInput?.audio?.voiceover_url);
-  if (!shotstackVoiceoverUrl) {
-    issues.push("Shotstack input is missing audio.voiceover_url");
-  }
-  if (audioSrcs.length === 0) {
-    issues.push("Shotstack payload is missing audio clip");
-  }
   if (shotstackVoiceoverUrl && audioSrcs.length > 0 && !audioSrcs.includes(shotstackVoiceoverUrl)) {
     issues.push("Shotstack payload audio clip does not match shotstack input voiceover URL");
   }

@@ -258,20 +258,22 @@ async function stageGeneratedAssetDirectoryLocally({
 }
 
 function probeAudioDurationSec(localPath) {
-  if (!text(localPath)) {
-    return 0;
+  if (!text(localPath)) return 0;
+  const ffprobe = spawnSync(
+    "ffprobe",
+    ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", localPath],
+    { cwd: repoRoot, encoding: "utf8", stdio: "pipe" },
+  );
+  if (ffprobe.status === 0 && text(ffprobe.stdout)) {
+    const dur = Number(ffprobe.stdout.trim());
+    if (dur > 0) return dur;
   }
-  const result = spawnSync("afinfo", [localPath], {
-    cwd: repoRoot,
-    encoding: "utf8",
-    stdio: "pipe",
-  });
-  if (result.status !== 0) {
-    return 0;
+  const afinfo = spawnSync("afinfo", [localPath], { cwd: repoRoot, encoding: "utf8", stdio: "pipe" });
+  if (afinfo.status === 0) {
+    const match = `${afinfo.stdout || ""}\n${afinfo.stderr || ""}`.match(/estimated duration:\s*([0-9.]+)\s*sec/i);
+    if (match) return Number(match[1]) || 0;
   }
-  const output = `${result.stdout || ""}\n${result.stderr || ""}`;
-  const match = output.match(/estimated duration:\s*([0-9.]+)\s*sec/i);
-  return match ? Number(match[1]) || 0 : 0;
+  return 0;
 }
 
 function text(value) {
