@@ -145,6 +145,25 @@ function count(rows: BotFunnelRow[], predicate: (r: BotFunnelRow) => boolean): n
   return rows.filter(predicate).length;
 }
 
+function uniqueUsers(rows: BotFunnelRow[], predicate: (r: BotFunnelRow) => boolean): Set<string> {
+  const values = new Set<string>();
+  for (const row of rows) {
+    if (!predicate(row)) continue;
+    const userId = String(row.user_id || "").trim();
+    if (!userId) continue;
+    values.add(userId);
+  }
+  return values;
+}
+
+function intersectionSize(left: Set<string>, right: Set<string>): number {
+  let total = 0;
+  for (const value of left) {
+    if (right.has(value)) total += 1;
+  }
+  return total;
+}
+
 function roundRate(value: number): number {
   if (!Number.isFinite(value)) return 0;
   return Number(value.toFixed(4));
@@ -203,6 +222,19 @@ function buildPeriodBucket({
   const reminderReactivated = count(scopedRows, (r) => r.event_type === "reminder_reactivated");
   const reminderOptedOut = count(scopedRows, (r) => r.event_type === "reminder_opted_out");
   const reminderDeliveryFailed = count(scopedRows, (r) => r.event_type === "reminder_delivery_failed");
+  const startUsers = uniqueUsers(scopedRows, (r) => r.event_type === "bot_started");
+  const firstActionUsers = uniqueUsers(
+    scopedRows,
+    (r) => r.event_type === "word_session_started" || r.event_type === "quiz_started",
+  );
+  const buyIntentUsers = uniqueUsers(scopedRows, (r) => r.event_type === "full_access_buy_click");
+  const reminderSentUsers = uniqueUsers(scopedRows, (r) => r.event_type === "reminder_sent");
+  const reminderClickedUsers = uniqueUsers(scopedRows, (r) => r.event_type === "reminder_clicked");
+  const reminderReactivatedUsers = uniqueUsers(scopedRows, (r) => r.event_type === "reminder_reactivated");
+  const startToFirstActionUsers = intersectionSize(startUsers, firstActionUsers);
+  const startToBuyIntentUsers = intersectionSize(startUsers, buyIntentUsers);
+  const reminderClickedFromSentUsers = intersectionSize(reminderSentUsers, reminderClickedUsers);
+  const reminderReactivatedFromSentUsers = intersectionSize(reminderSentUsers, reminderReactivatedUsers);
 
   return {
     period_key: periodKey,
@@ -224,10 +256,10 @@ function buildPeriodBucket({
     reminder_reactivated: reminderReactivated,
     reminder_opted_out: reminderOptedOut,
     reminder_delivery_failed: reminderDeliveryFailed,
-    start_to_first_action_rate: roundRate(botStarts > 0 ? firstActions / botStarts : 0),
-    start_to_buy_intent_rate: roundRate(botStarts > 0 ? buyIntent / botStarts : 0),
-    reminder_click_rate: roundRate(reminderSent > 0 ? reminderClicked / reminderSent : 0),
-    reminder_reactivation_rate: roundRate(reminderSent > 0 ? reminderReactivated / reminderSent : 0),
+    start_to_first_action_rate: roundRate(startUsers.size > 0 ? startToFirstActionUsers / startUsers.size : 0),
+    start_to_buy_intent_rate: roundRate(startUsers.size > 0 ? startToBuyIntentUsers / startUsers.size : 0),
+    reminder_click_rate: roundRate(reminderSentUsers.size > 0 ? reminderClickedFromSentUsers / reminderSentUsers.size : 0),
+    reminder_reactivation_rate: roundRate(reminderSentUsers.size > 0 ? reminderReactivatedFromSentUsers / reminderSentUsers.size : 0),
   };
 }
 
@@ -250,7 +282,7 @@ export function buildBotFunnelDashboard(
   // Funnel — ordered steps with drop-off
   const stepCounts: Record<string, number> = {};
   for (const step of FUNNEL_STEPS) {
-    stepCounts[step] = count(rows30d, (r) => r.event_type === step);
+    stepCounts[step] = uniqueUsers(rows30d, (r) => r.event_type === step).size;
   }
 
   const topStep = stepCounts["bot_started"] || stepCounts["course_selected"] || 1;
@@ -290,6 +322,9 @@ export function buildBotFunnelDashboard(
   const reminderReactivated = count(rows30d, (r) => r.event_type === "reminder_reactivated");
   const reminderOptedOut = count(rows30d, (r) => r.event_type === "reminder_opted_out");
   const reminderDeliveryFailed = count(rows30d, (r) => r.event_type === "reminder_delivery_failed");
+  const reminderSentUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_sent");
+  const reminderClickedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_clicked");
+  const reminderReactivatedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_reactivated");
   const reminderSentRows = rows30d.filter((r) => r.event_type === "reminder_sent");
   const cadenceModifiers30d = breakdown(
     reminderSentRows.map((r) => metadataText(r, "cadence_modifier")).filter(Boolean),
@@ -430,8 +465,12 @@ export function buildBotFunnelDashboard(
       reactivated: reminderReactivated,
       opted_out: reminderOptedOut,
       delivery_failed: reminderDeliveryFailed,
-      click_rate: reminderSent > 0 ? Math.round((reminderClicked / reminderSent) * 100) : 0,
-      reactivation_rate: reminderSent > 0 ? Math.round((reminderReactivated / reminderSent) * 100) : 0,
+      click_rate: reminderSentUsers30d.size > 0
+        ? Math.round((intersectionSize(reminderSentUsers30d, reminderClickedUsers30d) / reminderSentUsers30d.size) * 100)
+        : 0,
+      reactivation_rate: reminderSentUsers30d.size > 0
+        ? Math.round((intersectionSize(reminderSentUsers30d, reminderReactivatedUsers30d) / reminderSentUsers30d.size) * 100)
+        : 0,
     },
     reminder_state: {
       total_users: Number(reminderState?.summary.total_users || 0),
