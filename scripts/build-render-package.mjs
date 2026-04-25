@@ -417,22 +417,29 @@ function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabl
     ? Math.max(...timeline.map((s) => Number(s.end_sec || 0)))
     : durationTargetSec;
   const audioLength = Number(Math.max(durationTargetSec, timelineEndSec).toFixed(2));
-  const soundtrackSrc = voiceoverUrl || musicUrl;
-  const audioTrack =
-    soundtrackSrc
-        ? {
-            clips: [
-              {
-                asset: {
-                  type: "audio",
-                  src: soundtrackSrc,
-                },
-                start: 0,
-                length: audioLength,
-              },
-            ],
-          }
-      : null;
+  const musicVolume = Number(input.music_volume ?? (voiceoverUrl ? 0.12 : 0.30));
+  const voiceoverTrack = voiceoverUrl
+    ? {
+        clips: [{
+          asset: { type: "audio", src: voiceoverUrl },
+          start: 0,
+          length: audioLength,
+          volume: 1.0,
+        }],
+      }
+    : null;
+  const musicBedTrack = musicUrl
+    ? {
+        clips: [{
+          asset: { type: "audio", src: musicUrl },
+          start: 0,
+          length: audioLength,
+          volume: musicVolume,
+        }],
+      }
+    : null;
+  // Legacy single-track fallback when only one audio source is present
+  const audioTrack = voiceoverTrack || (!musicBedTrack && null);
 
   return {
     timeline: {
@@ -440,7 +447,8 @@ function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabl
       tracks: [
         ...(styledCaptionClips.length > 0 ? [{ clips: styledCaptionClips }] : []),
         backgroundTrack,
-        ...(audioTrack ? [audioTrack] : []),
+        ...(voiceoverTrack ? [voiceoverTrack] : []),
+        ...(musicBedTrack ? [musicBedTrack] : []),
       ],
     },
     output: {

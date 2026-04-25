@@ -9,6 +9,7 @@ import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { prepareGenericGeneratedVisualPackage } from "./render/prepare-generic-generated-visuals.mjs";
 import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
 import { enhanceNewsScenesWithGpt } from "./render/creative-planner.mjs";
+import { selectMusicBed } from "./runtime/music-bed-selector.mjs";
 import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -386,6 +387,8 @@ function buildRenderTask(approvedNews, scenarioResponse, newsPackage) {
     audio_policy: text(approvedNews.voiceover_url) ? "voiceover_only_news_test" : "none_for_first_visual_test",
     voice_mode: text(approvedNews.voice_mode) || (text(approvedNews.voiceover_url) ? "voiceover" : "none"),
     voiceover_url: text(approvedNews.voiceover_url),
+    music_url: selectMusicBed("NEWS", { hasVoiceover: Boolean(text(approvedNews.voiceover_url)) })?.url || "",
+    music_volume: selectMusicBed("NEWS", { hasVoiceover: Boolean(text(approvedNews.voiceover_url)) })?.volume ?? null,
     voice_script: text(approvedNews.voice_script),
     bridge_draft_id: text(row.draft_id),
     version: text(row.version) || "1",

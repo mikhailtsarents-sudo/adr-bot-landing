@@ -11,6 +11,7 @@ import { bootstrapLocalRuntimeEnv } from "./runtime/local-runtime-env.mjs";
 import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
 import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 import { enhanceWordScenesWithGpt } from "./render/creative-planner.mjs";
+import { selectMusicBed } from "./runtime/music-bed-selector.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -488,9 +489,12 @@ async function main() {
       Number(voiceoverAsset.voiceoverDurationSec || 0) > 0
         ? Math.max(12, Math.ceil(Number(voiceoverAsset.voiceoverDurationSec)) + 2)
         : renderTask.duration_target_sec;
+    const wordMusicBed = selectMusicBed("WORD", { hasVoiceover: Boolean(text(voiceoverAsset.voiceoverUrl)) });
     renderTask.audio_policy = text(voiceoverAsset.voiceoverUrl) ? "voiceover_only_word_test" : "none_for_first_visual_test";
     renderTask.voice_mode = text(voiceoverAsset.voiceMode) || "none";
     renderTask.voiceover_url = text(voiceoverAsset.voiceoverUrl);
+    renderTask.music_url = wordMusicBed?.url || "";
+    renderTask.music_volume = wordMusicBed?.volume ?? null;
     renderTask.voice_script = text(voiceoverAsset.voiceScript);
     renderTask.voice_generated_from_word = Boolean(voiceoverAsset.generatedFromWord);
     renderTask.generated_visual = {

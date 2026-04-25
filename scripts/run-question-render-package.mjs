@@ -16,6 +16,7 @@ import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime
 import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
+import { selectMusicBed } from "./runtime/music-bed-selector.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -756,6 +757,8 @@ function buildRenderTask(questionInput, scenario, audioSource = {}, options = {}
     audio_policy: text(audioSource.voiceoverUrl) ? "voiceover_only_question_test" : "none_for_first_visual_test",
     voice_mode: text(audioSource.voiceMode) || (text(audioSource.voiceoverUrl) ? "voiceover" : "none"),
     voiceover_url: text(audioSource.voiceoverUrl),
+    music_url: selectMusicBed("QUESTION", { hasVoiceover: Boolean(text(audioSource.voiceoverUrl)) })?.url || "",
+    music_volume: selectMusicBed("QUESTION", { hasVoiceover: Boolean(text(audioSource.voiceoverUrl)) })?.volume ?? null,
     talking_head_url: "",
     talking_head_asset_name: "",
     source_title: `QUESTION source: ${titles.selected_title || shortenedTitle}`,
