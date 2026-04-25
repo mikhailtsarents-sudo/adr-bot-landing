@@ -126,6 +126,53 @@ This does not require:
 - Google OAuth setup in the landing;
 - extra paid analytics tooling.
 
+## Readable summary auto-refresh for Google Sheets
+
+The whole `Понятная сводка` tab now refreshes automatically through a dedicated Apps Script:
+
+- `/Users/mihailcarenc/Documents/New project/adr-bot-landing/google-apps-script/readable_summary_refresh.gs`
+
+What it does:
+
+- fetches live site summary from:
+  - `/api/analytics/dashboard.json`
+- fetches live bot funnel summary from:
+  - `/api/analytics/bot-funnel.json`
+- rebuilds the whole `Понятная сводка` tab in one pass
+- shows clear partial-failure status if one source is temporarily unavailable
+
+Required Apps Script properties:
+
+- `ADR_SITE_ANALYTICS_DASHBOARD_URL`
+  - example:
+    - `https://www.adr-bot.de/api/analytics/dashboard.json?limit=2000`
+- `ADR_BOT_FUNNEL_DASHBOARD_URL`
+  - example:
+    - `https://www.adr-bot.de/api/analytics/bot-funnel.json?limit=2000`
+- `READABLE_SUMMARY_TIMEZONE`
+  - default:
+    - `Europe/Berlin`
+
+Main Apps Script entrypoints:
+
+- `refreshReadableSummary()`
+- `installReadableSummaryTrigger()`
+
+Current live state:
+
+- the tab is already created and populated;
+- hourly trigger is already installed;
+- `bot-funnel.json` is live and returns `ok: true`;
+- `N8N_BOT_FUNNEL_TABLE_ID` is deployed in Vercel runtime.
+
+This is the preferred fix for the old problem where the lower event list in `Понятная сводка` stopped at an older date even though newer live activity existed.
+
+Practical production meaning now:
+
+- the sheet no longer depends on direct self-host `n8n` API access;
+- the Apps Script reads two stable Vercel-facing summaries instead;
+- this removes the old surprise mode where the top block looked fresh but the lower event area stayed stale.
+
 ## Important Production Note About Google Sheets
 
 In practice, direct `IMPORTDATA(...)` may fail or cache earlier bad responses even when the export endpoint itself is healthy.

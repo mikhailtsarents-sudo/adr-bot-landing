@@ -1,0 +1,949 @@
+{
+  "created_at": "2026-04-25T19:59:32.827Z",
+  "runtime_env": {
+    "loaded_from": "/Users/mihailcarenc/Documents/New project/adr-bot-landing/.env.local",
+    "n8n_configured": true,
+    "gsc_configured": false
+  },
+  "source_status": {
+    "analytics": {
+      "status": "ok",
+      "count": 33,
+      "message": ""
+    },
+    "search_console": {
+      "status": "skipped",
+      "count": 0,
+      "message": "Missing GSC_ACCESS_TOKEN or GSC_SERVICE_ACCOUNT_KEY_PATH."
+    }
+  },
+  "page_count": 30,
+  "top_by_views": [
+    {
+      "path": "/adr-begriffe",
+      "views": 2,
+      "cta_clicks": 0,
+      "redirects": 0
+    },
+    {
+      "path": "/adr-pruefung-auf-deutsch",
+      "views": 2,
+      "cta_clicks": 1,
+      "redirects": 1
+    },
+    {
+      "path": "/adr-app-fuer-auslaender",
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0
+    },
+    {
+      "path": "/adr-deutsch-fuer-lkw-fahrer",
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0
+    },
+    {
+      "path": "/adr-deutsch-ueben",
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0
+    },
+    {
+      "path": "/adr-fachbegriffe-deutsch",
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0
+    },
+    {
+      "path": "/adr-faq-fuer-fahrer",
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0
+    },
+    {
+      "path": "/adr-fragebogen-deutsch",
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0
+    },
+    {
+      "path": "/adr-fragen-auf-deutsch",
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0
+    },
+    {
+      "path": "/adr-fragen-und-antworten",
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0
+    }
+  ],
+  "top_by_redirects": [
+    {
+      "path": "/adr-pruefung-auf-deutsch",
+      "views": 2,
+      "redirects": 1,
+      "redirect_rate_from_views": 0.5
+    }
+  ],
+  "faq_gaps": [
+    {
+      "path": "/adr-fragen-auf-deutsch",
+      "faq_count": 2
+    },
+    {
+      "path": "/adr-fachbegriffe-deutsch",
+      "faq_count": 1
+    },
+    {
+      "path": "/adr-deutsch-fuer-lkw-fahrer",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-pruefung-deutsch-lernen",
+      "faq_count": 0
+    },
+    {
+      "path": "/gefahrgut-pruefung-auf-deutsch",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-app-fuer-auslaender",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-telegram-bot-deutsch",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-pruefungsfragen-lernen",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-test-deutsch",
+      "faq_count": 2
+    },
+    {
+      "path": "/adr-fragebogen-deutsch",
+      "faq_count": 2
+    },
+    {
+      "path": "/adr-kurs-deutsch",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-schein-deutsch",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-pruefung-hilfe",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-deutsch-ueben",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-pruefung-bestehen",
+      "faq_count": 2
+    },
+    {
+      "path": "/adr-gefahrgut-symbole-deutsch",
+      "faq_count": 2
+    },
+    {
+      "path": "/adr-klassen-deutsch",
+      "faq_count": 2
+    },
+    {
+      "path": "/adr-wiederholung-deutsch",
+      "faq_count": 0
+    },
+    {
+      "path": "/adr-lernhilfe-deutsch",
+      "faq_count": 2
+    }
+  ],
+  "linking_gaps": [
+    {
+      "path": "/technisches-deutsch-adr",
+      "reason": "generic hubs dominate effective related links"
+    },
+    {
+      "path": "/gefahrgut-deutsch-lernen",
+      "reason": "generic hubs dominate effective related links"
+    }
+  ],
+  "thin_pages": [
+    {
+      "path": "/adr-faq-fuer-fahrer",
+      "reasons": [
+        "small sample block",
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-app-fuer-auslaender",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-deutsch-fuer-lkw-fahrer",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-deutsch-ueben",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-fachbegriffe-deutsch",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-fragebogen-deutsch",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-fragen-auf-deutsch",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-fragen-und-antworten",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-gefahrgut-symbole-deutsch",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-klassen-deutsch",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-kurs-deutsch",
+      "reasons": [
+        "no views in 30d"
+      ]
+    },
+    {
+      "path": "/adr-lernhilfe-deutsch",
+      "reasons": [
+        "no views in 30d"
+      ]
+    }
+  ],
+  "overlap_pairs": [
+    {
+      "left": "/adr-pruefung-auf-deutsch",
+      "right": "/adr-pruefung-deutsch-lernen",
+      "similarity": 0.5172
+    },
+    {
+      "left": "/adr-kurs-deutsch",
+      "right": "/adr-schein-deutsch",
+      "similarity": 0.5
+    },
+    {
+      "left": "/adr-pruefung-deutsch-lernen",
+      "right": "/adr-kurs-deutsch",
+      "similarity": 0.5
+    },
+    {
+      "left": "/adr-telegram-bot-deutsch",
+      "right": "/adr-schein-deutsch",
+      "similarity": 0.5
+    },
+    {
+      "left": "/adr-telegram-bot-deutsch",
+      "right": "/adr-lernhilfe-deutsch",
+      "similarity": 0.5
+    },
+    {
+      "left": "/adr-pruefung-deutsch-lernen",
+      "right": "/adr-pruefungsfragen-lernen",
+      "similarity": 0.4815
+    },
+    {
+      "left": "/adr-fragen-auf-deutsch",
+      "right": "/adr-test-deutsch",
+      "similarity": 0.48
+    },
+    {
+      "left": "/adr-pruefung-deutsch-lernen",
+      "right": "/adr-test-deutsch",
+      "similarity": 0.48
+    },
+    {
+      "left": "/adr-telegram-bot-deutsch",
+      "right": "/adr-kurs-deutsch",
+      "similarity": 0.4783
+    },
+    {
+      "left": "/adr-fragen-auf-deutsch",
+      "right": "/adr-pruefung-deutsch-lernen",
+      "similarity": 0.4615
+    },
+    {
+      "left": "/adr-vorbereitung-fuer-lkw-fahrer",
+      "right": "/adr-pruefung-deutsch-lernen",
+      "similarity": 0.4615
+    },
+    {
+      "left": "/adr-vorbereitung-fuer-lkw-fahrer",
+      "right": "/adr-kurs-deutsch",
+      "similarity": 0.4444
+    }
+  ],
+  "top_by_impressions": [],
+  "pages": [
+    {
+      "path": "/adr-pruefung-auf-deutsch",
+      "pageTitle": "ADR-Pruefung auf Deutsch",
+      "metaTitle": "ADR-Pruefung auf Deutsch | Begriffe, Fragen und Tipps",
+      "telegramSource": "seo_adr_pruefung_auf_deutsch",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 5,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 3,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 2,
+      "cta_clicks": 1,
+      "redirects": 1,
+      "redirect_rate_from_views": 0.5,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/basiskurs-preview",
+      "pageTitle": "Basiskurs Preview",
+      "metaTitle": "Basiskurs Preview | ADR Fragen und Woerter",
+      "telegramSource": "seo_basiskurs_preview",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 5,
+      "sample_term_count": 5,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 3,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 1,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/aufbaukurs-tank-preview",
+      "pageTitle": "Aufbaukurs Tank Preview",
+      "metaTitle": "Aufbaukurs Tank Preview | ADR Tank Fragen und Begriffe",
+      "telegramSource": "seo_aufbaukurs_tank_preview",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 5,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 3,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 1,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-begriffe",
+      "pageTitle": "ADR Begriffe / Vocabulary",
+      "metaTitle": "ADR Begriffe erklaert | ADR Vocabulary fuer Fahrer",
+      "telegramSource": "seo_adr_begriffe",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 0,
+      "sample_term_count": 8,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 3,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 1,
+      "views": 2,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-faq-fuer-fahrer",
+      "pageTitle": "ADR FAQ fuer Fahrer",
+      "metaTitle": "ADR FAQ fuer Fahrer | Kurze Antworten zur ADR-Pruefung",
+      "telegramSource": "seo_adr_faq_fuer_fahrer",
+      "manual_faq_count": 5,
+      "effective_faq_count": 5,
+      "sample_question_count": 0,
+      "sample_term_count": 0,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/technisches-deutsch-adr",
+      "pageTitle": "Technisches Deutsch fuer ADR",
+      "metaTitle": "Technisches Deutsch fuer ADR | Woerter, Verstaendnis und Beispiele",
+      "telegramSource": "seo_technisches_deutsch_adr",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 0,
+      "sample_term_count": 5,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 3,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 2,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/gefahrgut-deutsch-lernen",
+      "pageTitle": "Gefahrgut Deutsch lernen",
+      "metaTitle": "Gefahrgut Deutsch lernen | Woerter und typische ADR-Sprache",
+      "telegramSource": "seo_gefahrgut_deutsch_lernen",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 0,
+      "sample_term_count": 5,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 2,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-vorbereitung-fuer-lkw-fahrer",
+      "pageTitle": "ADR Vorbereitung fuer LKW-Fahrer",
+      "metaTitle": "ADR Vorbereitung fuer LKW-Fahrer | Einstieg, Fragen und Begriffe",
+      "telegramSource": "seo_adr_vorbereitung_fuer_lkw_fahrer",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 3,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-pruefung-fuer-nicht-muttersprachler",
+      "pageTitle": "ADR-Pruefung fuer Nicht-Muttersprachler",
+      "metaTitle": "ADR-Pruefung fuer Nicht-Muttersprachler | Sprache, Fragen und Einstieg",
+      "telegramSource": "seo_adr_pruefung_fuer_nicht_muttersprachler",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-fragen-und-antworten",
+      "pageTitle": "ADR Fragen und Antworten",
+      "metaTitle": "ADR Fragen und Antworten | Kleine Vorschau fuer die Vorbereitung",
+      "telegramSource": "seo_adr_fragen_und_antworten",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 4,
+      "sample_term_count": 0,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 3,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-pruefungsfragen-app-deutsch",
+      "pageTitle": "ADR Pruefungsfragen App Deutsch",
+      "metaTitle": "ADR Pruefungsfragen App Deutsch | Fragen-Sample und Telegram-Bot",
+      "telegramSource": "seo_adr_pruefungsfragen_app_deutsch",
+      "manual_faq_count": 3,
+      "effective_faq_count": 3,
+      "sample_question_count": 4,
+      "sample_term_count": 0,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-fragen-auf-deutsch",
+      "pageTitle": "ADR Fragen auf Deutsch",
+      "metaTitle": "ADR Fragen auf Deutsch | Formulierungen verstehen und ueben",
+      "telegramSource": "seo_adr_fragen_auf_deutsch",
+      "manual_faq_count": 2,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-fachbegriffe-deutsch",
+      "pageTitle": "ADR Fachbegriffe Deutsch",
+      "metaTitle": "ADR Fachbegriffe Deutsch | Woerter fuer die Pruefung",
+      "telegramSource": "seo_adr_fachbegriffe_deutsch",
+      "manual_faq_count": 1,
+      "effective_faq_count": 3,
+      "sample_question_count": 0,
+      "sample_term_count": 5,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-deutsch-fuer-lkw-fahrer",
+      "pageTitle": "ADR Deutsch fuer LKW-Fahrer",
+      "metaTitle": "ADR Deutsch fuer LKW-Fahrer | Sprache fuer Theorie und Praxis",
+      "telegramSource": "seo_adr_deutsch_fuer_lkw_fahrer",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-pruefung-deutsch-lernen",
+      "pageTitle": "ADR Pruefung Deutsch lernen",
+      "metaTitle": "ADR Pruefung Deutsch lernen | Fragen, Begriffe, Vorbereitung",
+      "telegramSource": "seo_adr_pruefung_deutsch_lernen",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 1,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/gefahrgut-pruefung-auf-deutsch",
+      "pageTitle": "Gefahrgut Pruefung auf Deutsch",
+      "metaTitle": "Gefahrgut Pruefung auf Deutsch | Einstieg fuer ADR-Lernende",
+      "telegramSource": "seo_gefahrgut_pruefung_auf_deutsch",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 0,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-app-fuer-auslaender",
+      "pageTitle": "ADR App fuer Auslaender",
+      "metaTitle": "ADR App fuer Auslaender | Deutsch lernen und Fragen verstehen",
+      "telegramSource": "seo_adr_app_fuer_auslaender",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-telegram-bot-deutsch",
+      "pageTitle": "ADR Telegram Bot Deutsch",
+      "metaTitle": "ADR Telegram Bot Deutsch | Fragen und Begriffe im Chat lernen",
+      "telegramSource": "seo_adr_telegram_bot_deutsch",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-pruefungsfragen-lernen",
+      "pageTitle": "ADR Pruefungsfragen lernen",
+      "metaTitle": "ADR Pruefungsfragen lernen | Uebung und Wiederholung",
+      "telegramSource": "seo_adr_pruefungsfragen_lernen",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-test-deutsch",
+      "pageTitle": "ADR Test Deutsch",
+      "metaTitle": "ADR Test Deutsch | Uebungsfragen und Einstieg | ADR Bot",
+      "telegramSource": "seo_adr_test_deutsch",
+      "manual_faq_count": 2,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-fragebogen-deutsch",
+      "pageTitle": "ADR Fragebogen Deutsch",
+      "metaTitle": "ADR Fragebogen Deutsch | Pruefungsnahe Uebungsboegen | ADR Bot",
+      "telegramSource": "seo_adr_fragebogen_deutsch",
+      "manual_faq_count": 2,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-kurs-deutsch",
+      "pageTitle": "ADR Kurs Deutsch",
+      "metaTitle": "ADR Kurs Deutsch | Einstieg, Begriffe und Fragen | ADR Bot",
+      "telegramSource": "seo_adr_kurs_deutsch",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-schein-deutsch",
+      "pageTitle": "ADR Schein Deutsch",
+      "metaTitle": "ADR Schein Deutsch | Vorbereitung und Lernhilfe | ADR Bot",
+      "telegramSource": "seo_adr_schein_deutsch",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-pruefung-hilfe",
+      "pageTitle": "ADR Pruefung Hilfe",
+      "metaTitle": "ADR Pruefung Hilfe | Verstehen, ueben und vorbereiten | ADR Bot",
+      "telegramSource": "seo_adr_pruefung_hilfe",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 2,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-deutsch-ueben",
+      "pageTitle": "ADR Deutsch ueben",
+      "metaTitle": "ADR Deutsch ueben | Sprache und Fragen trainieren | ADR Bot",
+      "telegramSource": "seo_adr_deutsch_ueben",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 2,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-pruefung-bestehen",
+      "pageTitle": "ADR Pruefung bestehen",
+      "metaTitle": "ADR Pruefung bestehen | Tipps und Vorbereitung | ADR Bot",
+      "telegramSource": "seo_adr_pruefung_bestehen",
+      "manual_faq_count": 2,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-gefahrgut-symbole-deutsch",
+      "pageTitle": "Gefahrgut Symbole Deutsch",
+      "metaTitle": "Gefahrgut Symbole Deutsch | ADR Gefahrzettel erklaert | ADR Bot",
+      "telegramSource": "seo_adr_gefahrgut_symbole_deutsch",
+      "manual_faq_count": 2,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-klassen-deutsch",
+      "pageTitle": "ADR Klassen Deutsch",
+      "metaTitle": "ADR Klassen Deutsch | Gefahrgutklassen 1-9 erklaert | ADR Bot",
+      "telegramSource": "seo_adr_klassen_deutsch",
+      "manual_faq_count": 2,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 5,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-wiederholung-deutsch",
+      "pageTitle": "ADR Wiederholung Deutsch",
+      "metaTitle": "ADR Wiederholung Deutsch | Stoff wiederholen und festigen | ADR Bot",
+      "telegramSource": "seo_adr_wiederholung_deutsch",
+      "manual_faq_count": 0,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 4,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 0,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    },
+    {
+      "path": "/adr-lernhilfe-deutsch",
+      "pageTitle": "ADR Lernhilfe Deutsch",
+      "metaTitle": "ADR Lernhilfe Deutsch | Einstieg, Begriffe und Uebung | ADR Bot",
+      "telegramSource": "seo_adr_lernhilfe_deutsch",
+      "manual_faq_count": 2,
+      "effective_faq_count": 3,
+      "sample_question_count": 3,
+      "sample_term_count": 3,
+      "manual_related_link_count": 3,
+      "manual_generic_related_count": 1,
+      "effective_related_link_count": 3,
+      "effective_generic_related_count": 0,
+      "views": 0,
+      "cta_clicks": 0,
+      "redirects": 0,
+      "redirect_rate_from_views": 0,
+      "gsc_impressions": 0,
+      "gsc_clicks": 0,
+      "gsc_ctr": 0
+    }
+  ]
+}
