@@ -1,4 +1,5 @@
 import type { BotFunnelRow } from "@/lib/bot-funnel-storage";
+import type { ReminderStateSnapshot } from "@/lib/reminder-state-storage";
 
 export type DashboardPeriodKey = "today" | "days_7" | "days_30";
 
@@ -84,6 +85,11 @@ export type BotFunnelDashboard = {
   funnel_30d: FunnelStepRow[];
   referral_30d: ReferralSummary;
   reminder_30d: ReminderSummary;
+  reminder_state: ReminderStateSnapshot["summary"] & {
+    reminder_modes: SourceBreakdown[];
+    reminder_segments: SourceBreakdown[];
+    reminder_languages: SourceBreakdown[];
+  };
   top_sources_30d: SourceBreakdown[];
   top_kurs_30d: SourceBreakdown[];
   event_mix_30d: { event_type: string; count: number }[];
@@ -210,9 +216,10 @@ function buildPeriodBucket({
 
 export function buildBotFunnelDashboard(
   rows: BotFunnelRow[],
-  options: { timeZone?: string } = {},
+  options: { timeZone?: string; reminderState?: ReminderStateSnapshot | null } = {},
 ): BotFunnelDashboard {
   const timeZone = options.timeZone ?? "Europe/Berlin";
+  const reminderState = options.reminderState ?? null;
   const now = new Date();
   const sinceToday = getStartOfDayInTimezone(0, timeZone);
   const since7d = getStartOfDayInTimezone(6, timeZone);
@@ -398,6 +405,19 @@ export function buildBotFunnelDashboard(
       delivery_failed: reminderDeliveryFailed,
       click_rate: reminderSent > 0 ? Math.round((reminderClicked / reminderSent) * 100) : 0,
       reactivation_rate: reminderSent > 0 ? Math.round((reminderReactivated / reminderSent) * 100) : 0,
+    },
+    reminder_state: {
+      total_users: Number(reminderState?.summary.total_users || 0),
+      normal_users: Number(reminderState?.summary.normal_users || 0),
+      rare_users: Number(reminderState?.summary.rare_users || 0),
+      dormant_users: Number(reminderState?.summary.dormant_users || 0),
+      disabled_users: Number(reminderState?.summary.disabled_users || 0),
+      exam_mode_users: Number(reminderState?.summary.exam_mode_users || 0),
+      snoozed_users: Number(reminderState?.summary.snoozed_users || 0),
+      language_override_users: Number(reminderState?.summary.language_override_users || 0),
+      reminder_modes: reminderState?.reminder_modes ?? [],
+      reminder_segments: reminderState?.reminder_segments ?? [],
+      reminder_languages: reminderState?.reminder_languages ?? [],
     },
     top_sources_30d,
     top_kurs_30d,

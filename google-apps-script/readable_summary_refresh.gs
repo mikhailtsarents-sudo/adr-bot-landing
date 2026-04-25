@@ -148,6 +148,19 @@ function emptyBotFunnelDashboard_() {
       click_rate: 0,
       reactivation_rate: 0,
     },
+    reminder_state: {
+      total_users: 0,
+      normal_users: 0,
+      rare_users: 0,
+      dormant_users: 0,
+      disabled_users: 0,
+      exam_mode_users: 0,
+      snoozed_users: 0,
+      language_override_users: 0,
+      reminder_modes: [],
+      reminder_segments: [],
+      reminder_languages: [],
+    },
     top_sources_30d: [],
     top_kurs_30d: [],
     event_mix_30d: [],
@@ -197,6 +210,7 @@ function buildReadableSummaryRows_(context) {
   const funnel30d = botFunnelDashboard.funnel_30d || [];
   const referral30d = botFunnelDashboard.referral_30d || {};
   const reminder30d = botFunnelDashboard.reminder_30d || {};
+  const reminderState = botFunnelDashboard.reminder_state || {};
   const sourceCounts30d = botFunnelDashboard.top_sources_30d || [];
   const eventMix30d = botFunnelDashboard.event_mix_30d || [];
   const topKurs30d = botFunnelDashboard.top_kurs_30d || [];
@@ -509,6 +523,27 @@ function buildReadableSummaryRows_(context) {
   rows.push(["Reminder delivery failed", number_(reminder30d.delivery_failed), "", "", "", "", ""]);
   rows.push(["Reminder click rate", percentFromWhole_(reminder30d.click_rate), "", "", "", "", ""]);
   rows.push(["Reminder reactivation rate", percentFromWhole_(reminder30d.reactivation_rate), "", "", "", "", ""]);
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push(["Reminder state сейчас", "Количество", "", "", "", "", ""]);
+  rows.push(["Всего users", number_(reminderState.total_users), "", "", "", "", ""]);
+  rows.push(["Normal mode", number_(reminderState.normal_users), "", "", "", "", ""]);
+  rows.push(["Rare mode", number_(reminderState.rare_users), "", "", "", "", ""]);
+  rows.push(["Dormant", number_(reminderState.dormant_users), "", "", "", "", ""]);
+  rows.push(["Disabled", number_(reminderState.disabled_users), "", "", "", "", ""]);
+  rows.push(["Exam mode", number_(reminderState.exam_mode_users), "", "", "", "", ""]);
+  rows.push(["Snoozed now", number_(reminderState.snoozed_users), "", "", "", "", ""]);
+  rows.push(["Language override users", number_(reminderState.language_override_users), "", "", "", "", ""]);
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push(["Top reminder languages", "Количество", "", "", "", "", ""]);
+  if (!(reminderState.reminder_languages || []).length) {
+    rows.push(["нет данных", "", "", "", "", "", ""]);
+  } else {
+    for (let i = 0; i < Math.min(reminderState.reminder_languages.length, 5); i += 1) {
+      rows.push([reminderState.reminder_languages[i].source, reminderState.reminder_languages[i].count, "", "", "", "", ""]);
+    }
+  }
   rows.push(["", "", "", "", "", "", ""]);
 
   rows.push(["Рефералы и входы (30 дней)", "Количество", "", "", "", "", ""]);
