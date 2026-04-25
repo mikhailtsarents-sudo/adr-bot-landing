@@ -1,3 +1,5 @@
+import { computeTextLayout } from "./text-layout-engine.mjs";
+
 const FONT_IMPORT = "@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');";
 
 // Spacing between per-line clips in offset.y units (fraction of frame height 1920px)
@@ -175,9 +177,8 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
   }
 
   if (r === "hook" || r === "question") {
-    const lines = splitLines(captionText, 22, 3);
+    const { fontSize: fs, lines } = computeTextLayout(r, captionText);
     if (lines.length === 0) return [];
-    const fs = 52;
     const step = lineStep(fs);
     const baseY = -0.05;
     return [
@@ -196,9 +197,8 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
   }
 
   if (r === "timer") {
-    const lines = splitLines(captionText, 22, 2);
+    const { fontSize: fs, lines } = computeTextLayout(r, captionText);
     if (lines.length === 0) return [];
-    const fs = 54;
     const step = lineStep(fs);
     return [
       buildTextZoneGradientClip({ start: s, length: l, offsetY: 0 }),
@@ -216,9 +216,8 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
   }
 
   if (r === "answer") {
-    const lines = splitLines(captionText, 24, 2);
+    const { fontSize: fs, lines } = computeTextLayout(r, captionText);
     if (lines.length === 0) return [];
-    const fs = 52;
     const step = lineStep(fs);
     return [
       buildTextZoneGradientClip({ start: s, length: l, offsetY: 0 }),

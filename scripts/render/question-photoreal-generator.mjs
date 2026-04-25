@@ -2465,3 +2465,36 @@ export async function generatePhotorealSceneFrames({
       : `Photorealistic frame generation exhausted all providers. ${reasons}`,
   );
 }
+
+// Generates a single scene frame with a text-zone-optimised prompt modifier.
+// Used by the validation retry loop when a frame's text zone scores below threshold.
+export async function regenerateSingleSceneFrame({ scene, questionText, outputPath }) {
+  const providers = buildImageProviders();
+  const provider = providers.find((p) => p.available);
+  if (!provider) throw new Error("No image provider available for single-frame retry");
+
+  const textZoneModifier = [
+    "Compositional constraint for text overlay:",
+    "main subject placed in lower-left or lower-right third;",
+    "upper half of the frame visually calm — low contrast, open sky, plain wall, or blurred background;",
+    "do NOT place hero object, face, or busy detail in the vertical center band.",
+  ].join(" ");
+
+  const basePrompt = buildScenePositivePrompt({
+    role: text(scene.role),
+    sceneIndex: 0,
+    questionText: text(questionText),
+    copy: normalizeSceneCopy(scene.copy),
+    sceneIntent: text(scene.scene_intent),
+    visualHint: text(scene.visual_hint),
+    subject: text(scene.subject),
+    context: text(scene.context),
+    tension: text(scene.tension),
+  });
+
+  const prompt = `${basePrompt}\n${textZoneModifier}`;
+  const negativePrompt = buildSceneNegativePrompt();
+
+  await generateImageToFileWithProvider({ provider, prompt, negativePrompt, outputPath });
+  return outputPath;
+}

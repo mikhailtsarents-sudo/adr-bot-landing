@@ -3,7 +3,8 @@ import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { generatePhotorealSceneFrames } from "./question-photoreal-generator.mjs";
+import { generatePhotorealSceneFrames, regenerateSingleSceneFrame } from "./question-photoreal-generator.mjs";
+import { validateTextZoneReadabilityBatch, pickBestFrame } from "./image-text-zone-validator.mjs";
 
 const WIDTH = 1440;
 const HEIGHT = 2400;
@@ -1311,6 +1312,40 @@ export async function generateQuestionVisualBundle({
   }
 
   const sceneFrames = [...photorealBundle.framePaths];
+
+  // Text zone validation: check that the center band of each frame is visually calm enough
+  // for text overlay. Retry once with a text-zone-optimised prompt for any frame that fails.
+  const textZoneResults = await validateTextZoneReadabilityBatch(sceneFrames);
+  const textZoneLog = [];
+  for (let i = 0; i < sceneFrames.length; i += 1) {
+    const result = textZoneResults[i] || {};
+    textZoneLog.push({ frame: i + 1, score: result.score, pass: result.pass, reason: result.reason });
+    if (!result.pass) {
+      const retryPath = path.join(generatedDir, `scene${i + 1}-tzretry.jpg`);
+      try {
+        const slideData = Array.isArray(brief?.slides) ? brief.slides[i] : null;
+        if (slideData) {
+          await regenerateSingleSceneFrame({ scene: slideData, questionText, outputPath: retryPath });
+          const retryResult = await validateTextZoneReadabilityBatch([retryPath]);
+          const retryScore = retryResult[0]?.score ?? 0;
+          if (retryScore > (result.score ?? 0)) {
+            sceneFrames[i] = retryPath;
+            textZoneLog[i] = { ...textZoneLog[i], retry_score: retryScore, retry_used: true };
+          } else {
+            textZoneLog[i] = { ...textZoneLog[i], retry_score: retryScore, retry_used: false, retry_note: "original kept (higher score)" };
+          }
+        }
+      } catch (retryErr) {
+        textZoneLog[i] = { ...textZoneLog[i], retry_error: String(retryErr?.message || retryErr), retry_used: false };
+      }
+    }
+  }
+  await writeFile(
+    path.join(generatedDir, "text_zone_validation.json"),
+    `${JSON.stringify({ video_id: safeVideoId, frames: textZoneLog }, null, 2)}\n`,
+    "utf8",
+  );
+
   const frameManifest = Array.isArray(photorealBundle.frameManifest)
     ? photorealBundle.frameManifest.map((entry, index) => ({
         ...entry,
@@ -1320,7 +1355,7 @@ export async function generateQuestionVisualBundle({
       }))
     : null;
   validateSceneFrameManifest(frameManifest, sceneFrames, photorealBundle.provider_used, safeVideoId);
-  await copyFile(leadFramePath, derivedCompatBgPath);
+  await copyFile(sceneFrames[0] || leadFramePath, derivedCompatBgPath);
   const assetPath = leadFramePath;
   const assetFileName = path.basename(leadFramePath);
 
