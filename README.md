@@ -29,6 +29,21 @@ Operational runtime health snapshot is now also available:
 npm run run:runtime-health-snapshot -- --public-only
 ```
 
+Callback UX telemetry is now also available in the bot-funnel dashboard layer:
+
+- lifecycle events:
+  - `callback_received`
+  - `callback_answered`
+  - `callback_rendered`
+  - `callback_completed`
+  - `callback_failed`
+- 30d summary:
+  - answer / render / completion / failure rates
+  - top handlers
+  - failed handlers
+  - render modes
+  - average + p95 completion time
+
 ## Local Development
 
 Run the dev server:

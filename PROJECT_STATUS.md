@@ -403,3 +403,18 @@ Status:
 
 - ready for bounded Vercel + Apps Script deploy
 - not yet live-confirmed from this side
+
+## Callback UX Telemetry (2026-04-25)
+
+Bot-funnel observability now includes callback lifecycle quality, not just reminder/result events.
+
+- `src/lib/bot-funnel-dashboard.ts` now exposes `callback_telemetry_30d`
+- summary includes:
+  - counts for `received`, `answered`, `rendered`, `completed`, `failed`
+  - answer / render / completion / failure rates
+  - top callback handlers
+  - failed handlers
+  - render modes
+  - average and p95 completion time
+
+This is intended to surface “tap -> spinner -> no obvious UI change” regressions before they have to be diagnosed only from manual user reports.

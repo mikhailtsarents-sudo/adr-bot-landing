@@ -59,10 +59,19 @@ export type BotFunnelPeriodBucket = {
   reminder_reactivated: number;
   reminder_opted_out: number;
   reminder_delivery_failed: number;
+  callback_received: number;
+  callback_answered: number;
+  callback_rendered: number;
+  callback_completed: number;
+  callback_failed: number;
   start_to_first_action_rate: number;
   start_to_buy_intent_rate: number;
   reminder_click_rate: number;
   reminder_reactivation_rate: number;
+  callback_answer_rate: number;
+  callback_render_rate: number;
+  callback_completion_rate: number;
+  callback_failure_rate: number;
 };
 
 export type ReminderSummary = {
@@ -76,6 +85,23 @@ export type ReminderSummary = {
   reactivation_rate: number;
 };
 
+export type CallbackTelemetrySummary = {
+  received: number;
+  answered: number;
+  rendered: number;
+  completed: number;
+  failed: number;
+  answer_rate: number;
+  render_rate: number;
+  completion_rate: number;
+  failure_rate: number;
+  avg_completion_ms: number;
+  p95_completion_ms: number;
+  top_handlers_30d: SourceBreakdown[];
+  failed_handlers_30d: SourceBreakdown[];
+  render_modes_30d: SourceBreakdown[];
+};
+
 export type BotFunnelDashboard = {
   refreshed_at: string;
   timezone: string;
@@ -86,6 +112,7 @@ export type BotFunnelDashboard = {
   funnel_30d: FunnelStepRow[];
   referral_30d: ReferralSummary;
   reminder_30d: ReminderSummary;
+  callback_telemetry_30d: CallbackTelemetrySummary;
   reminder_state: ReminderStateSnapshot["summary"] & {
     reminder_modes: SourceBreakdown[];
     reminder_segments: SourceBreakdown[];
@@ -127,6 +154,21 @@ function metadataText(
     }
   }
   return "";
+}
+
+function metadataNumber(
+  row: BotFunnelRow,
+  ...keys: string[]
+): number {
+  const metadata = parseMetadata(row);
+  for (const key of keys) {
+    const value = metadata[key];
+    const numeric = Number(value);
+    if (Number.isFinite(numeric)) {
+      return numeric;
+    }
+  }
+  return 0;
 }
 
 function getStartOfDayInTimezone(daysAgo: number, timeZone: string): Date {
@@ -224,6 +266,11 @@ function buildPeriodBucket({
   const reminderReactivated = count(scopedRows, (r) => r.event_type === "reminder_reactivated");
   const reminderOptedOut = count(scopedRows, (r) => r.event_type === "reminder_opted_out");
   const reminderDeliveryFailed = count(scopedRows, (r) => r.event_type === "reminder_delivery_failed");
+  const callbackReceived = count(scopedRows, (r) => r.event_type === "callback_received");
+  const callbackAnswered = count(scopedRows, (r) => r.event_type === "callback_answered");
+  const callbackRendered = count(scopedRows, (r) => r.event_type === "callback_rendered");
+  const callbackCompleted = count(scopedRows, (r) => r.event_type === "callback_completed");
+  const callbackFailed = count(scopedRows, (r) => r.event_type === "callback_failed");
   const startUsers = uniqueUsers(scopedRows, (r) => r.event_type === "bot_started");
   const firstActionUsers = uniqueUsers(
     scopedRows,
@@ -258,10 +305,19 @@ function buildPeriodBucket({
     reminder_reactivated: reminderReactivated,
     reminder_opted_out: reminderOptedOut,
     reminder_delivery_failed: reminderDeliveryFailed,
+    callback_received: callbackReceived,
+    callback_answered: callbackAnswered,
+    callback_rendered: callbackRendered,
+    callback_completed: callbackCompleted,
+    callback_failed: callbackFailed,
     start_to_first_action_rate: roundRate(startUsers.size > 0 ? startToFirstActionUsers / startUsers.size : 0),
     start_to_buy_intent_rate: roundRate(startUsers.size > 0 ? startToBuyIntentUsers / startUsers.size : 0),
     reminder_click_rate: roundRate(reminderSentUsers.size > 0 ? reminderClickedFromSentUsers / reminderSentUsers.size : 0),
     reminder_reactivation_rate: roundRate(reminderSentUsers.size > 0 ? reminderReactivatedFromSentUsers / reminderSentUsers.size : 0),
+    callback_answer_rate: roundRate(callbackReceived > 0 ? callbackAnswered / callbackReceived : 0),
+    callback_render_rate: roundRate(callbackReceived > 0 ? callbackRendered / callbackReceived : 0),
+    callback_completion_rate: roundRate(callbackReceived > 0 ? callbackCompleted / callbackReceived : 0),
+    callback_failure_rate: roundRate(callbackReceived > 0 ? callbackFailed / callbackReceived : 0),
   };
 }
 
@@ -329,10 +385,19 @@ export function buildBotFunnelDashboard(
   const reminderReactivated = count(rows30d, (r) => r.event_type === "reminder_reactivated");
   const reminderOptedOut = count(rows30d, (r) => r.event_type === "reminder_opted_out");
   const reminderDeliveryFailed = count(rows30d, (r) => r.event_type === "reminder_delivery_failed");
+  const callbackReceived30d = count(rows30d, (r) => r.event_type === "callback_received");
+  const callbackAnswered30d = count(rows30d, (r) => r.event_type === "callback_answered");
+  const callbackRendered30d = count(rows30d, (r) => r.event_type === "callback_rendered");
+  const callbackCompleted30d = count(rows30d, (r) => r.event_type === "callback_completed");
+  const callbackFailed30d = count(rows30d, (r) => r.event_type === "callback_failed");
   const reminderSentUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_sent");
   const reminderClickedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_clicked");
   const reminderReactivatedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_reactivated");
   const reminderSentRows = rows30d.filter((r) => r.event_type === "reminder_sent");
+  const callbackReceivedRows30d = rows30d.filter((r) => r.event_type === "callback_received");
+  const callbackFailedRows30d = rows30d.filter((r) => r.event_type === "callback_failed");
+  const callbackRenderedRows30d = rows30d.filter((r) => r.event_type === "callback_rendered");
+  const callbackCompletedRows30d = rows30d.filter((r) => r.event_type === "callback_completed");
   const cadenceModifiers30d = breakdown(
     reminderSentRows.map((r) => metadataText(r, "cadence_modifier")).filter(Boolean),
   );
@@ -341,6 +406,33 @@ export function buildBotFunnelDashboard(
   );
   const preferredHours30d = breakdown(
     reminderSentRows.map((r) => metadataText(r, "preferred_learning_hour_berlin")).filter(Boolean),
+  );
+  const callbackCompletionDurations30d = callbackCompletedRows30d
+    .map((r) => metadataNumber(r, "callback_duration_ms"))
+    .filter((value) => value > 0)
+    .sort((a, b) => a - b);
+  const callbackAvgCompletionMs30d = callbackCompletionDurations30d.length > 0
+    ? Math.round(
+        callbackCompletionDurations30d.reduce((sum, value) => sum + value, 0) /
+          callbackCompletionDurations30d.length,
+      )
+    : 0;
+  const callbackP95CompletionMs30d = callbackCompletionDurations30d.length > 0
+    ? callbackCompletionDurations30d[
+        Math.min(
+          callbackCompletionDurations30d.length - 1,
+          Math.floor(callbackCompletionDurations30d.length * 0.95),
+        )
+      ]
+    : 0;
+  const callbackTopHandlers30d = breakdown(
+    callbackReceivedRows30d.map((r) => metadataText(r, "callback_handler")).filter(Boolean),
+  );
+  const callbackFailedHandlers30d = breakdown(
+    callbackFailedRows30d.map((r) => metadataText(r, "callback_handler")).filter(Boolean),
+  );
+  const callbackRenderModes30d = breakdown(
+    callbackRenderedRows30d.map((r) => metadataText(r, "callback_render_mode")).filter(Boolean),
   );
 
   const referrerCounts: Record<string, number> = {};
@@ -478,6 +570,22 @@ export function buildBotFunnelDashboard(
       reactivation_rate: reminderSentUsers30d.size > 0
         ? Math.round((intersectionSize(reminderSentUsers30d, reminderReactivatedUsers30d) / reminderSentUsers30d.size) * 100)
         : 0,
+    },
+    callback_telemetry_30d: {
+      received: callbackReceived30d,
+      answered: callbackAnswered30d,
+      rendered: callbackRendered30d,
+      completed: callbackCompleted30d,
+      failed: callbackFailed30d,
+      answer_rate: callbackReceived30d > 0 ? Math.round((callbackAnswered30d / callbackReceived30d) * 100) : 0,
+      render_rate: callbackReceived30d > 0 ? Math.round((callbackRendered30d / callbackReceived30d) * 100) : 0,
+      completion_rate: callbackReceived30d > 0 ? Math.round((callbackCompleted30d / callbackReceived30d) * 100) : 0,
+      failure_rate: callbackReceived30d > 0 ? Math.round((callbackFailed30d / callbackReceived30d) * 100) : 0,
+      avg_completion_ms: callbackAvgCompletionMs30d,
+      p95_completion_ms: callbackP95CompletionMs30d,
+      top_handlers_30d: callbackTopHandlers30d,
+      failed_handlers_30d: callbackFailedHandlers30d,
+      render_modes_30d: callbackRenderModes30d,
     },
     reminder_state: {
       total_users: Number(reminderState?.summary.total_users || 0),
