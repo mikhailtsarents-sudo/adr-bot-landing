@@ -211,6 +211,25 @@ Main current findings:
     - `/gefahrgut-deutsch-lernen`
   - very little real traffic yet on most newly created SEO pages
 
+Follow-up impact pass on `2026-04-25` improved this further:
+
+- targeted overlap cleanup applied to:
+  - `/adr-pruefung-auf-deutsch`
+  - `/adr-pruefung-deutsch-lernen`
+  - `/adr-pruefung-hilfe`
+  - `/adr-test-deutsch`
+  - `/adr-kurs-deutsch`
+  - `/adr-schein-deutsch`
+  - `/adr-telegram-bot-deutsch`
+  - `/adr-lernhilfe-deutsch`
+- targeted cluster-linking polish applied to:
+  - `/technisches-deutsch-adr`
+  - `/gefahrgut-deutsch-lernen`
+- final local audit after the pass:
+  - no internal linking gaps remain
+  - the former top overlap around `/adr-pruefung-auf-deutsch` and `/adr-pruefung-deutsch-lernen` is no longer leading the report
+  - residual overlaps are now mostly lower-priority cluster similarities plus the expected lack of real Search Console data in local runtime
+
 ### Image Generation — Flux AI upgrade (done 2026-04-22)
 
 - Default model switched from `fal-ai/flux/dev` → `fal-ai/flux-realism` (photorealism LoRA, better skin/material detail)

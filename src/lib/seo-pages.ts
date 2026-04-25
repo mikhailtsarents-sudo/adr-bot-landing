@@ -62,9 +62,9 @@ export const adrPruefungAufDeutsch: SeoPageConfig = {
   slug: "adr-pruefung-auf-deutsch",
   path: "/adr-pruefung-auf-deutsch",
   pageTitle: "ADR-Pruefung auf Deutsch",
-  metaTitle: "ADR-Pruefung auf Deutsch | Begriffe, Fragen und Tipps",
+  metaTitle: "ADR-Pruefung auf Deutsch | Orientierung, Begriffe und Fragen",
   metaDescription:
-    "Lerne ADR auf Deutsch mit kurzen Beispielen, wichtigen Begriffen und einem kleinen Fragen-Sample. Fuer mehr Uebung geht es in den Telegram-Bot.",
+    "Erste Orientierung zur ADR-Pruefung auf Deutsch mit wichtigen Begriffen, typischen Fragen und einem klaren Weiterweg in den Telegram-Bot.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR-Pruefung auf Deutsch",
   heroLead:
@@ -73,8 +73,8 @@ export const adrPruefungAufDeutsch: SeoPageConfig = {
     "Diese Seite zeigt bewusst nur einen Ausschnitt. Sie hilft beim Verstehen, Orientieren und Weiterklicken.",
   intentTitle: "Worum es hier geht",
   intentParagraphs: [
-    "Diese Seite hilft Menschen, die ADR auf Deutsch suchen und zuerst eine kleine Orientierung brauchen. Sie ist als Einstieg gebaut, nicht als vollstaendige Wissensdatenbank.",
-    "Du bekommst kleine, lesbare Beispiele, damit du schnell verstehst, wie die Begriffe und die Sprache rund um ADR klingen. Fuer die komplette Uebung fuehrt der naechste Schritt in den Telegram-Bot.",
+    "Diese Seite hilft Menschen, die ADR auf Deutsch suchen und zuerst eine kleine Orientierung brauchen. Sie ist als Uebersichtsseite gebaut, nicht als enger Spezial-Intent.",
+    "Du bekommst kleine, lesbare Beispiele, damit du schnell verstehst, wie Begriffe, Frageformen und Themen rund um ADR klingen. Fuer aktives Lernen und Wiederholung fuehren die spezielleren Unterseiten und der Telegram-Bot weiter.",
   ],
   sampleTitle: "Kurzes Sample",
   sampleLead:
@@ -144,16 +144,20 @@ export const adrPruefungAufDeutsch: SeoPageConfig = {
     },
   ],
   relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zurueck zum Haupt-Landingpage-Flow" },
     {
-      href: "/basiskurs-preview",
-      label: "Basiskurs Preview",
-      note: "Breiter Einstieg in den wichtigsten Kurs",
+      href: "/adr-pruefung-deutsch-lernen",
+      label: "ADR Pruefung Deutsch lernen",
+      note: "Wenn du von Orientierung in aktives Lernen wechseln willst",
     },
     {
-      href: "/adr-faq-fuer-fahrer",
-      label: "ADR FAQ fuer Fahrer",
-      note: "Kurze Antworten auf die haeufigsten Fragen",
+      href: "/technisches-deutsch-adr",
+      label: "Technisches Deutsch fuer ADR",
+      note: "Sprachfokus fuer Pruefungsdeutsch und schwierige Formulierungen",
+    },
+    {
+      href: "/adr-begriffe",
+      label: "ADR Begriffe",
+      note: "Begriffseinstieg fuer Wortschatz und Fachsprache",
     },
   ],
   ctaTitle: "Mehr ADR-Uebung im Telegram-Bot",
@@ -664,16 +668,20 @@ export const technischesDeutschAdr: SeoPageConfig = {
     },
   ],
   relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zurueck zum Haupt-Landingpage-Flow" },
     {
-      href: "/adr-begriffe",
-      label: "ADR Begriffe",
-      note: "Der allgemeine Wortschatz-Einstieg",
+      href: "/gefahrgut-deutsch-lernen",
+      label: "Gefahrgut Deutsch lernen",
+      note: "Alltagsnahe Sprachhuerde mit Gefahrgut-Wortschatz",
     },
     {
-      href: "/adr-pruefung-auf-deutsch",
-      label: "ADR-Pruefung auf Deutsch",
-      note: "Breiter Einstieg in Fragen und Begriffe",
+      href: "/adr-deutsch-ueben",
+      label: "ADR Deutsch ueben",
+      note: "Wenn du aus Sprache direkt in Wiederholung gehen willst",
+    },
+    {
+      href: "/adr-fragen-auf-deutsch",
+      label: "ADR Fragen auf Deutsch",
+      note: "Frageformate und typische Formulierungen gezielt trainieren",
     },
   ],
   ctaTitle: "Im Telegram-Bot weiterlernen",
@@ -759,16 +767,20 @@ export const gefahrgutDeutschLernen: SeoPageConfig = {
     },
   ],
   relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zurueck zum Haupt-Landingpage-Flow" },
     {
       href: "/technisches-deutsch-adr",
       label: "Technisches Deutsch fuer ADR",
       note: "Sprachfokus auf Pruefungsdeutsch und Formulierungen",
     },
     {
+      href: "/gefahrgut-pruefung-auf-deutsch",
+      label: "Gefahrgut Pruefung auf Deutsch",
+      note: "Wenn aus Wortschatz konkreter Pruefungsbezug werden soll",
+    },
+    {
       href: "/adr-begriffe",
       label: "ADR Begriffe",
-      note: "Mehr ADR-spezifischer Wortschatz",
+      note: "ADR-spezifischer Wortschatz als naechster Schritt",
     },
   ],
   ctaTitle: "Gefahrgut-Deutsch im Telegram-Bot weiterlernen",
@@ -1423,19 +1435,19 @@ export const adrPruefungDeutschLernen: SeoPageConfig = {
   slug: "adr-pruefung-deutsch-lernen",
   path: "/adr-pruefung-deutsch-lernen",
   pageTitle: "ADR Pruefung Deutsch lernen",
-  metaTitle: "ADR Pruefung Deutsch lernen | Fragen, Begriffe, Vorbereitung",
+  metaTitle: "ADR Pruefung Deutsch lernen | Sprache trainieren und wiederholen",
   metaDescription:
-    "ADR Pruefung auf Deutsch lernen mit kleinem Fragen-Sample, wichtigen Begriffen und klarem Einstieg in den Telegram-Bot.",
+    "ADR Pruefung auf Deutsch lernen mit Fokus auf Sprachverstaendnis, Wiederholung und kleine Lernschritte im Telegram-Bot.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Pruefung Deutsch lernen",
   heroLead:
-    "Diese Seite ist fuer Menschen gedacht, die ADR auf Deutsch lernen wollen und einen klaren, einfachen Einstieg suchen.",
+    "Diese Seite ist fuer Menschen gedacht, die nicht nur Orientierung suchen, sondern die ADR-Pruefung auf Deutsch wirklich Schritt fuer Schritt lernen wollen.",
   heroSupport:
     "Sie verbindet Suchintention, Sprachhilfe und einen direkten Uebergang in den Telegram-Bot.",
   intentTitle: "Was Google hier verstehen soll",
   intentParagraphs: [
-    "Nicht jeder sucht nach Kursnamen. Viele Nutzer suchen ganz direkt nach der Aufgabe: ADR Pruefung auf Deutsch lernen.",
-    "Genau deshalb ist diese Seite stark: sie spiegelt den Suchsatz fast eins zu eins und gibt Google eine sehr klare Relevanz.",
+    "Nicht jeder sucht nach Kursnamen. Viele Nutzer suchen ganz direkt nach der Aufgabe: ADR Pruefung auf Deutsch lernen. Dahinter steckt meist Lernabsicht, nicht nur Informationssuche.",
+    "Genau deshalb ist diese Seite enger als die allgemeine ADR-Pruefung-auf-Deutsch-Seite: weniger Uebersicht, mehr Fokus auf Sprache, Wiederholung und kleinen Lernfortschritt.",
   ],
   sampleTitle: "Lernen in kleinen Schritten",
   sampleLead:
@@ -1463,17 +1475,38 @@ export const adrPruefungDeutschLernen: SeoPageConfig = {
     "Im Bot geht Lernen in kleinen Einheiten weiter, was fuer Sprach- und Frage-Training besonders gut funktioniert.",
     "Die oeffentliche Seite zeigt nur die Richtung. Der Bot uebernimmt die eigentliche Lernroutine.",
   ],
-  relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
+  faqs: [
     {
-      href: "/adr-pruefung-auf-deutsch",
-      label: "ADR Pruefung auf Deutsch",
-      note: "Allgemeinerer Einstieg zum gleichen Themenfeld",
+      question: "Worin unterscheidet sich diese Seite von einer allgemeinen ADR-Pruefungsseite?",
+      answer:
+        "Hier geht es staerker um das Lernen selbst: Sprachverstaendnis, kleine Schritte und Wiederholung, nicht nur um einen allgemeinen Ueberblick.",
     },
     {
-      href: "/adr-fragen-auf-deutsch",
-      label: "ADR Fragen auf Deutsch",
-      note: "Fragenfokus mit typischen Formulierungen",
+      question: "Ist diese Seite fuer Menschen mit schwachem Deutsch geeignet?",
+      answer:
+        "Ja. Genau fuer diese Lernlage ist sie gedacht: erst Sprache und Formulierungen sicherer machen, dann mehr Fragen im Bot trainieren.",
+    },
+    {
+      question: "Was ist nach dieser Vorschau der sinnvollste Schritt?",
+      answer:
+        "Direkt in den Telegram-Bot wechseln und dort mit kurzen Frageblöcken und Wiederholung weitermachen.",
+    },
+  ],
+  relatedLinks: [
+    {
+      href: "/adr-pruefung-auf-deutsch",
+      label: "ADR-Pruefung auf Deutsch",
+      note: "Wenn du erst den groesseren Gesamtueberblick sehen willst",
+    },
+    {
+      href: "/technisches-deutsch-adr",
+      label: "Technisches Deutsch fuer ADR",
+      note: "Sprachfokus fuer schwierige Begriffe und Formulierungen",
+    },
+    {
+      href: "/adr-deutsch-ueben",
+      label: "ADR Deutsch ueben",
+      note: "Wenn du aus Lernen direkt in aktive Wiederholung gehen willst",
     },
   ],
   ctaTitle: "Jetzt mit ADR auf Deutsch starten",
@@ -1486,8 +1519,8 @@ export const adrPruefungDeutschLernen: SeoPageConfig = {
   keywords: [
     "ADR Pruefung Deutsch lernen",
     "ADR auf Deutsch lernen",
-    "ADR Deutsch lernen",
-    "ADR Pruefung lernen",
+    "ADR Pruefung Sprache lernen",
+    "ADR Deutsch lernen Wiederholung",
   ],
 };
 
@@ -1639,7 +1672,7 @@ export const adrTelegramBotDeutsch: SeoPageConfig = {
   intentTitle: "Warum dieser Suchbegriff wertvoll ist",
   intentParagraphs: [
     "Das ist ein sehr konkreter Suchintent mit hoher Naehe zur Conversion, weil die Loesung bereits im Suchsatz mitgedacht wird.",
-    "Genau deshalb sollte Google fuer diesen Begriff nicht nur die Startseite, sondern eine eigene, passend benannte Zielseite sehen.",
+    "Genau deshalb sollte Google fuer diesen Begriff nicht nur die Startseite, sondern eine eigene, passend benannte Zielseite sehen. Hier geht es um den Kanal und das Format, nicht um allgemeine Lernhilfe.",
   ],
   sampleTitle: "So passt der Bot zum Suchintent",
   sampleLead:
@@ -1667,12 +1700,33 @@ export const adrTelegramBotDeutsch: SeoPageConfig = {
     "Suchende nach einem Telegram Bot sollten ohne Umweg direkt in denselben Kanal wechseln koennen.",
     "Genau deshalb ist diese Seite nicht nur fuer SEO, sondern auch fuer Conversion sehr stark.",
   ],
+  faqs: [
+    {
+      question: "Warum gibt es dafuer eine eigene Seite und nicht nur die Startseite?",
+      answer:
+        "Weil der Suchintent sehr konkret ist: Nutzer wollen direkt einen ADR Telegram Bot finden und nicht erst allgemein nach Lernhilfe suchen.",
+    },
+    {
+      question: "Ist Telegram hier nur ein Kontaktkanal oder das eigentliche Lernformat?",
+      answer:
+        "Telegram ist das eigentliche Lernformat. Dort laufen Fragen, Begriffe und Wiederholung direkt im Chat.",
+    },
+    {
+      question: "Worin unterscheidet sich diese Seite von allgemeiner ADR Lernhilfe?",
+      answer:
+        "Diese Seite verkauft den konkreten Kanal Telegram. Allgemeine Lernhilfe-Seiten erklaeren eher den Einstieg und die Struktur des Lernens.",
+    },
+  ],
   relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
     {
       href: "/adr-pruefungsfragen-app-deutsch",
       label: "ADR Pruefungsfragen App Deutsch",
       note: "App-intent mit aehnlicher Suchlogik",
+    },
+    {
+      href: "/adr-lernhilfe-deutsch",
+      label: "ADR Lernhilfe Deutsch",
+      note: "Breitere Lernhilfe fuer Einstieg, Struktur und Grundverstaendnis",
     },
     {
       href: "/adr-fragen-auf-deutsch",
@@ -1767,19 +1821,19 @@ export const adrTestDeutsch: SeoPageConfig = {
   slug: "adr-test-deutsch",
   path: "/adr-test-deutsch",
   pageTitle: "ADR Test Deutsch",
-  metaTitle: "ADR Test Deutsch | Uebungsfragen und Einstieg | ADR Bot",
+  metaTitle: "ADR Test Deutsch | Probeformat und Selbstcheck | ADR Bot",
   metaDescription:
-    "ADR Test auf Deutsch mit kleinem Fragen-Sample, typischen Formulierungen und direktem Einstieg in den Telegram-Bot.",
+    "ADR Test auf Deutsch mit kleinem Probeformat, Selbstcheck-Charakter und direktem Einstieg in den Telegram-Bot.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Test Deutsch",
   heroLead:
-    "Diese Seite gibt dir einen kompakten Einstieg in einen ADR Test auf Deutsch. Du siehst typische Fragestellungen und gehst danach direkt in den Bot weiter.",
+    "Diese Seite gibt dir einen kompakten Einstieg in einen ADR Test auf Deutsch. Du siehst eher einen kleinen Selbstcheck im Testformat und gehst danach direkt in den Bot weiter.",
   heroSupport:
     "Die Seite ist bewusst kurz. Sie soll Suchintentionen abholen und nicht das komplette Training oeffentlich machen.",
   intentTitle: "Was du auf dieser Seite bekommst",
   intentParagraphs: [
-    "Viele suchen nach ADR Test Deutsch, weil sie schnell pruefen wollen, ob sie die Fachsprache verstehen. Genau dafuer ist diese Seite gebaut.",
-    "Du bekommst einen kleinen Ausschnitt mit typischen Fragen und klaren Begriffen. Fuer mehr Wiederholung und mehr Tiefe geht es direkt in Telegram weiter.",
+    "Viele suchen nach ADR Test Deutsch, weil sie schnell pruefen wollen, ob sie die Fachsprache und das Niveau schon grob verstehen. Genau dafuer ist diese Seite gebaut.",
+    "Du bekommst hier eher ein kleines Probeformat mit Selbstcheck-Charakter, nicht einfach nur eine Sammlung einzelner Fragen. Fuer mehr Wiederholung und mehr Tiefe geht es direkt in Telegram weiter.",
   ],
   sampleTitle: "Mini-Testvorschau",
   sampleLead:
@@ -1825,18 +1879,27 @@ export const adrTestDeutsch: SeoPageConfig = {
       answer:
         "Nein. Sie zeigt nur einen Einstieg. Das vollstaendige Ueben geht im Bot weiter.",
     },
+    {
+      question: "Worin unterscheidet sich diese Seite von ADR Fragen auf Deutsch?",
+      answer:
+        "Hier steht eher ein kleiner Test- oder Selbstcheck-Moment im Vordergrund. Seiten zu ADR Fragen fokussieren staerker einzelne Formulierungen und Fragearten.",
+    },
   ],
   relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
-    {
-      href: "/adr-pruefungsfragen-lernen",
-      label: "ADR Pruefungsfragen lernen",
-      note: "Mehr Fokus auf Fragen und Wiederholung",
-    },
     {
       href: "/adr-fragen-auf-deutsch",
       label: "ADR Fragen auf Deutsch",
-      note: "Breiter Einstieg in deutsche Frageformate",
+      note: "Wenn du statt Testformat einzelne Frageformulierungen trainieren willst",
+    },
+    {
+      href: "/adr-pruefungsfragen-lernen",
+      label: "ADR Pruefungsfragen lernen",
+      note: "Mehr Fokus auf Lernen, Wiederholung und Frageblöcke",
+    },
+    {
+      href: "/adr-pruefung-hilfe",
+      label: "ADR Pruefung Hilfe",
+      note: "Wenn du statt Selbstcheck eher Orientierung und Starthilfe brauchst",
     },
   ],
   ctaTitle: "Direkt in den ADR-Testfluss wechseln",
@@ -1957,8 +2020,8 @@ export const adrKursDeutsch: SeoPageConfig = {
     "Der volle Kurs liegt nicht oeffentlich auf der Seite. Wir zeigen den Einstieg und leiten dann in den Bot weiter.",
   intentTitle: "Wofuer diese Kursseite gedacht ist",
   intentParagraphs: [
-    "Suchende wollen oft zuerst wissen, ob der Stoff auf Deutsch verstaendlich erklaert wird. Diese Seite beantwortet genau diese Schwelle.",
-    "Sie verbindet Kursintention, einfache Orientierung und einen klaren Uebergang in den Telegram-Bot.",
+    "Suchende wollen oft zuerst wissen, ob der Stoff auf Deutsch verstaendlich erklaert wird und welcher Kurs ueberhaupt der richtige Einstieg ist. Diese Seite beantwortet genau diese Schwelle.",
+    "Sie verbindet Kursintention, einfache Orientierung und die Frage nach Basiskurs versus Aufbaukurs mit einem klaren Uebergang in den Telegram-Bot.",
   ],
   sampleTitle: "Kursvorschau",
   sampleLead:
@@ -1985,12 +2048,33 @@ export const adrKursDeutsch: SeoPageConfig = {
     "Der Bot ist besser fuer kleinschrittiges Lernen und Wiederholen geeignet als eine rein statische Landingpage.",
     "So bleibt die Seite fuer Google stark und der Lernfluss fuer Nutzer praktisch.",
   ],
+  faqs: [
+    {
+      question: "Ist diese Seite als Kurswahl-Hilfe gedacht?",
+      answer:
+        "Ja. Sie hilft vor allem beim Verstehen, was mit ADR-Kurs auf Deutsch gemeint ist und welcher Einstieg sinnvoll sein kann.",
+    },
+    {
+      question: "Ersetzt diese Seite einen offiziellen ADR-Kurs?",
+      answer:
+        "Nein. Sie ist nur eine Vorschau und Lernhilfe. Der offizielle Kurs bleibt notwendig.",
+    },
+    {
+      question: "Was ist nach dieser Kursvorschau sinnvoll?",
+      answer:
+        "Im Bot mit Begriffen und Fragen starten, damit der Kurseinstieg spaeter leichter faellt.",
+    },
+  ],
   relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
     {
       href: "/basiskurs-preview",
       label: "Basiskurs Preview",
       note: "Direkter Einstieg in den haeufigsten Kursintent",
+    },
+    {
+      href: "/adr-schein-deutsch",
+      label: "ADR Schein Deutsch",
+      note: "Wenn du weniger Kurswahl und mehr Ziel Schein im Kopf hast",
     },
     {
       href: "/adr-vorbereitung-fuer-lkw-fahrer",
@@ -2017,9 +2101,9 @@ export const adrScheinDeutsch: SeoPageConfig = {
   slug: "adr-schein-deutsch",
   path: "/adr-schein-deutsch",
   pageTitle: "ADR Schein Deutsch",
-  metaTitle: "ADR Schein Deutsch | Vorbereitung und Lernhilfe | ADR Bot",
+  metaTitle: "ADR Schein Deutsch | Weg zur Pruefung und Lernhilfe | ADR Bot",
   metaDescription:
-    "ADR Schein auf Deutsch: kompakte Orientierung zu Fragen, Begriffen und Vorbereitung fuer Lernende und Fahrer.",
+    "ADR Schein auf Deutsch: kompakte Orientierung zum Weg durch Kurs, Pruefung und Lernhilfe fuer Fahrer und Lernende.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Schein Deutsch",
   heroLead:
@@ -2028,8 +2112,8 @@ export const adrScheinDeutsch: SeoPageConfig = {
     "Diese Vorschauseite zeigt den Einstieg. Das eigentliche Training geht anschliessend im Bot weiter.",
   intentTitle: "Was Suchende nach ADR Schein Deutsch meist brauchen",
   intentParagraphs: [
-    "Viele suchen nicht nach abstrakter Theorie, sondern nach einem verstaendlichen Weg zum ADR Schein auf Deutsch.",
-    "Genau dafuer verbinden wir hier Kurslogik, Fragebeispiele und klare Begriffe mit einem schnellen CTA zum Bot.",
+    "Viele suchen nicht nach abstrakter Theorie, sondern nach einem verstaendlichen Weg zum ADR Schein auf Deutsch. Sie denken vom Ziel her: bestehen, bekommen, verlaengern.",
+    "Genau dafuer verbinden wir hier Schein-Logik, Fragebeispiele und klare Begriffe mit einem schnellen CTA zum Bot, ohne in die eigentliche Kurswahl-Seite abzurutschen.",
   ],
   sampleTitle: "Kleiner Einstieg",
   sampleLead:
@@ -2056,17 +2140,38 @@ export const adrScheinDeutsch: SeoPageConfig = {
     "Der Bot erlaubt mehr Wiederholung, kurze Lerneinheiten und einen klareren Uebergang vom Lesen zum Ueben.",
     "So bleibt die Landingpage leicht und der eigentliche Trainingswert sitzt dort, wo Nutzer oefter zurueckkommen.",
   ],
+  faqs: [
+    {
+      question: "Hilft diese Seite eher beim Ziel Schein als bei der Kurswahl?",
+      answer:
+        "Ja. Hier steht das Ziel ADR Schein im Vordergrund, waehrend andere Seiten staerker die Frage nach dem passenden Kurs beantworten.",
+    },
+    {
+      question: "Bekomme ich den ADR Schein allein durch den Bot?",
+      answer:
+        "Nein. Der Bot hilft beim Lernen, ersetzt aber weder offiziellen Kurs noch Pruefung.",
+    },
+    {
+      question: "Wofuer ist der Bot in diesem Kontext am nuetzlichsten?",
+      answer:
+        "Fuer Wiederholung, Sprachverstaendnis und regelmaessige kleine Lerneinheiten auf dem Weg zur Pruefung.",
+    },
+  ],
   relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
     {
       href: "/adr-kurs-deutsch",
       label: "ADR Kurs Deutsch",
-      note: "Kursnaher Einstieg fuer denselben Bedarf",
+      note: "Wenn du statt Scheinziel erst den passenden Kurs einordnen willst",
     },
     {
       href: "/adr-pruefung-auf-deutsch",
       label: "ADR Pruefung auf Deutsch",
       note: "Pruefungsfokus fuer Suchende mit Testintention",
+    },
+    {
+      href: "/adr-pruefung-bestehen",
+      label: "ADR Pruefung bestehen",
+      note: "Wenn dein Fokus klar auf Bestehen und Vorbereitung liegt",
     },
   ],
   ctaTitle: "Mit dem Lernen fuer den ADR Schein anfangen",
@@ -2088,19 +2193,19 @@ export const adrPruefungHilfe: SeoPageConfig = {
   slug: "adr-pruefung-hilfe",
   path: "/adr-pruefung-hilfe",
   pageTitle: "ADR Pruefung Hilfe",
-  metaTitle: "ADR Pruefung Hilfe | Verstehen, ueben und vorbereiten | ADR Bot",
+  metaTitle: "ADR Pruefung Hilfe | Orientierung und erster Lernplan | ADR Bot",
   metaDescription:
-    "Hilfe fuer die ADR Pruefung auf Deutsch mit typischen Fragen, Begriffen und einem klaren Lernweg in den Telegram-Bot.",
+    "Hilfe fuer die ADR Pruefung auf Deutsch mit schneller Orientierung, ersten Lernschritten und klarem Weiterweg in den Telegram-Bot.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Pruefung Hilfe",
   heroLead:
-    "Diese Seite richtet sich an Menschen, die schnelle Hilfe fuer die ADR Pruefung suchen und einen klaren Einstieg auf Deutsch brauchen.",
+    "Diese Seite richtet sich an Menschen, die schnelle Hilfe fuer die ADR Pruefung suchen und zuerst wissen wollen, wie sie sinnvoll anfangen.",
   heroSupport:
     "Du bekommst Orientierung, ein kleines Sample und danach den direkten Weg in den Bot.",
   intentTitle: "Wie diese Hilfeseite genutzt werden soll",
   intentParagraphs: [
-    "Nicht jeder sucht nach Kurs oder App. Viele tippen einfach ADR Pruefung Hilfe ein. Genau dieses Problem loest diese Seite.",
-    "Sie beantwortet den Bedarf nach schneller Orientierung und fuehrt dann in ein strukturierteres Lernformat weiter.",
+    "Nicht jeder sucht nach Kurs oder App. Viele tippen einfach ADR Pruefung Hilfe ein. Genau dieses Problem loest diese Seite mit einem rescue-orientierten Einstieg.",
+    "Sie beantwortet den Bedarf nach schneller Orientierung, nach einem ersten Lernplan und nach den naechsten sinnvollen Schritten. Erst danach fuehrt sie in ein strukturierteres Lernformat weiter.",
   ],
   sampleTitle: "Schnelle Hilfe in klein",
   sampleLead:
@@ -2127,17 +2232,38 @@ export const adrPruefungHilfe: SeoPageConfig = {
     "Die Seite beantwortet die Suchintention. Der Bot liefert die Wiederholung und den eigentlichen Lernfortschritt.",
     "So bekommt der Nutzer beides: Google-Einstieg und praktischen Lernfluss.",
   ],
-  relatedLinks: [
-    { href: "/", label: "Startseite", note: "Zur Hauptseite zurueck" },
+  faqs: [
     {
-      href: "/adr-test-deutsch",
-      label: "ADR Test Deutsch",
-      note: "Fuer Suchende mit Testintention",
+      question: "Ist diese Seite eher fuer Orientierung als fuer komplettes Lernen gedacht?",
+      answer:
+        "Ja. Sie hilft vor allem dann, wenn du schnell Klarheit brauchst, womit du fuer die ADR-Pruefung anfangen solltest.",
     },
+    {
+      question: "Worin unterscheidet sich diese Seite von ADR Pruefung auf Deutsch?",
+      answer:
+        "Die allgemeine ADR-Pruefungsseite gibt einen breiteren Ueberblick. Diese Hilfeseite ist staerker als Rescue-Einstieg gebaut: weniger Gesamtbild, mehr erster naechster Schritt.",
+    },
+    {
+      question: "Was mache ich nach dieser Hilfe-Seite?",
+      answer:
+        "Direkt in den Telegram-Bot wechseln und dort mit kurzen Frageblöcken, Begriffen und Wiederholung starten.",
+    },
+  ],
+  relatedLinks: [
     {
       href: "/adr-pruefung-auf-deutsch",
       label: "ADR Pruefung auf Deutsch",
-      note: "Direkter Einstieg in Pruefungssprache",
+      note: "Wenn du statt Rescue-Hilfe erst den groesseren Ueberblick willst",
+    },
+    {
+      href: "/adr-pruefung-deutsch-lernen",
+      label: "ADR Pruefung Deutsch lernen",
+      note: "Wenn du aus Starthilfe direkt in Lernroutine wechseln willst",
+    },
+    {
+      href: "/adr-test-deutsch",
+      label: "ADR Test Deutsch",
+      note: "Wenn du statt Starthilfe lieber einen schnellen Selbstcheck machen willst",
     },
   ],
   ctaTitle: "Jetzt praktische Hilfe im Bot nutzen",
@@ -2151,7 +2277,7 @@ export const adrPruefungHilfe: SeoPageConfig = {
     "ADR Pruefung Hilfe",
     "Hilfe fuer ADR Pruefung",
     "ADR Hilfe Deutsch",
-    "ADR Vorbereitung Hilfe",
+    "ADR Lernplan Pruefung",
   ],
 };
 
@@ -2536,9 +2662,9 @@ export const adrLernhilfeDeutsch: SeoPageConfig = {
   slug: "adr-lernhilfe-deutsch",
   path: "/adr-lernhilfe-deutsch",
   pageTitle: "ADR Lernhilfe Deutsch",
-  metaTitle: "ADR Lernhilfe Deutsch | Einstieg, Begriffe und Uebung | ADR Bot",
+  metaTitle: "ADR Lernhilfe Deutsch | Struktur, Begriffe und Lernplan | ADR Bot",
   metaDescription:
-    "ADR Lernhilfe auf Deutsch: Einstieg fuer Fahrer und Lernende mit Fachbegriffen, kurzen Fragebeispielen und dem Telegram-Bot fuer echte Wiederholung.",
+    "ADR Lernhilfe auf Deutsch: strukturierter Einstieg mit Fachbegriffen, Lernplan und dem Telegram-Bot fuer spaetere Wiederholung.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Lernhilfe auf Deutsch",
   heroLead:
@@ -2548,7 +2674,7 @@ export const adrLernhilfeDeutsch: SeoPageConfig = {
   intentTitle: "Wer nach ADR Lernhilfe sucht",
   intentParagraphs: [
     "Viele Fahrer suchen nach ADR Lernhilfe, weil ihnen der Einstieg schwerfaellt. Die Kombination aus technischen Inhalten und Fachsprache wirkt am Anfang ueberwaetigend.",
-    "Diese Seite hilft dabei, den Stoff zu strukturieren und einen echten Lernfluss zu starten.",
+    "Diese Seite hilft dabei, den Stoff zu strukturieren und einen echten Lernfluss zu starten. Sie ist breiter als eine reine Telegram- oder App-Seite und erklaert eher den Einstieg als den Kanal.",
   ],
   sampleTitle: "Erste Lernhilfe-Elemente",
   sampleLead:
@@ -2591,11 +2717,16 @@ export const adrLernhilfeDeutsch: SeoPageConfig = {
       answer:
         "Ja. Viele Fahrer lernen ADR auf Deutsch als Zweitsprache. Der Bot ist genau dafuer gebaut.",
     },
+    {
+      question: "Ist diese Seite eher Lernhilfe als Bot-Seite?",
+      answer:
+        "Ja. Hier geht es um Struktur, Einstieg und Orientierung. Die konkrete Telegram-Loesung wird erst als naechster Schritt angeboten.",
+    },
   ],
   relatedLinks: [
     { href: "/adr-pruefung-auf-deutsch", label: "ADR-Pruefung auf Deutsch", note: "Allgemeiner Einstieg" },
     { href: "/adr-deutsch-ueben", label: "ADR Deutsch ueben", note: "Aktives Ueben von Sprache und Fragen" },
-    { href: "/adr-pruefung-fuer-nicht-muttersprachler", label: "ADR fuer Nicht-Muttersprachler", note: "Speziell fuer Lernende mit anderer Muttersprache" },
+    { href: "/adr-telegram-bot-deutsch", label: "ADR Telegram Bot Deutsch", note: "Wenn du nach der Lernhilfe direkt den Kanal suchst" },
   ],
   ctaTitle: "Jetzt mit echtem Lernen beginnen",
   ctaLead: "Der Telegram-Bot begleitet dich von den ersten Begriffen bis zur Pruefungsvorbereitung.",
