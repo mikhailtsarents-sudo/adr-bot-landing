@@ -1072,6 +1072,7 @@ async function main() {
         shortform: scenario.shortform_contract,
         brief: contractor2Prompt,
         variationTag: buildVariationTag(args),
+        contentFamily: "QUESTION",
         stagingRoot: args.generatedAssetLocalStagingRoot,
       });
   logAutonomousDecision(args.useApprovedPreviewBundle ? "approved preview bundle reused" : "fresh visual generation selected", {

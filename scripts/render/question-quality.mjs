@@ -124,7 +124,7 @@ export function buildQuestionShortformContract(questionInput) {
   const answers = Array.isArray(payload.answer_options) ? payload.answer_options.map((item) => normalizeWhitespace(item)) : [];
   const correctAnswer = normalizeWhitespace(payload.correct_answer);
   const explanation = normalizeWhitespace(payload.simple_explanation);
-  const cta = "Im Telegram-Bot kostenlos starten: 5 Fragen gratis testen";
+  const cta = "Schaffst du 5 ADR-Fragen?";
 
   const hook = shortenQuestion(questionText, 54);
   const questionShort = shortenQuestion(questionText, 84);

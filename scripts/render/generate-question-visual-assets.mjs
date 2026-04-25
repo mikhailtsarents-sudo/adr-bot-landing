@@ -5,6 +5,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { generatePhotorealSceneFrames, regenerateSingleSceneFrame } from "./question-photoreal-generator.mjs";
 import { validateTextZoneReadabilityBatch, pickBestFrame } from "./image-text-zone-validator.mjs";
+import { postProcessFrames } from "./image-post-processor.mjs";
 
 const WIDTH = 1440;
 const HEIGHT = 2400;
@@ -1269,6 +1270,7 @@ export async function generateQuestionVisualBundle({
   shortform,
   brief = null,
   variationTag = null,
+  contentFamily,
   stagingRoot = path.join(os.tmpdir(), "adr-generated-assets-staging"),
 }) {
   const safeVideoId = slugify(videoId);
@@ -1300,6 +1302,7 @@ export async function generateQuestionVisualBundle({
     questionText,
     brief,
     descriptors,
+    contentFamily,
   });
   const primarySceneValidation = photorealBundle.summary;
   const fallbackUsed = false;
@@ -1345,6 +1348,8 @@ export async function generateQuestionVisualBundle({
     `${JSON.stringify({ video_id: safeVideoId, frames: textZoneLog }, null, 2)}\n`,
     "utf8",
   );
+
+  await postProcessFrames(sceneFrames).catch(() => {});
 
   const frameManifest = Array.isArray(photorealBundle.frameManifest)
     ? photorealBundle.frameManifest.map((entry, index) => ({

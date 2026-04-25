@@ -48,6 +48,7 @@ yarn-error.log*
 /autonomous-production-test-runs/
 /intent-to-content-runs/
 /preview-smoke-runs/
+/runtime-health-runs/
 /runtime-archive/
 /public/generated/q-test-*/
 /public/shotstack-assets/adr-short-video/current/*-trace/

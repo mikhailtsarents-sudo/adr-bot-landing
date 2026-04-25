@@ -35,6 +35,7 @@ export async function prepareGenericGeneratedVisualPackage({
   sourceId,
   shortform,
   brief,
+  contentFamily,
   diagnosticsDir,
   stagingRoot,
 }) {
@@ -45,6 +46,7 @@ export async function prepareGenericGeneratedVisualPackage({
     questionId: sourceId,
     shortform,
     brief,
+    contentFamily,
     stagingRoot,
   });
 

@@ -186,7 +186,7 @@ function buildScenario(wordInput, classification) {
       { id: 2, role: "content", text: `${term} / ${translation}` },
       { id: 3, role: "pause", text: synonym ? `Auch bekannt als: ${synonym}` : explanation },
       { id: 4, role: "answer", text: `${term} = ${translation}` },
-      { id: 5, role: "cta", text: "Mehr ADR-Begriffe im Telegram-Bot" },
+      { id: 5, role: "cta", text: "1 Begriff pro Tag" },
     ],
     body_blocks: [
       term,
@@ -195,7 +195,7 @@ function buildScenario(wordInput, classification) {
     ].filter(Boolean),
     core_answer: `${term} = ${translation}`,
     short_explanation: explanation,
-    cta_text: "Mehr ADR-Begriffe im Telegram-Bot",
+    cta_text: "1 Begriff pro Tag",
     caption_text: `ADR Begriff kurz erklärt: ${term}.`,
     hashtags: ["#ADR", "#Gefahrgut", "#LKW", "#ADRDeutsch"],
     tone: "klar_und_ruhig",
@@ -481,6 +481,7 @@ async function main() {
       sourceId: text(wordInput.source_id),
       shortform,
       brief: visualBrief,
+      contentFamily: "WORD",
       diagnosticsDir: outputDir,
       stagingRoot: args.generatedAssetLocalStagingRoot,
     });

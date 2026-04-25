@@ -23,6 +23,12 @@ Detailed execution status lives in:
 - [ANALYTICS_SETUP.md](/Users/mihailcarenc/Documents/New project/adr-bot-landing/ANALYTICS_SETUP.md)
 - [TIKTOK_SETUP_LOG.md](/Users/mihailcarenc/Documents/New project/adr-bot-landing/TIKTOK_SETUP_LOG.md)
 
+Operational runtime health snapshot is now also available:
+
+```bash
+npm run run:runtime-health-snapshot -- --public-only
+```
+
 ## Local Development
 
 Run the dev server:

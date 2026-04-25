@@ -288,6 +288,12 @@ function sanitizeVisualHint(hint) {
     .trim();
 }
 
+const FAMILY_MOOD = {
+  QUESTION: "bright, energetic, curiosity-driven mood; warm natural daylight; vibrant but realistic colors; clear approachable atmosphere",
+  WORD: "clean, minimal, educational, premium feel; soft natural daylight; calm modern European logistics environment",
+  NEWS: "clear, modern, informative look; neutral-bright daylight; fresh contemporary European transport setting",
+};
+
 function buildScenePositivePrompt({
   role,
   sceneIndex,
@@ -298,6 +304,7 @@ function buildScenePositivePrompt({
   subject,
   context,
   tension,
+  contentFamily,
 }) {
   const roleSpec =
     role === "hook"
@@ -343,6 +350,7 @@ function buildScenePositivePrompt({
     `Visual hint: ${sanitizeVisualHint(visualHint) || sceneIntent || "real truck transport or hazardous goods handling situation"}.`,
     "Style/medium: photorealistic smartphone video still, not illustration, not vector, not flat design, not infographic, not UI.",
     "Composition/framing: vertical 9:16, accidental shaky phone-camera capture, off-center subjects, partial crop, shallow depth of field, imperfect framing, foreground obstruction allowed.",
+    `Visual mood: ${FAMILY_MOOD[String(contentFamily || "QUESTION").toUpperCase()] || FAMILY_MOOD.QUESTION}. Avoid: overcast sky, rain, dark cinematic mood, fog, cold blue tint, desaturated colors, industrial decay, gloomy atmosphere, grey washed-out look.`,
     "Lighting/mood: natural uneven lighting, real-world noise, tension or action visible in the scene.",
     "Materials/textures: skin texture, fabric folds, worn equipment, industrial context, road grime, imperfect reflections.",
     "Hard constraint: no artificial text overlays.",
@@ -1412,6 +1420,7 @@ async function generateFramesWithProvider({
   generatedDir,
   selectedScenes,
   questionText,
+  contentFamily,
   frameTimeoutMs = DEFAULT_FRAME_GENERATION_TIMEOUT_MS,
   providerAttemptTimeoutMs = DEFAULT_PROVIDER_ATTEMPT_TIMEOUT_MS,
 }) {
@@ -1442,6 +1451,7 @@ async function generateFramesWithProvider({
         subject: scene.subject,
         context: scene.context,
         tension: scene.tension,
+        contentFamily,
       });
       const promptFile = path.join(generatedDir, `${provider.id}-scene${i + 1}.prompt.txt`);
       const negativePromptFile = path.join(generatedDir, `${provider.id}-scene${i + 1}.negative_prompt.txt`);
@@ -1605,6 +1615,7 @@ async function generateFramesWithProvider({
       subject: scene.subject,
       context: scene.context,
       tension: scene.tension,
+      contentFamily,
     });
     const negativePrompt = buildSceneNegativePrompt();
     const promptFile = path.join(generatedDir, `${provider.id}-scene${i + 1}.prompt.txt`);
@@ -2180,6 +2191,7 @@ export async function generatePhotorealSceneFrames({
   questionText,
   brief,
   descriptors,
+  contentFamily,
 }) {
   const selectedRoles = ROLE_SEQUENCE;
   const selectedScenes = selectedRoles
@@ -2233,6 +2245,7 @@ export async function generatePhotorealSceneFrames({
         generatedDir,
         selectedScenes,
         questionText,
+        contentFamily,
       });
       const rawFramePaths = generatedFrames.framePaths;
       const finalFramePaths = [];

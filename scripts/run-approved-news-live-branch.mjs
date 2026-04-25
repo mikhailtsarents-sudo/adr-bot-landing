@@ -604,6 +604,7 @@ async function main() {
     sourceId: approvedNews.news_id,
     shortform,
     brief: canvaBrief,
+    contentFamily: "NEWS",
     diagnosticsDir: outputDir,
     stagingRoot: args.generatedAssetLocalStagingRoot,
   });

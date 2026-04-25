@@ -77,26 +77,32 @@ export function computeTextLayout(role, captionText) {
 
   if (!t) return { fontSize: 52, lines: [] };
 
-  if (r === "hook" || r === "question") {
-    const fontSize = pickFontSize({ text: t, maxLines: 3, maxSize: 58, minSize: 32 });
+  if (r === "hook") {
+    const fontSize = pickFontSize({ text: t, maxLines: 3, maxSize: 88, minSize: 36 });
+    const lines = wrapText(t, fontSize);
+    return { fontSize, lines: lines.slice(0, 3) };
+  }
+
+  if (r === "question") {
+    const fontSize = pickFontSize({ text: t, maxLines: 3, maxSize: 72, minSize: 32 });
     const lines = wrapText(t, fontSize);
     return { fontSize, lines: lines.slice(0, 3) };
   }
 
   if (r === "answer") {
-    const fontSize = pickFontSize({ text: t, maxLines: 2, maxSize: 58, minSize: 30 });
+    const fontSize = pickFontSize({ text: t, maxLines: 2, maxSize: 64, minSize: 30 });
     const lines = wrapText(t, fontSize);
     return { fontSize, lines: lines.slice(0, 2) };
   }
 
   if (r === "timer") {
-    const fontSize = pickFontSize({ text: t, maxLines: 2, maxSize: 60, minSize: 32 });
+    const fontSize = pickFontSize({ text: t, maxLines: 2, maxSize: 70, minSize: 32 });
     const lines = wrapText(t, fontSize);
     return { fontSize, lines: lines.slice(0, 2) };
   }
 
   // Default (answers/transcript)
-  const fontSize = pickFontSize({ text: t, maxLines: 4, maxSize: 46, minSize: 28 });
+  const fontSize = pickFontSize({ text: t, maxLines: 4, maxSize: 52, minSize: 28 });
   const lines = wrapText(t, fontSize);
   return { fontSize, lines: lines.slice(0, 4) };
 }

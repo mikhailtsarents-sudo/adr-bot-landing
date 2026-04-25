@@ -69,6 +69,18 @@ This file is the current execution snapshot for the ADR Bot landing project.
     - turn referral from “visible but vague” into a real operator-readable growth channel
   - deploy state:
     - ready for next bounded Vercel deploy
+- Runtime health snapshot layer added on `2026-04-25`:
+  - script:
+    - `scripts/run-runtime-health-snapshot.mjs`
+  - npm entry:
+    - `npm run run:runtime-health-snapshot`
+  - it now verifies:
+    - public analytics dashboards
+    - private ingest reads
+    - VPS service/log freshness in full mode
+    - Telegram webhook alignment in full mode
+  - practical meaning:
+    - operator can now get one bounded machine-readable + Markdown health snapshot instead of guessing from separate logs and endpoints
 
 ### Content Catalogs
 

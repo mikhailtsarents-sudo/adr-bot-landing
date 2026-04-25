@@ -28,7 +28,7 @@ function buildLineClip({ html, color, fontSize, start, length, offsetY }) {
 }
 
 // Telegram CTA — glassmorphism overlay, reusable across all video types
-function buildCtaClips({ start, length }) {
+function buildCtaClips({ start, length, headline }) {
   const cardWidth = 960;
   const cardHeight = 370;
 
@@ -62,11 +62,12 @@ function buildCtaClips({ start, length }) {
     `animation:jump 0.8s ease-in-out infinite;white-space:nowrap;}`,
   ].join("");
 
+  const headlineText = headline || "Kostenlos \u00fcben";
   const html = [
     `<div class="card">`,
-    `<div class="headline">Kostenlos starten</div>`,
+    `<div class="headline">${esc(headlineText)}</div>`,
     `<div class="sub">im Telegram-Bot</div>`,
-    `<div class="btn">\u2708 Kostenlos ausprobieren \u2192</div>`,
+    `<div class="btn">\u2708 Jetzt starten \u2192</div>`,
     `</div>`,
   ].join("");
 
@@ -152,7 +153,7 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
   const l = Number(Math.max(length || 0.1, 0.1));
 
   if (r === "cta") {
-    return buildCtaClips({ start: s, length: l });
+    return buildCtaClips({ start: s, length: l, headline: captionText || undefined });
   }
 
   if (r === "answers") {
