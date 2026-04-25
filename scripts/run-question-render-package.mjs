@@ -15,6 +15,7 @@ import { DEFAULT_SCENARIO_ID, applyScenarioAnchor } from "./render/question-scen
 import { enableStrictNonInteractiveMode, logAutonomousDecision } from "./runtime/non-interactive-mode.mjs";
 import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
+import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,8 +38,7 @@ const DEFAULT_GENERATED_ASSET_SSH_TARGET =
 const DEFAULT_GENERATED_ASSET_LOCAL_STAGING_ROOT =
   process.env.GENERATED_ASSET_LOCAL_STAGING_ROOT || path.join(os.tmpdir(), "adr-generated-assets-staging");
 const DEFAULT_QUESTION_VOICEOVER_LOCAL_PATH = process.env.QUESTION_VOICEOVER_LOCAL_PATH || "";
-const DEFAULT_QUESTION_TTS_MODEL = process.env.QUESTION_TTS_MODEL || "gpt-4o-mini-tts";
-const DEFAULT_QUESTION_TTS_VOICE = process.env.QUESTION_TTS_VOICE || "alloy";
+const DEFAULT_QUESTION_TTS_VOICE = process.env.QUESTION_TTS_VOICE || DEFAULT_FAL_TTS_VOICE;
 const DEFAULT_VISIBILITY = "public";
 const DEFAULT_HEYGEN_MANIFEST_PATH = path.join(
   repoRoot,
@@ -778,40 +778,7 @@ function buildQuestionVoiceoverScript(questionInput, scenario) {
     .join(" ");
 }
 
-async function synthesizeQuestionVoiceoverToFile(outputPath, scriptText) {
-  const apiKey = text(process.env.OPENAI_API_KEY || process.env.OPENAI_API_TOKEN);
-  if (!apiKey || !text(scriptText)) {
-    return false;
-  }
-
-  const response = await fetch("https://api.openai.com/v1/audio/speech", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: DEFAULT_QUESTION_TTS_MODEL,
-      voice: DEFAULT_QUESTION_TTS_VOICE,
-      format: "mp3",
-      input: scriptText,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Question TTS request failed with HTTP ${response.status}.`);
-  }
-
-  const buffer = Buffer.from(await response.arrayBuffer());
-  if (buffer.length === 0) {
-    throw new Error("Question TTS returned an empty audio buffer.");
-  }
-
-  await writeFile(outputPath, buffer);
-  return true;
-}
-
-async function resolveQuestionVoiceoverAsset(args, visualBundle, questionInput, scenario, heygenManifest) {
+async function resolveQuestionVoiceoverAsset(args, visualBundle, questionInput, scenario) {
   const voiceoverTargetPath = path.join(visualBundle.generated_dir, "voiceover.mp3");
   const publicBase = String(args.generatedAssetPublicBaseUrl).replace(/\/$/, "");
   const canUseLocalGeneratedAssetDelivery = await canUseLocalGeneratedAssetRoot(args.generatedAssetRemoteRoot);
@@ -829,7 +796,7 @@ async function resolveQuestionVoiceoverAsset(args, visualBundle, questionInput, 
 
   const voiceScript = buildQuestionVoiceoverScript(questionInput, scenario);
   try {
-    const generated = await synthesizeQuestionVoiceoverToFile(voiceoverTargetPath, voiceScript);
+    const generated = await synthesizeVoiceoverToFile(voiceoverTargetPath, voiceScript, DEFAULT_QUESTION_TTS_VOICE);
     if (generated) {
       let voiceoverUrl = `${publicBase}/generated/${visualBundle.video_id}/voiceover.mp3`;
       const sshPassword = process.env.GENERATED_ASSET_SSH_PASSWORD || "";
@@ -850,14 +817,13 @@ async function resolveQuestionVoiceoverAsset(args, visualBundle, questionInput, 
       };
     }
   } catch (error) {
-    console.warn(`QUESTION TTS generation failed, falling back to static asset: ${error.message}`);
+    console.warn(`QUESTION TTS generation failed: ${error.message}`);
   }
 
-  const talkingHeadAsset = resolveTalkingHeadAsset(heygenManifest, args.baseUrl);
   return {
-    voiceoverUrl: talkingHeadAsset.talkingHeadUrl,
+    voiceoverUrl: "",
     voiceoverDurationSec: 0,
-    voiceMode: "heygen_avatar",
+    voiceMode: "tts_failed",
     voiceScript,
     generatedFromQuestion: false,
   };
@@ -1100,7 +1066,6 @@ async function main() {
     visualBundle,
     questionInput,
     scenario,
-    heygenManifest,
   );
   const renderTask = buildRenderTask(questionInput, scenario, {
     voiceoverUrl: voiceoverAsset.voiceoverUrl,

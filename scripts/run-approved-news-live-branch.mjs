@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { prepareGenericGeneratedVisualPackage } from "./render/prepare-generic-generated-visuals.mjs";
 import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
+import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,8 +18,7 @@ const DEFAULT_GENERATED_ASSET_PUBLIC_BASE_URL =
   process.env.GENERATED_ASSET_PUBLIC_BASE_URL || "http://46.225.170.55:8080";
 const DEFAULT_GENERATED_ASSET_LOCAL_STAGING_ROOT =
   process.env.GENERATED_ASSET_LOCAL_STAGING_ROOT || path.join(os.tmpdir(), "adr-generated-assets-staging");
-const DEFAULT_NEWS_TTS_MODEL = process.env.NEWS_TTS_MODEL || "gpt-4o-mini-tts";
-const DEFAULT_NEWS_TTS_VOICE = process.env.NEWS_TTS_VOICE || "alloy";
+const DEFAULT_NEWS_TTS_VOICE = process.env.NEWS_TTS_VOICE || DEFAULT_FAL_TTS_VOICE;
 
 function printHelp() {
   console.log(`Usage: node scripts/run-approved-news-live-branch.mjs --input <approved-row.json> [options]
@@ -416,39 +416,10 @@ function probeAudioDurationSec(localPath) {
   return match ? Number(match[1]) || 0 : 0;
 }
 
-async function synthesizeNewsVoiceoverToFile(outputPath, scriptText) {
-  const apiKey = text(process.env.OPENAI_API_KEY || process.env.OPENAI_API_TOKEN);
-  if (!apiKey) {
-    throw new Error("Missing OPENAI_API_KEY for NEWS TTS generation.");
-  }
-
-  const response = await fetch("https://api.openai.com/v1/audio/speech", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: DEFAULT_NEWS_TTS_MODEL,
-      voice: DEFAULT_NEWS_TTS_VOICE,
-      input: text(scriptText),
-      format: "mp3",
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`NEWS TTS failed: ${response.status} ${await response.text()}`);
-  }
-
-  const arrayBuffer = await response.arrayBuffer();
-  await writeFile(outputPath, Buffer.from(arrayBuffer));
-  return outputPath;
-}
-
 async function resolveNewsVoiceoverAsset(outputDir, approvedNews, scenarioResponse) {
   const voiceScript = buildNewsVoiceoverScript(approvedNews, scenarioResponse);
   const voiceoverTargetPath = path.join(outputDir, "voiceover.mp3");
-  await synthesizeNewsVoiceoverToFile(voiceoverTargetPath, voiceScript);
+  await synthesizeVoiceoverToFile(voiceoverTargetPath, voiceScript, DEFAULT_NEWS_TTS_VOICE);
   const temporaryUpload = await uploadFileToTemporaryHost(voiceoverTargetPath, {
     diagnosticsDir: outputDir,
     frameId: "news_voiceover",

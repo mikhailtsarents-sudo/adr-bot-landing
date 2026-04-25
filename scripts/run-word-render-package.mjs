@@ -9,6 +9,7 @@ import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { prepareGenericGeneratedVisualPackage } from "./render/prepare-generic-generated-visuals.mjs";
 import { bootstrapLocalRuntimeEnv } from "./runtime/local-runtime-env.mjs";
 import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-links.mjs";
+import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,8 +27,7 @@ const DEFAULT_GENERATED_ASSET_PUBLIC_BASE_URL =
   process.env.GENERATED_ASSET_PUBLIC_BASE_URL || "http://46.225.170.55:8080";
 const DEFAULT_GENERATED_ASSET_LOCAL_STAGING_ROOT =
   process.env.GENERATED_ASSET_LOCAL_STAGING_ROOT || path.join(os.tmpdir(), "adr-generated-assets-staging");
-const DEFAULT_WORD_TTS_MODEL = process.env.WORD_TTS_MODEL || "gpt-4o-mini-tts";
-const DEFAULT_WORD_TTS_VOICE = process.env.WORD_TTS_VOICE || "alloy";
+const DEFAULT_WORD_TTS_VOICE = process.env.WORD_TTS_VOICE || DEFAULT_FAL_TTS_VOICE;
 
 function printHelp() {
   console.log(`Usage: node scripts/run-word-render-package.mjs [options]
@@ -400,45 +400,13 @@ function buildWordVisualBrief(wordInput, scenario) {
   };
 }
 
-async function synthesizeWordVoiceoverToFile(outputPath, scriptText) {
-  const apiKey = text(process.env.OPENAI_API_KEY || process.env.OPENAI_API_TOKEN);
-  if (!apiKey || !text(scriptText)) {
-    return false;
-  }
-
-  const response = await fetch("https://api.openai.com/v1/audio/speech", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: DEFAULT_WORD_TTS_MODEL,
-      voice: DEFAULT_WORD_TTS_VOICE,
-      format: "mp3",
-      input: scriptText,
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`WORD TTS request failed with HTTP ${response.status}.`);
-  }
-
-  const buffer = Buffer.from(await response.arrayBuffer());
-  if (buffer.length === 0) {
-    throw new Error("WORD TTS returned an empty audio buffer.");
-  }
-
-  await writeFile(outputPath, buffer);
-  return true;
-}
 
 async function resolveWordVoiceoverAsset(tempDir, outputDir, wordInput, scenario) {
   const voiceScript = buildWordVoiceoverScript(wordInput, scenario);
   const voiceoverTargetPath = path.join(tempDir, "voiceover.mp3");
 
   try {
-    const generated = await synthesizeWordVoiceoverToFile(voiceoverTargetPath, voiceScript);
+    const generated = await synthesizeVoiceoverToFile(voiceoverTargetPath, voiceScript, DEFAULT_WORD_TTS_VOICE);
     if (!generated) {
       return {
         voiceoverUrl: "",
