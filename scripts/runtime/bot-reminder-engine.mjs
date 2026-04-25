@@ -4,6 +4,7 @@ const POSITIVE_CALLBACKS = {
   basiskurs: "reminder:track:bk",
   tank: "reminder:track:tank",
   begriffe: "reminder:track:begriffe",
+  exam_settings: "reminder:exammenu",
   snooze: "reminder:snooze",
   rare: "reminder:rare",
   stop: "reminder:stop",
@@ -19,11 +20,16 @@ const COPY = {
     track_body: "Du kannst mit Basiskurs, Tank oder nur Begriffen weitermachen.",
     exam_prompt: "Bis zur ADR-Prüfung ist nicht mehr viel Zeit.",
     exam_body: "Heute ist ein kleiner, klarer Schritt besser als ein großer Plan.",
+    exam_body_far: "Noch ist genug Zeit für ruhige kleine Schritte.",
+    exam_body_mid: "Jetzt hilft ein kurzer klarer Wieder-Einstieg mehr als Warten.",
+    exam_body_near: "Jetzt zählt ein kurzer, konzentrierter Schritt.",
+    exam_days_left: "Noch {days} Tage bis zur ADR-Prüfung.",
     cta_question: "1 Frage",
     cta_word: "1 Begriff",
     cta_basiskurs: "Basiskurs",
     cta_tank: "Tank",
     cta_begriffe: "Begriffe",
+    cta_exam_settings: "Prüfungsmodus",
     cta_not_now: "Nicht heute",
     cta_rare: "Seltener erinnern",
     cta_stop: "Erinnerungen aus",
@@ -37,11 +43,16 @@ const COPY = {
     track_body: "Можно продолжить через Basiskurs, Tank или просто через Begriffe.",
     exam_prompt: "До ADR-экзамена осталось не так много времени.",
     exam_body: "Сегодня маленький понятный шаг полезнее большого плана.",
+    exam_body_far: "Времени ещё достаточно для спокойных маленьких шагов.",
+    exam_body_mid: "Сейчас короткий понятный возврат полезнее, чем снова откладывать.",
+    exam_body_near: "Сейчас важнее короткий и собранный шаг, чем большой план.",
+    exam_days_left: "До ADR-экзамена осталось {days} дн.",
     cta_question: "1 вопрос",
     cta_word: "1 Begriff",
     cta_basiskurs: "Basiskurs",
     cta_tank: "Tank",
     cta_begriffe: "Begriffe",
+    cta_exam_settings: "Режим экзамена",
     cta_not_now: "Не сегодня",
     cta_rare: "Реже напоминать",
     cta_stop: "Выключить",
@@ -55,11 +66,16 @@ const COPY = {
     track_body: "You can return through Basiskurs, Tank, or just Begriffe.",
     exam_prompt: "Your ADR exam date is getting closer.",
     exam_body: "A small clear step today is better than a big plan.",
+    exam_body_far: "There is still enough time for calm small steps.",
+    exam_body_mid: "A short clear return now is better than waiting again.",
+    exam_body_near: "A short focused step matters more than a big plan now.",
+    exam_days_left: "{days} days left until your ADR exam.",
     cta_question: "1 question",
     cta_word: "1 term",
     cta_basiskurs: "Basiskurs",
     cta_tank: "Tank",
     cta_begriffe: "Begriffe",
+    cta_exam_settings: "Exam mode",
     cta_not_now: "Not today",
     cta_rare: "Remind less",
     cta_stop: "Stop reminders",
@@ -73,11 +89,16 @@ const COPY = {
     track_body: "Basiskurs, Tank veya sadece Begriffe ile devam edebilirsin.",
     exam_prompt: "ADR sınav tarihi yaklaşıyor.",
     exam_body: "Bugün küçük ve net bir adım büyük bir plandan daha iyi.",
+    exam_body_far: "Sakin küçük adımlar için hâlâ yeterli zaman var.",
+    exam_body_mid: "Şimdi kısa ve net bir dönüş yine ertelemekten daha iyi.",
+    exam_body_near: "Şu an büyük bir plandan çok kısa ve odaklı bir adım önemli.",
+    exam_days_left: "ADR sınavına {days} gün kaldı.",
     cta_question: "1 soru",
     cta_word: "1 terim",
     cta_basiskurs: "Basiskurs",
     cta_tank: "Tank",
     cta_begriffe: "Begriffe",
+    cta_exam_settings: "Sınav modu",
     cta_not_now: "Bugün değil",
     cta_rare: "Daha seyrek hatırlat",
     cta_stop: "Hatırlatmaları kapat",
@@ -124,14 +145,42 @@ export function resolveReminderLanguage(candidate) {
 }
 
 export function inQuietHours(now = new Date()) {
-  const hour = Number(
+  const hour = berlinHour(now);
+  return hour >= 22 || hour < 8;
+}
+
+function berlinWeekday(now = new Date()) {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Berlin",
+    weekday: "short",
+  }).format(now);
+}
+
+function berlinHour(now = new Date()) {
+  return Number(
     new Intl.DateTimeFormat("en-GB", {
       timeZone: "Europe/Berlin",
       hour: "2-digit",
       hour12: false,
     }).format(now),
   );
-  return hour >= 22 || hour < 8;
+}
+
+function berlinMonthDay(now = new Date()) {
+  const month = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Berlin", month: "2-digit" }).format(now);
+  const day = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Berlin", day: "2-digit" }).format(now);
+  return `${month}-${day}`;
+}
+
+export function inSoftSkipWindow(now = new Date()) {
+  const weekday = berlinWeekday(now);
+  const hour = berlinHour(now);
+  return (weekday === "Fri" && hour >= 18) || (weekday === "Sat" && hour < 11);
+}
+
+export function inHolidaySkipWindow(now = new Date()) {
+  const monthDay = berlinMonthDay(now);
+  return ["12-24", "12-25", "12-26", "12-31", "01-01"].includes(monthDay);
 }
 
 function daysBetween(now, isoOrDate) {
@@ -194,6 +243,24 @@ function reminderTypeForDecision(segment, sequenceStep) {
   return "track_choice_nudge";
 }
 
+function buildExamText(copy, candidate, now) {
+  const daysLeft = examDaysLeft(now, candidate.exam_date);
+  const lines = [copy.exam_prompt];
+  if (daysLeft != null && daysLeft >= 0) {
+    lines.push(copy.exam_days_left.replace("{days}", String(daysLeft)));
+  }
+  if (daysLeft == null) {
+    lines.push(copy.exam_body);
+  } else if (daysLeft < 7) {
+    lines.push(copy.exam_body_near);
+  } else if (daysLeft < 21) {
+    lines.push(copy.exam_body_mid);
+  } else {
+    lines.push(copy.exam_body_far);
+  }
+  return { text: lines.join("\n\n"), daysLeft };
+}
+
 export function decideReminder(candidate, now = new Date()) {
   if (!text(candidate.effective_chat_id || candidate.chat_id)) {
     return { send: false, reason: "missing_chat_id" };
@@ -201,6 +268,8 @@ export function decideReminder(candidate, now = new Date()) {
   if (candidate.reminder_mode === "disabled") return { send: false, reason: "disabled" };
   if (candidate.reminder_mode === "dormant") return { send: false, reason: "dormant" };
   if (inQuietHours(now)) return { send: false, reason: "quiet_hours" };
+  if (inSoftSkipWindow(now)) return { send: false, reason: "soft_skip_window" };
+  if (inHolidaySkipWindow(now)) return { send: false, reason: "holiday_skip" };
 
   const snoozeUntil = text(candidate.snooze_until);
   if (snoozeUntil && new Date(snoozeUntil) > now) return { send: false, reason: "snoozed" };
@@ -236,11 +305,14 @@ export function decideReminder(candidate, now = new Date()) {
   const language = resolveReminderLanguage(candidate);
   const reminderType = reminderTypeForDecision(segment, sequenceStep);
   const copy = reminderCopy(language);
+  const examText = segment === "exam_mode" ? buildExamText(copy, candidate, now) : null;
 
   let textBody = "";
   let buttons = [];
   if (reminderType === "question_nudge") {
-    textBody = `${copy.question_prompt}\n\n${copy.question_body}`;
+    textBody = segment === "exam_mode"
+      ? `${examText.text}\n\n${copy.question_body}`
+      : `${copy.question_prompt}\n\n${copy.question_body}`;
     buttons = [
       [{ text: copy.cta_question, callback_data: POSITIVE_CALLBACKS.question }],
       [
@@ -249,7 +321,9 @@ export function decideReminder(candidate, now = new Date()) {
       ],
     ];
   } else if (reminderType === "word_nudge") {
-    textBody = `${segment === "exam_mode" ? copy.exam_prompt : copy.word_prompt}\n\n${segment === "exam_mode" ? copy.exam_body : copy.word_body}`;
+    textBody = segment === "exam_mode"
+      ? `${examText.text}\n\n${copy.word_body}`
+      : `${copy.word_prompt}\n\n${copy.word_body}`;
     buttons = [
       [{ text: copy.cta_word, callback_data: POSITIVE_CALLBACKS.word }],
       [
@@ -269,6 +343,12 @@ export function decideReminder(candidate, now = new Date()) {
         { text: copy.cta_not_now, callback_data: POSITIVE_CALLBACKS.snooze },
       ],
     ];
+  }
+
+  if (segment === "exam_mode") {
+    buttons.push([
+      { text: copy.cta_exam_settings, callback_data: POSITIVE_CALLBACKS.exam_settings },
+    ]);
   }
 
   if (sequenceStep >= 2 && segment !== "exam_mode") {
@@ -291,6 +371,8 @@ export function decideReminder(candidate, now = new Date()) {
     text: textBody,
     reply_markup: { inline_keyboard: buttons },
     next_reminder_due_at: nextReminderDueAt,
+    exam_days_left: examText?.daysLeft ?? null,
+    exam_intensity: segment === "exam_mode" ? text(candidate.exam_reminder_intensity || "normal") : "",
     hours_since_meaningful_activity: Number.isFinite(hoursBetween(now, candidate.last_meaningful_activity_at))
       ? Number(hoursBetween(now, candidate.last_meaningful_activity_at).toFixed(2))
       : null,

@@ -120,6 +120,8 @@ async function main() {
       reminder_sequence_step: decision.sequence_step,
       reminder_type: decision.reminder_type,
       reminder_language: decision.reminder_language,
+      exam_days_left: decision.exam_days_left,
+      exam_intensity: decision.exam_intensity,
       hours_since_meaningful_activity: decision.hours_since_meaningful_activity,
       days_since_meaningful_activity: decision.days_since_meaningful_activity,
     };
