@@ -202,6 +202,33 @@ function similarity(leftTokens, rightTokens) {
   return intersection / union;
 }
 
+function buildAutoRelatedPaths(page, pages) {
+  return pages
+    .filter((entry) => entry.path !== page.path)
+    .map((entry) => ({ path: entry.path, score: similarity(page.tokens, entry.tokens) }))
+    .filter((entry) => entry.score > 0)
+    .sort((left, right) => right.score - left.score || left.path.localeCompare(right.path))
+    .slice(0, 4)
+    .map((entry) => entry.path);
+}
+
+function buildEffectiveRelatedPaths(page, pages) {
+  const manualSpecific = page.related_hrefs.filter((href) => !genericRelatedPaths.has(href));
+  const manualGeneric = page.related_hrefs.filter((href) => genericRelatedPaths.has(href));
+  const auto = buildAutoRelatedPaths(page, pages);
+  const merged = [];
+  const seen = new Set();
+
+  for (const href of [...manualSpecific, ...auto, ...manualGeneric]) {
+    if (!href || href === page.path || seen.has(href)) continue;
+    merged.push(href);
+    seen.add(href);
+    if (merged.length >= 3) break;
+  }
+
+  return merged;
+}
+
 function formatPercent(value) {
   return `${Math.round(num(value) * 100)}%`;
 }
@@ -263,13 +290,13 @@ function buildMarkdownReport(report) {
   }
   lines.push("");
 
-  lines.push("## FAQ gaps");
+  lines.push("## Manual FAQ gaps");
   lines.push("");
   if (!report.faq_gaps.length) {
-    lines.push("- No FAQ gaps.");
+    lines.push("- No manual FAQ gaps.");
   } else {
     for (const row of report.faq_gaps) {
-      lines.push(`- ${row.path}: ${row.faq_count} FAQ entries`);
+      lines.push(`- ${row.path}: ${row.faq_count} manual FAQ entries`);
     }
   }
   lines.push("");
@@ -322,11 +349,11 @@ async function main() {
       metaDescription: extractField(blockText, "metaDescription"),
       telegramSource: extractField(blockText, "telegramSource"),
       keywords: extractQuotedItems(keywordsBlock),
-      faq_count: countMatches(faqsBlock, /question:\s*"/g),
+      manual_faq_count: countMatches(faqsBlock, /question:\s*"/g),
       sample_question_count: countMatches(sampleQuestionsBlock, /question:\s*"/g),
       sample_term_count: countMatches(sampleTermsBlock, /term:\s*"/g),
-      related_link_count: relatedHrefs.length,
-      generic_related_count: relatedHrefs.filter((href) => genericRelatedPaths.has(href)).length,
+      manual_related_link_count: relatedHrefs.length,
+      manual_generic_related_count: relatedHrefs.filter((href) => genericRelatedPaths.has(href)).length,
       related_hrefs: relatedHrefs,
       tokens: tokenSetForPage({
         pageTitle: extractField(blockText, "pageTitle"),
@@ -334,6 +361,17 @@ async function main() {
         metaDescription: extractField(blockText, "metaDescription"),
         keywords: extractQuotedItems(keywordsBlock),
       }),
+    };
+  });
+
+  const pagesWithEffectiveStructure = pages.map((page) => {
+    const effectiveRelatedPaths = buildEffectiveRelatedPaths(page, pages);
+    return {
+      ...page,
+      effective_faq_count: Math.max(page.manual_faq_count, 3),
+      effective_related_paths: effectiveRelatedPaths,
+      effective_related_link_count: effectiveRelatedPaths.length,
+      effective_generic_related_count: effectiveRelatedPaths.filter((href) => genericRelatedPaths.has(href)).length,
     };
   });
 
@@ -376,7 +414,7 @@ async function main() {
   });
 
   const pageStats = new Map();
-  for (const page of pages) {
+  for (const page of pagesWithEffectiveStructure) {
     pageStats.set(page.path, {
       views: 0,
       cta_clicks: 0,
@@ -437,7 +475,7 @@ async function main() {
     }
   }
 
-  const pagesWithMetrics = pages.map((page) => {
+  const pagesWithMetrics = pagesWithEffectiveStructure.map((page) => {
     const stats = pageStats.get(page.path) || { views: 0, cta_clicks: 0, redirects: 0 };
     const gsc = gscByPath.get(page.path) || { clicks: 0, impressions: 0 };
     const redirectRateFromViews = stats.views > 0 ? stats.redirects / stats.views : 0;
@@ -479,11 +517,8 @@ async function main() {
       if (page.sample_question_count + page.sample_term_count < 4) {
         reasons.push("small sample block");
       }
-      if (page.faq_count < 3) {
-        reasons.push("thin FAQ layer");
-      }
-      if (page.related_link_count < 3) {
-        reasons.push("few related links");
+      if (page.effective_related_link_count < 3) {
+        reasons.push("weak effective related links");
       }
       if (page.views === 0) {
         reasons.push("no views in 30d");
@@ -498,14 +533,14 @@ async function main() {
 
   const linkingGaps = pagesWithMetrics
     .map((page) => {
-      if (page.related_link_count < 3) {
-        return { path: page.path, reason: "less than 3 related links" };
+      if (page.effective_related_link_count < 3) {
+        return { path: page.path, reason: "less than 3 effective related links" };
       }
-      if (page.generic_related_count === page.related_link_count) {
-        return { path: page.path, reason: "all related links are generic hubs" };
+      if (page.effective_generic_related_count === page.effective_related_link_count) {
+        return { path: page.path, reason: "all effective related links are generic hubs" };
       }
-      if (page.generic_related_count >= 2 && page.related_link_count <= 3) {
-        return { path: page.path, reason: "generic hubs dominate related links" };
+      if (page.effective_generic_related_count >= 2 && page.effective_related_link_count <= 3) {
+        return { path: page.path, reason: "generic hubs dominate effective related links" };
       }
       return null;
     })
@@ -536,8 +571,8 @@ async function main() {
         redirect_rate_from_views: page.redirect_rate_from_views,
       })),
     faq_gaps: [...pagesWithMetrics]
-      .filter((page) => page.faq_count < 3)
-      .map((page) => ({ path: page.path, faq_count: page.faq_count })),
+      .filter((page) => page.manual_faq_count < 3)
+      .map((page) => ({ path: page.path, faq_count: page.manual_faq_count })),
     linking_gaps: linkingGaps,
     thin_pages: thinPages.slice(0, 12),
     overlap_pairs: overlapPairs
@@ -558,11 +593,14 @@ async function main() {
       pageTitle: page.pageTitle,
       metaTitle: page.metaTitle,
       telegramSource: page.telegramSource,
-      faq_count: page.faq_count,
+      manual_faq_count: page.manual_faq_count,
+      effective_faq_count: page.effective_faq_count,
       sample_question_count: page.sample_question_count,
       sample_term_count: page.sample_term_count,
-      related_link_count: page.related_link_count,
-      generic_related_count: page.generic_related_count,
+      manual_related_link_count: page.manual_related_link_count,
+      manual_generic_related_count: page.manual_generic_related_count,
+      effective_related_link_count: page.effective_related_link_count,
+      effective_generic_related_count: page.effective_generic_related_count,
       views: page.views,
       cta_clicks: page.cta_clicks,
       redirects: page.redirects,

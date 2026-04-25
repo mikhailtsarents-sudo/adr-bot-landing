@@ -205,8 +205,10 @@ Main current findings:
   - `/adr-kurs-deutsch` <-> `/adr-schein-deutsch`
   - `/adr-telegram-bot-deutsch` <-> `/adr-lernhilfe-deutsch`
 - biggest remaining page-quality debt now is:
-  - thin FAQ depth on many pages
-  - overly generic hub-heavy related links on many pages
+  - many pages still rely on fallback FAQ logic instead of stronger manual FAQ authoring
+  - effective related-link weakness now remains mainly on:
+    - `/technisches-deutsch-adr`
+    - `/gefahrgut-deutsch-lernen`
   - very little real traffic yet on most newly created SEO pages
 
 ### Image Generation — Flux AI upgrade (done 2026-04-22)
