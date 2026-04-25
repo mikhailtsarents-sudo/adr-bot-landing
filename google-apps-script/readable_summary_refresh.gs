@@ -161,6 +161,11 @@ function emptyBotFunnelDashboard_() {
       reminder_segments: [],
       reminder_languages: [],
     },
+    reminder_phase12_30d: {
+      cadence_modifiers: [],
+      weak_tracks: [],
+      preferred_hours: [],
+    },
     top_sources_30d: [],
     top_kurs_30d: [],
     event_mix_30d: [],
@@ -211,6 +216,7 @@ function buildReadableSummaryRows_(context) {
   const referral30d = botFunnelDashboard.referral_30d || {};
   const reminder30d = botFunnelDashboard.reminder_30d || {};
   const reminderState = botFunnelDashboard.reminder_state || {};
+  const reminderPhase12 = botFunnelDashboard.reminder_phase12_30d || {};
   const sourceCounts30d = botFunnelDashboard.top_sources_30d || [];
   const eventMix30d = botFunnelDashboard.event_mix_30d || [];
   const topKurs30d = botFunnelDashboard.top_kurs_30d || [];
@@ -544,6 +550,36 @@ function buildReadableSummaryRows_(context) {
       rows.push([reminderState.reminder_languages[i].source, reminderState.reminder_languages[i].count, "", "", "", "", ""]);
     }
   }
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push(["Reminder Phase 12 (30 дней)", "Количество", "", "", "", "", ""]);
+  rows.push([
+    "Cadence modifiers",
+    formatSourceBreakdown_(reminderPhase12.cadence_modifiers || []),
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Weak tracks",
+    formatSourceBreakdown_(reminderPhase12.weak_tracks || []),
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Preferred hours",
+    formatSourceBreakdown_(reminderPhase12.preferred_hours || []),
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
   rows.push(["", "", "", "", "", "", ""]);
 
   rows.push(["Рефералы и входы (30 дней)", "Количество", "", "", "", "", ""]);

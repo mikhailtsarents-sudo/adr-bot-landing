@@ -184,7 +184,7 @@ export function inSoftSkipWindow(now = new Date()) {
 
 export function inHolidaySkipWindow(now = new Date()) {
   const monthDay = berlinMonthDay(now);
-  return ["12-24", "12-25", "12-26", "12-31", "01-01"].includes(monthDay);
+  return ["01-01", "05-01", "10-03", "12-24", "12-25", "12-26", "12-31"].includes(monthDay);
 }
 
 function withinPreferredHourWindow(now, preferredHour, toleranceHours = 2) {
