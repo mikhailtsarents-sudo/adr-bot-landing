@@ -54,6 +54,19 @@ This file is the current execution snapshot for the ADR Bot landing project.
     - `yt--shorts--<render_task_id>`
   - this is the new handoff for future `YouTube -> Bot` attribution
   - bot funnel events also have a dedicated dashboard path now, not only storage
+- Local referral hardening follow-up prepared on `2026-04-25`:
+  - `src/lib/bot-funnel-dashboard.ts` now adds richer referral summary slices:
+    - `offer_views`
+    - `unlock_clicks`
+    - `counted_screens`
+    - `duplicate_screens`
+    - `top_referrers_30d`
+    - `rejection_reasons_30d`
+    - `grant_variants_30d`
+  - practical goal:
+    - turn referral from “visible but vague” into a real operator-readable growth channel
+  - deploy state:
+    - ready for next bounded Vercel deploy
 
 ### Content Catalogs
 
@@ -271,3 +284,38 @@ Claude Code can now run commands on the VPS directly without going through the H
 - Verify production directly on `adr-bot.de` when checking deploy outcomes
 - Prefer narrow, high-intent German long-tail pages over broad generic ADR terms
 - Claude Code SSH key: `~/.ssh/adr_vps_key` — do not delete
+
+## Bot Funnel Operator Panel — prepared locally (2026-04-25)
+
+The next readability upgrade is now prepared locally:
+
+- `src/lib/bot-funnel-dashboard.ts` now builds explicit bot-funnel period buckets for:
+  - `today`
+  - `days_7`
+  - `days_30`
+- each period now includes:
+  - `/start`
+  - `course_selected`
+  - `first_actions`
+  - `learning_actions`
+  - `buy_intent`
+  - referral granted / rejected
+  - start-to-action and start-to-buy rates
+
+This is meant to remove the remaining “half-ready” readable summary behavior where the sheet still had placeholder strings like:
+
+- `отдельного daily-блока пока нет`
+- `смотри блок ниже`
+
+The matching Google Apps Script refresh file was also upgraded locally so the top sheet summary can read as one funnel:
+
+- `site views -> CTA -> redirects -> bot /start -> first action -> buy intent`
+
+Local verification:
+
+- `npx tsc --noEmit`
+
+Status:
+
+- ready for bounded Vercel + Apps Script deploy
+- not yet live-confirmed from this side

@@ -1,5 +1,7 @@
 import type { BotFunnelRow } from "@/lib/bot-funnel-storage";
 
+export type DashboardPeriodKey = "today" | "days_7" | "days_30";
+
 const FUNNEL_STEPS = [
   "bot_started",
   "course_selected",
@@ -21,6 +23,13 @@ export type ReferralSummary = {
   granted: number;
   rejected: number;
   grant_rate: number;
+  offer_views: number;
+  unlock_clicks: number;
+  counted_screens: number;
+  duplicate_screens: number;
+  top_referrers_30d: SourceBreakdown[];
+  rejection_reasons_30d: SourceBreakdown[];
+  grant_variants_30d: SourceBreakdown[];
 };
 
 export type SourceBreakdown = {
@@ -28,10 +37,31 @@ export type SourceBreakdown = {
   count: number;
 };
 
+export type BotFunnelPeriodBucket = {
+  period_key: DashboardPeriodKey;
+  label_ru: string;
+  window_days: number;
+  since: string;
+  until: string;
+  total_events: number;
+  bot_starts: number;
+  course_selected: number;
+  first_actions: number;
+  learning_actions: number;
+  buy_intent: number;
+  referral_granted: number;
+  referral_rejected: number;
+  start_to_first_action_rate: number;
+  start_to_buy_intent_rate: number;
+};
+
 export type BotFunnelDashboard = {
   refreshed_at: string;
+  timezone: string;
   total_events: number;
   total_events_30d: number;
+  periods: BotFunnelPeriodBucket[];
+  period_map: Record<DashboardPeriodKey, BotFunnelPeriodBucket>;
   funnel_30d: FunnelStepRow[];
   referral_30d: ReferralSummary;
   top_sources_30d: SourceBreakdown[];
@@ -40,6 +70,31 @@ export type BotFunnelDashboard = {
   youtube_starts_30d: number;
   direct_starts_30d: number;
 };
+
+function parseMetadata(row: BotFunnelRow): Record<string, unknown> {
+  const raw = row.metadata_json;
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function metadataText(
+  row: BotFunnelRow,
+  ...keys: string[]
+): string {
+  const metadata = parseMetadata(row);
+  for (const key of keys) {
+    const value = metadata[key];
+    if (value != null && `${value}`.trim()) {
+      return `${value}`.trim();
+    }
+  }
+  return "";
+}
 
 function getStartOfDayInTimezone(daysAgo: number, timeZone: string): Date {
   const now = new Date();
@@ -59,11 +114,74 @@ function count(rows: BotFunnelRow[], predicate: (r: BotFunnelRow) => boolean): n
   return rows.filter(predicate).length;
 }
 
+function roundRate(value: number): number {
+  if (!Number.isFinite(value)) return 0;
+  return Number(value.toFixed(4));
+}
+
+function buildPeriodBucket({
+  rows,
+  periodKey,
+  labelRu,
+  windowDays,
+  since,
+  until,
+}: {
+  rows: BotFunnelRow[];
+  periodKey: DashboardPeriodKey;
+  labelRu: string;
+  windowDays: number;
+  since: Date;
+  until: Date;
+}): BotFunnelPeriodBucket {
+  const scopedRows = rows.filter((r) => {
+    const ts = r.occurred_at || r.received_at || r.createdAt || "";
+    if (!ts) return false;
+    const parsed = new Date(ts);
+    return parsed >= since && parsed <= until;
+  });
+
+  const botStarts = count(scopedRows, (r) => r.event_type === "bot_started");
+  const courseSelected = count(scopedRows, (r) => r.event_type === "course_selected");
+  const firstActions = count(
+    scopedRows,
+    (r) => r.event_type === "word_session_started" || r.event_type === "quiz_started",
+  );
+  const learningActions = count(
+    scopedRows,
+    (r) => r.event_type === "word_response" || r.event_type === "quiz_answer_submitted",
+  );
+  const buyIntent = count(scopedRows, (r) => r.event_type === "full_access_buy_click");
+  const referralGranted = count(scopedRows, (r) => r.event_type === "referral_granted");
+  const referralRejected = count(scopedRows, (r) => r.event_type === "referral_rejected");
+
+  return {
+    period_key: periodKey,
+    label_ru: labelRu,
+    window_days: windowDays,
+    since: since.toISOString(),
+    until: until.toISOString(),
+    total_events: scopedRows.length,
+    bot_starts: botStarts,
+    course_selected: courseSelected,
+    first_actions: firstActions,
+    learning_actions: learningActions,
+    buy_intent: buyIntent,
+    referral_granted: referralGranted,
+    referral_rejected: referralRejected,
+    start_to_first_action_rate: roundRate(botStarts > 0 ? firstActions / botStarts : 0),
+    start_to_buy_intent_rate: roundRate(botStarts > 0 ? buyIntent / botStarts : 0),
+  };
+}
+
 export function buildBotFunnelDashboard(
   rows: BotFunnelRow[],
   options: { timeZone?: string } = {},
 ): BotFunnelDashboard {
   const timeZone = options.timeZone ?? "Europe/Berlin";
+  const now = new Date();
+  const sinceToday = getStartOfDayInTimezone(0, timeZone);
+  const since7d = getStartOfDayInTimezone(6, timeZone);
   const since30d = getStartOfDayInTimezone(30, timeZone);
 
   const rows30d = rows.filter((r) => {
@@ -92,6 +210,60 @@ export function buildBotFunnelDashboard(
   const referralGranted = count(rows30d, (r) => r.event_type === "referral_granted");
   const referralRejected = count(rows30d, (r) => r.event_type === "referral_rejected");
   const referralTotal = referralGranted + referralRejected;
+  const referralOfferViews = count(
+    rows30d,
+    (r) => r.event_type === "referral_option_click",
+  );
+  const referralUnlockClicks = count(
+    rows30d,
+    (r) => r.event_type === "referral_unlock_click",
+  );
+  const referralCountedScreens = count(
+    rows30d,
+    (r) => r.event_type === "referral_counted",
+  );
+  const referralDuplicateScreens = count(
+    rows30d,
+    (r) => r.event_type === "referral_duplicate_screen",
+  );
+
+  const referrerCounts: Record<string, number> = {};
+  const rejectionReasonCounts: Record<string, number> = {};
+  const grantVariantCounts: Record<string, number> = {};
+  for (const row of rows30d) {
+    if (row.event_type === "referral_granted") {
+      const referrerId = metadataText(
+        row,
+        "referral_referrer_id",
+        "tracker_referral_referrer_id",
+      );
+      if (referrerId) {
+        referrerCounts[referrerId] = (referrerCounts[referrerId] ?? 0) + 1;
+      }
+      const variant = metadataText(row, "referral_offer_variant");
+      if (variant) {
+        grantVariantCounts[variant] = (grantVariantCounts[variant] ?? 0) + 1;
+      }
+    }
+    if (row.event_type === "referral_rejected") {
+      const reason = metadataText(row, "referral_rejection_reason");
+      rejectionReasonCounts[reason || "unknown"] =
+        (rejectionReasonCounts[reason || "unknown"] ?? 0) + 1;
+    }
+  }
+
+  const top_referrers_30d: SourceBreakdown[] = Object.entries(referrerCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([source, count]) => ({ source, count }));
+  const rejection_reasons_30d: SourceBreakdown[] = Object.entries(rejectionReasonCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([source, count]) => ({ source, count }));
+  const grant_variants_30d: SourceBreakdown[] = Object.entries(grantVariantCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([source, count]) => ({ source, count }));
 
   // Top entry sources
   const sourceCounts: Record<string, number> = {};
@@ -124,15 +296,58 @@ export function buildBotFunnelDashboard(
     .sort((a, b) => b[1] - a[1])
     .map(([event_type, count]) => ({ event_type, count }));
 
+  const periods = [
+    buildPeriodBucket({
+      rows,
+      periodKey: "today",
+      labelRu: "Сегодня",
+      windowDays: 1,
+      since: sinceToday,
+      until: now,
+    }),
+    buildPeriodBucket({
+      rows,
+      periodKey: "days_7",
+      labelRu: "7 дней",
+      windowDays: 7,
+      since: since7d,
+      until: now,
+    }),
+    buildPeriodBucket({
+      rows,
+      periodKey: "days_30",
+      labelRu: "30 дней",
+      windowDays: 30,
+      since: since30d,
+      until: now,
+    }),
+  ];
+
+  const period_map = {
+    today: periods[0],
+    days_7: periods[1],
+    days_30: periods[2],
+  } satisfies Record<DashboardPeriodKey, BotFunnelPeriodBucket>;
+
   return {
     refreshed_at: new Date().toISOString(),
+    timezone: timeZone,
     total_events: rows.length,
     total_events_30d: rows30d.length,
+    periods,
+    period_map,
     funnel_30d,
     referral_30d: {
       granted: referralGranted,
       rejected: referralRejected,
       grant_rate: referralTotal > 0 ? Math.round((referralGranted / referralTotal) * 100) : 0,
+      offer_views: referralOfferViews,
+      unlock_clicks: referralUnlockClicks,
+      counted_screens: referralCountedScreens,
+      duplicate_screens: referralDuplicateScreens,
+      top_referrers_30d,
+      rejection_reasons_30d,
+      grant_variants_30d,
     },
     top_sources_30d,
     top_kurs_30d,
