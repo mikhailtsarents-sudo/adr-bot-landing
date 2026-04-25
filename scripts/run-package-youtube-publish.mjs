@@ -53,7 +53,7 @@ function parseArgs(argv) {
   const args = {
     packageDir: DEFAULT_PACKAGE_DIR,
     draftIdSuffix: "",
-    n8nApiKey: process.env.N8N_API_KEY || "",
+    n8nApiKey: process.env.ADR_INGEST_API_KEY || process.env.N8N_API_KEY || "",
     tableUrl: DEFAULT_TABLE_URL,
     webhookUrl: DEFAULT_WEBHOOK_URL,
     pollMs: 8000,
