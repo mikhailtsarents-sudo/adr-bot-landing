@@ -90,6 +90,11 @@ export type BotFunnelDashboard = {
     reminder_segments: SourceBreakdown[];
     reminder_languages: SourceBreakdown[];
   };
+  reminder_phase12_30d: {
+    cadence_modifiers: SourceBreakdown[];
+    weak_tracks: SourceBreakdown[];
+    preferred_hours: SourceBreakdown[];
+  };
   top_sources_30d: SourceBreakdown[];
   top_kurs_30d: SourceBreakdown[];
   event_mix_30d: { event_type: string; count: number }[];
@@ -143,6 +148,18 @@ function count(rows: BotFunnelRow[], predicate: (r: BotFunnelRow) => boolean): n
 function roundRate(value: number): number {
   if (!Number.isFinite(value)) return 0;
   return Number(value.toFixed(4));
+}
+
+function breakdown(values: string[], limit = 10): SourceBreakdown[] {
+  const counts: Record<string, number> = {};
+  for (const value of values) {
+    const key = value || "unknown";
+    counts[key] = (counts[key] ?? 0) + 1;
+  }
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([source, count]) => ({ source, count }));
 }
 
 function buildPeriodBucket({
@@ -273,6 +290,16 @@ export function buildBotFunnelDashboard(
   const reminderReactivated = count(rows30d, (r) => r.event_type === "reminder_reactivated");
   const reminderOptedOut = count(rows30d, (r) => r.event_type === "reminder_opted_out");
   const reminderDeliveryFailed = count(rows30d, (r) => r.event_type === "reminder_delivery_failed");
+  const reminderSentRows = rows30d.filter((r) => r.event_type === "reminder_sent");
+  const cadenceModifiers30d = breakdown(
+    reminderSentRows.map((r) => metadataText(r, "cadence_modifier")).filter(Boolean),
+  );
+  const weakTracks30d = breakdown(
+    reminderSentRows.map((r) => metadataText(r, "weak_kurs_30d")).filter(Boolean),
+  );
+  const preferredHours30d = breakdown(
+    reminderSentRows.map((r) => metadataText(r, "preferred_learning_hour_berlin")).filter(Boolean),
+  );
 
   const referrerCounts: Record<string, number> = {};
   const rejectionReasonCounts: Record<string, number> = {};
@@ -418,6 +445,11 @@ export function buildBotFunnelDashboard(
       reminder_modes: reminderState?.reminder_modes ?? [],
       reminder_segments: reminderState?.reminder_segments ?? [],
       reminder_languages: reminderState?.reminder_languages ?? [],
+    },
+    reminder_phase12_30d: {
+      cadence_modifiers: cadenceModifiers30d,
+      weak_tracks: weakTracks30d,
+      preferred_hours: preferredHours30d,
     },
     top_sources_30d,
     top_kurs_30d,

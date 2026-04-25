@@ -14,6 +14,7 @@ const COPY = {
   de: {
     question_prompt: "Ein kurzer ADR-Frage-Check für heute?",
     question_body: "Eine Frage reicht, um wieder in den Lernrhythmus zu kommen.",
+    question_body_weak_track: "In {track} war es zuletzt etwas schwerer. Eine kurze Frage hilft, ruhig wieder reinzukommen.",
     word_prompt: "Ein ADR-Begriff für heute?",
     word_body: "Kurz erklärt, damit die deutschen Formulierungen leichter werden.",
     track_prompt: "Womit ist der Wiedereinstieg heute leichter?",
@@ -37,6 +38,7 @@ const COPY = {
   ru: {
     question_prompt: "Один короткий ADR-вопрос на сегодня?",
     question_body: "Достаточно одного вопроса, чтобы снова войти в ритм.",
+    question_body_weak_track: "По теме {track} в последнее время было чуть сложнее. Один короткий вопрос поможет спокойно вернуться.",
     word_prompt: "Один ADR-термин на сегодня?",
     word_body: "Короткое объяснение, чтобы немецкие формулировки стали понятнее.",
     track_prompt: "С чего сегодня удобнее вернуться?",
@@ -60,6 +62,7 @@ const COPY = {
   en: {
     question_prompt: "One short ADR question for today?",
     question_body: "One question is enough to get back into the learning rhythm.",
+    question_body_weak_track: "{track} looked a bit harder recently. One short question can help you return calmly.",
     word_prompt: "One ADR term for today?",
     word_body: "A quick explanation to make the German wording easier.",
     track_prompt: "What feels easiest to continue with today?",
@@ -83,6 +86,7 @@ const COPY = {
   tr: {
     question_prompt: "Bugün kısa bir ADR sorusu?",
     question_body: "Sadece bir soru bile ritme geri dönmek için yeterli.",
+    question_body_weak_track: "{track} son zamanlarda biraz daha zordu. Kısa bir soru sakin şekilde geri dönmene yardımcı olabilir.",
     word_prompt: "Bugün bir ADR terimi?",
     word_body: "Almanca ifadeleri daha kolay anlamak için kısa bir açıklama.",
     track_prompt: "Bugün dönmek için en kolay yol hangisi?",
@@ -224,6 +228,19 @@ function roundCadenceDay(value) {
   return Math.max(1, Math.round(value));
 }
 
+function weakTrackLabel(rawTrack) {
+  const value = text(rawTrack);
+  if (!value) return "";
+  const mapping = {
+    Basiskurs: "Basiskurs",
+    Aufbaukurs_Tank: "Tank",
+    Aufbaukurs_Klasse1: "Klasse 1",
+    Aufbaukurs_Klasse7: "Klasse 7",
+    Auffrischungsschulung: "Auffrischung",
+  };
+  return mapping[value] || value.replaceAll("_", " ");
+}
+
 export function deriveCadenceModifier(segment, candidate) {
   if (segment === "exam_mode" || segment === "rare_mode" || segment === "start_no_action") {
     return { modifier: "none", factor: 1 };
@@ -356,10 +373,15 @@ export function decideReminder(candidate, now = new Date()) {
 
   let textBody = "";
   let buttons = [];
+  const weakTrack = weakTrackLabel(candidate.weak_kurs_30d);
   if (reminderType === "question_nudge") {
+    const questionBody =
+      weakTrack && Number(candidate.weak_kurs_wrong_answers_30d || 0) > 0
+        ? copy.question_body_weak_track.replace("{track}", weakTrack)
+        : copy.question_body;
     textBody = segment === "exam_mode"
-      ? `${examText.text}\n\n${copy.question_body}`
-      : `${copy.question_prompt}\n\n${copy.question_body}`;
+      ? `${examText.text}\n\n${questionBody}`
+      : `${copy.question_prompt}\n\n${questionBody}`;
     buttons = [
       [{ text: copy.cta_question, callback_data: POSITIVE_CALLBACKS.question }],
       [
@@ -426,6 +448,8 @@ export function decideReminder(candidate, now = new Date()) {
     preferred_learning_hour_berlin: Number.isFinite(Number(candidate.preferred_learning_hour_berlin))
       ? Number(candidate.preferred_learning_hour_berlin)
       : null,
+    weak_kurs_30d: weakTrack || "",
+    weak_kurs_wrong_answers_30d: Number(candidate.weak_kurs_wrong_answers_30d || 0),
     exam_days_left: examText?.daysLeft ?? null,
     exam_intensity: segment === "exam_mode" ? text(candidate.exam_reminder_intensity || "normal") : "",
     hours_since_meaningful_activity: Number.isFinite(hoursBetween(now, candidate.last_meaningful_activity_at))

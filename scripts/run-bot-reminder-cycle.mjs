@@ -126,6 +126,8 @@ async function main() {
       recent_learning_actions_30d: decision.recent_learning_actions_30d,
       recent_active_days_7d: decision.recent_active_days_7d,
       preferred_learning_hour_berlin: decision.preferred_learning_hour_berlin,
+      weak_kurs_30d: decision.weak_kurs_30d,
+      weak_kurs_wrong_answers_30d: decision.weak_kurs_wrong_answers_30d,
       exam_days_left: decision.exam_days_left,
       exam_intensity: decision.exam_intensity,
       hours_since_meaningful_activity: decision.hours_since_meaningful_activity,
