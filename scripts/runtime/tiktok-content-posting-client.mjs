@@ -56,7 +56,7 @@ export function buildTikTokAuthUrl({
   redirectUri,
   codeChallenge,
   state,
-  scope = "video.upload",
+  scope = "video.upload,video.publish",
 }) {
   const url = new URL(TIKTOK_AUTH_BASE);
   url.searchParams.set("client_key", clientKey);

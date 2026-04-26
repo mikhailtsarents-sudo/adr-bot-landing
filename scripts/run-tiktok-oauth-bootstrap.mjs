@@ -38,7 +38,7 @@ function parseArgs(argv) {
     clientKey: process.env.TIKTOK_CLIENT_KEY || "",
     clientSecret: process.env.TIKTOK_CLIENT_SECRET || "",
     redirectUri: process.env.TIKTOK_REDIRECT_URI || "",
-    scope: "video.upload",
+    scope: "video.upload,video.publish",
     tokenPath: defaultTikTokOauthTokenPath(),
   };
   for (let i = 0; i < argv.length; i += 1) {
