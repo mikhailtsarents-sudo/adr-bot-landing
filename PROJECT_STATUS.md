@@ -156,6 +156,19 @@ This file is the current execution snapshot for the ADR Bot landing project.
     - referral offer variants
   - practical meaning:
     - paywall/referral is now measurable as a real funnel instead of a partially invisible local flow
+- 2026-04-26: monetization diagnosis layer was added on top of the raw funnel.
+  - `src/lib/bot-funnel-dashboard.ts` now also exposes:
+    - `monetization_diagnosis_30d`
+  - diagnosis now highlights:
+    - users who saw the limit
+    - users who acted from the limit screen
+    - users who did nothing after the limit screen
+    - users stuck on referral offer without unlock confirmation
+    - users still unresolved after unlock confirmation
+    - top loss stage
+    - recommended focus
+  - practical meaning:
+    - the operator layer now tells us where monetization leaks the most instead of forcing manual comparison of many counters
 
 ### Content Catalogs
 

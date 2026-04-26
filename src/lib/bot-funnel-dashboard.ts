@@ -105,6 +105,22 @@ export type MonetizationSummary = {
   referral_offer_variants_30d: SourceBreakdown[];
 };
 
+export type MonetizationDiagnosisSummary = {
+  limit_users: number;
+  acted_from_limit_users: number;
+  no_action_after_limit_users: number;
+  no_action_after_limit_rate: number;
+  referral_offer_users: number;
+  waiting_without_unlock_users: number;
+  waiting_without_unlock_rate: number;
+  referral_unlock_users: number;
+  unresolved_after_unlock_users: number;
+  unresolved_after_unlock_rate: number;
+  top_loss_stage: string;
+  top_loss_rate: number;
+  recommended_focus: string;
+};
+
 export type CallbackTelemetrySummary = {
   received: number;
   answered: number;
@@ -133,6 +149,7 @@ export type BotFunnelDashboard = {
   referral_30d: ReferralSummary;
   reminder_30d: ReminderSummary;
   monetization_30d: MonetizationSummary;
+  monetization_diagnosis_30d: MonetizationDiagnosisSummary;
   callback_telemetry_30d: CallbackTelemetrySummary;
   reminder_state: ReminderStateSnapshot["summary"] & {
     reminder_modes: SourceBreakdown[];
@@ -227,6 +244,16 @@ function intersectionSize(left: Set<string>, right: Set<string>): number {
     if (right.has(value)) total += 1;
   }
   return total;
+}
+
+function unionSets(...sets: Set<string>[]): Set<string> {
+  const values = new Set<string>();
+  for (const entrySet of sets) {
+    for (const value of entrySet) {
+      values.add(value);
+    }
+  }
+  return values;
 }
 
 function roundRate(value: number): number {
@@ -427,6 +454,7 @@ export function buildBotFunnelDashboard(
   const referralOfferViewUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "referral_option_click");
   const referralUnlockUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "referral_unlock_click");
   const referralGrantedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "referral_granted");
+  const referralRejectedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "referral_rejected");
   const reminderSentRows = rows30d.filter((r) => r.event_type === "reminder_sent");
   const callbackReceivedRows30d = rows30d.filter((r) => r.event_type === "callback_received");
   const callbackFailedRows30d = rows30d.filter((r) => r.event_type === "callback_failed");
@@ -480,6 +508,51 @@ export function buildBotFunnelDashboard(
       .map((r) => metadataText(r, "referral_offer_variant"))
       .filter(Boolean),
   );
+  const limitActionUsers30d = unionSets(
+    fullAccessOfferOpenUsers30d,
+    buyIntentUsers30d,
+    referralPathUsers30d,
+    continueLaterUsers30d,
+  );
+  const noActionAfterLimitUsers30d = Math.max(0, limitOfferViewUsers30d.size - intersectionSize(limitOfferViewUsers30d, limitActionUsers30d));
+  const waitingWithoutUnlockUsers30d = Math.max(
+    0,
+    referralOfferViewUsers30d.size - intersectionSize(referralOfferViewUsers30d, referralUnlockUsers30d),
+  );
+  const resolvedAfterUnlockUsers30d = intersectionSize(
+    referralUnlockUsers30d,
+    unionSets(referralGrantedUsers30d, referralRejectedUsers30d),
+  );
+  const unresolvedAfterUnlockUsers30d = Math.max(0, referralUnlockUsers30d.size - resolvedAfterUnlockUsers30d);
+  const topLossCandidates = [
+    {
+      stage: "no_action_after_limit",
+      rate: limitOfferViewUsers30d.size > 0
+        ? Math.round((noActionAfterLimitUsers30d / limitOfferViewUsers30d.size) * 100)
+        : 0,
+    },
+    {
+      stage: "waiting_without_unlock",
+      rate: referralOfferViewUsers30d.size > 0
+        ? Math.round((waitingWithoutUnlockUsers30d / referralOfferViewUsers30d.size) * 100)
+        : 0,
+    },
+    {
+      stage: "unresolved_after_unlock",
+      rate: referralUnlockUsers30d.size > 0
+        ? Math.round((unresolvedAfterUnlockUsers30d / referralUnlockUsers30d.size) * 100)
+        : 0,
+    },
+  ].sort((left, right) => right.rate - left.rate);
+  const topLossStage = topLossCandidates[0]?.stage || "";
+  const topLossRate = topLossCandidates[0]?.rate || 0;
+  const recommendedFocus = topLossStage === "no_action_after_limit"
+    ? "limit_screen_choice"
+    : topLossStage === "waiting_without_unlock"
+      ? "referral_offer_clarity"
+      : topLossStage === "unresolved_after_unlock"
+        ? "referral_resolution"
+        : "observe";
 
   const referrerCounts: Record<string, number> = {};
   const rejectionReasonCounts: Record<string, number> = {};
@@ -647,6 +720,27 @@ export function buildBotFunnelDashboard(
         : 0,
       top_limit_reasons_30d: topLimitReasons30d,
       referral_offer_variants_30d: referralOfferVariants30d,
+    },
+    monetization_diagnosis_30d: {
+      limit_users: limitOfferViewUsers30d.size,
+      acted_from_limit_users: intersectionSize(limitOfferViewUsers30d, limitActionUsers30d),
+      no_action_after_limit_users: noActionAfterLimitUsers30d,
+      no_action_after_limit_rate: limitOfferViewUsers30d.size > 0
+        ? Math.round((noActionAfterLimitUsers30d / limitOfferViewUsers30d.size) * 100)
+        : 0,
+      referral_offer_users: referralOfferViewUsers30d.size,
+      waiting_without_unlock_users: waitingWithoutUnlockUsers30d,
+      waiting_without_unlock_rate: referralOfferViewUsers30d.size > 0
+        ? Math.round((waitingWithoutUnlockUsers30d / referralOfferViewUsers30d.size) * 100)
+        : 0,
+      referral_unlock_users: referralUnlockUsers30d.size,
+      unresolved_after_unlock_users: unresolvedAfterUnlockUsers30d,
+      unresolved_after_unlock_rate: referralUnlockUsers30d.size > 0
+        ? Math.round((unresolvedAfterUnlockUsers30d / referralUnlockUsers30d.size) * 100)
+        : 0,
+      top_loss_stage: topLossStage,
+      top_loss_rate: topLossRate,
+      recommended_focus: recommendedFocus,
     },
     callback_telemetry_30d: {
       received: callbackReceived30d,

@@ -202,6 +202,21 @@ function emptyBotFunnelDashboard_() {
       top_limit_reasons_30d: [],
       referral_offer_variants_30d: [],
     },
+    monetization_diagnosis_30d: {
+      limit_users: 0,
+      acted_from_limit_users: 0,
+      no_action_after_limit_users: 0,
+      no_action_after_limit_rate: 0,
+      referral_offer_users: 0,
+      waiting_without_unlock_users: 0,
+      waiting_without_unlock_rate: 0,
+      referral_unlock_users: 0,
+      unresolved_after_unlock_users: 0,
+      unresolved_after_unlock_rate: 0,
+      top_loss_stage: "",
+      top_loss_rate: 0,
+      recommended_focus: "",
+    },
     reminder_state: {
       total_users: 0,
       normal_users: 0,
@@ -305,6 +320,7 @@ function buildReadableSummaryRows_(context) {
   const referral30d = botFunnelDashboard.referral_30d || {};
   const reminder30d = botFunnelDashboard.reminder_30d || {};
   const monetization30d = botFunnelDashboard.monetization_30d || {};
+  const monetizationDiagnosis30d = botFunnelDashboard.monetization_diagnosis_30d || {};
   const reminderState = botFunnelDashboard.reminder_state || {};
   const reminderPhase12 = botFunnelDashboard.reminder_phase12_30d || {};
   const reminderPhase12LivePreview = botFunnelDashboard.reminder_phase12_live_preview || {};
@@ -672,6 +688,22 @@ function buildReadableSummaryRows_(context) {
     "",
     "",
   ]);
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push(["Monetization diagnosis (30 дней)", "Значение", "", "", "", "", ""]);
+  rows.push(["Limit users", number_(monetizationDiagnosis30d.limit_users), "", "", "", "", ""]);
+  rows.push(["Acted from limit", number_(monetizationDiagnosis30d.acted_from_limit_users), "", "", "", "", ""]);
+  rows.push(["No action after limit", number_(monetizationDiagnosis30d.no_action_after_limit_users), "", "", "", "", ""]);
+  rows.push(["No action rate", percentFromWhole_(monetizationDiagnosis30d.no_action_after_limit_rate), "", "", "", "", ""]);
+  rows.push(["Referral offer users", number_(monetizationDiagnosis30d.referral_offer_users), "", "", "", "", ""]);
+  rows.push(["Waiting without unlock", number_(monetizationDiagnosis30d.waiting_without_unlock_users), "", "", "", "", ""]);
+  rows.push(["Waiting without unlock rate", percentFromWhole_(monetizationDiagnosis30d.waiting_without_unlock_rate), "", "", "", "", ""]);
+  rows.push(["Referral unlock users", number_(monetizationDiagnosis30d.referral_unlock_users), "", "", "", "", ""]);
+  rows.push(["Unresolved after unlock", number_(monetizationDiagnosis30d.unresolved_after_unlock_users), "", "", "", "", ""]);
+  rows.push(["Unresolved after unlock rate", percentFromWhole_(monetizationDiagnosis30d.unresolved_after_unlock_rate), "", "", "", "", ""]);
+  rows.push(["Top loss stage", stringOrEmpty_(monetizationDiagnosis30d.top_loss_stage), "", "", "", "", ""]);
+  rows.push(["Top loss rate", percentFromWhole_(monetizationDiagnosis30d.top_loss_rate), "", "", "", "", ""]);
+  rows.push(["Recommended focus", stringOrEmpty_(monetizationDiagnosis30d.recommended_focus), "", "", "", "", ""]);
   rows.push(["", "", "", "", "", "", ""]);
 
   rows.push(["Reminder state сейчас", "Количество", "", "", "", "", ""]);
