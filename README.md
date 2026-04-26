@@ -29,6 +29,17 @@ Operational runtime health snapshot is now also available:
 npm run run:runtime-health-snapshot -- --public-only
 ```
 
+It now also supports operator-style alerting output:
+
+```bash
+npm run run:runtime-health-snapshot -- --fail-on-status fail
+```
+
+The snapshot writes both per-run output and stable latest copies under:
+
+- `runtime-health-runs/<slug>/`
+- `runtime-health-runs/latest/`
+
 Callback UX telemetry is now also available in the bot-funnel dashboard layer:
 
 - lifecycle events:

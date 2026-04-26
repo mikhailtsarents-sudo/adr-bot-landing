@@ -81,6 +81,27 @@ This file is the current execution snapshot for the ADR Bot landing project.
     - Telegram webhook alignment in full mode
   - practical meaning:
     - operator can now get one bounded machine-readable + Markdown health snapshot instead of guessing from separate logs and endpoints
+- 2026-04-26: runtime health alerting is now closed as a live VPS layer.
+  - runtime health script now also writes:
+    - `alerting.severity`
+    - `alerting.alert_needed`
+    - `alerting.recommended_actions`
+    - stable latest copies under:
+      - `runtime-health-runs/latest/`
+  - CLI now also supports:
+    - `--fail-on-status fail`
+  - live VPS wrapper/timer installed:
+    - `/usr/local/bin/adr-runtime-health.sh`
+    - `adr-runtime-health.service`
+    - `adr-runtime-health.timer`
+  - first live run immediately caught a real drift:
+    - Telegram webhook had fallen back to Railway
+  - webhook was then corrected back to:
+    - `https://46.225.170.55:8443/telegram-webhook`
+  - follow-up live snapshot turned fully green
+  - practical meaning:
+    - runtime health is no longer just a passive snapshot tool
+    - it is now an active VPS alerting layer that can catch and surface real production drift
 
 ### Content Catalogs
 

@@ -43,6 +43,7 @@ function parseArgs(argv) {
     ingestUrl: process.env.ADR_INGEST_URL || "http://46.225.170.55:3456",
     timeoutMs: 8000,
     publicOnly: false,
+    failOnStatus: "never",
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -53,6 +54,13 @@ function parseArgs(argv) {
     else if (token === "--ingest-url") args.ingestUrl = argv[++i];
     else if (token === "--timeout-ms") args.timeoutMs = number(argv[++i], 8000);
     else if (token === "--public-only") args.publicOnly = true;
+    else if (token === "--fail-on-status") {
+      const threshold = text(argv[++i]).toLowerCase();
+      if (!["never", "warn", "fail"].includes(threshold)) {
+        throw new Error(`Unsupported --fail-on-status value: ${threshold}`);
+      }
+      args.failOnStatus = threshold;
+    }
     else if (token === "--help" || token === "-h") {
       console.log(`Usage: node scripts/run-runtime-health-snapshot.mjs [options]
 
@@ -63,6 +71,7 @@ Options:
   --ingest-url <url>      Private ingest URL to verify (default: ADR_INGEST_URL or VPS default)
   --timeout-ms <n>        Per-check timeout in milliseconds (default: 8000)
   --public-only           Skip systemd/private ingest checks and verify only public endpoints
+  --fail-on-status <v>    Exit non-zero on runtime status >= threshold (never|warn|fail)
 `);
       process.exit(0);
     } else {
@@ -93,6 +102,77 @@ function summarizeStatus(checks) {
   if (checks.some((entry) => entry.status === "warn")) return "warn";
   if (checks.every((entry) => entry.status === "skipped")) return "skipped";
   return "ok";
+}
+
+const STATUS_RANK = {
+  skipped: -1,
+  ok: 0,
+  warn: 1,
+  fail: 2,
+};
+
+function shouldExitNonZero(status, threshold) {
+  if (threshold === "never") return false;
+  return (STATUS_RANK[status] ?? 0) >= (STATUS_RANK[threshold] ?? Number.POSITIVE_INFINITY);
+}
+
+function buildRecommendedActions(checks) {
+  const actions = [];
+  const push = (value) => {
+    if (!value || actions.includes(value)) return;
+    actions.push(value);
+  };
+
+  for (const check of checks) {
+    if (check.status !== "fail" && check.status !== "warn") continue;
+    if (check.key.startsWith("systemd:")) {
+      push(`Inspect and, if needed, restart ${check.key.replace("systemd:", "")}.`);
+    } else if (check.key.startsWith("log:")) {
+      push(`Review stale runtime activity for ${check.key.replace("log:", "")} and verify the underlying scheduler/service is still active.`);
+    } else if (check.key === "telegram:webhook_info") {
+      push("Check Telegram webhook URL, pending update count, and bot token configuration on VPS.");
+    } else if (check.key.startsWith("ingest:")) {
+      push("Verify adr-ingest health, ADR_INGEST_API_KEY, and Postgres connectivity for private analytics reads.");
+    } else if (check.key.startsWith("public:")) {
+      push("Inspect public analytics/dashboard routes and confirm the current web deploy is serving the expected build.");
+    }
+  }
+
+  if (!actions.length) {
+    push("No immediate operator action required.");
+  }
+
+  return actions.slice(0, 6);
+}
+
+function buildAlerting(checks, overallStatus) {
+  const failChecks = checks.filter((entry) => entry.status === "fail");
+  const warnChecks = checks.filter((entry) => entry.status === "warn");
+  const okCount = checks.filter((entry) => entry.status === "ok").length;
+  const skippedCount = checks.filter((entry) => entry.status === "skipped").length;
+  const severity = overallStatus === "fail"
+    ? "critical"
+    : overallStatus === "warn"
+      ? "warning"
+      : "none";
+
+  return {
+    severity,
+    alert_needed: overallStatus === "fail",
+    fail_count: failChecks.length,
+    warn_count: warnChecks.length,
+    ok_count: okCount,
+    skipped_count: skippedCount,
+    failing_checks: failChecks.map((entry) => entry.key),
+    warning_checks: warnChecks.map((entry) => entry.key),
+    headline:
+      overallStatus === "fail"
+        ? "Runtime health snapshot found blocking failures."
+        : overallStatus === "warn"
+          ? "Runtime health snapshot found warnings."
+          : "Runtime health snapshot is healthy.",
+    recommended_actions: buildRecommendedActions(checks),
+  };
 }
 
 async function runCommand(file, args, timeoutMs) {
@@ -302,6 +382,22 @@ function buildMarkdown(snapshot) {
   lines.push(`- Host: \`${snapshot.host}\``);
   lines.push(`- Mode: \`${snapshot.mode}\``);
   lines.push(`- Overall status: \`${snapshot.overall_status}\``);
+  lines.push(`- Alert severity: \`${snapshot.alerting.severity}\``);
+  lines.push(`- Alert needed: \`${snapshot.alerting.alert_needed ? "yes" : "no"}\``);
+  lines.push("");
+  lines.push("## Alerting");
+  lines.push("");
+  lines.push(`- Headline: ${snapshot.alerting.headline}`);
+  lines.push(`- Fail checks: ${snapshot.alerting.fail_count}`);
+  lines.push(`- Warn checks: ${snapshot.alerting.warn_count}`);
+  lines.push(`- OK checks: ${snapshot.alerting.ok_count}`);
+  lines.push(`- Skipped checks: ${snapshot.alerting.skipped_count}`);
+  lines.push("");
+  lines.push("### Recommended actions");
+  lines.push("");
+  for (const action of snapshot.alerting.recommended_actions) {
+    lines.push(`- ${action}`);
+  }
   lines.push("");
   lines.push("| Check | Status | Summary |");
   lines.push("| --- | --- | --- |");
@@ -414,26 +510,45 @@ async function main() {
     .filter((entry) => entry.status === "fail")
     .map((entry) => `${entry.key}: ${entry.summary}`);
 
+  const overallStatus = summarizeStatus(checks);
+  const alerting = buildAlerting(checks, overallStatus);
+
   const snapshot = {
     generated_at: isoNow(),
     host: os.hostname(),
     mode: args.publicOnly ? "public_only" : "full",
-    overall_status: summarizeStatus(checks),
+    overall_status: overallStatus,
+    alerting,
     checks,
     blockers,
   };
 
   const jsonPath = path.join(outputDir, "runtime_health_snapshot.json");
   const markdownPath = path.join(outputDir, "runtime_health_snapshot.md");
+  const latestDir = path.join(args.outputRoot, "latest");
+  const latestJsonPath = path.join(latestDir, "runtime_health_snapshot.json");
+  const latestMarkdownPath = path.join(latestDir, "runtime_health_snapshot.md");
+  await mkdir(latestDir, { recursive: true });
   await writeFile(jsonPath, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
   await writeFile(markdownPath, buildMarkdown(snapshot), "utf8");
+  await writeFile(latestJsonPath, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
+  await writeFile(latestMarkdownPath, buildMarkdown(snapshot), "utf8");
 
   console.log(JSON.stringify({
     ok: snapshot.overall_status !== "fail",
     overall_status: snapshot.overall_status,
+    alert_needed: snapshot.alerting.alert_needed,
+    alert_severity: snapshot.alerting.severity,
     output_dir: outputDir,
+    latest_json_path: latestJsonPath,
+    latest_markdown_path: latestMarkdownPath,
     blockers: snapshot.blockers,
+    recommended_actions: snapshot.alerting.recommended_actions,
   }, null, 2));
+
+  if (shouldExitNonZero(snapshot.overall_status, args.failOnStatus)) {
+    process.exitCode = 1;
+  }
 }
 
 main().catch((error) => {
