@@ -382,16 +382,21 @@ function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabl
               position: "center",
             },
           ]
-        : timeline.map((scene) => ({
-            asset: {
-              type: "image",
-              src: scene.asset_url,
-            },
-            start: scene.start_sec,
-            length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
-            fit: isQuestionFlow ? "cover" : "contain",
-            position: isQuestionFlow ? getQuestionBackgroundPosition(scene.role) : "center",
-          })),
+        : timeline.map((scene, sceneIdx) => {
+            const MICRO_EFFECTS = ["zoomIn", "zoomOut", "slideLeft", "slideRight"];
+            const effect = MICRO_EFFECTS[sceneIdx % MICRO_EFFECTS.length];
+            return {
+              asset: {
+                type: "image",
+                src: scene.asset_url,
+              },
+              start: scene.start_sec,
+              length: Number((scene.end_sec - scene.start_sec).toFixed(2)),
+              fit: isQuestionFlow ? "cover" : "contain",
+              position: isQuestionFlow ? getQuestionBackgroundPosition(scene.role) : "center",
+              effect,
+            };
+          }),
   };
 
   const hasQuestionTalkingHeadMainTrack = backgroundTrack.clips.some((clip) => {
