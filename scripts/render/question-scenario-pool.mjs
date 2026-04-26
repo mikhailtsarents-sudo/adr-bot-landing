@@ -133,6 +133,104 @@ function applyScenarioAnchor(questionInput, scenarioId) {
   };
 }
 
+const DYNAMIC_SCENARIO_CATEGORIES = [
+  "fire_safety", "tank_transport", "emergency_equipment", "marking_labeling",
+  "cargo_securing", "tunnel_routes", "duties_of_driver", "transport_documents",
+  "packaging", "training",
+];
+
+async function generateDynamicScenario() {
+  const apiKey = text(process.env.OPENAI_API_KEY || process.env.OPENAI_API_TOKEN);
+  if (!apiKey) return null;
+
+  const category = DYNAMIC_SCENARIO_CATEGORIES[Math.floor(Math.random() * DYNAMIC_SCENARIO_CATEGORIES.length)];
+
+  const systemPrompt = [
+    "Generate a realistic ADR Gefahrguttransport multiple-choice question in German.",
+    "Return strict JSON: { id, question_text, answer_options (array of 4 strings), correct_answer, simple_explanation, category, topic_tags (array) }",
+    "question_text must be a real ADR exam-style question in German.",
+    "All answer_options and correct_answer must be in German.",
+    "simple_explanation: one sentence in German explaining why the correct answer is right.",
+  ].join(" ");
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        model: "gpt-4.1-mini",
+        input: [
+          { role: "system", content: [{ type: "input_text", text: systemPrompt }] },
+          { role: "user", content: [{ type: "input_text", text: `category: ${category}` }] },
+        ],
+        text: {
+          format: {
+            type: "json_schema",
+            name: "adr_scenario",
+            schema: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                id: { type: "string" },
+                question_text: { type: "string" },
+                answer_options: { type: "array", items: { type: "string" } },
+                correct_answer: { type: "string" },
+                simple_explanation: { type: "string" },
+                category: { type: "string" },
+                topic_tags: { type: "array", items: { type: "string" } },
+              },
+              required: ["id", "question_text", "answer_options", "correct_answer", "simple_explanation", "category", "topic_tags"],
+            },
+          },
+        },
+      }),
+    });
+    if (!response.ok) return null;
+    const json = await response.json();
+    const raw = text(json.output_text || "");
+    if (!raw) return null;
+    const scenario = JSON.parse(raw);
+    if (!scenario?.question_text || !Array.isArray(scenario?.answer_options)) return null;
+    return { ...scenario, id: scenario.id || `dynamic_${category}_${Date.now()}` };
+  } catch {
+    return null;
+  }
+}
+
+export async function pickScenario(questionInput, scenarioId) {
+  const hasRealContent =
+    text(questionInput?.payload?.question_text) &&
+    text(questionInput?.payload?.correct_answer);
+
+  if (hasRealContent && !text(scenarioId)) {
+    return questionInput;
+  }
+
+  if (text(scenarioId)) {
+    return applyScenarioAnchor(questionInput, scenarioId);
+  }
+
+  const dynamic = await generateDynamicScenario().catch(() => null);
+  if (dynamic) {
+    return {
+      ...questionInput,
+      source_id: dynamic.id,
+      topic_tags: dynamic.topic_tags,
+      payload: {
+        ...(questionInput?.payload || {}),
+        question_text: dynamic.question_text,
+        answer_options: dynamic.answer_options,
+        correct_answer: dynamic.correct_answer,
+        simple_explanation: dynamic.simple_explanation,
+        category: dynamic.category,
+      },
+      fixed_scenario: dynamic.id,
+    };
+  }
+
+  return applyScenarioAnchor(questionInput, DEFAULT_SCENARIO_ID);
+}
+
 export {
   QUESTION_SCENARIO_POOL,
   QUESTION_SCENARIO_IDS,
