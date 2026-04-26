@@ -348,10 +348,36 @@ Follow-up impact pass on `2026-04-25` improved this further:
 
 ### TikTok Automation
 
-- Real TikTok auth/posting flow is not implemented yet
-- No end-to-end TikTok posting demo exists yet
-- TikTok app review has not been submitted successfully
-- TikTok direct posting is intentionally not enabled yet
+- TikTok OAuth2 + PKCE flow implemented and completed (2026-04-26)
+  - Token saved to `runtime/tiktok-auth/oauth-token.json` on VPS
+  - Scope: `video.upload` (INBOX_UPLOAD mode active)
+- End-to-end INBOX_UPLOAD confirmed working: `tiktok_sent_to_inbox`
+  - publish_id: `v_inbox_file~v2.7633067962769131523`
+- Pipeline integration: TikTok publish runs as Step 4 in `run-post-render-pipeline.mjs`
+  - Triggered automatically when `TIKTOK_OAUTH_TOKEN_PATH` env var is set
+  - TikTok failure is non-fatal (wrapped in try/catch, YouTube publish not aborted)
+- TikTok App Review: demo video recorded, pending upload + submit
+  - Blocked: `spam_risk_too_many_pending_share` (daily INBOX limit hit during testing)
+  - Retry tomorrow with fresh daily limit
+- TikTok direct posting (`DIRECT_PRIVATE`) blocked until App Review approved
+  - `video.publish` scope not available in sandbox yet
+- Client secret was exposed in screenshots — rotate before production use
+
+### Content Diversity
+
+- WORD pipeline fix deployed (2026-04-26):
+  - `DEFAULT_WORD_DIR` was pointing to `examples/` (1 word)
+  - Now points to `examples/word-batch-wave-1/` (174 words)
+  - Affected files: `scripts/run-word-content-creator.mjs`, `scripts/run-shorts-decider-cycle.mjs`
+  - Commit: `7ba0133`
+  - Action needed: `git pull` on VPS so next decider cycle picks WORD content
+- NEWS: 1 news item in prepared queue (`draft-1776895259492`), needs regular news flow
+
+### Video Quality (open)
+
+- Horizontal stripe/line visible in middle of some videos — cause unknown, needs investigation
+- Text/audio desync on latest QUESTION video — timing calibration needed
+- CTA glassmorphism card: implemented but design needs final polish to match reference
 
 ### Search / Indexation
 

@@ -44,11 +44,36 @@ This file is a working log for TikTok setup and future automation.
 
 ## Automation Readiness
 
-- Upload API access: partially prepared
-- Publish API access: partially prepared
-- Analytics API access: unknown
-- Refresh token stored: no
-- Access token stored: no
+- Upload API access: **LIVE** — INBOX_UPLOAD confirmed working (2026-04-26)
+- Publish API access: pending App Review (`video.publish` scope)
+- Analytics API access: not implemented
+- Refresh token stored: **yes** — `runtime/tiktok-auth/oauth-token.json` on VPS
+- Access token stored: **yes** — auto-refresh implemented in `getValidAccessToken()`
+
+## OAuth Flow (completed 2026-04-26)
+
+- Script: `scripts/run-tiktok-oauth-bootstrap.mjs`
+- Flow: manual-paste (HTTPS redirect URI, no localhost server possible)
+- Scope authorized: `video.upload`
+- Token path: `TIKTOK_OAUTH_TOKEN_PATH` env var → `runtime/tiktok-auth/oauth-token.json`
+- Auto-refresh: implemented in `tiktok-content-posting-client.mjs`
+
+## Pipeline Integration (2026-04-26)
+
+- Step 4 in `run-post-render-pipeline.mjs` — runs after YouTube publish
+- Mode: `TIKTOK_PUBLISH_MODE` env var (default: `INBOX_UPLOAD`)
+- Non-fatal: TikTok failure does not abort YouTube-published content
+- Flag: `--skip-tiktok` to skip
+- Caption: auto-generated German caption with hashtags via `buildTikTokCaption()`
+- Attribution token: `tt--{family}--{content_id}` format
+
+## App Review Status (2026-04-26)
+
+- Demo video: recorded (screen recording showing terminal + `tiktok_sent_to_inbox`)
+- Blocked on upload: hit `spam_risk_too_many_pending_share` daily limit during testing
+- Next step: upload demo video + submit for review (retry tomorrow)
+- After approval: re-run OAuth bootstrap with `video.upload,video.publish` scope
+- After approval: change `TIKTOK_PUBLISH_MODE=DIRECT_PRIVATE`
 
 ## Notes
 
