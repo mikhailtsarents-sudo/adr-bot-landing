@@ -50,6 +50,13 @@ export function buildYoutubeTelegramAttribution({
   };
 }
 
+export function buildTikTokStartToken({ contentId, contentFamily = "" } = {}) {
+  const familySlug = FAMILY_PREFIX[String(contentFamily).toUpperCase()]
+    ? FAMILY_PREFIX[String(contentFamily).toUpperCase()]
+    : "shorts";
+  return `tt--${familySlug}--${slugify(contentId, "unknown")}`;
+}
+
 export function appendYoutubeTelegramAttribution(description, options = {}) {
   const safeDescription = text(description);
   const attribution = buildYoutubeTelegramAttribution(options);
