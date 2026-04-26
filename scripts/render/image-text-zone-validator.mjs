@@ -82,6 +82,44 @@ export async function validateTextZoneReadability(imagePath, options = {}) {
   };
 }
 
+// Fast pre-filter: rejects images that are obviously broken before text-zone check.
+// Checks full-frame mean brightness (too dark/bright) and stdev (solid color).
+export async function preFilterImage(imagePath) {
+  let buffer;
+  try { buffer = await readFile(imagePath); } catch {
+    return { pass: false, reason: "file_not_found" };
+  }
+
+  let decoded;
+  try {
+    decoded = jpegJs.decode(buffer, { useTArray: true, maxMemoryUsageInMB: 256 });
+  } catch {
+    return { pass: false, reason: "jpeg_decode_failed" };
+  }
+
+  const { width, height, data } = decoded;
+  if (!width || !height || !data) return { pass: false, reason: "empty_image" };
+
+  const step = 8;
+  const values = [];
+  for (let y = 0; y < height; y += step) {
+    for (let x = 0; x < width; x += step) {
+      const idx = (y * width + x) * 4;
+      values.push(0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2]);
+    }
+  }
+
+  const mean = values.reduce((a, b) => a + b, 0) / values.length;
+  const variance = values.reduce((a, b) => a + (b - mean) ** 2, 0) / values.length;
+  const stdev = Math.sqrt(variance);
+
+  if (mean < 18) return { pass: false, reason: `too_dark (mean=${mean.toFixed(1)})` };
+  if (mean > 238) return { pass: false, reason: `too_bright (mean=${mean.toFixed(1)})` };
+  if (stdev < 8) return { pass: false, reason: `solid_color (stdev=${stdev.toFixed(1)})` };
+
+  return { pass: true, reason: "ok", mean: Number(mean.toFixed(1)), stdev: Number(stdev.toFixed(1)) };
+}
+
 // Validates a batch of frame paths. Returns array of per-frame results.
 export async function validateTextZoneReadabilityBatch(framePaths, options = {}) {
   const results = [];

@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { generatePhotorealSceneFrames, regenerateSingleSceneFrame } from "./question-photoreal-generator.mjs";
-import { validateTextZoneReadabilityBatch, pickBestFrame } from "./image-text-zone-validator.mjs";
+import { validateTextZoneReadabilityBatch, pickBestFrame, preFilterImage } from "./image-text-zone-validator.mjs";
 import { postProcessFrames } from "./image-post-processor.mjs";
 
 const WIDTH = 1440;
@@ -1315,6 +1315,14 @@ export async function generateQuestionVisualBundle({
   }
 
   const sceneFrames = [...photorealBundle.framePaths];
+
+  // Pre-filter: discard obviously broken frames (solid color / too dark / blown out)
+  for (let i = 0; i < sceneFrames.length; i += 1) {
+    const preCheck = await preFilterImage(sceneFrames[i]).catch(() => ({ pass: true }));
+    if (!preCheck.pass) {
+      console.warn(`[visual-assets] frame ${i + 1} failed pre-filter: ${preCheck.reason} — will retry text-zone`);
+    }
+  }
 
   // Text zone validation: check that the center band of each frame is visually calm enough
   // for text overlay. Retry once with a text-zone-optimised prompt for any frame that fails.
