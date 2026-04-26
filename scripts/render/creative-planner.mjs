@@ -5,8 +5,71 @@
 const MODEL = process.env.CREATIVE_PLANNER_MODEL || "gpt-4.1-mini";
 const OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses";
 
+const WEAK_PHRASES = [
+  "dramatic scene",
+  "modern background",
+  "abstract background",
+  "floating icons",
+  "symmetrical composition",
+  "decorative composition",
+  "generic scene",
+  "adr truck",
+  "roadside scene",
+];
+
 function text(value) {
   return value == null ? "" : String(value).trim();
+}
+
+function normalizeLower(value) {
+  return text(value).toLowerCase();
+}
+
+function isWeakValue(value) {
+  const safe = normalizeLower(value);
+  return !safe || WEAK_PHRASES.some((phrase) => safe.includes(phrase));
+}
+
+function isEnhancementRelevant(baseSlide, enh) {
+  const copyWords = normalizeLower(baseSlide.copy)
+    .split(/[^a-zA-Z0-9äöüß]+/)
+    .filter((w) => w.length >= 4);
+  const combined = [enh.scene_intent, enh.visual_hint, enh.subject, enh.context, enh.tension]
+    .map(normalizeLower)
+    .join(" ");
+  if (!combined) return false;
+  const role = normalizeLower(baseSlide.role);
+  if (role && combined.includes(role)) return true;
+  return copyWords.some((w) => combined.includes(w));
+}
+
+export function validateCreativePlanSlides(baseSlides, enhancedSlides) {
+  if (!Array.isArray(baseSlides) || baseSlides.length === 0) return { ok: false, validSlides: [] };
+  if (!Array.isArray(enhancedSlides)) return { ok: false, validSlides: [] };
+
+  const validSlides = [];
+  for (const base of baseSlides) {
+    const enh = enhancedSlides.find((s) => Number(s?.id) === Number(base.id));
+    if (!enh) continue;
+
+    const candidate = {
+      id: Number(base.id),
+      scene_intent: text(enh.scene_intent),
+      visual_hint: text(enh.visual_hint),
+      subject: text(enh.subject),
+      context: text(enh.context),
+      tension: text(enh.tension),
+      composition: text(enh.composition),
+    };
+
+    if (!candidate.scene_intent || !candidate.visual_hint) continue;
+    if (isWeakValue(candidate.scene_intent) || isWeakValue(candidate.visual_hint)) continue;
+    if (!isEnhancementRelevant(base, candidate)) continue;
+
+    validSlides.push(candidate);
+  }
+
+  return { ok: validSlides.length > 0, validSlides };
 }
 
 // ─── NEWS system prompt ──────────────────────────────────────────────────────
@@ -162,6 +225,11 @@ export async function enhanceNewsScenesWithGpt({ brief, newsContent }) {
     return { usedGpt: false, reason: result ? "empty_response" : "gpt_unavailable", mergedBrief: brief };
   }
 
+  const validation = validateCreativePlanSlides(baseSlides, result.slides);
+  if (!validation.ok) {
+    return { usedGpt: false, reason: "invalid_or_weak_gpt_output", mergedBrief: brief };
+  }
+
   return {
     usedGpt: true,
     reason: "ok",
@@ -169,7 +237,7 @@ export async function enhanceNewsScenesWithGpt({ brief, newsContent }) {
     main_entity: text(result.main_entity),
     mergedBrief: {
       ...brief,
-      slides: mergeSlideEnhancements(baseSlides, result.slides),
+      slides: mergeSlideEnhancements(baseSlides, validation.validSlides),
     },
   };
 }
@@ -200,12 +268,17 @@ export async function enhanceWordScenesWithGpt({ brief, wordContent }) {
     return { usedGpt: false, reason: result ? "empty_response" : "gpt_unavailable", mergedBrief: brief };
   }
 
+  const validation = validateCreativePlanSlides(baseSlides, result.slides);
+  if (!validation.ok) {
+    return { usedGpt: false, reason: "invalid_or_weak_gpt_output", mergedBrief: brief };
+  }
+
   return {
     usedGpt: true,
     reason: "ok",
     mergedBrief: {
       ...brief,
-      slides: mergeSlideEnhancements(baseSlides, result.slides),
+      slides: mergeSlideEnhancements(baseSlides, validation.validSlides),
     },
   };
 }
