@@ -19,7 +19,7 @@ function normalizeLower(value) {
 }
 
 export const QUESTION_SCENE_ENHANCER_SYSTEM_PROMPT = [
-  "You are a visual scene director for ADR Gefahrgut educational Shorts.",
+  "You are a visual scene director and cinematographer for ADR Gefahrgut educational Shorts.",
   "Your job: read the actual ADR question category and content, then define a SPECIFIC real-world scene that matches the topic.",
   "CRITICAL: Do NOT default to a roadside document check unless the content is actually about driver licenses or transport documents.",
   "Map ADR categories to appropriate real-world scenes:",
@@ -34,10 +34,14 @@ export const QUESTION_SCENE_ENHANCER_SYSTEM_PROMPT = [
   "packaging/containers → warehouse worker handling ADR-labeled containers or drums;",
   "training/certification → classroom or practical ADR exam situation;",
   "news/regulation → official reviewing ADR regulation document or safety briefing;",
-  "word/vocabulary → the term itself determines what is shown: if the term names a physical object (wheel chock, fire extinguisher, etc.) show that object being used; if the term refers to a label, sign, or document show that; always make the named concept visually present and recognisable in the frame.",
+  "word/vocabulary → the term itself determines what is shown: if the term names a physical object show it being used; if it names a label or document show that; always make the named concept visually present.",
   "Create a real moment in time with interaction, context, and tension specific to the actual topic.",
   "Avoid generic roadside scenes, abstract backgrounds, floating icons, and decorative filler.",
-  "Return strict JSON only: {\"slides\":[...]} with fields: id, scene_intent, visual_hint, subject, context, tension.",
+  "For shot_size use one of: extreme_close_up, close_up, medium_close_up, medium_shot, medium_wide, wide_shot.",
+  "For camera_angle use one of: low_angle, eye_level, high_angle, dutch_angle.",
+  "For lens use one of: 24mm_wide, 35mm_documentary, 50mm_standard, 85mm_portrait.",
+  "For lighting use one of: golden_hour_warm, clear_midday_bright, soft_diffused_overcast, indoor_industrial.",
+  "Return strict JSON only: {\"slides\":[...]} with fields: id, scene_intent, visual_hint, subject, context, tension, shot_size, camera_angle, lens, lighting.",
 ].join(" ");
 
 export function buildQuestionSceneEnhancerInput(brief, contractor1Output) {
@@ -142,6 +146,10 @@ export function validateQuestionSceneEnhancements(baseSlides, enhancements) {
       subject: text(enhancement.subject),
       context: text(enhancement.context),
       tension: text(enhancement.tension),
+      shot_size: text(enhancement.shot_size),
+      camera_angle: text(enhancement.camera_angle),
+      lens: text(enhancement.lens),
+      lighting: text(enhancement.lighting),
     };
 
     const hasPrimaryFields =
@@ -183,6 +191,10 @@ export function mergeQuestionSceneEnhancements(baseSlides, enhancements) {
       ...(text(enhancement.subject) ? { subject: text(enhancement.subject) } : {}),
       ...(text(enhancement.context) ? { context: text(enhancement.context) } : {}),
       ...(text(enhancement.tension) ? { tension: text(enhancement.tension) } : {}),
+      ...(text(enhancement.shot_size) ? { shot_size: text(enhancement.shot_size) } : {}),
+      ...(text(enhancement.camera_angle) ? { camera_angle: text(enhancement.camera_angle) } : {}),
+      ...(text(enhancement.lens) ? { lens: text(enhancement.lens) } : {}),
+      ...(text(enhancement.lighting) ? { lighting: text(enhancement.lighting) } : {}),
     };
   });
 }
@@ -231,8 +243,12 @@ async function callSceneEnhancerGpt(payload) {
                     subject: { type: "string" },
                     context: { type: "string" },
                     tension: { type: "string" },
+                    shot_size: { type: "string" },
+                    camera_angle: { type: "string" },
+                    lens: { type: "string" },
+                    lighting: { type: "string" },
                   },
-                  required: ["id", "scene_intent", "visual_hint", "subject", "context", "tension"],
+                  required: ["id", "scene_intent", "visual_hint", "subject", "context", "tension", "shot_size", "camera_angle", "lens", "lighting"],
                 },
               },
             },

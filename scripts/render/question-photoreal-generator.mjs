@@ -289,9 +289,19 @@ function sanitizeVisualHint(hint) {
 }
 
 const FAMILY_MOOD = {
-  QUESTION: "bright, energetic, curiosity-driven mood; warm natural daylight; vibrant but realistic colors; clear approachable atmosphere",
-  WORD: "clean, minimal, educational, premium feel; soft natural daylight; calm modern European logistics environment",
-  NEWS: "clear, modern, informative look; neutral-bright daylight; fresh contemporary European transport setting",
+  QUESTION: "bright editorial photography, clean modern aesthetic, golden hour soft daylight, warm yellow and fresh white color palette, high-key lighting, optimistic atmosphere",
+  WORD: "clean minimal editorial, soft natural daylight, pastel warm tones, premium educational feel, calm modern European logistics environment",
+  NEWS: "clear modern photojournalism, neutral bright daylight, fresh white and accent blue color palette, informative approachable atmosphere",
+};
+
+// Anti-default prefix: prevents flux from defaulting to dark/cinematic/moody
+const ANTI_DEFAULT_MOOD = "Avoid: overcast sky, rain, dark cinematic mood, fog, cold blue tint, desaturated colors, industrial decay, gloomy atmosphere, grey washed-out look, dystopian feel, dramatic shadows.";
+
+// Per-family camera style references
+const FAMILY_CAMERA = {
+  QUESTION: "iPhone 16 Pro, 35mm equivalent, candid documentary",
+  WORD: "Canon EOS R5, 50mm lens, clean editorial training photo",
+  NEWS: "Fujifilm X-T5, 35mm documentary photojournalism look",
 };
 
 function buildScenePositivePrompt({
@@ -305,65 +315,63 @@ function buildScenePositivePrompt({
   context,
   tension,
   contentFamily,
+  shot_size,
+  camera_angle,
+  lens,
+  lighting,
 }) {
-  const roleSpec =
-    role === "hook"
-      ? "Extreme close phone-camera frame, peak action moment, immediate tension, no setup shot."
-      : role === "question"
-        ? "Mid-action, both key subjects visible, hesitation or decision moment rising."
-        : "Tighter moment, pressure visibly higher, action or consequence clearly unfolding.";
+  const family = String(contentFamily || "QUESTION").toUpperCase();
+  const familyMood = FAMILY_MOOD[family] || FAMILY_MOOD.QUESTION;
+  const familyCamera = FAMILY_CAMERA[family] || FAMILY_CAMERA.QUESTION;
 
-  const sceneAnchor = [
-    subject ? `Subject: ${subject}.` : "",
-    context ? `Scene context: ${context}.` : "",
-    sceneIntent ? `Scene intent: ${sceneIntent}.` : "",
+  // Shot defaults when GPT enhancement didn't provide them
+  const resolvedShot = shot_size || (role === "hook" ? "medium_close_up" : role === "question" ? "medium_shot" : "medium_close_up");
+  const resolvedAngle = camera_angle || "low_angle";
+  const resolvedLens = lens || "35mm_documentary";
+  const resolvedLighting = lighting || "golden_hour_warm";
+
+  // Subject-first opening sentence (most important for model comprehension)
+  const subjectLine = subject
+    ? `${subject}${context ? `, ${context}` : ""}.`
+    : `Real-world ADR / Gefahrgut scene: ${sceneIntent || visualHint || "truck transport or hazardous goods handling"}.`;
+
+  const cinematographySpec = [
+    `Camera: ${familyCamera}.`,
+    `Shot: ${resolvedShot.replace(/_/g, " ")}, ${resolvedAngle.replace(/_/g, " ")}.`,
+    `Lens: ${resolvedLens.replace(/_/g, " ")}.`,
+    `Lighting: ${resolvedLighting.replace(/_/g, " ")}.`,
+  ].join(" ");
+
+  const mandatoryElements = [
     "Mandatory: real ADR / Gefahrgut / truck transport or hazardous goods handling setting.",
     "Mandatory: at least one person (driver, worker, or operator) clearly visible and actively doing something.",
     "Mandatory: hands interacting with relevant object (equipment, label, container, document, or vehicle part).",
     "Mandatory: at least one readable human face.",
     "Mandatory: vehicle, roadside, warehouse, or industrial ADR context visible.",
-    "Captured like a handheld smartphone video frame.",
-  ].filter(Boolean).join(" ");
-
-  const compositionConstraints = [
-    "Composition constraints:",
-    "medium shot or close documentary framing;",
-    "no wide cinematic establishing shot;",
-    "no empty scene;",
-    "no isolated portrait with no context;",
-    "no faceless hands-only crop.",
-  ].join(" ");
-
-  const realismConstraints = [
-    "Realism constraints:",
-    "candid moment;",
-    "imperfect framing;",
-    "natural light;",
-    "phone-camera exposure;",
-    "no studio lighting.",
   ].join(" ");
 
   return [
-    "Use case: photorealistic-natural",
-    "Asset type: vertical Shorts preview frame",
-    `Primary request: photorealistic real-world ADR / Gefahrgut scene, frame ${sceneIndex + 1} of a short unfolding sequence.`,
-    `Visual hint: ${sanitizeVisualHint(visualHint) || sceneIntent || "real truck transport or hazardous goods handling situation"}.`,
-    "Style/medium: photorealistic smartphone video still, not illustration, not vector, not flat design, not infographic, not UI.",
-    "Composition/framing: vertical 9:16, accidental shaky phone-camera capture, off-center subjects, partial crop, shallow depth of field, imperfect framing, foreground obstruction allowed.",
-    `Visual mood: ${FAMILY_MOOD[String(contentFamily || "QUESTION").toUpperCase()] || FAMILY_MOOD.QUESTION}. Avoid: overcast sky, rain, dark cinematic mood, fog, cold blue tint, desaturated colors, industrial decay, gloomy atmosphere, grey washed-out look.`,
-    "Lighting/mood: natural uneven lighting, real-world noise, tension or action visible in the scene.",
-    "Materials/textures: skin texture, fabric folds, worn equipment, industrial context, road grime, imperfect reflections.",
-    "Hard constraint: no artificial text overlays.",
-    "Hard constraint: no added captions or subtitles.",
-    "Hard constraint: scene must look like raw camera capture.",
-    "Natural in-scene text is allowed only when it belongs to the photographed world: labels on containers, hazard placards, uniform markings, signage.",
-    sceneAnchor,
-    compositionConstraints,
-    realismConstraints,
-    `Framing: ${roleSpec}`,
-    questionText ? `Scene topic (visual reference only, NOT text to render): ${questionText}` : "",
-    `Tension detail: ${tension}`,
-  ].filter((line) => line && !line.endsWith(": ")).join("\n");
+    // 1. SUBJECT FIRST — what is in the frame
+    subjectLine,
+    // 2. Scene intent and visual detail
+    sceneIntent ? `Scene intent: ${sceneIntent}.` : "",
+    visualHint ? `Visual detail: ${sanitizeVisualHint(visualHint)}.` : "",
+    tension ? `Tension: ${tension}.` : "",
+    questionText ? `Topic context (visual only, NOT text to render): ${questionText}.` : "",
+    // 3. Cinematography spec
+    cinematographySpec,
+    // 4. Composition
+    "Composition: vertical 9:16 smartphone frame, subject placed in lower two-thirds, clear space in upper area for text overlay.",
+    // 5. Style
+    `Style: photorealistic smartphone documentary still. ${familyMood}. ${ANTI_DEFAULT_MOOD}`,
+    // 6. Materials and realism
+    "Materials: skin texture, fabric folds, worn safety equipment, industrial surfaces, imperfect real-world details.",
+    // 7. Mandatory elements
+    mandatoryElements,
+    // 8. Hard constraints
+    "No artificial text overlays. No captions. No subtitles. No logos. No watermarks. No UI elements.",
+    "Natural in-scene text is allowed only when it belongs to the photographed world: labels on containers, hazard placards, uniform markings.",
+  ].filter((line) => line && line.trim()).join("\n");
 }
 
 function buildSceneNegativePrompt() {
@@ -447,6 +455,10 @@ function buildMultiScenePrompt({ questionText, scenes }) {
           subject: scene.subject,
           context: scene.context,
           tension: scene.tension,
+          shot_size: scene.shot_size,
+          camera_angle: scene.camera_angle,
+          lens: scene.lens,
+          lighting: scene.lighting,
         }),
       ].join("\n"),
     ),
@@ -1451,6 +1463,10 @@ async function generateFramesWithProvider({
         subject: scene.subject,
         context: scene.context,
         tension: scene.tension,
+        shot_size: scene.shot_size,
+        camera_angle: scene.camera_angle,
+        lens: scene.lens,
+        lighting: scene.lighting,
         contentFamily,
       });
       const promptFile = path.join(generatedDir, `${provider.id}-scene${i + 1}.prompt.txt`);
@@ -1615,6 +1631,10 @@ async function generateFramesWithProvider({
       subject: scene.subject,
       context: scene.context,
       tension: scene.tension,
+      shot_size: scene.shot_size,
+      camera_angle: scene.camera_angle,
+      lens: scene.lens,
+      lighting: scene.lighting,
       contentFamily,
     });
     const negativePrompt = buildSceneNegativePrompt();
@@ -2503,6 +2523,10 @@ export async function regenerateSingleSceneFrame({ scene, questionText, outputPa
     subject: text(scene.subject),
     context: text(scene.context),
     tension: text(scene.tension),
+    shot_size: text(scene.shot_size),
+    camera_angle: text(scene.camera_angle),
+    lens: text(scene.lens),
+    lighting: text(scene.lighting),
   });
 
   const prompt = `${basePrompt}\n${textZoneModifier}`;
