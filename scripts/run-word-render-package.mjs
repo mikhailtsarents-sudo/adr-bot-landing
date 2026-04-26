@@ -182,11 +182,39 @@ function buildScenario(wordInput, classification) {
     render_priority: classification.render_priority,
     hook_text: `Was bedeutet ${term}?`,
     scene_plan: [
-      { id: 1, role: "hook", text: `Was bedeutet ${term}?` },
-      { id: 2, role: "content", text: `${term} / ${translation}` },
-      { id: 3, role: "pause", text: synonym ? `Auch bekannt als: ${synonym}` : explanation },
-      { id: 4, role: "answer", text: `${term} = ${translation}` },
-      { id: 5, role: "cta", text: "1 Begriff pro Tag" },
+      {
+        id: 1,
+        role: "hook",
+        text: `Was bedeutet ${term}?`,
+        voiceover_text: `Kennst du diesen Begriff? ${term}.`,
+      },
+      {
+        id: 2,
+        role: "content",
+        text: `${term} / ${translation}`,
+        voiceover_text: term ? `${term} — das ist ein wichtiger ADR-Begriff.` : "",
+      },
+      {
+        id: 3,
+        role: "pause",
+        text: synonym ? `Auch bekannt als: ${synonym}` : explanation,
+        voiceover_text: [
+          synonym ? `Auch bekannt als: ${synonym}.` : "",
+          explanation ? `${explanation}` : "",
+        ].filter(Boolean).join(" "),
+      },
+      {
+        id: 4,
+        role: "answer",
+        text: `${term} = ${translation}`,
+        voiceover_text: `${term} bedeutet: ${translation}.`,
+      },
+      {
+        id: 5,
+        role: "cta",
+        text: "1 Begriff pro Tag",
+        voiceover_text: "Ein Begriff pro Tag, kostenlos im Telegram-Bot.",
+      },
     ],
     body_blocks: [
       term,
@@ -262,6 +290,15 @@ function buildRenderTask(wordInput, scenario, audioSource = {}) {
 }
 
 function buildWordVoiceoverScript(wordInput, scenario) {
+  // Prefer voiceover_text from scene_plan (conversational spoken form).
+  const scenePlan = Array.isArray(scenario.scene_plan) ? scenario.scene_plan : [];
+  const fromPlan = scenePlan
+    .map((s) => text(s.voiceover_text))
+    .filter(Boolean)
+    .join(" ");
+  if (fromPlan) return fromPlan;
+
+  // Legacy fallback: construct from raw word data
   const term = text(wordInput.payload?.de_term);
   const targetLang = text(wordInput.target_lang || "ru") || "ru";
   const translation =
@@ -270,13 +307,12 @@ function buildWordVoiceoverScript(wordInput, scenario) {
   const explanation = text(wordInput.payload?.simple_explanation);
   const synonym = text(wordInput.payload?.synonym);
   const ctaText = text(scenario.cta_text);
-
   return [
     text(scenario.hook_text),
-    term ? `Begriff. ${term}.` : "",
-    translation ? `Auf Russisch. ${translation}.` : "",
-    synonym ? `Auch bekannt als. ${synonym}.` : "",
-    explanation ? `Kurz erklärt. ${explanation}` : "",
+    term ? `${term}.` : "",
+    translation ? `${translation}.` : "",
+    synonym ? `Auch bekannt als: ${synonym}.` : "",
+    explanation ? `${explanation}` : "",
     ctaText,
   ]
     .filter(Boolean)

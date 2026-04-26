@@ -666,18 +666,49 @@ function buildScenario(questionInput, classification) {
     correct_short: shortform.correct_short,
     explanation_short: shortform.explanation_short,
     scene_plan: [
-      { id: 1, role: "hook", text: shortenedHook },
-      { id: 2, role: "question", text: shortform.question_short || questionText },
+      {
+        id: 1,
+        role: "hook",
+        text: shortenedHook,
+        voiceover_text: shortenedHook,
+      },
+      {
+        id: 2,
+        role: "question",
+        text: shortform.question_short || questionText,
+        voiceover_text: questionText ? `Kurze Frage: ${questionText}` : (shortform.question_short || ""),
+      },
       {
         id: 3,
         role: "answers",
         text: (shortform.answers_short || [])
           .map((item, index) => `${String.fromCharCode(65 + index)}: ${item}`)
           .join("\n"),
+        voiceover_text: (shortform.answers_short || [])
+          .map((item, index) => `${String.fromCharCode(65 + index)}... ${item}`)
+          .join(". "),
       },
-      { id: 4, role: "timer", text: "3 Sekunden überlegen" },
-      { id: 5, role: "answer", text: `Richtig ist ${shortform.correct_short || correctAnswer}` },
-      { id: 6, role: "cta", text: shortform.cta },
+      {
+        id: 4,
+        role: "timer",
+        text: "3 Sekunden überlegen",
+        voiceover_text: "",
+      },
+      {
+        id: 5,
+        role: "answer",
+        text: `Richtig ist ${shortform.correct_short || correctAnswer}`,
+        voiceover_text: [
+          `Richtig ist: ${shortform.correct_short || correctAnswer}.`,
+          explanation ? `Kurz erklärt: ${explanation}` : "",
+        ].filter(Boolean).join(" "),
+      },
+      {
+        id: 6,
+        role: "cta",
+        text: shortform.cta,
+        voiceover_text: shortform.cta,
+      },
     ],
     body_blocks: [questionText, correctAnswer, explanation].filter(Boolean),
     core_answer: correctAnswer,
@@ -775,6 +806,16 @@ function buildRenderTask(questionInput, scenario, audioSource = {}, options = {}
 }
 
 function buildQuestionVoiceoverScript(questionInput, scenario) {
+  // Prefer voiceover_text from scene_plan (conversational spoken form).
+  // Fall back to constructing from raw fields if scene_plan lacks voiceover_text.
+  const scenePlan = Array.isArray(scenario.scene_plan) ? scenario.scene_plan : [];
+  const fromPlan = scenePlan
+    .map((s) => text(s.voiceover_text))
+    .filter(Boolean)
+    .join(" ");
+  if (fromPlan) return fromPlan;
+
+  // Legacy fallback: construct from raw question data
   const questionText = text(questionInput.payload?.question_text);
   const answers = Array.isArray(questionInput.payload?.answer_options)
     ? questionInput.payload.answer_options.map((item, index) => `${String.fromCharCode(65 + index)}. ${text(item)}`).filter(Boolean)
@@ -782,13 +823,12 @@ function buildQuestionVoiceoverScript(questionInput, scenario) {
   const correctAnswer = text(questionInput.payload?.correct_answer);
   const explanation = text(questionInput.payload?.simple_explanation);
   const ctaText = text(scenario.cta_text);
-
   return [
     text(scenario.hook_text),
-    questionText ? `Frage. ${questionText}` : "",
-    answers.length > 0 ? `Antworten. ${answers.join(". ")}` : "",
-    correctAnswer ? `Richtig ist. ${correctAnswer}` : "",
-    explanation ? `Kurz erklärt. ${explanation}` : "",
+    questionText ? `Kurze Frage: ${questionText}` : "",
+    answers.length > 0 ? answers.join(". ") : "",
+    correctAnswer ? `Richtig ist: ${correctAnswer}.` : "",
+    explanation ? `Kurz erklärt: ${explanation}` : "",
     ctaText,
   ]
     .filter(Boolean)
