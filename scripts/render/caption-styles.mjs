@@ -64,6 +64,32 @@ const CTA_BY_FAMILY = {
   NEWS:     { accent: '#FACC15', headline: 'ADR-News bleiben', sub: 'täglich neue Updates', btn: '🔔 Bot abonnieren', badge: '📰 News' },
 };
 
+
+// A/B variant pools per family: headline rotates per source_id hash
+const CTA_AB_VARIANTS = {
+  QUESTION: [
+    'Kostenlos üben',
+    'Täglich 1 Frage lernen',
+    'Prüfung bestehen',
+  ],
+  WORD: [
+    'ADR-Wörter lernen',
+    '1 Begriff pro Tag',
+    'Vokabeln täglich',
+  ],
+  NEWS: [
+    'ADR-News bleiben',
+    'Updates nicht verpassen',
+    'Immer aktuell',
+  ],
+};
+
+export function pickCtaVariant(contentFamily, sourceId) {
+  const pool = CTA_AB_VARIANTS[String(contentFamily).toUpperCase()] || CTA_AB_VARIANTS.QUESTION;
+  const hash = String(sourceId || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  return pool[hash % pool.length];
+}
+
 // Telegram CTA -- glassmorphism overlay with family-specific branding
 function buildCtaClips({ start, length, headline, contentFamily = 'QUESTION' }) {
   const fam = CTA_BY_FAMILY[String(contentFamily).toUpperCase()] || CTA_BY_FAMILY.QUESTION;
