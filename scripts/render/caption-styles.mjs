@@ -21,9 +21,10 @@ function typo(role) {
   return ROLE_TYPOGRAPHY[String(role || "").toLowerCase()] || ROLE_TYPOGRAPHY.answers;
 }
 
-// Spacing between per-line clips in offset.y units (fraction of frame height 1920px)
+// Spacing between per-line clips in offset.y units (fraction of frame height 1920px).
+// No inter-line gap: clips are flush so the frosted-glass backdrop shows no visible stripe.
 function lineStep(fontSize) {
-  return (fontSize * 3 + 16) / 1920;
+  return (fontSize * 3) / 1920;
 }
 
 // Highlight the first ALL-CAPS word (≥4 chars) with accent color
@@ -222,7 +223,7 @@ function buildAnswerLines(text) {
 // Frosted glass pill backdrop — semi-transparent rounded card behind text lines
 function buildFrostedGlassBackdrop({ start, length, offsetY = -0.05, lineCount = 1, fontSize = 52 }) {
   const lineH = fontSize * 3;
-  const textBlockH = lineCount * lineH + Math.max(lineCount - 1, 0) * 8;
+  const textBlockH = lineCount * lineH;
   const padV = 28;
   const cardH = textBlockH + padV * 2;
   const cardW = 880;
@@ -264,7 +265,7 @@ export function buildCaptionClip({ role, text: captionText, start, length, conte
       buildFrostedGlassBackdrop({ start: s, length: l, offsetY: baseY, lineCount: answerLines.length, fontSize: fs }),
       ...answerLines.map((html, i) =>
         buildLineClip({ html, color: "#FFFFFF", fontSize: fs, start: s, length: l,
-          offsetY: baseY + (i - (answerLines.length - 1) / 2) * step, role: r }),
+          offsetY: baseY + ((answerLines.length - 1) / 2 - i) * step, role: r }),
       ),
     ];
   }
@@ -278,7 +279,7 @@ export function buildCaptionClip({ role, text: captionText, start, length, conte
       buildFrostedGlassBackdrop({ start: s, length: l, offsetY: baseY, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
         buildLineClip({ html: esc(line), color: "#FFFFFF", fontSize: fs, start: s, length: l,
-          offsetY: baseY + (i - (lines.length - 1) / 2) * step, role: r, accentWord: r === "hook" }),
+          offsetY: baseY + ((lines.length - 1) / 2 - i) * step, role: r, accentWord: r === "hook" }),
       ),
     ];
   }
@@ -291,7 +292,7 @@ export function buildCaptionClip({ role, text: captionText, start, length, conte
       buildFrostedGlassBackdrop({ start: s, length: l, offsetY: 0, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
         buildLineClip({ html: esc(line), color: "#FACC15", fontSize: fs, start: s, length: l,
-          offsetY: (i - (lines.length - 1) / 2) * step, role: r }),
+          offsetY: ((lines.length - 1) / 2 - i) * step, role: r }),
       ),
     ];
   }
@@ -304,7 +305,7 @@ export function buildCaptionClip({ role, text: captionText, start, length, conte
       buildFrostedGlassBackdrop({ start: s, length: l, offsetY: 0, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
         buildLineClip({ html: esc(line), color: "#4ADE80", fontSize: fs, start: s, length: l,
-          offsetY: (i - (lines.length - 1) / 2) * step, role: r }),
+          offsetY: ((lines.length - 1) / 2 - i) * step, role: r }),
       ),
     ];
   }
@@ -316,7 +317,7 @@ export function buildCaptionClip({ role, text: captionText, start, length, conte
   const step = lineStep(fs);
   return lines.map((line, i) =>
     buildLineClip({ html: esc(line), color: "#F8FAFC", fontSize: fs, start: s, length: l,
-      offsetY: 0.3 + (i - (lines.length - 1) / 2) * step }),
+      offsetY: 0.3 + ((lines.length - 1) / 2 - i) * step }),
   );
 }
 
