@@ -61,6 +61,10 @@ export function validateCreativePlanSlides(baseSlides, enhancedSlides) {
       tension: text(enh.tension),
       composition: text(enh.composition),
       continuity_key: text(enh.continuity_key),
+      shot_size: text(enh.shot_size),
+      camera_angle: text(enh.camera_angle),
+      lens: text(enh.lens),
+      lighting: text(enh.lighting),
     };
 
     if (!candidate.scene_intent || !candidate.visual_hint) continue;
@@ -96,7 +100,11 @@ const NEWS_SYSTEM_PROMPT = [
   "Avoid: abstract backgrounds, floating icons, decorative filler, studio lighting.",
   "CONTINUITY: all slides in this video share the same master_scene (one-line description of the primary physical setting and character) and continuity_key (a short token like 'inspector_border_morning' that ties all frames together).",
   "master_scene appears once at the top level. continuity_key appears on every slide.",
-  "Return strict JSON: {\"news_type\": \"...\", \"main_entity\": \"...\", \"master_scene\": \"...\", \"slides\": [{id, scene_intent, visual_hint, subject, context, tension, composition, continuity_key}]}",
+  "For shot_size use one of: extreme_close_up, close_up, medium_close_up, medium_shot, medium_wide, wide_shot.",
+  "For camera_angle use one of: low_angle, eye_level, high_angle, dutch_angle.",
+  "For lens use one of: 24mm_wide, 35mm_documentary, 50mm_standard, 85mm_portrait.",
+  "For lighting use one of: golden_hour_warm, clear_midday_bright, soft_diffused_overcast, indoor_industrial.",
+  "Return strict JSON: {\"news_type\": \"...\", \"main_entity\": \"...\", \"master_scene\": \"...\", \"slides\": [{id, scene_intent, visual_hint, subject, context, tension, composition, continuity_key, shot_size, camera_angle, lens, lighting}]}",
 ].join(" ");
 
 // ─── WORD system prompt ──────────────────────────────────────────────────────
@@ -115,7 +123,11 @@ const WORD_SYSTEM_PROMPT = [
   "Avoid: posed portraits, generic road scenes without the term's object, abstract imagery.",
   "CONTINUITY: all slides share the same master_scene (one-line primary setting + character) and continuity_key (short token like 'driver_warehouse_morning' repeated on every slide).",
   "master_scene appears once at the top level.",
-  "Return strict JSON: {\"master_scene\": \"...\", \"slides\": [{id, scene_intent, visual_hint, subject, context, tension, composition, continuity_key}]}",
+  "For shot_size use one of: extreme_close_up, close_up, medium_close_up, medium_shot, medium_wide, wide_shot.",
+  "For camera_angle use one of: low_angle, eye_level, high_angle, dutch_angle.",
+  "For lens use one of: 24mm_wide, 35mm_documentary, 50mm_standard, 85mm_portrait.",
+  "For lighting use one of: golden_hour_warm, clear_midday_bright, soft_diffused_overcast, indoor_industrial.",
+  "Return strict JSON: {\"master_scene\": \"...\", \"slides\": [{id, scene_intent, visual_hint, subject, context, tension, composition, continuity_key, shot_size, camera_angle, lens, lighting}]}",
 ].join(" ");
 
 // ─── Shared OpenAI call ──────────────────────────────────────────────────────
@@ -140,8 +152,12 @@ async function callPlannerGpt(systemPrompt, userPayload) {
           tension: { type: "string" },
           composition: { type: "string" },
           continuity_key: { type: "string" },
+          shot_size: { type: "string" },
+          camera_angle: { type: "string" },
+          lens: { type: "string" },
+          lighting: { type: "string" },
         },
-        required: ["id", "scene_intent", "visual_hint", "subject", "context", "tension", "composition", "continuity_key"],
+        required: ["id", "scene_intent", "visual_hint", "subject", "context", "tension", "composition", "continuity_key", "shot_size", "camera_angle", "lens", "lighting"],
       },
     },
   };
@@ -203,6 +219,10 @@ function mergeSlideEnhancements(baseSlides, enhancedSlides, masterScene) {
       ...(text(enh.tension) ? { tension: text(enh.tension) } : {}),
       ...(text(enh.composition) ? { composition: text(enh.composition) } : {}),
       ...(text(enh.continuity_key) ? { continuity_key: text(enh.continuity_key) } : {}),
+      ...(text(enh.shot_size) ? { shot_size: text(enh.shot_size) } : {}),
+      ...(text(enh.camera_angle) ? { camera_angle: text(enh.camera_angle) } : {}),
+      ...(text(enh.lens) ? { lens: text(enh.lens) } : {}),
+      ...(text(enh.lighting) ? { lighting: text(enh.lighting) } : {}),
       ...(masterScene ? { master_scene: masterScene } : {}),
     };
   });
