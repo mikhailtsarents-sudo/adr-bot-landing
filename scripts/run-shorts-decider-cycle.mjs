@@ -32,7 +32,7 @@ const DEFAULT_FAMILY_HISTORY_PATH = path.join(
   "shorts_family_history.latest.json",
 );
 const DEFAULT_QUESTION_DIR = path.join(repoRoot, "examples", "question-batch-wave-1");
-const DEFAULT_WORD_DIR = path.join(repoRoot, "examples");
+const DEFAULT_WORD_DIR = path.join(repoRoot, "examples", "word-batch-wave-1");
 const DEFAULT_NEWS_DIR = path.join(repoRoot, "examples", "approved-news");
 const DEFAULT_NEWS_TABLE_URL =
   process.env.DRAFT_STORAGE_API_URL

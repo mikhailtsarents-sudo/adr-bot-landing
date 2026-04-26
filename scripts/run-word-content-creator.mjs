@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 const controlCenterRoot = path.resolve(repoRoot, "..", "adr-control-center");
-const DEFAULT_WORD_DIR = path.join(repoRoot, "examples");
+const DEFAULT_WORD_DIR = path.join(repoRoot, "examples", "word-batch-wave-1");
 const DEFAULT_OUTPUT_ROOT = path.join(controlCenterRoot, "runtime", "queues", "word-content-creator");
 const DEFAULT_PUBLISH_HISTORY_PATH = path.join(
   controlCenterRoot,
