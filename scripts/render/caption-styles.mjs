@@ -2,24 +2,54 @@ import { computeTextLayout } from "./text-layout-engine.mjs";
 
 const FONT_IMPORT = "@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');";
 
+// Role-based typography system: font weight, letter-spacing, text-transform
+const ROLE_TYPOGRAPHY = {
+  hook:     { weight: 900, tracking: "-1px",  transform: "none",       shadow: "heavy" },
+  question: { weight: 900, tracking: "-0.5px", transform: "none",      shadow: "heavy" },
+  answers:  { weight: 800, tracking: "0px",   transform: "none",       shadow: "medium" },
+  timer:    { weight: 900, tracking: "2px",   transform: "uppercase",  shadow: "heavy" },
+  answer:   { weight: 900, tracking: "-0.5px", transform: "none",      shadow: "heavy" },
+  cta:      { weight: 800, tracking: "0px",   transform: "none",       shadow: "medium" },
+};
+
+const TEXT_SHADOWS = {
+  heavy:  "0 4px 16px rgba(0,0,0,0.99),0 2px 6px rgba(0,0,0,0.97)",
+  medium: "0 3px 12px rgba(0,0,0,0.95),0 1px 4px rgba(0,0,0,0.85)",
+};
+
+function typo(role) {
+  return ROLE_TYPOGRAPHY[String(role || "").toLowerCase()] || ROLE_TYPOGRAPHY.answers;
+}
+
 // Spacing between per-line clips in offset.y units (fraction of frame height 1920px)
 function lineStep(fontSize) {
   return (fontSize * 3 + 16) / 1920;
 }
 
+// Highlight the first ALL-CAPS word (≥4 chars) with accent color
+function highlightAccentWord(html, accentColor = "#FACC15") {
+  return html.replace(
+    /\b([A-ZÄÖÜ]{4,})\b/,
+    `<span style="color:${accentColor}">\$1</span>`,
+  );
+}
+
 // Single-line HTML clip — the core building block (proven stable in Shotstack)
-function buildLineClip({ html, color, fontSize, start, length, offsetY }) {
+function buildLineClip({ html, color, fontSize, start, length, offsetY, role = "answers", accentWord = false }) {
   const h = fontSize * 3;
+  const t = typo(role);
+  const renderedHtml = accentWord ? highlightAccentWord(html) : html;
   const css =
     `${FONT_IMPORT}` +
     `body{margin:0;padding:0;background:transparent;text-align:center;}` +
     `p{color:${color};font-family:'Montserrat',Arial,sans-serif;font-size:${fontSize}px;` +
-    `font-weight:900;line-height:${h}px;margin:0;padding:0;` +
-    `text-shadow:0 4px 16px rgba(0,0,0,0.99),0 2px 6px rgba(0,0,0,0.97);` +
-    `word-break:break-word;overflow-wrap:anywhere;letter-spacing:-0.5px;}`;
+    `font-weight:${t.weight};line-height:${h}px;margin:0;padding:0;` +
+    `text-shadow:${TEXT_SHADOWS[t.shadow] || TEXT_SHADOWS.medium};` +
+    `word-break:break-word;overflow-wrap:anywhere;` +
+    `letter-spacing:${t.tracking};text-transform:${t.transform};}`;
 
   return {
-    asset: { type: "html", html: `<p>${html}</p>`, css, width: 960, height: h },
+    asset: { type: "html", html: `<p>${renderedHtml}</p>`, css, width: 960, height: h },
     position: "center",
     start: Number((start || 0).toFixed(2)),
     length: Number(Math.max(length || 0.1, 0.1).toFixed(2)),
@@ -173,14 +203,8 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     return [
       buildFrostedGlassBackdrop({ start: s, length: l, offsetY: baseY, lineCount: answerLines.length, fontSize: fs }),
       ...answerLines.map((html, i) =>
-        buildLineClip({
-          html,
-          color: "#FFFFFF",
-          fontSize: fs,
-          start: s,
-          length: l,
-          offsetY: baseY + (i - (answerLines.length - 1) / 2) * step,
-        }),
+        buildLineClip({ html, color: "#FFFFFF", fontSize: fs, start: s, length: l,
+          offsetY: baseY + (i - (answerLines.length - 1) / 2) * step, role: r }),
       ),
     ];
   }
@@ -193,14 +217,8 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     return [
       buildFrostedGlassBackdrop({ start: s, length: l, offsetY: baseY, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
-        buildLineClip({
-          html: esc(line),
-          color: "#FFFFFF",
-          fontSize: fs,
-          start: s,
-          length: l,
-          offsetY: baseY + (i - (lines.length - 1) / 2) * step,
-        }),
+        buildLineClip({ html: esc(line), color: "#FFFFFF", fontSize: fs, start: s, length: l,
+          offsetY: baseY + (i - (lines.length - 1) / 2) * step, role: r, accentWord: r === "hook" }),
       ),
     ];
   }
@@ -212,14 +230,8 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     return [
       buildFrostedGlassBackdrop({ start: s, length: l, offsetY: 0, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
-        buildLineClip({
-          html: esc(line),
-          color: "#FACC15",
-          fontSize: fs,
-          start: s,
-          length: l,
-          offsetY: (i - (lines.length - 1) / 2) * step,
-        }),
+        buildLineClip({ html: esc(line), color: "#FACC15", fontSize: fs, start: s, length: l,
+          offsetY: (i - (lines.length - 1) / 2) * step, role: r }),
       ),
     ];
   }
@@ -231,14 +243,8 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     return [
       buildFrostedGlassBackdrop({ start: s, length: l, offsetY: 0, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
-        buildLineClip({
-          html: esc(line),
-          color: "#4ADE80",
-          fontSize: fs,
-          start: s,
-          length: l,
-          offsetY: (i - (lines.length - 1) / 2) * step,
-        }),
+        buildLineClip({ html: esc(line), color: "#4ADE80", fontSize: fs, start: s, length: l,
+          offsetY: (i - (lines.length - 1) / 2) * step, role: r }),
       ),
     ];
   }
@@ -249,14 +255,8 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
   const fs = 46;
   const step = lineStep(fs);
   return lines.map((line, i) =>
-    buildLineClip({
-      html: esc(line),
-      color: "#F8FAFC",
-      fontSize: fs,
-      start: s,
-      length: l,
-      offsetY: 0.3 + (i - (lines.length - 1) / 2) * step,
-    }),
+    buildLineClip({ html: esc(line), color: "#F8FAFC", fontSize: fs, start: s, length: l,
+      offsetY: 0.3 + (i - (lines.length - 1) / 2) * step }),
   );
 }
 
