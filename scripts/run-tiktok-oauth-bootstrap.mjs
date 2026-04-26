@@ -7,6 +7,7 @@
 import { createInterface } from "node:readline";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { bootstrapPhotorealRuntimeEnv } from "./runtime/photoreal-runtime-env.mjs";
 import {
   buildPkcePair,
   buildTikTokAuthUrl,
@@ -64,6 +65,7 @@ function prompt(question) {
 }
 
 async function main() {
+  await bootstrapPhotorealRuntimeEnv(path.resolve(__dirname, ".."));
   const args = parseArgs(process.argv.slice(2));
   const { verifier, challenge } = buildPkcePair();
   const state = `tiktok-oauth-${Date.now().toString(36)}`;

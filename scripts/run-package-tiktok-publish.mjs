@@ -11,6 +11,7 @@
 import { access, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { bootstrapPhotorealRuntimeEnv } from "./runtime/photoreal-runtime-env.mjs";
 import {
   buildTikTokCaption,
   fetchPublishStatus,
@@ -152,6 +153,7 @@ async function openPg() {
 }
 
 async function main() {
+  await bootstrapPhotorealRuntimeEnv(path.resolve(__dirname, ".."));
   const args = parseArgs(process.argv.slice(2));
   const publishReady = await loadJson(args.publishReadyPath);
   const contentId = text(publishReady.content_id || publishReady.render_task_id);
