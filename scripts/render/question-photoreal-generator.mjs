@@ -32,7 +32,21 @@ const FAL_MODEL_PRESETS = {
   realism: "https://fal.run/fal-ai/flux-realism",
   dev: "https://fal.run/fal-ai/flux/dev",
   pro: "https://fal.run/fal-ai/flux-pro/v1.1",
+  ultra: "https://fal.run/fal-ai/flux-pro/v1.1-ultra",
 };
+
+// A/B experiment: % of renders routed to the challenger model (flux-ultra).
+// Set FAL_AB_CHALLENGER_RATE=0.2 to send 20% of renders to ultra.
+const AB_CHALLENGER_RATE = Math.min(1, Math.max(0,
+  Number(process.env.FAL_AB_CHALLENGER_RATE || 0),
+));
+const AB_CHALLENGER_PROFILE = text(process.env.FAL_AB_CHALLENGER_PROFILE || "ultra");
+
+function resolveAbProfile(sourceId) {
+  if (AB_CHALLENGER_RATE <= 0) return null;
+  const hash = String(sourceId || Date.now()).split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  return (hash % 100) < Math.round(AB_CHALLENGER_RATE * 100) ? AB_CHALLENGER_PROFILE : null;
+}
 
 function normalizeFalProfile(value) {
   const raw = text(value).toLowerCase();
@@ -40,16 +54,24 @@ function normalizeFalProfile(value) {
   if (raw === "flux-realism" || raw === "realism") return "realism";
   if (raw === "flux-dev" || raw === "dev") return "dev";
   if (raw === "flux-pro" || raw === "pro" || raw === "pro-v1.1") return "pro";
+  if (raw === "flux-ultra" || raw === "ultra" || raw === "pro-v1.1-ultra") return "ultra";
   return "realism";
 }
 
-export function resolveFalAiModelConfig() {
+export function resolveFalAiModelConfig(sourceId = "") {
   const explicitUrl = text(process.env.FAL_AI_MODEL_URL);
   if (explicitUrl) {
+    return { profile: "custom", url: explicitUrl, source: "FAL_AI_MODEL_URL", ab_variant: false };
+  }
+
+  const abProfile = resolveAbProfile(sourceId);
+  if (abProfile) {
+    const normalizedAb = normalizeFalProfile(abProfile);
     return {
-      profile: "custom",
-      url: explicitUrl,
-      source: "FAL_AI_MODEL_URL",
+      profile: normalizedAb,
+      url: FAL_MODEL_PRESETS[normalizedAb] || FAL_MODEL_PRESETS.realism,
+      source: "ab_experiment",
+      ab_variant: true,
     };
   }
 
@@ -61,6 +83,7 @@ export function resolveFalAiModelConfig() {
     profile,
     url: FAL_MODEL_PRESETS[profile] || FAL_MODEL_PRESETS.realism,
     source: profile === "realism" ? "default" : "profile",
+    ab_variant: false,
   };
 }
 
