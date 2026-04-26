@@ -57,56 +57,63 @@ function buildLineClip({ html, color, fontSize, start, length, offsetY, role = "
   };
 }
 
-// Telegram CTA — glassmorphism overlay, reusable across all video types
-function buildCtaClips({ start, length, headline }) {
+// Per-family CTA config: accent colour, headline, sub-line, button label, badge
+const CTA_BY_FAMILY = {
+  QUESTION: { accent: '#229ED9', headline: 'Kostenlos üben', sub: 'im Telegram-Bot', btn: '✈ Jetzt starten →', badge: '📝 ADR-Quiz' },
+  WORD:     { accent: '#4ADE80', headline: 'ADR-Wörter lernen', sub: '1 Begriff pro Tag • kostenlos', btn: '💬 Im Bot üben', badge: '📖 Vokabeln' },
+  NEWS:     { accent: '#FACC15', headline: 'ADR-News bleiben', sub: 'täglich neue Updates', btn: '🔔 Bot abonnieren', badge: '📰 News' },
+};
+
+// Telegram CTA -- glassmorphism overlay with family-specific branding
+function buildCtaClips({ start, length, headline, contentFamily = 'QUESTION' }) {
+  const fam = CTA_BY_FAMILY[String(contentFamily).toUpperCase()] || CTA_BY_FAMILY.QUESTION;
   const cardWidth = 960;
-  const cardHeight = 370;
+  const cardHeight = 390;
+  const accent = fam.accent;
 
   const css = [
     FONT_IMPORT,
     `*{box-sizing:border-box;margin:0;padding:0;}`,
     `body{background:transparent;width:${cardWidth}px;height:${cardHeight}px;`,
     `display:flex;align-items:center;justify-content:center;}`,
-    `.card{background:rgba(10,18,32,0.58);`,
+    `.card{background:rgba(10,18,32,0.62);`,
     `border:1.5px solid rgba(255,255,255,0.18);`,
     `border-radius:44px;`,
-    `padding:30px 42px;`,
-    `box-shadow:0 8px 40px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.12);`,
-    `display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;}`,
-    `.headline{font-family:'Montserrat',Arial,sans-serif;font-size:64px;font-weight:900;`,
-    `color:#F5EDD8;`,
-    `-webkit-text-stroke:1.5px rgba(0,0,0,0.75);`,
+    `padding:24px 40px 28px;`,
+    `box-shadow:0 8px 40px rgba(0,0,0,0.65),inset 0 1px 0 rgba(255,255,255,0.10);`,
+    `display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;}`,
+    `.badge{font-family:'Montserrat',Arial,sans-serif;font-size:26px;font-weight:700;`,
+    `color:${accent};letter-spacing:1px;text-transform:uppercase;}`,
+    `.headline{font-family:'Montserrat',Arial,sans-serif;font-size:60px;font-weight:900;`,
+    `color:#F5EDD8;-webkit-text-stroke:1px rgba(0,0,0,0.7);`,
     `text-shadow:0 3px 12px rgba(0,0,0,0.95),0 1px 4px rgba(0,0,0,0.85);`,
     `letter-spacing:-1px;text-align:center;}`,
-    `.sub{font-family:'Montserrat',Arial,sans-serif;font-size:38px;font-weight:700;`,
-    `color:#229ED9;text-shadow:0 2px 8px rgba(0,0,0,0.8);text-align:center;}`,
-    `@keyframes jump{`,
-    `0%,100%{transform:scale(1) translateY(0);`,
-    `box-shadow:0 8px 28px rgba(34,158,217,0.55),0 2px 8px rgba(0,0,0,0.5);}`,
-    `50%{transform:scale(1.04) translateY(-5px);`,
-    `box-shadow:0 16px 44px rgba(34,158,217,0.85),0 4px 12px rgba(0,0,0,0.6);}}`,
+    `.sub{font-family:'Montserrat',Arial,sans-serif;font-size:34px;font-weight:700;`,
+    `color:${accent};text-shadow:0 2px 8px rgba(0,0,0,0.8);text-align:center;}`,
+    `@keyframes jump{0%,100%{transform:scale(1) translateY(0);}50%{transform:scale(1.04) translateY(-4px);}}`,
     `.btn{display:inline-flex;align-items:center;gap:10px;`,
-    `background:#229ED9;color:#fff;`,
-    `font-family:'Montserrat',Arial,sans-serif;font-size:42px;font-weight:800;`,
-    `padding:16px 46px;border-radius:60px;border:none;`,
-    `animation:jump 0.8s ease-in-out infinite;white-space:nowrap;}`,
-  ].join("");
+    `background:${accent};color:#0A0E1A;`,
+    `font-family:'Montserrat',Arial,sans-serif;font-size:40px;font-weight:800;`,
+    `padding:14px 44px;border-radius:60px;border:none;`,
+    `animation:jump 0.9s ease-in-out infinite;white-space:nowrap;}`,
+  ].join('');
 
-  const headlineText = headline || "Kostenlos \u00fcben";
+  const headlineText = headline || fam.headline;
   const html = [
     `<div class="card">`,
+    `<div class="badge">${esc(fam.badge)}</div>`,
     `<div class="headline">${esc(headlineText)}</div>`,
-    `<div class="sub">im Telegram-Bot</div>`,
-    `<div class="btn">\u2708 Jetzt starten \u2192</div>`,
+    `<div class="sub">${esc(fam.sub)}</div>`,
+    `<div class="btn">${esc(fam.btn)}</div>`,
     `</div>`,
-  ].join("");
+  ].join('');
 
   return [{
-    asset: { type: "html", html, css, width: cardWidth, height: cardHeight },
-    position: "center",
+    asset: { type: 'html', html, css, width: cardWidth, height: cardHeight },
+    position: 'center',
     start: Number((start || 0).toFixed(2)),
     length: Number(Math.max(length || 0.1, 0.1).toFixed(2)),
-    offset: { x: 0, y: -0.27 },
+    offset: { x: 0, y: -0.26 },
   }];
 }
 
@@ -185,13 +192,13 @@ function buildFrostedGlassBackdrop({ start, length, offsetY = -0.05, lineCount =
 }
 
 // Build per-line clips for a given role/text/timing
-export function buildCaptionClip({ role, text: captionText, start, length }) {
+export function buildCaptionClip({ role, text: captionText, start, length, contentFamily = "QUESTION" }) {
   const r = String(role || "").toLowerCase();
   const s = Number(start || 0);
   const l = Number(Math.max(length || 0.1, 0.1));
 
   if (r === "cta") {
-    return buildCtaClips({ start: s, length: l, headline: captionText || undefined });
+    return buildCtaClips({ start: s, length: l, headline: captionText || undefined, contentFamily });
   }
 
   if (r === "answers") {
