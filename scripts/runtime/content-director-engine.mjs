@@ -92,3 +92,80 @@ export async function familyHasCapacity(family) {
   const target = FAMILY_DAILY_TARGETS[String(family).toUpperCase()] ?? 1;
   return produced < target;
 }
+
+async function queryFunnelConversions(lookbackDays = 7) {
+  const dbUrl = text(DB_URL);
+  if (!dbUrl) return null;
+
+  let pg;
+  try { pg = await import("pg"); } catch { return null; }
+  const Pool = pg.default?.Pool ?? pg.Pool;
+  if (!Pool) return null;
+
+  const pool = new Pool({ connectionString: dbUrl, max: 1 });
+  try {
+    const result = await pool.query(
+      `SELECT
+         CASE
+           WHEN entry_source_token LIKE 'yt--question--%' THEN 'QUESTION'
+           WHEN entry_source_token LIKE 'yt--word--%' THEN 'WORD'
+           WHEN entry_source_token LIKE 'yt--news--%' THEN 'NEWS'
+           ELSE 'UNKNOWN'
+         END AS family,
+         COUNT(*) AS conversions
+       FROM adr_bot_funnel_events
+       WHERE occurred_at >= NOW() - INTERVAL '${lookbackDays} days'
+         AND entry_source_token LIKE 'yt--%'
+       GROUP BY family`,
+    );
+    const counts = {};
+    for (const row of result.rows) {
+      counts[row.family] = Number(row.conversions);
+    }
+    return counts;
+  } finally {
+    await pool.end().catch(() => {});
+  }
+}
+
+/**
+ * Returns per-family bot conversion counts from YouTube deeplinks over last N days.
+ * Used to understand which content family drives the most bot sign-ups.
+ */
+export async function getFunnelConversionsByFamily(lookbackDays = 7) {
+  const counts = await queryFunnelConversions(lookbackDays).catch(() => null);
+  if (!counts) {
+    return { available: false, counts: {}, reason: "db_unavailable" };
+  }
+  return { available: true, counts, lookback_days: lookbackDays };
+}
+
+/**
+ * Enriched production plan: includes conversion data to weigh family priority.
+ * Families with higher conversion rates get +10% weight.
+ */
+export async function buildEnrichedProductionPlan() {
+  const [base, conversions] = await Promise.all([
+    buildProductionPlan(),
+    getFunnelConversionsByFamily(7),
+  ]);
+
+  if (!conversions.available || base.plan.length === 0) {
+    return { ...base, conversions: conversions.counts };
+  }
+
+  const totalConversions = Object.values(conversions.counts).reduce((a, b) => a + b, 0) || 1;
+
+  const enriched = base.plan.map((item) => {
+    const convRate = (conversions.counts[item.family] || 0) / totalConversions;
+    return { ...item, conversion_rate: Number(convRate.toFixed(3)) };
+  });
+
+  enriched.sort((a, b) => (b.count + b.conversion_rate * 2) - (a.count + a.conversion_rate * 2));
+
+  return {
+    ...base,
+    plan: enriched,
+    conversions: conversions.counts,
+  };
+}
