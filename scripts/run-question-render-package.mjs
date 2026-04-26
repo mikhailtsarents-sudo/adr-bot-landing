@@ -18,6 +18,7 @@ import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 import { selectMusicBed } from "./runtime/music-bed-selector.mjs";
 import { optimizeTtsScript } from "./runtime/tts-script-optimizer.mjs";
+import { logRenderGeneration } from "./runtime/render-generation-logger.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -1222,6 +1223,18 @@ async function main() {
     await writeFile(path.join(outputDir, "qa_report.json"), `${JSON.stringify(qaReport, null, 2)}\n`, "utf8");
     await writeFile(path.join(outputDir, "render_task.json"), `${JSON.stringify(renderTask, null, 2)}\n`, "utf8");
     await writeFile(path.join(outputDir, "generated_visual.json"), `${JSON.stringify(visualBundle, null, 2)}\n`, "utf8");
+
+    await logRenderGeneration({
+      render_task_id: renderTask.render_task_id,
+      source_id: renderTask.source_id,
+      content_family: "QUESTION",
+      provider_used: text(visualBundle?.provider_used),
+      frame_count: Array.isArray(visualBundle?.framePaths) ? visualBundle.framePaths.length : 0,
+      tts_voice: text(renderTask.voice_mode),
+      tts_optimizer_used: true,
+      scene_enhancer_used: Boolean(sceneEnhancement?.usedGpt),
+      creative_planner_used: false,
+    });
 
     console.log(`slug=${slug}`);
     console.log(`output_dir=${outputDir}`);

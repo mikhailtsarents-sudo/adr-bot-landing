@@ -13,6 +13,7 @@ import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-
 import { enhanceWordScenesWithGpt } from "./render/creative-planner.mjs";
 import { selectMusicBed } from "./runtime/music-bed-selector.mjs";
 import { optimizeTtsScript } from "./runtime/tts-script-optimizer.mjs";
+import { logRenderGeneration } from "./runtime/render-generation-logger.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -563,6 +564,18 @@ async function main() {
     await writeFile(path.join(outputDir, "visual_brief.json"), `${JSON.stringify(visualBrief, null, 2)}\n`, "utf8");
     await writeFile(path.join(outputDir, "shortform_contract.json"), `${JSON.stringify(shortform, null, 2)}\n`, "utf8");
     await writeFile(path.join(outputDir, "render_task.json"), `${JSON.stringify(renderTask, null, 2)}\n`, "utf8");
+
+    await logRenderGeneration({
+      render_task_id: renderTask.render_task_id || renderTaskId,
+      source_id: text(wordInput.source_id),
+      content_family: "WORD",
+      provider_used: text(visualBundle?.provider_used),
+      frame_count: Array.isArray(visualBundle?.scene_frame_manifest) ? visualBundle.scene_frame_manifest.length : 0,
+      tts_voice: text(renderTask.voice_mode),
+      tts_optimizer_used: true,
+      scene_enhancer_used: false,
+      creative_planner_used: Boolean(wordSceneEnhancement?.usedGpt),
+    });
 
     console.log(`slug=${slug}`);
     console.log(`output_dir=${outputDir}`);
