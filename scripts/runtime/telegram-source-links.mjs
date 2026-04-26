@@ -23,16 +23,22 @@ export function buildTelegramStartUrl(startToken, botUsername = DEFAULT_BOT_PUBL
   return `https://t.me/${safeBotUsername}?start=${encodeURIComponent(safeToken)}`;
 }
 
-export function buildYoutubeStartToken({ contentId, surface = "shorts" } = {}) {
-  return `yt--${slugify(surface, "shorts")}--${slugify(contentId, "unknown")}`;
+const FAMILY_PREFIX = { QUESTION: "question", WORD: "word", NEWS: "news" };
+
+export function buildYoutubeStartToken({ contentId, surface = "shorts", contentFamily = "" } = {}) {
+  const familySlug = FAMILY_PREFIX[String(contentFamily).toUpperCase()]
+    ? slugify(FAMILY_PREFIX[String(contentFamily).toUpperCase()], "shorts")
+    : slugify(surface, "shorts");
+  return `yt--${familySlug}--${slugify(contentId, "unknown")}`;
 }
 
 export function buildYoutubeTelegramAttribution({
   contentId,
   surface = "shorts",
+  contentFamily = "",
   botUsername = DEFAULT_BOT_PUBLIC_USERNAME,
 } = {}) {
-  const startToken = buildYoutubeStartToken({ contentId, surface });
+  const startToken = buildYoutubeStartToken({ contentId, surface, contentFamily });
   const telegramUrl = buildTelegramStartUrl(startToken, botUsername);
   return {
     startToken,

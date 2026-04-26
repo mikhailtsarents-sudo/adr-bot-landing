@@ -751,7 +751,7 @@ function buildRenderTask(questionInput, scenario, audioSource = {}, options = {}
   const titles = buildQuestionTitleVariants(questionInput, scenario, null, renderTaskId);
   const youtubeAttribution = appendYoutubeTelegramAttribution(
     titles.description || [shortenedTitle, correctAnswer, explanation].filter(Boolean).join("\n"),
-    { contentId: renderTaskId, surface: "shorts" },
+    { contentId: renderTaskId, surface: "shorts", contentFamily: "QUESTION" },
   );
 
   return {

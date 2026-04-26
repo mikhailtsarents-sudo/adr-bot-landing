@@ -349,7 +349,7 @@ function buildRenderTask(approvedNews, scenarioResponse, newsPackage) {
     ]
       .filter(Boolean)
       .join("\n"),
-    { contentId: renderTaskId, surface: "shorts" },
+    { contentId: renderTaskId, surface: "shorts", contentFamily: "NEWS" },
   );
   return {
     trace_id: approvedNews.trace_id,

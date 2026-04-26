@@ -251,7 +251,7 @@ function buildRenderTask(wordInput, scenario, audioSource = {}) {
     ]
       .filter(Boolean)
       .join("\n"),
-    { contentId: renderTaskId, surface: "shorts" },
+    { contentId: renderTaskId, surface: "shorts", contentFamily: "WORD" },
   );
 
   return {
