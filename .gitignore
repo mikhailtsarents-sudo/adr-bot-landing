@@ -50,6 +50,7 @@ yarn-error.log*
 /seo-performance-runs/
 /preview-smoke-runs/
 /runtime-health-runs/
+/reports/deep-seo-audit-*/
 /runtime-archive/
 /public/generated/q-test-*/
 /public/shotstack-assets/adr-short-video/current/*-trace/
