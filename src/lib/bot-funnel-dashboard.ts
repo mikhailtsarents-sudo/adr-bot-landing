@@ -85,6 +85,26 @@ export type ReminderSummary = {
   reactivation_rate: number;
 };
 
+export type MonetizationSummary = {
+  limit_offer_views: number;
+  full_access_offer_opens: number;
+  buy_intent_clicks: number;
+  referral_path_clicks: number;
+  continue_later_clicks: number;
+  referral_offer_views: number;
+  referral_unlock_clicks: number;
+  referral_granted: number;
+  referral_rejected: number;
+  full_access_offer_open_rate: number;
+  buy_intent_rate_from_limit: number;
+  referral_path_rate_from_limit: number;
+  continue_later_rate_from_limit: number;
+  referral_unlock_rate_from_offer: number;
+  referral_grant_rate_from_unlock: number;
+  top_limit_reasons_30d: SourceBreakdown[];
+  referral_offer_variants_30d: SourceBreakdown[];
+};
+
 export type CallbackTelemetrySummary = {
   received: number;
   answered: number;
@@ -112,6 +132,7 @@ export type BotFunnelDashboard = {
   funnel_30d: FunnelStepRow[];
   referral_30d: ReferralSummary;
   reminder_30d: ReminderSummary;
+  monetization_30d: MonetizationSummary;
   callback_telemetry_30d: CallbackTelemetrySummary;
   reminder_state: ReminderStateSnapshot["summary"] & {
     reminder_modes: SourceBreakdown[];
@@ -363,6 +384,11 @@ export function buildBotFunnelDashboard(
   const referralGranted = count(rows30d, (r) => r.event_type === "referral_granted");
   const referralRejected = count(rows30d, (r) => r.event_type === "referral_rejected");
   const referralTotal = referralGranted + referralRejected;
+  const limitOfferViews = count(rows30d, (r) => r.event_type === "limit_offer_view");
+  const fullAccessOfferOpens = count(rows30d, (r) => r.event_type === "limit_full_access_click");
+  const buyIntentClicks = count(rows30d, (r) => r.event_type === "full_access_buy_click");
+  const referralPathClicks = count(rows30d, (r) => r.event_type === "limit_referral_click");
+  const continueLaterClicks = count(rows30d, (r) => r.event_type === "limit_later_click");
   const referralOfferViews = count(
     rows30d,
     (r) => r.event_type === "referral_option_click",
@@ -393,6 +419,14 @@ export function buildBotFunnelDashboard(
   const reminderSentUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_sent");
   const reminderClickedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_clicked");
   const reminderReactivatedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "reminder_reactivated");
+  const limitOfferViewUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "limit_offer_view");
+  const fullAccessOfferOpenUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "limit_full_access_click");
+  const buyIntentUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "full_access_buy_click");
+  const referralPathUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "limit_referral_click");
+  const continueLaterUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "limit_later_click");
+  const referralOfferViewUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "referral_option_click");
+  const referralUnlockUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "referral_unlock_click");
+  const referralGrantedUsers30d = uniqueUsers(rows30d, (r) => r.event_type === "referral_granted");
   const reminderSentRows = rows30d.filter((r) => r.event_type === "reminder_sent");
   const callbackReceivedRows30d = rows30d.filter((r) => r.event_type === "callback_received");
   const callbackFailedRows30d = rows30d.filter((r) => r.event_type === "callback_failed");
@@ -433,6 +467,18 @@ export function buildBotFunnelDashboard(
   );
   const callbackRenderModes30d = breakdown(
     callbackRenderedRows30d.map((r) => metadataText(r, "callback_render_mode")).filter(Boolean),
+  );
+  const topLimitReasons30d = breakdown(
+    rows30d
+      .filter((r) => r.event_type === "limit_offer_view")
+      .map((r) => metadataText(r, "limit_reason", "full_access_limit_reason"))
+      .filter(Boolean),
+  );
+  const referralOfferVariants30d = breakdown(
+    rows30d
+      .filter((r) => r.event_type === "referral_option_click")
+      .map((r) => metadataText(r, "referral_offer_variant"))
+      .filter(Boolean),
   );
 
   const referrerCounts: Record<string, number> = {};
@@ -570,6 +616,37 @@ export function buildBotFunnelDashboard(
       reactivation_rate: reminderSentUsers30d.size > 0
         ? Math.round((intersectionSize(reminderSentUsers30d, reminderReactivatedUsers30d) / reminderSentUsers30d.size) * 100)
         : 0,
+    },
+    monetization_30d: {
+      limit_offer_views: limitOfferViews,
+      full_access_offer_opens: fullAccessOfferOpens,
+      buy_intent_clicks: buyIntentClicks,
+      referral_path_clicks: referralPathClicks,
+      continue_later_clicks: continueLaterClicks,
+      referral_offer_views: referralOfferViews,
+      referral_unlock_clicks: referralUnlockClicks,
+      referral_granted: referralGranted,
+      referral_rejected: referralRejected,
+      full_access_offer_open_rate: limitOfferViewUsers30d.size > 0
+        ? Math.round((intersectionSize(limitOfferViewUsers30d, fullAccessOfferOpenUsers30d) / limitOfferViewUsers30d.size) * 100)
+        : 0,
+      buy_intent_rate_from_limit: limitOfferViewUsers30d.size > 0
+        ? Math.round((intersectionSize(limitOfferViewUsers30d, buyIntentUsers30d) / limitOfferViewUsers30d.size) * 100)
+        : 0,
+      referral_path_rate_from_limit: limitOfferViewUsers30d.size > 0
+        ? Math.round((intersectionSize(limitOfferViewUsers30d, referralPathUsers30d) / limitOfferViewUsers30d.size) * 100)
+        : 0,
+      continue_later_rate_from_limit: limitOfferViewUsers30d.size > 0
+        ? Math.round((intersectionSize(limitOfferViewUsers30d, continueLaterUsers30d) / limitOfferViewUsers30d.size) * 100)
+        : 0,
+      referral_unlock_rate_from_offer: referralOfferViewUsers30d.size > 0
+        ? Math.round((intersectionSize(referralOfferViewUsers30d, referralUnlockUsers30d) / referralOfferViewUsers30d.size) * 100)
+        : 0,
+      referral_grant_rate_from_unlock: referralUnlockUsers30d.size > 0
+        ? Math.round((intersectionSize(referralUnlockUsers30d, referralGrantedUsers30d) / referralUnlockUsers30d.size) * 100)
+        : 0,
+      top_limit_reasons_30d: topLimitReasons30d,
+      referral_offer_variants_30d: referralOfferVariants30d,
     },
     callback_telemetry_30d: {
       received: callbackReceived30d,

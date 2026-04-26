@@ -183,6 +183,25 @@ function emptyBotFunnelDashboard_() {
       click_rate: 0,
       reactivation_rate: 0,
     },
+    monetization_30d: {
+      limit_offer_views: 0,
+      full_access_offer_opens: 0,
+      buy_intent_clicks: 0,
+      referral_path_clicks: 0,
+      continue_later_clicks: 0,
+      referral_offer_views: 0,
+      referral_unlock_clicks: 0,
+      referral_granted: 0,
+      referral_rejected: 0,
+      full_access_offer_open_rate: 0,
+      buy_intent_rate_from_limit: 0,
+      referral_path_rate_from_limit: 0,
+      continue_later_rate_from_limit: 0,
+      referral_unlock_rate_from_offer: 0,
+      referral_grant_rate_from_unlock: 0,
+      top_limit_reasons_30d: [],
+      referral_offer_variants_30d: [],
+    },
     reminder_state: {
       total_users: 0,
       normal_users: 0,
@@ -285,6 +304,7 @@ function buildReadableSummaryRows_(context) {
   const funnel30d = botFunnelDashboard.funnel_30d || [];
   const referral30d = botFunnelDashboard.referral_30d || {};
   const reminder30d = botFunnelDashboard.reminder_30d || {};
+  const monetization30d = botFunnelDashboard.monetization_30d || {};
   const reminderState = botFunnelDashboard.reminder_state || {};
   const reminderPhase12 = botFunnelDashboard.reminder_phase12_30d || {};
   const reminderPhase12LivePreview = botFunnelDashboard.reminder_phase12_live_preview || {};
@@ -616,6 +636,42 @@ function buildReadableSummaryRows_(context) {
   rows.push(["Reminder delivery failed", number_(reminder30d.delivery_failed), "", "", "", "", ""]);
   rows.push(["Reminder click rate", percentFromWhole_(reminder30d.click_rate), "", "", "", "", ""]);
   rows.push(["Reminder reactivation rate", percentFromWhole_(reminder30d.reactivation_rate), "", "", "", "", ""]);
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push(["Monetization funnel (30 дней)", "Количество", "", "", "", "", ""]);
+  rows.push(["Limit offer views", number_(monetization30d.limit_offer_views), "", "", "", "", ""]);
+  rows.push(["Full access offer opens", number_(monetization30d.full_access_offer_opens), "", "", "", "", ""]);
+  rows.push(["Buy intent clicks", number_(monetization30d.buy_intent_clicks), "", "", "", "", ""]);
+  rows.push(["Referral path clicks", number_(monetization30d.referral_path_clicks), "", "", "", "", ""]);
+  rows.push(["Continue later clicks", number_(monetization30d.continue_later_clicks), "", "", "", "", ""]);
+  rows.push(["Referral offer views", number_(monetization30d.referral_offer_views), "", "", "", "", ""]);
+  rows.push(["Referral unlock clicks", number_(monetization30d.referral_unlock_clicks), "", "", "", "", ""]);
+  rows.push(["Referral granted", number_(monetization30d.referral_granted), "", "", "", "", ""]);
+  rows.push(["Referral rejected", number_(monetization30d.referral_rejected), "", "", "", "", ""]);
+  rows.push(["Offer open rate", percentFromWhole_(monetization30d.full_access_offer_open_rate), "", "", "", "", ""]);
+  rows.push(["Buy rate from limit", percentFromWhole_(monetization30d.buy_intent_rate_from_limit), "", "", "", "", ""]);
+  rows.push(["Referral path rate", percentFromWhole_(monetization30d.referral_path_rate_from_limit), "", "", "", "", ""]);
+  rows.push(["Continue later rate", percentFromWhole_(monetization30d.continue_later_rate_from_limit), "", "", "", "", ""]);
+  rows.push(["Referral unlock rate", percentFromWhole_(monetization30d.referral_unlock_rate_from_offer), "", "", "", "", ""]);
+  rows.push(["Referral grant from unlock", percentFromWhole_(monetization30d.referral_grant_rate_from_unlock), "", "", "", "", ""]);
+  rows.push([
+    "Top limit reasons",
+    formatSourceBreakdown_(monetization30d.top_limit_reasons_30d || []),
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  rows.push([
+    "Referral offer variants",
+    formatSourceBreakdown_(monetization30d.referral_offer_variants_30d || []),
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
   rows.push(["", "", "", "", "", "", ""]);
 
   rows.push(["Reminder state сейчас", "Количество", "", "", "", "", ""]);

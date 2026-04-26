@@ -133,6 +133,29 @@ This file is the current execution snapshot for the ADR Bot landing project.
   - current reality:
     - repo version is ready
     - live Google Apps Script editor still needs a manual sync if we want the new block to appear in the current sheet immediately
+- 2026-04-26: monetization funnel visibility was tightened.
+  - practical gap fixed:
+    - `limit_offer_view`
+    - `limit_referral_click`
+    - `limit_later_click`
+    were previously only local/debug signals, not canonical bot-funnel events
+  - `adr-trainer-bot` now emits these as passive funnel events into VPS analytics
+  - `src/lib/bot-funnel-dashboard.ts` now also exposes:
+    - `monetization_30d`
+  - the new summary includes:
+    - limit offer views
+    - full-access offer opens
+    - buy-intent clicks
+    - referral-path clicks
+    - continue-later clicks
+    - referral-offer views
+    - referral-unlock clicks
+    - referral grant/reject counts
+    - user-based rates from limit and referral screens
+    - top limit reasons
+    - referral offer variants
+  - practical meaning:
+    - paywall/referral is now measurable as a real funnel instead of a partially invisible local flow
 
 ### Content Catalogs
 
