@@ -373,11 +373,14 @@ Follow-up impact pass on `2026-04-25` improved this further:
   - Action needed: `git pull` on VPS so next decider cycle picks WORD content
 - NEWS: 1 news item in prepared queue (`draft-1776895259492`), needs regular news flow
 
-### Video Quality (open)
+### Video Quality
 
-- Horizontal stripe/line visible in middle of some videos — cause unknown, needs investigation
-- Text/audio desync on latest QUESTION video — timing calibration needed
-- CTA glassmorphism card: implemented but design needs final polish to match reference
+- **Horizontal stripe FIXED (2026-04-26)**: Root cause was two bugs in `scripts/render/caption-styles.mjs`:
+  1. Text lines were rendered in **reversed order** — Shotstack positive offset.y is UP, so the formula `(i - (n-1)/2) * step` put the first line at the bottom and the last at the top. Fixed by flipping to `((n-1)/2 - i) * step` in all five line-rendering loops.
+  2. `lineStep` added 16px inter-line gap, but the frosted-glass backdrop used only 8px — leaving a 16px transparent gap between clips where the semi-transparent pill background showed against the video. Fixed by removing the gap entirely (`lineStep = fontSize*3/1920`) and updating backdrop height to match.
+  - Commit: `3238038`
+- Text/audio desync on latest QUESTION video — timing calibration still open
+- CTA glassmorphism card with scribble arrow: shipped `b0dffb3`
 
 ### Search / Indexation
 
