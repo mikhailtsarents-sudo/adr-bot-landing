@@ -40,6 +40,15 @@ The snapshot writes both per-run output and stable latest copies under:
 - `runtime-health-runs/<slug>/`
 - `runtime-health-runs/latest/`
 
+In full VPS mode it also verifies:
+
+- `adr-telegram-bot.service`
+- `adr-ingest.service`
+- bot/reminder log freshness
+- Telegram webhook alignment
+- backup manifest freshness
+- restore smoke freshness
+
 Callback UX telemetry is now also available in the bot-funnel dashboard layer:
 
 - lifecycle events:

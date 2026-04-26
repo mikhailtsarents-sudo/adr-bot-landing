@@ -2,7 +2,7 @@
 
 import { execFile as execFileCb } from "node:child_process";
 import { promisify } from "node:util";
-import { mkdir, stat, writeFile } from "node:fs/promises";
+import { mkdir, readdir, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -238,6 +238,47 @@ async function checkFileFreshness(key, filePath, thresholds, publicOnly) {
   }
 }
 
+async function checkLatestFileFreshness(key, directoryPath, matcher, thresholds, publicOnly) {
+  if (publicOnly) {
+    return { key, status: "skipped", summary: "Skipped in public-only mode." };
+  }
+
+  try {
+    const entries = await readdir(directoryPath, { withFileTypes: true });
+    const candidates = entries
+      .filter((entry) => entry.isFile() && matcher(entry.name))
+      .map((entry) => entry.name)
+      .sort();
+
+    const latestName = candidates.at(-1);
+    if (!latestName) {
+      return {
+        key,
+        status: "fail",
+        summary: `No matching files found in ${directoryPath}`,
+      };
+    }
+
+    const latestPath = path.join(directoryPath, latestName);
+    const fileStat = await stat(latestPath);
+    const modifiedAt = fileStat.mtime.toISOString();
+    const ageMinutes = minutesSince(modifiedAt);
+    return {
+      key,
+      status: classifyByAge(ageMinutes, thresholds),
+      summary: `${latestName} modified ${Math.round(ageMinutes)} min ago`,
+      details: `mtime=${modifiedAt}; path=${latestPath}`,
+    };
+  } catch (error) {
+    return {
+      key,
+      status: "fail",
+      summary: `Missing or unreadable directory: ${directoryPath}`,
+      details: text(error.message),
+    };
+  }
+}
+
 async function fetchJson(url, options = {}) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), options.timeoutMs || 8000);
@@ -458,6 +499,20 @@ async function main() {
     "log:adr-bot-reminder",
     "/var/log/adr-bot-reminder.log",
     { okWithin: 130, warnWithin: 360 },
+    args.publicOnly,
+  ));
+  checks.push(await checkLatestFileFreshness(
+    "backup:manifest_latest",
+    "/srv/adr-project/backups/adr-stack/manifests",
+    (name) => name.endsWith(".json"),
+    { okWithin: 26 * 60, warnWithin: 48 * 60 },
+    args.publicOnly,
+  ));
+  checks.push(await checkLatestFileFreshness(
+    "backup:restore_smoke_latest",
+    "/srv/adr-project/backups/adr-stack/restore-smoke",
+    (name) => name.endsWith(".json"),
+    { okWithin: 8 * 24 * 60, warnWithin: 14 * 24 * 60 },
     args.publicOnly,
   ));
   checks.push(await checkTelegramWebhook(botToken, args.timeoutMs, args.publicOnly));

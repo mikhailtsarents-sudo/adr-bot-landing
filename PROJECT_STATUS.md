@@ -88,6 +88,9 @@ This file is the current execution snapshot for the ADR Bot landing project.
     - `alerting.recommended_actions`
     - stable latest copies under:
       - `runtime-health-runs/latest/`
+    - backup / recovery freshness checks for:
+      - latest backup manifest
+      - latest restore smoke report
   - CLI now also supports:
     - `--fail-on-status fail`
   - live VPS wrapper/timer installed:
