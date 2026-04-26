@@ -168,6 +168,11 @@ Current live state:
 - the tab is already created and populated;
 - hourly trigger is already installed;
 - `bot-funnel.json` is live and returns `ok: true`;
+- runtime health operator surface now also exists:
+  - private ingest source:
+    - `/v1/runtime-health/latest`
+  - sanitized analytics route:
+    - `/api/analytics/runtime-health.json`
 - `ADR_INGEST_URL` / `ADR_INGEST_API_KEY` are the canonical storage path for machine-readable analytics.
 
 This is the preferred fix for the old problem where the lower event list in `Понятная сводка` stopped at an older date even though newer live activity existed.

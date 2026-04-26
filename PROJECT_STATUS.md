@@ -105,6 +105,25 @@ This file is the current execution snapshot for the ADR Bot landing project.
   - practical meaning:
     - runtime health is no longer just a passive snapshot tool
     - it is now an active VPS alerting layer that can catch and surface real production drift
+- 2026-04-26: runtime health operator visibility is now also exposed through the analytics layer.
+  - new private ingest endpoint:
+    - `/v1/runtime-health/latest`
+  - new landing route:
+    - `/api/analytics/runtime-health.json`
+  - route behavior:
+    - reads latest VPS runtime-health snapshot from `adr-ingest`
+    - exposes sanitized operator-facing summary:
+      - overall status
+      - alerting headline / severity / recommended actions
+      - grouped area status for:
+        - services
+        - logs
+        - backup
+        - webhook
+        - ingest
+        - public dashboards
+  - practical meaning:
+    - runtime health is now visible as a proper machine-readable operator surface, not only as local VPS files
 
 ### Content Catalogs
 

@@ -49,6 +49,12 @@ In full VPS mode it also verifies:
 - backup manifest freshness
 - restore smoke freshness
 
+Sanitized operator-facing runtime health dashboard is now also available:
+
+```text
+/api/analytics/runtime-health.json
+```
+
 Callback UX telemetry is now also available in the bot-funnel dashboard layer:
 
 - lifecycle events:
