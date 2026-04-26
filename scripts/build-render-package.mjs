@@ -421,20 +421,18 @@ function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabl
   const voiceoverTrack = voiceoverUrl
     ? {
         clips: [{
-          asset: { type: "audio", src: voiceoverUrl },
+          asset: { type: "audio", src: voiceoverUrl, volume: 1.0 },
           start: 0,
           length: audioLength,
-          volume: 1.0,
         }],
       }
     : null;
   const musicBedTrack = musicUrl
     ? {
         clips: [{
-          asset: { type: "audio", src: musicUrl },
+          asset: { type: "audio", src: musicUrl, volume: musicVolume },
           start: 0,
           length: audioLength,
-          volume: musicVolume,
         }],
       }
     : null;
