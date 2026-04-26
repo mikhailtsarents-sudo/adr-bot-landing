@@ -129,16 +129,24 @@ function buildAnswerLines(text) {
     });
 }
 
-// Subtle dark gradient behind text zone — ensures readability regardless of image content
-function buildTextZoneGradientClip({ start, length, offsetY = -0.05 }) {
-  const w = 960;
-  const h = 560;
+// Frosted glass pill backdrop — semi-transparent rounded card behind text lines
+function buildFrostedGlassBackdrop({ start, length, offsetY = -0.05, lineCount = 1, fontSize = 52 }) {
+  const lineH = fontSize * 3;
+  const textBlockH = lineCount * lineH + Math.max(lineCount - 1, 0) * 8;
+  const padV = 28;
+  const cardH = textBlockH + padV * 2;
+  const cardW = 880;
+  const outerH = cardH + 48;
   const css =
-    `body{margin:0;padding:0;background:transparent;}` +
-    `.g{width:${w}px;height:${h}px;` +
-    `background:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.18) 30%,rgba(0,0,0,0.22) 50%,rgba(0,0,0,0.18) 70%,transparent 100%);}`;
+    `body{margin:0;padding:0;background:transparent;width:960px;height:${outerH}px;` +
+    `display:flex;align-items:center;justify-content:center;}` +
+    `.pill{width:${cardW}px;height:${cardH}px;` +
+    `background:rgba(8,14,26,0.54);` +
+    `border:1px solid rgba(255,255,255,0.13);` +
+    `border-radius:28px;` +
+    `box-shadow:0 6px 36px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.07);}`;
   return {
-    asset: { type: "html", html: `<div class="g"></div>`, css, width: w, height: h },
+    asset: { type: "html", html: `<div class="pill"></div>`, css, width: 960, height: outerH },
     position: "center",
     start: Number((start || 0).toFixed(2)),
     length: Number(Math.max(length || 0.1, 0.1).toFixed(2)),
@@ -163,7 +171,7 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     const step = lineStep(fs);
     const baseY = -0.05;
     return [
-      buildTextZoneGradientClip({ start: s, length: l, offsetY: baseY }),
+      buildFrostedGlassBackdrop({ start: s, length: l, offsetY: baseY, lineCount: answerLines.length, fontSize: fs }),
       ...answerLines.map((html, i) =>
         buildLineClip({
           html,
@@ -183,7 +191,7 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     const step = lineStep(fs);
     const baseY = -0.05;
     return [
-      buildTextZoneGradientClip({ start: s, length: l, offsetY: baseY }),
+      buildFrostedGlassBackdrop({ start: s, length: l, offsetY: baseY, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
         buildLineClip({
           html: esc(line),
@@ -202,7 +210,7 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     if (lines.length === 0) return [];
     const step = lineStep(fs);
     return [
-      buildTextZoneGradientClip({ start: s, length: l, offsetY: 0 }),
+      buildFrostedGlassBackdrop({ start: s, length: l, offsetY: 0, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
         buildLineClip({
           html: esc(line),
@@ -221,7 +229,7 @@ export function buildCaptionClip({ role, text: captionText, start, length }) {
     if (lines.length === 0) return [];
     const step = lineStep(fs);
     return [
-      buildTextZoneGradientClip({ start: s, length: l, offsetY: 0 }),
+      buildFrostedGlassBackdrop({ start: s, length: l, offsetY: 0, lineCount: lines.length, fontSize: fs }),
       ...lines.map((line, i) =>
         buildLineClip({
           html: esc(line),
