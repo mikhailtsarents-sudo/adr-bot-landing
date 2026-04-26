@@ -501,8 +501,8 @@ function buildOpenAiImageBody(provider, prompt, negativePrompt, imageCount = 1) 
 function buildFalAiBody(prompt, negativePrompt, { referenceImageUrl = null, strength = 0.55, seed = null } = {}) {
   const body = {
     prompt: `${prompt}\nAvoid: ${negativePrompt}`,
-    image_size: "portrait_16_9",
-    num_inference_steps: 35,
+    image_size: { width: 1080, height: 1920 },
+    num_inference_steps: 28,
     guidance_scale: 3.5,
     num_images: 1,
     enable_safety_checker: true,
