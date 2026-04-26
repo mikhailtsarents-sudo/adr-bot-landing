@@ -17,6 +17,7 @@ import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-link
 import { uploadFileToTemporaryHost } from "./runtime/temporary-upload.mjs";
 import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 import { selectMusicBed } from "./runtime/music-bed-selector.mjs";
+import { optimizeTtsScript } from "./runtime/tts-script-optimizer.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -851,7 +852,8 @@ async function resolveQuestionVoiceoverAsset(args, visualBundle, questionInput, 
     };
   }
 
-  const voiceScript = buildQuestionVoiceoverScript(questionInput, scenario);
+  const rawScript = buildQuestionVoiceoverScript(questionInput, scenario);
+  const voiceScript = await optimizeTtsScript(rawScript, "QUESTION");
   try {
     const generated = await synthesizeVoiceoverToFile(voiceoverTargetPath, voiceScript, DEFAULT_QUESTION_TTS_VOICE);
     if (generated) {

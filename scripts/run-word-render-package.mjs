@@ -12,6 +12,7 @@ import { appendYoutubeTelegramAttribution } from "./runtime/telegram-source-link
 import { synthesizeVoiceoverToFile, DEFAULT_FAL_TTS_VOICE } from "./runtime/fal-tts-engine.mjs";
 import { enhanceWordScenesWithGpt } from "./render/creative-planner.mjs";
 import { selectMusicBed } from "./runtime/music-bed-selector.mjs";
+import { optimizeTtsScript } from "./runtime/tts-script-optimizer.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -431,7 +432,8 @@ function buildWordVisualBrief(wordInput, scenario) {
 
 
 async function resolveWordVoiceoverAsset(tempDir, outputDir, wordInput, scenario) {
-  const voiceScript = buildWordVoiceoverScript(wordInput, scenario);
+  const rawScript = buildWordVoiceoverScript(wordInput, scenario);
+  const voiceScript = await optimizeTtsScript(rawScript, "WORD");
   const voiceoverTargetPath = path.join(tempDir, "voiceover.mp3");
 
   try {
