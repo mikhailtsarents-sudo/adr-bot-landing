@@ -60,6 +60,7 @@ export function validateCreativePlanSlides(baseSlides, enhancedSlides) {
       context: text(enh.context),
       tension: text(enh.tension),
       composition: text(enh.composition),
+      continuity_key: text(enh.continuity_key),
     };
 
     if (!candidate.scene_intent || !candidate.visual_hint) continue;
@@ -93,7 +94,9 @@ const NEWS_SYSTEM_PROMPT = [
   "Say 'medium shot, worker occupying right half, clean wall on left' NOT 'text zone top'.",
   "Each scene must have: one person actively doing something, a specific ADR object, real setting.",
   "Avoid: abstract backgrounds, floating icons, decorative filler, studio lighting.",
-  "Return strict JSON: {\"news_type\": \"...\", \"main_entity\": \"...\", \"slides\": [{id, scene_intent, visual_hint, subject, context, tension, composition}]}",
+  "CONTINUITY: all slides in this video share the same master_scene (one-line description of the primary physical setting and character) and continuity_key (a short token like 'inspector_border_morning' that ties all frames together).",
+  "master_scene appears once at the top level. continuity_key appears on every slide.",
+  "Return strict JSON: {\"news_type\": \"...\", \"main_entity\": \"...\", \"master_scene\": \"...\", \"slides\": [{id, scene_intent, visual_hint, subject, context, tension, composition, continuity_key}]}",
 ].join(" ");
 
 // ─── WORD system prompt ──────────────────────────────────────────────────────
@@ -110,7 +113,9 @@ const WORD_SYSTEM_PROMPT = [
   "Use COMPOSITIONAL language: 'subject lower-left, clean upper third' NOT 'text zone'.",
   "Each scene must have: one person + the specific object/document/sign of the term + a real ADR transport setting.",
   "Avoid: posed portraits, generic road scenes without the term's object, abstract imagery.",
-  "Return strict JSON: {\"slides\": [{id, scene_intent, visual_hint, subject, context, tension, composition}]}",
+  "CONTINUITY: all slides share the same master_scene (one-line primary setting + character) and continuity_key (short token like 'driver_warehouse_morning' repeated on every slide).",
+  "master_scene appears once at the top level.",
+  "Return strict JSON: {\"master_scene\": \"...\", \"slides\": [{id, scene_intent, visual_hint, subject, context, tension, composition, continuity_key}]}",
 ].join(" ");
 
 // ─── Shared OpenAI call ──────────────────────────────────────────────────────
@@ -120,6 +125,7 @@ async function callPlannerGpt(systemPrompt, userPayload) {
   if (!apiKey) return null;
 
   const schemaProperties = {
+    master_scene: { type: "string" },
     slides: {
       type: "array",
       items: {
@@ -133,8 +139,9 @@ async function callPlannerGpt(systemPrompt, userPayload) {
           context: { type: "string" },
           tension: { type: "string" },
           composition: { type: "string" },
+          continuity_key: { type: "string" },
         },
-        required: ["id", "scene_intent", "visual_hint", "subject", "context", "tension", "composition"],
+        required: ["id", "scene_intent", "visual_hint", "subject", "context", "tension", "composition", "continuity_key"],
       },
     },
   };
@@ -158,7 +165,7 @@ async function callPlannerGpt(systemPrompt, userPayload) {
               type: "object",
               additionalProperties: false,
               properties: schemaProperties,
-              required: ["slides"],
+              required: ["master_scene", "slides"],
             },
           },
         },
@@ -182,7 +189,7 @@ async function callPlannerGpt(systemPrompt, userPayload) {
 
 // ─── Merge helper ────────────────────────────────────────────────────────────
 
-function mergeSlideEnhancements(baseSlides, enhancedSlides) {
+function mergeSlideEnhancements(baseSlides, enhancedSlides, masterScene) {
   const byId = new Map((enhancedSlides || []).map((s) => [Number(s.id), s]));
   return baseSlides.map((slide) => {
     const enh = byId.get(Number(slide.id));
@@ -195,6 +202,8 @@ function mergeSlideEnhancements(baseSlides, enhancedSlides) {
       ...(text(enh.context) ? { context: text(enh.context) } : {}),
       ...(text(enh.tension) ? { tension: text(enh.tension) } : {}),
       ...(text(enh.composition) ? { composition: text(enh.composition) } : {}),
+      ...(text(enh.continuity_key) ? { continuity_key: text(enh.continuity_key) } : {}),
+      ...(masterScene ? { master_scene: masterScene } : {}),
     };
   });
 }
@@ -230,14 +239,17 @@ export async function enhanceNewsScenesWithGpt({ brief, newsContent }) {
     return { usedGpt: false, reason: "invalid_or_weak_gpt_output", mergedBrief: brief };
   }
 
+  const masterScene = text(result.master_scene);
   return {
     usedGpt: true,
     reason: "ok",
     news_type: text(result.news_type),
     main_entity: text(result.main_entity),
+    master_scene: masterScene,
     mergedBrief: {
       ...brief,
-      slides: mergeSlideEnhancements(baseSlides, validation.validSlides),
+      ...(masterScene ? { master_scene: masterScene } : {}),
+      slides: mergeSlideEnhancements(baseSlides, validation.validSlides, masterScene),
     },
   };
 }
@@ -273,12 +285,15 @@ export async function enhanceWordScenesWithGpt({ brief, wordContent }) {
     return { usedGpt: false, reason: "invalid_or_weak_gpt_output", mergedBrief: brief };
   }
 
+  const masterScene = text(result.master_scene);
   return {
     usedGpt: true,
     reason: "ok",
+    master_scene: masterScene,
     mergedBrief: {
       ...brief,
-      slides: mergeSlideEnhancements(baseSlides, validation.validSlides),
+      ...(masterScene ? { master_scene: masterScene } : {}),
+      slides: mergeSlideEnhancements(baseSlides, validation.validSlides, masterScene),
     },
   };
 }
