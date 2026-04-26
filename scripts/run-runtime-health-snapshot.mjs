@@ -394,19 +394,22 @@ async function checkTelegramWebhook(token, timeoutMs, publicOnly) {
     const currentUrl = text(info.url);
     const lastError = text(info.last_error_message);
     const lastErrorDate = number(info.last_error_date, 0);
+    const lastErrorAgeMinutes = lastErrorDate
+      ? Math.max(0, (Date.now() - lastErrorDate * 1000) / (60 * 1000))
+      : 0;
     const pending = number(info.pending_update_count, 0);
     const status =
       currentUrl !== expectedUrl
         ? "fail"
         : lastError
-          ? (pending > 0 ? "fail" : "warn")
+          ? (pending > 0 ? "fail" : (lastErrorAgeMinutes <= 5 ? "warn" : "ok"))
           : (pending > 100 ? "warn" : "ok");
 
     return {
       key,
       status,
       summary: currentUrl ? `webhook=${currentUrl}` : "No webhook URL configured",
-      details: `expected=${expectedUrl}; pending=${pending}; last_error=${lastError || "none"}; last_error_date=${lastErrorDate || "none"}`,
+      details: `expected=${expectedUrl}; pending=${pending}; last_error=${lastError || "none"}; last_error_date=${lastErrorDate || "none"}; last_error_age_min=${lastErrorDate ? Math.round(lastErrorAgeMinutes) : "none"}`,
     };
   } catch (error) {
     return {
