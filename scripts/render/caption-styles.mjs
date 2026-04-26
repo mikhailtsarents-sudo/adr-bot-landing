@@ -90,47 +90,66 @@ export function pickCtaVariant(contentFamily, sourceId) {
   return pool[hash % pool.length];
 }
 
-// Telegram CTA -- glassmorphism overlay with family-specific branding
-function buildCtaClips({ start, length, headline, contentFamily = 'QUESTION' }) {
-  const fam = CTA_BY_FAMILY[String(contentFamily).toUpperCase()] || CTA_BY_FAMILY.QUESTION;
-  const cardWidth = 960;
-  const cardHeight = 390;
-  const accent = fam.accent;
+// Telegram CTA — modern glassmorphism floating card
+function buildCtaClips({ start, length }) {
+  const cardWidth = 980;
+  const cardHeight = 520;
+
+  const planeSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path fill="white" d="M2 21L23 12 2 3v7l15 2-15 2v7z"/></svg>';
 
   const css = [
     FONT_IMPORT,
     `*{box-sizing:border-box;margin:0;padding:0;}`,
     `body{background:transparent;width:${cardWidth}px;height:${cardHeight}px;`,
-    `display:flex;align-items:center;justify-content:center;}`,
-    `.card{background:rgba(10,18,32,0.62);`,
-    `border:1.5px solid rgba(255,255,255,0.18);`,
-    `border-radius:44px;`,
-    `padding:24px 40px 28px;`,
-    `box-shadow:0 8px 40px rgba(0,0,0,0.65),inset 0 1px 0 rgba(255,255,255,0.10);`,
-    `display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;}`,
-    `.badge{font-family:'Montserrat',Arial,sans-serif;font-size:26px;font-weight:700;`,
-    `color:${accent};letter-spacing:1px;text-transform:uppercase;}`,
-    `.headline{font-family:'Montserrat',Arial,sans-serif;font-size:60px;font-weight:900;`,
-    `color:#F5EDD8;-webkit-text-stroke:1px rgba(0,0,0,0.7);`,
-    `text-shadow:0 3px 12px rgba(0,0,0,0.95),0 1px 4px rgba(0,0,0,0.85);`,
-    `letter-spacing:-1px;text-align:center;}`,
-    `.sub{font-family:'Montserrat',Arial,sans-serif;font-size:34px;font-weight:700;`,
-    `color:${accent};text-shadow:0 2px 8px rgba(0,0,0,0.8);text-align:center;}`,
-    `@keyframes jump{0%,100%{transform:scale(1) translateY(0);}50%{transform:scale(1.04) translateY(-4px);}}`,
-    `.btn{display:inline-flex;align-items:center;gap:10px;`,
-    `background:${accent};color:#0A0E1A;`,
-    `font-family:'Montserrat',Arial,sans-serif;font-size:40px;font-weight:800;`,
-    `padding:14px 44px;border-radius:60px;border:none;`,
-    `animation:jump 0.9s ease-in-out infinite;white-space:nowrap;}`,
+    `display:flex;align-items:center;justify-content:center;position:relative;}`,
+    `body::after{content:'';position:absolute;bottom:-40px;left:-100px;right:-100px;height:200px;`,
+    `background:linear-gradient(transparent,rgba(0,0,0,0.30));pointer-events:none;z-index:0;}`,
+    `.card{position:relative;z-index:1;width:100%;`,
+    `background:rgba(8,14,26,0.85);`,
+    `border:1px solid rgba(255,255,255,0.14);`,
+    `border-radius:56px;`,
+    `padding:30px 44px 34px;`,
+    `box-shadow:0 24px 80px rgba(0,0,0,0.50);`,
+    `display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden;}`,
+    `.card::before{content:'';position:absolute;top:-80px;left:-80px;width:360px;height:360px;`,
+    `background:radial-gradient(circle,rgba(34,158,217,0.28) 0%,transparent 65%);pointer-events:none;}`,
+    `.card::after{content:'';position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);`,
+    `width:65%;height:100px;`,
+    `background:radial-gradient(ellipse,rgba(34,158,217,0.18) 0%,transparent 70%);pointer-events:none;}`,
+    `.top-row{display:flex;align-items:center;gap:20px;}`,
+    `.tg-icon{width:110px;height:110px;border-radius:50%;flex-shrink:0;`,
+    `background:linear-gradient(135deg,#2AABEE,#229ED9);`,
+    `display:flex;align-items:center;justify-content:center;`,
+    `box-shadow:0 10px 30px rgba(34,158,217,0.45);}`,
+    `.badge{background:rgba(34,158,217,0.95);color:#fff;`,
+    `font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:32px;`,
+    `border-radius:18px;padding:10px 22px;}`,
+    `.headline{font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:68px;`,
+    `color:#fff;line-height:1.0;text-align:center;`,
+    `text-shadow:0 4px 18px rgba(0,0,0,0.50);}`,
+    `.sub{font-family:'Montserrat',Arial,sans-serif;font-weight:800;font-size:38px;`,
+    `color:#229ED9;text-align:center;}`,
+    `@keyframes pulse{0%,100%{box-shadow:0 14px 40px rgba(34,158,217,0.45);}`,
+    `50%{box-shadow:0 14px 60px rgba(34,158,217,0.75),0 0 40px rgba(34,158,217,0.30);}}`,
+    `@keyframes arrow-move{0%,70%,100%{transform:translateX(0);}85%{transform:translateX(5px);}}`,
+    `.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;`,
+    `background:linear-gradient(135deg,#2AABEE,#168BD2);color:#fff;`,
+    `font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:38px;`,
+    `padding:22px 42px;border-radius:999px;border:none;width:740px;`,
+    `animation:pulse 2.5s ease-in-out infinite;`,
+    `text-shadow:0 2px 8px rgba(0,0,0,0.25);}`,
+    `.arrow{display:inline-block;animation:arrow-move 2.5s ease-in-out infinite;}`,
   ].join('');
 
-  const headlineText = headline || fam.headline;
   const html = [
     `<div class="card">`,
-    `<div class="badge">${esc(fam.badge)}</div>`,
-    `<div class="headline">${esc(headlineText)}</div>`,
-    `<div class="sub">${esc(fam.sub)}</div>`,
-    `<div class="btn">${esc(fam.btn)}</div>`,
+    `<div class="top-row">`,
+    `<div class="tg-icon">${planeSvg}</div>`,
+    `<div class="badge">ADR Quiz Bot</div>`,
+    `</div>`,
+    `<div class="headline">Schaffst du die<br>ADR-Pr&uuml;fung?</div>`,
+    `<div class="sub">Kostenlos im Telegram &uuml;ben</div>`,
+    `<div class="btn">Jetzt kostenlos starten <span class="arrow">&rarr;</span></div>`,
     `</div>`,
   ].join('');
 
