@@ -3,6 +3,8 @@ const DEFAULT_TIMEZONE = "Europe/Berlin";
 const DEFAULT_SITE_DASHBOARD_URL = "https://www.adr-bot.de/api/analytics/dashboard.json?limit=2000";
 const DEFAULT_BOT_FUNNEL_DASHBOARD_URL =
   "https://www.adr-bot.de/api/analytics/bot-funnel.json?limit=2000";
+const DEFAULT_RUNTIME_HEALTH_DASHBOARD_URL =
+  "https://www.adr-bot.de/api/analytics/runtime-health.json";
 
 function onOpen() {
   SpreadsheetApp.getUi()
@@ -19,12 +21,15 @@ function refreshReadableSummary() {
     props.getProperty("ADR_SITE_ANALYTICS_DASHBOARD_URL") || DEFAULT_SITE_DASHBOARD_URL;
   const botFunnelDashboardUrl =
     props.getProperty("ADR_BOT_FUNNEL_DASHBOARD_URL") || DEFAULT_BOT_FUNNEL_DASHBOARD_URL;
+  const runtimeHealthDashboardUrl =
+    props.getProperty("ADR_RUNTIME_HEALTH_DASHBOARD_URL") || DEFAULT_RUNTIME_HEALTH_DASHBOARD_URL;
 
   const now = new Date();
   const refreshedAt = formatDateTime_(now, timeZone);
 
   const siteResult = fetchSiteDashboard_(siteDashboardUrl);
   const botFunnelResult = fetchBotFunnelDashboard_(botFunnelDashboardUrl);
+  const runtimeHealthResult = fetchRuntimeHealthDashboard_(runtimeHealthDashboardUrl);
 
   const sheet = getOrCreateReadableSummarySheet_();
   sheet.clear();
@@ -34,6 +39,7 @@ function refreshReadableSummary() {
     timeZone,
     siteResult,
     botFunnelResult,
+    runtimeHealthResult,
   });
 
   sheet.getRange(1, 1, rows.length, rows[0].length).setValues(rows);
@@ -113,6 +119,35 @@ function fetchBotFunnelDashboard_(url) {
   }
 }
 
+function fetchRuntimeHealthDashboard_(url) {
+  try {
+    const response = UrlFetchApp.fetch(url, {
+      method: "get",
+      muteHttpExceptions: true,
+      headers: { Accept: "application/json" },
+    });
+    const payload = JSON.parse(response.getContentText() || "{}");
+    if (response.getResponseCode() !== 200 || !payload.ok || !payload.dashboard) {
+      return {
+        ok: false,
+        error: payload.error || "runtime_health_dashboard_unavailable",
+        dashboard: emptyRuntimeHealthDashboard_(),
+      };
+    }
+    return {
+      ok: true,
+      error: "",
+      dashboard: payload.dashboard,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      error: String(error && error.message ? error.message : error),
+      dashboard: emptyRuntimeHealthDashboard_(),
+    };
+  }
+}
+
 function emptyBotFunnelDashboard_() {
   return {
     refreshed_at: "",
@@ -181,6 +216,33 @@ function emptyBotFunnelDashboard_() {
   };
 }
 
+function emptyRuntimeHealthDashboard_() {
+  return {
+    refreshed_at: "",
+    overall_status: "",
+    alerting: {
+      severity: "",
+      alert_needed: false,
+      fail_count: 0,
+      warn_count: 0,
+      ok_count: 0,
+      skipped_count: 0,
+      failing_checks: [],
+      warning_checks: [],
+      headline: "",
+      recommended_actions: [],
+    },
+    areas: {
+      services: { status: "", failing_checks: [], warning_checks: [] },
+      logs: { status: "", failing_checks: [], warning_checks: [] },
+      backup: { status: "", failing_checks: [], warning_checks: [] },
+      webhook: { status: "", failing_checks: [], warning_checks: [] },
+      ingest: { status: "", failing_checks: [], warning_checks: [] },
+      public_dashboards: { status: "", failing_checks: [], warning_checks: [] },
+    },
+  };
+}
+
 function emptyBotFunnelPeriod_(periodKey, labelRu, windowDays) {
   return {
     period_key: periodKey,
@@ -213,6 +275,7 @@ function buildReadableSummaryRows_(context) {
   const rows = [];
   const siteDashboard = context.siteResult.dashboard || {};
   const botFunnelDashboard = context.botFunnelResult.dashboard || emptyBotFunnelDashboard_();
+  const runtimeHealthDashboard = context.runtimeHealthResult.dashboard || emptyRuntimeHealthDashboard_();
   const siteToday = safePath_(siteDashboard, ["period_map", "today"]) || {};
   const site7d = safePath_(siteDashboard, ["period_map", "days_7"]) || {};
   const site30d = safePath_(siteDashboard, ["period_map", "days_30"]) || {};
@@ -228,6 +291,8 @@ function buildReadableSummaryRows_(context) {
   const sourceCounts30d = botFunnelDashboard.top_sources_30d || [];
   const eventMix30d = botFunnelDashboard.event_mix_30d || [];
   const topKurs30d = botFunnelDashboard.top_kurs_30d || [];
+  const runtimeAlerting = runtimeHealthDashboard.alerting || {};
+  const runtimeAreas = runtimeHealthDashboard.areas || {};
 
   rows.push(["Понятная сводка", context.refreshedAt, "", "", "", "", ""]);
   rows.push([
@@ -286,6 +351,20 @@ function buildReadableSummaryRows_(context) {
     number_(bot30d.first_actions),
     number_(bot30d.buy_intent),
   ]);
+  rows.push(["", "", "", "", "", "", ""]);
+
+  rows.push(["Runtime health", "Значение", "", "", "", "", ""]);
+  rows.push(["Overall status", stringOrEmpty_(runtimeHealthDashboard.overall_status), "", "", "", "", ""]);
+  rows.push(["Alert severity", stringOrEmpty_(runtimeAlerting.severity), "", "", "", "", ""]);
+  rows.push(["Alert needed", runtimeAlerting.alert_needed ? "yes" : "no", "", "", "", "", ""]);
+  rows.push(["Headline", stringOrEmpty_(runtimeAlerting.headline), "", "", "", "", ""]);
+  rows.push(["Recommended actions", formatStringList_(runtimeAlerting.recommended_actions || []), "", "", "", "", ""]);
+  rows.push(["Services area", safePathText_(runtimeAreas, ["services", "status"]), "", "", "", "", ""]);
+  rows.push(["Logs area", safePathText_(runtimeAreas, ["logs", "status"]), "", "", "", "", ""]);
+  rows.push(["Backup area", safePathText_(runtimeAreas, ["backup", "status"]), "", "", "", "", ""]);
+  rows.push(["Webhook area", safePathText_(runtimeAreas, ["webhook", "status"]), "", "", "", "", ""]);
+  rows.push(["Ingest area", safePathText_(runtimeAreas, ["ingest", "status"]), "", "", "", "", ""]);
+  rows.push(["Public dashboards area", safePathText_(runtimeAreas, ["public_dashboards", "status"]), "", "", "", "", ""]);
   rows.push(["", "", "", "", "", "", ""]);
 
   rows.push([
@@ -808,6 +887,11 @@ function safePath_(value, path) {
   return current == null ? null : current;
 }
 
+function safePathText_(value, path) {
+  const resolved = safePath_(value, path);
+  return resolved == null ? "" : String(resolved);
+}
+
 function number_(value) {
   return Number(value || 0);
 }
@@ -829,6 +913,19 @@ function ratio_(numerator, denominator) {
 
 function stringOrEmpty_(value) {
   return value == null ? "" : String(value);
+}
+
+function formatStringList_(items) {
+  if (!items || !items.length) return "нет данных";
+  return items
+    .slice(0, 5)
+    .map(function (item) {
+      return String(item || "");
+    })
+    .filter(function (item) {
+      return item;
+    })
+    .join(", ");
 }
 
 function formatDateTime_(date, timeZone) {

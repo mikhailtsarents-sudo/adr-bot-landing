@@ -124,6 +124,15 @@ This file is the current execution snapshot for the ADR Bot landing project.
         - public dashboards
   - practical meaning:
     - runtime health is now visible as a proper machine-readable operator surface, not only as local VPS files
+- 2026-04-26: the repo Apps Script readable-summary layer was also extended for runtime health.
+  - file:
+    - `google-apps-script/readable_summary_refresh.gs`
+  - it now fetches:
+    - `/api/analytics/runtime-health.json`
+  - and renders a dedicated runtime health block for the human-readable sheet summary
+  - current reality:
+    - repo version is ready
+    - live Google Apps Script editor still needs a manual sync if we want the new block to appear in the current sheet immediately
 
 ### Content Catalogs
 
