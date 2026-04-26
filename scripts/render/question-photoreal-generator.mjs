@@ -498,7 +498,7 @@ function buildOpenAiImageBody(provider, prompt, negativePrompt, imageCount = 1) 
   return body;
 }
 
-function buildFalAiBody(prompt, negativePrompt) {
+function buildFalAiBody(prompt, negativePrompt, { referenceImageUrl = null, strength = 0.55, seed = null } = {}) {
   const body = {
     prompt: `${prompt}\nAvoid: ${negativePrompt}`,
     image_size: "portrait_16_9",
@@ -506,11 +506,13 @@ function buildFalAiBody(prompt, negativePrompt) {
     guidance_scale: 3.5,
     num_images: 1,
     enable_safety_checker: true,
+    ...(seed !== null ? { seed } : {}),
+    ...(referenceImageUrl ? { image_url: referenceImageUrl, strength } : {}),
   };
   return body;
 }
 
-function buildProviderRequest(provider, prompt, negativePrompt, imageCount = 1) {
+function buildProviderRequest(provider, prompt, negativePrompt, imageCount = 1, options = {}) {
   if (provider.kind === "openai") {
     return {
       url: OPENAI_IMAGES_URL,
@@ -521,7 +523,7 @@ function buildProviderRequest(provider, prompt, negativePrompt, imageCount = 1) 
   if (provider.kind === "fal_ai") {
     return {
       url: FAL_AI_URL,
-      body: buildFalAiBody(prompt, negativePrompt),
+      body: buildFalAiBody(prompt, negativePrompt, options),
     };
   }
 
@@ -926,13 +928,13 @@ async function generateImageToFile({ provider, requestBody, outputPath, timeoutC
     const rawText = await response.text();
     const parsed = tryParseJson(rawText);
     if (parsed) {
-      await writeImagePayloadToFile(parsed, outputPath, timeoutConfig);
-      return;
+      const sourceUrl = await writeImagePayloadToFile(parsed, outputPath, timeoutConfig);
+      return sourceUrl || null;
     }
 
     if (rawText.startsWith("http://") || rawText.startsWith("https://")) {
-      await writeImagePayloadToFile({ url: rawText.trim() }, outputPath, timeoutConfig);
-      return;
+      const sourceUrl = await writeImagePayloadToFile({ url: rawText.trim() }, outputPath, timeoutConfig);
+      return sourceUrl || null;
     }
 
     throw new Error(`${provider.id} returned invalid or non-raster output.`);
@@ -1367,7 +1369,7 @@ async function writeImagePayloadToFile(payload, outputPath, timeoutConfig) {
   const b64 = extractBase64Image(payload);
   if (b64) {
     await writeFile(outputPath, Buffer.from(b64, "base64"));
-    return;
+    return null;
   }
 
   const remoteUrl = extractRemoteImageUrl(payload);
@@ -1380,7 +1382,7 @@ async function writeImagePayloadToFile(payload, outputPath, timeoutConfig) {
     }
     const bytes = Buffer.from(await response.arrayBuffer());
     await writeFile(outputPath, bytes);
-    return;
+    return remoteUrl;
   }
 
   throw new Error("Provider returned no raster image payload.");
@@ -1617,6 +1619,9 @@ async function generateFramesWithProvider({
     };
   }
 
+  const videoSeed = Math.floor(Math.random() * 2147483647);
+  let hookFrameUrl = null;
+
   for (let i = 0; i < selectedScenes.length; i += 1) {
     const scene = selectedScenes[i];
     const frameEntry = frameManifest[i];
@@ -1642,7 +1647,10 @@ async function generateFramesWithProvider({
     const negativePromptFile = path.join(generatedDir, `${provider.id}-scene${i + 1}.negative_prompt.txt`);
     await writeFile(promptFile, `${prompt}\n`, "utf8");
     await writeFile(negativePromptFile, `${negativePrompt}\n`, "utf8");
-    const requestBody = buildProviderRequest(provider, prompt, negativePrompt);
+    const i2iOptions = provider.kind === "fal_ai"
+      ? { seed: videoSeed, ...(i > 0 && hookFrameUrl ? { referenceImageUrl: hookFrameUrl, strength: 0.55 } : {}) }
+      : {};
+    const requestBody = buildProviderRequest(provider, prompt, negativePrompt, 1, i2iOptions);
     const requestDebugFile = await writeProviderDebugPayload({
       generatedDir,
       provider,
@@ -1677,7 +1685,7 @@ async function generateFramesWithProvider({
     }
 
     try {
-      await generateImageToFile({
+      const sourceUrl = await generateImageToFile({
         provider,
         requestBody,
         outputPath: framePath,
@@ -1689,6 +1697,9 @@ async function generateFramesWithProvider({
           timeoutScope: "frame",
         },
       });
+      if (i === 0 && sourceUrl) {
+        hookFrameUrl = sourceUrl;
+      }
       framePaths.push(framePath);
     } catch (error) {
       error.generation_debug = {
