@@ -93,29 +93,32 @@ export function pickCtaVariant(contentFamily, sourceId) {
 // Telegram CTA — modern glassmorphism floating card
 function buildCtaClips({ start, length }) {
   const cardWidth = 980;
-  const cardHeight = 520;
+  const cardHeight = 560;
 
   const planeSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path fill="white" d="M2 21L23 12 2 3v7l15 2-15 2v7z"/></svg>';
+
+  // Hand-drawn scribble arrow pointing left toward the button
+  const scribbleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none">
+    <path d="M72 28 C78 38, 80 52, 70 62 C60 72, 44 74, 32 68 C24 64, 20 56, 22 48"
+      stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/>
+    <path d="M22 48 L18 38 M22 48 L32 44"
+      stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/>
+  </svg>`;
 
   const css = [
     FONT_IMPORT,
     `*{box-sizing:border-box;margin:0;padding:0;}`,
     `body{background:transparent;width:${cardWidth}px;height:${cardHeight}px;`,
     `display:flex;align-items:center;justify-content:center;position:relative;}`,
-    `body::after{content:'';position:absolute;bottom:-40px;left:-100px;right:-100px;height:200px;`,
-    `background:linear-gradient(transparent,rgba(0,0,0,0.30));pointer-events:none;z-index:0;}`,
     `.card{position:relative;z-index:1;width:100%;`,
     `background:rgba(8,14,26,0.85);`,
     `border:1px solid rgba(255,255,255,0.14);`,
     `border-radius:56px;`,
     `padding:30px 44px 34px;`,
     `box-shadow:0 24px 80px rgba(0,0,0,0.50);`,
-    `display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden;}`,
+    `display:flex;flex-direction:column;align-items:center;gap:12px;overflow:visible;}`,
     `.card::before{content:'';position:absolute;top:-80px;left:-80px;width:360px;height:360px;`,
-    `background:radial-gradient(circle,rgba(34,158,217,0.28) 0%,transparent 65%);pointer-events:none;}`,
-    `.card::after{content:'';position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);`,
-    `width:65%;height:100px;`,
-    `background:radial-gradient(ellipse,rgba(34,158,217,0.18) 0%,transparent 70%);pointer-events:none;}`,
+    `background:radial-gradient(circle,rgba(34,158,217,0.28) 0%,transparent 65%);pointer-events:none;border-radius:50%;}`,
     `.top-row{display:flex;align-items:center;gap:20px;}`,
     `.tg-icon{width:110px;height:110px;border-radius:50%;flex-shrink:0;`,
     `background:linear-gradient(135deg,#2AABEE,#229ED9);`,
@@ -129,16 +132,18 @@ function buildCtaClips({ start, length }) {
     `text-shadow:0 4px 18px rgba(0,0,0,0.50);}`,
     `.sub{font-family:'Montserrat',Arial,sans-serif;font-weight:800;font-size:38px;`,
     `color:#229ED9;text-align:center;}`,
+    `.btn-wrap{position:relative;width:740px;}`,
     `@keyframes pulse{0%,100%{box-shadow:0 14px 40px rgba(34,158,217,0.45);}`,
     `50%{box-shadow:0 14px 60px rgba(34,158,217,0.75),0 0 40px rgba(34,158,217,0.30);}}`,
     `@keyframes arrow-move{0%,70%,100%{transform:translateX(0);}85%{transform:translateX(5px);}}`,
-    `.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;`,
+    `.btn{display:flex;align-items:center;justify-content:center;gap:12px;`,
     `background:linear-gradient(135deg,#2AABEE,#168BD2);color:#fff;`,
     `font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:38px;`,
-    `padding:22px 42px;border-radius:999px;border:none;width:740px;`,
+    `padding:22px 42px;border-radius:999px;border:none;width:100%;`,
     `animation:pulse 2.5s ease-in-out infinite;`,
     `text-shadow:0 2px 8px rgba(0,0,0,0.25);}`,
     `.arrow{display:inline-block;animation:arrow-move 2.5s ease-in-out infinite;}`,
+    `.scribble{position:absolute;right:-70px;bottom:-30px;transform:rotate(-10deg);}`,
   ].join('');
 
   const html = [
@@ -149,7 +154,10 @@ function buildCtaClips({ start, length }) {
     `</div>`,
     `<div class="headline">Schaffst du die<br>ADR-Pr&uuml;fung?</div>`,
     `<div class="sub">Kostenlos im Telegram &uuml;ben</div>`,
+    `<div class="btn-wrap">`,
     `<div class="btn">Jetzt kostenlos starten <span class="arrow">&rarr;</span></div>`,
+    `<div class="scribble">${scribbleSvg}</div>`,
+    `</div>`,
     `</div>`,
   ].join('');
 
@@ -158,7 +166,7 @@ function buildCtaClips({ start, length }) {
     position: 'center',
     start: Number((start || 0).toFixed(2)),
     length: Number(Math.max(length || 0.1, 0.1).toFixed(2)),
-    offset: { x: 0, y: -0.26 },
+    offset: { x: 0, y: -0.24 },
   }];
 }
 
