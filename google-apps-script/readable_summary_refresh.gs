@@ -928,6 +928,16 @@ function formatStringList_(items) {
     .join(", ");
 }
 
+function formatSourceBreakdown_(items) {
+  if (!items || !items.length) return "нет данных";
+  return items
+    .slice(0, 5)
+    .map(function (item) {
+      return String(item.source || "unknown") + ": " + Number(item.count || 0);
+    })
+    .join(", ");
+}
+
 function formatDateTime_(date, timeZone) {
   return Utilities.formatDate(new Date(date), timeZone || DEFAULT_TIMEZONE, "dd.MM.yyyy HH:mm");
 }
