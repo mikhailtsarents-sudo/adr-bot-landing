@@ -169,9 +169,14 @@ async function main() {
     clientSecret: text(process.env.TIKTOK_CLIENT_SECRET),
   });
 
-  // 2. Query creator info — validates account capabilities
-  const creatorInfo = await queryCreatorInfo({ accessToken });
-  console.log(`[tiktok-publish] creator=${text(creatorInfo.creator_username)} max_duration=${creatorInfo.max_video_post_duration_sec}s`);
+  // 2. Query creator info — optional, requires video.publish scope
+  let creatorInfo = {};
+  try {
+    creatorInfo = await queryCreatorInfo({ accessToken });
+    console.log(`[tiktok-publish] creator=${text(creatorInfo.creator_username)} max_duration=${creatorInfo.max_video_post_duration_sec}s`);
+  } catch (e) {
+    console.warn(`[tiktok-publish] creator_info skipped (likely needs video.publish scope): ${e.message}`);
+  }
 
   // 3. Resolve local video file
   let localVideoPath = text(args.videoFilePath);
