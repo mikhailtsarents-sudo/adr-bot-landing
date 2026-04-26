@@ -26,6 +26,7 @@ Options:
   --n8n-table-url <url>      n8n data table URL
   --n8n-webhook-url <url>    YouTube bridge webhook URL
   --skip-youtube             Stop after finalize, skip YouTube publish
+  --skip-tiktok              Skip TikTok publish (default: runs if TIKTOK_OAUTH_TOKEN_PATH is set)
   --help                     Show this help
 `);
 }
@@ -39,6 +40,7 @@ function parseArgs(argv) {
     n8nTableUrl: "",
     n8nWebhookUrl: "",
     skipYoutube: false,
+    skipTiktok: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -50,6 +52,7 @@ function parseArgs(argv) {
     else if (token === "--n8n-table-url") args.n8nTableUrl = argv[++i];
     else if (token === "--n8n-webhook-url") args.n8nWebhookUrl = argv[++i];
     else if (token === "--skip-youtube") args.skipYoutube = true;
+    else if (token === "--skip-tiktok") args.skipTiktok = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
       process.exit(0);
@@ -165,6 +168,24 @@ async function main() {
 
     const youtubeUrl = parseOutputPath(youtubeOutput, "YOUTUBE_URL");
     if (youtubeUrl) youtubeUrls.push(youtubeUrl);
+
+    // Step 4: TikTok publish (optional — runs when TIKTOK_OAUTH_TOKEN_PATH is set)
+    const tiktokTokenPath = process.env.TIKTOK_OAUTH_TOKEN_PATH || "";
+    if (!args.skipTiktok && tiktokTokenPath) {
+      try {
+        logAutonomousDecision("publishing to tiktok", { package_dir: packageDir });
+        const tiktokOutput = runNodeScript(
+          path.join(repoRoot, "scripts", "run-package-tiktok-publish.mjs"),
+          ["--package-dir", packageDir],
+        );
+        console.log(tiktokOutput);
+      } catch (tiktokError) {
+        // TikTok failure must not abort YouTube-already-published content
+        console.warn(`[post-render] TikTok publish failed (non-fatal): ${tiktokError.message}`);
+      }
+    } else if (!args.skipTiktok && !tiktokTokenPath) {
+      console.log(`[post-render] TikTok publish skipped: TIKTOK_OAUTH_TOKEN_PATH not set`);
+    }
   }
 
   console.log(`post_render_pipeline=done`);
