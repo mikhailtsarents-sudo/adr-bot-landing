@@ -48,6 +48,11 @@ function detectLang(): LangCode {
   return DEFAULT_LANG;
 }
 
+function persistLangCookie(lang: LangCode) {
+  if (typeof document === "undefined") return;
+  document.cookie = `${STORAGE_KEY}=${encodeURIComponent(lang)}; path=/; max-age=31536000; SameSite=Lax`;
+}
+
 // ── Context ───────────────────────────────────────────────────────────────────
 type LangContextType = {
   lang: LangCode;
@@ -97,6 +102,7 @@ export function LangProvider({
     } catch {
       // ignore
     }
+    persistLangCookie(newLang);
   }
 
   return (

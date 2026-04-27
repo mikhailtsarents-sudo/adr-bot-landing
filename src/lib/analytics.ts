@@ -1,3 +1,5 @@
+import { LANDING_ROUTE_BY_LANG } from "@/lib/landing-locales";
+
 export const analyticsEventNames = {
   sitePageView: "site_page_view",
   telegramCtaClick: "telegram_cta_click",
@@ -79,7 +81,7 @@ export function buildTelegramStartToken({
 }
 
 export function inferPageType(pathname: string): AnalyticsPageType {
-  if (pathname === "/" || pathname === "/ru") {
+  if (Object.values(LANDING_ROUTE_BY_LANG).includes(pathname)) {
     return "landing";
   }
 

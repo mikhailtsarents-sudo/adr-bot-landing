@@ -108,10 +108,18 @@ const bootstrapLangScript = `
       var saved = null;
       try { saved = localStorage.getItem('site_language'); } catch (_) {}
       var browser = (navigator.language || '').slice(0, 2).toLowerCase();
+      if (location.pathname === '/' && supported.indexOf(pathSegment) === -1) {
+        var preferred =
+          supported.indexOf(saved) !== -1 ? saved :
+          supported.indexOf(browser) !== -1 ? browser :
+          fallback;
+        if (preferred && preferred !== fallback) {
+          location.replace('/' + preferred + location.search + location.hash);
+          return;
+        }
+      }
       var lang =
         supported.indexOf(pathSegment) !== -1 ? pathSegment :
-        supported.indexOf(saved) !== -1 ? saved :
-        supported.indexOf(browser) !== -1 ? browser :
         fallback;
       document.documentElement.lang = lang;
       document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -125,6 +133,7 @@ export default function RootLayout({
   return (
     <html
       lang="de"
+      suppressHydrationWarning
       className={`h-full antialiased ${plusJakarta.variable} ${barlowCondensed.variable}`}
     >
       <head>
