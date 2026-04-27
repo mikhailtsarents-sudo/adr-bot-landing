@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       de: "/",
+      en: "/en",
       ru: "/ru",
     },
   },

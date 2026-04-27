@@ -3,6 +3,7 @@
 import { SUPPORTED_LANGS, type LangCode } from "@/lib/i18n/translations";
 import { useLang } from "@/lib/i18n/use-lang";
 import { ChevronDown, Globe } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const LANG_NAMES: Record<LangCode, string> = {
@@ -33,10 +34,24 @@ const LANG_SWITCHER_LABELS: Record<LangCode, string> = {
 
 type Props = { compact?: boolean };
 
+const LANDING_ROUTE_BY_LANG: Partial<Record<LangCode, string>> = {
+  de: "/",
+  en: "/en",
+  ru: "/ru",
+};
+
 export function LanguageSwitcher({ compact = false }: Props) {
   const { lang, setLang } = useLang();
+  const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  function resolveLandingRoute(code: LangCode) {
+    if (!pathname) return null;
+    if (!["/", "/en", "/ru"].includes(pathname)) return null;
+    return LANDING_ROUTE_BY_LANG[code] ?? null;
+  }
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -78,6 +93,10 @@ export function LanguageSwitcher({ compact = false }: Props) {
               key={code}
               onClick={() => {
                 setLang(code);
+                const targetRoute = resolveLandingRoute(code);
+                if (targetRoute && targetRoute !== pathname) {
+                  router.push(targetRoute);
+                }
                 setOpen(false);
               }}
               className={[
