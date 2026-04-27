@@ -164,6 +164,27 @@ export async function getValidAccessToken({ tokenPath, clientKey, clientSecret }
   return updated.access_token;
 }
 
+export async function queryUserInfo({ accessToken }) {
+  const fields = ["open_id", "union_id", "display_name", "avatar_url"].join(",");
+  const url = new URL(`${TIKTOK_BASE_URL}/v2/user/info/`);
+  url.searchParams.set("fields", fields);
+  const response = await fetch(url.toString(), {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(`TikTok user/info query failed: HTTP ${response.status} ${JSON.stringify(payload)}`);
+  }
+  if (text(payload?.error?.code) !== "ok") {
+    throw new Error(`TikTok user/info error: ${JSON.stringify(payload?.error)}`);
+  }
+  return payload.data?.user || {};
+}
+
 export async function queryCreatorInfo({ accessToken }) {
   const fields = [
     "creator_avatar_url",

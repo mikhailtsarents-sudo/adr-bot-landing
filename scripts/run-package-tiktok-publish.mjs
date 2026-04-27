@@ -14,14 +14,17 @@ import { fileURLToPath } from "node:url";
 import { bootstrapPhotorealRuntimeEnv } from "./runtime/photoreal-runtime-env.mjs";
 import {
   buildTikTokCaption,
+  defaultTikTokOauthTokenPath,
   fetchPublishStatus,
   getFileInfo,
   getValidAccessToken,
   initDirectPost,
   initInboxUpload,
   loadJson,
+  loadTikTokToken,
   pollPublishStatus,
   queryCreatorInfo,
+  queryUserInfo,
   uploadFileToTikTok,
   validateCaptionLength,
   writeJson,
@@ -163,17 +166,40 @@ async function main() {
   console.log(`[tiktok-publish] mode=${args.mode} content_id=${contentId} family=${contentFamily}`);
 
   // 1. Obtain valid access token (auto-refresh if expired)
+  const tokenPath = args.oauthTokenPath || undefined;
   const accessToken = await getValidAccessToken({
-    tokenPath: args.oauthTokenPath || undefined,
+    tokenPath,
     clientKey: text(process.env.TIKTOK_CLIENT_KEY),
     clientSecret: text(process.env.TIKTOK_CLIENT_SECRET),
   });
 
-  // 2. Query creator info — optional, requires video.publish scope
+  // Log token metadata for account verification
+  const tokenBundle = await loadTikTokToken({ tokenPath }).catch(() => ({}));
+  console.log(`[tiktok-publish] ── DIAGNOSTIC INFO ──`);
+  console.log(`[tiktok-publish] scopes_in_token=${text(tokenBundle.scope)}`);
+  console.log(`[tiktok-publish] token_created_at=${text(tokenBundle.created_at)}`);
+  console.log(`[tiktok-publish] open_id_in_token=${text(tokenBundle.open_id) || "(not stored)"}`);
+
+  // 2a. Fetch user info to confirm which account this token belongs to
+  let userInfo = {};
+  try {
+    userInfo = await queryUserInfo({ accessToken });
+    console.log(`[tiktok-publish] account_open_id=${text(userInfo.open_id)}`);
+    console.log(`[tiktok-publish] account_display_name=${text(userInfo.display_name)}`);
+    // Persist open_id into the token file for future reference
+    if (userInfo.open_id && !tokenBundle.open_id) {
+      const resolvedTokenPath = tokenPath || defaultTikTokOauthTokenPath();
+      await writeJson(resolvedTokenPath, { ...tokenBundle, open_id: text(userInfo.open_id), display_name: text(userInfo.display_name) });
+    }
+  } catch (e) {
+    console.warn(`[tiktok-publish] user/info skipped: ${e.message}`);
+  }
+
+  // 2b. Query creator info — optional, requires video.publish scope
   let creatorInfo = {};
   try {
     creatorInfo = await queryCreatorInfo({ accessToken });
-    console.log(`[tiktok-publish] creator=${text(creatorInfo.creator_username)} max_duration=${creatorInfo.max_video_post_duration_sec}s`);
+    console.log(`[tiktok-publish] creator_username=${text(creatorInfo.creator_username)} max_duration=${creatorInfo.max_video_post_duration_sec}s`);
   } catch (e) {
     console.warn(`[tiktok-publish] creator_info skipped (likely needs video.publish scope): ${e.message}`);
   }
@@ -223,12 +249,17 @@ async function main() {
   try {
     // 7. Init upload
     if (args.mode === "INBOX_UPLOAD") {
+      const endpoint = "/v2/post/publish/inbox/video/init/";
+      console.log(`[tiktok-publish] endpoint=${endpoint}`);
       const initData = await initInboxUpload({ accessToken, videoSize: fileInfo.size });
       publishId = text(initData.publish_id);
       uploadUrl = text(initData.upload_url);
-      console.log(`[tiktok-publish] inbox_upload publish_id=${publishId}`);
+      console.log(`[tiktok-publish] publish_id=${publishId}`);
+      console.log(`[tiktok-publish] upload_url_ok=${!!uploadUrl}`);
     } else {
       const privacyLevel = args.mode === "DIRECT_PUBLIC" ? "PUBLIC_TO_EVERYONE" : "SELF_ONLY";
+      const endpoint = "/v2/post/publish/video/init/";
+      console.log(`[tiktok-publish] endpoint=${endpoint}`);
       const initData = await initDirectPost({
         accessToken,
         title: caption,
@@ -238,7 +269,7 @@ async function main() {
       });
       publishId = text(initData.publish_id);
       uploadUrl = text(initData.upload_url);
-      console.log(`[tiktok-publish] direct_post privacy=${privacyLevel} publish_id=${publishId}`);
+      console.log(`[tiktok-publish] publish_id=${publishId} privacy=${privacyLevel}`);
     }
 
     if (!publishId || !uploadUrl) {
@@ -251,9 +282,10 @@ async function main() {
     console.log(`[tiktok-publish] Upload complete`);
 
     // 9. Poll status
-    console.log(`[tiktok-publish] Polling publish status...`);
+    console.log(`[tiktok-publish] Polling publish status for publish_id=${publishId}...`);
     const result = await pollPublishStatus({ accessToken, publishId });
     console.log(`[tiktok-publish] status=${result.status}`);
+    console.log(`[tiktok-publish] full_status_response=${JSON.stringify(result.data)}`);
 
     const platformPostIds = result.data?.publicaly_available_post_id || [];
     const platformPostId = Array.isArray(platformPostIds) ? text(platformPostIds[0]) : "";
@@ -313,6 +345,9 @@ async function main() {
     console.log(`tiktok_deeplink_token=${deepLinkToken}`);
 
   } catch (error) {
+    console.error(`[tiktok-publish] ERROR: ${error.message}`);
+    if (error.failReason) console.error(`[tiktok-publish] fail_reason=${error.failReason}`);
+    if (error.tiktokStatus) console.error(`[tiktok-publish] tiktok_status=${error.tiktokStatus}`);
     if (pg) {
       await writePlatformPublishLog(pg, {
         ...logBase,
