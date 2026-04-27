@@ -305,7 +305,7 @@ function buildSubtitlesSrt(timeline, sceneTextEntries) {
       scene,
       subtitleText: textByRole.get(scene.role),
     }))
-    .filter((item) => item.subtitleText);
+    .filter((item) => item.subtitleText && item.scene.role !== "cta");
 
   if (subtitleItems.length === 0) {
     return "";

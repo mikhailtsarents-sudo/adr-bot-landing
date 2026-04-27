@@ -112,7 +112,7 @@ function buildCtaClips({ start, length }) {
     `body{background:transparent;width:${cardWidth}px;height:${cardHeight}px;`,
     `display:flex;align-items:center;justify-content:center;position:relative;}`,
     `.card{position:relative;z-index:1;width:100%;`,
-    `background:rgba(8,14,26,0.85);`,
+    `background:rgba(8,14,26,0.97);`,
     `border:1px solid rgba(255,255,255,0.14);`,
     `border-radius:56px;`,
     `padding:30px 44px 34px;`,
