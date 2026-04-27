@@ -17,6 +17,7 @@ export type RuntimeHealthDashboard = {
     webhook: RuntimeHealthAreaStatus;
     ingest: RuntimeHealthAreaStatus;
     public_dashboards: RuntimeHealthAreaStatus;
+    search_console: RuntimeHealthAreaStatus;
   };
 };
 
@@ -52,7 +53,7 @@ export function buildRuntimeHealthDashboard(snapshot: RuntimeHealthSnapshot): Ru
       webhook: buildArea(snapshot, ["telegram:webhook_info"]),
       ingest: buildArea(snapshot, "ingest:"),
       public_dashboards: buildArea(snapshot, "public:"),
+      search_console: buildArea(snapshot, "search_console:"),
     },
   };
 }
-

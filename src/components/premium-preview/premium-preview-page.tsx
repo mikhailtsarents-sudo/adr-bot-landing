@@ -11,6 +11,102 @@ import { useEffect, useRef, useState } from "react";
 import { getPremiumPreviewCopy } from "./premium-preview-copy";
 import styles from "./premium-preview-page.module.css";
 
+const conversionChecklistByLang: Record<
+  LangCode,
+  { title: string; items: [string, string, string]; note: string }
+> = {
+  de: {
+    title: "Was direkt nach dem Klick passiert",
+    items: [
+      "Telegram öffnet sich sofort.",
+      "Du tippst /start und wählst deinen Pfad.",
+      "Die erste Frage oder der erste Begriff kommt in unter 60 Sekunden.",
+    ],
+    note: "Keine Registrierung. Keine extra App. Kein langer Prozess.",
+  },
+  en: {
+    title: "What happens right after you click",
+    items: [
+      "Telegram opens immediately.",
+      "You type /start and choose your path.",
+      "Your first question or term appears in under 60 seconds.",
+    ],
+    note: "No signup. No extra app. No long setup.",
+  },
+  ru: {
+    title: "Что произойдет сразу после клика",
+    items: [
+      "Telegram откроется сразу.",
+      "Ты вводишь /start и выбираешь свой путь.",
+      "Первый вопрос или термин приходит меньше чем за 60 секунд.",
+    ],
+    note: "Без регистрации. Без лишнего приложения. Без долгой настройки.",
+  },
+  uk: {
+    title: "Що станеться одразу після кліку",
+    items: [
+      "Telegram відкриється одразу.",
+      "Ти вводиш /start і обираєш свій шлях.",
+      "Перше питання або термін з'явиться менш ніж за 60 секунд.",
+    ],
+    note: "Без реєстрації. Без зайвого застосунку. Без довгого налаштування.",
+  },
+  tr: {
+    title: "Tıkladıktan hemen sonra ne olur",
+    items: [
+      "Telegram hemen açılır.",
+      "Sen /start yazarsın ve yolunu seçersin.",
+      "İlk soru veya ilk terim 60 saniyeden kısa sürede gelir.",
+    ],
+    note: "Kayıt yok. Ekstra uygulama yok. Uzun kurulum yok.",
+  },
+  ar: {
+    title: "ماذا يحدث مباشرة بعد الضغط",
+    items: [
+      "يفتح تيليجرام فورًا.",
+      "تكتب ‎/start‎ ثم تختار المسار المناسب لك.",
+      "يظهر أول سؤال أو أول مصطلح خلال أقل من 60 ثانية.",
+    ],
+    note: "من دون تسجيل. من دون تطبيق إضافي. من دون إعداد طويل.",
+  },
+  pl: {
+    title: "Co stanie się od razu po kliknięciu",
+    items: [
+      "Telegram otworzy się od razu.",
+      "Wpisujesz /start i wybierasz swoją ścieżkę.",
+      "Pierwsze pytanie lub pojęcie pojawi się w mniej niż 60 sekund.",
+    ],
+    note: "Bez rejestracji. Bez dodatkowej aplikacji. Bez długiej konfiguracji.",
+  },
+  ro: {
+    title: "Ce se întâmplă imediat după clic",
+    items: [
+      "Telegram se deschide imediat.",
+      "Tastezi /start și alegi traseul potrivit.",
+      "Prima întrebare sau primul termen apare în mai puțin de 60 de secunde.",
+    ],
+    note: "Fără cont. Fără aplicație suplimentară. Fără configurare lungă.",
+  },
+  bg: {
+    title: "Какво става веднага след натискането",
+    items: [
+      "Telegram се отваря веднага.",
+      "Пишеш /start и избираш своя път.",
+      "Първият въпрос или термин идва за по-малко от 60 секунди.",
+    ],
+    note: "Без регистрация. Без допълнително приложение. Без дълга настройка.",
+  },
+  hr: {
+    title: "Što se događa odmah nakon klika",
+    items: [
+      "Telegram se otvara odmah.",
+      "Upišeš /start i odabereš svoj put.",
+      "Prvo pitanje ili prvi pojam stiže za manje od 60 sekundi.",
+    ],
+    note: "Bez registracije. Bez dodatne aplikacije. Bez dugog podešavanja.",
+  },
+};
+
 function useVisibleCards() {
   const [visibleCards, setVisibleCards] = useState(4);
 
@@ -55,6 +151,7 @@ export function PremiumPreviewPage({
   const stepCards = copy.steps.cards;
   const pricingCards = copy.pricing.cards;
   const faqItems = copy.faq.items;
+  const conversionChecklist = conversionChecklistByLang[lang] ?? conversionChecklistByLang.en;
   const visibleCards = useVisibleCards();
   const [activePage, setActivePage] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -451,6 +548,15 @@ export function PremiumPreviewPage({
                 <TrackedTelegramLink source={`${trackingSource}_footer_cta`} locale={lang} className={`${styles.button} ${styles.blueButton}`}>
                   {copy.faq.ctaButton}
                 </TrackedTelegramLink>
+                <div className={styles.ctaChecklistWrap}>
+                  <p className={styles.ctaChecklistTitle}>{conversionChecklist.title}</p>
+                  <ul className={styles.ctaChecklist}>
+                    {conversionChecklist.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <p className={styles.ctaChecklistNote}>{conversionChecklist.note}</p>
+                </div>
               </div>
               <div className={styles.trophy}>🏆</div>
             </div>

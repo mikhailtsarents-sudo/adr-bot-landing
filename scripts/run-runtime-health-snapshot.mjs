@@ -8,6 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { bootstrapLocalRuntimeEnv } from "./runtime/local-runtime-env.mjs";
 import { enableStrictNonInteractiveMode } from "./runtime/non-interactive-mode.mjs";
+import { resolveSearchConsoleAccessToken } from "./runtime/gsc-auth.mjs";
 
 const execFile = promisify(execFileCb);
 
@@ -135,6 +136,8 @@ function buildRecommendedActions(checks) {
       push("Verify adr-ingest health, ADR_INGEST_API_KEY, and Postgres connectivity for private analytics reads.");
     } else if (check.key.startsWith("public:")) {
       push("Inspect public analytics/dashboard routes and confirm the current web deploy is serving the expected build.");
+    } else if (check.key.startsWith("search_console:")) {
+      push("Restore Search Console access on VPS and confirm the configured property can answer live API queries.");
     }
   }
 
@@ -421,6 +424,89 @@ async function checkTelegramWebhook(token, timeoutMs, publicOnly) {
   }
 }
 
+async function checkSearchConsoleQuery(timeoutMs, publicOnly) {
+  const key = "search_console:query";
+  if (publicOnly) {
+    return { key, status: "skipped", summary: "Skipped in public-only mode." };
+  }
+
+  const siteUrl = text(process.env.GSC_SITE_URL) || "sc-domain:adr-bot.de";
+  const accessToken = text(process.env.GSC_ACCESS_TOKEN);
+  const serviceAccountKeyPath = text(process.env.GSC_SERVICE_ACCOUNT_KEY_PATH);
+
+  if (!accessToken && !serviceAccountKeyPath) {
+    return {
+      key,
+      status: "fail",
+      summary: "Missing GSC_ACCESS_TOKEN / GSC_SERVICE_ACCOUNT_KEY_PATH.",
+    };
+  }
+
+  try {
+    const auth = await resolveSearchConsoleAccessToken({
+      accessToken,
+      serviceAccountKeyPath,
+    });
+
+    const endDate = new Date().toISOString().slice(0, 10);
+    const startDate = new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10);
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(
+        `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            startDate,
+            endDate,
+            dimensions: ["query"],
+            rowLimit: 1,
+          }),
+          signal: controller.signal,
+          cache: "no-store",
+        },
+      );
+
+      if (!response.ok) {
+        const body = await response.text();
+        return {
+          key,
+          status: "fail",
+          summary: `HTTP ${response.status}`,
+          details: body.slice(0, 400),
+        };
+      }
+
+      const payload = await response.json();
+      const rowCount = Array.isArray(payload?.rows) ? payload.rows.length : 0;
+
+      return {
+        key,
+        status: "ok",
+        summary: `query_ok rows=${rowCount} auth=${auth.authMode}`,
+        details: `site_url=${siteUrl}; range=${startDate}->${endDate}`,
+      };
+    } finally {
+      clearTimeout(timeout);
+    }
+  } catch (error) {
+    return {
+      key,
+      status: "fail",
+      summary: "gsc_query_failed",
+      details: text(error?.message || error),
+    };
+  }
+}
+
 function buildMarkdown(snapshot) {
   const lines = [];
   lines.push("# Runtime Health Snapshot");
@@ -522,6 +608,7 @@ async function main() {
     args.publicOnly,
   ));
   checks.push(await checkTelegramWebhook(botToken, args.timeoutMs, args.publicOnly));
+  checks.push(await checkSearchConsoleQuery(args.timeoutMs, args.publicOnly));
 
   checks.push(await checkPrivateIngest(
     "ingest:analytics_rows",
@@ -565,6 +652,12 @@ async function main() {
     `${publicBaseUrl}/api/analytics/reconciliation.json?limit=50`,
     args.timeoutMs,
     (dashboard) => `largest_gap=${text(dashboard.summary_30d?.largest_gap_step) || "n/a"}`,
+  ));
+  checks.push(await checkPublicSummary(
+    "public:conversion_control_dashboard",
+    `${publicBaseUrl}/api/analytics/conversion-control.json?limit=200`,
+    args.timeoutMs,
+    (dashboard) => `largest_dropoff=${text(dashboard.conversion_control_30d?.largest_dropoff_step) || "n/a"}`,
   ));
 
   const blockers = checks

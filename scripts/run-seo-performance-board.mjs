@@ -53,6 +53,7 @@ Options:
   --gsc-site-url <value>      Search Console siteUrl override
   --gsc-start-date <yyyy-mm-dd> Search Console start date override
   --gsc-end-date <yyyy-mm-dd> Search Console end date override
+  --allow-missing-gsc         Allow report generation without Search Console data
   --help                      Show this help
 `);
 }
@@ -67,6 +68,7 @@ function parseArgs(argv) {
     gscSiteUrl: process.env.GSC_SITE_URL || DEFAULT_GSC_SITE_URL,
     gscStartDate: process.env.GSC_START_DATE || defaults.startDate,
     gscEndDate: process.env.GSC_END_DATE || defaults.endDate,
+    allowMissingGsc: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -78,6 +80,7 @@ function parseArgs(argv) {
     else if (token === "--gsc-site-url") args.gscSiteUrl = argv[++i];
     else if (token === "--gsc-start-date") args.gscStartDate = argv[++i];
     else if (token === "--gsc-end-date") args.gscEndDate = argv[++i];
+    else if (token === "--allow-missing-gsc") args.allowMissingGsc = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
       process.exit(0);
@@ -106,6 +109,15 @@ function classifySourceFailure(message) {
   const safe = text(message).toLowerCase();
   if (safe.includes("missing ")) return "skipped";
   return "failed";
+}
+
+function isMissingGscConfiguration(message) {
+  const safe = text(message).toLowerCase();
+  return (
+    safe.includes("missing gsc_access_token") ||
+    safe.includes("missing gsc_access_token or gsc_service_account_key_path") ||
+    safe.includes("missing gsc_site_url")
+  );
 }
 
 function parseSeoPageBlocks(source) {
@@ -341,6 +353,7 @@ function buildPerformanceBoard({ seoPages, analyticsRows, gscRows, sourceStatus,
     gsc_site_url: args.gscSiteUrl,
     gsc_start_date: args.gscStartDate,
     gsc_end_date: args.gscEndDate,
+    gsc_required: !args.allowMissingGsc,
     seo_page_count: seoPages.length,
     gsc_page_count: [...gscByPage.keys()].length,
     top_pages_by_impressions: topPagesByImpressions,
@@ -366,6 +379,7 @@ function buildMarkdown(board) {
   lines.push(`- Created at: ${board.created_at}`);
   lines.push(`- Runtime env loaded from: ${text(board.runtime_env_loaded_from) || "not_found"}`);
   lines.push(`- Search Console status: ${board.source_status.search_console.status} (${board.source_status.search_console.count})`);
+  lines.push(`- Search Console required: ${board.gsc_required ? "yes" : "no"}`);
   lines.push(`- Analytics status: ${board.source_status.analytics.status} (${board.source_status.analytics.count})`);
   lines.push(`- GSC range: ${board.gsc_start_date} -> ${board.gsc_end_date}`);
   lines.push(`- SEO pages known: ${board.seo_page_count}`);
@@ -463,12 +477,17 @@ async function main() {
     });
     sourceStatus.search_console = { status: "ok", count: gscRows.length, message: "" };
   } catch (error) {
+    const message = text(error?.message || error);
+    const missingConfig = isMissingGscConfiguration(message);
     sourceStatus.search_console = {
-      status: classifySourceFailure(error.message),
+      status: args.allowMissingGsc && missingConfig ? "skipped" : "failed",
       count: 0,
-      message: error.message,
+      message,
     };
-    warnings.push(`search_console: ${error.message}`);
+    warnings.push(`search_console: ${message}`);
+    if (!args.allowMissingGsc) {
+      throw new Error(`Search Console is required for SEO performance board. ${message}`);
+    }
   }
 
   if (analyticsRows.length <= 0 && gscRows.length <= 0) {

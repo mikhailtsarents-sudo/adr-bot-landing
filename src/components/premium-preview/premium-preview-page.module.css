@@ -1229,6 +1229,52 @@
   line-height: 1.55;
 }
 
+.ctaChecklistWrap {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(12, 25, 50, 0.08);
+}
+
+.ctaChecklistTitle {
+  margin: 0 0 10px !important;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #152238 !important;
+}
+
+.ctaChecklist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.ctaChecklist li {
+  position: relative;
+  padding-left: 20px;
+  color: #314259;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.ctaChecklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #1565d8;
+  font-weight: 900;
+}
+
+.ctaChecklistNote {
+  margin: 12px 0 0 !important;
+  color: #637089 !important;
+  font-size: 13px;
+}
+
 .trophy {
   width: 160px;
   height: 160px;

@@ -57,6 +57,7 @@ Options:
   --analytics-limit <n>     Max analytics rows to fetch (default: 2000)
   --gsc-row-limit <n>       Max Search Console rows to fetch (default: 500)
   --gsc-site-url <value>    Search Console siteUrl override
+  --allow-missing-gsc       Allow audit generation without Search Console data
   --help                    Show this help
 `);
 }
@@ -67,6 +68,7 @@ function parseArgs(argv) {
     analyticsLimit: 2000,
     gscRowLimit: 500,
     gscSiteUrl: "",
+    allowMissingGsc: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -75,6 +77,7 @@ function parseArgs(argv) {
     else if (token === "--analytics-limit") args.analyticsLimit = Number(argv[++i]);
     else if (token === "--gsc-row-limit") args.gscRowLimit = Number(argv[++i]);
     else if (token === "--gsc-site-url") args.gscSiteUrl = argv[++i];
+    else if (token === "--allow-missing-gsc") args.allowMissingGsc = true;
     else if (token === "--help" || token === "-h") {
       printHelp();
       process.exit(0);
@@ -84,6 +87,15 @@ function parseArgs(argv) {
   }
 
   return args;
+}
+
+function isMissingGscConfiguration(message) {
+  const safe = text(message).toLowerCase();
+  return (
+    safe.includes("missing gsc_access_token") ||
+    safe.includes("missing gsc_access_token or gsc_service_account_key_path") ||
+    safe.includes("missing gsc_site_url")
+  );
 }
 
 function parseSeoPageBlocks(source) {
@@ -241,6 +253,7 @@ function buildMarkdownReport(report) {
   lines.push(`- SEO pages audited: ${report.page_count}`);
   lines.push(`- Analytics status: ${report.source_status.analytics.status} (${report.source_status.analytics.count})`);
   lines.push(`- Search Console status: ${report.source_status.search_console.status} (${report.source_status.search_console.count})`);
+  lines.push(`- Search Console required: ${report.gsc_required ? "yes" : "no"}`);
   if (report.source_status.search_console.message) {
     lines.push(`- Search Console note: ${report.source_status.search_console.message}`);
   }
@@ -450,11 +463,16 @@ async function main() {
       message: "",
     };
   } catch (error) {
+    const message = text(error?.message || error);
+    const missingConfig = isMissingGscConfiguration(message);
     sourceStatus.search_console = {
-      status: "skipped",
+      status: args.allowMissingGsc && missingConfig ? "skipped" : "failed",
       count: 0,
-      message: text(error?.message || error),
+      message,
     };
+    if (!args.allowMissingGsc) {
+      throw new Error(`Search Console is required for SEO page audit. ${message}`);
+    }
   }
 
   const gscByPath = new Map();
@@ -548,6 +566,7 @@ async function main() {
 
   const report = {
     created_at: new Date().toISOString(),
+    gsc_required: !args.allowMissingGsc,
     runtime_env: runtimeEnv,
     source_status: sourceStatus,
     page_count: pagesWithMetrics.length,
