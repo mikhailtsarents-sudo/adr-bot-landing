@@ -139,7 +139,7 @@ export function PremiumPreviewPage({
             </nav>
 
             <div className={styles.navActions}>
-              <LanguageSwitcher compact />
+                <LanguageSwitcher compact currentLang={lang} />
               <TrackedTelegramLink source={`${trackingSource}_nav_telegram`} locale={lang} className={styles.telegramInline}>
                 <Send size={16} />
                 {copy.nav.telegram}
@@ -151,7 +151,7 @@ export function PremiumPreviewPage({
           </div>
 
           <div className={styles.mobileTopBar}>
-            <LanguageSwitcher compact />
+              <LanguageSwitcher compact currentLang={lang} />
           </div>
         </div>
       </div>

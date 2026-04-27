@@ -33,10 +33,11 @@ const LANG_SWITCHER_LABELS: Record<LangCode, string> = {
   hr: "Odaberi jezik",
 };
 
-type Props = { compact?: boolean };
+type Props = { compact?: boolean; currentLang?: LangCode };
 
-export function LanguageSwitcher({ compact = false }: Props) {
-  const { lang, setLang } = useLang();
+export function LanguageSwitcher({ compact = false, currentLang }: Props) {
+  const { lang: contextLang, setLang } = useLang();
+  const lang = currentLang ?? contextLang;
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
