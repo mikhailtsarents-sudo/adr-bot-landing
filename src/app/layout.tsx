@@ -1,4 +1,5 @@
 import { Providers } from "@/components/providers";
+import { DEFAULT_LANG, SUPPORTED_LANGS } from "@/lib/i18n/translations";
 import { allowIndexing, siteConfig, siteUrl } from "@/lib/site";
 import { Barlow_Condensed, Plus_Jakarta_Sans } from "next/font/google";
 import type { Metadata, Viewport } from "next";
@@ -98,6 +99,26 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
+const bootstrapLangScript = `
+  (function () {
+    try {
+      var supported = ${JSON.stringify(SUPPORTED_LANGS)};
+      var fallback = ${JSON.stringify(DEFAULT_LANG)};
+      var pathSegment = (location.pathname.split('/')[1] || '').toLowerCase();
+      var saved = null;
+      try { saved = localStorage.getItem('site_language'); } catch (_) {}
+      var browser = (navigator.language || '').slice(0, 2).toLowerCase();
+      var lang =
+        supported.indexOf(pathSegment) !== -1 ? pathSegment :
+        supported.indexOf(saved) !== -1 ? saved :
+        supported.indexOf(browser) !== -1 ? browser :
+        fallback;
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    } catch (_) {}
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -107,6 +128,7 @@ export default function RootLayout({
       className={`h-full antialiased ${plusJakarta.variable} ${barlowCondensed.variable}`}
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: bootstrapLangScript }} />
         <meta
           name="msvalidate.01"
           content="2028F869A48CF5B416545FE84E778B72"
