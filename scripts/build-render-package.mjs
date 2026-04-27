@@ -333,7 +333,7 @@ function buildShotstackPayload(input, timeline, sceneTextEntries, subtitlesEnabl
   const durationTargetSec = Number(input.duration_target_sec || input.duration_sec || 12);
   const useTalkingHeadAsMainTrack = Boolean(talkingHeadUrl) && !isQuestionFlow;
   const captionClips = subtitlesEnabled
-    ? buildSceneCaptionClips(timeline, sceneTextEntries, text(input.template_variant) || "quiz_safe")
+    ? buildSceneCaptionClips(timeline, sceneTextEntries, text(input.content_family) || "QUESTION")
     : [];
   const styledCaptionClips = captionClips;
   if (isQuestionFlow && talkingHeadUrl) {
@@ -565,7 +565,9 @@ async function main() {
   const captionEntries = timeline.map((scene, i) => ({
     id: scene.scene_id,
     role: scene.role,
-    text: slidesWithText[i]?.text || "",
+    // CTA clips are fully self-contained (family-aware card) — give a non-empty sentinel
+    // so buildSceneCaptionClips doesn't skip the CTA scene.
+    text: scene.role === "cta" ? "cta" : (slidesWithText[i]?.text || ""),
   }));
   const subtitlesSrt = subtitlesEnabled ? buildSubtitlesSrt(timeline, captionEntries) : "";
   const hashtags = filterProductionHashtags(normalizeHashtags(input.hashtags));

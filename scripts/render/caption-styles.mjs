@@ -91,8 +91,11 @@ export function pickCtaVariant(contentFamily, sourceId) {
   return pool[hash % pool.length];
 }
 
-// Telegram CTA — modern glassmorphism floating card
-function buildCtaClips({ start, length }) {
+// Telegram CTA — modern glassmorphism floating card, family-aware
+function buildCtaClips({ start, length, contentFamily = "QUESTION" }) {
+  const family = String(contentFamily || "QUESTION").toUpperCase();
+  const cfg = CTA_BY_FAMILY[family] || CTA_BY_FAMILY.QUESTION;
+
   const cardWidth = 980;
   const cardHeight = 560;
 
@@ -105,6 +108,9 @@ function buildCtaClips({ start, length }) {
     <path d="M22 48 L18 38 M22 48 L32 44"
       stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/>
   </svg>`;
+
+  const accentRgb = family === "WORD" ? "74,222,128" : family === "NEWS" ? "250,204,21" : "34,158,217";
+  const accentHex = cfg.accent;
 
   const css = [
     FONT_IMPORT,
@@ -119,26 +125,26 @@ function buildCtaClips({ start, length }) {
     `box-shadow:0 24px 80px rgba(0,0,0,0.50);`,
     `display:flex;flex-direction:column;align-items:center;gap:12px;overflow:visible;}`,
     `.card::before{content:'';position:absolute;top:-80px;left:-80px;width:360px;height:360px;`,
-    `background:radial-gradient(circle,rgba(34,158,217,0.28) 0%,transparent 65%);pointer-events:none;border-radius:50%;}`,
+    `background:radial-gradient(circle,rgba(${accentRgb},0.28) 0%,transparent 65%);pointer-events:none;border-radius:50%;}`,
     `.top-row{display:flex;align-items:center;gap:20px;}`,
     `.tg-icon{width:110px;height:110px;border-radius:50%;flex-shrink:0;`,
-    `background:linear-gradient(135deg,#2AABEE,#229ED9);`,
+    `background:linear-gradient(135deg,${accentHex},${accentHex}CC);`,
     `display:flex;align-items:center;justify-content:center;`,
-    `box-shadow:0 10px 30px rgba(34,158,217,0.45);}`,
-    `.badge{background:rgba(34,158,217,0.95);color:#fff;`,
+    `box-shadow:0 10px 30px rgba(${accentRgb},0.45);}`,
+    `.badge{background:rgba(${accentRgb},0.95);color:#fff;`,
     `font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:32px;`,
     `border-radius:18px;padding:10px 22px;}`,
     `.headline{font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:68px;`,
     `color:#fff;line-height:1.0;text-align:center;`,
     `text-shadow:0 4px 18px rgba(0,0,0,0.50);}`,
     `.sub{font-family:'Montserrat',Arial,sans-serif;font-weight:800;font-size:38px;`,
-    `color:#229ED9;text-align:center;}`,
+    `color:${accentHex};text-align:center;}`,
     `.btn-wrap{position:relative;width:740px;}`,
-    `@keyframes pulse{0%,100%{box-shadow:0 14px 40px rgba(34,158,217,0.45);}`,
-    `50%{box-shadow:0 14px 60px rgba(34,158,217,0.75),0 0 40px rgba(34,158,217,0.30);}}`,
+    `@keyframes pulse{0%,100%{box-shadow:0 14px 40px rgba(${accentRgb},0.45);}`,
+    `50%{box-shadow:0 14px 60px rgba(${accentRgb},0.75),0 0 40px rgba(${accentRgb},0.30);}}`,
     `@keyframes arrow-move{0%,70%,100%{transform:translateX(0);}85%{transform:translateX(5px);}}`,
     `.btn{display:flex;align-items:center;justify-content:center;gap:12px;`,
-    `background:linear-gradient(135deg,#2AABEE,#168BD2);color:#fff;`,
+    `background:linear-gradient(135deg,${accentHex},${accentHex}CC);color:#fff;`,
     `font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:38px;`,
     `padding:22px 42px;border-radius:999px;border:none;width:100%;`,
     `animation:pulse 2.5s ease-in-out infinite;`,
@@ -151,12 +157,12 @@ function buildCtaClips({ start, length }) {
     `<div class="card">`,
     `<div class="top-row">`,
     `<div class="tg-icon">${planeSvg}</div>`,
-    `<div class="badge">ADR Quiz Bot</div>`,
+    `<div class="badge">${cfg.badge}</div>`,
     `</div>`,
-    `<div class="headline">Schaffst du die<br>ADR-Pr&uuml;fung?</div>`,
-    `<div class="sub">Kostenlos im Telegram &uuml;ben</div>`,
+    `<div class="headline">${cfg.headline}</div>`,
+    `<div class="sub">${cfg.sub}</div>`,
     `<div class="btn-wrap">`,
-    `<div class="btn">Jetzt kostenlos starten <span class="arrow">&rarr;</span></div>`,
+    `<div class="btn">${cfg.btn} <span class="arrow">&rarr;</span></div>`,
     `<div class="scribble">${scribbleSvg}</div>`,
     `</div>`,
     `</div>`,
@@ -220,97 +226,78 @@ function buildAnswerLines(text) {
     });
 }
 
-// Frosted glass pill backdrop — semi-transparent rounded card behind text lines
-function buildFrostedGlassBackdrop({ start, length, offsetY = -0.05, lineCount = 1, fontSize = 52 }) {
+// Unified clip: frosted-glass backdrop + all text lines in ONE HTML element.
+// Eliminates sub-pixel compositing seams that occur between separate per-line clips.
+function buildMultiLineClip({ lines, fontSize, start, length, role, baseY = -0.05, color }) {
   const lineH = fontSize * 3;
-  const textBlockH = lineCount * lineH;
   const padV = 28;
-  const cardH = textBlockH + padV * 2;
-  const cardW = 880;
+  const cardH = lines.length * lineH + padV * 2;
   const outerH = cardH + 48;
-  const css =
-    `body{margin:0;padding:0;background:transparent;width:960px;height:${outerH}px;` +
-    `display:flex;align-items:center;justify-content:center;}` +
-    `.pill{width:${cardW}px;height:${cardH}px;` +
-    `background:rgba(8,14,26,0.54);` +
-    `border:1px solid rgba(255,255,255,0.13);` +
-    `border-radius:28px;` +
-    `box-shadow:0 6px 36px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.07);}`;
-  return {
-    asset: { type: "html", html: `<div class="pill"></div>`, css, width: 960, height: outerH },
+  const t = typo(role);
+  const r = String(role || "").toLowerCase();
+
+  const linesHtml = lines
+    .map((html) => `<p class="line">${r === "hook" ? highlightAccentWord(html) : html}</p>`)
+    .join("");
+
+  const css = [
+    FONT_IMPORT,
+    `body{margin:0;padding:0;background:transparent;width:960px;height:${outerH}px;`,
+    `display:flex;align-items:center;justify-content:center;}`,
+    `.card{width:880px;background:rgba(8,14,26,0.54);`,
+    `border:1px solid rgba(255,255,255,0.13);border-radius:28px;`,
+    `padding:${padV}px 40px;display:flex;flex-direction:column;align-items:center;gap:0;`,
+    `box-shadow:0 6px 36px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.07);}`,
+    `.line{color:${color};font-family:'Montserrat',Arial,sans-serif;font-size:${fontSize}px;`,
+    `line-height:${lineH}px;font-weight:${t.weight};margin:0;padding:0;text-align:center;`,
+    `word-break:break-word;overflow-wrap:anywhere;letter-spacing:${t.tracking};`,
+    `text-transform:${t.transform};text-shadow:${TEXT_SHADOWS[t.shadow] || TEXT_SHADOWS.medium};}`,
+  ].join("");
+
+  return [{
+    asset: { type: "html", html: `<div class="card">${linesHtml}</div>`, css, width: 960, height: outerH },
     position: "center",
     start: Number((start || 0).toFixed(2)),
     length: Number(Math.max(length || 0.1, 0.1).toFixed(2)),
-    offset: { x: 0, y: Number(offsetY.toFixed(6)) },
-  };
+    offset: { x: 0, y: Number(baseY.toFixed(6)) },
+  }];
 }
 
-// Build per-line clips for a given role/text/timing
+// Build caption clips for a given role/text/timing
 export function buildCaptionClip({ role, text: captionText, start, length, contentFamily = "QUESTION" }) {
   const r = String(role || "").toLowerCase();
   const s = Number(start || 0);
   const l = Number(Math.max(length || 0.1, 0.1));
 
   if (r === "cta") {
-    return buildCtaClips({ start: s, length: l, headline: captionText || undefined, contentFamily });
+    return buildCtaClips({ start: s, length: l, contentFamily });
   }
 
   if (r === "answers") {
     const answerLines = buildAnswerLines(captionText);
     if (answerLines.length === 0) return [];
-    const fs = 42;
-    const step = lineStep(fs);
-    const baseY = -0.05;
-    return [
-      buildFrostedGlassBackdrop({ start: s, length: l, offsetY: baseY, lineCount: answerLines.length, fontSize: fs }),
-      ...answerLines.map((html, i) =>
-        buildLineClip({ html, color: "#FFFFFF", fontSize: fs, start: s, length: l,
-          offsetY: baseY + ((answerLines.length - 1) / 2 - i) * step, role: r }),
-      ),
-    ];
+    return buildMultiLineClip({ lines: answerLines, fontSize: 42, start: s, length: l, role: r, baseY: -0.05, color: "#FFFFFF" });
   }
 
   if (r === "hook" || r === "question") {
     const { fontSize: fs, lines } = computeTextLayout(r, captionText);
     if (lines.length === 0) return [];
-    const step = lineStep(fs);
-    const baseY = -0.05;
-    return [
-      buildFrostedGlassBackdrop({ start: s, length: l, offsetY: baseY, lineCount: lines.length, fontSize: fs }),
-      ...lines.map((line, i) =>
-        buildLineClip({ html: esc(line), color: "#FFFFFF", fontSize: fs, start: s, length: l,
-          offsetY: baseY + ((lines.length - 1) / 2 - i) * step, role: r, accentWord: r === "hook" }),
-      ),
-    ];
+    return buildMultiLineClip({ lines: lines.map(esc), fontSize: fs, start: s, length: l, role: r, baseY: -0.05, color: "#FFFFFF" });
   }
 
   if (r === "timer") {
     const { fontSize: fs, lines } = computeTextLayout(r, captionText);
     if (lines.length === 0) return [];
-    const step = lineStep(fs);
-    return [
-      buildFrostedGlassBackdrop({ start: s, length: l, offsetY: 0, lineCount: lines.length, fontSize: fs }),
-      ...lines.map((line, i) =>
-        buildLineClip({ html: esc(line), color: "#FACC15", fontSize: fs, start: s, length: l,
-          offsetY: ((lines.length - 1) / 2 - i) * step, role: r }),
-      ),
-    ];
+    return buildMultiLineClip({ lines: lines.map(esc), fontSize: fs, start: s, length: l, role: r, baseY: 0, color: "#FACC15" });
   }
 
   if (r === "answer") {
     const { fontSize: fs, lines } = computeTextLayout(r, captionText);
     if (lines.length === 0) return [];
-    const step = lineStep(fs);
-    return [
-      buildFrostedGlassBackdrop({ start: s, length: l, offsetY: 0, lineCount: lines.length, fontSize: fs }),
-      ...lines.map((line, i) =>
-        buildLineClip({ html: esc(line), color: "#4ADE80", fontSize: fs, start: s, length: l,
-          offsetY: ((lines.length - 1) / 2 - i) * step, role: r }),
-      ),
-    ];
+    return buildMultiLineClip({ lines: lines.map(esc), fontSize: fs, start: s, length: l, role: r, baseY: 0, color: "#4ADE80" });
   }
 
-  // Default (transcript etc)
+  // Default (transcript etc) — no backdrop, plain text near top
   const lines = splitLines(captionText, 22, 2);
   if (lines.length === 0) return [];
   const fs = 46;
@@ -321,7 +308,7 @@ export function buildCaptionClip({ role, text: captionText, start, length, conte
   );
 }
 
-export function buildSceneCaptionClips(timeline, sceneTextEntries) {
+export function buildSceneCaptionClips(timeline, sceneTextEntries, contentFamily = "QUESTION") {
   const textByRole = new Map((sceneTextEntries || []).map((e) => [e.role, e.text]));
   const clips = [];
 
@@ -334,6 +321,7 @@ export function buildSceneCaptionClips(timeline, sceneTextEntries) {
       text: captionText,
       start: scene.start_sec,
       length: scene.end_sec - scene.start_sec,
+      contentFamily,
     });
 
     clips.push(...(Array.isArray(sceneClips) ? sceneClips : [sceneClips]));
