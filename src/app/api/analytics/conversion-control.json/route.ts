@@ -24,6 +24,7 @@ export async function GET(request: Request) {
         source: analyticsDashboard.source,
         timezone: analyticsDashboard.timezone,
         funnel_30d: analyticsDashboard.funnel_30d,
+        dashboard: analyticsDashboard.conversion_control_30d,
         conversion_control_30d: analyticsDashboard.conversion_control_30d,
       },
       {
