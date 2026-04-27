@@ -383,7 +383,7 @@ const de: PremiumPreviewCopy = {
     ctaButton: "Jetzt kostenlos starten",
   },
   footer: {
-    copyright: "© 2026 ADR Bot · Premium Preview",
+    copyright: "© 2026 ADR Bot",
     imprint: "Impressum",
     privacy: "Datenschutz",
     terms: "AGB",
@@ -653,7 +653,7 @@ const en: PremiumPreviewCopy = {
     ctaButton: "Start free now",
   },
   footer: {
-    copyright: "© 2026 ADR Bot · Premium Preview",
+    copyright: "© 2026 ADR Bot",
     imprint: "Imprint",
     privacy: "Privacy",
     terms: "Terms",
@@ -925,7 +925,7 @@ const ru: PremiumPreviewCopy = {
     ctaButton: "Начать бесплатно",
   },
   footer: {
-    copyright: "© 2026 ADR Bot · Premium Preview",
+    copyright: "© 2026 ADR Bot",
     imprint: "Impressum",
     privacy: "Datenschutz",
     terms: "AGB",
