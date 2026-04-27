@@ -379,6 +379,10 @@ Follow-up impact pass on `2026-04-25` improved this further:
   1. Text lines were rendered in **reversed order** — Shotstack positive offset.y is UP, so the formula `(i - (n-1)/2) * step` put the first line at the bottom and the last at the top. Fixed by flipping to `((n-1)/2 - i) * step` in all five line-rendering loops.
   2. `lineStep` added 16px inter-line gap, but the frosted-glass backdrop used only 8px — leaving a 16px transparent gap between clips where the semi-transparent pill background showed against the video. Fixed by removing the gap entirely (`lineStep = fontSize*3/1920`) and updating backdrop height to match.
   - Commit: `3238038`
+- **buildMultiLineClip (2026-04-27)**: Replaced separate backdrop + per-line clips with a single HTML element containing all text lines. Eliminates all sub-pixel compositor seams entirely — stripe is now structurally impossible.
+  - Commit: `aecaf0e`
+- **CTA family-aware (2026-04-27)**: `buildCtaClips` now accepts `contentFamily` and picks badge/headline/sub/btn/accent colour from `CTA_BY_FAMILY` (QUESTION=blue, WORD=green, NEWS=yellow). `buildSceneCaptionClips` and the `buildShotstackPayload` call chain now pass `content_family` end-to-end.
+  - Commit: `aecaf0e`
 - Text/audio desync on latest QUESTION video — timing calibration still open
 - CTA glassmorphism card with scribble arrow: shipped `b0dffb3`
 
