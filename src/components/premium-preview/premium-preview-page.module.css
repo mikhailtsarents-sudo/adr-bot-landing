@@ -1400,6 +1400,11 @@
     max-width: 11ch;
   }
 
+  .heroTitle span {
+    display: block;
+    margin-top: 0.08em;
+  }
+
   .heroText {
     font-size: 16px;
     line-height: 1.58;
