@@ -22,7 +22,13 @@ const STORAGE_KEY = "site_language";
 function detectLang(): LangCode {
   if (typeof window === "undefined") return DEFAULT_LANG;
 
-  // Priority 1: user has manually selected a language
+  // Priority 1: explicit language route on the current page
+  const pathSegment = window.location.pathname.split("/")[1]?.toLowerCase() ?? "";
+  if ((SUPPORTED_LANGS as readonly string[]).includes(pathSegment)) {
+    return pathSegment as LangCode;
+  }
+
+  // Priority 2: user has manually selected a language
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && (SUPPORTED_LANGS as readonly string[]).includes(saved)) {
@@ -32,13 +38,13 @@ function detectLang(): LangCode {
     // localStorage blocked (private mode etc.) — continue
   }
 
-  // Priority 2: browser/device language
+  // Priority 3: browser/device language
   const browserLang = (navigator.language ?? "").slice(0, 2).toLowerCase();
   if ((SUPPORTED_LANGS as readonly string[]).includes(browserLang)) {
     return browserLang as LangCode;
   }
 
-  // Priority 3: fallback to German
+  // Priority 4: fallback to German
   return DEFAULT_LANG;
 }
 

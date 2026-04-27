@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
+import { LANDING_ROUTE_BY_LANG } from "@/lib/landing-locales";
 import { siteUrl } from "@/lib/site";
 import { seoPageList } from "@/lib/seo-pages";
 
 const routes = [
-  "",
-  "/ru",
+  ...Object.values(LANDING_ROUTE_BY_LANG),
   "/impressum",
   "/datenschutz",
   "/legal",

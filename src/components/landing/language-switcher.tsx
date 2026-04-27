@@ -1,6 +1,7 @@
 "use client";
 
 import { SUPPORTED_LANGS, type LangCode } from "@/lib/i18n/translations";
+import { LANDING_ROUTE_BY_LANG } from "@/lib/landing-locales";
 import { useLang } from "@/lib/i18n/use-lang";
 import { ChevronDown, Globe } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
@@ -34,12 +35,6 @@ const LANG_SWITCHER_LABELS: Record<LangCode, string> = {
 
 type Props = { compact?: boolean };
 
-const LANDING_ROUTE_BY_LANG: Partial<Record<LangCode, string>> = {
-  de: "/",
-  en: "/en",
-  ru: "/ru",
-};
-
 export function LanguageSwitcher({ compact = false }: Props) {
   const { lang, setLang } = useLang();
   const pathname = usePathname();
@@ -49,7 +44,7 @@ export function LanguageSwitcher({ compact = false }: Props) {
 
   function resolveLandingRoute(code: LangCode) {
     if (!pathname) return null;
-    if (!["/", "/en", "/ru"].includes(pathname)) return null;
+    if (!Object.values(LANDING_ROUTE_BY_LANG).includes(pathname)) return null;
     return LANDING_ROUTE_BY_LANG[code] ?? null;
   }
 

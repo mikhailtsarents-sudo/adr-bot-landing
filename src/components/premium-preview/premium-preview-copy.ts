@@ -1,4 +1,4 @@
-import type { LangCode } from "@/lib/i18n/translations";
+import { translations, type LangCode } from "@/lib/i18n/translations";
 
 export type PreviewCard = {
   title: string;
@@ -62,7 +62,7 @@ export type PremiumPreviewCopy = {
   hero: {
     eyebrow: string;
     title: string;
-    highlight: string;
+    highlight?: string;
     text: string;
     primary: string;
     secondary: string;
@@ -117,6 +117,80 @@ export type PremiumPreviewCopy = {
     terms: string;
   };
 };
+
+type SupplementalCopy = {
+  ui: PremiumPreviewCopy["ui"];
+  nav: Pick<PremiumPreviewCopy["nav"], "ariaLabel" | "features" | "courses" | "pricing" | "faq"> &
+    Partial<Pick<PremiumPreviewCopy["nav"], "telegram" | "primary">>;
+  hero: Pick<PremiumPreviewCopy["hero"], "title" | "trustPills"> &
+    Partial<Pick<PremiumPreviewCopy["hero"], "eyebrow" | "highlight" | "text" | "primary" | "secondary" | "microNote">>;
+  visual: PremiumPreviewCopy["visual"];
+  courses: PremiumPreviewCopy["courses"];
+  carousel: PremiumPreviewCopy["carousel"];
+  pricing: PremiumPreviewCopy["pricing"];
+  faq: PremiumPreviewCopy["faq"];
+  footer: PremiumPreviewCopy["footer"];
+  stepsTitle?: string;
+  extraStep: StepCard;
+};
+
+function buildLocalizedCopy(
+  lang: Exclude<LangCode, "de" | "en" | "ru">,
+  supplemental: SupplementalCopy,
+): PremiumPreviewCopy {
+  const base = translations[lang];
+  const benefitEmojis = ["✈️", "🎯", "📋", "📊", "🕘"];
+  const stepEmojis = ["✈️", "📖", "✏️"];
+
+  return {
+    ui: supplemental.ui,
+    nav: {
+      ariaLabel: supplemental.nav.ariaLabel,
+      features: supplemental.nav.features,
+      courses: supplemental.nav.courses,
+      pricing: supplemental.nav.pricing,
+      faq: supplemental.nav.faq,
+      telegram: supplemental.nav.telegram ?? base.nav.openInTelegram,
+      primary: supplemental.nav.primary ?? base.hero.ctaPrimary,
+    },
+    hero: {
+      eyebrow: supplemental.hero.eyebrow ?? base.hero.eyebrow,
+      title: supplemental.hero.title,
+      highlight: supplemental.hero.highlight,
+      text: supplemental.hero.text ?? base.hero.description,
+      primary: supplemental.hero.primary ?? base.hero.ctaPrimary,
+      secondary: supplemental.hero.secondary ?? base.hero.ctaSecondary,
+      microNote: supplemental.hero.microNote ?? base.hero.note,
+      trustPills: supplemental.hero.trustPills,
+    },
+    visual: supplemental.visual,
+    courses: supplemental.courses,
+    benefits: {
+      title: base.benefits.title,
+      cards: base.benefits.cards.slice(0, 5).map((card, index) => ({
+        emoji: benefitEmojis[index] ?? "✦",
+        title: card.title,
+        body: card.text,
+      })),
+    },
+    steps: {
+      title: supplemental.stepsTitle ?? base.howItWorks.title,
+      cards: [
+        ...base.howItWorks.steps.map((step, index) => ({
+          step: String(index + 1),
+          emoji: stepEmojis[index] ?? "✦",
+          title: step.title,
+          body: step.text,
+        })),
+        supplemental.extraStep,
+      ],
+    },
+    carousel: supplemental.carousel,
+    pricing: supplemental.pricing,
+    faq: supplemental.faq,
+    footer: supplemental.footer,
+  };
+}
 
 const de: PremiumPreviewCopy = {
   ui: {
@@ -932,17 +1006,1047 @@ const ru: PremiumPreviewCopy = {
   },
 };
 
+const uk = buildLocalizedCopy("uk", {
+  ui: {
+    carouselNavLabel: "Навігація прев’ю",
+    previousPreview: "Попереднє прев’ю",
+    nextPreview: "Наступне прев’ю",
+    previewLabel: "Прев’ю",
+  },
+  nav: {
+    ariaLabel: "Преміум-прев’ю ADR Bot",
+    features: "Можливості",
+    courses: "Курси",
+    pricing: "Ціни",
+    faq: "FAQ",
+    telegram: "У Telegram",
+    primary: "Почати безкоштовно",
+  },
+  hero: {
+    title: "Простий старт до іспиту ADR",
+    highlight: "німецькою",
+    primary: "Почати безкоштовно",
+    secondary: "Як це працює",
+    microNote: "Безкоштовно. Без реєстрації. Відразу в Telegram.",
+    trustPills: [
+      { icon: "✈", title: "У Telegram", subtitle: "Старт одразу" },
+      { icon: "🇩🇪", title: "Німецькою", subtitle: "Легше зрозуміти" },
+      { icon: "✦", title: "Крок за кроком", subtitle: "Більше впевненості" },
+    ],
+  },
+  visual: {
+    baseCourse: "Basiskurs",
+    tankCourse: "Tank",
+    termsCourse: "Терміни",
+    progress: "Прогрес",
+    lessonChip: "Урок: 2.3 Перевезення в цистернах",
+    question: "Яке твердження правильне?",
+    statement: "Автоцистерна має бути позначена помаранчевими табличками.",
+    answers: [
+      "A Правильно",
+      "B Неправильно",
+      "C Лише для небезпечних вантажів класу 3",
+    ],
+    feedbackTitle: "Чудово!",
+    feedbackText: "Правильна відповідь — A. Так тримати.",
+    inputPlaceholder: "Повідомлення",
+  },
+  courses: {
+    cards: [
+      {
+        emoji: "📖",
+        title: "Basiskurs",
+        body: "Основи, правила й важливі вимоги пояснені зрозуміло та без перевантаження.",
+        meta: "12 уроків",
+      },
+      {
+        emoji: "🚛",
+        title: "Tank",
+        body: "Спеціальні знання з перевезення в цистернах — практично й по суті.",
+        meta: "8 уроків",
+      },
+      {
+        emoji: "📘",
+        title: "Терміни",
+        body: "Ключові ADR-терміни простими словами й у правильному контексті.",
+        meta: "120+ термінів",
+      },
+    ],
+  },
+  carousel: {
+    title: "Як виглядає навчання з ADR Bot",
+    description:
+      "Кілька екранів показують, як усередині бота виглядають навчання, повторення й швидкий пошук.",
+    cards: [
+      { title: "Пояснення", body: "Короткі відповіді показують не лише що правильно, а й чому.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Квіз", body: "Питання у форматі іспиту прямо всередині діалогу Telegram.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "Практичний кейс", body: "Тренуй реальні ситуації з перевезення, Tank і документації.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "Прогрес", body: "Одразу видно, які теми вже тримаються, а де потрібне повторення.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Терміни", body: "Швидше розумій ADR-терміни на кшталт UN-номера, знаків небезпеки й tunnel code.", accents: ["blue", "yellow", "short", "tinyGreen"] },
+      { title: "Робота над помилками", body: "Неправильні відповіді повертаються доти, доки знання не стане стійким.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
+      { title: "Імітація іспиту", body: "Тренування в реалістичнішому режимі з чітким розбором після спроби.", accents: ["blue", "short", "neutral", "yellow"] },
+      { title: "Спецзнання по Tank", body: "Окремі матеріали про маркування, перевезення й типові питання.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Basiskurs", body: "Вивчай основи, обов’язки й важливі правила крок за кроком.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Список на повторення", body: "Зберігай складні питання й терміни, щоб повернутися до них пізніше.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
+      { title: "Ціль на день", body: "Невеликі цілі допомагають навчатися рівно й без випадіння з ритму.", accents: ["blue", "short", "green", "neutral"] },
+      { title: "Швидкий пошук", body: "Швидше розбирайся в документах, маркуванні та формулюваннях, коли це потрібно.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+    ],
+  },
+  pricing: {
+    title: "Проста модель ціни. Без здогадок.",
+    description:
+      "Два зрозумілі варіанти: почати безкоштовно або один раз заплатити 15 EUR за повний доступ.",
+    cards: [
+      {
+        title: "Безкоштовний доступ",
+        subtitle: "Щоб подивитися формат і зробити перші кроки всередині бота.",
+        price: "0 EUR",
+        suffix: "/ безкоштовно",
+        features: [
+          "Спробувати перші приклади питань",
+          "Подивитися частину термінів",
+          "Відразу стартувати в Telegram",
+          "Без нової навчальної платформи",
+        ],
+        cta: "Спробувати безкоштовно",
+        source: "premium_preview_free",
+      },
+      {
+        title: "Повний доступ",
+        subtitle: "Платиш один раз і тренуєшся з усім доступним навчальним матеріалом.",
+        price: "15 EUR",
+        suffix: "/ один раз",
+        features: [
+          "Увесь доступний навчальний контент",
+          "Basiskurs, Tank і терміни",
+          "Розширені квізи й практичні кейси",
+          "Пояснення, повторення й прогрес",
+          "Без щомісячної оплати",
+        ],
+        cta: "Відкрити повний доступ за 15 EUR",
+        source: "premium_preview_full_access",
+        featured: true,
+        badge: "Full Access",
+      },
+    ],
+  },
+  faq: {
+    title: "Поширені запитання",
+    items: [
+      {
+        question: "Як працює ADR Bot?",
+        answer:
+          "Ти відкриваєш Telegram, запускаєш бота й обираєш свій навчальний шлях. Далі отримуєш питання, терміни й пояснення крок за кроком.",
+      },
+      {
+        question: "Чи потрібна база наперед?",
+        answer:
+          "Ні. Вхід спеціально зроблений простим. У теми Tank та спеціальні блоки можна заглибитися пізніше.",
+      },
+      {
+        question: "На яких пристроях це працює?",
+        answer: "Скрізь, де працює Telegram: смартфон, планшет або комп’ютер.",
+      },
+      {
+        question: "Full Access — це підписка?",
+        answer:
+          "Ні. У цьому прев’ю Full Access показаний як разовий платіж 15 EUR.",
+      },
+    ],
+    ctaTitle: "Хочеш іти на ADR-іспит спокійніше?",
+    ctaDescription:
+      "Почни безкоштовно в Telegram і навчайся тоді, коли тобі зручно.",
+    ctaButton: "Почати безкоштовно",
+  },
+  footer: {
+    copyright: "© 2026 ADR Bot",
+    imprint: "Вихідні дані",
+    privacy: "Конфіденційність",
+    terms: "Умови",
+  },
+  extraStep: {
+    step: "4",
+    emoji: "🏆",
+    title: "Іди на іспит спокійніше",
+    body: "Нарощуй рутину й підходь до ADR-іспиту з більшою впевненістю.",
+  },
+});
+
+const tr = buildLocalizedCopy("tr", {
+  ui: {
+    carouselNavLabel: "Önizleme gezinmesi",
+    previousPreview: "Önceki önizleme",
+    nextPreview: "Sonraki önizleme",
+    previewLabel: "Önizleme",
+  },
+  nav: {
+    ariaLabel: "ADR Bot premium önizleme",
+    features: "Özellikler",
+    courses: "Kurslar",
+    pricing: "Fiyatlandırma",
+    faq: "SSS",
+    telegram: "Telegram'da",
+    primary: "Ücretsiz başla",
+  },
+  hero: {
+    title: "ADR sınavına daha basit bir başlangıç",
+    highlight: "Almanca",
+    primary: "Ücretsiz başla",
+    secondary: "Nasıl çalışır",
+    microNote: "Ücretsiz. Kayıt yok. Doğrudan Telegram'da.",
+    trustPills: [
+      { icon: "✈", title: "Telegram'da", subtitle: "Anında başla" },
+      { icon: "🇩🇪", title: "Almanca", subtitle: "Daha kolay anla" },
+      { icon: "✦", title: "Adım adım", subtitle: "Güven kazan" },
+    ],
+  },
+  visual: {
+    baseCourse: "Basiskurs",
+    tankCourse: "Tank",
+    termsCourse: "Terimler",
+    progress: "İlerleme",
+    lessonChip: "Ders: 2.3 Tanklarda taşıma",
+    question: "Hangi ifade doğrudur?",
+    statement: "Bir tank aracı turuncu levhalarla işaretlenmelidir.",
+    answers: [
+      "A Doğru",
+      "B Yanlış",
+      "C Sadece sınıf 3 tehlikeli maddeler için",
+    ],
+    feedbackTitle: "Harika!",
+    feedbackText: "Doğru cevap A. Böyle devam et.",
+    inputPlaceholder: "Mesaj",
+  },
+  courses: {
+    cards: [
+      {
+        emoji: "📖",
+        title: "Basiskurs",
+        body: "Temeller, kurallar ve önemli gereklilikler daha anlaşılır şekilde açıklanır.",
+        meta: "12 ders",
+      },
+      {
+        emoji: "🚛",
+        title: "Tank",
+        body: "Tank taşımacılığı için özel bilgi — pratik ve sindirmesi daha kolay.",
+        meta: "8 ders",
+      },
+      {
+        emoji: "📘",
+        title: "Terimler",
+        body: "Önemli ADR terimleri basit dille ve doğru bağlam içinde açıklanır.",
+        meta: "120+ terim",
+      },
+    ],
+  },
+  carousel: {
+    title: "ADR Bot ile öğrenmek nasıl görünüyor?",
+    description:
+      "Birden fazla ekran, bot içinde öğrenme, tekrar ve hızlı bakışın nasıl hissettirdiğini gösterir.",
+    cards: [
+      { title: "Açıklama", body: "Kısa cevaplar yalnızca neyin doğru olduğunu değil, nedenini de gösterir.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Quiz", body: "Sınava benzer çoktan seçmeli sorular doğrudan Telegram diyaloğunda gelir.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "Senaryo", body: "Taşıma, Tank ve belgelerden gerçek durumları çalış.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "İlerleme", body: "Hangi konuların oturduğunu ve nerede tekrar gerektiğini hemen görürsün.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Terimler", body: "UN numarası, tehlike etiketi ve tünel kodu gibi ADR terimlerini daha hızlı anla.", accents: ["blue", "yellow", "short", "tinyGreen"] },
+      { title: "Hata çalışması", body: "Yanlış cevaplar bilgi kalıcı olana kadar geri gelir.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
+      { title: "Sınav simülasyonu", body: "Daha gerçekçi koşullarda çalış ve sonrasında net geri bildirim al.", accents: ["blue", "short", "neutral", "yellow"] },
+      { title: "Tank uzmanlığı", body: "Tank işaretleme, taşıma ve tipik sorular için özel içerik.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Basiskurs", body: "Temel yükümlülükleri ve önemli kuralları adım adım öğren.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Kayıt listesi", body: "Zor soruları ve terimleri kaydet, sonra hedefli şekilde tekrar et.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
+      { title: "Günlük hedef", body: "Küçük hedefler ritmi korumana ve düzenli ilerlemene yardım eder.", accents: ["blue", "short", "green", "neutral"] },
+      { title: "Hızlı bakış", body: "Belgeleri, işaretleri ve ifadeleri gerektiği anda daha hızlı anla.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+    ],
+  },
+  pricing: {
+    title: "Basit fiyatlandırma. Tahmin yok.",
+    description:
+      "İki net seçenek: ücretsiz başla ya da tam erişim için bir kez 15 EUR öde.",
+    cards: [
+      {
+        title: "Ücretsiz erişim",
+        subtitle: "Formatı görmek ve bot içinde ilk adımları atmak için ideal.",
+        price: "0 EUR",
+        suffix: "/ ücretsiz",
+        features: [
+          "İlk örnek soruları dene",
+          "Seçili ADR terimlerini gör",
+          "Doğrudan Telegram'da başla",
+          "Ek öğrenme platformu yok",
+        ],
+        cta: "Ücretsiz dene",
+        source: "premium_preview_free",
+      },
+      {
+        title: "Tam erişim",
+        subtitle: "Bir kez öde ve mevcut tüm öğrenme içeriğiyle çalış.",
+        price: "15 EUR",
+        suffix: "/ tek sefer",
+        features: [
+          "Mevcut tüm öğrenme içeriği",
+          "Basiskurs, Tank ve terimler",
+          "Genişletilmiş quizler ve pratik senaryolar",
+          "Açıklamalar, tekrar ve ilerleme",
+          "Aylık ödeme yok",
+        ],
+        cta: "15 EUR ile tam erişimi aç",
+        source: "premium_preview_full_access",
+        featured: true,
+        badge: "Full Access",
+      },
+    ],
+  },
+  faq: {
+    title: "Sık sorulan sorular",
+    items: [
+      {
+        question: "ADR Bot nasıl çalışır?",
+        answer:
+          "Telegram'ı açarsın, botu başlatırsın ve öğrenme yolunu seçersin. Sonra adım adım sorular, terimler ve açıklamalar alırsın.",
+      },
+      {
+        question: "Önceden bilgi gerekir mi?",
+        answer:
+          "Hayır. Giriş özellikle basit tutuldu. Tank ve özel konulara daha sonra daha derin girebilirsin.",
+      },
+      {
+        question: "Hangi cihazlarda çalışır?",
+        answer: "Telegram çalışan her yerde: telefon, tablet veya masaüstü.",
+      },
+      {
+        question: "Tam erişim bir abonelik mi?",
+        answer:
+          "Hayır. Bu önizlemede tam erişim 15 EUR tek seferlik ödeme olarak gösteriliyor.",
+      },
+    ],
+    ctaTitle: "ADR sınavına daha sakin girmek ister misin?",
+    ctaDescription:
+      "Telegram'da ücretsiz başla ve istediğin zaman, istediğin yerde öğren.",
+    ctaButton: "Ücretsiz başla",
+  },
+  footer: {
+    copyright: "© 2026 ADR Bot",
+    imprint: "Yasal Bilgiler",
+    privacy: "Gizlilik",
+    terms: "Şartlar",
+  },
+  extraStep: {
+    step: "4",
+    emoji: "🏆",
+    title: "Sınava daha sakin gir",
+    body: "Rutin kur ve ADR sınavına daha fazla güvenle yaklaş.",
+  },
+});
+
+const ar = buildLocalizedCopy("ar", {
+  ui: {
+    carouselNavLabel: "التنقّل بين المعاينات",
+    previousPreview: "المعاينة السابقة",
+    nextPreview: "المعاينة التالية",
+    previewLabel: "معاينة",
+  },
+  nav: {
+    ariaLabel: "معاينة ADR Bot المميزة",
+    features: "المزايا",
+    courses: "الدورات",
+    pricing: "الأسعار",
+    faq: "الأسئلة الشائعة",
+    telegram: "في Telegram",
+    primary: "ابدأ مجانًا",
+  },
+  hero: {
+    title: "بداية أبسط لامتحان ADR",
+    highlight: "بالألمانية",
+    primary: "ابدأ مجانًا",
+    secondary: "كيف يعمل",
+    microNote: "مجانًا. بدون تسجيل. مباشرة داخل Telegram.",
+    trustPills: [
+      { icon: "✈", title: "داخل Telegram", subtitle: "ابدأ فورًا" },
+      { icon: "🇩🇪", title: "بالألمانية", subtitle: "أسهل للفهم" },
+      { icon: "✦", title: "خطوة بخطوة", subtitle: "ثقة أكبر" },
+    ],
+  },
+  visual: {
+    baseCourse: "Basiskurs",
+    tankCourse: "Tank",
+    termsCourse: "المصطلحات",
+    progress: "التقدّم",
+    lessonChip: "الدرس: 2.3 النقل في الصهاريج",
+    question: "أي عبارة صحيحة؟",
+    statement: "يجب تمييز مركبة الصهريج بلوحات برتقالية.",
+    answers: [
+      "A صحيح",
+      "B خطأ",
+      "C فقط لمواد الخطر من الفئة 3",
+    ],
+    feedbackTitle: "ممتاز!",
+    feedbackText: "الإجابة الصحيحة هي A. استمر هكذا.",
+    inputPlaceholder: "رسالة",
+  },
+  courses: {
+    cards: [
+      {
+        emoji: "📖",
+        title: "Basiskurs",
+        body: "الأساسيات والقواعد والمتطلبات المهمة مشروحة بشكل أوضح وأسهل.",
+        meta: "12 درسًا",
+      },
+      {
+        emoji: "🚛",
+        title: "Tank",
+        body: "معرفة متخصصة في النقل بالصهاريج بشكل عملي وأسهل للاستيعاب.",
+        meta: "8 دروس",
+      },
+      {
+        emoji: "📘",
+        title: "المصطلحات",
+        body: "أهم مصطلحات ADR مشروحة بلغة بسيطة وضمن السياق الصحيح.",
+        meta: "120+ مصطلح",
+      },
+    ],
+  },
+  carousel: {
+    title: "كيف يبدو التعلّم مع ADR Bot",
+    description:
+      "عدة شاشات توضّح كيف يبدو التعلّم والمراجعة والبحث السريع داخل البوت.",
+    cards: [
+      { title: "شرح", body: "الإجابات القصيرة لا تُظهر ما هو الصحيح فقط، بل توضح السبب أيضًا.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "اختبار", body: "أسئلة متعددة الخيارات بصيغة قريبة من الامتحان داخل محادثة Telegram مباشرة.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "سيناريو عملي", body: "تدرّب على مواقف حقيقية من النقل والصهاريج والوثائق.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "التقدّم", body: "ترى فورًا ما الذي أصبح ثابتًا وأين تحتاج إلى مزيد من التكرار.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "المصطلحات", body: "افهم أسرع مصطلحات ADR مثل رقم UN وملصق الخطر ورمز النفق.", accents: ["blue", "yellow", "short", "tinyGreen"] },
+      { title: "تدريب الأخطاء", body: "تعود الإجابات الخاطئة حتى تصبح المعرفة أكثر ثباتًا.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
+      { title: "محاكاة الامتحان", body: "تدرّب في ظروف أكثر واقعية مع ملاحظات واضحة بعد المحاولة.", accents: ["blue", "short", "neutral", "yellow"] },
+      { title: "معرفة Tank المتخصصة", body: "محتوى مخصص لوسم الصهاريج والنقل والأسئلة الشائعة.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Basiskurs", body: "تعلّم الأساسيات والالتزامات والقواعد المهمة خطوة بخطوة.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "قائمة المراجعة", body: "احفظ الأسئلة والمصطلحات الصعبة وارجع إليها لاحقًا بشكل مركّز.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
+      { title: "هدف اليوم", body: "الأهداف الصغيرة تساعدك على الاستمرار بوتيرة ثابتة.", accents: ["blue", "short", "green", "neutral"] },
+      { title: "بحث سريع", body: "افهم الوثائق والعلامات والصياغات بسرعة أكبر عندما تحتاج إليها.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+    ],
+  },
+  pricing: {
+    title: "تسعير بسيط. بلا تخمين.",
+    description:
+      "خياران واضحان: ابدأ مجانًا أو ادفع 15 يورو مرة واحدة للوصول الكامل.",
+    cards: [
+      {
+        title: "وصول مجاني",
+        subtitle: "مناسب للتجربة الأولى ولأخذ أول خطواتك داخل البوت.",
+        price: "0 EUR",
+        suffix: "/ مجاني",
+        features: [
+          "جرّب أول أمثلة الأسئلة",
+          "اطّلع على بعض مصطلحات ADR",
+          "ابدأ مباشرة داخل Telegram",
+          "من دون منصة تعلم إضافية",
+        ],
+        cta: "جرّب مجانًا",
+        source: "premium_preview_free",
+      },
+      {
+        title: "وصول كامل",
+        subtitle: "ادفع مرة واحدة وتدرّب على كل المحتوى التعليمي المتاح حاليًا.",
+        price: "15 EUR",
+        suffix: "/ مرة واحدة",
+        features: [
+          "كل المحتوى التعليمي المتاح",
+          "Basiskurs وTank والمصطلحات",
+          "اختبارات موسعة وسيناريوهات عملية",
+          "شروحات وتكرار وتتبع للتقدم",
+          "من دون دفعات شهرية",
+        ],
+        cta: "افتح الوصول الكامل مقابل 15 يورو",
+        source: "premium_preview_full_access",
+        featured: true,
+        badge: "Full Access",
+      },
+    ],
+  },
+  faq: {
+    title: "الأسئلة الشائعة",
+    items: [
+      {
+        question: "كيف يعمل ADR Bot؟",
+        answer:
+          "تفتح Telegram وتبدأ البوت وتختار مسارك الدراسي. بعد ذلك تحصل على أسئلة ومصطلحات وشروحات خطوة بخطوة.",
+      },
+      {
+        question: "هل أحتاج إلى معرفة مسبقة؟",
+        answer:
+          "لا. الدخول مصمم ليكون بسيطًا. ويمكنك التعمق لاحقًا في موضوع Tank والمواضيع الخاصة.",
+      },
+      {
+        question: "على أي أجهزة يعمل؟",
+        answer: "في كل مكان يعمل فيه Telegram: الهاتف أو الجهاز اللوحي أو الكمبيوتر.",
+      },
+      {
+        question: "هل الوصول الكامل اشتراك؟",
+        answer:
+          "لا. في هذه المعاينة يظهر الوصول الكامل كدفعة واحدة بقيمة 15 يورو.",
+      },
+    ],
+    ctaTitle: "هل تريد دخول امتحان ADR براحة أكبر؟",
+    ctaDescription:
+      "ابدأ مجانًا في Telegram وتعلّم في الوقت والمكان المناسبين لك.",
+    ctaButton: "ابدأ مجانًا",
+  },
+  footer: {
+    copyright: "© 2026 ADR Bot",
+    imprint: "البيانات القانونية",
+    privacy: "الخصوصية",
+    terms: "الشروط",
+  },
+  extraStep: {
+    step: "4",
+    emoji: "🏆",
+    title: "ادخل الامتحان بهدوء أكبر",
+    body: "ابنِ روتينك وتوجّه إلى امتحان ADR بثقة أكبر.",
+  },
+});
+
+const pl = buildLocalizedCopy("pl", {
+  ui: {
+    carouselNavLabel: "Nawigacja podglądu",
+    previousPreview: "Poprzedni podgląd",
+    nextPreview: "Następny podgląd",
+    previewLabel: "Podgląd",
+  },
+  nav: {
+    ariaLabel: "Podgląd premium ADR Bot",
+    features: "Funkcje",
+    courses: "Kursy",
+    pricing: "Cennik",
+    faq: "FAQ",
+    telegram: "W Telegramie",
+    primary: "Zacznij za darmo",
+  },
+  hero: {
+    title: "Prostszy start do egzaminu ADR",
+    highlight: "po niemiecku",
+    primary: "Zacznij za darmo",
+    secondary: "Jak to działa",
+    microNote: "Za darmo. Bez rejestracji. Bezpośrednio w Telegramie.",
+    trustPills: [
+      { icon: "✈", title: "W Telegramie", subtitle: "Start od razu" },
+      { icon: "🇩🇪", title: "Po niemiecku", subtitle: "Łatwiej zrozumieć" },
+      { icon: "✦", title: "Krok po kroku", subtitle: "Więcej pewności" },
+    ],
+  },
+  visual: {
+    baseCourse: "Basiskurs",
+    tankCourse: "Tank",
+    termsCourse: "Terminy",
+    progress: "Postęp",
+    lessonChip: "Lekcja: 2.3 Transport w cysternach",
+    question: "Które stwierdzenie jest prawidłowe?",
+    statement: "Pojazd-cysterna musi być oznaczony pomarańczowymi tablicami.",
+    answers: [
+      "A Prawda",
+      "B Fałsz",
+      "C Tylko dla towarów niebezpiecznych klasy 3",
+    ],
+    feedbackTitle: "Świetnie!",
+    feedbackText: "Prawidłowa odpowiedź to A. Tak trzymaj.",
+    inputPlaceholder: "Wiadomość",
+  },
+  courses: {
+    cards: [
+      { emoji: "📖", title: "Basiskurs", body: "Podstawy, zasady i ważne wymagania wyjaśnione prościej.", meta: "12 lekcji" },
+      { emoji: "🚛", title: "Tank", body: "Wiedza specjalistyczna o transporcie w cysternach — praktycznie i bez przeciążenia.", meta: "8 lekcji" },
+      { emoji: "📘", title: "Terminy", body: "Najważniejsze pojęcia ADR wyjaśnione prostym językiem i we właściwym kontekście.", meta: "120+ terminów" },
+    ],
+  },
+  carousel: {
+    title: "Jak wygląda nauka z ADR Bot",
+    description: "Kilka ekranów pokazuje, jak w bocie wyglądają nauka, powtórki i szybkie sprawdzanie.",
+    cards: [
+      { title: "Wyjaśnienie", body: "Krótkie odpowiedzi pokazują nie tylko co jest poprawne, ale też dlaczego.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Quiz", body: "Pytania wielokrotnego wyboru zbliżone do egzaminu, bezpośrednio w rozmowie Telegram.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "Sytuacja praktyczna", body: "Ćwicz konkretne sytuacje z transportu, Tank i dokumentacji.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "Postęp", body: "Od razu widzisz, które tematy już trzymają się dobrze, a gdzie potrzebna jest powtórka.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Terminy", body: "Szybciej rozumiesz pojęcia ADR, takie jak numer UN, nalepka ostrzegawcza czy tunnel code.", accents: ["blue", "yellow", "short", "tinyGreen"] },
+      { title: "Trening błędów", body: "Błędne odpowiedzi wracają, dopóki wiedza nie stanie się stabilna.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
+      { title: "Symulacja egzaminu", body: "Ćwicz w bardziej realistycznym trybie i dostawaj jasną informację zwrotną po próbie.", accents: ["blue", "short", "neutral", "yellow"] },
+      { title: "Wiedza specjalistyczna Tank", body: "Osobne materiały o oznakowaniu, przewozie i typowych pytaniach dla Tank.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Basiskurs", body: "Ucz się podstaw, obowiązków i ważnych zasad krok po kroku.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Lista do powtórek", body: "Zapisuj trudne pytania i terminy, aby wrócić do nich później.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
+      { title: "Cel na dziś", body: "Małe cele pomagają uczyć się regularnie i bez przerw.", accents: ["blue", "short", "green", "neutral"] },
+      { title: "Szybkie sprawdzenie", body: "Szybciej rozumiesz dokumenty, oznaczenia i sformułowania wtedy, gdy są potrzebne.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+    ],
+  },
+  pricing: {
+    title: "Prosty cennik. Bez zgadywania.",
+    description: "Dwie jasne opcje: zacząć za darmo albo zapłacić jednorazowo 15 EUR za pełny dostęp.",
+    cards: [
+      {
+        title: "Dostęp bezpłatny",
+        subtitle: "Aby sprawdzić format i zrobić pierwsze kroki w bocie.",
+        price: "0 EUR",
+        suffix: "/ gratis",
+        features: [
+          "Wypróbuj pierwsze przykładowe pytania",
+          "Zobacz wybrane terminy ADR",
+          "Zacznij od razu w Telegramie",
+          "Bez dodatkowej platformy do nauki",
+        ],
+        cta: "Wypróbuj za darmo",
+        source: "premium_preview_free",
+      },
+      {
+        title: "Pełny dostęp",
+        subtitle: "Płacisz raz i ćwiczysz z całym dostępnym materiałem.",
+        price: "15 EUR",
+        suffix: "/ jednorazowo",
+        features: [
+          "Cały dostępny materiał edukacyjny",
+          "Basiskurs, Tank i terminy",
+          "Rozszerzone quizy i sytuacje praktyczne",
+          "Wyjaśnienia, powtórki i postęp",
+          "Bez miesięcznej opłaty",
+        ],
+        cta: "Otwórz pełny dostęp za 15 EUR",
+        source: "premium_preview_full_access",
+        featured: true,
+        badge: "Full Access",
+      },
+    ],
+  },
+  faq: {
+    title: "Najczęstsze pytania",
+    items: [
+      { question: "Jak działa ADR Bot?", answer: "Otwierasz Telegram, uruchamiasz bota i wybierasz swoją ścieżkę nauki. Potem dostajesz pytania, terminy i wyjaśnienia krok po kroku." },
+      { question: "Czy potrzebuję wcześniejszej wiedzy?", answer: "Nie. Wejście jest celowo proste. W tematy Tank i specjalistyczne możesz wejść głębiej później." },
+      { question: "Na jakich urządzeniach to działa?", answer: "Wszędzie tam, gdzie działa Telegram: smartfon, tablet lub komputer." },
+      { question: "Czy pełny dostęp to subskrypcja?", answer: "Nie. W tym podglądzie pełny dostęp jest pokazany jako jednorazowa płatność 15 EUR." },
+    ],
+    ctaTitle: "Chcesz podejść do egzaminu ADR spokojniej?",
+    ctaDescription: "Zacznij za darmo w Telegramie i ucz się wtedy, kiedy Ci wygodnie.",
+    ctaButton: "Zacznij za darmo",
+  },
+  footer: {
+    copyright: "© 2026 ADR Bot",
+    imprint: "Nota prawna",
+    privacy: "Prywatność",
+    terms: "Warunki",
+  },
+  extraStep: {
+    step: "4",
+    emoji: "🏆",
+    title: "Podejdź do egzaminu spokojniej",
+    body: "Buduj rutynę i idź na egzamin ADR z większą pewnością.",
+  },
+});
+
+const ro = buildLocalizedCopy("ro", {
+  ui: {
+    carouselNavLabel: "Navigarea previzualizării",
+    previousPreview: "Previzualizarea anterioară",
+    nextPreview: "Previzualizarea următoare",
+    previewLabel: "Previzualizare",
+  },
+  nav: {
+    ariaLabel: "Previzualizare premium ADR Bot",
+    features: "Funcții",
+    courses: "Cursuri",
+    pricing: "Prețuri",
+    faq: "FAQ",
+    telegram: "În Telegram",
+    primary: "Începe gratuit",
+  },
+  hero: {
+    title: "Un început mai simplu pentru examenul ADR",
+    highlight: "în germană",
+    primary: "Începe gratuit",
+    secondary: "Cum funcționează",
+    microNote: "Gratuit. Fără cont. Direct în Telegram.",
+    trustPills: [
+      { icon: "✈", title: "În Telegram", subtitle: "Pornești imediat" },
+      { icon: "🇩🇪", title: "În germană", subtitle: "Mai ușor de înțeles" },
+      { icon: "✦", title: "Pas cu pas", subtitle: "Mai multă încredere" },
+    ],
+  },
+  visual: {
+    baseCourse: "Basiskurs",
+    tankCourse: "Tank",
+    termsCourse: "Termeni",
+    progress: "Progres",
+    lessonChip: "Lecția: 2.3 Transport în cisterne",
+    question: "Care afirmație este corectă?",
+    statement: "Un vehicul-cisternă trebuie marcat cu plăci portocalii.",
+    answers: [
+      "A Corect",
+      "B Greșit",
+      "C Doar pentru mărfuri periculoase din clasa 3",
+    ],
+    feedbackTitle: "Foarte bine!",
+    feedbackText: "Răspunsul corect este A. Continuă așa.",
+    inputPlaceholder: "Mesaj",
+  },
+  courses: {
+    cards: [
+      { emoji: "📖", title: "Basiskurs", body: "Bazele, regulile și cerințele importante sunt explicate mai clar.", meta: "12 lecții" },
+      { emoji: "🚛", title: "Tank", body: "Cunoștințe speciale pentru transportul în cisterne — practic și mai ușor de asimilat.", meta: "8 lecții" },
+      { emoji: "📘", title: "Termeni", body: "Termenii ADR importanți explicați simplu și în contextul potrivit.", meta: "120+ termeni" },
+    ],
+  },
+  carousel: {
+    title: "Cum arată învățarea cu ADR Bot",
+    description: "Mai multe ecrane arată cum se simt învățarea, repetarea și verificarea rapidă în interiorul botului.",
+    cards: [
+      { title: "Explicație", body: "Răspunsurile scurte arată nu doar ce este corect, ci și de ce.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Quiz", body: "Întrebări tip grilă apropiate de examen, direct în dialogul Telegram.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "Situație practică", body: "Exersează situații concrete din transport, Tank și documentație.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "Progres", body: "Vezi imediat ce teme sunt deja stabile și unde mai ajută repetarea.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Termeni", body: "Înțelegi mai repede termeni ADR precum numărul UN, eticheta de pericol sau tunnel code.", accents: ["blue", "yellow", "short", "tinyGreen"] },
+      { title: "Antrenarea greșelilor", body: "Răspunsurile greșite revin până când informația devine stabilă.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
+      { title: "Simulare de examen", body: "Exersezi în condiții mai realiste și primești feedback clar după încercare.", accents: ["blue", "short", "neutral", "yellow"] },
+      { title: "Cunoștințe Tank", body: "Conținut separat pentru marcaj, transport și întrebări tipice pentru Tank.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Basiskurs", body: "Învață bazele, obligațiile și regulile importante pas cu pas.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Listă de reluare", body: "Salvează întrebările și termenii dificili ca să revii la ei mai târziu.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
+      { title: "Obiectiv zilnic", body: "Obiectivele mici te ajută să rămâi constant și să nu pierzi ritmul.", accents: ["blue", "short", "green", "neutral"] },
+      { title: "Verificare rapidă", body: "Înțelegi mai repede documentele, marcajele și formulările atunci când ai nevoie.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+    ],
+  },
+  pricing: {
+    title: "Preț simplu. Fără ghicit.",
+    description: "Două opțiuni clare: începi gratuit sau plătești o singură dată 15 EUR pentru acces complet.",
+    cards: [
+      {
+        title: "Acces gratuit",
+        subtitle: "Ca să vezi formatul și să faci primii pași în bot.",
+        price: "0 EUR",
+        suffix: "/ gratuit",
+        features: [
+          "Testezi primele exemple de întrebări",
+          "Vezi o parte din termenii ADR",
+          "Începi direct în Telegram",
+          "Fără platformă nouă de învățare",
+        ],
+        cta: "Încearcă gratuit",
+        source: "premium_preview_free",
+      },
+      {
+        title: "Acces complet",
+        subtitle: "Plătești o singură dată și exersezi cu tot conținutul disponibil.",
+        price: "15 EUR",
+        suffix: "/ o singură dată",
+        features: [
+          "Tot conținutul de învățare disponibil",
+          "Basiskurs, Tank și termeni",
+          "Quizuri extinse și situații practice",
+          "Explicații, repetare și progres",
+          "Fără plată lunară",
+        ],
+        cta: "Deschide accesul complet pentru 15 EUR",
+        source: "premium_preview_full_access",
+        featured: true,
+        badge: "Full Access",
+      },
+    ],
+  },
+  faq: {
+    title: "Întrebări frecvente",
+    items: [
+      { question: "Cum funcționează ADR Bot?", answer: "Deschizi Telegram, pornești botul și alegi traseul de învățare. Apoi primești întrebări, termeni și explicații pas cu pas." },
+      { question: "Am nevoie de cunoștințe anterioare?", answer: "Nu. Intrarea este intenționat simplă. Poți aprofunda mai târziu Tank și temele speciale." },
+      { question: "Pe ce dispozitive funcționează?", answer: "Oriunde funcționează Telegram: telefon, tabletă sau desktop." },
+      { question: "Accesul complet este abonament?", answer: "Nu. În această previzualizare accesul complet este prezentat ca o plată unică de 15 EUR." },
+    ],
+    ctaTitle: "Vrei să intri mai liniștit la examenul ADR?",
+    ctaDescription: "Începe gratuit în Telegram și învață atunci când îți este convenabil.",
+    ctaButton: "Începe gratuit",
+  },
+  footer: {
+    copyright: "© 2026 ADR Bot",
+    imprint: "Mențiuni legale",
+    privacy: "Confidențialitate",
+    terms: "Termeni",
+  },
+  extraStep: {
+    step: "4",
+    emoji: "🏆",
+    title: "Intră mai calm la examen",
+    body: "Construiește rutină și mergi la examenul ADR cu mai multă încredere.",
+  },
+});
+
+const bg = buildLocalizedCopy("bg", {
+  ui: {
+    carouselNavLabel: "Навигация на прегледа",
+    previousPreview: "Предишен преглед",
+    nextPreview: "Следващ преглед",
+    previewLabel: "Преглед",
+  },
+  nav: {
+    ariaLabel: "Премиум преглед на ADR Bot",
+    features: "Функции",
+    courses: "Курсове",
+    pricing: "Цени",
+    faq: "FAQ",
+    telegram: "В Telegram",
+    primary: "Започни безплатно",
+  },
+  hero: {
+    title: "По-лесен старт за ADR изпита",
+    highlight: "на немски",
+    primary: "Започни безплатно",
+    secondary: "Как работи",
+    microNote: "Безплатно. Без регистрация. Направо в Telegram.",
+    trustPills: [
+      { icon: "✈", title: "В Telegram", subtitle: "Старт веднага" },
+      { icon: "🇩🇪", title: "На немски", subtitle: "По-лесно за разбиране" },
+      { icon: "✦", title: "Стъпка по стъпка", subtitle: "Повече увереност" },
+    ],
+  },
+  visual: {
+    baseCourse: "Basiskurs",
+    tankCourse: "Tank",
+    termsCourse: "Термини",
+    progress: "Прогрес",
+    lessonChip: "Урок: 2.3 Превоз в цистерни",
+    question: "Кое твърдение е вярно?",
+    statement: "Автоцистерната трябва да бъде обозначена с оранжеви табели.",
+    answers: [
+      "A Вярно",
+      "B Невярно",
+      "C Само за опасни товари от клас 3",
+    ],
+    feedbackTitle: "Страхотно!",
+    feedbackText: "Правилният отговор е A. Продължавай така.",
+    inputPlaceholder: "Съобщение",
+  },
+  courses: {
+    cards: [
+      { emoji: "📖", title: "Basiskurs", body: "Основите, правилата и важните изисквания са обяснени по-разбираемо.", meta: "12 урока" },
+      { emoji: "🚛", title: "Tank", body: "Специални знания за превоз в цистерни — практично и без претоварване.", meta: "8 урока" },
+      { emoji: "📘", title: "Термини", body: "Ключовите ADR термини са обяснени просто и в правилния контекст.", meta: "120+ термина" },
+    ],
+  },
+  carousel: {
+    title: "Как изглежда ученето с ADR Bot",
+    description: "Няколко екрана показват как изглеждат ученето, повторението и бързата справка вътре в бота.",
+    cards: [
+      { title: "Обяснение", body: "Кратките отговори показват не само кое е правилно, а и защо.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Куиз", body: "Въпроси с избираем отговор, близки до изпита, директно в разговора в Telegram.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "Практически случай", body: "Тренирай конкретни ситуации от транспорта, Tank и документацията.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "Прогрес", body: "Веднага виждаш кои теми вече са стабилни и къде помага повторението.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Термини", body: "По-бързо разбираш ADR термини като UN номер, етикет за опасност и tunnel code.", accents: ["blue", "yellow", "short", "tinyGreen"] },
+      { title: "Тренировка на грешки", body: "Грешните отговори се връщат, докато знанието стане по-стабилно.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
+      { title: "Симулация на изпит", body: "Упражнявай се в по-реалистичен режим и получавай ясна обратна връзка след опита.", accents: ["blue", "short", "neutral", "yellow"] },
+      { title: "Специални знания за Tank", body: "Отделно съдържание за маркировка, превоз и типични въпроси за Tank.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Basiskurs", body: "Учи основите, задълженията и важните правила стъпка по стъпка.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Списък за повторение", body: "Запазвай трудните въпроси и термини, за да се върнеш към тях по-късно.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
+      { title: "Дневна цел", body: "Малките цели помагат да учиш по-редовно и без изпадане от ритъм.", accents: ["blue", "short", "green", "neutral"] },
+      { title: "Бърза справка", body: "По-бързо разбираш документи, маркировки и формулировки, когато ти потрябват.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+    ],
+  },
+  pricing: {
+    title: "Проста цена. Без гадаене.",
+    description: "Две ясни опции: започваш безплатно или плащаш еднократно 15 EUR за пълен достъп.",
+    cards: [
+      {
+        title: "Безплатен достъп",
+        subtitle: "За да видиш формата и да направиш първите си стъпки в бота.",
+        price: "0 EUR",
+        suffix: "/ безплатно",
+        features: [
+          "Пробвай първите примерни въпроси",
+          "Виж избрани ADR термини",
+          "Започни веднага в Telegram",
+          "Без нова учебна платформа",
+        ],
+        cta: "Пробвай безплатно",
+        source: "premium_preview_free",
+      },
+      {
+        title: "Пълен достъп",
+        subtitle: "Плащаш веднъж и упражняваш с цялото налично съдържание.",
+        price: "15 EUR",
+        suffix: "/ еднократно",
+        features: [
+          "Цялото налично учебно съдържание",
+          "Basiskurs, Tank и термини",
+          "Разширени куизове и практически случаи",
+          "Обяснения, повторение и прогрес",
+          "Без месечна такса",
+        ],
+        cta: "Отвори пълен достъп за 15 EUR",
+        source: "premium_preview_full_access",
+        featured: true,
+        badge: "Full Access",
+      },
+    ],
+  },
+  faq: {
+    title: "Често задавани въпроси",
+    items: [
+      { question: "Как работи ADR Bot?", answer: "Отваряш Telegram, стартираш бота и избираш своя учебен път. След това получаваш въпроси, термини и обяснения стъпка по стъпка." },
+      { question: "Нужна ли е предварителна подготовка?", answer: "Не. Началото е умишлено направено лесно. В темите Tank и специалните блокове можеш да навлезеш по-дълбоко по-късно." },
+      { question: "На кои устройства работи?", answer: "Навсякъде, където работи Telegram: смартфон, таблет или компютър." },
+      { question: "Пълният достъп абонамент ли е?", answer: "Не. В този преглед пълният достъп е показан като еднократно плащане от 15 EUR." },
+    ],
+    ctaTitle: "Искаш ли да влезеш по-спокойно на ADR изпита?",
+    ctaDescription: "Започни безплатно в Telegram и учи тогава, когато ти е удобно.",
+    ctaButton: "Започни безплатно",
+  },
+  footer: {
+    copyright: "© 2026 ADR Bot",
+    imprint: "Правна информация",
+    privacy: "Поверителност",
+    terms: "Условия",
+  },
+  extraStep: {
+    step: "4",
+    emoji: "🏆",
+    title: "Отиди по-спокойно на изпита",
+    body: "Изгради рутина и влез в ADR изпита с повече увереност.",
+  },
+});
+
+const hr = buildLocalizedCopy("hr", {
+  ui: {
+    carouselNavLabel: "Navigacija pregleda",
+    previousPreview: "Prethodni pregled",
+    nextPreview: "Sljedeći pregled",
+    previewLabel: "Pregled",
+  },
+  nav: {
+    ariaLabel: "ADR Bot premium pregled",
+    features: "Značajke",
+    courses: "Tečajevi",
+    pricing: "Cijene",
+    faq: "FAQ",
+    telegram: "U Telegramu",
+    primary: "Počni besplatno",
+  },
+  hero: {
+    title: "Jednostavniji početak za ADR ispit",
+    highlight: "na njemačkom",
+    primary: "Počni besplatno",
+    secondary: "Kako funkcionira",
+    microNote: "Besplatno. Bez registracije. Izravno u Telegramu.",
+    trustPills: [
+      { icon: "✈", title: "U Telegramu", subtitle: "Počni odmah" },
+      { icon: "🇩🇪", title: "Na njemačkom", subtitle: "Lakše za razumjeti" },
+      { icon: "✦", title: "Korak po korak", subtitle: "Više sigurnosti" },
+    ],
+  },
+  visual: {
+    baseCourse: "Basiskurs",
+    tankCourse: "Tank",
+    termsCourse: "Pojmovi",
+    progress: "Napredak",
+    lessonChip: "Lekcija: 2.3 Prijevoz u cisternama",
+    question: "Koja je tvrdnja točna?",
+    statement: "Vozilo-cisterna mora biti označeno narančastim pločama.",
+    answers: [
+      "A Točno",
+      "B Netočno",
+      "C Samo za opasnu robu klase 3",
+    ],
+    feedbackTitle: "Odlično!",
+    feedbackText: "Točan odgovor je A. Samo nastavi.",
+    inputPlaceholder: "Poruka",
+  },
+  courses: {
+    cards: [
+      { emoji: "📖", title: "Basiskurs", body: "Osnove, pravila i važni zahtjevi objašnjeni su jasnije i jednostavnije.", meta: "12 lekcija" },
+      { emoji: "🚛", title: "Tank", body: "Specijalno znanje za prijevoz u cisternama — praktično i lakše za usvojiti.", meta: "8 lekcija" },
+      { emoji: "📘", title: "Pojmovi", body: "Najvažniji ADR pojmovi objašnjeni su jednostavno i u pravom kontekstu.", meta: "120+ pojmova" },
+    ],
+  },
+  carousel: {
+    title: "Kako izgleda učenje s ADR Botom",
+    description: "Nekoliko ekrana pokazuje kako unutar bota izgledaju učenje, ponavljanje i brza provjera.",
+    cards: [
+      { title: "Objašnjenje", body: "Kratki odgovori pokazuju ne samo što je točno nego i zašto.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Kviz", body: "Pitanja s više odgovora bliska ispitu, izravno u Telegram razgovoru.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "Praktičan slučaj", body: "Vježbaj konkretne situacije iz prijevoza, Tank i dokumentacije.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "Napredak", body: "Odmah vidiš koje su teme već stabilne, a gdje još pomaže ponavljanje.", accents: ["blue", "neutral", "short", "green"] },
+      { title: "Pojmovi", body: "Brže razumiješ ADR pojmove kao što su UN broj, oznaka opasnosti ili tunnel code.", accents: ["blue", "yellow", "short", "tinyGreen"] },
+      { title: "Trening pogrešaka", body: "Pogrešni odgovori vraćaju se dok znanje ne postane stabilnije.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
+      { title: "Simulacija ispita", body: "Vježbaj u realističnijem načinu i poslije dobivaj jasnu povratnu informaciju.", accents: ["blue", "short", "neutral", "yellow"] },
+      { title: "Specijalno znanje za Tank", body: "Poseban sadržaj za označavanje, prijevoz i tipična pitanja za Tank.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Basiskurs", body: "Uči osnove, obveze i važna pravila korak po korak.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Popis za ponavljanje", body: "Spremi teška pitanja i pojmove kako bi im se kasnije ciljano vratio.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
+      { title: "Dnevni cilj", body: "Mali ciljevi pomažu da učiš ravnomjerno i bez ispadanja iz ritma.", accents: ["blue", "short", "green", "neutral"] },
+      { title: "Brza provjera", body: "Brže razumij dokumente, oznake i formulacije kada ti zatrebaju.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+    ],
+  },
+  pricing: {
+    title: "Jednostavna cijena. Bez nagađanja.",
+    description: "Dvije jasne opcije: počni besplatno ili jednokratno plati 15 EUR za puni pristup.",
+    cards: [
+      {
+        title: "Besplatan pristup",
+        subtitle: "Za upoznavanje s formatom i prve korake unutar bota.",
+        price: "0 EUR",
+        suffix: "/ besplatno",
+        features: [
+          "Isprobaj prva ogledna pitanja",
+          "Pogledaj odabrane ADR pojmove",
+          "Počni odmah u Telegramu",
+          "Bez nove platforme za učenje",
+        ],
+        cta: "Isprobaj besplatno",
+        source: "premium_preview_free",
+      },
+      {
+        title: "Puni pristup",
+        subtitle: "Plati jednom i vježbaj sa svim trenutno dostupnim sadržajem.",
+        price: "15 EUR",
+        suffix: "/ jednokratno",
+        features: [
+          "Sav dostupan sadržaj za učenje",
+          "Basiskurs, Tank i pojmovi",
+          "Prošireni kvizovi i praktični slučajevi",
+          "Objašnjenja, ponavljanje i napredak",
+          "Bez mjesečne pretplate",
+        ],
+        cta: "Otvori puni pristup za 15 EUR",
+        source: "premium_preview_full_access",
+        featured: true,
+        badge: "Full Access",
+      },
+    ],
+  },
+  faq: {
+    title: "Česta pitanja",
+    items: [
+      { question: "Kako radi ADR Bot?", answer: "Otvoriš Telegram, pokreneš bot i odabereš svoj put učenja. Zatim dobivaš pitanja, pojmove i objašnjenja korak po korak." },
+      { question: "Trebam li prethodno znanje?", answer: "Ne. Ulaz je namjerno jednostavan. U Tank i posebne teme možeš ući dublje kasnije." },
+      { question: "Na kojim uređajima radi?", answer: "Svugdje gdje radi Telegram: pametni telefon, tablet ili računalo." },
+      { question: "Je li puni pristup pretplata?", answer: "Ne. U ovom pregledu puni pristup prikazan je kao jednokratno plaćanje od 15 EUR." },
+    ],
+    ctaTitle: "Želiš li mirnije ući na ADR ispit?",
+    ctaDescription: "Počni besplatno u Telegramu i uči kada ti najviše odgovara.",
+    ctaButton: "Počni besplatno",
+  },
+  footer: {
+    copyright: "© 2026 ADR Bot",
+    imprint: "Pravne informacije",
+    privacy: "Privatnost",
+    terms: "Uvjeti",
+  },
+  extraStep: {
+    step: "4",
+    emoji: "🏆",
+    title: "Idi mirnije na ispit",
+    body: "Izgradi rutinu i pristupi ADR ispitu s više sigurnosti.",
+  },
+});
+
 const fallbackMap: Partial<Record<LangCode, PremiumPreviewCopy>> = {
   de,
   en,
   ru,
-  uk: ru,
-  tr: en,
-  ar: en,
-  pl: en,
-  ro: en,
-  bg: en,
-  hr: en,
+  uk,
+  tr,
+  ar,
+  pl,
+  ro,
+  bg,
+  hr,
 };
 
 export function getPremiumPreviewCopy(lang: LangCode): PremiumPreviewCopy {

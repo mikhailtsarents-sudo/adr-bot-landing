@@ -1,20 +1,9 @@
 import { PremiumPreviewPage } from "@/components/premium-preview/premium-preview-page";
+import { buildLandingMetadata } from "@/lib/landing-locales";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: { absolute: "Экзамен ADR на немецком | Вопросы и термины в Telegram" },
-  description:
-    "Подготовка к ADR в Telegram: вопросы, термины и короткие объяснения для Basiskurs, Tank и тех, кому мешает язык.",
-  alternates: {
-    canonical: "/ru",
-    languages: {
-      de: "/",
-      en: "/en",
-      ru: "/ru",
-    },
-  },
-};
+export const metadata: Metadata = buildLandingMetadata("ru");
 
 export default function RussianHome() {
-  return <PremiumPreviewPage trackingSource="landing_v2_ru" trackingSlug="home-v2-ru" />;
+  return <PremiumPreviewPage trackingSource="landing_v2_ru" trackingSlug="home-v2-ru" forcedLang="ru" />;
 }

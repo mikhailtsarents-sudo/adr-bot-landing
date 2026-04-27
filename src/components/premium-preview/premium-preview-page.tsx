@@ -4,6 +4,7 @@ import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { LanguageSwitcher } from "@/components/landing/language-switcher";
 import { TrackedTelegramLink } from "@/components/landing/tracked-telegram-link";
 import { useLang } from "@/lib/i18n/use-lang";
+import type { LangCode } from "@/lib/i18n/translations";
 import { ArrowRight, ChevronLeft, ChevronRight, Send } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -37,13 +38,16 @@ function useVisibleCards() {
 type PremiumPreviewPageProps = {
   trackingSource?: string;
   trackingSlug?: string;
+  forcedLang?: LangCode;
 };
 
 export function PremiumPreviewPage({
   trackingSource = "premium_preview",
   trackingSlug = "premium-preview",
+  forcedLang,
 }: PremiumPreviewPageProps = {}) {
-  const { lang } = useLang();
+  const { lang: contextLang } = useLang();
+  const lang = forcedLang ?? contextLang;
   const copy = getPremiumPreviewCopy(lang);
   const previewCards = copy.carousel.cards;
   const courseCards = copy.courses.cards;
@@ -161,7 +165,8 @@ export function PremiumPreviewPage({
               </div>
 
               <h1 className={styles.heroTitle}>
-                {copy.hero.title} <span>{copy.hero.highlight}</span>
+                {copy.hero.title}
+                {copy.hero.highlight ? <span>{copy.hero.highlight}</span> : null}
               </h1>
 
               <p className={styles.heroText}>{copy.hero.text}</p>
