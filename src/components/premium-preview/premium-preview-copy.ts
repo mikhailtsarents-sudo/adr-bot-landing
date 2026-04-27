@@ -1196,7 +1196,7 @@ const tr = buildLocalizedCopy("tr", {
     microNote: "Ücretsiz. Kayıt yok. Doğrudan Telegram'da.",
     trustPills: [
       { icon: "✈", title: "Telegram'da", subtitle: "Anında başla" },
-      { icon: "🇩🇪", title: "Almanca", subtitle: "Daha kolay anla" },
+      { icon: "🇩🇪", title: "Almanca", subtitle: "Daha anlaşılır" },
       { icon: "✦", title: "Adım adım", subtitle: "Güven kazan" },
     ],
   },
@@ -1242,20 +1242,20 @@ const tr = buildLocalizedCopy("tr", {
   carousel: {
     title: "ADR Bot ile öğrenmek nasıl görünüyor?",
     description:
-      "Birden fazla ekran, bot içinde öğrenme, tekrar ve hızlı bakışın nasıl hissettirdiğini gösterir.",
+      "Birkaç ekran, bot içinde öğrenmenin, tekrarın ve hızlı başvurunun nasıl göründüğünü gösterir.",
     cards: [
       { title: "Açıklama", body: "Kısa cevaplar yalnızca neyin doğru olduğunu değil, nedenini de gösterir.", accents: ["blue", "neutral", "short", "green"] },
       { title: "Quiz", body: "Sınava benzer çoktan seçmeli sorular doğrudan Telegram diyaloğunda gelir.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
-      { title: "Senaryo", body: "Taşıma, Tank ve belgelerden gerçek durumları çalış.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "Pratik durum", body: "Taşıma, Tank ve belgelerden gerçek durumları çalış.", accents: ["blue", "short", "neutral", "green"] },
       { title: "İlerleme", body: "Hangi konuların oturduğunu ve nerede tekrar gerektiğini hemen görürsün.", accents: ["blue", "neutral", "short", "green"] },
       { title: "Terimler", body: "UN numarası, tehlike etiketi ve tünel kodu gibi ADR terimlerini daha hızlı anla.", accents: ["blue", "yellow", "short", "tinyGreen"] },
       { title: "Hata çalışması", body: "Yanlış cevaplar bilgi kalıcı olana kadar geri gelir.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
       { title: "Sınav simülasyonu", body: "Daha gerçekçi koşullarda çalış ve sonrasında net geri bildirim al.", accents: ["blue", "short", "neutral", "yellow"] },
       { title: "Tank uzmanlığı", body: "Tank işaretleme, taşıma ve tipik sorular için özel içerik.", accents: ["blue", "neutral", "green", "tinyYellow"] },
       { title: "Basiskurs", body: "Temel yükümlülükleri ve önemli kuralları adım adım öğren.", accents: ["yellow", "neutral", "shortBlue", "green"] },
-      { title: "Kayıt listesi", body: "Zor soruları ve terimleri kaydet, sonra hedefli şekilde tekrar et.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
+      { title: "Tekrar listesi", body: "Zor soruları ve terimleri kaydet, sonra hedefli şekilde tekrar et.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
       { title: "Günlük hedef", body: "Küçük hedefler ritmi korumana ve düzenli ilerlemene yardım eder.", accents: ["blue", "short", "green", "neutral"] },
-      { title: "Hızlı bakış", body: "Belgeleri, işaretleri ve ifadeleri gerektiği anda daha hızlı anla.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Hızlı başvuru", body: "Belgeleri, işaretleri ve ifadeleri gerektiği anda daha hızlı anla.", accents: ["yellow", "neutral", "shortBlue", "green"] },
     ],
   },
   pricing: {
@@ -1311,7 +1311,7 @@ const tr = buildLocalizedCopy("tr", {
       },
       {
         question: "Hangi cihazlarda çalışır?",
-        answer: "Telegram çalışan her yerde: telefon, tablet veya masaüstü.",
+        answer: "Telegram'ın çalıştığı her yerde: telefon, tablet veya bilgisayar.",
       },
       {
         question: "Tam erişim bir abonelik mi?",
@@ -1319,7 +1319,7 @@ const tr = buildLocalizedCopy("tr", {
           "Hayır. Bu önizlemede tam erişim 15 EUR tek seferlik ödeme olarak gösteriliyor.",
       },
     ],
-    ctaTitle: "ADR sınavına daha sakin girmek ister misin?",
+    ctaTitle: "ADR sınavına daha rahat girmek ister misin?",
     ctaDescription:
       "Telegram'da ücretsiz başla ve istediğin zaman, istediğin yerde öğren.",
     ctaButton: "Ücretsiz başla",
@@ -1333,7 +1333,7 @@ const tr = buildLocalizedCopy("tr", {
   extraStep: {
     step: "4",
     emoji: "🏆",
-    title: "Sınava daha sakin gir",
+    title: "Sınava daha rahat gir",
     body: "Rutin kur ve ADR sınavına daha fazla güvenle yaklaş.",
   },
 });
@@ -1435,10 +1435,10 @@ const ar = buildLocalizedCopy("ar", {
         price: "0 EUR",
         suffix: "/ مجاني",
         features: [
-          "جرّب أول أمثلة الأسئلة",
+          "جرّب أولى نماذج الأسئلة",
           "اطّلع على بعض مصطلحات ADR",
           "ابدأ مباشرة داخل Telegram",
-          "من دون منصة تعلم إضافية",
+          "من دون منصة تعليم إضافية",
         ],
         cta: "جرّب مجانًا",
         source: "premium_preview_free",
@@ -1452,7 +1452,7 @@ const ar = buildLocalizedCopy("ar", {
           "كل المحتوى التعليمي المتاح",
           "Basiskurs وTank والمصطلحات",
           "اختبارات موسعة وسيناريوهات عملية",
-          "شروحات وتكرار وتتبع للتقدم",
+          "شروحات ومراجعة وتتبع للتقدم",
           "من دون دفعات شهرية",
         ],
         cta: "افتح الوصول الكامل مقابل 15 يورو",
@@ -1485,7 +1485,7 @@ const ar = buildLocalizedCopy("ar", {
           "لا. في هذه المعاينة يظهر الوصول الكامل كدفعة واحدة بقيمة 15 يورو.",
       },
     ],
-    ctaTitle: "هل تريد دخول امتحان ADR براحة أكبر؟",
+    ctaTitle: "هل تريد دخول امتحان ADR بهدوء أكبر؟",
     ctaDescription:
       "ابدأ مجانًا في Telegram وتعلّم في الوقت والمكان المناسبين لك.",
     ctaButton: "ابدأ مجانًا",
@@ -1499,7 +1499,7 @@ const ar = buildLocalizedCopy("ar", {
   extraStep: {
     step: "4",
     emoji: "🏆",
-    title: "ادخل الامتحان بهدوء أكبر",
+    title: "ادخل إلى الامتحان بهدوء أكبر",
     body: "ابنِ روتينك وتوجّه إلى امتحان ADR بثقة أكبر.",
   },
 });
@@ -1561,17 +1561,17 @@ const pl = buildLocalizedCopy("pl", {
     description: "Kilka ekranów pokazuje, jak w bocie wyglądają nauka, powtórki i szybkie sprawdzanie.",
     cards: [
       { title: "Wyjaśnienie", body: "Krótkie odpowiedzi pokazują nie tylko co jest poprawne, ale też dlaczego.", accents: ["blue", "neutral", "short", "green"] },
-      { title: "Quiz", body: "Pytania wielokrotnego wyboru zbliżone do egzaminu, bezpośrednio w rozmowie Telegram.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "Quiz", body: "Pytania wielokrotnego wyboru zbliżone do egzaminu, bezpośrednio na czacie Telegram.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
       { title: "Sytuacja praktyczna", body: "Ćwicz konkretne sytuacje z transportu, Tank i dokumentacji.", accents: ["blue", "short", "neutral", "green"] },
       { title: "Postęp", body: "Od razu widzisz, które tematy już trzymają się dobrze, a gdzie potrzebna jest powtórka.", accents: ["blue", "neutral", "short", "green"] },
       { title: "Terminy", body: "Szybciej rozumiesz pojęcia ADR, takie jak numer UN, nalepka ostrzegawcza czy tunnel code.", accents: ["blue", "yellow", "short", "tinyGreen"] },
-      { title: "Trening błędów", body: "Błędne odpowiedzi wracają, dopóki wiedza nie stanie się stabilna.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
-      { title: "Symulacja egzaminu", body: "Ćwicz w bardziej realistycznym trybie i dostawaj jasną informację zwrotną po próbie.", accents: ["blue", "short", "neutral", "yellow"] },
-      { title: "Wiedza specjalistyczna Tank", body: "Osobne materiały o oznakowaniu, przewozie i typowych pytaniach dla Tank.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Praca nad błędami", body: "Błędne odpowiedzi wracają, dopóki wiedza nie stanie się stabilna.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
+      { title: "Symulacja egzaminu", body: "Ćwicz w bardziej realistycznym trybie i otrzymuj jasną informację zwrotną po każdej próbie.", accents: ["blue", "short", "neutral", "yellow"] },
+      { title: "Moduł Tank", body: "Osobne materiały o oznakowaniu, przewozie i typowych pytaniach dla Tank.", accents: ["blue", "neutral", "green", "tinyYellow"] },
       { title: "Basiskurs", body: "Ucz się podstaw, obowiązków i ważnych zasad krok po kroku.", accents: ["yellow", "neutral", "shortBlue", "green"] },
       { title: "Lista do powtórek", body: "Zapisuj trudne pytania i terminy, aby wrócić do nich później.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
       { title: "Cel na dziś", body: "Małe cele pomagają uczyć się regularnie i bez przerw.", accents: ["blue", "short", "green", "neutral"] },
-      { title: "Szybkie sprawdzenie", body: "Szybciej rozumiesz dokumenty, oznaczenia i sformułowania wtedy, gdy są potrzebne.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Szybki podgląd", body: "Szybciej rozumiesz dokumenty, oznaczenia i sformułowania wtedy, gdy są potrzebne.", accents: ["yellow", "neutral", "shortBlue", "green"] },
     ],
   },
   pricing: {
@@ -1615,7 +1615,7 @@ const pl = buildLocalizedCopy("pl", {
     title: "Najczęstsze pytania",
     items: [
       { question: "Jak działa ADR Bot?", answer: "Otwierasz Telegram, uruchamiasz bota i wybierasz swoją ścieżkę nauki. Potem dostajesz pytania, terminy i wyjaśnienia krok po kroku." },
-      { question: "Czy potrzebuję wcześniejszej wiedzy?", answer: "Nie. Wejście jest celowo proste. W tematy Tank i specjalistyczne możesz wejść głębiej później." },
+      { question: "Czy potrzebuję wcześniejszej wiedzy?", answer: "Nie. Start został celowo uproszczony. W tematy Tank i specjalistyczne możesz wejść głębiej później." },
       { question: "Na jakich urządzeniach to działa?", answer: "Wszędzie tam, gdzie działa Telegram: smartfon, tablet lub komputer." },
       { question: "Czy pełny dostęp to subskrypcja?", answer: "Nie. W tym podglądzie pełny dostęp jest pokazany jako jednorazowa płatność 15 EUR." },
     ],
@@ -1700,11 +1700,11 @@ const ro = buildLocalizedCopy("ro", {
       { title: "Termeni", body: "Înțelegi mai repede termeni ADR precum numărul UN, eticheta de pericol sau tunnel code.", accents: ["blue", "yellow", "short", "tinyGreen"] },
       { title: "Antrenarea greșelilor", body: "Răspunsurile greșite revin până când informația devine stabilă.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
       { title: "Simulare de examen", body: "Exersezi în condiții mai realiste și primești feedback clar după încercare.", accents: ["blue", "short", "neutral", "yellow"] },
-      { title: "Cunoștințe Tank", body: "Conținut separat pentru marcaj, transport și întrebări tipice pentru Tank.", accents: ["blue", "neutral", "green", "tinyYellow"] },
+      { title: "Modulul Tank", body: "Conținut separat pentru marcaj, transport și întrebări tipice pentru Tank.", accents: ["blue", "neutral", "green", "tinyYellow"] },
       { title: "Basiskurs", body: "Învață bazele, obligațiile și regulile importante pas cu pas.", accents: ["yellow", "neutral", "shortBlue", "green"] },
       { title: "Listă de reluare", body: "Salvează întrebările și termenii dificili ca să revii la ei mai târziu.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
       { title: "Obiectiv zilnic", body: "Obiectivele mici te ajută să rămâi constant și să nu pierzi ritmul.", accents: ["blue", "short", "green", "neutral"] },
-      { title: "Verificare rapidă", body: "Înțelegi mai repede documentele, marcajele și formulările atunci când ai nevoie.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Consultare rapidă", body: "Înțelegi mai repede documentele, marcajele și formulările atunci când ai nevoie.", accents: ["yellow", "neutral", "shortBlue", "green"] },
     ],
   },
   pricing: {
@@ -1841,7 +1841,7 @@ const bg = buildLocalizedCopy("bg", {
     ],
   },
   pricing: {
-    title: "Проста цена. Без гадаене.",
+    title: "Ясна цена. Без гадаене.",
     description: "Две ясни опции: започваш безплатно или плащаш еднократно 15 EUR за пълен достъп.",
     cards: [
       {
@@ -1866,7 +1866,7 @@ const bg = buildLocalizedCopy("bg", {
         features: [
           "Цялото налично учебно съдържание",
           "Basiskurs, Tank и термини",
-          "Разширени куизове и практически случаи",
+          "Разширени тестове и практически случаи",
           "Обяснения, повторение и прогрес",
           "Без месечна такса",
         ],
@@ -1898,7 +1898,7 @@ const bg = buildLocalizedCopy("bg", {
   extraStep: {
     step: "4",
     emoji: "🏆",
-    title: "Отиди по-спокойно на изпита",
+    title: "Отиди на изпита по-спокойно",
     body: "Изгради рутина и влез в ADR изпита с повече увереност.",
   },
 });
@@ -1927,7 +1927,7 @@ const hr = buildLocalizedCopy("hr", {
     microNote: "Besplatno. Bez registracije. Izravno u Telegramu.",
     trustPills: [
       { icon: "✈", title: "U Telegramu", subtitle: "Počni odmah" },
-      { icon: "🇩🇪", title: "Na njemačkom", subtitle: "Lakše za razumjeti" },
+      { icon: "🇩🇪", title: "Na njemačkom", subtitle: "Lakše za razumijevanje" },
       { icon: "✦", title: "Korak po korak", subtitle: "Više sigurnosti" },
     ],
   },
@@ -1960,8 +1960,8 @@ const hr = buildLocalizedCopy("hr", {
     description: "Nekoliko ekrana pokazuje kako unutar bota izgledaju učenje, ponavljanje i brza provjera.",
     cards: [
       { title: "Objašnjenje", body: "Kratki odgovori pokazuju ne samo što je točno nego i zašto.", accents: ["blue", "neutral", "short", "green"] },
-      { title: "Kviz", body: "Pitanja s više odgovora bliska ispitu, izravno u Telegram razgovoru.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
-      { title: "Praktičan slučaj", body: "Vježbaj konkretne situacije iz prijevoza, Tank i dokumentacije.", accents: ["blue", "short", "neutral", "green"] },
+      { title: "Kviz", body: "Pitanja višestrukog izbora bliska ispitu, izravno u Telegram razgovoru.", accents: ["blue", "neutral", "neutral", "shortGreen"] },
+      { title: "Praktični primjer", body: "Vježbaj konkretne situacije iz prijevoza, Tank i dokumentacije.", accents: ["blue", "short", "neutral", "green"] },
       { title: "Napredak", body: "Odmah vidiš koje su teme već stabilne, a gdje još pomaže ponavljanje.", accents: ["blue", "neutral", "short", "green"] },
       { title: "Pojmovi", body: "Brže razumiješ ADR pojmove kao što su UN broj, oznaka opasnosti ili tunnel code.", accents: ["blue", "yellow", "short", "tinyGreen"] },
       { title: "Trening pogrešaka", body: "Pogrešni odgovori vraćaju se dok znanje ne postane stabilnije.", accents: ["blue", "neutral", "yellow", "shortGreen"] },
@@ -1970,7 +1970,7 @@ const hr = buildLocalizedCopy("hr", {
       { title: "Basiskurs", body: "Uči osnove, obveze i važna pravila korak po korak.", accents: ["yellow", "neutral", "shortBlue", "green"] },
       { title: "Popis za ponavljanje", body: "Spremi teška pitanja i pojmove kako bi im se kasnije ciljano vratio.", accents: ["blue", "tiny", "neutral", "shortGreen"] },
       { title: "Dnevni cilj", body: "Mali ciljevi pomažu da učiš ravnomjerno i bez ispadanja iz ritma.", accents: ["blue", "short", "green", "neutral"] },
-      { title: "Brza provjera", body: "Brže razumij dokumente, oznake i formulacije kada ti zatrebaju.", accents: ["yellow", "neutral", "shortBlue", "green"] },
+      { title: "Brzi pregled", body: "Brže razumij dokumente, oznake i formulacije kada ti zatrebaju.", accents: ["yellow", "neutral", "shortBlue", "green"] },
     ],
   },
   pricing: {
