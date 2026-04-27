@@ -1,11 +1,11 @@
 import { siteConfig, siteUrl } from "@/lib/site";
-import { LandingPage } from "@/components/landing/landing-page";
+import { PremiumPreviewPage } from "@/components/premium-preview/premium-preview-page";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ADR-Prüfung auf Deutsch | Fragen und Begriffe in Telegram",
+  title: "ADR-Prüfung auf Deutsch | Einfach per Telegram lernen",
   description:
-    "ADR-Vorbereitung in Telegram: Fragen, Begriffe und kurze Erklärungen für Basiskurs, Tank und Menschen, denen die Sprache im Weg steht.",
+    "ADR-Vorbereitung in Telegram: verständliche Fragen, Fachbegriffe und kurze Übungen für Basiskurs, Tank und Fahrer, denen die Sprache im Weg steht.",
   alternates: {
     canonical: "/",
     languages: {
@@ -95,7 +95,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LandingPage />
+      <PremiumPreviewPage trackingSource="landing_v2" trackingSlug="home-v2" />
     </>
   );
 }

@@ -18,6 +18,19 @@ const LANG_NAMES: Record<LangCode, string> = {
   hr: "Hrvatski",
 };
 
+const LANG_SWITCHER_LABELS: Record<LangCode, string> = {
+  de: "Sprache auswählen",
+  en: "Select language",
+  ru: "Выбрать язык",
+  uk: "Вибрати мову",
+  tr: "Dil seç",
+  ar: "اختر اللغة",
+  pl: "Wybierz język",
+  ro: "Alege limba",
+  bg: "Избери език",
+  hr: "Odaberi jezik",
+};
+
 type Props = { compact?: boolean };
 
 export function LanguageSwitcher({ compact = false }: Props) {
@@ -40,8 +53,9 @@ export function LanguageSwitcher({ compact = false }: Props) {
     <div ref={ref} className="relative z-[120]">
       <button
         onClick={() => setOpen((v) => !v)}
-        aria-label="Select language"
+        aria-label={LANG_SWITCHER_LABELS[lang]}
         aria-expanded={open}
+        title={LANG_SWITCHER_LABELS[lang]}
         className="flex items-center gap-1.5 rounded-full border border-white/65 bg-white/72 px-3 py-1.5 text-sm text-slate-700 shadow-[0_8px_24px_rgba(15,10,6,0.12)] backdrop-blur-md transition hover:border-white/80 hover:bg-white/82"
       >
         <Globe className="h-3.5 w-3.5 text-slate-500" />
