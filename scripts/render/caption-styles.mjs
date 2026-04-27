@@ -60,9 +60,9 @@ function buildLineClip({ html, color, fontSize, start, length, offsetY, role = "
 
 // Per-family CTA config: accent colour, headline, sub-line, button label, badge
 const CTA_BY_FAMILY = {
-  QUESTION: { accent: '#229ED9', headline: 'Kostenlos üben', sub: 'im Telegram-Bot', btn: '✈ Jetzt starten →', badge: '📝 ADR-Quiz' },
-  WORD:     { accent: '#4ADE80', headline: 'ADR-Wörter lernen', sub: '1 Begriff pro Tag • kostenlos', btn: '💬 Im Bot üben', badge: '📖 Vokabeln' },
-  NEWS:     { accent: '#FACC15', headline: 'ADR-News bleiben', sub: 'täglich neue Updates', btn: '🔔 Bot abonnieren', badge: '📰 News' },
+  QUESTION: { accent: '#229ED9', accentRgb: '34,158,217', headline: 'Schaffst du die<br>ADR-Pr&uuml;fung?', sub: 'Kostenlos im Telegram &uuml;ben', btn: 'Jetzt kostenlos starten', badge: 'ADR Quiz Bot', btnGrad: 'linear-gradient(135deg,#2AABEE,#168BD2)' },
+  WORD:     { accent: '#4ADE80', accentRgb: '74,222,128',  headline: 'ADR-W&ouml;rter lernen',           sub: '1 Begriff pro Tag &bull; kostenlos',  btn: 'Im Bot &uuml;ben',          badge: 'ADR Vokabeln', btnGrad: 'linear-gradient(135deg,#22c55e,#16a34a)' },
+  NEWS:     { accent: '#FACC15', accentRgb: '250,204,21',  headline: 'ADR-News nicht verpassen',         sub: 't&auml;glich neue Updates',            btn: 'Bot abonnieren',            badge: 'ADR News',     btnGrad: 'linear-gradient(135deg,#eab308,#ca8a04)' },
 };
 
 
@@ -91,66 +91,73 @@ export function pickCtaVariant(contentFamily, sourceId) {
   return pool[hash % pool.length];
 }
 
-// Telegram CTA — modern glassmorphism floating card, family-aware
+// Telegram CTA — glassmorphism floating card, family-aware
 function buildCtaClips({ start, length, contentFamily = "QUESTION" }) {
   const family = String(contentFamily || "QUESTION").toUpperCase();
   const cfg = CTA_BY_FAMILY[family] || CTA_BY_FAMILY.QUESTION;
+  const { accent, accentRgb, btnGrad } = cfg;
 
   const cardWidth = 980;
-  const cardHeight = 560;
+  const cardHeight = 510;
 
-  const planeSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path fill="white" d="M2 21L23 12 2 3v7l15 2-15 2v7z"/></svg>';
+  const planeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"><path fill="white" d="M2 21L23 12 2 3v7l15 2-15 2v7z"/></svg>`;
 
-  // Hand-drawn scribble arrow pointing left toward the button
-  const scribbleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none">
-    <path d="M72 28 C78 38, 80 52, 70 62 C60 72, 44 74, 32 68 C24 64, 20 56, 22 48"
-      stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/>
-    <path d="M22 48 L18 38 M22 48 L32 44"
-      stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/>
-  </svg>`;
-
-  const accentRgb = family === "WORD" ? "74,222,128" : family === "NEWS" ? "250,204,21" : "34,158,217";
-  const accentHex = cfg.accent;
+  const scribbleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none"><path d="M72 28 C78 38,80 52,70 62 C60 72,44 74,32 68 C24 64,20 56,22 48" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/><path d="M22 48 L18 38 M22 48 L32 44" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/></svg>`;
 
   const css = [
     FONT_IMPORT,
     `*{box-sizing:border-box;margin:0;padding:0;}`,
     `body{background:transparent;width:${cardWidth}px;height:${cardHeight}px;`,
-    `display:flex;align-items:center;justify-content:center;position:relative;}`,
-    `.card{position:relative;z-index:1;width:100%;`,
-    `background:rgba(8,14,26,0.97);`,
+    `display:flex;align-items:center;justify-content:center;}`,
+
+    `.card{position:relative;width:100%;`,
+    `background:rgba(8,14,26,0.68);`,
+    `backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);`,
     `border:1px solid rgba(255,255,255,0.14);`,
     `border-radius:56px;`,
-    `padding:30px 44px 34px;`,
-    `box-shadow:0 24px 80px rgba(0,0,0,0.50);`,
-    `display:flex;flex-direction:column;align-items:center;gap:12px;overflow:visible;}`,
-    `.card::before{content:'';position:absolute;top:-80px;left:-80px;width:360px;height:360px;`,
-    `background:radial-gradient(circle,rgba(${accentRgb},0.28) 0%,transparent 65%);pointer-events:none;border-radius:50%;}`,
-    `.top-row{display:flex;align-items:center;gap:20px;}`,
+    `padding:28px 40px 32px 40px;`,
+    `box-shadow:0 24px 80px rgba(0,0,0,0.45),inset 0 1px 0 rgba(255,255,255,0.08);`,
+    `display:flex;flex-direction:column;align-items:flex-start;gap:12px;overflow:visible;}`,
+
+    // top-left accent glow
+    `.card::before{content:'';position:absolute;top:-60px;left:-60px;width:300px;height:300px;`,
+    `background:radial-gradient(circle,rgba(${accentRgb},0.30) 0%,transparent 65%);`,
+    `pointer-events:none;border-radius:50%;z-index:0;}`,
+    // bottom accent glow
+    `.card::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);`,
+    `width:70%;height:50px;`,
+    `background:radial-gradient(ellipse,rgba(${accentRgb},0.18) 0%,transparent 70%);`,
+    `pointer-events:none;z-index:0;}`,
+
+    `.top-row{display:flex;align-items:center;gap:18px;position:relative;z-index:1;}`,
     `.tg-icon{width:110px;height:110px;border-radius:50%;flex-shrink:0;`,
-    `background:linear-gradient(135deg,${accentHex},${accentHex}CC);`,
+    `background:linear-gradient(135deg,#2AABEE,#229ED9);`,
     `display:flex;align-items:center;justify-content:center;`,
-    `box-shadow:0 10px 30px rgba(${accentRgb},0.45);}`,
-    `.badge{background:rgba(${accentRgb},0.95);color:#fff;`,
-    `font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:32px;`,
-    `border-radius:18px;padding:10px 22px;}`,
+    `box-shadow:0 10px 30px rgba(34,158,217,0.45);}`,
+    `.badge{background:rgba(${accentRgb},0.92);color:#fff;`,
+    `font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:30px;`,
+    `border-radius:16px;padding:10px 22px;}`,
+
     `.headline{font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:68px;`,
-    `color:#fff;line-height:1.0;text-align:center;`,
-    `text-shadow:0 4px 18px rgba(0,0,0,0.50);}`,
+    `color:#fff;line-height:1.02;text-align:left;`,
+    `text-shadow:0 4px 18px rgba(0,0,0,0.45);position:relative;z-index:1;}`,
+
     `.sub{font-family:'Montserrat',Arial,sans-serif;font-weight:800;font-size:38px;`,
-    `color:${accentHex};text-align:center;}`,
-    `.btn-wrap{position:relative;width:740px;}`,
-    `@keyframes pulse{0%,100%{box-shadow:0 14px 40px rgba(${accentRgb},0.45);}`,
-    `50%{box-shadow:0 14px 60px rgba(${accentRgb},0.75),0 0 40px rgba(${accentRgb},0.30);}}`,
-    `@keyframes arrow-move{0%,70%,100%{transform:translateX(0);}85%{transform:translateX(5px);}}`,
-    `.btn{display:flex;align-items:center;justify-content:center;gap:12px;`,
-    `background:linear-gradient(135deg,${accentHex},${accentHex}CC);color:#fff;`,
+    `color:${accent};text-align:left;position:relative;z-index:1;}`,
+
+    `.btn-wrap{position:relative;width:100%;z-index:1;}`,
+    `@keyframes pulse-glow{`,
+    `0%,100%{box-shadow:0 14px 40px rgba(${accentRgb},0.45);}`,
+    `50%{box-shadow:0 14px 60px rgba(${accentRgb},0.78),0 0 40px rgba(${accentRgb},0.25);}}`,
+    `@keyframes arrow-nudge{0%,70%,100%{transform:translateX(0);}85%{transform:translateX(4px);}}`,
+    `.btn{display:flex;align-items:center;justify-content:center;gap:10px;`,
+    `background:${btnGrad};color:#fff;`,
     `font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:38px;`,
     `padding:22px 42px;border-radius:999px;border:none;width:100%;`,
-    `animation:pulse 2.5s ease-in-out infinite;`,
+    `animation:pulse-glow 2.5s ease-in-out infinite;`,
     `text-shadow:0 2px 8px rgba(0,0,0,0.25);}`,
-    `.arrow{display:inline-block;animation:arrow-move 2.5s ease-in-out infinite;}`,
-    `.scribble{position:absolute;right:-70px;bottom:-30px;transform:rotate(-10deg);}`,
+    `.arr{display:inline-block;animation:arrow-nudge 2.5s ease-in-out infinite;}`,
+    `.scribble{position:absolute;right:-58px;bottom:-22px;transform:rotate(-10deg);opacity:0.88;}`,
   ].join('');
 
   const html = [
@@ -162,7 +169,7 @@ function buildCtaClips({ start, length, contentFamily = "QUESTION" }) {
     `<div class="headline">${cfg.headline}</div>`,
     `<div class="sub">${cfg.sub}</div>`,
     `<div class="btn-wrap">`,
-    `<div class="btn">${cfg.btn} <span class="arrow">&rarr;</span></div>`,
+    `<div class="btn">${cfg.btn}&nbsp;<span class="arr">&rarr;</span></div>`,
     `<div class="scribble">${scribbleSvg}</div>`,
     `</div>`,
     `</div>`,
@@ -173,7 +180,7 @@ function buildCtaClips({ start, length, contentFamily = "QUESTION" }) {
     position: 'center',
     start: Number((start || 0).toFixed(2)),
     length: Number(Math.max(length || 0.1, 0.1).toFixed(2)),
-    offset: { x: 0, y: -0.24 },
+    offset: { x: 0, y: -0.04 },
   }];
 }
 
