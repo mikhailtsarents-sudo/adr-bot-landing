@@ -30,7 +30,7 @@ export async function GET(request: Request) {
         ok: false,
         error: error instanceof Error ? error.message : "unknown_error",
       },
-      { status: 500 },
+      { status: error instanceof Error && error.message === "bot_funnel_not_configured" ? 503 : 500 },
     );
   }
 }
