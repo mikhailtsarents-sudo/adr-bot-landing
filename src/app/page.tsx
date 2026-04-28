@@ -32,12 +32,21 @@ export default function Home() {
         applicationCategory: "EducationalApplication",
         operatingSystem: "Telegram",
         description:
-          "Telegram-basierte Vorbereitungshilfe fuer ADR-Fragen, Begriffe und typische Formulierungen auf Deutsch.",
-        offers: {
-          "@type": "Offer",
-          price: "0",
-          priceCurrency: "EUR",
-        },
+          "Telegram-basierte Vorbereitungshilfe fuer ADR-Fragen, Begriffe und typische Formulierungen auf Deutsch mit kostenlosem Start und optionalem Vollzugriff.",
+        offers: [
+          {
+            "@type": "Offer",
+            name: "Kostenloser Start",
+            price: "0",
+            priceCurrency: "EUR",
+          },
+          {
+            "@type": "Offer",
+            name: "Full Access",
+            price: "15",
+            priceCurrency: "EUR",
+          },
+        ],
       },
       {
         "@type": "FAQPage",
@@ -55,7 +64,7 @@ export default function Home() {
             name: "Ist ADR Bot kostenlos?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Ja. ADR Bot befindet sich aktuell in einer kostenlosen oeffentlichen Testphase.",
+              text: "Du kannst kostenlos in Telegram starten und die ersten Fragen ansehen. Full Access wird aktuell als einmalige Zahlung ueber 15 EUR dargestellt.",
             },
           },
           {

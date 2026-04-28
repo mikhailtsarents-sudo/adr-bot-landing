@@ -107,6 +107,188 @@ const conversionChecklistByLang: Record<
   },
 };
 
+const heroDecisionAidByLang: Record<
+  LangCode,
+  { title: string; items: [string, string, string] }
+> = {
+  de: {
+    title: "Was du in der ersten Minute bekommst",
+    items: [
+      "Telegram öffnet sofort.",
+      "Du siehst die erste ADR-Frage ohne Registrierung.",
+      "Danach entscheidest du in Ruhe, ob du weitermachen willst.",
+    ],
+  },
+  en: {
+    title: "What you get in the first minute",
+    items: [
+      "Telegram opens immediately.",
+      "You see your first ADR question without signing up.",
+      "Then you decide calmly whether the format is worth it.",
+    ],
+  },
+  ru: {
+    title: "Что ты получаешь в первую минуту",
+    items: [
+      "Telegram открывается сразу.",
+      "Ты видишь первый ADR-вопрос без регистрации.",
+      "Потом спокойно решаешь, стоит ли продолжать.",
+    ],
+  },
+  uk: {
+    title: "Що ти отримуєш у першу хвилину",
+    items: [
+      "Telegram відкривається одразу.",
+      "Ти бачиш перше ADR-запитання без реєстрації.",
+      "Потім спокійно вирішуєш, чи варто продовжувати.",
+    ],
+  },
+  tr: {
+    title: "İlk dakikada ne elde edersin",
+    items: [
+      "Telegram hemen açılır.",
+      "Kayıt olmadan ilk ADR sorunu görürsün.",
+      "Sonra devam etmeye değip değmediğine sakince karar verirsin.",
+    ],
+  },
+  ar: {
+    title: "ما الذي تحصل عليه خلال أول دقيقة",
+    items: [
+      "يفتح Telegram فورًا.",
+      "ترى أول سؤال ADR من دون تسجيل.",
+      "ثم تقرر بهدوء إن كان هذا الأسلوب مناسبًا لك.",
+    ],
+  },
+  pl: {
+    title: "Co dostajesz w pierwszej minucie",
+    items: [
+      "Telegram otwiera się od razu.",
+      "Widzisz pierwsze pytanie ADR bez rejestracji.",
+      "Potem spokojnie decydujesz, czy warto iść dalej.",
+    ],
+  },
+  ro: {
+    title: "Ce primești în primul minut",
+    items: [
+      "Telegram se deschide imediat.",
+      "Vezi prima întrebare ADR fără cont.",
+      "Apoi decizi liniștit dacă merită să continui.",
+    ],
+  },
+  bg: {
+    title: "Какво получаваш в първата минута",
+    items: [
+      "Telegram се отваря веднага.",
+      "Виждаш първия ADR въпрос без регистрация.",
+      "След това спокойно решаваш дали си струва да продължиш.",
+    ],
+  },
+  hr: {
+    title: "Što dobivaš u prvoj minuti",
+    items: [
+      "Telegram se otvara odmah.",
+      "Vidiš prvo ADR pitanje bez registracije.",
+      "Zatim mirno odlučuješ ima li smisla nastaviti.",
+    ],
+  },
+};
+
+const pricingClarityByLang: Record<
+  LangCode,
+  { title: string; items: [string, string, string]; note: string }
+> = {
+  de: {
+    title: "Klare Preislogik",
+    items: [
+      "Kostenloser Start direkt in Telegram",
+      "15 EUR nur für Full Access",
+      "Keine automatische Verlängerung",
+    ],
+    note: "Erst ausprobieren. Dann entscheiden.",
+  },
+  en: {
+    title: "Clear pricing logic",
+    items: [
+      "Free start directly in Telegram",
+      "15 EUR only for full access",
+      "No automatic renewal",
+    ],
+    note: "Try first. Decide after that.",
+  },
+  ru: {
+    title: "Понятная логика цены",
+    items: [
+      "Бесплатный старт прямо в Telegram",
+      "15 EUR только за полный доступ",
+      "Без автопродления",
+    ],
+    note: "Сначала пробуешь. Потом решаешь.",
+  },
+  uk: {
+    title: "Зрозуміла логіка ціни",
+    items: [
+      "Безкоштовний старт прямо в Telegram",
+      "15 EUR лише за повний доступ",
+      "Без автоматичного продовження",
+    ],
+    note: "Спочатку пробуєш. Потім вирішуєш.",
+  },
+  tr: {
+    title: "Açık fiyat mantığı",
+    items: [
+      "Ücretsiz başlangıç doğrudan Telegram'da",
+      "15 EUR sadece tam erişim için",
+      "Otomatik yenileme yok",
+    ],
+    note: "Önce dene. Sonra karar ver.",
+  },
+  ar: {
+    title: "منطق تسعير واضح",
+    items: [
+      "بداية مجانية مباشرة داخل Telegram",
+      "15 يورو فقط للوصول الكامل",
+      "لا يوجد تجديد تلقائي",
+    ],
+    note: "جرّب أولًا. ثم قرر.",
+  },
+  pl: {
+    title: "Jasna logika ceny",
+    items: [
+      "Darmowy start bezpośrednio w Telegramie",
+      "15 EUR tylko za pełny dostęp",
+      "Bez automatycznego odnawiania",
+    ],
+    note: "Najpierw sprawdź. Potem zdecyduj.",
+  },
+  ro: {
+    title: "Logică de preț clară",
+    items: [
+      "Pornire gratuită direct în Telegram",
+      "15 EUR doar pentru acces complet",
+      "Fără reînnoire automată",
+    ],
+    note: "Încearcă mai întâi. Decizi după aceea.",
+  },
+  bg: {
+    title: "Ясна логика на цената",
+    items: [
+      "Безплатен старт директно в Telegram",
+      "15 EUR само за пълен достъп",
+      "Без автоматично подновяване",
+    ],
+    note: "Първо пробваш. После решаваш.",
+  },
+  hr: {
+    title: "Jasna logika cijene",
+    items: [
+      "Besplatan start izravno u Telegramu",
+      "15 EUR samo za puni pristup",
+      "Bez automatske obnove",
+    ],
+    note: "Najprije isprobaj. Zatim odluči.",
+  },
+};
+
 function useVisibleCards() {
   const [visibleCards, setVisibleCards] = useState(4);
 
@@ -152,6 +334,8 @@ export function PremiumPreviewPage({
   const pricingCards = copy.pricing.cards;
   const faqItems = copy.faq.items;
   const conversionChecklist = conversionChecklistByLang[lang] ?? conversionChecklistByLang.en;
+  const heroDecisionAid = heroDecisionAidByLang[lang] ?? heroDecisionAidByLang.en;
+  const pricingClarity = pricingClarityByLang[lang] ?? pricingClarityByLang.en;
   const visibleCards = useVisibleCards();
   const [activePage, setActivePage] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -277,6 +461,15 @@ export function PremiumPreviewPage({
                 <a href="#funktioniert" className={`${styles.button} ${styles.secondaryButton}`}>
                   {copy.hero.secondary}
                 </a>
+              </div>
+
+              <div className={styles.heroDecisionAid}>
+                <p className={styles.heroDecisionAidTitle}>{heroDecisionAid.title}</p>
+                <ul className={styles.heroDecisionAidList}>
+                  {heroDecisionAid.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
               </div>
 
               <div className={styles.microNote}>{copy.hero.microNote}</div>
@@ -478,6 +671,18 @@ export function PremiumPreviewPage({
           <div className={styles.sectionHead}>
             <h2>{copy.pricing.title}</h2>
             <p>{copy.pricing.description}</p>
+          </div>
+
+          <div className={styles.pricingClarityPanel}>
+            <div>
+              <p className={styles.pricingClarityTitle}>{pricingClarity.title}</p>
+              <ul className={styles.pricingClarityList}>
+                {pricingClarity.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <p className={styles.pricingClarityNote}>{pricingClarity.note}</p>
           </div>
 
           <div className={styles.pricingGrid}>

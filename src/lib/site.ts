@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "ADR Bot",
   description:
-    "ADR Bot ist ein kostenloses Pilotprojekt zur ADR-Pruefungsvorbereitung auf Deutsch. Der Telegram-Bot hilft bei Fachbegriffen, Pruefungsdeutsch und dem Verstaendnis typischer ADR-Fragen.",
+    "ADR Bot bietet einen kostenlosen Start in Telegram und optionalen Vollzugriff fuer die ADR-Pruefungsvorbereitung auf Deutsch. Der Bot hilft bei Fachbegriffen, Pruefungsdeutsch und typischen ADR-Fragen.",
   defaultLocale: "de-DE",
   keywords: [
     "ADR Prüfung Deutsch",
