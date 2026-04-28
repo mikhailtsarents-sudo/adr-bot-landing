@@ -353,14 +353,22 @@ Follow-up impact pass on `2026-04-25` improved this further:
   - Scope: `video.upload` (INBOX_UPLOAD mode active)
 - End-to-end INBOX_UPLOAD confirmed working: `tiktok_sent_to_inbox`
   - publish_id: `v_inbox_file~v2.7633067962769131523`
+  - Confirmed again 2026-04-28: `v_inbox_file~v2.7633727770430064662`
+- Bug fixed 2026-04-28: `chunk_size` was set to 10MB while uploading whole file in one PUT
+  - TikTok rejected with `"The total chunk count is invalid"`
+  - Fix: `chunk_size = videoSize`, `total_chunk_count = 1` (commit `ec9d734`)
 - Pipeline integration: TikTok publish runs as Step 4 in `run-post-render-pipeline.mjs`
   - Triggered automatically when `TIKTOK_OAUTH_TOKEN_PATH` env var is set
   - TikTok failure is non-fatal (wrapped in try/catch, YouTube publish not aborted)
-- TikTok App Review: demo video recorded, pending upload + submit
-  - Blocked: `spam_risk_too_many_pending_share` (daily INBOX limit hit during testing)
-  - Retry tomorrow with fresh daily limit
+- **TikTok App Review: SUBMITTED 2026-04-28**
+  - App name: **ADR Bot TikTok Publisher**
+  - Status: **In Review** (yellow clock icon in Developer Portal)
+  - Demo video recorded and compressed: `tiktok-demo-compressed.mp4` (5.3MB)
+  - Reason submitted: Content Posting API for educational ADR videos via INBOX_UPLOAD
+  - Expected review time: 3–7 business days
 - TikTok direct posting (`DIRECT_PRIVATE`) blocked until App Review approved
   - `video.publish` scope not available in sandbox yet
+  - After approval: re-run OAuth with scope `video.upload,video.publish`, set `TIKTOK_PUBLISH_MODE=DIRECT_PRIVATE`
 - Client secret was exposed in screenshots — rotate before production use
 
 ### Content Diversity
