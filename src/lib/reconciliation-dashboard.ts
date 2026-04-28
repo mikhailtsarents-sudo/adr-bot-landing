@@ -61,6 +61,8 @@ function buildPeriodRow(
   const botStarts = number(bot?.bot_starts);
   const botFirstActions = number(bot?.first_actions);
   const botBuyIntent = number(bot?.buy_intent);
+  const startToFirstActionRate = number(bot?.start_to_first_action_rate);
+  const firstActionToBuyIntentRate = number(bot?.first_action_to_buy_intent_rate);
 
   return {
     period_key: periodKey,
@@ -74,8 +76,8 @@ function buildPeriodRow(
     views_to_cta_rate: roundRate(ratio(siteCta, siteViews)),
     cta_to_redirect_rate: roundRate(ratio(siteRedirects, siteCta)),
     redirect_to_start_rate: roundRate(ratio(botStarts, siteRedirects)),
-    start_to_first_action_rate: roundRate(ratio(botFirstActions, botStarts)),
-    first_action_to_buy_intent_rate: roundRate(ratio(botBuyIntent, botFirstActions)),
+    start_to_first_action_rate: roundRate(startToFirstActionRate),
+    first_action_to_buy_intent_rate: roundRate(firstActionToBuyIntentRate),
     redirect_minus_start: siteRedirects - botStarts,
   };
 }

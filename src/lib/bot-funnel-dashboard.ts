@@ -65,6 +65,7 @@ export type BotFunnelPeriodBucket = {
   callback_completed: number;
   callback_failed: number;
   start_to_first_action_rate: number;
+  first_action_to_buy_intent_rate: number;
   start_to_buy_intent_rate: number;
   reminder_click_rate: number;
   reminder_reactivation_rate: number;
@@ -329,6 +330,7 @@ function buildPeriodBucket({
   const reminderClickedUsers = uniqueUsers(scopedRows, (r) => r.event_type === "reminder_clicked");
   const reminderReactivatedUsers = uniqueUsers(scopedRows, (r) => r.event_type === "reminder_reactivated");
   const startToFirstActionUsers = intersectionSize(startUsers, firstActionUsers);
+  const firstActionToBuyIntentUsers = intersectionSize(firstActionUsers, buyIntentUsers);
   const startToBuyIntentUsers = intersectionSize(startUsers, buyIntentUsers);
   const reminderClickedFromSentUsers = intersectionSize(reminderSentUsers, reminderClickedUsers);
   const reminderReactivatedFromSentUsers = intersectionSize(reminderSentUsers, reminderReactivatedUsers);
@@ -359,6 +361,9 @@ function buildPeriodBucket({
     callback_completed: callbackCompleted,
     callback_failed: callbackFailed,
     start_to_first_action_rate: roundRate(startUsers.size > 0 ? startToFirstActionUsers / startUsers.size : 0),
+    first_action_to_buy_intent_rate: roundRate(
+      firstActionUsers.size > 0 ? firstActionToBuyIntentUsers / firstActionUsers.size : 0,
+    ),
     start_to_buy_intent_rate: roundRate(startUsers.size > 0 ? startToBuyIntentUsers / startUsers.size : 0),
     reminder_click_rate: roundRate(reminderSentUsers.size > 0 ? reminderClickedFromSentUsers / reminderSentUsers.size : 0),
     reminder_reactivation_rate: roundRate(reminderSentUsers.size > 0 ? reminderReactivatedFromSentUsers / reminderSentUsers.size : 0),
