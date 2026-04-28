@@ -223,13 +223,14 @@ export async function getFileInfo(filePath) {
 }
 
 function buildSourceInfo(videoSize) {
-  const chunkSize = Math.min(10 * 1024 * 1024, videoSize);
-  const totalChunks = Math.ceil(videoSize / chunkSize);
+  // We upload the entire file in one PUT, so chunk_size = videoSize, total_chunk_count = 1.
+  // Sending chunk_size < videoSize with total_chunk_count > 1 while doing a single PUT
+  // causes TikTok to reject with "The total chunk count is invalid".
   return {
     source: "FILE_UPLOAD",
     video_size: videoSize,
-    chunk_size: chunkSize,
-    total_chunk_count: totalChunks,
+    chunk_size: videoSize,
+    total_chunk_count: 1,
   };
 }
 
