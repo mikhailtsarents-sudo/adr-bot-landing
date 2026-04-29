@@ -92,69 +92,38 @@ export function pickCtaVariant(contentFamily, sourceId) {
 }
 
 // Telegram CTA — glassmorphism floating card, family-aware
+// Uses inline styles only (no CSS classes, no nested flex) for Shotstack compatibility
 function buildCtaClips({ start, length, contentFamily = "QUESTION" }) {
   const family = String(contentFamily || "QUESTION").toUpperCase();
   const cfg = CTA_BY_FAMILY[family] || CTA_BY_FAMILY.QUESTION;
   const { accent, accentRgb, btnGrad } = cfg;
 
   const cardWidth = 980;
-  const cardHeight = 510;
+  const cardHeight = 520;
 
-  const planeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"><path fill="white" d="M2 21L23 12 2 3v7l15 2-15 2v7z"/></svg>`;
+  const planeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path fill="white" d="M2 21L23 12 2 3v7l15 2-15 2v7z"/></svg>`;
 
-  const scribbleSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none"><path d="M72 28 C78 38,80 52,70 62 C60 72,44 74,32 68 C24 64,20 56,22 48" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/><path d="M22 48 L18 38 M22 48 L32 44" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.85"/></svg>`;
-
+  const f = `font-family:'Montserrat',Arial,sans-serif;`;
   const css = [
     FONT_IMPORT,
     `*{box-sizing:border-box;margin:0;padding:0;}`,
-    `body{background:transparent;width:${cardWidth}px;height:${cardHeight}px;`,
-    `display:flex;align-items:center;justify-content:center;position:relative;}`,
-    `.card{position:relative;z-index:1;width:100%;`,
-    `background:rgba(8,14,26,0.92);`,
-    `border:1px solid rgba(255,255,255,0.14);`,
-    `border-radius:56px;`,
-    `padding:30px 44px 34px;`,
-    `box-shadow:0 24px 80px rgba(0,0,0,0.50);`,
-    `display:flex;flex-direction:column;align-items:center;gap:12px;overflow:visible;}`,
-    `.top-row{display:flex;align-items:center;gap:20px;}`,
-    `.tg-icon{width:110px;height:110px;border-radius:50%;flex-shrink:0;`,
-    `background:linear-gradient(135deg,#2AABEE,#229ED9);`,
-    `display:flex;align-items:center;justify-content:center;`,
-    `box-shadow:0 10px 30px rgba(34,158,217,0.45);}`,
-    `.badge{background:rgba(${accentRgb},0.95);color:#fff;`,
-    `font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:32px;`,
-    `border-radius:18px;padding:10px 22px;}`,
-    `.headline{font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:68px;`,
-    `color:#fff;line-height:1.0;text-align:center;`,
-    `text-shadow:0 4px 18px rgba(0,0,0,0.50);}`,
-    `.sub{font-family:'Montserrat',Arial,sans-serif;font-weight:800;font-size:38px;`,
-    `color:${accent};text-align:center;}`,
-    `.btn-wrap{position:relative;width:740px;}`,
-    `@keyframes pulse{0%,100%{box-shadow:0 14px 40px rgba(${accentRgb},0.45);}`,
-    `50%{box-shadow:0 14px 60px rgba(${accentRgb},0.75),0 0 40px rgba(${accentRgb},0.30);}}`,
-    `@keyframes arrow-move{0%,70%,100%{transform:translateX(0);}85%{transform:translateX(5px);}}`,
-    `.btn{display:flex;align-items:center;justify-content:center;gap:12px;`,
-    `background:${btnGrad};color:#fff;`,
-    `font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:38px;`,
-    `padding:22px 42px;border-radius:999px;border:none;width:100%;`,
-    `animation:pulse 2.5s ease-in-out infinite;`,
-    `text-shadow:0 2px 8px rgba(0,0,0,0.25);}`,
-    `.arrow{display:inline-block;animation:arrow-move 2.5s ease-in-out infinite;}`,
-    `.scribble{position:absolute;right:-70px;bottom:-30px;transform:rotate(-10deg);}`,
+    `body{margin:0;padding:0;background:transparent;width:${cardWidth}px;height:${cardHeight}px;}`,
+    `@keyframes pulse{0%,100%{box-shadow:0 14px 40px rgba(${accentRgb},0.45);}50%{box-shadow:0 14px 60px rgba(${accentRgb},0.75);}}`,
   ].join('');
 
   const html = [
-    `<div class="card">`,
-    `<div class="top-row">`,
-    `<div class="tg-icon">${planeSvg}</div>`,
-    `<div class="badge">${cfg.badge}</div>`,
+    `<div style="width:100%;background:rgba(8,14,26,0.92);border:1px solid rgba(255,255,255,0.14);border-radius:56px;padding:30px 44px 34px;box-shadow:0 24px 80px rgba(0,0,0,0.50);">`,
+    // top row: icon + badge as inline-block (no flex)
+    `<div style="margin-bottom:14px;line-height:0;">`,
+    `<span style="display:inline-block;vertical-align:middle;width:110px;height:110px;border-radius:55px;background:linear-gradient(135deg,#2AABEE,#229ED9);text-align:center;padding-top:25px;box-shadow:0 10px 30px rgba(34,158,217,0.45);">${planeSvg}</span>`,
+    `<span style="display:inline-block;vertical-align:middle;margin-left:18px;background:rgba(${accentRgb},0.95);color:#fff;${f}font-weight:700;font-size:32px;border-radius:18px;padding:10px 22px;">${cfg.badge}</span>`,
     `</div>`,
-    `<div class="headline">${cfg.headline}</div>`,
-    `<div class="sub">${cfg.sub}</div>`,
-    `<div class="btn-wrap">`,
-    `<div class="btn">${cfg.btn}&nbsp;<span class="arrow">&rarr;</span></div>`,
-    `<div class="scribble">${scribbleSvg}</div>`,
-    `</div>`,
+    // headline
+    `<div style="display:block;${f}font-weight:900;font-size:68px;color:#fff;line-height:1.0;text-align:center;text-shadow:0 4px 18px rgba(0,0,0,0.50);margin-bottom:10px;">${cfg.headline}</div>`,
+    // sub
+    `<div style="display:block;${f}font-weight:800;font-size:38px;color:${accent};text-align:center;margin-bottom:16px;">${cfg.sub}</div>`,
+    // button
+    `<div style="display:block;text-align:center;background:${btnGrad};color:#fff;${f}font-weight:900;font-size:38px;padding:22px 42px;border-radius:999px;animation:pulse 2.5s ease-in-out infinite;text-shadow:0 2px 8px rgba(0,0,0,0.25);">${cfg.btn} &rarr;</div>`,
     `</div>`,
   ].join('');
 
@@ -301,24 +270,32 @@ export function buildCaptionClip({ role, text: captionText, start, length, conte
 export function buildSceneCaptionClips(timeline, sceneTextEntries, contentFamily = "QUESTION") {
   const textByRole = new Map((sceneTextEntries || []).map((e) => [e.role, e.text]));
 
-  // Answers should stay on screen during the timer scene so text matches voice
   const timerScene = (timeline || []).find((s) => s.role === "timer");
+  const ctaScene = (timeline || []).find((s) => s.role === "cta");
+  // Hard ceiling: no text clip may extend into the CTA scene
+  const ctaStart = ctaScene ? ctaScene.start_sec : Infinity;
+
   const clips = [];
 
   for (const scene of timeline) {
     const captionText = textByRole.get(scene.role);
     if (!captionText || !String(captionText).trim()) continue;
 
-    // Extend answers clip to cover timer duration too
-    const endSec = (scene.role === "answers" && timerScene)
+    // Answers stay visible through the timer scene (voice reads answers during countdown)
+    const rawEnd = (scene.role === "answers" && timerScene)
       ? timerScene.end_sec
       : scene.end_sec;
+
+    // Clamp end to CTA start so no text bleeds into CTA
+    const endSec = Math.min(rawEnd, ctaStart);
+    const length = endSec - scene.start_sec;
+    if (length <= 0) continue;
 
     const sceneClips = buildCaptionClip({
       role: scene.role,
       text: captionText,
       start: scene.start_sec,
-      length: endSec - scene.start_sec,
+      length,
       contentFamily,
     });
 
