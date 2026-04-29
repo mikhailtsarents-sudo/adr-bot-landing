@@ -107,42 +107,40 @@ function buildCtaClips({ start, length, contentFamily = "QUESTION" }) {
   const css = [
     FONT_IMPORT,
     `*{box-sizing:border-box;margin:0;padding:0;}`,
-    `body{margin:0;padding:0;background:transparent;`,
-    `width:${cardWidth}px;height:${cardHeight}px;`,
-    `display:flex;align-items:center;justify-content:center;}`,
-    `.card{width:${cardWidth}px;`,
-    `background:rgba(8,14,26,0.82);`,
-    `border:1px solid rgba(255,255,255,0.15);`,
-    `border-radius:52px;`,
-    `padding:28px 40px 32px 40px;`,
-    `box-shadow:0 20px 70px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.08);}`,
-    `.top-row{display:flex;flex-direction:row;align-items:center;`,
-    `gap:18px;margin-bottom:14px;}`,
-    `.tg-icon{width:100px;height:100px;border-radius:50%;flex-shrink:0;`,
+    `body{background:transparent;width:${cardWidth}px;height:${cardHeight}px;`,
+    `display:flex;align-items:center;justify-content:center;position:relative;}`,
+    `.card{position:relative;z-index:1;width:100%;`,
+    `background:rgba(8,14,26,0.92);`,
+    `border:1px solid rgba(255,255,255,0.14);`,
+    `border-radius:56px;`,
+    `padding:30px 44px 34px;`,
+    `box-shadow:0 24px 80px rgba(0,0,0,0.50);`,
+    `display:flex;flex-direction:column;align-items:center;gap:12px;overflow:visible;}`,
+    `.top-row{display:flex;align-items:center;gap:20px;}`,
+    `.tg-icon{width:110px;height:110px;border-radius:50%;flex-shrink:0;`,
     `background:linear-gradient(135deg,#2AABEE,#229ED9);`,
     `display:flex;align-items:center;justify-content:center;`,
-    `box-shadow:0 8px 24px rgba(34,158,217,0.50);}`,
-    `.badge{display:inline-block;background:rgba(${accentRgb},0.92);color:#fff;`,
-    `font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:30px;`,
-    `border-radius:16px;padding:10px 22px;white-space:nowrap;}`,
-    `.headline{font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:66px;`,
-    `color:#fff;line-height:1.05;text-align:left;margin-bottom:10px;`,
-    `text-shadow:0 4px 18px rgba(0,0,0,0.55);}`,
-    `.sub{font-family:'Montserrat',Arial,sans-serif;font-weight:800;font-size:36px;`,
-    `color:${accent};text-align:left;margin-bottom:16px;}`,
-    `.btn-wrap{position:relative;}`,
-    `@keyframes pulse-glow{`,
-    `0%,100%{box-shadow:0 12px 36px rgba(${accentRgb},0.50);}`,
-    `50%{box-shadow:0 12px 56px rgba(${accentRgb},0.80);}}`,
-    `@keyframes arr{0%,70%,100%{margin-left:0;}85%{margin-left:5px;}}`,
-    `.btn{display:block;text-align:center;`,
+    `box-shadow:0 10px 30px rgba(34,158,217,0.45);}`,
+    `.badge{background:rgba(${accentRgb},0.95);color:#fff;`,
+    `font-family:'Montserrat',Arial,sans-serif;font-weight:700;font-size:32px;`,
+    `border-radius:18px;padding:10px 22px;}`,
+    `.headline{font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:68px;`,
+    `color:#fff;line-height:1.0;text-align:center;`,
+    `text-shadow:0 4px 18px rgba(0,0,0,0.50);}`,
+    `.sub{font-family:'Montserrat',Arial,sans-serif;font-weight:800;font-size:38px;`,
+    `color:${accent};text-align:center;}`,
+    `.btn-wrap{position:relative;width:740px;}`,
+    `@keyframes pulse{0%,100%{box-shadow:0 14px 40px rgba(${accentRgb},0.45);}`,
+    `50%{box-shadow:0 14px 60px rgba(${accentRgb},0.75),0 0 40px rgba(${accentRgb},0.30);}}`,
+    `@keyframes arrow-move{0%,70%,100%{transform:translateX(0);}85%{transform:translateX(5px);}}`,
+    `.btn{display:flex;align-items:center;justify-content:center;gap:12px;`,
     `background:${btnGrad};color:#fff;`,
     `font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:38px;`,
-    `padding:22px 42px;border-radius:999px;width:100%;`,
-    `animation:pulse-glow 2.5s ease-in-out infinite;`,
-    `text-shadow:0 2px 8px rgba(0,0,0,0.30);}`,
-    `.arr{display:inline-block;animation:arr 2.5s ease-in-out infinite;}`,
-    `.scribble{position:absolute;right:-52px;bottom:-18px;opacity:0.90;}`,
+    `padding:22px 42px;border-radius:999px;border:none;width:100%;`,
+    `animation:pulse 2.5s ease-in-out infinite;`,
+    `text-shadow:0 2px 8px rgba(0,0,0,0.25);}`,
+    `.arrow{display:inline-block;animation:arrow-move 2.5s ease-in-out infinite;}`,
+    `.scribble{position:absolute;right:-70px;bottom:-30px;transform:rotate(-10deg);}`,
   ].join('');
 
   const html = [
@@ -154,7 +152,7 @@ function buildCtaClips({ start, length, contentFamily = "QUESTION" }) {
     `<div class="headline">${cfg.headline}</div>`,
     `<div class="sub">${cfg.sub}</div>`,
     `<div class="btn-wrap">`,
-    `<div class="btn">${cfg.btn}&nbsp;<span class="arr">&rarr;</span></div>`,
+    `<div class="btn">${cfg.btn}&nbsp;<span class="arrow">&rarr;</span></div>`,
     `<div class="scribble">${scribbleSvg}</div>`,
     `</div>`,
     `</div>`,
@@ -302,17 +300,25 @@ export function buildCaptionClip({ role, text: captionText, start, length, conte
 
 export function buildSceneCaptionClips(timeline, sceneTextEntries, contentFamily = "QUESTION") {
   const textByRole = new Map((sceneTextEntries || []).map((e) => [e.role, e.text]));
+
+  // Answers should stay on screen during the timer scene so text matches voice
+  const timerScene = (timeline || []).find((s) => s.role === "timer");
   const clips = [];
 
   for (const scene of timeline) {
     const captionText = textByRole.get(scene.role);
     if (!captionText || !String(captionText).trim()) continue;
 
+    // Extend answers clip to cover timer duration too
+    const endSec = (scene.role === "answers" && timerScene)
+      ? timerScene.end_sec
+      : scene.end_sec;
+
     const sceneClips = buildCaptionClip({
       role: scene.role,
       text: captionText,
       start: scene.start_sec,
-      length: scene.end_sec - scene.start_sec,
+      length: endSec - scene.start_sec,
       contentFamily,
     });
 

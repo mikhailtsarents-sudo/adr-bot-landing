@@ -6,6 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildSceneCaptionClips } from "./render/caption-styles.mjs";
 import { buildQuestionQaReport } from "./render/question-quality.mjs";
+import { DEFAULT_BOT_PUBLIC_USERNAME } from "./runtime/telegram-source-links.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,6 +18,7 @@ const DEFAULT_ADAPTER = "youtube_short_adapter";
 const DEFAULT_VISIBILITY = "public";
 const DEFAULT_LANGUAGE = "de";
 const DEFAULT_SUBTITLE_POLICY = "burned_or_external_srt";
+const DEFAULT_TELEGRAM_CTA_URL = `https://t.me/${DEFAULT_BOT_PUBLIC_USERNAME}`;
 const ROLE_ORDER = ["hook", "question", "answers", "timer", "answer", "cta"];
 const DEFAULT_ROLE_WEIGHTS = {
   hook: 0.2,
@@ -30,7 +32,8 @@ const DEFAULT_ROLE_WEIGHTS = {
 // Reading speed: ~2.5 words/sec for video viewers + 1s buffer per slide
 function readingDurationSec(slideText) {
   const words = String(slideText || "").trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(2.0, Number((words / 2.5 + 1.0).toFixed(2)));
+  // 1.8 words/sec matches spoken German pace; 1.5s buffer per slide
+  return Math.max(2.5, Number((words / 1.8 + 1.5).toFixed(2)));
 }
 
 function printHelp() {
@@ -663,7 +666,7 @@ async function main() {
     caption: text(input.caption_text),
     hashtags,
     cta_text: text(input.cta_text),
-    cta_url: text(input.cta_url) || "https://t.me/adr_pruefung_trainer_bot",
+    cta_url: text(input.cta_url) || DEFAULT_TELEGRAM_CTA_URL,
     channel_name: text(input.channel_name) || "ADR Prüfung Trainer",
     visibility: text(input.visibility) || DEFAULT_VISIBILITY,
     category: text(input.category) || "Education",
