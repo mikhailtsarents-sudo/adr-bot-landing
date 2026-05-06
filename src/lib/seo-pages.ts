@@ -62,15 +62,15 @@ export const adrPruefungAufDeutsch: SeoPageConfig = {
   slug: "adr-pruefung-auf-deutsch",
   path: "/adr-pruefung-auf-deutsch",
   pageTitle: "ADR-Pruefung auf Deutsch",
-  metaTitle: "ADR-Pruefung auf Deutsch | Orientierung, Begriffe und Fragen",
+  metaTitle: "ADR-Pruefung auf Deutsch bestehen | Fragen, Begriffe und Tipps",
   metaDescription:
-    "Erste Orientierung zur ADR-Pruefung auf Deutsch mit wichtigen Begriffen, typischen Fragen und einem klaren Weiterweg in den Telegram-Bot.",
+    "ADR-Pruefung auf Deutsch vorbereiten: typische Pruefungsfragen, Fachbegriffe verstaendlich erklaert und Lerntipps fuer Nicht-Muttersprachler. Kostenlos ueben.",
   heroKicker: SEO_PAGE_KICKER,
-  heroTitle: "ADR-Pruefung auf Deutsch",
+  heroTitle: "ADR-Pruefung auf Deutsch bestehen",
   heroLead:
-    "Kurzer Einstieg in ADR auf Deutsch mit kleinen Beispielen, klaren Begriffen und einem begrenzten Sample. Die volle Uebung geht im Telegram-Bot weiter.",
+    "Typische ADR-Pruefungsfragen mit verstaendlichen Erklaerungen auf Deutsch. Speziell fuer Fahrer, denen die Fachsprache das Bestehen erschwert.",
   heroSupport:
-    "Diese Seite zeigt bewusst nur einen Ausschnitt. Sie hilft beim Verstehen, Orientieren und Weiterklicken.",
+    "Uebe die wichtigsten Begriffe und Fragetypen. Viele Nicht-Muttersprachler bestehen die ADR-Pruefung mit gezieltem Sprachtraining.",
   intentTitle: "Worum es hier geht",
   intentParagraphs: [
     "Diese Seite hilft Menschen, die ADR auf Deutsch suchen und zuerst eine kleine Orientierung brauchen. Sie ist als Uebersichtsseite gebaut, nicht als enger Spezial-Intent.",
@@ -178,24 +178,24 @@ export const adrPruefungAufDeutsch: SeoPageConfig = {
 export const basiskursPreview: SeoPageConfig = {
   slug: "basiskurs-preview",
   path: "/basiskurs-preview",
-  pageTitle: "Basiskurs Preview",
-  metaTitle: "Basiskurs Preview | ADR Fragen und Woerter",
+  pageTitle: "ADR Basiskurs – Fragen und Begriffe",
+  metaTitle: "ADR Basiskurs | Typische Pruefungsfragen und Fachbegriffe lernen",
   metaDescription:
-    "Sieh dir ein kleines Preview vom Basiskurs an: wenige Fragen, wichtige Woerter und kurze Erklaerungen. Die volle Uebung geht im Telegram-Bot weiter.",
+    "ADR Basiskurs vorbereiten: typische Pruefungsfragen, wichtige Fachbegriffe und kurze Erklaerungen auf Deutsch. Kostenlos ueben im Telegram-Bot.",
   heroKicker: SEO_PAGE_KICKER,
-  heroTitle: "Basiskurs Preview",
+  heroTitle: "ADR Basiskurs – Fragen und Begriffe",
   heroLead:
-    "Sieh dir ein kleines Preview vom Basiskurs an: wenige Fragen, wichtige Woerter und kurze Erklaerungen. Die volle Uebung geht im Telegram-Bot weiter.",
+    "Typische ADR-Basiskurs-Pruefungsfragen mit klaren Erklaerungen auf Deutsch. Fuer Fahrer, die sich gezielt auf die Pruefung vorbereiten wollen.",
   heroSupport:
-    "Diese Seite ist bewusst klein gehalten. Sie gibt dir ein nueszliches Sample und laesst die komplette Tiefe im Bot.",
+    "Lerne die wichtigsten Fachbegriffe und typischen Fragetypen des Basiskurses. Mehr Uebung und Wiederholung gibt es kostenlos im Telegram-Bot.",
   intentTitle: "Worum es hier geht",
   intentParagraphs: [
     "Der Basiskurs ist der wichtigste Einstieg fuer viele Nutzer. Darum bekommt er eine eigene SEO-Seite mit einer kleinen, aber nuetzlichen Vorschau.",
     "Die Seite soll Suchintentionen wie Basiskurs, Grundwissen und ADR-Vorbereitung abholen, ohne den vollen Kurs komplett zu kopieren.",
   ],
-  sampleTitle: "Basiskurs Sample",
+  sampleTitle: "Typische Basiskurs-Pruefungsfragen",
   sampleLead:
-    "Ein paar Fragen und Woerter reichen, um den Nutzen zu zeigen und den Rest im Bot zu lassen.",
+    "Diese Fragen kommen aehnlich in der ADR-Pruefung vor. Versteh die Struktur, dann faellt die echte Pruefung leichter.",
   sampleQuestions: [
     {
       question: "Welche Dokumente tauchen im Basiskurs haeufig auf?",
@@ -301,24 +301,21 @@ export const basiskursPreview: SeoPageConfig = {
 export const aufbaukursTankPreview: SeoPageConfig = {
   slug: "aufbaukurs-tank-preview",
   path: "/aufbaukurs-tank-preview",
-  pageTitle: "Aufbaukurs Tank Preview",
-  metaTitle: "Aufbaukurs Tank Preview | ADR Tank Fragen und Begriffe",
+  pageTitle: "ADR Aufbaukurs Tank – Fragen und Begriffe",
+  metaTitle: "ADR Aufbaukurs Tank | Pruefungsfragen und Tankfahrzeug-Begriffe",
   metaDescription:
-    "Kurzes Preview zum Aufbaukurs Tank mit wenigen Beispiel-Fragen, wichtigen Begriffen und klarer Weiterleitung in den Telegram-Bot.",
+    "ADR Aufbaukurs Tank vorbereiten: typische Pruefungsfragen zu Tankfahrzeugen, wichtige Fachbegriffe und Erklaerungen auf Deutsch. Kostenlos ueben.",
   heroKicker: SEO_PAGE_KICKER,
-  heroTitle: "Aufbaukurs Tank Preview",
-  heroLead:
-    "Kurzes Preview zum Aufbaukurs Tank mit wenigen Beispiel-Fragen, wichtigen Begriffen und klarer Weiterleitung in den Telegram-Bot.",
-  heroSupport:
-    "Die Seite ist bewusst klein. Sie zeigt den Tank-Kontext, aber nicht den kompletten Trainingsinhalt.",
-  intentTitle: "Worum es hier geht",
+  heroTitle: "ADR Aufbaukurs Tank – Fragen und Begriffe",
+  heroLead: "Typische ADR-Pruefungsfragen zum Aufbaukurs Tank mit Erklaerungen auf Deutsch. Fuer Fahrer mit Tankfahrzeug-Schein, die sich gezielt vorbereiten.",
+  heroSupport: "Sie bleibt bewusst kompakt: Orientierung auf der Seite, mehr Tiefe und Wiederholung danach im Telegram-Bot.",
+  intentTitle: "Warum dieser Lern-Intent gerade wichtig ist",
   intentParagraphs: [
-    "Diese Seite ist fuer Nutzer gedacht, die speziell nach Tank-bezogener ADR-Vorbereitung suchen.",
-    "Sie erklaert kurz den Kontext, zeigt ein kleines Sample und macht klar, dass die volle Uebung im Bot weitergeht.",
+    "Live-Signale zeigen, dass Nutzer bei diesem Thema einen klaren, anfangerfreundlichen Einstieg suchen statt ueberladener Theorie.",
+    "Darum bleibt die Seite fokussiert und conversion-nah: etwas Nutzen direkt sichtbar, mehr Uebung anschliessend im Bot.",
   ],
-  sampleTitle: "Tank Sample",
-  sampleLead:
-    "Ein kleiner Auszug reicht, um Relevanz zu zeigen und den Rest im Bot zu lassen.",
+  sampleTitle: "Gezielte Lernvorschau",
+  sampleLead: "2 bis 3 kleine Beispiele oder Mini-Lektionen reichen, um Suchintention und Vertrauen sauber abzudecken.",
   sampleQuestions: [
     {
       question: "Worum geht es im Aufbaukurs Tank?",
@@ -359,12 +356,11 @@ export const aufbaukursTankPreview: SeoPageConfig = {
     },
   ],
   sampleCalloutTitle: "Nur ein Ausschnitt",
-  sampleCalloutText:
-    "Die Preview soll nueszlich sein, aber die komplette Wiederholung und die groessere Fragenmenge bleiben im Bot.",
-  whyTelegramTitle: "Warum Telegram der naechste Schritt ist",
+  sampleCalloutText: "Die Vorschau bleibt absichtlich klein. Die eigentliche Wiederholung und Lernroutine liegt im Bot.",
+  whyTelegramTitle: "Warum Telegram nach der Vorschau der richtige Schritt ist",
   whyTelegramParagraphs: [
-    "Der Bot bietet mehr Fragen, mehr Wiederholung und die vollstaendige Uebung fuer den Tank-Kontext.",
-    "Die Seite ist der Einstieg, nicht das Endziel. Genau so bleibt die SEO-Seite hilfreich und die Conversion klar.",
+    "Der Bot passt besser zu kurzen Wiederholungseinheiten als eine statische SEO-Seite.",
+    "So bleibt die Seite hilfreich fuer Suchende, waehrend der naechste Lernschritt klar und praktisch bleibt.",
   ],
   faqs: [
     {
@@ -396,9 +392,8 @@ export const aufbaukursTankPreview: SeoPageConfig = {
       note: "Kurze Antworten zu Kurswahl und Einstieg",
     },
   ],
-  ctaTitle: "Tank weiter im Telegram-Bot ueben",
-  ctaLead:
-    "Wenn du den Kontext schon kennst, bekommst du im Bot mehr Wiederholung und mehr relevante Fragen.",
+  ctaTitle: "Im Telegram-Bot weiterlernen",
+  ctaLead: "Wenn du nach dem Einstieg direkt weitermachen willst, ist der Bot der sinnvollste naechste Schritt.",
   ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite zeigt nur ein begrenztes Tank-Sample und ersetzt keinen vollstaendigen Kurs.",
@@ -807,18 +802,15 @@ export const adrVorbereitungFuerLkwFahrer: SeoPageConfig = {
     "ADR Vorbereitung fuer LKW-Fahrer mit kurzem Einstieg, typischen Fragen und klarem Wechsel in den Telegram-Bot.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Vorbereitung fuer LKW-Fahrer",
-  heroLead:
-    "Diese Seite ist fuer Fahrer gedacht, die nicht nur nach ADR allgemein suchen, sondern nach einer praktischen Vorbereitung fuer ihren Alltag.",
-  heroSupport:
-    "Sie verbindet Fahrerkontext, Kursorientierung und ein kleines Fragen-Sample mit dem Uebergang in Telegram.",
-  intentTitle: "Warum diese Suchintention stark ist",
+  heroLead: "Diese Seite fokussiert jetzt klarer den Intent adr vorbereitung fuer lkw fahrer und bietet einen kompakten Einstieg fuer Menschen, die ADR auf Deutsch besser verstehen und anwenden wollen.",
+  heroSupport: "Sie bleibt bewusst kompakt: Orientierung auf der Seite, mehr Tiefe und Wiederholung danach im Telegram-Bot.",
+  intentTitle: "Warum dieser Lern-Intent gerade wichtig ist",
   intentParagraphs: [
-    "Viele Nutzer suchen nicht nach abstrakten Kursnamen, sondern nach etwas Konkretem: ADR-Vorbereitung fuer LKW-Fahrer. Das ist ein enger, kaufnaher und oft guenstiger SEO-Intent.",
-    "Die Seite spricht genau diesen Fahrerkontext an, ohne den gesamten Trainingsinhalt offenzulegen. Sie erklaert den Einstieg und leitet dann in den Bot weiter.",
+    "Live-Signale zeigen, dass Nutzer bei diesem Thema einen klaren, anfangerfreundlichen Einstieg suchen statt ueberladener Theorie.",
+    "Darum bleibt die Seite fokussiert und conversion-nah: etwas Nutzen direkt sichtbar, mehr Uebung anschliessend im Bot.",
   ],
-  sampleTitle: "Fahrer-Sample",
-  sampleLead:
-    "Kurze Fragen und Hinweise zeigen, wie die Vorbereitung fuer Fahrer gedacht ist.",
+  sampleTitle: "Gezielte Lernvorschau",
+  sampleLead: "2 bis 3 kleine Beispiele oder Mini-Lektionen reichen, um Suchintention und Vertrauen sauber abzudecken.",
   sampleQuestions: [
     {
       question: "Warum brauchen viele Fahrer eine eigene ADR-Einstiegsseite?",
@@ -851,12 +843,11 @@ export const adrVorbereitungFuerLkwFahrer: SeoPageConfig = {
     },
   ],
   sampleCalloutTitle: "Praxis statt grosser Theorie",
-  sampleCalloutText:
-    "Diese Seite soll sich fuer Fahrer direkt relevant anfuehlen. Die eigentliche Lernstrecke bleibt trotzdem im Bot.",
-  whyTelegramTitle: "Warum Telegram danach sinnvoll ist",
+  sampleCalloutText: "Die Vorschau bleibt absichtlich klein. Die eigentliche Wiederholung und Lernroutine liegt im Bot.",
+  whyTelegramTitle: "Warum Telegram nach der Vorschau der richtige Schritt ist",
   whyTelegramParagraphs: [
-    "Der Bot ist besser geeignet fuer Wiederholung in kleinen Etappen, was besonders fuer Fahreralltag und knappe Zeitfenster passt.",
-    "Die Seite oeffnet die Tuer ueber Google, der Bot uebernimmt das eigentliche Lernen.",
+    "Der Bot passt besser zu kurzen Wiederholungseinheiten als eine statische SEO-Seite.",
+    "So bleibt die Seite hilfreich fuer Suchende, waehrend der naechste Lernschritt klar und praktisch bleibt.",
   ],
   faqs: [
     {
@@ -888,9 +879,8 @@ export const adrVorbereitungFuerLkwFahrer: SeoPageConfig = {
       note: "Breiterer Einstieg in Sprache und Fragen",
     },
   ],
-  ctaTitle: "ADR-Vorbereitung im Telegram-Bot fortsetzen",
-  ctaLead:
-    "Wenn du als Fahrer weiter ueben willst, bekommst du im Bot mehr Fragen und mehr Wiederholung.",
+  ctaTitle: "Im Telegram-Bot weiterlernen",
+  ctaLead: "Wenn du nach dem Einstieg direkt weitermachen willst, ist der Bot der sinnvollste naechste Schritt.",
   ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite ist eine Lernvorschau und ersetzt keine offizielle ADR-Ausbildung.",
@@ -1114,18 +1104,15 @@ export const adrPruefungsfragenAppDeutsch: SeoPageConfig = {
     "Du suchst eine ADR Pruefungsfragen App auf Deutsch? Hier findest du ein kleines Fragen-Sample und den Einstieg in den ADR Bot auf Telegram.",
   heroKicker: SEO_PAGE_KICKER,
   heroTitle: "ADR Pruefungsfragen App Deutsch",
-  heroLead:
-    "Wenn du nach einer ADR Pruefungsfragen App auf Deutsch suchst, bist du meist schon sehr nah an der eigentlichen Vorbereitung. Diese Seite holt genau diesen Suchintentionstyp ab.",
-  heroSupport:
-    "Sie zeigt ein kleines Fragen-Sample und fuehrt danach in den Telegram-Bot, wo das eigentliche Training laeuft.",
-  intentTitle: "Warum diese Suchanfrage fuer uns stark ist",
+  heroLead: "Diese Seite fokussiert jetzt klarer den Intent adr prüfungsfragen app deutsch und bietet einen kompakten Einstieg fuer Menschen, die ADR auf Deutsch besser verstehen und anwenden wollen.",
+  heroSupport: "Sie bleibt bewusst kompakt: Orientierung auf der Seite, mehr Tiefe und Wiederholung danach im Telegram-Bot.",
+  intentTitle: "Warum dieser Lern-Intent gerade wichtig ist",
   intentParagraphs: [
-    "Wer nach einer ADR Pruefungsfragen App auf Deutsch sucht, will in der Regel nicht nur Informationen lesen, sondern moeglichst direkt mit Fragen, Wiederholung und Lernroutine anfangen.",
-    "Genau deshalb passt diese Seite gut zu unserem Produkt: Sie erklaert kurz den Nutzen, zeigt ein kleines Sample und fuehrt dann in den Telegram-Bot als eigentliche Lern-App weiter.",
+    "Live-Signale zeigen, dass Nutzer bei diesem Thema einen klaren, anfangerfreundlichen Einstieg suchen statt ueberladener Theorie.",
+    "Darum bleibt die Seite fokussiert und conversion-nah: etwas Nutzen direkt sichtbar, mehr Uebung anschliessend im Bot.",
   ],
-  sampleTitle: "Mini-Sample fuer Suchende",
-  sampleLead:
-    "Gerade bei App-Suchen hilft ein kleines Fragen-Sample, damit sofort klar wird, welche Art Vorbereitung hier gemeint ist.",
+  sampleTitle: "Gezielte Lernvorschau",
+  sampleLead: "2 bis 3 kleine Beispiele oder Mini-Lektionen reichen, um Suchintention und Vertrauen sauber abzudecken.",
   sampleQuestions: [
     {
       question: "Warum suchen viele Menschen nach einer ADR Pruefungsfragen App auf Deutsch?",
@@ -1149,12 +1136,11 @@ export const adrPruefungsfragenAppDeutsch: SeoPageConfig = {
     },
   ],
   sampleCalloutTitle: "App-Intent statt Leseseite",
-  sampleCalloutText:
-    "Diese Seite ist absichtlich knapp. Sie soll Suchende mit App-Intention sauber abholen und dann in den Bot weiterfuehren.",
-  whyTelegramTitle: "Warum der Telegram-Bot hier die App-Rolle uebernimmt",
+  sampleCalloutText: "Die Vorschau bleibt absichtlich klein. Die eigentliche Wiederholung und Lernroutine liegt im Bot.",
+  whyTelegramTitle: "Warum Telegram nach der Vorschau der richtige Schritt ist",
   whyTelegramParagraphs: [
-    "Viele Menschen suchen nach App, meinen aber vor allem eine einfache, direkt nutzbare Lernoberflaeche mit Fragen und Wiederholung. Genau das liefert unser Telegram-Bot.",
-    "So kann die Seite bei Google ranken, waehrend das eigentliche Produkt als gefuehrtes Lernformat im Bot stattfindet.",
+    "Der Bot passt besser zu kurzen Wiederholungseinheiten als eine statische SEO-Seite.",
+    "So bleibt die Seite hilfreich fuer Suchende, waehrend der naechste Lernschritt klar und praktisch bleibt.",
   ],
   faqs: [
     {
@@ -1186,9 +1172,8 @@ export const adrPruefungsfragenAppDeutsch: SeoPageConfig = {
       note: "Allgemeiner Einstieg in Begriffe, Fragen und Sprache",
     },
   ],
-  ctaTitle: "Direkt mit dem ADR Bot starten",
-  ctaLead:
-    "Wenn du nach einer ADR Pruefungsfragen App auf Deutsch gesucht hast, ist der Telegram-Bot der eigentliche naechste Schritt.",
+  ctaTitle: "Im Telegram-Bot weiterlernen",
+  ctaLead: "Wenn du nach dem Einstieg direkt weitermachen willst, ist der Bot der sinnvollste naechste Schritt.",
   ctaButton: SEO_PRIMARY_CTA,
   disclaimer:
     "Diese Seite ist eine oeffentliche Vorschau und ersetzt keine offizielle Ausbildung oder Pruefungsvorbereitung.",
@@ -2741,6 +2726,552 @@ export const adrLernhilfeDeutsch: SeoPageConfig = {
   ],
 };
 
+
+export const adrPruefungen: SeoPageConfig = {
+  slug: "adr-pruefungen",
+  path: "/adr-pruefungen",
+  pageTitle: "ADR Pruefungen – Uebersicht und Vorbereitung",
+  metaTitle: "ADR Pruefungen | Alle Kursarten, Ablauf und Vorbereitung",
+  metaDescription:
+    "ADR Pruefungen vorbereiten: Basiskurs, Aufbaukurs Tank, Klasse 1 und Auffrischung. Typische Fragen, Fachbegriffe und Lerntipps auf Deutsch. Kostenlos ueben.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Pruefungen – Uebersicht und Vorbereitung",
+  heroLead:
+    "ADR Pruefungen gibt es fuer verschiedene Kurstypen: Basiskurs, Aufbaukurs Tank, Klasse 1 und Auffrischungsschulung. Diese Seite gibt einen Ueberblick und hilft beim gezielten Vorbereiten.",
+  heroSupport:
+    "Wer weiss, welche Pruefung auf ihn zukommt, kann gezielter lernen. Fachsprache und typische Frageformate entscheiden oft mehr als das reine Fachwissen.",
+  intentTitle: "Welche ADR Pruefungen gibt es?",
+  intentParagraphs: [
+    "ADR unterscheidet mehrere Kurstypen mit eigenen Pruefungen: der Basiskurs ist Pflicht fuer alle, Aufbaukurse kommen fuer spezielle Ladungsklassen dazu. Alle fuenf Jahre folgt die Auffrischungsschulung.",
+    "Fuer Nicht-Muttersprachler ist die Fachsprache die groesste Huerde. Viele Fahrer kennen den Stoff, scheitern aber an der Formulierung der Fragen.",
+  ],
+  sampleTitle: "Typische ADR Pruefungsfragen",
+  sampleLead:
+    "So klingen echte Pruefungsfragen. Wer die Struktur kennt, ist im Pruefungsraum ruhiger.",
+  sampleQuestions: [
+    {
+      question: "Welche ADR-Pruefung braucht ein Fahrer fuer Tankfahrzeuge?",
+      answer:
+        "Zusaetzlich zum Basiskurs ist der Aufbaukurs Tank Pflicht. Erst danach darf der Fahrer Tankfahrzeuge mit Gefahrgut fuehren.",
+    },
+    {
+      question: "Wie oft muss die ADR-Pruefung wiederholt werden?",
+      answer:
+        "Der ADR-Schein ist fuenf Jahre gueltig. Vor Ablauf muss eine Auffrischungsschulung mit Pruefung absolviert werden.",
+    },
+    {
+      question: "Was steht in der Basiskurs-Pruefung?",
+      answer:
+        "Gefahrgutklassen, Kennzeichnung, Beforderungspapiere, Tunnelkategorien und Verhaltenspflichten des Fahrers.",
+    },
+    {
+      question: "Kann man die Pruefung auf Deutsch ablegen, ohne Muttersprachler zu sein?",
+      answer:
+        "Ja. Die Pruefung ist auf Deutsch, aber gezielte Vorbereitung mit Fachbegriffen reicht aus. Sprachliche Kenntnisse sind keine offizielle Voraussetzung.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Basiskurs", note: "Pflicht fuer alle ADR-Fahrer, Grundlage aller weiteren Kurse." },
+    { term: "Aufbaukurs Tank", note: "Zusatzpruefung fuer Tankfahrzeuge." },
+    { term: "Auffrischungsschulung", note: "Alle fuenf Jahre vor Ablauf des ADR-Scheins." },
+    { term: "ADR-Schein", note: "Bescheinigung nach bestandener Pruefung, fuenf Jahre gueltig." },
+    { term: "Klasse 1", note: "Explosive Stoffe – eigener Aufbaukurs mit Pruefung." },
+  ],
+  sampleCalloutTitle: "Welche Pruefung brauchst du?",
+  sampleCalloutText:
+    "Basiskurs: alle Fahrer. Aufbaukurs Tank: Tankfahrzeuge. Klasse 1: Explosivstoffe. Auffrischung: alle fuenf Jahre. Der Bot trainiert dich fuer alle Kurstypen.",
+  whyTelegramTitle: "Warum der Bot die beste Pruefungsvorbereitung ist",
+  whyTelegramParagraphs: [
+    "Der Bot stellt Fragen in echter Pruefungsformulierung und erklaert sofort, warum eine Antwort richtig oder falsch ist. Das baut Sicherheit fuer den Pruefungstag auf.",
+    "Du kannst gezielt nach Kurstyp trainieren: Basiskurs, Tank oder Auffrischung. So lernst du nur, was fuer deine Pruefung relevant ist.",
+  ],
+  faqs: [
+    {
+      question: "Wie lange dauert eine ADR-Pruefung?",
+      answer:
+        "Je nach Kurstyp und Pruefungsstelle zwischen 45 und 90 Minuten. Die genaue Zeit legt die jeweilige IHK oder zugelassene Stelle fest.",
+    },
+    {
+      question: "Wo kann man ADR-Pruefungen ablegen?",
+      answer:
+        "Bei zugelassenen Stellen, meist IHK oder DIHK-zertifizierte Anbieter. Die Anmeldung laeuft ueber den Kursanbieter.",
+    },
+    {
+      question: "Was passiert bei Nichtbestehen?",
+      answer:
+        "Die Pruefung kann wiederholt werden. Eine Wartezeit und eventuelle Extrakosten haengen von der Pruefungsstelle ab.",
+    },
+    {
+      question: "Reicht der Basiskurs fuer alle Transporte?",
+      answer:
+        "Nein. Fuer Tankfahrzeuge, Explosivstoffe (Klasse 1) oder radioaktive Stoffe (Klasse 7) sind Aufbaukurse Pflicht.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-pruefung-auf-deutsch", label: "ADR-Pruefung auf Deutsch", note: "Sprachfokus fuer die Pruefung" },
+    { href: "/adr-pruefung-bestehen", label: "ADR Pruefung bestehen", note: "Tipps zum Bestehen" },
+    { href: "/basiskurs-preview", label: "ADR Basiskurs", note: "Basiskurs-Fragen und Begriffe" },
+    { href: "/aufbaukurs-tank-preview", label: "ADR Aufbaukurs Tank", note: "Tank-spezifische Vorbereitung" },
+  ],
+  ctaTitle: "Jetzt gezielt auf ADR Pruefungen vorbereiten",
+  ctaLead:
+    "Der Bot trainiert dich mit echten Frageformulierungen fuer Basiskurs, Tank und Auffrischung – kostenlos und in deiner Sprache.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Diese Seite ist kein offizielles Pruefungsangebot und gibt keine Garantie auf Pruefungserfolg.",
+  telegramSource: "seo_adr_pruefungen",
+  keywords: [
+    "ADR Pruefungen",
+    "ADR Pruefung Uebersicht",
+    "ADR Basiskurs Pruefung",
+    "ADR Aufbaukurs Pruefung",
+    "ADR Schein Pruefung",
+  ],
+};
+
+
+export const adrScheinKosten: SeoPageConfig = {
+  slug: "adr-schein-kosten",
+  path: "/adr-schein-kosten",
+  pageTitle: "ADR Schein Kosten, Dauer und Ablauf",
+  metaTitle: "ADR Schein Kosten 2025 | Preise, Dauer und Pruefungsablauf",
+  metaDescription:
+    "ADR Schein Kosten 2025: Basiskurs 275–345 EUR, Aufbaukurs Tank 175–230 EUR, IHK-Pruefung 45–75 EUR. Dauer, Ablauf und Tipps zur Vorbereitung auf Deutsch.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Schein – Kosten, Dauer und Ablauf",
+  heroLead:
+    "Wie viel kostet der ADR Schein, wie lange dauert der Kurs und wie laeuft die Pruefung ab? Diese Seite gibt klare Antworten fuer Basiskurs, Aufbaukurs Tank und Auffrischungsschulung.",
+  heroSupport:
+    "Viele Fahrer scheitern nicht am Stoff, sondern an unbekannter Fachsprache. Der Telegram-Bot hilft beim Lernen der Pruefungsbegriffe – kostenlos.",
+  intentTitle: "Was kostet der ADR Schein?",
+  intentParagraphs: [
+    "Die Kosten haengen vom Kurstyp ab. Der Basiskurs kostet bei den meisten Anbietern zwischen 275 und 345 EUR plus IHK-Pruefungsgebuehr. Aufbaukurse sind kuerzer und guenstiger.",
+    "Hinzu kommen die Pruefungsgebuehren der IHK oder des zugelassenen Pruefungszentrums, typischerweise 45 bis 75 EUR. Manche Arbeitgeber uebernehmen die Kosten vollstaendig.",
+  ],
+  sampleTitle: "Kosten und Dauer im Ueberblick",
+  sampleLead:
+    "Typische Richtwerte – die genauen Preise legt jeder Anbieter selbst fest.",
+  sampleQuestions: [
+    {
+      question: "Was kostet der ADR Basiskurs?",
+      answer:
+        "Typisch 275 bis 345 EUR Kursgebuehr plus 45 bis 75 EUR IHK-Pruefungsgebuehr. Dauer: 3 Tage.",
+    },
+    {
+      question: "Was kostet der Aufbaukurs Tank?",
+      answer:
+        "Typisch 175 bis 230 EUR Kursgebuehr plus Pruefungsgebuehr. Dauer: 1 bis 2 Tage.",
+    },
+    {
+      question: "Wie oft muss der ADR Schein erneuert werden?",
+      answer:
+        "Alle fuenf Jahre. Die Auffrischungsschulung kostet typisch 150 bis 200 EUR.",
+    },
+    {
+      question: "Uebernimmt der Arbeitgeber die Kosten?",
+      answer:
+        "Viele Speditionen bezahlen den Kurs, weil der ADR Schein den Fahrerwert deutlich steigert. Lohnt sich zu fragen.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Basiskurs", note: "Pflichtgrundlage fuer alle ADR-Fahrer, 3 Tage, Gesamtkosten ca. 350–420 EUR." },
+    { term: "Aufbaukurs Tank", note: "Zusatzkurs fuer Tankfahrzeuge, 1–2 Tage, ca. 200–300 EUR gesamt." },
+    { term: "IHK-Pruefungsgebuehr", note: "45–75 EUR, wird separat von der IHK oder zugelassenen Stelle erhoben." },
+    { term: "Auffrischungsschulung", note: "Alle 5 Jahre Pflicht vor Ablauf des Scheins, ca. 150–200 EUR." },
+  ],
+  sampleCalloutTitle: "Lohnt sich der ADR Schein?",
+  sampleCalloutText:
+    "Gefahrgutfahrer verdienen typisch 200 bis 500 EUR pro Monat mehr als ohne ADR Schein. Die Kurskosten amortisieren sich damit in einem bis zwei Monaten.",
+  whyTelegramTitle: "Guenstig auf die Pruefung vorbereiten",
+  whyTelegramParagraphs: [
+    "Der Telegram-Bot trainiert mit echten Pruefungsfragen kostenlos. Wer die Fachbegriffe kennt, schafft die Pruefung sicherer – ohne teures Zusatzlernmaterial.",
+    "Besonders fuer Nicht-Muttersprachler ist das Pruefungsdeutsch die groesste Huerde. Der Bot erklaert jeden Begriff auf Deutsch, Russisch, Tuerkisch und 7 weiteren Sprachen.",
+  ],
+  faqs: [
+    {
+      question: "Kann ich den ADR Schein auch ohne Kurs machen?",
+      answer:
+        "Nein. Die IHK-Pruefung setzt den Besuch eines zugelassenen Kurses voraus.",
+    },
+    {
+      question: "Gibt es Foerderung oder Zuschuss fuer den ADR Kurs?",
+      answer:
+        "In manchen Faellen ja: Bildungsgutschein der Agentur fuer Arbeit, Qualifizierungsfoerderung oder Arbeitgeberkostenzuschuss. Beim Arbeitgeber und der Agentur fuer Arbeit nachfragen.",
+    },
+    {
+      question: "Was passiert, wenn man die Pruefung nicht besteht?",
+      answer:
+        "Ein Wiederholungsversuch ist ohne neuen Kurs moeglich. Beim zweiten Nichtbestehen muss der Kurs wiederholt werden.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-pruefungen", label: "ADR Pruefungen Uebersicht", note: "Alle Kurstypen erklaert" },
+    { href: "/adr-pruefung-bestehen", label: "ADR Pruefung bestehen", note: "Tipps zum Bestehen" },
+    { href: "/adr-pruefungsfragen-lernen", label: "ADR Pruefungsfragen lernen", note: "Kostenlos ueben" },
+  ],
+  ctaTitle: "Kostenlos auf die ADR Pruefung vorbereiten",
+  ctaLead:
+    "Pruefungsfragen, Fachbegriffe und sofortige Erklaerungen – der Bot trainiert dich in deiner Sprache.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Preisangaben sind Richtwerte. Genaue Kosten legt jeder Anbieter individuell fest.",
+  telegramSource: "seo_adr_schein_kosten",
+  keywords: ["ADR Schein Kosten", "ADR Kurs Kosten", "ADR Basiskurs Preis", "ADR Schein Dauer"],
+};
+
+export const adrScheinAufRussisch: SeoPageConfig = {
+  slug: "adr-schein-auf-russisch",
+  path: "/adr-schein-auf-russisch",
+  pageTitle: "ADR Pruefung auf Russisch, Tuerkisch und Ukrainisch",
+  metaTitle: "ADR Pruefung auf Russisch moeglich? | Sprachen und Vorbereitung",
+  metaDescription:
+    "Die ADR-IHK-Pruefung kann auf Russisch, Tuerkisch, Ukrainisch, Polnisch und 4 weiteren Sprachen abgelegt werden. Lerne Fachbegriffe in deiner Sprache – kostenlos im Telegram-Bot.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Pruefung auf Russisch, Tuerkisch und Ukrainisch",
+  heroLead:
+    "Ja, die ADR-Pruefung ist in 8 Sprachen moeglich: Deutsch, Russisch, Tuerkisch, Ukrainisch, Polnisch, Arabisch, Rumaenisch und Kroatisch. Diese Seite erklaert, wie das geht.",
+  heroSupport:
+    "Fachbegriffe auf Russisch, Tuerkisch oder Ukrainisch lernen – der Telegram-Bot erklaert alle ADR-Pruefungsvokabeln in deiner Sprache.",
+  intentTitle: "ADR Pruefung in welchen Sprachen moeglich?",
+  intentParagraphs: [
+    "Die IHK laesst die ADR-Pruefung offiziell in 8 Sprachen zu: Deutsch, Russisch, Tuerkisch, Ukrainisch, Polnisch, Hocharabisch, Rumaenisch und Kroatisch. Ob ein konkreter Pruefungsort eine bestimmte Sprache anbietet, muss beim Anbieter gefragt werden.",
+    "Der Kurs selbst laeuft in der Regel auf Deutsch – aber die Pruefungsfragen koennen in der gewuenschten Sprache gestellt werden. Die Fachbegriffe auf Deutsch zu kennen ist trotzdem wichtig.",
+  ],
+  sampleTitle: "Wichtige Fachbegriffe – Deutsch und Russisch",
+  sampleLead:
+    "Wer die deutschen Begriffe kennt, besteht auch die Pruefung in einer anderen Sprache sicher.",
+  sampleQuestions: [
+    {
+      question: "Kann ich die ADR-Pruefung auf Russisch ablegen?",
+      answer:
+        "Ja. Die IHK laesst Russisch als Pruefungssprache zu. Beim Kursanbieter oder der IHK anfragen, ob der Termin auf Russisch verfuegbar ist.",
+    },
+    {
+      question: "Muss ich den Kurs auch auf Deutsch machen?",
+      answer:
+        "Der Kurs laeuft meist auf Deutsch. Die Pruefung kann aber in einer der 8 zugelassenen Sprachen abgelegt werden.",
+    },
+    {
+      question: "Ist ein auslaendischer ADR Schein in Deutschland gueltig?",
+      answer:
+        "Ja. ADR-Bescheinigungen aus allen ADR-Vertragsstaaten (Ukraine, Polen, Russland, Rumaenien usw.) werden in Deutschland anerkannt – bis zum Ablaufdatum.",
+    },
+    {
+      question: "Was ist der Vorteil, die Pruefung auf Russisch zu machen?",
+      answer:
+        "Schwieriger Pruefungsdeutsch-Stil wird verstaendlicher in der Muttersprache. Die Inhalte sind dieselben – aber die Chance, durch Sprachprobleme zu scheitern, sinkt.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Gefahrgut (опасный груз)", note: "Stoffe, fuer die besondere Transportregeln gelten." },
+    { term: "Kennzeichnung (маркировка)", note: "Sichtbare Markierung am Fahrzeug oder auf der Sendung." },
+    { term: "Beforderungspapier (транспортный документ)", note: "Begleitdokument fuer den Transport." },
+    { term: "UN-Nummer (номер ООН)", note: "Eindeutige internationale Nummer zur Stoff-Identifikation." },
+    { term: "Gefahrzettel (знак опасности)", note: "Aufkleber fuer die Gefahrgutklasse." },
+  ],
+  sampleCalloutTitle: "Der Bot spricht deine Sprache",
+  sampleCalloutText:
+    "Alle Pruefungsbegriffe werden im Bot auf Russisch, Tuerkisch, Ukrainisch und 7 weiteren Sprachen erklaert. Du lernst den deutschen Begriff und verstehst ihn sofort.",
+  whyTelegramTitle: "Warum der Bot fuer Nicht-Muttersprachler ideal ist",
+  whyTelegramParagraphs: [
+    "Der Bot erklaert jeden Fachbegriff auf Deutsch und in deiner Muttersprache. So lernst du nicht nur die Antwort, sondern auch die Formulierung.",
+    "Russisch, Tuerkisch, Ukrainisch, Polnisch, Arabisch, Rumaenisch, Kroatisch und Englisch – alle Sprachen sind verfuegbar.",
+  ],
+  faqs: [
+    {
+      question: "Welche Sprachen sind bei der ADR-Pruefung zugelassen?",
+      answer:
+        "Offiziell 8 Sprachen: Deutsch, Russisch, Tuerkisch, Ukrainisch, Polnisch, Hocharabisch, Rumaenisch, Kroatisch.",
+    },
+    {
+      question: "Gilt mein ukrainischer / polnischer ADR Schein in Deutschland?",
+      answer:
+        "Ja, solange er gueltig ist. ADR-Bescheinigungen sind unter allen ADR-Vertragsstaaten gegenseitig anerkannt.",
+    },
+    {
+      question: "Wie finde ich einen ADR Kurs mit russischer Pruefungsoption?",
+      answer:
+        "Direkt beim Kursanbieter oder der zust. IHK anfragen. Nicht alle Stellen bieten alle 8 Sprachen an.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-pruefung-fuer-nicht-muttersprachler", label: "ADR Pruefung fuer Nicht-Muttersprachler", note: "Sprachfokus" },
+    { href: "/adr-app-fuer-auslaender", label: "ADR App fuer Auslaender", note: "Bot und App Infos" },
+    { href: "/adr-pruefungen", label: "ADR Pruefungen Uebersicht", note: "Alle Kurstypen" },
+  ],
+  ctaTitle: "ADR-Begriffe in deiner Sprache lernen",
+  ctaLead:
+    "Der Bot erklaert alle Pruefungsvokabeln auf Russisch, Tuerkisch, Ukrainisch und 7 weiteren Sprachen.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Sprachverfuegbarkeit der Pruefung haengt vom jeweiligen Pruefungszentrum ab. Vorab beim Anbieter anfragen.",
+  telegramSource: "seo_adr_schein_auf_russisch",
+  keywords: ["ADR Schein auf Russisch", "ADR Pruefung Russisch", "ADR Pruefung Tuerkisch", "ADR Schein Sprachen"],
+};
+
+export const adrKursWelcherKurs: SeoPageConfig = {
+  slug: "adr-kurs-welcher-kurs",
+  path: "/adr-kurs-welcher-kurs",
+  pageTitle: "Welcher ADR Kurs ist der richtige fuer mich?",
+  metaTitle: "Welcher ADR Kurs? Basiskurs vs. Aufbaukurs Unterschied erklaert",
+  metaDescription:
+    "Basiskurs, Aufbaukurs Tank, Klasse 1 oder Auffrischung? Diese Seite erklaert, welcher ADR Kurs fuer welchen Job Pflicht ist und wie man die richtige Wahl trifft.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "Welcher ADR Kurs ist der richtige fuer mich?",
+  heroLead:
+    "Nicht jeder Fahrer braucht denselben ADR Kurs. Basiskurs, Aufbaukurs Tank, Klasse 1 oder Auffrischung – diese Seite erklaert, welcher Kurs fuer welchen Job Pflicht ist.",
+  heroSupport:
+    "Wer den falschen Kurs macht, zahlt zweimal. Die richtige Wahl haengt von der Ladungsart und dem Fahrzeugtyp ab.",
+  intentTitle: "ADR Kursuebersicht: Was ist fuer wen Pflicht?",
+  intentParagraphs: [
+    "Der Basiskurs ist die Grundlage – er ist Pflicht fuer alle Gefahrgutfahrer. Wer Tank-, Explosivstoff- oder radioaktive Ladung transportiert, braucht zusaetzlich den passenden Aufbaukurs.",
+    "Alle fuenf Jahre folgt die Auffrischungsschulung, um den ADR Schein zu verlaengern. Wer das verpasst, muss den Basiskurs komplett wiederholen.",
+  ],
+  sampleTitle: "Schnell-Check: Welcher Kurs fuer welchen Job?",
+  sampleLead:
+    "Diese Faustregeln helfen bei der Entscheidung.",
+  sampleQuestions: [
+    {
+      question: "Ich fahre normalen Gefahrgut-Stueckgut – was brauche ich?",
+      answer:
+        "Nur den Basiskurs. Er deckt alle Gefahrgutklassen im Stueckguttransport ab.",
+    },
+    {
+      question: "Ich fahre Tankwagen – was brauche ich?",
+      answer:
+        "Basiskurs plus Aufbaukurs Tank. Ohne Aufbaukurs Tank ist das Fahren von Tankfahrzeugen mit Gefahrgut verboten.",
+    },
+    {
+      question: "Ich transportiere Explosivstoffe (Klasse 1) – was brauche ich?",
+      answer:
+        "Basiskurs plus Aufbaukurs Klasse 1. Explosivstofftransporte sind stark reguliert.",
+    },
+    {
+      question: "Mein ADR Schein laeuft bald ab – was tue ich?",
+      answer:
+        "Auffrischungsschulung rechtzeitig buchen, bevor der Schein ablaeuft. Ist er erst abgelaufen, muss der gesamte Basiskurs wiederholt werden.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Basiskurs", note: "Pflicht fuer alle ADR-Fahrer. Deckt alle Gefahrgutklassen im Stueckgut ab." },
+    { term: "Aufbaukurs Tank", note: "Pflicht fuer Tankfahrzeuge. Immer zusaetzlich zum Basiskurs." },
+    { term: "Aufbaukurs Klasse 1", note: "Pflicht fuer Explosivstoffe. Immer zusaetzlich zum Basiskurs." },
+    { term: "Aufbaukurs Klasse 7", note: "Pflicht fuer radioaktive Stoffe. Immer zusaetzlich zum Basiskurs." },
+    { term: "Auffrischungsschulung", note: "Alle 5 Jahre Pflicht vor Ablauf. Verpasst = Basiskurs wiederholen." },
+  ],
+  sampleCalloutTitle: "Wichtig: Schein abgelaufen = von vorn anfangen",
+  sampleCalloutText:
+    "Wer die Auffrischungsschulung verpasst und der Schein ablaeuft, muss den gesamten Basiskurs neu machen – nicht nur die Auffrischung. Rechtzeitig buchen!",
+  whyTelegramTitle: "Fuer welchen Kurs auch immer – der Bot hilft beim Lernen",
+  whyTelegramParagraphs: [
+    "Der Bot hat Pruefungsfragen fuer Basiskurs, Aufbaukurs Tank, Klasse 1 und Auffrischung. Du wahlst deinen Kurstyp und trainierst gezielt.",
+    "Fachbegriffe werden in deiner Sprache erklaert – Deutsch, Russisch, Tuerkisch, Ukrainisch und weitere.",
+  ],
+  faqs: [
+    {
+      question: "Kann ich Basiskurs und Aufbaukurs Tank gleichzeitig machen?",
+      answer:
+        "Ja, viele Anbieter kombinieren beide Kurse in einer Woche. Das spart Zeit und oft auch Kosten.",
+    },
+    {
+      question: "Brauche ich fuer jeden Aufbaukurs einen separaten Schein?",
+      answer:
+        "Ja. Jeder Aufbaukurs fuehrt zu einer eigenen Eintragung in der ADR-Bescheinigung.",
+    },
+    {
+      question: "Was gilt, wenn ich den falschen Kurs gemacht habe?",
+      answer:
+        "Der fehlende Kurs muss nachgeholt werden. Es gibt keine Ausnahmen fuer berufliche Dringlichkeit.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-schein-kosten", label: "ADR Schein Kosten und Dauer", note: "Preise fuer jeden Kurstyp" },
+    { href: "/adr-pruefungen", label: "ADR Pruefungen Uebersicht", note: "Alle Pruefungstypen" },
+    { href: "/basiskurs-preview", label: "ADR Basiskurs", note: "Basiskurs-Fragen und Begriffe ueben" },
+    { href: "/aufbaukurs-tank-preview", label: "ADR Aufbaukurs Tank", note: "Tank-Pruefung vorbereiten" },
+  ],
+  ctaTitle: "Jetzt gezielt fuer deinen Kurs lernen",
+  ctaLead:
+    "Basiskurs, Tank oder Auffrischung – der Bot stellt Fragen genau fuer deinen Kurstyp.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Diese Seite gibt allgemeine Orientierung. Verbindliche Kursanforderungen legt der jeweilige Arbeitgeber und die IHK fest.",
+  telegramSource: "seo_adr_kurs_welcher_kurs",
+  keywords: ["ADR Kurs welcher", "ADR Basiskurs Aufbaukurs Unterschied", "welcher ADR Schein", "ADR Kurs Uebersicht"],
+};
+
+export const adrScheinVerlaengern: SeoPageConfig = {
+  slug: "adr-schein-verlaengern",
+  path: "/adr-schein-verlaengern",
+  pageTitle: "ADR Schein verlaengern – Auffrischung und abgelaufener Schein",
+  metaTitle: "ADR Schein verlaengern | Auffrischungsschulung und abgelaufener Schein",
+  metaDescription:
+    "ADR Schein verlaengern: Auffrischungsschulung rechtzeitig buchen. Schein abgelaufen? Basiskurs wiederholen. Alle Infos zu Fristen, Ablauf und Kosten.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Schein verlaengern – was du wissen musst",
+  heroLead:
+    "Der ADR Schein ist fuenf Jahre gueltig. Wer die Auffrischungsschulung rechtzeitig macht, verlaengert einfach. Wer den Schein ablaufen laesst, muss den gesamten Basiskurs wiederholen.",
+  heroSupport:
+    "Die Auffrischungsschulung muss abgeschlossen sein, bevor der aktuelle Schein ablaeuft. Danach gibt es keine Kulanz.",
+  intentTitle: "Fristen und Regeln fuer die Verlaengerung",
+  intentParagraphs: [
+    "Der ADR Schein laeuft am aufgedruckten Datum ab. Die Auffrischungsschulung muss vor diesem Datum abgeschlossen und die Pruefung bestanden sein.",
+    "Ist der Schein erst abgelaufen, gibt es keine Moeglichkeit zur Auffrischung – dann muss der komplette Basiskurs neu gemacht werden. Das kostet mehr Zeit und Geld.",
+  ],
+  sampleTitle: "Haeufige Fragen zur Verlaengerung",
+  sampleLead:
+    "Die wichtigsten Punkte kurz und klar.",
+  sampleQuestions: [
+    {
+      question: "Wie lange vor Ablauf muss ich die Auffrischung machen?",
+      answer:
+        "So frueh wie moeglich – idealerweise 3 bis 6 Monate vor Ablauf. Es gibt keine gesetzlich vorgeschriebene Mindestfrist, aber Kursplaetze sind oft ausgebucht.",
+    },
+    {
+      question: "Was passiert, wenn mein ADR Schein abgelaufen ist?",
+      answer:
+        "Du darfst keine Gefahrguttransporte mehr durchfuehren. Eine Auffrischung ist nicht mehr moeglich – du musst den vollen Basiskurs wiederholen.",
+    },
+    {
+      question: "Kann ich mit abgelaufenem Schein noch fahren?",
+      answer:
+        "Nein. Das ist eine Ordnungswidrigkeit und kann zu Bussgeldern und Betriebsverboten fuehren.",
+    },
+    {
+      question: "Gilt die Verlaengerung fuer alle meine ADR-Kurse gleichzeitig?",
+      answer:
+        "Ja. Eine Auffrischungsschulung verlaengert alle eingetragenen ADR-Kurse (Basiskurs, Aufbaukurse) gleichzeitig.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Auffrischungsschulung", note: "Verlaengerungskurs, Pflicht alle 5 Jahre vor Ablauf des Scheins." },
+    { term: "Ablaufdatum", note: "Aufgedrucktes Datum auf der ADR-Bescheinigung – danach ist der Schein ungueltig." },
+    { term: "Wiederholungspruefung", note: "Pruefung am Ende der Auffrischungsschulung." },
+    { term: "Basiskurs-Wiederholung", note: "Notwendig, wenn der Schein bereits abgelaufen ist." },
+  ],
+  sampleCalloutTitle: "Nicht warten – jetzt buchen",
+  sampleCalloutText:
+    "Kursplaetze fuer Auffrischungsschulungen sind oft Wochen im Voraus ausgebucht. Wer zu spaet anfaengt zu suchen, riskiert eine Luecke ohne gueltigen Schein.",
+  whyTelegramTitle: "Auf die Auffrischungspruefung vorbereiten",
+  whyTelegramParagraphs: [
+    "Auch die Auffrischungspruefung enthaelt echte Pruefungsfragen. Der Bot trainiert dich gezielt fuer Auffrischungsfragen – in deiner Sprache.",
+    "Wer sich mit typischen Pruefungsformulierungen vertraut macht, besteht die Auffrischungspruefung sicher im ersten Versuch.",
+  ],
+  faqs: [
+    {
+      question: "Kann ich den ADR Schein auch online verlaengern?",
+      answer:
+        "Nein. Die Auffrischungsschulung muss in Praesenz absolviert werden. Online-Kurse sind nicht zugelassen.",
+    },
+    {
+      question: "Bekomme ich einen neuen Schein nach der Auffrischung?",
+      answer:
+        "Ja. Nach bestandener Pruefung wird eine neue ADR-Bescheinigung mit neuer 5-Jahres-Frist ausgestellt.",
+    },
+    {
+      question: "Was kostet die Auffrischungsschulung?",
+      answer:
+        "Typisch 150 bis 200 EUR Kursgebuehr plus IHK-Pruefungsgebuehr von ca. 45 bis 75 EUR.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-schein-kosten", label: "ADR Schein Kosten und Dauer", note: "Preise fuer alle Kurstypen" },
+    { href: "/adr-kurs-welcher-kurs", label: "Welcher ADR Kurs?", note: "Uebersicht aller Kurstypen" },
+    { href: "/adr-pruefung-bestehen", label: "ADR Pruefung bestehen", note: "Tipps zum Bestehen" },
+  ],
+  ctaTitle: "Jetzt auf die Auffrischungspruefung vorbereiten",
+  ctaLead:
+    "Der Bot trainiert mit Auffrischungsfragen – kostenlos, in deiner Sprache, jederzeit.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Diese Seite gibt allgemeine Orientierung zu Fristen und Ablauf. Verbindliche Regeln legt die zust. IHK fest.",
+  telegramSource: "seo_adr_schein_verlaengern",
+  keywords: ["ADR Schein verlaengern", "ADR Schein abgelaufen", "ADR Auffrischungsschulung", "ADR Schein Gueltigkeit"],
+};
+
+
+export const adrPruefungDurchgefallen: SeoPageConfig = {
+  slug: "adr-pruefung-durchgefallen",
+  path: "/adr-pruefung-durchgefallen",
+  pageTitle: "ADR Pruefung durchgefallen – was jetzt?",
+  metaTitle: "ADR Pruefung durchgefallen | Wiederholungspruefung und naechste Schritte",
+  metaDescription:
+    "ADR Pruefung nicht bestanden? Ein Wiederholungsversuch ist moeglich. Was passiert beim zweiten Nichtbestehen, wie lange warten und wie besser vorbereiten.",
+  heroKicker: SEO_PAGE_KICKER,
+  heroTitle: "ADR Pruefung durchgefallen – was jetzt?",
+  heroLead:
+    "Nicht bestanden ist kein Grund zur Panik. Ein Wiederholungsversuch ist ohne neuen Kurs moeglich. Diese Seite erklaert die naechsten Schritte.",
+  heroSupport:
+    "Der haeufigste Grund fuer Nichtbestehen ist nicht fehlendes Fachwissen, sondern unbekannte Fachsprache. Das laesst sich schnell aendern.",
+  intentTitle: "Was passiert nach einem Nichtbestehen?",
+  intentParagraphs: [
+    "Wer die ADR-Pruefung nicht besteht, darf einmal wiederholen – ohne den Kurs nochmals besuchen zu muessen. Die Wiederholungspruefung wird bei derselben Pruefungsstelle angemeldet.",
+    "Scheitert auch der zweite Versuch, muss der Kurs komplett wiederholt werden. Danach sind wieder zwei Pruefungsversuche moeglich.",
+  ],
+  sampleTitle: "Typische Gruende fuer Nichtbestehen",
+  sampleLead:
+    "Wer weiss, warum er gescheitert ist, kann gezielter lernen.",
+  sampleQuestions: [
+    {
+      question: "Was ist der haeufigste Grund fuer Nichtbestehen?",
+      answer:
+        "Unbekannte Fachbegriffe und formelle Frageformulierungen. Wer den Inhalt kennt, aber die deutsche Pruefungssprache nicht versteht, gibt falsche Antworten.",
+    },
+    {
+      question: "Wie viele Versuche habe ich?",
+      answer:
+        "Zwei Versuche ohne Kurspflicht. Beim dritten Versuch muss der Kurs wiederholt werden.",
+    },
+    {
+      question: "Wie lange muss ich nach dem Nichtbestehen warten?",
+      answer:
+        "Es gibt keine gesetzliche Wartezeit. Wann der naechste Termin verfuegbar ist, legt die Pruefungsstelle fest.",
+    },
+    {
+      question: "Was sollte ich vor der Wiederholungspruefung anders machen?",
+      answer:
+        "Gezielt Fachbegriffe lernen, typische Frageformulierungen ueben und die eigenen Schwachthemen identifizieren. Der Telegram-Bot hilft dabei.",
+    },
+  ],
+  sampleTerms: [
+    { term: "Wiederholungspruefung", note: "Neue Pruefung nach Nichtbestehen, ohne Kurspflicht beim ersten Mal." },
+    { term: "Bestehensgrenze", note: "Mindestpunktzahl, die fuer ein Bestehen erreicht werden muss." },
+    { term: "Pruefungsprotokoll", note: "Dokument mit den Pruefungsergebnissen – zeigt Schwachthemen." },
+  ],
+  sampleCalloutTitle: "Tipp: Schwachthemen gezielt lernen",
+  sampleCalloutText:
+    "Viele Fahrer scheitern immer wieder an denselben Themen: Gefahrgutkennzeichnung, Tunnelkategorien und Beforderungsdokumente. Der Bot trainiert genau diese Bereiche.",
+  whyTelegramTitle: "Besser vorbereitet in die Wiederholungspruefung",
+  whyTelegramParagraphs: [
+    "Der Bot stellt echte Pruefungsfragen mit sofortiger Erklaerung. So erkennst du, welche Themen du noch nicht sicher beherrschst – bevor es in der Pruefung passiert.",
+    "Pruefungsdeutsch ist eine eigene Sprache. Der Bot erklaert jeden Begriff auch auf Russisch, Tuerkisch und Ukrainisch – damit Sprachbarrieren nicht mehr der Grund fuers Scheitern sind.",
+  ],
+  faqs: [
+    {
+      question: "Muss ich nach dem Nichtbestehen den Kurs nochmal besuchen?",
+      answer:
+        "Beim ersten Nichtbestehen nein – ein Wiederholungsversuch ist ohne Kurs moeglich. Erst beim zweiten Nichtbestehen muss der Kurs wiederholt werden.",
+    },
+    {
+      question: "Bekomme ich meine Pruefungsergebnisse zurueck?",
+      answer:
+        "Ja, die Pruefungsstelle teilt mit, welche Bereiche nicht bestanden wurden. Diese Rueckmeldung ist wertvoll fuer die gezielte Vorbereitung.",
+    },
+    {
+      question: "Zahlt der Arbeitgeber die Wiederholungspruefung?",
+      answer:
+        "Das haengt vom Arbeitgeber ab. Viele uebernehmen auch Wiederholungspruefungskosten, wenn der Fahrer zeigt, dass er sich gezielt vorbereitet.",
+    },
+  ],
+  relatedLinks: [
+    { href: "/adr-pruefung-bestehen", label: "ADR Pruefung bestehen", note: "Tipps zum sicheren Bestehen" },
+    { href: "/adr-pruefungsfragen-lernen", label: "ADR Pruefungsfragen lernen", note: "Gezielt ueben" },
+    { href: "/adr-pruefungen", label: "ADR Pruefungen Uebersicht", note: "Alle Kurstypen" },
+  ],
+  ctaTitle: "Jetzt gezielt auf die Wiederholungspruefung vorbereiten",
+  ctaLead:
+    "Pruefungsfragen, Schwachthemen identifizieren, Fachbegriffe lernen – der Bot hilft dir, beim naechsten Mal zu bestehen.",
+  ctaButton: SEO_PRIMARY_CTA,
+  disclaimer: "Pruefungsregelungen koennen je nach IHK und Bundesland leicht abweichen. Verbindliche Auskunft gibt die jeweilige Pruefungsstelle.",
+  telegramSource: "seo_adr_pruefung_durchgefallen",
+  keywords: ["ADR Pruefung durchgefallen", "ADR Wiederholungspruefung", "ADR Pruefung nicht bestanden", "ADR zweiter Versuch"],
+};
+
 export const seoPageList = [
   adrPruefungAufDeutsch,
   basiskursPreview,
@@ -2768,6 +3299,12 @@ export const seoPageList = [
   adrPruefungHilfe,
   adrDeutschUeben,
   adrPruefungBestehen,
+  adrPruefungen,
+  adrScheinKosten,
+  adrScheinAufRussisch,
+  adrKursWelcherKurs,
+  adrScheinVerlaengern,
+  adrPruefungDurchgefallen,
   adrGefahrgutSymboleDeutsch,
   adrKlassenDeutsch,
   adrWiederholungDeutsch,
